@@ -1,5 +1,11 @@
 package script.systems.crafting.chemistry;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.craftinglib;
 import script.resource_weight;
 
@@ -45,6 +51,7 @@ public class crafting_enhancers extends script.systems.crafting.chemistry.crafti
                                     new resource_weight.weight(craftinglib.RESOURCE_QUALITY, 4)
                             })
             };
+
     public crafting_enhancers()
     {
     }

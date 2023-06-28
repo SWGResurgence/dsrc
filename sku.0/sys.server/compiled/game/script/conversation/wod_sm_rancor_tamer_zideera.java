@@ -1,26 +1,32 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class wod_sm_rancor_tamer_zideera extends script.base_script
 {
+    public static String c_stringFile = "conversation/wod_sm_rancor_tamer_zideera";
+
     public wod_sm_rancor_tamer_zideera()
     {
     }
-    public static String c_stringFile = "conversation/wod_sm_rancor_tamer_zideera";
+
     public boolean wod_sm_rancor_tamer_zideera_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean wod_sm_rancor_tamer_zideera_condition_IsNoEntertainer(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (content.isEntertainer(player))
-        {
-            return false;
-        }
-        return true;
+        return !content.isEntertainer(player);
     }
+
     public boolean wod_sm_rancor_tamer_zideera_condition_IsIndifferent(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "wod_prologue_quests"))
@@ -28,12 +34,9 @@ public class wod_sm_rancor_tamer_zideera extends script.base_script
             return false;
         }
         int status = getIntObjVar(player, "wod_prologue_quests");
-        if ((status < 0) && (status > -8))
-        {
-            return true;
-        }
-        return false;
+        return (status < 0) && (status > -8);
     }
+
     public boolean wod_sm_rancor_tamer_zideera_condition_IsNS(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "wod_prologue_quests"))
@@ -41,12 +44,9 @@ public class wod_sm_rancor_tamer_zideera extends script.base_script
             return false;
         }
         int status = getIntObjVar(player, "wod_prologue_quests");
-        if (status > -1)
-        {
-            return true;
-        }
-        return false;
+        return status > -1;
     }
+
     public boolean wod_sm_rancor_tamer_zideera_condition_hasCompletedTamerSM(obj_id player, obj_id npc) throws InterruptedException
     {
         if ((hasObjVar(player, "wod_prologue_quests")) && (groundquests.hasCompletedQuest(player, "wod_themepark_sm_rancor_tamer")))
@@ -56,6 +56,7 @@ public class wod_sm_rancor_tamer_zideera extends script.base_script
         }
         return false;
     }
+
     public boolean wod_sm_rancor_tamer_zideera_condition_hasPreqComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         if ((hasObjVar(player, "wod_prologue_quests")) && (groundquests.hasCompletedQuest(player, "wod_rubina_goto_sm")))
@@ -65,15 +66,18 @@ public class wod_sm_rancor_tamer_zideera extends script.base_script
         }
         return false;
     }
+
     public boolean wod_sm_rancor_tamer_zideera_condition_hasQuestActive(obj_id player, obj_id npc) throws InterruptedException
     {
         return questIsQuestActive(questGetQuestId("quest/wod_themepark_sm_rancor_tamer"), player) || questIsQuestActive(questGetQuestId("quest/wod_themepark_ns_rancor_tamer"), player);
     }
+
     public void wod_sm_rancor_tamer_zideera_action_grantTPTamerSM(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest/wod_themepark_sm_rancor_tamer");
         attachScript(player, "theme_park.wod.entertainer_rancor");
     }
+
     public int wod_sm_rancor_tamer_zideera_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_40"))
@@ -99,6 +103,7 @@ public class wod_sm_rancor_tamer_zideera extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_rancor_tamer_zideera_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_18"))
@@ -118,7 +123,7 @@ public class wod_sm_rancor_tamer_zideera extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_22");
@@ -127,7 +132,7 @@ public class wod_sm_rancor_tamer_zideera extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_sm_rancor_tamer_zideera.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -137,6 +142,7 @@ public class wod_sm_rancor_tamer_zideera extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_rancor_tamer_zideera_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_22"))
@@ -156,7 +162,7 @@ public class wod_sm_rancor_tamer_zideera extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_26");
@@ -165,7 +171,7 @@ public class wod_sm_rancor_tamer_zideera extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_sm_rancor_tamer_zideera.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -175,6 +181,7 @@ public class wod_sm_rancor_tamer_zideera extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_rancor_tamer_zideera_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_26"))
@@ -194,7 +201,7 @@ public class wod_sm_rancor_tamer_zideera extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_30");
@@ -203,7 +210,7 @@ public class wod_sm_rancor_tamer_zideera extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_sm_rancor_tamer_zideera.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -213,6 +220,7 @@ public class wod_sm_rancor_tamer_zideera extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_rancor_tamer_zideera_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_30"))
@@ -232,7 +240,7 @@ public class wod_sm_rancor_tamer_zideera extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_34");
@@ -241,7 +249,7 @@ public class wod_sm_rancor_tamer_zideera extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_sm_rancor_tamer_zideera.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -251,6 +259,7 @@ public class wod_sm_rancor_tamer_zideera extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_rancor_tamer_zideera_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_34"))
@@ -270,7 +279,7 @@ public class wod_sm_rancor_tamer_zideera extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_39");
@@ -279,7 +288,7 @@ public class wod_sm_rancor_tamer_zideera extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_sm_rancor_tamer_zideera.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -289,6 +298,7 @@ public class wod_sm_rancor_tamer_zideera extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_rancor_tamer_zideera_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_39"))
@@ -304,6 +314,7 @@ public class wod_sm_rancor_tamer_zideera extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -313,11 +324,13 @@ public class wod_sm_rancor_tamer_zideera extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -326,18 +339,21 @@ public class wod_sm_rancor_tamer_zideera extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.wod_sm_rancor_tamer_zideera");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -385,7 +401,7 @@ public class wod_sm_rancor_tamer_zideera extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_40");
@@ -401,7 +417,7 @@ public class wod_sm_rancor_tamer_zideera extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "wod_sm_rancor_tamer_zideera", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -432,7 +448,7 @@ public class wod_sm_rancor_tamer_zideera extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_18");
@@ -444,7 +460,7 @@ public class wod_sm_rancor_tamer_zideera extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "wod_sm_rancor_tamer_zideera", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -463,6 +479,7 @@ public class wod_sm_rancor_tamer_zideera extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("wod_sm_rancor_tamer_zideera"))

@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.myyydril;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -12,11 +18,13 @@ public class grievous_encounter_manager extends script.base_script
 {
     public static final string_id START = new string_id("dungeon/myyydril", "start");
     public static final string_id STOP = new string_id("dungeon/myyydril", "stop");
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, "grievous_encounter.active", false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setObjVar(self, "grievous_encounter.active", false);
@@ -27,6 +35,7 @@ public class grievous_encounter_manager extends script.base_script
         messageTo(self, "handleBeginEncounter", null, 5.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (text.equals("startEncounter"))
@@ -43,6 +52,7 @@ public class grievous_encounter_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleBeginEncounter(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, "grievous_encounter.active", true);
@@ -101,6 +111,7 @@ public class grievous_encounter_manager extends script.base_script
         attachScript(grievousGuard2, "theme_park.dungeon.myyydril.grievous_guard");
         return SCRIPT_CONTINUE;
     }
+
     public int handleEndEncounter(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);
@@ -130,8 +141,10 @@ public class grievous_encounter_manager extends script.base_script
         }
         location selfLocation = getLocation(self);
         obj_id[] objectsInRange = getObjectsInRange(selfLocation, 150.0f);
-        for (obj_id obj_id : objectsInRange) {
-            if (isIdValid(obj_id) && hasObjVar(obj_id, "grievous_encounter.isPowerCell")) {
+        for (obj_id obj_id : objectsInRange)
+        {
+            if (isIdValid(obj_id) && hasObjVar(obj_id, "grievous_encounter.isPowerCell"))
+            {
                 obj_id powerCell = obj_id;
                 destroyObject(powerCell);
             }
@@ -140,6 +153,7 @@ public class grievous_encounter_manager extends script.base_script
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePowerCellDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);
@@ -166,26 +180,31 @@ public class grievous_encounter_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSpawnSpeedFast(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, "grievous_encounter.powerSpawn", 20.0f);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSpawnSpeedMed(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, "grievous_encounter.powerSpawn", 40.0f);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSpawnSpeedSlow(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, "grievous_encounter.powerSpawn", 60.0f);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSpawnSpeedReallySlow(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, "grievous_encounter.powerSpawn", 80.0f);
         return SCRIPT_CONTINUE;
     }
+
     public int handleNpcDeath(obj_id self, dictionary params) throws InterruptedException
     {
         int num = getIntObjVar(self, "grievous_encounter.numMobs");
@@ -194,11 +213,13 @@ public class grievous_encounter_manager extends script.base_script
         if (num <= 0)
         {
             obj_id[] players = getEventPlayersInDungeon(getTopMostContainer(self));
-            if (players != null && players.length > 0)
+            if (players != null)
             {
-                for (obj_id player : players) {
+                for (obj_id player : players)
+                {
                     string_id msg = new string_id("dungeon/myyydril", "encounter_ending");
-                    if (!badge.hasBadge(player, "bdg_kash_grievous")) {
+                    if (!badge.hasBadge(player, "bdg_kash_grievous"))
+                    {
                         badge.grantBadge(player, "bdg_kash_grievous");
                     }
                     sendSystemMessage(player, msg);
@@ -206,20 +227,26 @@ public class grievous_encounter_manager extends script.base_script
             }
             messageTo(self, "handleEndEncounter", params, 60.0f, false);
         }
-        
+
         return SCRIPT_CONTINUE;
     }
+
     public obj_id[] getEventPlayersInDungeon(obj_id dungeon) throws InterruptedException
     {
         obj_id[] cellIds = getCellIds(dungeon);
         Vector eventPlayers = new Vector();
         eventPlayers.setSize(0);
-        for (obj_id cellId : cellIds) {
+        for (obj_id cellId : cellIds)
+        {
             obj_id[] contents = getContents(cellId);
-            if (contents != null && contents.length > 0) {
-                for (obj_id content : contents) {
-                    if (isPlayer(content) && hasScript(content, "theme_park.dungeon.myyydril.grievous_player")) {
-                        if (validatePlayerSessionId(content, dungeon)) {
+            if (contents != null)
+            {
+                for (obj_id content : contents)
+                {
+                    if (isPlayer(content) && hasScript(content, "theme_park.dungeon.myyydril.grievous_player"))
+                    {
+                        if (validatePlayerSessionId(content, dungeon))
+                        {
                             eventPlayers = utils.addElement(eventPlayers, content);
                         }
                     }
@@ -240,11 +267,12 @@ public class grievous_encounter_manager extends script.base_script
         {
             return convertedArray;
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public boolean validatePlayerSessionId(obj_id player, obj_id dungeon) throws InterruptedException
     {
         if (hasObjVar(dungeon, "grievous_lock.isActive"))
@@ -253,20 +281,21 @@ public class grievous_encounter_manager extends script.base_script
             {
                 return (getSessionId(player) == getSessionId(dungeon));
             }
-            else 
+            else
             {
                 return false;
             }
         }
         return false;
     }
+
     public int getSessionId(obj_id target) throws InterruptedException
     {
         if (utils.hasScriptVar(target, "grievous_lock.encounter_session_current"))
         {
             return utils.getIntScriptVar(target, "grievous_lock.encounter_session_current");
         }
-        else 
+        else
         {
             return -1;
         }

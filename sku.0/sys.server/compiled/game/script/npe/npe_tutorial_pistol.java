@@ -1,5 +1,11 @@
 package script.npe;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.static_item;
 import script.library.utils;
 import script.library.xp;
@@ -8,14 +14,17 @@ import script.string_id;
 
 public class npe_tutorial_pistol extends script.base_script
 {
+    public static final string_id SID_ITEM_MUST_NOT_BE_EQUIP = new string_id("base_player", "not_while_equipped");
+
     public npe_tutorial_pistol()
     {
     }
-    public static final string_id SID_ITEM_MUST_NOT_BE_EQUIP = new string_id("base_player", "not_while_equipped");
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnTransferred(obj_id self, obj_id sourceContainer, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (isPlayer(destContainer) && utils.hasScriptVar(destContainer, "npe.pistolReady"))
@@ -27,6 +36,7 @@ public class npe_tutorial_pistol extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id container = getContainedBy(self);
@@ -40,7 +50,7 @@ public class npe_tutorial_pistol extends script.base_script
             }
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             obj_id player = utils.getContainingPlayer(self);
             sendSystemMessage(player, SID_ITEM_MUST_NOT_BE_EQUIP);

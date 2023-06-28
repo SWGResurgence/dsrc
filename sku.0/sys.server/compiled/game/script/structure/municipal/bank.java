@@ -1,5 +1,11 @@
 package script.structure.municipal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.structure;
@@ -12,6 +18,7 @@ public class bank extends script.base_script
     public static final String SCRIPT_ME = "structure.municipal.bank";
     public static final String JUNK_DEALER = "junk_dealer";
     public static final String DATATABLE_TERMINAL_LIST = "datatables/structure/municipal/bank_terminal.iff";
+
     public bank()
     {
     }

@@ -1,5 +1,11 @@
 package script.faction_perk.hq;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -7,9 +13,6 @@ import java.util.Vector;
 
 public class turret_control extends script.terminal.base.base_terminal
 {
-    public turret_control()
-    {
-    }
     private static final String BTN_ATTACK = "@" + "hq" + ":btn_attack";
     private static final string_id MNU_TURRET_CONTROL = new string_id("hq", "mnu_turret_control");
     private static final string_id ATTACK_TARGETS = new string_id("hq", "attack_targets");
@@ -26,6 +29,10 @@ public class turret_control extends script.terminal.base.base_terminal
     private static final string_id IN_USE = new string_id("hq", "in_use");
     private static final string_id ALREADY_ATTACKING = new string_id("hq", "already_attacking");
     private static final String CONTROL_TURRET = "controlling.turret";
+    public turret_control()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         createTriggerVolume("turret_control_range", 5, true);
@@ -40,6 +47,7 @@ public class turret_control extends script.terminal.base.base_terminal
         messageTo(self, "handleSetControl", null, 5.0f, false);
         return super.OnInitialize(self);
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volName, obj_id who) throws InterruptedException
     {
         if (!isIdValid(who))
@@ -59,6 +67,7 @@ public class turret_control extends script.terminal.base.base_terminal
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetControl(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id structure = player_structure.getStructure(self);
@@ -84,6 +93,7 @@ public class turret_control extends script.terminal.base.base_terminal
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -105,7 +115,7 @@ public class turret_control extends script.terminal.base.base_terminal
                     sendSystemMessage(player, IN_USE);
                     return super.OnObjectMenuRequest(self, player, mi);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(self, "sui.in_use");
                 }
@@ -131,6 +141,7 @@ public class turret_control extends script.terminal.base.base_terminal
         mi.addRootMenu(menu_info_types.SERVER_MENU1, MNU_TURRET_CONTROL);
         return super.OnObjectMenuRequest(self, player, mi);
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isIdValid(player) || isDead(player) || isIncapacitated(player))
@@ -162,6 +173,7 @@ public class turret_control extends script.terminal.base.base_terminal
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleTurretAssignment(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id structure = player_structure.getStructure(self);
@@ -178,7 +190,7 @@ public class turret_control extends script.terminal.base.base_terminal
             {
                 removeObjVar(self, CONTROL_TURRET);
             }
-            else 
+            else
             {
                 setObjVar(self, CONTROL_TURRET, turret);
             }
@@ -190,7 +202,7 @@ public class turret_control extends script.terminal.base.base_terminal
             {
                 removeObjVar(self, CONTROL_TURRET);
             }
-            else 
+            else
             {
                 setObjVar(self, CONTROL_TURRET, turret);
             }
@@ -202,7 +214,7 @@ public class turret_control extends script.terminal.base.base_terminal
             {
                 removeObjVar(self, CONTROL_TURRET);
             }
-            else 
+            else
             {
                 setObjVar(self, CONTROL_TURRET, turret);
             }
@@ -214,7 +226,7 @@ public class turret_control extends script.terminal.base.base_terminal
             {
                 removeObjVar(self, CONTROL_TURRET);
             }
-            else 
+            else
             {
                 setObjVar(self, CONTROL_TURRET, turret);
             }
@@ -222,6 +234,7 @@ public class turret_control extends script.terminal.base.base_terminal
         showTurretControl(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int handleTargetSelection(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -302,7 +315,7 @@ public class turret_control extends script.terminal.base.base_terminal
             sendSystemMessageProse(player, ppAttack);
             showTurretControl(self, player);
         }
-        else 
+        else
         {
             utils.setScriptVar(cturret, turret.SCRIPTVAR_ENGAGED, target);
             prose_package ppAttack = prose.getPackage(ATTACK_TARGETS, tarName);
@@ -313,6 +326,7 @@ public class turret_control extends script.terminal.base.base_terminal
         }
         return SCRIPT_CONTINUE;
     }
+
     private void showTurretControl(obj_id terminal, obj_id player) throws InterruptedException
     {
         if (!isIdValid(terminal) || !isIdValid(player))
@@ -358,7 +372,8 @@ public class turret_control extends script.terminal.base.base_terminal
         int cur_hp = 0;
         obj_id target;
         String tarName;
-        for (Object target1 : targets) {
+        for (Object target1 : targets)
+        {
             target = ((obj_id) target1);
             tarName = getEncodedName(target);
             cur_hp = getAttrib(target, 0);

@@ -1,5 +1,11 @@
 package script.theme_park.nym;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.spawning;
@@ -9,11 +15,12 @@ import script.obj_id;
 
 public class research_lab extends script.base_script
 {
+    public static final String NYM_OBJECT_DATATABLE = "datatables/spawning/theme_park/nym_research_lab_objects.iff";
+    public static final String SPAWNER_DATATABLE = "datatables/spawning/theme_park/nym_research_lab.iff";
     public research_lab()
     {
     }
-    public static final String NYM_OBJECT_DATATABLE = "datatables/spawning/theme_park/nym_research_lab_objects.iff";
-    public static final String SPAWNER_DATATABLE = "datatables/spawning/theme_park/nym_research_lab.iff";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "spawnQuestObjects", null, 3, false);
@@ -21,6 +28,7 @@ public class research_lab extends script.base_script
         messageTo(self, "beginSpawn", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnQuestObjects(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -47,6 +55,7 @@ public class research_lab extends script.base_script
         spawning.spawnObjectsInDungeonFromTable(self, planet, NYM_OBJECT_DATATABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int beginSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -76,7 +85,7 @@ public class research_lab extends script.base_script
         {
             room = getCellId(self, spawnRoom);
         }
-        else 
+        else
         {
             spawnRoom = "";
         }
@@ -84,7 +93,7 @@ public class research_lab extends script.base_script
         {
             CustomerServiceLog("bad_spawner_data", "spawner " + self + ", datatable " + SPAWNER_DATATABLE + ", row " + x + ", mob " + spawn + ", room " + spawnRoom + " doesn't exist");
         }
-        else 
+        else
         {
             location spawnPoint = new location(xCoord, yCoord, zCoord, planet, room);
             obj_id spawnedCreature = create.object(spawn, spawnPoint);
@@ -115,6 +124,7 @@ public class research_lab extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tellingMomIDied(obj_id self, dictionary params) throws InterruptedException
     {
         int spawn_num = params.getInt("spawnNumber");
@@ -125,6 +135,7 @@ public class research_lab extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void doSpawn(int spawn_num) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -164,6 +175,5 @@ public class research_lab extends script.base_script
         setObjVar(spawnedCreature, "spawn_number", x);
         setObjVar(spawnedCreature, "mom", self);
         utils.setScriptVar(self, "spawned" + x, spawnedCreature);
-        return;
     }
 }

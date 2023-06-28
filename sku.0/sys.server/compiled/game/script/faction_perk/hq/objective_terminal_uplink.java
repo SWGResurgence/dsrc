@@ -1,5 +1,11 @@
 package script.faction_perk.hq;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -7,9 +13,6 @@ import java.util.Vector;
 
 public class objective_terminal_uplink extends script.faction_perk.hq.objective_object
 {
-    public objective_terminal_uplink()
-    {
-    }
     private static final string_id MNU_JAM = new string_id("hq", "mnu_jam");
     private static final String VAR_FREQ = "hq.objective.freq";
     private static final int STAGE_NONE = 0;
@@ -40,11 +43,16 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
     private static final string_id BAND_NUMBER = new string_id("faction/faction_hq/faction_hq_response", "band_number");
     private static final string_id SID_NO_STEALTH = new string_id("hq", "no_stealth");
     private static final string_id SCANNING_SIGNAL = new string_id("faction/faction_hq/faction_hq_response", "scanning_signal");
+    public objective_terminal_uplink()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, VAR_FREQ, rand(1, 99));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (stealth.hasInvisibleBuff(player))
@@ -60,6 +68,7 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
         mi.addRootMenu(menu_info_types.ITEM_USE, MNU_JAM);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (stealth.hasInvisibleBuff(player))
@@ -97,7 +106,7 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
                 prose_package ppDisableOther = prose.getPackage(hq.PROSE_DISABLE_OTHER, priorObjective, self);
                 sendSystemMessageProse(player, ppDisableOther);
             }
-            else 
+            else
             {
                 sendSystemMessage(player, OTHER_OBJECTIVES);
             }
@@ -116,7 +125,7 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
                 sendSystemMessage(player, BEGIN_SCANNING);
                 playJammingGame(self, player);
             }
-            else 
+            else
             {
                 sendSystemMessage(player, BEGIN_SCANNING);
                 dictionary d = new dictionary();
@@ -126,6 +135,7 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
         }
         return SCRIPT_CONTINUE;
     }
+
     private void playJammingGame(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(player))
@@ -184,9 +194,11 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
         Vector entries = new Vector();
         entries.setSize(0);
         string_id entryId;
-        for (Object opt : opts) {
+        for (Object opt : opts)
+        {
             entryId = null;
-            switch (stage) {
+            switch (stage)
+            {
                 case STAGE_FREQ:
                     entryId = CHANNEL_NUMBER;
                     break;
@@ -207,6 +219,7 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
             utils.setScriptVar(self, scriptvar_stage, stage);
         }
     }
+
     private int[] getFreshArray() throws InterruptedException
     {
         int[] ret = new int[10];
@@ -216,6 +229,7 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
         }
         return ret;
     }
+
     public int handleJammingGame(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -246,7 +260,8 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
         }
         int freq = getIntObjVar(self, VAR_FREQ);
         int correct = freq / 10;
-        if(stage == STAGE_FREQ){
+        if (stage == STAGE_FREQ)
+        {
             correct = freq % 10;
         }
         float delay = 5.0f;
@@ -281,7 +296,7 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
                     break;
             }
         }
-        else 
+        else
         {
             int findmod = getSkillStatMod(player, "droid_find_chance");
             int roll = rand(1, 150);
@@ -289,7 +304,7 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
             {
                 text = WHITE_NOISE;
             }
-            else 
+            else
             {
                 if (findmod > roll)
                 {
@@ -297,18 +312,18 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
                     {
                         text = SEARCH_HIGHER;
                     }
-                    else 
+                    else
                     {
                         text = SEARCH_LOWER;
                     }
                 }
-                else 
+                else
                 {
                     if (correct > (Integer) opt.get(idx))
                     {
                         text = SEARCH_LOWER;
                     }
-                    else 
+                    else
                     {
                         text = SEARCH_HIGHER;
                     }
@@ -335,6 +350,7 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
         messageTo(self, "handleJammingGameDelay", d, delay, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleJammingGameDelay(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -349,10 +365,12 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleObjectiveDisabled(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int handleStartDelay(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -363,6 +381,7 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
         playJammingGame(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int handleJammingInProgress(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -385,7 +404,7 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
             hq.disableObjective(self);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             sendSystemMessage(player, JAMMING_IN_PROGRESS);
             params.put("cnt", cnt);

@@ -1,5 +1,11 @@
 package script.theme_park.nym;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.factions;
@@ -8,9 +14,6 @@ import script.obj_id;
 
 public class nym_ambush_ai extends script.base_script
 {
-    public nym_ambush_ai()
-    {
-    }
     public static final boolean LOGGING_ON = true;
     public static final String SCRIPT_LOG = "outbreak_trigger";
     public static final String FAIL_SIGNAL = "fail_signal";
@@ -18,12 +21,17 @@ public class nym_ambush_ai extends script.base_script
     public static final String WAVE_GROUP_ID = "waveEventGroupId";
     public static final int RADIUS = 100;
     public static final int MIN_DIST = 50;
+    public nym_ambush_ai()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         LOG("nym_themepark_log", "nym_ambush_ai: OnAttach: attaching script");
         messageTo(self, "handleIntelligenceLoop", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id weapon, int[] damage) throws InterruptedException
     {
         if (!hasObjVar(self, "invln"))
@@ -33,6 +41,7 @@ public class nym_ambush_ai extends script.base_script
         setAttrib(self, HEALTH, getMaxAttrib(self, HEALTH));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDamaged(obj_id self, obj_id attacker, obj_id weapon, int damage) throws InterruptedException
     {
         if (!hasObjVar(self, "invln"))
@@ -42,22 +51,27 @@ public class nym_ambush_ai extends script.base_script
         setHitpoints(self, getMaxHitpoints(self));
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitateTarget(obj_id self, obj_id victim) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int handleIntelligenceLoop(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("nym_themepark_log", "nym_ambush_ai: handleIntelligenceLoop: loop start");
@@ -75,6 +89,7 @@ public class nym_ambush_ai extends script.base_script
         messageTo(self, "handleIntelligenceLoop", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public boolean getRandomCombatTarget(obj_id self, obj_id parent) throws InterruptedException
     {
         if (ai_lib.isInCombat(self))
@@ -95,27 +110,35 @@ public class nym_ambush_ai extends script.base_script
             return false;
         }
         String myFaction = factions.getFaction(self);
-        for (obj_id target : targets) {
-            if (!isIdValid(target)) {
+        for (obj_id target : targets)
+        {
+            if (!isIdValid(target))
+            {
                 continue;
             }
-            if (target == self) {
+            if (target == self)
+            {
                 continue;
             }
-            if (isInvulnerable(target)) {
+            if (isInvulnerable(target))
+            {
                 continue;
             }
-            if (hasScript(target, "theme_park.nym.nym_ambush_ai")) {
+            if (hasScript(target, "theme_park.nym.nym_ambush_ai"))
+            {
                 continue;
             }
-            if (ai_lib.isDead(target)) {
+            if (ai_lib.isDead(target))
+            {
                 continue;
             }
             String targetFaction = factions.getFaction(target);
-            if (targetFaction == null || targetFaction.length() <= 0) {
+            if (targetFaction == null || targetFaction.length() <= 0)
+            {
                 continue;
             }
-            if (factions.areCreaturesAllied(self, target)) {
+            if (factions.areCreaturesAllied(self, target))
+            {
                 continue;
             }
             startCombat(self, target);
@@ -123,6 +146,7 @@ public class nym_ambush_ai extends script.base_script
         }
         return false;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);

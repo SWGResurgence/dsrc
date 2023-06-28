@@ -1,5 +1,11 @@
 package script.developer.soe.beta;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.utils;
 import script.location;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class move_player extends script.base_script
     public move_player()
     {
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         String[] elems = split(text, ' ');

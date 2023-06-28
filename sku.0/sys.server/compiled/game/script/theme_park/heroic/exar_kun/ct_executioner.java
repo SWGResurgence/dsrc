@@ -1,5 +1,11 @@
 package script.theme_park.heroic.exar_kun;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.chat;
 import script.library.trial;
@@ -10,27 +16,32 @@ public class ct_executioner extends script.base_script
     public ct_executioner()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         detachScript(self, "ai.creature_combat");
         return SCRIPT_CONTINUE;
     }
+
     public int OnMoveMoving(obj_id self) throws InterruptedException
     {
         setMovementWalk(self);
         aiEquipPrimaryWeapon(self);
         return SCRIPT_CONTINUE;
     }
+
     public int kill_prisoner(obj_id self, dictionary params) throws InterruptedException
     {
         setInvulnerable(self, true);
         messageTo(self, "handleDelayedExecute", null, 3.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleDelayedExecute(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] prisoner = trial.getObjectsInDungeonWithScript(trial.getTop(self), "theme_park.heroic.exar_kun.ct_prisoner");
-        for (obj_id obj_id : prisoner) {
+        for (obj_id obj_id : prisoner)
+        {
             kill(obj_id);
         }
         messageTo(self, "cleanup", null, 5.0f, false);
@@ -42,6 +53,7 @@ public class ct_executioner extends script.base_script
         messageTo(trial.getTop(self), "triggerFired", dict, 0.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id weapon, int[] damage) throws InterruptedException
     {
         if (hasObjVar(self, "stop_recording"))
@@ -58,11 +70,13 @@ public class ct_executioner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cleanup(obj_id self, dictionary params) throws InterruptedException
     {
         trial.cleanupObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public void failExecute(obj_id self) throws InterruptedException
     {
         chat.chat(self, "I have failed the master!");

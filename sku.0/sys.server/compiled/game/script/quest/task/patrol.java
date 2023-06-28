@@ -1,5 +1,11 @@
 package script.quest.task;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.locations;
 import script.library.quests;
@@ -10,10 +16,12 @@ import script.string_id;
 
 public class patrol extends script.base_script
 {
+    public static final boolean DEBUGGING = false;
+
     public patrol()
     {
     }
-    public static final boolean DEBUGGING = false;
+
     public int handleDestroyWaypoint(obj_id self, dictionary params) throws InterruptedException
     {
         int waypointNumber = params.getInt("waypointNumber");
@@ -28,7 +36,7 @@ public class patrol extends script.base_script
                 waypointCount++;
                 setObjVar(self, "quest." + questName + ".waypointcount", waypointCount);
             }
-            else 
+            else
             {
                 setObjVar(self, "quest." + questName + ".waypointcount", 1);
             }
@@ -36,6 +44,7 @@ public class patrol extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void completeTask(obj_id self, String questName, boolean succeeded) throws InterruptedException
     {
         if (hasObjVar(self, "quest." + questName))
@@ -55,6 +64,7 @@ public class patrol extends script.base_script
         }
         quests.complete(questName, self, succeeded);
     }
+
     public void waypointCleanUp(String questName, obj_id player) throws InterruptedException
     {
         for (int i = 0; i < 8; i++)
@@ -70,6 +80,7 @@ public class patrol extends script.base_script
             }
         }
     }
+
     public void setupPatrolWaypoint(obj_id self, int questRow) throws InterruptedException
     {
         if (quests.isMyQuest(questRow, "quest.task.patrol"))
@@ -85,7 +96,7 @@ public class patrol extends script.base_script
                     {
                         radius = getFloatObjVar(self, "quest." + questName + ".parameter");
                     }
-                    else 
+                    else
                     {
                         String parameterString = quests.getDataEntry(questRow, "PARAMETER");
                         if (parameterString != null && !parameterString.equals(""))
@@ -133,6 +144,7 @@ public class patrol extends script.base_script
             }
         }
     }
+
     public location getPatrolLocation(obj_id self, int questRow) throws InterruptedException
     {
         location result = null;
@@ -149,12 +161,12 @@ public class patrol extends script.base_script
                 {
                     LOG("newquests", "location target for " + questName + " is overridden by an object variable. new location is " + result);
                 }
-                else 
+                else
                 {
                     LOG("newquests", "location target for " + questName + " was supposed to be overridden, but the location could not be retrieved from the location object variable quest." + questName + ".target");
                 }
             }
-            else 
+            else
             {
                 String planetName = null;
                 obj_id cell = null;
@@ -197,7 +209,7 @@ public class patrol extends script.base_script
                                 }
                             }
                         }
-                        else 
+                        else
                         {
                             LOG("newquests", "location first token is a number");
                             if (tokens.length > 1)
@@ -224,7 +236,7 @@ public class patrol extends script.base_script
                         result.area = planetName;
                         LOG("newquests", "Patrol Origin set location at " + result);
                     }
-                    else 
+                    else
                     {
                         waitForPlanetWarp = true;
                     }
@@ -236,7 +248,7 @@ public class patrol extends script.base_script
                     {
                         result = getLocation(self);
                     }
-                    else 
+                    else
                     {
                         waitForPlanetWarp = true;
                     }
@@ -247,13 +259,14 @@ public class patrol extends script.base_script
                 setObjVar(self, "quest." + questName + ".selected_location", result);
                 LOG("newquests", "location adding location target at " + result);
             }
-            else if (waitForPlanetWarp == true)
+            else if (waitForPlanetWarp)
             {
                 setObjVar(self, "quest." + questName + ".generate", waitForPlanetWarp);
             }
         }
         return result;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         int rows = dataTableGetNumRows("datatables/player/quests.iff");
@@ -275,6 +288,7 @@ public class patrol extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnQuestActivated(obj_id self, int questRow) throws InterruptedException
     {
         LOG("newquests", "Patrol - OnQuestActivated(" + questRow + ")");
@@ -285,6 +299,7 @@ public class patrol extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String locationName) throws InterruptedException
     {
         if (DEBUGGING)
@@ -326,7 +341,7 @@ public class patrol extends script.base_script
                             broadcast(self, "On Arrived At Location waypointNumber= " + waypointNumber);
                         }
                     }
-                    else 
+                    else
                     {
                         LOG("newquests", "Error parsing waypoint number, " + tokens[2] + " is not a Number");
                         if (DEBUGGING)
@@ -336,7 +351,7 @@ public class patrol extends script.base_script
                     }
                 }
             }
-            else 
+            else
             {
                 LOG("newquests", "Not enough Tokens to parse for good location number");
                 if (DEBUGGING)

@@ -1,5 +1,11 @@
 package script.creature_spawner;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -17,15 +23,17 @@ public class base_newbie_creature_spawner extends script.base_script
     public base_newbie_creature_spawner()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!SPAWNER_DISABLED)
         {
             spawnCreatures(self);
-            if(newbie) LOG("NewbieSpawn", "Spawning Init: " + self);
+            if (newbie) LOG("NewbieSpawn", "Spawning Init: " + self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public void spawnCreatures(obj_id self) throws InterruptedException
     {
         int count = utils.getIntScriptVar(self, "count");
@@ -38,7 +46,7 @@ public class base_newbie_creature_spawner extends script.base_script
         obj_id spawned;
         for (; count < maxPop; ++count)
         {
-            if(newbie) LOG("NewbieSpawn", "spawning #" + count);
+            if (newbie) LOG("NewbieSpawn", "spawning #" + count);
             goodLoc = pickLocation();
             if (goodLoc == null)
             {
@@ -52,10 +60,12 @@ public class base_newbie_creature_spawner extends script.base_script
             ai_lib.setDefaultCalmBehavior(spawned, ai_lib.BEHAVIOR_LOITER);
         }
     }
+
     public String pickCreature() throws InterruptedException
     {
         return "crazed_durni";
     }
+
     public location pickLocation() throws InterruptedException
     {
         location here = getLocation(getSelf());
@@ -63,11 +73,13 @@ public class base_newbie_creature_spawner extends script.base_script
         here.z = here.z + rand(-5, 5);
         return locations.getGoodLocationAroundLocation(here, 10.0f, 10.0f, 10.0f, 10.0f);
     }
+
     public int creatureDied(obj_id self, dictionary params) throws InterruptedException
     {
         doDeathRespawn(self);
         return SCRIPT_CONTINUE;
     }
+
     public void doDeathRespawn(obj_id self) throws InterruptedException
     {
         int count = utils.getIntScriptVar(self, "count");

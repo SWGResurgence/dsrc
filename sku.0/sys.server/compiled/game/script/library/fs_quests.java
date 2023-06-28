@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.location;
 import script.obj_id;
 import script.prose_package;
@@ -23,6 +29,7 @@ public class fs_quests extends script.base_script
     public static final String SCRIPT_VAR_REMOVE_TASK_PLAYER = "fs_quest.remove_task_player";
     public static final String SCRIPT_VAR_UNLOCK_BRANCH_SUI = "fs_quest.unlock_branch_sui";
     public static final String SCRIPT_VAR_UNLOCK_BRANCH_PLAYER = "fs_quest.unlock_branch_player";
+
     public fs_quests()
     {
     }

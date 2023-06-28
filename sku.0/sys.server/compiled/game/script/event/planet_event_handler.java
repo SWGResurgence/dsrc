@@ -1,5 +1,11 @@
 package script.event;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.holiday;
 import script.obj_id;
@@ -8,10 +14,12 @@ import java.time.LocalTime;
 
 public class planet_event_handler extends script.base_script
 {
+    private static final String EVENT_TIMESTAMP = "lifeday.time_stamp";
+
     public planet_event_handler()
     {
     }
-    private static final String EVENT_TIMESTAMP = "lifeday.time_stamp";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         //CustomerServiceLog("holidayEvent", "planet_event_handler.OnAttach: trigger initialized.");
@@ -31,6 +39,7 @@ public class planet_event_handler extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         //CustomerServiceLog("holidayEvent", "planet_event_handler.OnInitialize: trigger initialized.");
@@ -50,6 +59,7 @@ public class planet_event_handler extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     private void checkLifeDayData(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, EVENT_TIMESTAMP))
@@ -75,6 +85,7 @@ public class planet_event_handler extends script.base_script
             timedMessageToDaily(self, "lifeDayDailyAlarm", null, LocalTime.of(4, 0, 0));
         }
     }
+
     private boolean newDay(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, EVENT_TIMESTAMP))
@@ -85,6 +96,7 @@ public class planet_event_handler extends script.base_script
         }
         return true;
     }
+
     private void newTimeStamp(obj_id self) throws InterruptedException
     {
         int now = getCalendarTime();
@@ -93,6 +105,7 @@ public class planet_event_handler extends script.base_script
         setObjVar(self, EVENT_TIMESTAMP, then);
         timedMessageToDaily(self, "lifeDayDailyAlarm", null, LocalTime.of(10, 0, 0));
     }
+
     public int setUpEventLeaderBoard(obj_id self, dictionary params) throws InterruptedException
     {
         //CustomerServiceLog("holidayEvent", "planet_event_handler.setUpEventLeaderBoard: Event Leader Board Data being initialized.");
@@ -127,6 +140,7 @@ public class planet_event_handler extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int resetEventDataAfterDelay(obj_id self, dictionary params) throws InterruptedException
     {
         //CustomerServiceLog("holidayEvent", "planet_event_handler.resetEventDataAfterDelay: Message Handler Initialized.");
@@ -156,7 +170,7 @@ public class planet_event_handler extends script.base_script
             //CustomerServiceLog("holidayEvent", "planet_event_handler.resetEventDataAfterDelay: Message received with cargo. eventVar: " + eventVar + " with eventConfig: " + eventConfig + ". The data is being reset because the delay time has expired as planned.");
             messageTo(self, "setUpEventLeaderBoard", params, 3.0f, false);
         }
-        else 
+        else
         {
             //CustomerServiceLog("holidayEvent", "planet_event_handler.resetEventDataAfterDelay: Message received with cargo. eventVar: " + eventVar + " with eventConfig: " + eventConfig + ". The data WAS NOT reset because the event was not running.");
             if (hasObjVar(self, holiday.PLANET_VAR_EVENT_PREFIX + holiday.PLANET_VAR_EMPIRE_DAY))
@@ -166,6 +180,7 @@ public class planet_event_handler extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lifeDayDailyAlarm(obj_id self, dictionary params) throws InterruptedException
     {
         String lifedayRunning = getConfigSetting("GameServer", "lifeday");
@@ -179,6 +194,7 @@ public class planet_event_handler extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lifeDayScoreBoardUpdate(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -215,6 +231,7 @@ public class planet_event_handler extends script.base_script
         messageTo(player, "scoreBoardCheck", newParams, 3.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     private boolean setupInitialEventScores(obj_id planet, String scoreObjVar, int modifier, boolean faction) throws InterruptedException
     {
         if (!isValidId(planet) || !exists(planet))
@@ -241,7 +258,7 @@ public class planet_event_handler extends script.base_script
                 score--;
             }
         }
-        else 
+        else
         {
             for (int i = 1, score = modifier; i <= holiday.MAX_NUMBER_OF_PLANET_HIGH_SCORES; i++)
             {
@@ -262,6 +279,7 @@ public class planet_event_handler extends script.base_script
         }
         return true;
     }
+
     private boolean checkForHolidayEventConfigs(obj_id planet) throws InterruptedException
     {
         if (!isValidId(planet) || !exists(planet))
@@ -278,7 +296,7 @@ public class planet_event_handler extends script.base_script
             params.put("eventConfig", "empireday_ceremony");
             messageTo(planet, "setUpEventLeaderBoard", params, 3.0f, false);
         }
-        else 
+        else
         {
             if (hasObjVar(planet, holiday.PLANET_VAR_EVENT_PREFIX + holiday.PLANET_VAR_EMPIRE_DAY))
             {

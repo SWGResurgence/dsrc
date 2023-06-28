@@ -1,5 +1,11 @@
 package script.systems.crafting.community_crafting;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.community_crafting;
 import script.obj_id;
 import script.prose_package;
@@ -15,6 +21,7 @@ public class npc_inventory extends script.base_script
     public static final string_id SID_THANK_YOU_ONE = new string_id("crafting", "cc_thank_you_one");
     public static final string_id SID_THANK_YOU_WITH_COUNTS = new string_id("crafting", "cc_thank_you_with_counts");
     public static final string_id SID_NOT_CRAFTING = new string_id("crafting", "cc_not_crafting");
+
     public npc_inventory()
     {
     }

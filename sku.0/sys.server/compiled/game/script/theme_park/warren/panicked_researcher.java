@@ -1,5 +1,11 @@
 package script.theme_park.warren;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.utils;
@@ -7,11 +13,12 @@ import script.*;
 
 public class panicked_researcher extends script.base_script
 {
+    public static final String CONVO_FILE = "theme_park/warren/warren";
+    public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
     public panicked_researcher()
     {
     }
-    public static final String CONVO_FILE = "theme_park/warren/warren";
-    public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_LOITER);
@@ -22,6 +29,7 @@ public class panicked_researcher extends script.base_script
         setName(self, new string_id("theme_park/warren/warren_system_messages", "name_manx"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int mnu = mi.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -29,6 +37,7 @@ public class panicked_researcher extends script.base_script
         mdata.setServerNotify(false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(speaker) || ai_lib.aiIsDead(self))
@@ -50,11 +59,12 @@ public class panicked_researcher extends script.base_script
             return SCRIPT_CONTINUE;
         }
         string_id greeting = new string_id(CONVO_FILE, "researcher_start");
-        string_id response[] = new string_id[1];
+        string_id[] response = new string_id[1];
         response[0] = new string_id(CONVO_FILE, "researcher_reply_1");
         npcStartConversation(speaker, self, CONVO_FILE, greeting, response);
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convo, obj_id player, string_id response) throws InterruptedException
     {
         if (!convo.equals(CONVO_FILE))
@@ -69,12 +79,14 @@ public class panicked_researcher extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         obj_id warren = getObjIdObjVar(self, "warren.bldg");
         messageTo(warren, "handleResearcherDied", null, 800, false);
         return SCRIPT_CONTINUE;
     }
+
     public boolean isReactorDisabled(obj_id self) throws InterruptedException
     {
         obj_id warren = getObjIdObjVar(self, "warren.bldg");
@@ -82,12 +94,9 @@ public class panicked_researcher extends script.base_script
         {
             return false;
         }
-        if (utils.hasScriptVar(warren, "warren.reactorOverriden"))
-        {
-            return true;
-        }
-        return false;
+        return utils.hasScriptVar(warren, "warren.reactorOverriden");
     }
+
     public boolean hasBothCores(obj_id player) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -97,10 +106,13 @@ public class panicked_researcher extends script.base_script
             return false;
         }
         int countCores = 0;
-        for (obj_id content : contents) {
-            if (hasObjVar(content, "warren.reactorCore")) {
+        for (obj_id content : contents)
+        {
+            if (hasObjVar(content, "warren.reactorCore"))
+            {
                 countCores++;
-                if (countCores > 1) {
+                if (countCores > 1)
+                {
                     return true;
                 }
             }

@@ -1,5 +1,11 @@
 package script.theme_park.heroic.axkva_min;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.instance;
 import script.library.skill;
@@ -12,6 +18,7 @@ public class axkva_controller extends script.base_script
     public axkva_controller()
     {
     }
+
     public int axkvaDied(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] players = trial.getPlayersInDungeon(self);
@@ -33,6 +40,7 @@ public class axkva_controller extends script.base_script
         instance.setClock(self, 300);
         return SCRIPT_CONTINUE;
     }
+
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))
@@ -45,11 +53,14 @@ public class axkva_controller extends script.base_script
             return SCRIPT_CONTINUE;
         }
         obj_id shade = null;
-        for (obj_id object : objects) {
-            if (!hasObjVar(object, "spawn_id")) {
+        for (obj_id object : objects)
+        {
+            if (!hasObjVar(object, "spawn_id"))
+            {
                 continue;
             }
-            if ((getStringObjVar(object, "spawn_id")).equals("shade")) {
+            if ((getStringObjVar(object, "spawn_id")).equals("shade"))
+            {
                 shade = object;
             }
         }

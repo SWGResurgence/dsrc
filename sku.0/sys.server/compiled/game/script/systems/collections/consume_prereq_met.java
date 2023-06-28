@@ -1,5 +1,11 @@
 package script.systems.collections;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.collection;
 import script.library.static_item;
@@ -18,6 +24,7 @@ public class consume_prereq_met extends script.base_script
     public static final string_id SID_ALREADY_FINISHED_COLLECTION = new string_id("collection", "already_finished_collection");
     public static final string_id STR_COLLECTION_LIST_PROMPT = new string_id("collection", "collection_list_prompt");
     public static final string_id STR_COLLECTION_LIST_TITLE = new string_id("collection", "collection_list_title");
+
     public consume_prereq_met()
     {
     }

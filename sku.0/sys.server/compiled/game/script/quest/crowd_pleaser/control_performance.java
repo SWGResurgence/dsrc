@@ -1,5 +1,11 @@
 package script.quest.crowd_pleaser;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.create;
 import script.library.prose;
@@ -9,9 +15,6 @@ import java.util.Vector;
 
 public class control_performance extends script.base_script
 {
-    public control_performance()
-    {
-    }
     public static final String PERFORMANCE_DATATABLE = "datatables/performance/performance.iff";
     public static final String SEATING_DATATABLE = "datatables/quest/crowd_pleaser/theater_seat.iff";
     public static final String PLAYER_PERFORMANCE_SCRIPT = "quest.crowd_pleaser.player_performance";
@@ -52,6 +55,10 @@ public class control_performance extends script.base_script
     public static final int MINIMUM_POSITIVE_RATING = 2;
     public static final int MINIMUM_NEGATIVE_RATING = -10;
     public static final float HEARTBEAT = 15.0f;
+    public control_performance()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         utils.setScriptVar(self, SATISFACTION_OBJVAR, 0);
@@ -67,14 +74,14 @@ public class control_performance extends script.base_script
         switch (level)
         {
             case 1:
-            time = 120;
-            break;
+                time = 120;
+                break;
             case 2:
-            time = 150;
-            break;
+                time = 150;
+                break;
             case 3:
-            time = 180;
-            break;
+                time = 180;
+                break;
         }
         spawnAudience(self, player, level);
         createTriggerVolume(VOLUME_NAME, 10.0f, true);
@@ -84,6 +91,7 @@ public class control_performance extends script.base_script
         messageTo(self, "handleBeginPerformance", null, time, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, CONTROL_OBJVAR) || !utils.hasScriptVar(self, LEVEL_OBJVAR) || !utils.hasScriptVar(self, PLAYER_OBJVAR))
@@ -104,6 +112,7 @@ public class control_performance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volumeName, obj_id who) throws InterruptedException
     {
         if (!volumeName.equals(VOLUME_NAME))
@@ -123,6 +132,7 @@ public class control_performance extends script.base_script
         failPerformance(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePrePerformanceCountdown(obj_id self, dictionary params) throws InterruptedException
     {
         int time = params.getInt("time");
@@ -144,6 +154,7 @@ public class control_performance extends script.base_script
         messageTo(self, "handlePrePerformanceCountdown", d, dec, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleBeginPerformance(obj_id self, dictionary params) throws InterruptedException
     {
         int level = utils.getIntScriptVar(self, LEVEL_OBJVAR);
@@ -156,9 +167,12 @@ public class control_performance extends script.base_script
             return SCRIPT_CONTINUE;
         }
         boolean plyNotFound = true;
-        for (obj_id content : contents) {
-            if (content == player) {
+        for (obj_id content : contents)
+        {
+            if (content == player)
+            {
                 plyNotFound = false;
+                break;
             }
         }
         if (plyNotFound)
@@ -171,14 +185,14 @@ public class control_performance extends script.base_script
         switch (level)
         {
             case 1:
-            time = 120;
-            break;
+                time = 120;
+                break;
             case 2:
-            time = 210;
-            break;
+                time = 210;
+                break;
             case 3:
-            time = 300;
-            break;
+                time = 300;
+                break;
         }
         prose_package pp = prose.getPackage(PERFORMANCE_BEGIN, time);
         sendSystemMessageProse(player, pp);
@@ -192,6 +206,7 @@ public class control_performance extends script.base_script
         messageTo(self, "handlePerformanceHeartbeat", null, HEARTBEAT, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePerformanceHeartbeat(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, IN_PROGRESS_OBJVAR))
@@ -207,12 +222,12 @@ public class control_performance extends script.base_script
                 sendSystemMessage(player, FAIL_NOT_PLAYING);
                 failPerformance(self, player);
             }
-            else 
+            else
             {
                 utils.setScriptVar(self, NOT_PERFORMING_OBJVAR, 1);
             }
         }
-        else 
+        else
         {
             if (utils.hasScriptVar(self, NOT_PERFORMING_OBJVAR))
             {
@@ -224,7 +239,7 @@ public class control_performance extends script.base_script
             {
                 rating = utils.getIntScriptVar(self, RATING_OBJVAR + "." + performanceName);
             }
-            else 
+            else
             {
                 rating = DEFAULT_PERFORMANCE_RATING;
             }
@@ -258,6 +273,7 @@ public class control_performance extends script.base_script
         messageTo(self, "handlePerformanceHeartbeat", null, HEARTBEAT, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleObservedFlourish(obj_id self, dictionary params) throws InterruptedException
     {
         int index = params.getInt("flourishIndex");
@@ -266,7 +282,7 @@ public class control_performance extends script.base_script
         {
             rating = utils.getIntScriptVar(self, RATING_OBJVAR + "." + index);
         }
-        else 
+        else
         {
             rating = DEFAULT_PERFORMANCE_RATING;
         }
@@ -299,6 +315,7 @@ public class control_performance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleEndPerformance(obj_id self, dictionary params) throws InterruptedException
     {
         int level = utils.getIntScriptVar(self, LEVEL_OBJVAR);
@@ -307,14 +324,14 @@ public class control_performance extends script.base_script
         switch (level)
         {
             case 1:
-            threshold = LEVEL_1_THRESHOLD;
-            break;
+                threshold = LEVEL_1_THRESHOLD;
+                break;
             case 2:
-            threshold = LEVEL_2_THRESHOLD;
-            break;
+                threshold = LEVEL_2_THRESHOLD;
+                break;
             case 3:
-            threshold = LEVEL_3_THRESHOLD;
-            break;
+                threshold = LEVEL_3_THRESHOLD;
+                break;
         }
         int satisfaction = utils.getIntScriptVar(self, SATISFACTION_OBJVAR);
         performFinalAudienceReaction(self, player, satisfaction);
@@ -323,19 +340,21 @@ public class control_performance extends script.base_script
             sendSystemMessage(player, SUCCEED_PERFORMANCE);
             succeedPerformance(self, player);
         }
-        else 
+        else
         {
             sendSystemMessage(player, FAIL_NOT_SATISFIED);
             failPerformance(self, player);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleReceivePlayerFail(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, PLAYER_OBJVAR);
         failPerformance(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSpawnAudienceMembers(obj_id self, dictionary params) throws InterruptedException
     {
         final int SPAWN_LUMP = 5;
@@ -385,6 +404,7 @@ public class control_performance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleCleanup(obj_id self, dictionary params) throws InterruptedException
     {
         cleanupAudienceMembers(self);
@@ -393,19 +413,23 @@ public class control_performance extends script.base_script
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public boolean isOccupied(int seat, Vector list) throws InterruptedException
     {
         if (list == null || list.size() == 0)
         {
             return false;
         }
-        for (Object o : list) {
-            if ((Integer) o == seat) {
+        for (Object o : list)
+        {
+            if ((Integer) o == seat)
+            {
                 return true;
             }
         }
         return false;
     }
+
     public void succeedPerformance(obj_id self, obj_id player) throws InterruptedException
     {
         int level = utils.getIntScriptVar(self, LEVEL_OBJVAR);
@@ -419,18 +443,19 @@ public class control_performance extends script.base_script
         switch (level)
         {
             case 1:
-            status = 9;
-            break;
+                status = 9;
+                break;
             case 2:
-            status = 15;
-            break;
+                status = 15;
+                break;
             case 3:
-            status = 21;
-            break;
+                status = 21;
+                break;
         }
         setObjVar(player, STATUS_OBJVAR, status);
         messageTo(self, "handleCleanup", null, 20.0f, false);
     }
+
     public void failPerformance(obj_id self, obj_id player) throws InterruptedException
     {
         int level = utils.getIntScriptVar(self, LEVEL_OBJVAR);
@@ -444,32 +469,33 @@ public class control_performance extends script.base_script
         switch (level)
         {
             case 1:
-            status = 7;
-            break;
+                status = 7;
+                break;
             case 2:
-            status = 13;
-            break;
+                status = 13;
+                break;
             case 3:
-            status = 19;
-            break;
+                status = 19;
+                break;
         }
         setObjVar(player, STATUS_OBJVAR, status);
         messageTo(self, "handleCleanup", null, 20.0f, false);
     }
+
     public void spawnAudience(obj_id self, obj_id player, int level) throws InterruptedException
     {
         int members = 0;
         switch (level)
         {
             case 1:
-            members = 10;
-            break;
+                members = 10;
+                break;
             case 2:
-            members = 20;
-            break;
+                members = 20;
+                break;
             case 3:
-            members = 30;
-            break;
+                members = 30;
+                break;
         }
         String type = getStringObjVar(player, "quest.crowd_pleaser.audition.type");
         if (type == null || type.equals(""))
@@ -481,6 +507,7 @@ public class control_performance extends script.base_script
         d.put("type", type);
         messageTo(self, "handleSpawnAudienceMembers", d, 1.0f, false);
     }
+
     public void performAudienceReaction(obj_id self, obj_id player, int satisfaction) throws InterruptedException
     {
         int level = utils.getIntScriptVar(self, LEVEL_OBJVAR);
@@ -488,17 +515,17 @@ public class control_performance extends script.base_script
         switch (level)
         {
             case 1:
-            threshold = LEVEL_1_THRESHOLD;
-            break;
+                threshold = LEVEL_1_THRESHOLD;
+                break;
             case 2:
-            threshold = LEVEL_2_THRESHOLD;
-            break;
+                threshold = LEVEL_2_THRESHOLD;
+                break;
             case 3:
-            threshold = LEVEL_3_THRESHOLD;
-            break;
+                threshold = LEVEL_3_THRESHOLD;
+                break;
         }
         prose_package pp = new prose_package();
-        float rating = 100.0f * ((float)satisfaction / threshold);
+        float rating = 100.0f * ((float) satisfaction / threshold);
         if (rating > 125.0f)
         {
             pp = prose.getPackage(AUDIENCE_REACTION, localize(REACTION_1));
@@ -523,12 +550,13 @@ public class control_performance extends script.base_script
         {
             pp = prose.getPackage(AUDIENCE_REACTION, localize(REACTION_5));
         }
-        else 
+        else
         {
             pp = prose.getPackage(AUDIENCE_REACTION, localize(REACTION_6));
         }
         sendSystemMessageProse(player, pp);
     }
+
     public void performFinalAudienceReaction(obj_id self, obj_id player, int satisfaction) throws InterruptedException
     {
         int level = utils.getIntScriptVar(self, LEVEL_OBJVAR);
@@ -536,17 +564,17 @@ public class control_performance extends script.base_script
         switch (level)
         {
             case 1:
-            threshold = LEVEL_1_THRESHOLD;
-            break;
+                threshold = LEVEL_1_THRESHOLD;
+                break;
             case 2:
-            threshold = LEVEL_2_THRESHOLD;
-            break;
+                threshold = LEVEL_2_THRESHOLD;
+                break;
             case 3:
-            threshold = LEVEL_3_THRESHOLD;
-            break;
+                threshold = LEVEL_3_THRESHOLD;
+                break;
         }
         String effectName = "";
-        float rating = 100.0f * ((float)satisfaction / threshold);
+        float rating = 100.0f * ((float) satisfaction / threshold);
         if (rating >= 100.0f)
         {
             effectName = "clienteffect/perform_cheer.cef";
@@ -559,7 +587,7 @@ public class control_performance extends script.base_script
         {
             effectName = "clienteffect/perform_crickets.cef";
         }
-        else 
+        else
         {
             effectName = "clienteffect/perform_boo.cef";
         }
@@ -567,16 +595,19 @@ public class control_performance extends script.base_script
         location loc = new location(0.16f, 1.20f, 37.74f, myLoc.area, myLoc.cell);
         playClientEffectLoc(player, effectName, loc, 2.0f);
     }
+
     public void cleanupAudienceMembers(obj_id self) throws InterruptedException
     {
         location loc = getLocation(self);
-        obj_id contents[] = getContents(loc.cell);
-        if (contents == null || contents.length == 0)
+        obj_id[] contents = getContents(loc.cell);
+        if (contents == null)
         {
             return;
         }
-        for (obj_id content : contents) {
-            if (hasScript(content, "quest.crowd_pleaser.audience_member")) {
+        for (obj_id content : contents)
+        {
+            if (hasScript(content, "quest.crowd_pleaser.audience_member"))
+            {
                 destroyObject(content);
             }
         }

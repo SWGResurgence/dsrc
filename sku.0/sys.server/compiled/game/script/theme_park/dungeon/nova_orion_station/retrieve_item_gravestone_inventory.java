@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.nova_orion_station;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.groundquests;
 import script.library.utils;
@@ -9,11 +15,13 @@ public class retrieve_item_gravestone_inventory extends script.base_script
     public retrieve_item_gravestone_inventory()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "getQuestPlayerName", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int getQuestPlayerName(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id questPlayer = utils.getContainingPlayer(self);
@@ -23,6 +31,7 @@ public class retrieve_item_gravestone_inventory extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         if (hasScript(player, "quest.task.ground.retrieve_item"))
@@ -38,6 +47,7 @@ public class retrieve_item_gravestone_inventory extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (hasScript(player, "quest.task.ground.retrieve_item"))
@@ -57,7 +67,7 @@ public class retrieve_item_gravestone_inventory extends script.base_script
                                 sendSystemMessage(player, new string_id("nexus", "no_finale_event_already_underway"));
                                 return SCRIPT_CONTINUE;
                             }
-                            else 
+                            else
                             {
                                 dictionary params = new dictionary();
                                 params.put("source", self);
@@ -70,13 +80,13 @@ public class retrieve_item_gravestone_inventory extends script.base_script
                                 }
                             }
                         }
-                        else 
+                        else
                         {
                             sendSystemMessage(player, new string_id("nexus", "no_finale_event_too_far"));
                             return SCRIPT_CONTINUE;
                         }
                     }
-                    else 
+                    else
                     {
                         sendSystemMessage(player, new string_id("nexus", "no_finale_event_incorrect_location"));
                         return SCRIPT_CONTINUE;
@@ -86,6 +96,7 @@ public class retrieve_item_gravestone_inventory extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int destroyMe(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "doNotDestroyMe"))

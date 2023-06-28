@@ -1,5 +1,11 @@
 package script.quest.ep3;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class loot_ep3_clone_relics_on_destroy extends script.base_script
@@ -7,6 +13,7 @@ public class loot_ep3_clone_relics_on_destroy extends script.base_script
     public loot_ep3_clone_relics_on_destroy()
     {
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id container = getContainedBy(self);

@@ -1,5 +1,11 @@
 package script.systems.sign;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.static_item;
 import script.library.utils;
@@ -14,6 +20,7 @@ public class special_sign extends script.base_script
     public static final string_id SID_SKILLMOD_INVOCATION_CANCELED = new string_id("base_player", "skillmod_canceled");
     public static final string_id SID_OBJECT_CONSUMED = new string_id("player_structure", "token_object_consumed");
     public static final string_id SID_CONSUME_OBJECT = new string_id("player_structure", "consume_token");
+
     public special_sign()
     {
     }

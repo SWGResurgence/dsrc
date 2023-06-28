@@ -1,5 +1,11 @@
 package script.developer.soe.beta;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.player_version;
 import script.library.xp;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class tc_jedi extends script.base_script
     public tc_jedi()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         revokeSkills(self);
@@ -17,7 +24,7 @@ public class tc_jedi extends script.base_script
         {
             setObjVar(self, "jedi.totalPoints", 32);
         }
-        else 
+        else
         {
             setObjVar(self, "jedi.totalPoints", 250);
         }
@@ -25,6 +32,7 @@ public class tc_jedi extends script.base_script
         detachScript(self, "beta.tc_jedi");
         return SCRIPT_CONTINUE;
     }
+
     public void revokeSkills(obj_id objPlayer) throws InterruptedException
     {
         String[] skillList = getSkillListingForPlayer(objPlayer);
@@ -32,9 +40,10 @@ public class tc_jedi extends script.base_script
         while (skillList != null && count < 15)
         {
             skillList = player_version.orderSkillListForRevoke(skillList);
-            if ((skillList != null) && (skillList.length > 0))
+            if (skillList != null)
             {
-                for (String s : skillList) {
+                for (String s : skillList)
+                {
                     revokeSkill(objPlayer, s);
                 }
             }
@@ -47,18 +56,21 @@ public class tc_jedi extends script.base_script
             attachScript(objPlayer, "player.species_innate");
         }
     }
+
     public void revokeExperience(obj_id objPlayer) throws InterruptedException
     {
         if (objPlayer == null || !isIdValid(objPlayer))
         {
             return;
         }
-        String xpList[] = xp.getXpTypes(objPlayer);
-        if (xpList != null && xpList.length > 0)
+        String[] xpList = xp.getXpTypes(objPlayer);
+        if (xpList != null)
         {
-            for (String s : xpList) {
+            for (String s : xpList)
+            {
                 int xpAmount = getExperiencePoints(objPlayer, s);
-                if (xpAmount > 0) {
+                if (xpAmount > 0)
+                {
                     grantExperiencePoints(objPlayer, s, -xpAmount);
                 }
             }

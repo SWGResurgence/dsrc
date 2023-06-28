@@ -1,5 +1,11 @@
 package script.ai;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.deltadictionary;
 import script.dictionary;
 import script.library.*;
@@ -8,13 +14,14 @@ import script.obj_id;
 
 public class ai_aggro extends script.base_script
 {
-    public ai_aggro()
-    {
-    }
     public static final int AGGRO_STATUS_NOT_VALID = 0;
     public static final int AGGRO_STATUS_WAITING = 1;
     public static final int AGGRO_STATUS_READY = 2;
     public static final float AGGRO_RADIUS_INTERIOR_VERTICAL = 3.0f;
+    public ai_aggro()
+    {
+    }
+
     public static void requestAggroCheck(obj_id target) throws InterruptedException
     {
         final obj_id self = getSelf();
@@ -26,13 +33,13 @@ public class ai_aggro extends script.base_script
             {
                 default:
                 case ai_aggro.AGGRO_STATUS_NOT_VALID:
-                
+
                 {
                     LOGC(aiLoggingEnabled(self), "debug_ai", "creature_combat::handleAggroCheck() self(" + self + ":" + getName(self) + ") target(" + target + ") AGGRO_STATUS_NOT_VALID");
                 }
                 break;
                 case ai_aggro.AGGRO_STATUS_WAITING:
-                
+
                 {
                     LOGC(aiLoggingEnabled(self), "debug_ai", "creature_combat::handleAggroCheck() self(" + self + ":" + getName(self) + ") target(" + target + ") AGGRO_STATUS_WAITING");
                     deltadictionary dict = self.getScriptVars();
@@ -43,7 +50,7 @@ public class ai_aggro extends script.base_script
                 }
                 break;
                 case ai_aggro.AGGRO_STATUS_READY:
-                
+
                 {
                     LOGC(aiLoggingEnabled(self), "debug_ai", "creature_combat::handleAggroCheck() self(" + self + ":" + getName(self) + ") target(" + target + ") AGGRO_STATUS_READY");
                     dictionary params = new dictionary();
@@ -53,11 +60,12 @@ public class ai_aggro extends script.base_script
                 break;
             }
         }
-        else 
+        else
         {
             LOGC(aiLoggingEnabled(self), "debug_ai", "ai_aggro::requestAggroCheck(NO) self(" + self + ":" + getName(self) + ") target(" + target + ":" + getName(target) + ")");
         }
     }
+
     public static void stopAttemptingAggroCheck(obj_id target) throws InterruptedException
     {
         final obj_id self = getSelf();
@@ -65,12 +73,14 @@ public class ai_aggro extends script.base_script
         deltadictionary dict = self.getScriptVars();
         dict.remove("ai.aggrocheck." + target);
     }
+
     public static boolean isAttemptingAggroCheck(obj_id target) throws InterruptedException
     {
         final obj_id self = getSelf();
         deltadictionary dict = self.getScriptVars();
         return dict.getBoolean("ai.aggrocheck." + target);
     }
+
     public static int getAggroStatus(obj_id target) throws InterruptedException
     {
         int result = AGGRO_STATUS_NOT_VALID;
@@ -136,7 +146,7 @@ public class ai_aggro extends script.base_script
                 debugSpeakMsgc(aiLoggingEnabled(self), self, "AggroCheck(" + target + ") REZZURECTABLE TARGET IS INCAPACITATED");
                 result = AGGRO_STATUS_WAITING;
             }
-            else 
+            else
             {
                 LOGC(aiLoggingEnabled(self), "debug_ai", "ai_aggro::getAggroStatus() self(" + self + ":" + getName(self) + ") target(" + target + ":" + getName(target) + ") TARGET IS INCAPACITATED");
                 debugSpeakMsgc(aiLoggingEnabled(self), self, "AggroCheck(" + target + ") TARGET IS INCAPACITATED");
@@ -150,7 +160,7 @@ public class ai_aggro extends script.base_script
                 debugSpeakMsgc(aiLoggingEnabled(self), self, "AggroCheck(" + target + ") REZZURECTABLE TARGET IS DEAD");
                 result = AGGRO_STATUS_WAITING;
             }
-            else 
+            else
             {
                 LOGC(aiLoggingEnabled(self), "debug_ai", "ai_aggro::getAggroStatus() self(" + self + ":" + getName(self) + ") target(" + target + ":" + getName(target) + ") TARGET IS DEAD");
                 debugSpeakMsgc(aiLoggingEnabled(self), self, "AggroCheck(" + target + ") TARGET IS DEAD");
@@ -162,7 +172,7 @@ public class ai_aggro extends script.base_script
             debugSpeakMsgc(aiLoggingEnabled(self), self, "AggroCheck(" + target + ") TARGET IS AGGRO IMMUNE");
             result = AGGRO_STATUS_WAITING;
         }
-        else 
+        else
         {
             boolean doLosCheck = true;
             boolean doDistanceCheck = true;
@@ -208,14 +218,14 @@ public class ai_aggro extends script.base_script
                         {
                             result = AGGRO_STATUS_NOT_VALID;
                         }
-                        else 
+                        else
                         {
                             if (stealth.passiveDetectHiddenTarget(target, self, 100))
                             {
                                 stealth.checkForAndMakeVisible(target);
                                 result = AGGRO_STATUS_READY;
                             }
-                            else 
+                            else
                             {
                                 result = AGGRO_STATUS_NOT_VALID;
                                 int roll = rand(1, 5);
@@ -226,14 +236,14 @@ public class ai_aggro extends script.base_script
                             }
                         }
                     }
-                    else 
+                    else
                     {
                         LOGC(aiLoggingEnabled(self), "debug_ai", "ai_aggro::getAggroStatus() self(" + self + ":" + getName(self) + ") target(" + target + ":" + getName(target) + ") TARGET ACQUIRED");
                         debugSpeakMsgc(aiLoggingEnabled(self), self, "AggroCheck(" + target + ") TARGET ACQUIRED");
                         result = AGGRO_STATUS_READY;
                     }
                 }
-                else 
+                else
                 {
                     LOGC(aiLoggingEnabled(self), "debug_ai", "ai_aggro::getAggroStatus() self(" + self + ":" + getName(self) + ") target(" + target + ":" + getName(target) + ") CAN'T SEE TARGET");
                     debugSpeakMsgc(aiLoggingEnabled(self), self, "AggroCheck(" + target + ") CAN'T SEE TARGET");

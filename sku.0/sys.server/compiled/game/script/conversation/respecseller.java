@@ -1,32 +1,39 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class respecseller extends script.base_script
 {
+    public static String c_stringFile = "conversation/respecseller";
+
     public respecseller()
     {
     }
-    public static String c_stringFile = "conversation/respecseller";
+
     public boolean respecseller_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean respecseller_condition_hasBoughtRespecsBefore(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasObjVar(player, "respecsBought");
     }
+
     public boolean respecseller_condition_hasInventorySpace(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id inv = getObjectInSlot(player, "inventory");
         int free = getVolumeFree(inv);
-        if (free < 20)
-        {
-            return false;
-        }
-        return true;
+        return free >= 20;
     }
+
     public boolean respecseller_condition_repeatCustomerHasInventorySpace(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "respecsBought"))
@@ -35,12 +42,9 @@ public class respecseller extends script.base_script
         }
         obj_id inv = getObjectInSlot(player, "inventory");
         int free = getVolumeFree(inv);
-        if (free < 20)
-        {
-            return false;
-        }
-        return true;
+        return free >= 20;
     }
+
     public boolean respecseller_condition_firstTimeCustomerHasInventorySpace(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "respecsBought"))
@@ -49,75 +53,75 @@ public class respecseller extends script.base_script
         }
         obj_id inv = getObjectInSlot(player, "inventory");
         int free = getVolumeFree(inv);
-        if (free < 20)
-        {
-            return false;
-        }
-        return true;
+        return free >= 20;
     }
+
     public boolean respecseller_condition_hasCashToCoverRespec(obj_id player, obj_id npc) throws InterruptedException
     {
         int cost = respec.getRespecCost(player);
         int balance = getTotalMoney(player);
         return cost <= balance;
     }
+
     public boolean respecseller_condition_hasCashToCoverReallocation(obj_id player, obj_id npc) throws InterruptedException
     {
         int cost = respec.getReallocationCost(player);
         int balance = getTotalMoney(player);
         return cost <= balance;
     }
+
     public boolean respecseller_condition_hasExpertiseSkill(obj_id player, obj_id npc) throws InterruptedException
     {
         String[] skillList = getSkillListingForPlayer(player);
         if (skillList != null)
         {
-            for (String s : skillList) {
-                if (s.startsWith("expertise_")) {
+            for (String s : skillList)
+            {
+                if (s.startsWith("expertise_"))
+                {
                     return true;
                 }
             }
         }
         return false;
     }
+
     public boolean respecseller_condition_hasExpertiseAllocated(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasSkill(player, "internal_expertise_autoallocated");
     }
+
     public boolean respecseller_condition_hasFreeReallocations(obj_id player, obj_id npc) throws InterruptedException
     {
         return respec.hasFreeReallocation(player);
     }
+
     public boolean respecseller_condition_hasTwoOrMoreFreeRealloc(obj_id player, obj_id npc) throws InterruptedException
     {
-        
+
         {
-            if (respec.numFreeAllocations(player) == 1)
-            {
-                return true;
-            }
+            return respec.numFreeAllocations(player) == 1;
         }
-        return false;
     }
+
     public boolean respecseller_condition_hasNoMoreFreeRealloc(obj_id player, obj_id npc) throws InterruptedException
     {
-        
+
         {
-            if (respec.numFreeAllocations(player) == 0)
-            {
-                return true;
-            }
+            return respec.numFreeAllocations(player) == 0;
         }
-        return false;
     }
+
     public boolean respecseller_condition_hasCloningSickness(obj_id player, obj_id npc) throws InterruptedException
     {
         return buff.hasBuff(player, "cloning_sickness");
     }
+
     public void respecseller_action_buyRespecToken(obj_id player, obj_id npc) throws InterruptedException
     {
         respec.startNpcRespec(player, npc);
     }
+
     public void respecseller_action_removeAutoExpertise(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.fullExpertiseReset(player, true);
@@ -127,26 +131,32 @@ public class respecseller extends script.base_script
             grantSkill(player, "expertise");
         }
     }
+
     public void respecseller_action_buyReallocation(obj_id player, obj_id npc) throws InterruptedException
     {
         respec.handleNpcRealloc(player);
     }
+
     public String respecseller_tokenTO_tokenTO0001(obj_id player, obj_id npc) throws InterruptedException
     {
-        return new String();
+        return "";
     }
+
     public int respecseller_tokenDI_respecCost(obj_id player, obj_id npc) throws InterruptedException
     {
         return respec.getRespecCost(player);
     }
+
     public int respecseller_tokenDI_reallocCost(obj_id player, obj_id npc) throws InterruptedException
     {
         return respec.getReallocationCost(player);
     }
+
     public int respecseller_tokenDI_numFreeAlloc(obj_id player, obj_id npc) throws InterruptedException
     {
         return respec.numFreeAllocations(player);
     }
+
     public int respecseller_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_32"))
@@ -181,7 +191,7 @@ public class respecseller extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_60");
@@ -194,7 +204,7 @@ public class respecseller extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.respecseller.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -224,7 +234,7 @@ public class respecseller extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_75");
@@ -242,7 +252,7 @@ public class respecseller extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.respecseller.branchId");
                     prose_package pp = new prose_package();
@@ -293,7 +303,7 @@ public class respecseller extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_37");
@@ -306,7 +316,7 @@ public class respecseller extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.respecseller.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -335,7 +345,7 @@ public class respecseller extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -353,7 +363,7 @@ public class respecseller extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.respecseller.branchId");
                     prose_package pp = new prose_package();
@@ -387,7 +397,7 @@ public class respecseller extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_81");
@@ -400,7 +410,7 @@ public class respecseller extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.respecseller.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -429,7 +439,7 @@ public class respecseller extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_71");
@@ -447,7 +457,7 @@ public class respecseller extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.respecseller.branchId");
                     prose_package pp = new prose_package();
@@ -481,7 +491,7 @@ public class respecseller extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_53");
@@ -499,7 +509,7 @@ public class respecseller extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.respecseller.branchId");
                     prose_package pp = new prose_package();
@@ -514,6 +524,7 @@ public class respecseller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int respecseller_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_37"))
@@ -539,6 +550,7 @@ public class respecseller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int respecseller_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_47"))
@@ -564,6 +576,7 @@ public class respecseller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int respecseller_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_81"))
@@ -589,6 +602,7 @@ public class respecseller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int respecseller_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_71"))
@@ -614,6 +628,7 @@ public class respecseller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int respecseller_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_53"))
@@ -652,6 +667,7 @@ public class respecseller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int respecseller_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_43"))
@@ -686,7 +702,7 @@ public class respecseller extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_60");
@@ -699,7 +715,7 @@ public class respecseller extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.respecseller.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -729,7 +745,7 @@ public class respecseller extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_75");
@@ -747,7 +763,7 @@ public class respecseller extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.respecseller.branchId");
                     prose_package pp = new prose_package();
@@ -769,6 +785,7 @@ public class respecseller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int respecseller_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_60"))
@@ -798,6 +815,7 @@ public class respecseller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int respecseller_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_75"))
@@ -838,6 +856,7 @@ public class respecseller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -847,11 +866,13 @@ public class respecseller extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -860,18 +881,21 @@ public class respecseller extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.respecseller");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -901,7 +925,7 @@ public class respecseller extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_32");
@@ -913,7 +937,7 @@ public class respecseller extends script.base_script
                 utils.setScriptVar(player, "conversation.respecseller.branchId", 1);
                 npcStartConversation(player, npc, "respecseller", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -935,7 +959,7 @@ public class respecseller extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_43");
@@ -943,7 +967,7 @@ public class respecseller extends script.base_script
                 utils.setScriptVar(player, "conversation.respecseller.branchId", 19);
                 npcStartConversation(player, npc, "respecseller", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -952,6 +976,7 @@ public class respecseller extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("respecseller"))

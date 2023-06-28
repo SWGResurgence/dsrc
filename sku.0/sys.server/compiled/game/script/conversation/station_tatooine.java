@@ -1,61 +1,75 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class station_tatooine extends script.base_script
 {
+    public static String c_stringFile = "conversation/station_tatooine";
+
     public station_tatooine()
     {
     }
-    public static String c_stringFile = "conversation/station_tatooine";
+
     public boolean station_tatooine_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean station_tatooine_condition_canAfford50(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.canAffordShipRepairs(player, npc, 0.50f);
     }
+
     public boolean station_tatooine_condition_canAfford25(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_crafting.canAffordShipRepairs(player, npc, 0.25f) && space_crafting.isDamaged(player));
     }
+
     public boolean station_tatooine_condition_canAfford75(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.canAffordShipRepairs(player, npc, 0.75f);
     }
+
     public boolean station_tatooine_condition_canAfford100(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.canAffordShipRepairs(player, npc, 1.0f);
     }
+
     public boolean station_tatooine_condition_needRepairs(obj_id player, obj_id npc) throws InterruptedException
     {
         float fltDamage = space_crafting.getDamageTotal(player, getPilotedShip(player));
-        if (fltDamage > 0)
-        {
-            return true;
-        }
-        return false;
+        return fltDamage > 0;
     }
+
     public boolean station_tatooine_condition_isTooFar(obj_id player, obj_id npc) throws InterruptedException
     {
         space_combat.playCombatTauntSound(player);
         obj_id containingShip = space_transition.getContainingShip(player);
         return (getDistance(npc, containingShip) > space_transition.STATION_COMM_MAX_DISTANCE);
     }
+
     public boolean station_tatooine_condition_isFirstTierTatooinePrivateer(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_flags.isInTierOne(player) && space_flags.isSpaceTrack(player, space_flags.PRIVATEER_TATOOINE));
     }
+
     public boolean station_tatooine_condition_isFirstTierTatooineRebel(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_flags.isInTierOne(player) && space_flags.isSpaceTrack(player, space_flags.REBEL_TATOOINE));
     }
+
     public boolean station_tatooine_condition_isFirstTierTatooineImperial(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_flags.isInTierOne(player) && space_flags.isSpaceTrack(player, space_flags.IMPERIAL_TATOOINE));
     }
+
     public boolean station_tatooine_condition_canDoJabbaAccess(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasWonQuest(player, "assassinate", "tatooine_station_hutt_palace_access_quest_4"))
@@ -66,15 +80,9 @@ public class station_tatooine extends script.base_script
         {
             return false;
         }
-        if (space_transition.getPlayerSpaceFaction(player) == (1153980303))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_transition.getPlayerSpaceFaction(player) == (1153980303);
     }
+
     public boolean station_tatooine_condition_canGetTier1RecoveryDuty(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_flags.hasCompletedTierOne(player))
@@ -89,27 +97,18 @@ public class station_tatooine extends script.base_script
         {
             return true;
         }
-        if (space_flags.isSpaceTrack(player, space_flags.PRIVATEER_TATOOINE))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_flags.isSpaceTrack(player, space_flags.PRIVATEER_TATOOINE);
     }
+
     public boolean station_tatooine_condition_canLandAtJabbas(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_flags.isSpaceTrack(player, space_flags.PRIVATEER_TATOOINE) && !space_flags.isInTierTwo(player))
         {
             return true;
         }
-        if (utils.isProfession(player, utils.SMUGGLER) || utils.isProfession(player, utils.BOUNTY_HUNTER))
-        {
-            return true;
-        }
-        return false;
+        return utils.isProfession(player, utils.SMUGGLER) || utils.isProfession(player, utils.BOUNTY_HUNTER);
     }
+
     public boolean station_tatooine_condition_canLandAtHouse(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "homingBeacon.planet"))
@@ -117,159 +116,170 @@ public class station_tatooine extends script.base_script
             String homePlanet = getStringObjVar(player, "homingBeacon.planet");
             return (homePlanet.endsWith("tatooine"));
         }
-        else 
+        else
         {
             return false;
         }
     }
+
     public boolean station_tatooine_condition_canTakeQuest(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasQuest(player))
-        {
-            return false;
-        }
-        return true;
+        return !space_quest.hasQuest(player);
     }
+
     public boolean station_tatooine_condition_canAttackImperial(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_flags.isRebelPilot(player) || space_flags.isRebelHelperPilot(player))
-        {
-            return true;
-        }
-        return false;
+        return space_flags.isRebelPilot(player) || space_flags.isRebelHelperPilot(player);
     }
+
     public boolean station_tatooine_condition_canAttackRebel(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_flags.isImperialPilot(player) || space_flags.isImperialHelperPilot(player))
-        {
-            return true;
-        }
-        return false;
+        return space_flags.isImperialPilot(player) || space_flags.isImperialHelperPilot(player);
     }
+
     public boolean station_tatooine_condition_canTakeTier5ImperialDuty(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_skill.isMasterPilot(player))
         {
             return false;
         }
-        if (space_flags.isImperialPilot(player) || space_flags.isImperialHelperPilot(player))
-        {
-            return true;
-        }
-        return false;
+        return space_flags.isImperialPilot(player) || space_flags.isImperialHelperPilot(player);
     }
+
     public boolean station_tatooine_condition_canTakeTier5RebelDuty(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_skill.isMasterPilot(player))
         {
             return false;
         }
-        if (space_flags.isRebelPilot(player) || space_flags.isRebelHelperPilot(player))
-        {
-            return true;
-        }
-        return false;
+        return space_flags.isRebelPilot(player) || space_flags.isRebelHelperPilot(player);
     }
+
     public void station_tatooine_action_landStation3(obj_id player, obj_id npc) throws InterruptedException
     {
         space_content.landPlayer(player, npc, "Mos Espa Starport");
     }
+
     public void station_tatooine_action_fix25(obj_id player, obj_id npc) throws InterruptedException
     {
         space_crafting.doStationToShipRepairs(player, npc, 0.25f);
     }
+
     public void station_tatooine_action_fix50(obj_id player, obj_id npc) throws InterruptedException
     {
         space_crafting.doStationToShipRepairs(player, npc, 0.50f);
     }
+
     public void station_tatooine_action_fix75(obj_id player, obj_id npc) throws InterruptedException
     {
         space_crafting.doStationToShipRepairs(player, npc, 0.75f);
     }
+
     public void station_tatooine_action_fix100(obj_id player, obj_id npc) throws InterruptedException
     {
         space_crafting.doStationToShipRepairs(player, npc, 1.0f);
     }
+
     public void station_tatooine_action_landStation1(obj_id player, obj_id npc) throws InterruptedException
     {
         space_content.landPlayer(player, npc, "Bestine Starport");
     }
+
     public void station_tatooine_action_landStation2(obj_id player, obj_id npc) throws InterruptedException
     {
         space_content.landPlayer(player, npc, "Mos Eisley Starport");
     }
+
     public void station_tatooine_action_landStation4(obj_id player, obj_id npc) throws InterruptedException
     {
         space_content.landPlayer(player, npc, "Mos Entha Spaceport");
     }
+
     public void station_tatooine_action_giveJabbaAccessQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "rescue", "tatooine_station_hutt_palace_access_quest_1");
     }
+
     public void station_tatooine_action_grantTier1RecoveryDuty(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "recovery_duty", "tatooine_station_hutt_recovery_duty_tier1_1");
     }
+
     public void station_tatooine_action_landJabba(obj_id player, obj_id npc) throws InterruptedException
     {
         space_content.landPlayer(player, npc, "Jabba's Palace");
     }
+
     public void station_tatooine_action_landHoming(obj_id player, obj_id npc) throws InterruptedException
     {
         space_content.landPlayerHoming(player, npc);
     }
+
     public void station_tatooine_action_grantImperialDuty1(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "tatooine_imperial_tier1");
     }
+
     public void station_tatooine_action_grantImperialDuty2(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "tatooine_imperial_tier2");
     }
+
     public void station_tatooine_action_grantRebelDuty1(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "tatooine_rebel_tier1");
     }
+
     public void station_tatooine_action_grantRebelDuty2(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "tatooine_rebel_tier2");
     }
+
     public void station_tatooine_action_grantHiddenDaggerDuty2(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "tatooine_hidden_dagger_tier2");
     }
+
     public void station_tatooine_action_grantHiddenDaggerDuty1(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "tatooine_hidden_dagger_tier1");
     }
+
     public void station_tatooine_action_grantImperialDuty5(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "tatooine_imperial_tier5");
     }
+
     public void station_tatooine_action_grantRebelDuty5(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "tatooine_rebel_tier5");
     }
+
     public String station_tatooine_tokenTO_tokenTO0001(obj_id player, obj_id npc) throws InterruptedException
     {
-        return new String();
+        return "";
     }
+
     public int station_tatooine_tokenDI_getStationRepairCost25(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.getStationRepairCost(player, npc, 0.25f);
     }
+
     public int station_tatooine_tokenDI_getStationRepairCost50(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.getStationRepairCost(player, npc, 0.50f);
     }
+
     public int station_tatooine_tokenDI_getStationRepairCost75(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.getStationRepairCost(player, npc, 0.75f);
     }
+
     public int station_tatooine_tokenDI_getStationRepairCost100(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.getStationRepairCost(player, npc, 1.0f);
     }
+
     public int station_tatooine_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_375a3c20"))
@@ -345,7 +355,7 @@ public class station_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_dbc1c043");
@@ -386,7 +396,7 @@ public class station_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_tatooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -439,7 +449,7 @@ public class station_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_696719e4");
@@ -464,7 +474,7 @@ public class station_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_tatooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -496,7 +506,7 @@ public class station_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a5254f36");
@@ -509,7 +519,7 @@ public class station_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_tatooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -590,7 +600,7 @@ public class station_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_197");
@@ -631,7 +641,7 @@ public class station_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_tatooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -641,6 +651,7 @@ public class station_tatooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_tatooine_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a5254f36"))
@@ -677,7 +688,7 @@ public class station_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2f2188d5");
@@ -690,7 +701,7 @@ public class station_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_tatooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -700,6 +711,7 @@ public class station_tatooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_tatooine_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2f2188d5"))
@@ -725,6 +737,7 @@ public class station_tatooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_tatooine_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_5984746e"))
@@ -800,7 +813,7 @@ public class station_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_dbc1c043");
@@ -841,7 +854,7 @@ public class station_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_tatooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -894,7 +907,7 @@ public class station_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_696719e4");
@@ -919,7 +932,7 @@ public class station_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_tatooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -951,7 +964,7 @@ public class station_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_167");
@@ -964,7 +977,7 @@ public class station_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_tatooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -986,7 +999,7 @@ public class station_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_218");
@@ -995,7 +1008,7 @@ public class station_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_tatooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1083,7 +1096,7 @@ public class station_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_197");
@@ -1124,7 +1137,7 @@ public class station_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_tatooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1134,6 +1147,7 @@ public class station_tatooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_tatooine_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_dbc1c043"))
@@ -1160,7 +1174,7 @@ public class station_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c4682ea6");
@@ -1173,7 +1187,7 @@ public class station_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_tatooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1205,7 +1219,7 @@ public class station_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b9b27823");
@@ -1218,7 +1232,7 @@ public class station_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_tatooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1250,7 +1264,7 @@ public class station_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_895d093");
@@ -1263,7 +1277,7 @@ public class station_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_tatooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1295,7 +1309,7 @@ public class station_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_43");
@@ -1308,7 +1322,7 @@ public class station_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_tatooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1340,7 +1354,7 @@ public class station_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_53");
@@ -1353,7 +1367,7 @@ public class station_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_tatooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1385,7 +1399,7 @@ public class station_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_64");
@@ -1398,7 +1412,7 @@ public class station_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_tatooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1430,7 +1444,7 @@ public class station_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_75");
@@ -1443,7 +1457,7 @@ public class station_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_tatooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1475,7 +1489,7 @@ public class station_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_52917b0d");
@@ -1488,7 +1502,7 @@ public class station_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_tatooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1520,7 +1534,7 @@ public class station_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_135");
@@ -1533,7 +1547,7 @@ public class station_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_tatooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1543,6 +1557,7 @@ public class station_tatooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_tatooine_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c4682ea6"))
@@ -1568,6 +1583,7 @@ public class station_tatooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_tatooine_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b9b27823"))
@@ -1593,6 +1609,7 @@ public class station_tatooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_tatooine_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_895d093"))
@@ -1618,6 +1635,7 @@ public class station_tatooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_tatooine_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_43"))
@@ -1643,6 +1661,7 @@ public class station_tatooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_tatooine_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_53"))
@@ -1668,6 +1687,7 @@ public class station_tatooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_tatooine_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_64"))
@@ -1693,6 +1713,7 @@ public class station_tatooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_tatooine_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_75"))
@@ -1718,6 +1739,7 @@ public class station_tatooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_tatooine_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_52917b0d"))
@@ -1743,6 +1765,7 @@ public class station_tatooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_tatooine_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_135"))
@@ -1768,6 +1791,7 @@ public class station_tatooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_tatooine_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_696719e4"))
@@ -1794,7 +1818,7 @@ public class station_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_98");
@@ -1812,7 +1836,7 @@ public class station_tatooine extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_tatooine.branchId");
                     prose_package pp = new prose_package();
@@ -1849,7 +1873,7 @@ public class station_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d70dba34");
@@ -1867,7 +1891,7 @@ public class station_tatooine extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_tatooine.branchId");
                     prose_package pp = new prose_package();
@@ -1904,7 +1928,7 @@ public class station_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5e2a2bb1");
@@ -1922,7 +1946,7 @@ public class station_tatooine extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_tatooine.branchId");
                     prose_package pp = new prose_package();
@@ -1959,7 +1983,7 @@ public class station_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d0fd857b");
@@ -1977,7 +2001,7 @@ public class station_tatooine extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_tatooine.branchId");
                     prose_package pp = new prose_package();
@@ -2002,6 +2026,7 @@ public class station_tatooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_tatooine_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_98"))
@@ -2027,6 +2052,7 @@ public class station_tatooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_tatooine_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d70dba34"))
@@ -2052,6 +2078,7 @@ public class station_tatooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_tatooine_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_5e2a2bb1"))
@@ -2077,6 +2104,7 @@ public class station_tatooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_tatooine_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d0fd857b"))
@@ -2102,6 +2130,7 @@ public class station_tatooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_tatooine_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_167"))
@@ -2138,7 +2167,7 @@ public class station_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_175");
@@ -2151,7 +2180,7 @@ public class station_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_tatooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2161,6 +2190,7 @@ public class station_tatooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_tatooine_handleBranch53(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_175"))
@@ -2186,6 +2216,7 @@ public class station_tatooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_tatooine_handleBranch56(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_218"))
@@ -2261,7 +2292,7 @@ public class station_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_197");
@@ -2302,7 +2333,7 @@ public class station_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_tatooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2312,6 +2343,7 @@ public class station_tatooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_tatooine_handleBranch58(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_197"))
@@ -2414,18 +2446,21 @@ public class station_tatooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setObjVar(self, "convo.appearance", "object/mobile/space_comm_station_tatooine.iff");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setObjVar(self, "convo.appearance", "object/mobile/space_comm_station_tatooine.iff");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -2434,18 +2469,21 @@ public class station_tatooine extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.station_tatooine");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -2495,7 +2533,7 @@ public class station_tatooine extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_375a3c20");
@@ -2515,7 +2553,7 @@ public class station_tatooine extends script.base_script
                 utils.setScriptVar(player, "conversation.station_tatooine.branchId", 2);
                 npcStartConversation(player, npc, "station_tatooine", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2557,7 +2595,7 @@ public class station_tatooine extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_5984746e");
@@ -2577,7 +2615,7 @@ public class station_tatooine extends script.base_script
                 utils.setScriptVar(player, "conversation.station_tatooine.branchId", 8);
                 npcStartConversation(player, npc, "station_tatooine", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2586,6 +2624,7 @@ public class station_tatooine extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("station_tatooine"))

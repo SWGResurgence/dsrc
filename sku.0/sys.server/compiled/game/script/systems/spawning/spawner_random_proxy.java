@@ -1,5 +1,11 @@
 package script.systems.spawning;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -374,7 +380,7 @@ public class spawner_random_proxy extends script.base_script
         if (utils.hasScriptVar(self, "debugSpawnList"))
         {
             obj_id[] spawns = utils.getObjIdArrayScriptVar(self, "debugSpawnList");
-            if (spawns == null || spawns.length == 0)
+            if (spawns == null)
             {
                 return SCRIPT_CONTINUE;
             }

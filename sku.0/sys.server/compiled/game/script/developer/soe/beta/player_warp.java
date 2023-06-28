@@ -1,5 +1,11 @@
 package script.developer.soe.beta;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.utils;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class player_warp extends script.base_script
     public player_warp()
     {
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (text.startsWith("warp"))
@@ -73,7 +80,7 @@ public class player_warp extends script.base_script
                             return SCRIPT_CONTINUE;
                         }
                     }
-                    else 
+                    else
                     {
                         break;
                     }
@@ -83,14 +90,14 @@ public class player_warp extends script.base_script
             {
                 broadcast(self, "That is an invalid object.");
             }
-            else 
+            else
             {
                 obj_id object = createObjectOverloaded(template, inv);
                 if (!isIdValid(object))
                 {
                     broadcast(self, "That is an invalid object.");
                 }
-                else 
+                else
                 {
                     broadcast(self, object + " created.");
                 }

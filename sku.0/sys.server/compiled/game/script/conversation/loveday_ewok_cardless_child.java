@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,50 +14,47 @@ import script.*;
 
 public class loveday_ewok_cardless_child extends script.base_script
 {
+    public static String c_stringFile = "conversation/loveday_ewok_cardless_child";
+
     public loveday_ewok_cardless_child()
     {
     }
-    public static String c_stringFile = "conversation/loveday_ewok_cardless_child";
+
     public boolean loveday_ewok_cardless_child_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean loveday_ewok_cardless_child_condition_returningQuestIncomplete(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isQuestActive(player, "loveday_ewok_bundle_of_cards"))
         {
             obj_id lovedayCardBundle = utils.getStaticItemInInventory(player, "item_event_loveday_card_stack");
-            if (!isIdValid(lovedayCardBundle))
-            {
-                return true;
-            }
+            return !isIdValid(lovedayCardBundle);
         }
         return false;
     }
+
     public boolean loveday_ewok_cardless_child_condition_returningQuestComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isQuestActive(player, "loveday_ewok_bundle_of_cards"))
         {
             obj_id lovedayCardBundle = utils.getStaticItemInInventory(player, "item_event_loveday_card_stack");
-            if (isIdValid(lovedayCardBundle))
-            {
-                return true;
-            }
+            return isIdValid(lovedayCardBundle);
         }
         return false;
     }
+
     public boolean loveday_ewok_cardless_child_condition_notYetReadyForAnother(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.hasCompletedQuest(player, "loveday_ewok_bundle_of_cards") && hasObjVar(player, "loveday.eligibleBundleOfCards"))
         {
             int eligibleForNextQuestAt = getIntObjVar(player, "loveday.eligibleBundleOfCards");
-            if (getCalendarTime() < eligibleForNextQuestAt)
-            {
-                return true;
-            }
+            return getCalendarTime() < eligibleForNextQuestAt;
         }
         return false;
     }
+
     public void loveday_ewok_cardless_child_action_grantLovedayQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "loveday_ewok_bundle_of_cards");
@@ -60,18 +63,20 @@ public class loveday_ewok_cardless_child extends script.base_script
         {
             removeObjVar(player, "loveday.eligibleBundleOfCards");
         }
-        return;
     }
+
     public boolean loveday_ewok_cardless_child_action_sendCompletionSignal(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id lovedayCardBundle = utils.getStaticItemInInventory(player, "item_event_loveday_card_stack");
         if (isIdValid(lovedayCardBundle))
         {
-            if(!destroyObject(lovedayCardBundle)){
+            if (!destroyObject(lovedayCardBundle))
+            {
                 return false;
             }
         }
-        else{
+        else
+        {
             return false;
         }
         groundquests.sendSignal(player, "loveday_ewok_bundle_of_cards_complete");
@@ -85,13 +90,15 @@ public class loveday_ewok_cardless_child extends script.base_script
         setObjVar(player, "loveday.eligibleBundleOfCards", then);
         return true;
     }
+
     public int loveday_ewok_cardless_child_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_21"))
         {
             if (loveday_ewok_cardless_child_condition__defaultCondition(player, npc))
             {
-                if(!loveday_ewok_cardless_child_action_sendCompletionSignal(player, npc)){
+                if (!loveday_ewok_cardless_child_action_sendCompletionSignal(player, npc))
+                {
                     // fixes exploit where card deck can be "hidden" and user still gets credit.
                     chat.chat(npc, player, "Please put the cards in your inventory so I can get them.", 0);
                     npcEndConversation(player);
@@ -105,6 +112,7 @@ public class loveday_ewok_cardless_child extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int loveday_ewok_cardless_child_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_14"))
@@ -132,6 +140,7 @@ public class loveday_ewok_cardless_child extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -142,12 +151,14 @@ public class loveday_ewok_cardless_child extends script.base_script
         setCondition(self, CONDITION_HOLIDAY_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setCondition(self, CONDITION_HOLIDAY_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -157,6 +168,7 @@ public class loveday_ewok_cardless_child extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
@@ -164,12 +176,14 @@ public class loveday_ewok_cardless_child extends script.base_script
         detachScript(self, "conversation.loveday_ewok_cardless_child");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -192,7 +206,7 @@ public class loveday_ewok_cardless_child extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_21");
@@ -200,7 +214,7 @@ public class loveday_ewok_cardless_child extends script.base_script
                 utils.setScriptVar(player, "conversation.loveday_ewok_cardless_child.branchId", 1);
                 npcStartConversation(player, npc, "loveday_ewok_cardless_child", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -243,7 +257,7 @@ public class loveday_ewok_cardless_child extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_14");
@@ -255,7 +269,7 @@ public class loveday_ewok_cardless_child extends script.base_script
                 utils.setScriptVar(player, "conversation.loveday_ewok_cardless_child.branchId", 5);
                 npcStartConversation(player, npc, "loveday_ewok_cardless_child", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -264,6 +278,7 @@ public class loveday_ewok_cardless_child extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("loveday_ewok_cardless_child"))

@@ -1,5 +1,11 @@
 package script.content_tools;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.utils;
 import script.obj_id;
@@ -13,12 +19,14 @@ public class interior_buildout extends script.base_script
     public interior_buildout()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         requestPreloadCompleteTrigger(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnPreloadComplete(obj_id self) throws InterruptedException
     {
         String strDataTable = "";
@@ -26,7 +34,7 @@ public class interior_buildout extends script.base_script
         {
             strDataTable = "datatables/interior_buildouts/" + getStringObjVar(self, "strBuildout") + ".iff";
         }
-        else 
+        else
         {
             setName(self, "FAILED TO BUILDOUT");
             return SCRIPT_CONTINUE;
@@ -72,7 +80,7 @@ public class interior_buildout extends script.base_script
                             utils.setScriptVar(self, strLocationList[intI], tranTestList);
                             utils.setScriptVar(self, strLocationList[intI] + "Cells", objTestCells);
                         }
-                        else 
+                        else
                         {
                             objCells = utils.addElement(objCells, objCell);
                             tranList = utils.addElement(tranList, tr);
@@ -90,12 +98,15 @@ public class interior_buildout extends script.base_script
                         if (!strScripts[intI].equals(""))
                         {
                             String[] strScriptArray = split(strScripts[intI], ',');
-                            for (String s : strScriptArray) {
+                            for (String s : strScriptArray)
+                            {
                                 String script = s;
-                                if (script.contains("script.")) {
+                                if (script.contains("script."))
+                                {
                                     script = script.substring(7);
                                 }
-                                if (!hasScript(objTest, script)) {
+                                if (!hasScript(objTest, script))
+                                {
                                     attachScript(objTest, script);
                                 }
                             }
@@ -103,7 +114,7 @@ public class interior_buildout extends script.base_script
                         attachScript(objTest, "space.ship.ship_interior_autocleanup");
                     }
                 }
-                else 
+                else
                 {
                     obj_id objTest = createObject(strTemplates[intI], tr, objCell);
                     if (!strObjVars[intI].equals(""))
@@ -113,12 +124,15 @@ public class interior_buildout extends script.base_script
                     if (!strScripts[intI].equals(""))
                     {
                         String[] strScriptArray = split(strScripts[intI], ',');
-                        for (String s : strScriptArray) {
+                        for (String s : strScriptArray)
+                        {
                             String script = s;
-                            if (script.contains("script.")) {
+                            if (script.contains("script."))
+                            {
                                 script = script.substring(7);
                             }
-                            if (!hasScript(objTest, script)) {
+                            if (!hasScript(objTest, script))
+                            {
                                 attachScript(objTest, script);
                             }
                         }

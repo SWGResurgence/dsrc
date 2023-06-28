@@ -1,5 +1,11 @@
 package script.systems.turret;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.advanced_turret;
 import script.library.utils;
@@ -9,6 +15,7 @@ public class advanced_turret_ai extends script.systems.combat.combat_base
 {
     public static final int INTERVAL_MAX = 10;
     public static final int FARTHEST_TRIGGER = INTERVAL_MAX - 1;
+
     public advanced_turret_ai()
     {
     }
@@ -25,7 +32,7 @@ public class advanced_turret_ai extends script.systems.combat.combat_base
         {
             return SCRIPT_CONTINUE;
         }
-        doLogging("OnTriggerEnt", "" + getName(who) + " has entered volume " + volumeName + " which is a valid volume name: " + volumeName.startsWith(advanced_turret.ALERT_VOLUME_NAME));
+        doLogging("OnTriggerEnt", getName(who) + " has entered volume " + volumeName + " which is a valid volume name: " + volumeName.startsWith(advanced_turret.ALERT_VOLUME_NAME));
         if (volumeName.startsWith(advanced_turret.ALERT_VOLUME_NAME) && who != self)
         {
             advanced_turret.addTarget(self, who);
@@ -35,7 +42,7 @@ public class advanced_turret_ai extends script.systems.combat.combat_base
 
     public int OnTriggerVolumeExited(obj_id self, String volumeName, obj_id who) throws InterruptedException
     {
-        doLogging("OnTriggerExit", "" + getName(who) + " has exited volume name " + volumeName + " which is the farthest: " + volumeName.endsWith(advanced_turret.ALERT_VOLUME_NAME + FARTHEST_TRIGGER));
+        doLogging("OnTriggerExit", getName(who) + " has exited volume name " + volumeName + " which is the farthest: " + volumeName.endsWith(advanced_turret.ALERT_VOLUME_NAME + FARTHEST_TRIGGER));
         if (volumeName.endsWith(advanced_turret.ALERT_VOLUME_NAME + FARTHEST_TRIGGER) && who != self)
         {
             advanced_turret.removeTarget(self, who);

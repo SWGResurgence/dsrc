@@ -1,13 +1,16 @@
 package script.ai;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class familiar extends script.base_script
 {
-    public familiar()
-    {
-    }
     public static final String ALERT_VOLUME_NAME = "alertTriggerVolume";
     public static final String MESSAGE_PET_ID = "petId";
     public static final String MENU_FILE = "pet/pet_menu";
@@ -20,6 +23,10 @@ public class familiar extends script.base_script
     public static final int FAMILIAR_TRICK_4 = 4;
     public static final int FAMILIAR_TRICK_5 = 5;
     public static final int FAMILIAR_TRICK_6 = 6;
+    public familiar()
+    {
+    }
+
     public void doFamiliarTrick(obj_id pet, int trickNum) throws InterruptedException
     {
         obj_id petControl = callable.getCallableCD(pet);
@@ -40,48 +47,48 @@ public class familiar extends script.base_script
         switch (trickNum)
         {
             case FAMILIAR_TRICK_1:
-            doAnimationAction(pet, "trick_1");
-            break;
+                doAnimationAction(pet, "trick_1");
+                break;
             case FAMILIAR_TRICK_2:
-            doAnimationAction(pet, "trick_2");
-            break;
+                doAnimationAction(pet, "trick_2");
+                break;
             case FAMILIAR_TRICK_3:
-            if (isIdValid(master))
-            {
-                playClientEffectObj(master, "clienteffect/droid_effect_fog_machine.cef", pet, "");
-                playClientEffectObj(master, "clienteffect/droid_vocal/mouse_vocalize.cef", pet, "");
-            }
-            break;
+                if (isIdValid(master))
+                {
+                    playClientEffectObj(master, "clienteffect/droid_effect_fog_machine.cef", pet, "");
+                    playClientEffectObj(master, "clienteffect/droid_vocal/mouse_vocalize.cef", pet, "");
+                }
+                break;
             case FAMILIAR_TRICK_4:
-            if (isIdValid(master))
-            {
-                playClientEffectObj(master, "clienteffect/npe_droid_static.cef", pet, "");
-                playClientEffectObj(master, "sound/item_electronics_break.snd", pet, "");
-            }
-            break;
+                if (isIdValid(master))
+                {
+                    playClientEffectObj(master, "clienteffect/npe_droid_static.cef", pet, "");
+                    playClientEffectObj(master, "sound/item_electronics_break.snd", pet, "");
+                }
+                break;
             case FAMILIAR_TRICK_5:
-            String[] anims_01 = 
-            {
-                "stretch",
-                "bow",
-                "wave_item"
-            };
-            int chance_01 = rand(0, anims_01.length - 1);
-            doAnimationAction(pet, anims_01[chance_01]);
-            break;
+                String[] anims_01 =
+                        {
+                                "stretch",
+                                "bow",
+                                "wave_item"
+                        };
+                int chance_01 = rand(0, anims_01.length - 1);
+                doAnimationAction(pet, anims_01[chance_01]);
+                break;
             case FAMILIAR_TRICK_6:
-            String[] anims_02 = 
-            {
-                "startle",
-                "goodbye",
-                "shrug"
-            };
-            int chance_02 = rand(0, anims_02.length - 1);
-            doAnimationAction(pet, anims_02[chance_02]);
-            break;
+                String[] anims_02 =
+                        {
+                                "startle",
+                                "goodbye",
+                                "shrug"
+                        };
+                int chance_02 = rand(0, anims_02.length - 1);
+                doAnimationAction(pet, anims_02[chance_02]);
+                break;
         }
-        return;
     }
+
     public int doFamiliarTrick(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id pet = params.getObjId("pet");
@@ -113,11 +120,11 @@ public class familiar extends script.base_script
             switch (whichTrick)
             {
                 case 1:
-                trickData.put("trickNum", FAMILIAR_TRICK_1);
-                break;
+                    trickData.put("trickNum", FAMILIAR_TRICK_1);
+                    break;
                 case 2:
-                trickData.put("trickNum", FAMILIAR_TRICK_2);
-                break;
+                    trickData.put("trickNum", FAMILIAR_TRICK_2);
+                    break;
             }
             trickData.put("pet", pet);
             int trickDelay = rand(300, 480);
@@ -126,12 +133,14 @@ public class familiar extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, "alreadyTamed", true);
         messageTo(self, "handleSetupPet", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public boolean applyBuff(obj_id pet) throws InterruptedException
     {
         obj_id master = getMaster(pet);
@@ -170,12 +179,13 @@ public class familiar extends script.base_script
         }
         return true;
     }
+
     public void removePetBuff(obj_id master) throws InterruptedException
     {
         int numbuff = buff.getBuffOnTargetFromGroup(master, "vr_familiar");
         buff.applyBuff(master, numbuff, 3600.0f);
-        return;
     }
+
     public void repackPet(obj_id master, obj_id pet) throws InterruptedException
     {
         if (isIdValid(master))
@@ -183,7 +193,8 @@ public class familiar extends script.base_script
             removePetBuff(master);
         }
         obj_id petControlDevice = callable.getCallableCD(pet);
-        if(!isIdValid(petControlDevice)){
+        if (!isIdValid(petControlDevice))
+        {
             return;
         }
         utils.setScriptVar(pet, "stored", true);
@@ -197,12 +208,13 @@ public class familiar extends script.base_script
         {
             messageTo(petControlDevice, "handleRemoveCurrentPet", messageData, 1, false);
         }
-        return;
     }
+
     public int handleSetupPet(obj_id self, dictionary params) throws InterruptedException
     {
         applySkillStatisticModifier(self, "slope_move", 100);
-        if(!pet_lib.hasMaster(self)){
+        if (!pet_lib.hasMaster(self))
+        {
             destroyObject(self);
             return SCRIPT_CONTINUE;
         }
@@ -230,11 +242,11 @@ public class familiar extends script.base_script
         switch (whichTrick)
         {
             case 1:
-            trickData.put("trickNum", FAMILIAR_TRICK_1);
-            break;
+                trickData.put("trickNum", FAMILIAR_TRICK_1);
+                break;
             case 2:
-            trickData.put("trickNum", FAMILIAR_TRICK_2);
-            break;
+                trickData.put("trickNum", FAMILIAR_TRICK_2);
+                break;
         }
         trickData.put("pet", self);
         trickData.put("heartBeat", true);
@@ -242,6 +254,7 @@ public class familiar extends script.base_script
         messageTo(self, "doFamiliarTrick", trickData, trickDelay, false);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanupCheck(obj_id self, dictionary params) throws InterruptedException
     {
         if (!pet_lib.findMaster(self))
@@ -251,6 +264,7 @@ public class familiar extends script.base_script
         messageTo(self, "cleanupCheck", null, 300, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (!isMob(self))
@@ -263,6 +277,7 @@ public class familiar extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         if (!isMob(self))
@@ -284,6 +299,7 @@ public class familiar extends script.base_script
         setObjVar(self, "alreadyTrained", true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id master = getMaster(self);
@@ -313,21 +329,24 @@ public class familiar extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnFollowWaiting(obj_id self, obj_id target) throws InterruptedException
     {
         pet_lib.validateFollowTarget(self, target);
         return SCRIPT_CONTINUE;
     }
+
     public int OnFollowMoving(obj_id self, obj_id target) throws InterruptedException
     {
         if (getLocomotion(self) != LOCOMOTION_RUNNING)
         {
-            
+
         }
         setMovementRun(self);
         pet_lib.validateFollowTarget(self, target);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePackRequest(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -351,12 +370,13 @@ public class familiar extends script.base_script
         {
             messageTo(petControlDevice, "handleRemoveCurrentPet", messageData, 1, false);
         }
-        else 
+        else
         {
             debugServerConsoleMsg(null, "+++ pet.messageHandler handlePackRequest +++ WARNINGWARNING - FAILED TO DESTROY SELF");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isDead(self) || ai_lib.aiIsDead(player))
@@ -378,6 +398,7 @@ public class familiar extends script.base_script
         mi.addRootMenu(menu_info_types.PET_STORE, new string_id(MENU_FILE, "menu_store"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (ai_lib.aiIsDead(player))

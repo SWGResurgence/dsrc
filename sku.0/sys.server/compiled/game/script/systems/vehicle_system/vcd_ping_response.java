@@ -1,5 +1,11 @@
 package script.systems.vehicle_system;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.callable;
 import script.obj_id;
@@ -14,6 +20,7 @@ public class vcd_ping_response extends script.base_script
     public static final String VCDPING_VEHICLE_MESSAGEHANDLER_NEGATIVE_ACK_NAME = "handleNegativeAcknowledgementFromVcd";
     public static final String VCDPING_VEHICLE_MESSAGEHANDLER_PACK_REQUEST_NAME = "handlePackRequest";
     public static final boolean debug = false;
+
     public vcd_ping_response()
     {
     }

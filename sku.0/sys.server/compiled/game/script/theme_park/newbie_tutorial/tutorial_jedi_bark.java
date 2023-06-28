@@ -1,5 +1,11 @@
 package script.theme_park.newbie_tutorial;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.chat;
 import script.obj_id;
@@ -7,10 +13,12 @@ import script.string_id;
 
 public class tutorial_jedi_bark extends script.base_script
 {
+    public static final String JEDI_BARK = "newbie_tutorial/newbie_convo";
+
     public tutorial_jedi_bark()
     {
     }
-    public static final String JEDI_BARK = "newbie_tutorial/newbie_convo";
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         string_id bark = pickRandomBarkText();
@@ -19,6 +27,7 @@ public class tutorial_jedi_bark extends script.base_script
         messageTo(self, "barkRandomPhrase", webster, 5.0f, true);
         return SCRIPT_CONTINUE;
     }
+
     public int barkRandomPhrase(obj_id self, dictionary params) throws InterruptedException
     {
         string_id bark = params.getStringId("bark");
@@ -29,6 +38,7 @@ public class tutorial_jedi_bark extends script.base_script
         messageTo(self, "barkRandomPhrase", webster, 25.0f, true);
         return SCRIPT_CONTINUE;
     }
+
     public string_id pickRandomBarkText() throws InterruptedException
     {
         string_id bark = new string_id();
@@ -36,23 +46,23 @@ public class tutorial_jedi_bark extends script.base_script
         switch (randomBarkNumber)
         {
             case 1:
-            bark = new string_id(JEDI_BARK, "jedi_bark_1");
-            break;
+                bark = new string_id(JEDI_BARK, "jedi_bark_1");
+                break;
             case 2:
-            bark = new string_id(JEDI_BARK, "jedi_bark_2");
-            break;
+                bark = new string_id(JEDI_BARK, "jedi_bark_2");
+                break;
             case 3:
-            bark = new string_id(JEDI_BARK, "jedi_bark_3");
-            break;
+                bark = new string_id(JEDI_BARK, "jedi_bark_3");
+                break;
             case 4:
-            bark = new string_id(JEDI_BARK, "jedi_bark_4");
-            break;
+                bark = new string_id(JEDI_BARK, "jedi_bark_4");
+                break;
             case 5:
-            bark = new string_id(JEDI_BARK, "jedi_bark_5");
-            break;
+                bark = new string_id(JEDI_BARK, "jedi_bark_5");
+                break;
             default:
-            bark = new string_id(JEDI_BARK, "jedi_bark_1");
-            break;
+                bark = new string_id(JEDI_BARK, "jedi_bark_1");
+                break;
         }
         return bark;
     }

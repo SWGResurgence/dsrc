@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,50 +14,53 @@ import script.*;
 
 public class som_kenobi_moral_exec extends script.base_script
 {
+    public static String c_stringFile = "conversation/som_kenobi_moral_exec";
+
     public som_kenobi_moral_exec()
     {
     }
-    public static String c_stringFile = "conversation/som_kenobi_moral_exec";
+
     public boolean som_kenobi_moral_exec_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean som_kenobi_moral_exec_condition_defected(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedTask(player, "som_kenobi_moral_choice_1", "switchedSides");
     }
+
     public boolean som_kenobi_moral_exec_condition_haveCore(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "som_kenobi_moral_choice_1", "gotCore");
     }
+
     public boolean som_kenobi_moral_exec_condition_done(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "som_kenobi_moral_choice_1");
     }
+
     public boolean som_kenobi_moral_exec_condition_levelTooLow(obj_id player, obj_id npc) throws InterruptedException
     {
         int playerLevel = getLevel(player);
-        if (playerLevel > 60)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return playerLevel > 60;
     }
+
     public boolean som_kenobi_moral_exec_condition_onQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "som_kenobi_moral_choice_1");
     }
+
     public void som_kenobi_moral_exec_action_giveQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "som_kenobi_moral_choice_1");
     }
+
     public void som_kenobi_moral_exec_action_reward(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "givenCore");
     }
+
     public int som_kenobi_moral_exec_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_142"))
@@ -72,7 +81,7 @@ public class som_kenobi_moral_exec extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_146");
@@ -81,7 +90,7 @@ public class som_kenobi_moral_exec extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_moral_exec.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -108,7 +117,7 @@ public class som_kenobi_moral_exec extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -117,7 +126,7 @@ public class som_kenobi_moral_exec extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_moral_exec.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -127,6 +136,7 @@ public class som_kenobi_moral_exec extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_moral_exec_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_146"))
@@ -148,7 +158,7 @@ public class som_kenobi_moral_exec extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_150");
@@ -157,7 +167,7 @@ public class som_kenobi_moral_exec extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_moral_exec.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -167,6 +177,7 @@ public class som_kenobi_moral_exec extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_moral_exec_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_150"))
@@ -183,6 +194,7 @@ public class som_kenobi_moral_exec extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_moral_exec_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_160"))
@@ -205,7 +217,7 @@ public class som_kenobi_moral_exec extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_165");
@@ -214,7 +226,7 @@ public class som_kenobi_moral_exec extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_moral_exec.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -224,6 +236,7 @@ public class som_kenobi_moral_exec extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_moral_exec_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_165"))
@@ -240,6 +253,7 @@ public class som_kenobi_moral_exec extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_moral_exec_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_111"))
@@ -260,7 +274,7 @@ public class som_kenobi_moral_exec extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_99");
@@ -269,7 +283,7 @@ public class som_kenobi_moral_exec extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_moral_exec.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -295,7 +309,7 @@ public class som_kenobi_moral_exec extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_64");
@@ -304,7 +318,7 @@ public class som_kenobi_moral_exec extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_moral_exec.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -337,6 +351,7 @@ public class som_kenobi_moral_exec extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_moral_exec_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_99"))
@@ -357,7 +372,7 @@ public class som_kenobi_moral_exec extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_116");
@@ -366,7 +381,7 @@ public class som_kenobi_moral_exec extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_moral_exec.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -376,6 +391,7 @@ public class som_kenobi_moral_exec extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_moral_exec_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_116"))
@@ -403,7 +419,7 @@ public class som_kenobi_moral_exec extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_128");
@@ -416,7 +432,7 @@ public class som_kenobi_moral_exec extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_moral_exec.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -426,6 +442,7 @@ public class som_kenobi_moral_exec extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_moral_exec_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_128"))
@@ -446,7 +463,7 @@ public class som_kenobi_moral_exec extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_132");
@@ -455,7 +472,7 @@ public class som_kenobi_moral_exec extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_moral_exec.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -477,6 +494,7 @@ public class som_kenobi_moral_exec extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_moral_exec_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_132"))
@@ -493,6 +511,7 @@ public class som_kenobi_moral_exec extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_moral_exec_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_64"))
@@ -520,7 +539,7 @@ public class som_kenobi_moral_exec extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_66");
@@ -533,7 +552,7 @@ public class som_kenobi_moral_exec extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_moral_exec.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -543,6 +562,7 @@ public class som_kenobi_moral_exec extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_moral_exec_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_66"))
@@ -564,7 +584,7 @@ public class som_kenobi_moral_exec extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_71");
@@ -573,7 +593,7 @@ public class som_kenobi_moral_exec extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_moral_exec.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -594,6 +614,7 @@ public class som_kenobi_moral_exec extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_moral_exec_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_71"))
@@ -610,6 +631,7 @@ public class som_kenobi_moral_exec extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -621,6 +643,7 @@ public class som_kenobi_moral_exec extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_INTERESTING);
@@ -628,6 +651,7 @@ public class som_kenobi_moral_exec extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -636,18 +660,21 @@ public class som_kenobi_moral_exec extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.som_kenobi_moral_exec");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -685,7 +712,7 @@ public class som_kenobi_moral_exec extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_142");
@@ -697,7 +724,7 @@ public class som_kenobi_moral_exec extends script.base_script
                 utils.setScriptVar(player, "conversation.som_kenobi_moral_exec.branchId", 2);
                 npcStartConversation(player, npc, "som_kenobi_moral_exec", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -755,7 +782,7 @@ public class som_kenobi_moral_exec extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_111");
@@ -775,7 +802,7 @@ public class som_kenobi_moral_exec extends script.base_script
                 utils.setScriptVar(player, "conversation.som_kenobi_moral_exec.branchId", 11);
                 npcStartConversation(player, npc, "som_kenobi_moral_exec", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -791,6 +818,7 @@ public class som_kenobi_moral_exec extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("som_kenobi_moral_exec"))

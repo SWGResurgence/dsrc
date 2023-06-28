@@ -1,310 +1,202 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class yavin_rebel_trainer_2 extends script.base_script
 {
+    public static String c_stringFile = "conversation/yavin_rebel_trainer_2";
+
     public yavin_rebel_trainer_2()
     {
     }
-    public static String c_stringFile = "conversation/yavin_rebel_trainer_2";
+
     public boolean yavin_rebel_trainer_2_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean yavin_rebel_trainer_2_condition_readyForMission1(obj_id player, obj_id npc) throws InterruptedException
     {
-        if ((hasSkill(player, "pilot_rebel_navy_starships_02") || hasSkill(player, "pilot_rebel_navy_weapons_02") || hasSkill(player, "pilot_rebel_navy_procedures_02") || hasSkill(player, "pilot_rebel_navy_droid_02")) && space_flags.hasSpaceFlag(player, "ekerPilot") && !space_quest.hasWonQuest(player, "escort", "yavin_rebel_13"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return (hasSkill(player, "pilot_rebel_navy_starships_02") || hasSkill(player, "pilot_rebel_navy_weapons_02") || hasSkill(player, "pilot_rebel_navy_procedures_02") || hasSkill(player, "pilot_rebel_navy_droid_02")) && space_flags.hasSpaceFlag(player, "ekerPilot") && !space_quest.hasWonQuest(player, "escort", "yavin_rebel_13");
     }
+
     public boolean yavin_rebel_trainer_2_condition_hasFailedMission1(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuest(player, "escort", "yavin_rebel_13") || space_quest.hasAbortedQuest(player, "escort", "yavin_rebel_13"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasFailedQuest(player, "escort", "yavin_rebel_13") || space_quest.hasAbortedQuest(player, "escort", "yavin_rebel_13");
     }
+
     public boolean yavin_rebel_trainer_2_condition_hasWonMission1(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasWonQuest(player, "escort", "yavin_rebel_13") && !space_quest.hasReceivedReward(player, "escort", "yavin_rebel_13"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasWonQuest(player, "escort", "yavin_rebel_13") && !space_quest.hasReceivedReward(player, "escort", "yavin_rebel_13");
     }
+
     public boolean yavin_rebel_trainer_2_condition_readyForMission2(obj_id player, obj_id npc) throws InterruptedException
     {
-        String[] skills = 
-        {
-            "pilot_rebel_navy_starships_02",
-            "pilot_rebel_navy_weapons_02",
-            "pilot_rebel_navy_procedures_02",
-            "pilot_rebel_navy_droid_02"
-        };
+        String[] skills =
+                {
+                        "pilot_rebel_navy_starships_02",
+                        "pilot_rebel_navy_weapons_02",
+                        "pilot_rebel_navy_procedures_02",
+                        "pilot_rebel_navy_droid_02"
+                };
         int j = 0;
-        for (String skill : skills) {
-            if (hasSkill(player, skill)) {
+        for (String skill : skills)
+        {
+            if (hasSkill(player, skill))
+            {
                 j++;
             }
         }
-        if ((j == 2) && space_flags.hasSpaceFlag(player, "ekerPilot") && !space_quest.hasWonQuest(player, "inspect", "yavin_rebel_14"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return (j == 2) && space_flags.hasSpaceFlag(player, "ekerPilot") && !space_quest.hasWonQuest(player, "inspect", "yavin_rebel_14");
     }
+
     public boolean yavin_rebel_trainer_2_condition_hasWonMission2(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasWonQuest(player, "inspect", "yavin_rebel_14") && !space_quest.hasReceivedReward(player, "inspect", "yavin_rebel_14"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasWonQuest(player, "inspect", "yavin_rebel_14") && !space_quest.hasReceivedReward(player, "inspect", "yavin_rebel_14");
     }
+
     public boolean yavin_rebel_trainer_2_condition_hasFailedMission2(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuest(player, "inspect", "yavin_rebel_14") || space_quest.hasAbortedQuest(player, "inspect", "yavin_rebel_14"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasFailedQuest(player, "inspect", "yavin_rebel_14") || space_quest.hasAbortedQuest(player, "inspect", "yavin_rebel_14");
     }
+
     public boolean yavin_rebel_trainer_2_condition_isOnMission(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasQuest(player, "escort", "yavin_rebel_13") || space_quest.hasQuest(player, "inspect", "yavin_rebel_14") || space_quest.hasQuest(player, "inspect", "yavin_rebel_15") || space_quest.hasQuest(player, "escort", "yavin_rebel_16") || space_quest.hasQuest(player, "escort_duty", "yavin_rebel_10") || space_quest.hasQuest(player, "destroy_duty", "yavin_rebel_9") || space_quest.hasQuest(player, "recovery_duty", "yavin_rebel_12"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasQuest(player, "escort", "yavin_rebel_13") || space_quest.hasQuest(player, "inspect", "yavin_rebel_14") || space_quest.hasQuest(player, "inspect", "yavin_rebel_15") || space_quest.hasQuest(player, "escort", "yavin_rebel_16") || space_quest.hasQuest(player, "escort_duty", "yavin_rebel_10") || space_quest.hasQuest(player, "destroy_duty", "yavin_rebel_9") || space_quest.hasQuest(player, "recovery_duty", "yavin_rebel_12");
     }
+
     public boolean yavin_rebel_trainer_2_condition_readyForMission3(obj_id player, obj_id npc) throws InterruptedException
     {
-        String[] skills = 
-        {
-            "pilot_rebel_navy_starships_02",
-            "pilot_rebel_navy_weapons_02",
-            "pilot_rebel_navy_procedures_02",
-            "pilot_rebel_navy_droid_02"
-        };
+        String[] skills =
+                {
+                        "pilot_rebel_navy_starships_02",
+                        "pilot_rebel_navy_weapons_02",
+                        "pilot_rebel_navy_procedures_02",
+                        "pilot_rebel_navy_droid_02"
+                };
         int j = 0;
-        for (String skill : skills) {
-            if (hasSkill(player, skill)) {
+        for (String skill : skills)
+        {
+            if (hasSkill(player, skill))
+            {
                 j++;
             }
         }
-        if ((j == 3) && space_flags.hasSpaceFlag(player, "ekerPilot") && !space_quest.hasWonQuest(player, "destroy_surpriseattack", "yavin_rebel_15"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return (j == 3) && space_flags.hasSpaceFlag(player, "ekerPilot") && !space_quest.hasWonQuest(player, "destroy_surpriseattack", "yavin_rebel_15");
     }
+
     public boolean yavin_rebel_trainer_2_condition_hasFailedMission3(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuest(player, "inspect", "yavin_rebel_15") || space_quest.hasFailedQuest(player, "destroy_surpriseattack", "yavin_rebel_15") || space_quest.hasAbortedQuest(player, "inspect", "yavin_rebel_15") || space_quest.hasAbortedQuest(player, "destroy_surpriseattack", "yavin_rebel_15"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasFailedQuest(player, "inspect", "yavin_rebel_15") || space_quest.hasFailedQuest(player, "destroy_surpriseattack", "yavin_rebel_15") || space_quest.hasAbortedQuest(player, "inspect", "yavin_rebel_15") || space_quest.hasAbortedQuest(player, "destroy_surpriseattack", "yavin_rebel_15");
     }
+
     public boolean yavin_rebel_trainer_2_condition_hasWonMission3(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasWonQuest(player, "destroy_surpriseattack", "yavin_rebel_15") && !space_quest.hasReceivedReward(player, "destroy_surpriseattack", "yavin_rebel_15"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasWonQuest(player, "destroy_surpriseattack", "yavin_rebel_15") && !space_quest.hasReceivedReward(player, "destroy_surpriseattack", "yavin_rebel_15");
     }
+
     public boolean yavin_rebel_trainer_2_condition_readyForMission4(obj_id player, obj_id npc) throws InterruptedException
     {
-        String[] skills = 
-        {
-            "pilot_rebel_navy_starships_02",
-            "pilot_rebel_navy_weapons_02",
-            "pilot_rebel_navy_procedures_02",
-            "pilot_rebel_navy_droid_02"
-        };
+        String[] skills =
+                {
+                        "pilot_rebel_navy_starships_02",
+                        "pilot_rebel_navy_weapons_02",
+                        "pilot_rebel_navy_procedures_02",
+                        "pilot_rebel_navy_droid_02"
+                };
         int j = 0;
-        for (String skill : skills) {
-            if (hasSkill(player, skill)) {
+        for (String skill : skills)
+        {
+            if (hasSkill(player, skill))
+            {
                 j++;
             }
         }
-        if ((j == 4) && space_flags.hasSpaceFlag(player, "ekerPilot") && !space_quest.hasWonQuest(player, "escort", "yavin_rebel_16"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return (j == 4) && space_flags.hasSpaceFlag(player, "ekerPilot") && !space_quest.hasWonQuest(player, "escort", "yavin_rebel_16");
     }
+
     public boolean yavin_rebel_trainer_2_condition_hasWonMission4(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasWonQuest(player, "escort", "yavin_rebel_16") && !space_quest.hasReceivedReward(player, "escort", "yavin_rebel_16"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasWonQuest(player, "escort", "yavin_rebel_16") && !space_quest.hasReceivedReward(player, "escort", "yavin_rebel_16");
     }
+
     public boolean yavin_rebel_trainer_2_condition_hasFailedMission4(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuest(player, "escort", "yavin_rebel_16") || space_quest.hasAbortedQuest(player, "escort", "yavin_rebel_16"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasFailedQuest(player, "escort", "yavin_rebel_16") || space_quest.hasAbortedQuest(player, "escort", "yavin_rebel_16");
     }
+
     public boolean yavin_rebel_trainer_2_condition_readyForDuty(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_flags.getIntSpaceFlag(player, "ekerPilot") == 2)
-        {
-            return true;
-        }
-        return false;
+        return space_flags.getIntSpaceFlag(player, "ekerPilot") == 2;
     }
+
     public boolean yavin_rebel_trainer_2_condition_readyForSecondSkill(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (!hasSkill(player, "pilot_rebel_navy_starships_02") && !hasSkill(player, "pilot_rebel_navy_weapons_02") && !hasSkill(player, "pilot_rebel_navy_procedures_02") && !hasSkill(player, "pilot_rebel_navy_droid_02"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return !hasSkill(player, "pilot_rebel_navy_starships_02") && !hasSkill(player, "pilot_rebel_navy_weapons_02") && !hasSkill(player, "pilot_rebel_navy_procedures_02") && !hasSkill(player, "pilot_rebel_navy_droid_02");
     }
+
     public boolean yavin_rebel_trainer_2_condition_canBuySkill1(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (!hasSkill(player, "pilot_rebel_navy_starships_02") && space_quest.isPlayerQualifiedForSkill(player, "pilot_rebel_navy_starships_02"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return !hasSkill(player, "pilot_rebel_navy_starships_02") && space_quest.isPlayerQualifiedForSkill(player, "pilot_rebel_navy_starships_02");
     }
+
     public boolean yavin_rebel_trainer_2_condition_canBuySkill2(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (!hasSkill(player, "pilot_rebel_navy_weapons_02") && space_quest.isPlayerQualifiedForSkill(player, "pilot_rebel_navy_weapons_02"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return !hasSkill(player, "pilot_rebel_navy_weapons_02") && space_quest.isPlayerQualifiedForSkill(player, "pilot_rebel_navy_weapons_02");
     }
+
     public boolean yavin_rebel_trainer_2_condition_canBuySkill3(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (!hasSkill(player, "pilot_rebel_navy_procedures_02") && space_quest.isPlayerQualifiedForSkill(player, "pilot_rebel_navy_procedures_02"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return !hasSkill(player, "pilot_rebel_navy_procedures_02") && space_quest.isPlayerQualifiedForSkill(player, "pilot_rebel_navy_procedures_02");
     }
+
     public boolean yavin_rebel_trainer_2_condition_canBuySkill4(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (!hasSkill(player, "pilot_rebel_navy_droid_02") && space_quest.isPlayerQualifiedForSkill(player, "pilot_rebel_navy_droid_02"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return !hasSkill(player, "pilot_rebel_navy_droid_02") && space_quest.isPlayerQualifiedForSkill(player, "pilot_rebel_navy_droid_02");
     }
+
     public boolean yavin_rebel_trainer_2_condition_canBuySkill(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.isPlayerQualifiedForSkill(player, "pilot_rebel_navy_starships_02") || space_quest.isPlayerQualifiedForSkill(player, "pilot_rebel_navy_weapons_02") || space_quest.isPlayerQualifiedForSkill(player, "pilot_rebel_navy_procedures_02") || space_quest.isPlayerQualifiedForSkill(player, "pilot_rebel_navy_droid_02") && space_flags.hasSpaceFlag(player, "ekerPilot"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.isPlayerQualifiedForSkill(player, "pilot_rebel_navy_starships_02") || space_quest.isPlayerQualifiedForSkill(player, "pilot_rebel_navy_weapons_02") || space_quest.isPlayerQualifiedForSkill(player, "pilot_rebel_navy_procedures_02") || space_quest.isPlayerQualifiedForSkill(player, "pilot_rebel_navy_droid_02") && space_flags.hasSpaceFlag(player, "ekerPilot");
     }
+
     public boolean yavin_rebel_trainer_2_condition_hasAllSkills(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasReceivedReward(player, "escort", "yavin_rebel_16") && space_flags.hasCompletedTierTwo(player))
-        {
-            return true;
-        }
-        return false;
+        return space_quest.hasReceivedReward(player, "escort", "yavin_rebel_16") && space_flags.hasCompletedTierTwo(player);
     }
+
     public boolean yavin_rebel_trainer_2_condition_hasCompletedSeries(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasCompletedQuestSeries(player, "imperial_corellia_1");
     }
+
     public boolean yavin_rebel_trainer_2_condition_isGm(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasObjVar(player, "gm"));
     }
+
     public boolean yavin_rebel_trainer_2_condition_isNeutralPilot(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (hasSkill(player, "pilot_neutral_novice"))
-        {
-            return true;
-        }
-        return false;
+        return hasSkill(player, "pilot_neutral_novice");
     }
+
     public boolean yavin_rebel_trainer_2_condition_isRebelNonMember(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasSkill(player, "pilot_rebel_navy_novice") && !space_flags.hasSpaceFlag(player, "ekerPilot"));
     }
+
     public boolean yavin_rebel_trainer_2_condition_notTalkedSmuggler(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_flags.getIntSpaceFlag(player, "viopaSmuggler") == 1)
-        {
-            return true;
-        }
-        return false;
+        return space_flags.getIntSpaceFlag(player, "viopaSmuggler") == 1;
     }
+
     public boolean yavin_rebel_trainer_2_condition_isImperial(obj_id player, obj_id npc) throws InterruptedException
     {
         String playerFaction = factions.getFaction(player);
@@ -312,89 +204,75 @@ public class yavin_rebel_trainer_2 extends script.base_script
         {
             return hasSkill(player, "pilot_imperial_navy_novice");
         }
-        if (playerFaction.equals("Imperial") || hasSkill(player, "pilot_imperial_navy_novice"))
-        {
-            return true;
-        }
-        return false;
+        return playerFaction.equals("Imperial") || hasSkill(player, "pilot_imperial_navy_novice");
     }
+
     public boolean yavin_rebel_trainer_2_condition_isCorrectRebelPilot(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_flags.hasCompletedTierOne(player) && (space_flags.getIntSpaceFlag(player, "ekerPilot") == 1))
-        {
-            return true;
-        }
-        return false;
+        return space_flags.hasCompletedTierOne(player) && (space_flags.getIntSpaceFlag(player, "ekerPilot") == 1);
     }
+
     public boolean yavin_rebel_trainer_2_condition_talkedSmuggler(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_flags.getIntSpaceFlag(player, "viopaSmuggler") == 2)
-        {
-            return true;
-        }
-        return false;
+        return space_flags.getIntSpaceFlag(player, "viopaSmuggler") == 2;
     }
+
     public boolean yavin_rebel_trainer_2_condition_notTalkedSmuggler2(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_flags.getIntSpaceFlag(player, "viopaSmuggler") == 3)
-        {
-            return true;
-        }
-        return false;
+        return space_flags.getIntSpaceFlag(player, "viopaSmuggler") == 3;
     }
+
     public boolean yavin_rebel_trainer_2_condition_talkedSmuggler2(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_flags.getIntSpaceFlag(player, "viopaSmuggler") == 4)
-        {
-            return true;
-        }
-        return false;
+        return space_flags.getIntSpaceFlag(player, "viopaSmuggler") == 4;
     }
+
     public boolean yavin_rebel_trainer_2_condition_readyTier3(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_flags.hasCompletedTierTwo(player) && space_flags.hasSpaceFlag(player, "ekerPilot") && space_quest.hasReceivedReward(player, "escort", "yavin_rebel_16"))
-        {
-            return true;
-        }
-        return false;
+        return space_flags.hasCompletedTierTwo(player) && space_flags.hasSpaceFlag(player, "ekerPilot") && space_quest.hasReceivedReward(player, "escort", "yavin_rebel_16");
     }
+
     public boolean yavin_rebel_trainer_2_condition_canFlyNonTrackDuty(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_flags.hasCompletedTierOne(player) && !space_quest.hasQuest(player))
-        {
-            return true;
-        }
-        return false;
+        return space_flags.hasCompletedTierOne(player) && !space_quest.hasQuest(player);
     }
+
     public boolean yavin_rebel_trainer_2_condition_isOnAnotherMission(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasQuest(player);
     }
+
     public boolean yavin_rebel_trainer_2_condition_onMyTrack(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_flags.isSpaceTrack(player, space_flags.REBEL_TATOOINE);
     }
+
     public boolean yavin_rebel_trainer_2_condition_isPilot(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_flags.hasAnyPilotSkill(player);
     }
+
     public boolean yavin_rebel_trainer_2_condition_hasNegativeFaction(obj_id player, obj_id npc) throws InterruptedException
     {
         return (factions.getFactionStanding(player, factions.FACTION_REBEL) < 0.0f);
     }
+
     public boolean yavin_rebel_trainer_2_condition_hasCompletedTier3(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_flags.hasCompletedTierThree(player);
     }
+
     public void yavin_rebel_trainer_2_action_grantMission1(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         space_quest.grantQuest(player, "escort", "yavin_rebel_13");
     }
+
     public void yavin_rebel_trainer_2_action_goToSmuggler(obj_id player, obj_id npc) throws InterruptedException
     {
         space_flags.setSpaceFlag(player, "viopaSmuggler", 1);
     }
+
     public void yavin_rebel_trainer_2_action_giveRewardMission1(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasReceivedReward(player, "escort", "yavin_rebel_13"))
@@ -405,19 +283,23 @@ public class yavin_rebel_trainer_2 extends script.base_script
         space_quest.giveReward(player, "escort", "yavin_rebel_13", 5000, "object/tangible/ship/components/shield_generator/shd_mission_reward_rebel_incom_k77.iff");
         factions.addFactionStanding(player, factions.FACTION_REBEL, 75.0f);
     }
+
     public void yavin_rebel_trainer_2_action_removeSmuggler(obj_id player, obj_id npc) throws InterruptedException
     {
         space_flags.removeSpaceFlag(player, "viopaSmuggler");
     }
+
     public void yavin_rebel_trainer_2_action_goToSmuggler2(obj_id player, obj_id npc) throws InterruptedException
     {
         space_flags.setSpaceFlag(player, "viopaSmuggler", 3);
     }
+
     public void yavin_rebel_trainer_2_action_grantMission2(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         space_quest.grantQuest(player, "inspect", "yavin_rebel_14");
     }
+
     public void yavin_rebel_trainer_2_action_giveRewardMission2(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasReceivedReward(player, "inspect", "yavin_rebel_14"))
@@ -428,11 +310,13 @@ public class yavin_rebel_trainer_2 extends script.base_script
         space_quest.giveReward(player, "inspect", "yavin_rebel_14", 5000, "object/tangible/ship/components/droid_interface/ddi_mission_reward_rebel_moncal_d22.iff");
         factions.addFactionStanding(player, factions.FACTION_REBEL, 75.0f);
     }
+
     public void yavin_rebel_trainer_2_action_grantMission3(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         space_quest.grantQuest(player, "inspect", "yavin_rebel_15");
     }
+
     public void yavin_rebel_trainer_2_action_giveRewardMission3(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasReceivedReward(player, "destroy_surpriseattack", "yavin_rebel_15"))
@@ -443,11 +327,13 @@ public class yavin_rebel_trainer_2 extends script.base_script
         space_quest.giveReward(player, "destroy_surpriseattack", "yavin_rebel_15", 5000, "object/tangible/ship/components/booster/bst_mission_reward_rebel_novaldex_hypernova.iff");
         factions.addFactionStanding(player, factions.FACTION_REBEL, 75.0f);
     }
+
     public void yavin_rebel_trainer_2_action_grantMission4(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         space_quest.grantQuest(player, "escort", "yavin_rebel_16");
     }
+
     public void yavin_rebel_trainer_2_action_giveRewardMission4(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasReceivedReward(player, "escort", "yavin_rebel_16"))
@@ -459,59 +345,72 @@ public class yavin_rebel_trainer_2 extends script.base_script
         factions.addFactionStanding(player, factions.FACTION_REBEL, 75.0f);
         space_flags.setSpaceFlag(player, "ekerPilot", 3);
     }
+
     public void yavin_rebel_trainer_2_action_giveSkill1(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         skill.purchaseSkill(player, "pilot_rebel_navy_starships_02");
     }
+
     public void yavin_rebel_trainer_2_action_giveSkill2(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         skill.purchaseSkill(player, "pilot_rebel_navy_weapons_02");
     }
+
     public void yavin_rebel_trainer_2_action_giveSkill3(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         skill.purchaseSkill(player, "pilot_rebel_navy_procedures_02");
     }
+
     public void yavin_rebel_trainer_2_action_giveSkill4(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         skill.purchaseSkill(player, "pilot_rebel_navy_droid_02");
     }
+
     public void yavin_rebel_trainer_2_action_flagQuestSeriesComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         space_quest.setQuestSeriesFlag(player, "imperial_corellia_1", space_quest.QUEST_SERIES_COMPLETED);
     }
+
     public void yavin_rebel_trainer_2_action_grantDestroyDuty(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "yavin_rebel_9");
     }
+
     public void yavin_rebel_trainer_2_action_grantRecoveryDuty(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "recovery_duty", "yavin_rebel_12");
     }
+
     public void yavin_rebel_trainer_2_action_grantEscortDuty(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "escort_duty", "yavin_rebel_10");
     }
+
     public void yavin_rebel_trainer_2_action_removeEkerPilot(obj_id player, obj_id npc) throws InterruptedException
     {
         space_flags.removeSpaceFlag(player, "ekerPilot");
     }
+
     public void yavin_rebel_trainer_2_action_face(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
     }
+
     public void yavin_rebel_trainer_2_action_makeEkerPilot(obj_id player, obj_id npc) throws InterruptedException
     {
         space_flags.setSpaceFlag(player, "ekerPilot", 2);
     }
+
     public String yavin_rebel_trainer_2_tokenTO_tokenTO0001(obj_id player, obj_id npc) throws InterruptedException
     {
-        return new String();
+        return "";
     }
+
     public int yavin_rebel_trainer_2_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3938bdfc"))
@@ -548,6 +447,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ca776e30"))
@@ -572,6 +472,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_7f9b8387"))
@@ -592,7 +493,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f5427310");
@@ -601,7 +502,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -611,6 +512,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f5427310"))
@@ -626,6 +528,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1583743c"))
@@ -652,7 +555,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ca47d528");
@@ -665,7 +568,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -682,6 +585,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ca47d528"))
@@ -722,7 +626,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_73c783f8");
@@ -743,7 +647,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -763,6 +667,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_591601b8"))
@@ -783,7 +688,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4ca03ddb");
@@ -792,7 +697,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -825,6 +730,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4ca03ddb"))
@@ -840,6 +746,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c48841"))
@@ -879,7 +786,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_bb847e4c");
@@ -892,7 +799,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -902,6 +809,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_bb847e4c"))
@@ -929,7 +837,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_287ec62a");
@@ -942,7 +850,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -963,6 +871,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_287ec62a"))
@@ -988,6 +897,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b1df084d"))
@@ -1014,7 +924,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d5609495");
@@ -1027,7 +937,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1049,6 +959,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d5609495"))
@@ -1075,7 +986,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8bdbd90b");
@@ -1088,7 +999,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1109,6 +1020,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_8bdbd90b"))
@@ -1135,6 +1047,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_e0651b79"))
@@ -1163,6 +1076,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_faf96c0a"))
@@ -1201,7 +1115,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_affe46cc");
@@ -1214,7 +1128,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1224,6 +1138,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_affe46cc"))
@@ -1264,7 +1179,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_73c783f8");
@@ -1285,7 +1200,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1305,6 +1220,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ae785ffa"))
@@ -1324,7 +1240,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_841d27db");
@@ -1333,7 +1249,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1343,6 +1259,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_841d27db"))
@@ -1369,7 +1286,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3de0965c");
@@ -1382,7 +1299,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1392,6 +1309,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch48(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3de0965c"))
@@ -1412,7 +1330,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_71bb443b");
@@ -1421,7 +1339,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1446,7 +1364,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7b4382cf");
@@ -1455,7 +1373,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1465,6 +1383,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_71bb443b"))
@@ -1484,7 +1403,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6aacd1f1");
@@ -1493,7 +1412,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1503,6 +1422,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6aacd1f1"))
@@ -1523,7 +1443,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_38f14bb8");
@@ -1532,7 +1452,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1542,6 +1462,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_38f14bb8"))
@@ -1568,7 +1489,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ee790f5c");
@@ -1581,7 +1502,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1591,6 +1512,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch52(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ee790f5c"))
@@ -1632,7 +1554,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a99ad4e8");
@@ -1645,7 +1567,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1655,6 +1577,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a99ad4e8"))
@@ -1680,6 +1603,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch57(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_7b4382cf"))
@@ -1706,7 +1630,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cd0a60d4");
@@ -1719,7 +1643,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1729,6 +1653,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch58(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_cd0a60d4"))
@@ -1748,7 +1673,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47003e68");
@@ -1757,7 +1682,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1778,6 +1703,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch59(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_47003e68"))
@@ -1797,7 +1723,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_851cc47");
@@ -1806,7 +1732,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1816,6 +1742,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch60(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_851cc47"))
@@ -1843,7 +1770,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_112");
@@ -1856,7 +1783,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1866,6 +1793,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch61(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_112"))
@@ -1893,6 +1821,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch65(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_78bae101"))
@@ -1919,6 +1848,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch68(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ef170270"))
@@ -1946,7 +1876,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c551ea96");
@@ -1959,7 +1889,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1992,7 +1922,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6d00e51e");
@@ -2005,7 +1935,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2015,6 +1945,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch69(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c551ea96"))
@@ -2039,6 +1970,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch72(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6d00e51e"))
@@ -2067,6 +1999,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch75(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6673b556"))
@@ -2093,7 +2026,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_14bcd839");
@@ -2106,7 +2039,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2148,7 +2081,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f930a587");
@@ -2161,7 +2094,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2171,6 +2104,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch76(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_14bcd839"))
@@ -2190,7 +2124,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_32146025");
@@ -2199,7 +2133,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2224,7 +2158,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b2e9d505");
@@ -2233,7 +2167,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2243,6 +2177,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch77(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_32146025"))
@@ -2262,7 +2197,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d24a2285");
@@ -2271,7 +2206,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2281,6 +2216,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch78(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d24a2285"))
@@ -2300,7 +2236,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c3c8f385");
@@ -2309,7 +2245,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2319,6 +2255,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch79(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c3c8f385"))
@@ -2334,6 +2271,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch81(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b2e9d505"))
@@ -2354,7 +2292,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_bb25f9e7");
@@ -2363,7 +2301,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2373,6 +2311,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch82(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_bb25f9e7"))
@@ -2388,6 +2327,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch85(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f930a587"))
@@ -2407,7 +2347,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_39acc227");
@@ -2416,7 +2356,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2440,6 +2380,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch86(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_39acc227"))
@@ -2461,7 +2402,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6c251948");
@@ -2470,7 +2411,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2480,6 +2421,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch87(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6c251948"))
@@ -2495,6 +2437,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch90(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_837615b6"))
@@ -2521,7 +2464,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e39ec30");
@@ -2534,7 +2477,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2555,6 +2498,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch91(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_e39ec30"))
@@ -2590,7 +2534,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b54697f");
@@ -2607,7 +2551,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2640,7 +2584,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2f9e3b7b");
@@ -2653,7 +2597,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2663,6 +2607,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch92(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b54697f"))
@@ -2704,7 +2649,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_73c783f8");
@@ -2725,7 +2670,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2757,7 +2702,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_aaf61b87");
@@ -2770,7 +2715,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2792,6 +2737,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch93(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_aaf61b87"))
@@ -2833,7 +2779,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_73c783f8");
@@ -2854,7 +2800,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2877,6 +2823,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch96(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2f9e3b7b"))
@@ -2929,7 +2876,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_73c783f8");
@@ -2950,7 +2897,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2960,6 +2907,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch99(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d9c145dd"))
@@ -2999,7 +2947,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b601ca9f");
@@ -3012,7 +2960,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3022,6 +2970,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch101(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b601ca9f"))
@@ -3049,6 +2998,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch104(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_38e4c8a3"))
@@ -3096,7 +3046,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_313aff7d");
@@ -3113,7 +3063,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3145,7 +3095,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8e571bd6");
@@ -3158,7 +3108,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3190,7 +3140,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7b3f9583");
@@ -3203,7 +3153,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3213,6 +3163,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch106(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_313aff7d"))
@@ -3239,7 +3190,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f685a04e");
@@ -3252,7 +3203,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3277,7 +3228,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8e9d0848");
@@ -3286,7 +3237,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3318,7 +3269,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9b43a7ee");
@@ -3331,7 +3282,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3341,6 +3292,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch107(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f685a04e"))
@@ -3383,7 +3335,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e23e884f");
@@ -3396,7 +3348,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3406,6 +3358,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch109(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_e23e884f"))
@@ -3433,6 +3386,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch112(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_8e9d0848"))
@@ -3449,6 +3403,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch114(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9b43a7ee"))
@@ -3474,6 +3429,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch117(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_8e571bd6"))
@@ -3508,7 +3464,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_313aff7d");
@@ -3525,7 +3481,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3557,7 +3513,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_260761cf");
@@ -3570,7 +3526,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3580,6 +3536,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch118(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_260761cf"))
@@ -3606,6 +3563,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch121(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_7b3f9583"))
@@ -3640,7 +3598,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_313aff7d");
@@ -3657,7 +3615,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3689,7 +3647,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ca4d37ba");
@@ -3702,7 +3660,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3712,6 +3670,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch122(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ca4d37ba"))
@@ -3738,6 +3697,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch125(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_dd2fd70"))
@@ -3758,7 +3718,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_427");
@@ -3767,7 +3727,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3789,7 +3749,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_423");
@@ -3798,7 +3758,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3820,7 +3780,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_419");
@@ -3829,7 +3789,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3851,7 +3811,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_415");
@@ -3860,7 +3820,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3893,7 +3853,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a6e1c30a");
@@ -3906,7 +3866,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3938,7 +3898,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f4862cb7");
@@ -3951,7 +3911,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3972,6 +3932,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch126(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_427"))
@@ -3989,6 +3950,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch128(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_423"))
@@ -4006,6 +3968,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch130(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_419"))
@@ -4023,6 +3986,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch132(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_415"))
@@ -4040,6 +4004,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch134(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a6e1c30a"))
@@ -4060,7 +4025,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_427");
@@ -4069,7 +4034,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4091,7 +4056,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_423");
@@ -4100,7 +4065,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4122,7 +4087,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_419");
@@ -4131,7 +4096,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4153,7 +4118,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_415");
@@ -4162,7 +4127,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4209,7 +4174,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_73c783f8");
@@ -4230,7 +4195,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4240,6 +4205,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch135(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f4862cb7"))
@@ -4259,7 +4225,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_427");
@@ -4268,7 +4234,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4290,7 +4256,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_423");
@@ -4299,7 +4265,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4321,7 +4287,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_419");
@@ -4330,7 +4296,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4352,7 +4318,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_415");
@@ -4361,7 +4327,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4408,7 +4374,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_73c783f8");
@@ -4429,7 +4395,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4439,6 +4405,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch137(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2bf9b1f7"))
@@ -4480,7 +4447,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_73c783f8");
@@ -4501,7 +4468,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4526,7 +4493,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6b158a0e");
@@ -4535,7 +4502,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4602,7 +4569,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_317");
@@ -4635,7 +4602,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4645,6 +4612,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch138(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_73c783f8"))
@@ -4692,6 +4660,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch143(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6b158a0e"))
@@ -4753,7 +4722,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_165db597");
@@ -4786,7 +4755,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4796,6 +4765,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch144(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_165db597"))
@@ -4877,6 +4847,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch152(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_317"))
@@ -4958,6 +4929,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch160(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6a1c47d9"))
@@ -4996,7 +4968,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a9d63a81");
@@ -5009,7 +4981,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5042,7 +5014,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2bc43dfd");
@@ -5055,7 +5027,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5122,7 +5094,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_382");
@@ -5155,7 +5127,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5165,6 +5137,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch162(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a9d63a81"))
@@ -5207,7 +5180,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_73c783f8");
@@ -5228,7 +5201,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5260,7 +5233,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8f9a3bf4");
@@ -5273,7 +5246,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5283,6 +5256,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch163(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_8f9a3bf4"))
@@ -5325,7 +5299,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_73c783f8");
@@ -5346,7 +5320,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5379,7 +5353,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_356");
@@ -5392,7 +5366,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5402,6 +5376,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch164(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_356"))
@@ -5455,7 +5430,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_73c783f8");
@@ -5476,7 +5451,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5486,6 +5461,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch166(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2bc43dfd"))
@@ -5513,7 +5489,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_367");
@@ -5526,7 +5502,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5572,7 +5548,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_73c783f8");
@@ -5593,7 +5569,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5603,6 +5579,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch167(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_367"))
@@ -5644,7 +5621,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_73c783f8");
@@ -5665,7 +5642,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5690,7 +5667,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b2e340f6");
@@ -5699,7 +5676,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5709,6 +5686,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch168(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b2e340f6"))
@@ -5728,7 +5706,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_bc57b086");
@@ -5737,7 +5715,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5747,6 +5725,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch169(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_bc57b086"))
@@ -5761,6 +5740,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_rebel_trainer_2_handleBranch171(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_382"))
@@ -5842,6 +5822,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -5854,6 +5835,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         factions.setFaction(self, factions.FACTION_REBEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -5862,6 +5844,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         factions.setFaction(self, factions.FACTION_REBEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -5870,18 +5853,21 @@ public class yavin_rebel_trainer_2 extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.yavin_rebel_trainer_2");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -5919,7 +5905,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_3938bdfc");
@@ -5935,7 +5921,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "yavin_rebel_trainer_2", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -5977,7 +5963,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_ca776e30");
@@ -5989,7 +5975,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 utils.setScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId", 6);
                 npcStartConversation(player, npc, "yavin_rebel_trainer_2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -6011,7 +5997,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_7f9b8387");
@@ -6023,7 +6009,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "yavin_rebel_trainer_2", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -6048,7 +6034,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1583743c");
@@ -6056,7 +6042,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 utils.setScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId", 12);
                 npcStartConversation(player, npc, "yavin_rebel_trainer_2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -6122,7 +6108,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_591601b8");
@@ -6138,7 +6124,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 utils.setScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId", 20);
                 npcStartConversation(player, npc, "yavin_rebel_trainer_2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -6167,7 +6153,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_c48841");
@@ -6179,7 +6165,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 utils.setScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId", 25);
                 npcStartConversation(player, npc, "yavin_rebel_trainer_2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -6209,7 +6195,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_b1df084d");
@@ -6225,7 +6211,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "yavin_rebel_trainer_2", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -6259,7 +6245,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_e0651b79");
@@ -6271,7 +6257,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 utils.setScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId", 39);
                 npcStartConversation(player, npc, "yavin_rebel_trainer_2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -6300,7 +6286,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_faf96c0a");
@@ -6312,7 +6298,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 utils.setScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId", 42);
                 npcStartConversation(player, npc, "yavin_rebel_trainer_2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -6336,7 +6322,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_ae785ffa");
@@ -6348,7 +6334,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "yavin_rebel_trainer_2", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -6381,7 +6367,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_78bae101");
@@ -6393,7 +6379,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 utils.setScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId", 65);
                 npcStartConversation(player, npc, "yavin_rebel_trainer_2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -6422,7 +6408,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_ef170270");
@@ -6434,7 +6420,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 utils.setScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId", 68);
                 npcStartConversation(player, npc, "yavin_rebel_trainer_2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -6470,7 +6456,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_6673b556");
@@ -6490,7 +6476,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "yavin_rebel_trainer_2", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -6523,7 +6509,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_837615b6");
@@ -6535,7 +6521,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 utils.setScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId", 90);
                 npcStartConversation(player, npc, "yavin_rebel_trainer_2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -6564,7 +6550,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_d9c145dd");
@@ -6576,7 +6562,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 utils.setScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId", 99);
                 npcStartConversation(player, npc, "yavin_rebel_trainer_2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -6619,7 +6605,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_38e4c8a3");
@@ -6639,7 +6625,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 utils.setScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId", 104);
                 npcStartConversation(player, npc, "yavin_rebel_trainer_2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -6682,7 +6668,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_dd2fd70");
@@ -6702,7 +6688,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 utils.setScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId", 125);
                 npcStartConversation(player, npc, "yavin_rebel_trainer_2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -6738,7 +6724,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_2bf9b1f7");
@@ -6754,7 +6740,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 utils.setScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId", 137);
                 npcStartConversation(player, npc, "yavin_rebel_trainer_2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -6799,7 +6785,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_6a1c47d9");
@@ -6819,7 +6805,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 utils.setScriptVar(player, "conversation.yavin_rebel_trainer_2.branchId", 160);
                 npcStartConversation(player, npc, "yavin_rebel_trainer_2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -6834,6 +6820,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("yavin_rebel_trainer_2"))

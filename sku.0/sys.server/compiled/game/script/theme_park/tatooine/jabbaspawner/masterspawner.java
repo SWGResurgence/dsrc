@@ -1,5 +1,11 @@
 package script.theme_park.tatooine.jabbaspawner;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -11,6 +17,7 @@ public class masterspawner extends script.base_script
     public masterspawner()
     {
     }
+
     // public static final String VERSION = "v1.00.00";
     public int OnInitialize(obj_id self) throws InterruptedException
     {
@@ -21,6 +28,7 @@ public class masterspawner extends script.base_script
         messageTo(self, "doGating", null, 20, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (!hasObjVar(speaker, "gm"))
@@ -81,52 +89,61 @@ public class masterspawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void spawnEveryone(obj_id self) throws InterruptedException
     {
         spawnCelebs(self);
         messageTo(self, "throneRoom", null, 10, true);
     }
+
     public int throneRoom(obj_id self, dictionary params) throws InterruptedException
     {
         spawnThrone(self);
         messageTo(self, "guardSpawn", null, 10, true);
         return SCRIPT_CONTINUE;
     }
+
     public int guardSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         spawnGuards(self);
         messageTo(self, "monkSpawn", null, 10, true);
         return SCRIPT_CONTINUE;
     }
+
     public int monkSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         spawnMonks(self);
         messageTo(self, "jawaSpawn", null, 10, true);
         return SCRIPT_CONTINUE;
     }
+
     public int jawaSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         spawnJawas(self);
         messageTo(self, "randomSpawn", null, 10, true);
         return SCRIPT_CONTINUE;
     }
+
     public int randomSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         spawnRandom(self);
         messageTo(self, "droidSpawn", null, 10, true);
         return SCRIPT_CONTINUE;
     }
+
     public int droidSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         spawnDroids(self);
         messageTo(self, "prisonerSpawn", null, 10, true);
         return SCRIPT_CONTINUE;
     }
+
     public int prisonerSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         spawnPrisoners(self);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnCelebs(obj_id self) throws InterruptedException
     {
         spawnBarada(self);
@@ -137,6 +154,7 @@ public class masterspawner extends script.base_script
         spawnReeYees(self, spawnReelo(self));
         spawnJawl(self);
     }
+
     public void spawnThrone(obj_id self) throws InterruptedException
     {
         obj_id oola = spawnOola(self);
@@ -149,6 +167,7 @@ public class masterspawner extends script.base_script
         spawnCrumb(self, oola);
         spawnBib(self, oola);
     }
+
     public void spawnGuards(obj_id self) throws InterruptedException
     {
         obj_id ephant = spawnEphant(self);
@@ -165,6 +184,7 @@ public class masterspawner extends script.base_script
         spawnGamGuard12(self);
         spawnGamGuard13(self);
     }
+
     public void spawnMonks(obj_id self) throws InterruptedException
     {
         spawnBomarrMonk1(self);
@@ -174,6 +194,7 @@ public class masterspawner extends script.base_script
         spawnBomarrMonk5(self);
         spawnBomarrMonk6(self);
     }
+
     public void spawnJawas(obj_id self) throws InterruptedException
     {
         spawnJawa2(self);
@@ -185,6 +206,7 @@ public class masterspawner extends script.base_script
         spawnRandom13(self, spawnJawa3(self));
         spawnRandom14(self, spawnJawa4(self));
     }
+
     public void spawnRandom(obj_id self) throws InterruptedException
     {
         spawnRandom1(self, spawnGamGuard5(self));
@@ -196,6 +218,7 @@ public class masterspawner extends script.base_script
         spawnRandom15(self, spawnRandom5(self));
         spawnRandom16(self, spawnRandom6(self));
     }
+
     public void spawnDroids(obj_id self) throws InterruptedException
     {
         spawnEv9d9(self);
@@ -206,6 +229,7 @@ public class masterspawner extends script.base_script
         spawnDroid5(self);
         spawnDroid6(self);
     }
+
     public void spawnPrisoners(obj_id self) throws InterruptedException
     {
         spawnPrisoner1(self);
@@ -217,6 +241,7 @@ public class masterspawner extends script.base_script
         spawnPrisoner7(self);
         spawnPrisoner8(self);
     }
+
     public obj_id spawnBib(obj_id self, obj_id oola) throws InterruptedException
     {
         obj_id bib = create.staticObject("bib_fortuna", new location(-12.09f, 2.0f, 49.41f, "tatooine", getCellId(self, "throneroom")));
@@ -226,6 +251,7 @@ public class masterspawner extends script.base_script
         setObjVar(bib, "palace", self);
         return bib;
     }
+
     public obj_id spawnReelo(obj_id self) throws InterruptedException
     {
         obj_id reelo = create.staticObject("reelo_baruk", new location(-2, 2, 113, "tatooine", getCellId(self, "foyer")));
@@ -234,6 +260,7 @@ public class masterspawner extends script.base_script
         setObjVar(reelo, "palace", self);
         return reelo;
     }
+
     public void spawnReeYees(obj_id self, obj_id reelo) throws InterruptedException
     {
         obj_id ReeYees = create.staticObject("ree_yees", new location(5.97f, 0.3f, 116.1f, "tatooine", getCellId(self, "foyer")));
@@ -242,6 +269,7 @@ public class masterspawner extends script.base_script
         setObjVar(self, "PalaceInhabitants.reeyees", ReeYees);
         setObjVar(ReeYees, "palace", self);
     }
+
     public obj_id spawnEphant(obj_id self) throws InterruptedException
     {
         obj_id ephant = create.staticObject("ephant_mon", new location(-6, 8, 84, "tatooine", getCellId(self, "office")));
@@ -250,6 +278,7 @@ public class masterspawner extends script.base_script
         setObjVar(ephant, "palace", self);
         return ephant;
     }
+
     public obj_id spawnOola(obj_id self) throws InterruptedException
     {
         obj_id oola = create.staticObject("oola", new location(-10, 4, 43, "tatooine", getCellId(self, "throneroom")));
@@ -258,6 +287,7 @@ public class masterspawner extends script.base_script
         setObjVar(oola, "palace", self);
         return oola;
     }
+
     public void spawnMax(obj_id self, obj_id oola) throws InterruptedException
     {
         obj_id max = create.staticObject("max_rebo", new location(-11, 2, 36, "tatooine", getCellId(self, "throneroom")));
@@ -268,10 +298,12 @@ public class masterspawner extends script.base_script
         setObjVar(max, "oola", oola);
         setObjVar(oola, "max", max);
     }
+
     public void spawnOrgan(obj_id self) throws InterruptedException
     {
         createObject("object/tangible/instrument/organ_max_rebo.iff", new location(-11, 2, 36, "tatooine", getCellId(self, "throneroom")));
     }
+
     public void spawnSy(obj_id self, obj_id oola) throws InterruptedException
     {
         obj_id sy = create.staticObject("sy_snootles", new location(-8, 4, 37, "tatooine", getCellId(self, "throneroom")));
@@ -281,6 +313,7 @@ public class masterspawner extends script.base_script
         setObjVar(sy, "palace", self);
         setObjVar(oola, "sy", sy);
     }
+
     public void spawnDroopy(obj_id self, obj_id oola) throws InterruptedException
     {
         obj_id droopy = create.staticObject("droopy_mccool", new location(-13, 4, 37, "tatooine", getCellId(self, "throneroom")));
@@ -291,6 +324,7 @@ public class masterspawner extends script.base_script
         setObjVar(droopy, "palace", self);
         setObjVar(oola, "droopy", droopy);
     }
+
     public void spawnJabba(obj_id self, obj_id oola) throws InterruptedException
     {
         obj_id jabba = create.staticObject("jabba_the_hutt", new location(-16.65f, 7, 45, "tatooine", getCellId(self, "throneroom")));
@@ -300,6 +334,7 @@ public class masterspawner extends script.base_script
         setObjVar(self, "PalaceInhabitants.jabba", jabba);
         setObjVar(jabba, "palace", self);
     }
+
     public void spawnCrumb(obj_id self, obj_id oola) throws InterruptedException
     {
         obj_id crumb = create.staticObject("salacious_crumb", new location(-16.29f, 7.0f, 42.54f, "tatooine", getCellId(self, "throneroom")));
@@ -309,6 +344,7 @@ public class masterspawner extends script.base_script
         setObjVar(crumb, "palace", self);
         setObjVar(crumb, "ai.defaultCalmBehavior", 1);
     }
+
     public void spawnPDroid(obj_id self, obj_id oola) throws InterruptedException
     {
         obj_id pDroid = create.staticObject("g_5po", new location(-15.07f, 2, 45.9f, "tatooine", getCellId(self, "throneroom")));
@@ -317,6 +353,7 @@ public class masterspawner extends script.base_script
         setObjVar(self, "PalaceInhabitants.pDroid", pDroid);
         setObjVar(pDroid, "palace", self);
     }
+
     public void spawnBarada(obj_id self) throws InterruptedException
     {
         obj_id garage1 = getCellId(self, "garage1");
@@ -327,6 +364,7 @@ public class masterspawner extends script.base_script
         // Barada is meant to face the toolbox.
         faceTo(barada, new location(28, 0.2f, -1.05f, "tatooine", garage1));
     }
+
     public void spawnKlaatu(obj_id self) throws InterruptedException
     {
         obj_id klaatu = create.staticObject("klaatu", new location(-6178.97f, 90.0f, -6381.74f, "tatooine", null));
@@ -338,6 +376,7 @@ public class masterspawner extends script.base_script
         setObjVar(self, "PalaceInhabitants.klaatu", klaatu);
         setObjVar(klaatu, "palace", self);
     }
+
     public void spawnPorcellus(obj_id self) throws InterruptedException
     {
         location porcellusLocation = new location(-43, 5, 64, "tatooine", getCellId(self, "kitchen"));
@@ -346,6 +385,7 @@ public class masterspawner extends script.base_script
         setObjVar(self, "PalaceInhabitants.porcellus", porcellus);
         setObjVar(porcellus, "palace", self);
     }
+
     public obj_id spawnMalakili(obj_id self) throws InterruptedException
     {
         obj_id malakili = create.staticObject("malakili", new location(19, -9, 42, "tatooine", getCellId(self, "rancortrainer")));
@@ -354,6 +394,7 @@ public class masterspawner extends script.base_script
         setObjVar(malakili, "palace", self);
         return malakili;
     }
+
     public void spawnRancor(obj_id self, obj_id malakili) throws InterruptedException
     {
         obj_id rancor = create.staticObject("jabbas_palace_rancor", new location(4, -10, 45, "tatooine", getCellId(self, "rancorpit")));
@@ -363,6 +404,7 @@ public class masterspawner extends script.base_script
         setObjVar(rancor, "palace", self);
         setObjVar(rancor, "gm", 1);
     }
+
     public void spawnBoba(obj_id self, obj_id oola) throws InterruptedException
     {
         obj_id boba = create.staticObject("boba_fett", new location(-1, 5, 31, "tatooine", getCellId(self, "throneroom")));
@@ -372,6 +414,7 @@ public class masterspawner extends script.base_script
         setObjVar(self, "PalaceInhabitants.boba", boba);
         setObjVar(boba, "palace", self);
     }
+
     public obj_id spawnGamGuard1(obj_id self, obj_id whoToFace) throws InterruptedException
     {
         obj_id gamGuard1 = create.object("gamorrean_guard", new location(1, 7, 88, "tatooine", getCellId(self, "office")));
@@ -383,6 +426,7 @@ public class masterspawner extends script.base_script
         setName(gamGuard1, "Ortugg");
         return gamGuard1;
     }
+
     public void spawnGamGuard2(obj_id self, obj_id gamGuard1) throws InterruptedException
     {
         obj_id gamGuard2 = create.object("gamorrean_guard", new location(1, 7, 80, "tatooine", getCellId(self, "office")));
@@ -393,6 +437,7 @@ public class masterspawner extends script.base_script
         setObjVar(gamGuard2, "palace", self);
         setName(gamGuard2, "Rogua");
     }
+
     public void spawnGamGuard3(obj_id self, obj_id gamGuard1) throws InterruptedException
     {
         obj_id gamGuard3 = create.object("gamorrean_guard", new location(-11, 7, 88, "tatooine", getCellId(self, "office")));
@@ -403,6 +448,7 @@ public class masterspawner extends script.base_script
         setObjVar(gamGuard3, "palace", self);
         setName(gamGuard3, "Gartogg");
     }
+
     public void spawnGamGuard4(obj_id self, obj_id whoToFace) throws InterruptedException
     {
         obj_id gamGuard4 = create.object("gamorrean_guard", new location(-1, 7, 98, "tatooine", getCellId(self, "office")));
@@ -413,6 +459,7 @@ public class masterspawner extends script.base_script
         setObjVar(gamGuard4, "palace", self);
         setName(gamGuard4, "Torrug");
     }
+
     public obj_id spawnGamGuard5(obj_id self) throws InterruptedException
     {
         obj_id gamGuard5 = create.object("gamorrean_guard", new location(10, 7, 71, "tatooine", getCellId(self, "hall2")));
@@ -423,6 +470,7 @@ public class masterspawner extends script.base_script
         setName(gamGuard5, "Grogur");
         return gamGuard5;
     }
+
     public obj_id spawnGamGuard6(obj_id self) throws InterruptedException
     {
         obj_id gamGuard6 = create.object("gamorrean_guard", new location(-30.78f, 0.2f, 82.64f, "tatooine", getCellId(self, "hall5")));
@@ -433,6 +481,7 @@ public class masterspawner extends script.base_script
         setName(gamGuard6, "Urgott");
         return gamGuard6;
     }
+
     public void spawnGamGuard7(obj_id self, obj_id gamGuard6) throws InterruptedException
     {
         obj_id gamGuard7 = create.object("gamorrean_guard", new location(-2.04f, 0.2f, 82.61f, "tatooine", getCellId(self, "hall7")));
@@ -443,6 +492,7 @@ public class masterspawner extends script.base_script
         setObjVar(gamGuard7, "palace", self);
         setName(gamGuard7, "Artogg");
     }
+
     public void spawnGamGuard8(obj_id self, obj_id gamGuard6) throws InterruptedException
     {
         obj_id gamGuard8 = create.object("gamorrean_guard", new location(-13, 5, 59, "tatooine", getCellId(self, "hall4")));
@@ -453,6 +503,7 @@ public class masterspawner extends script.base_script
         setObjVar(gamGuard8, "palace", self);
         setName(gamGuard8, "Ogtur");
     }
+
     public void spawnGamGuard9(obj_id self) throws InterruptedException
     {
         obj_id gamGuard9 = create.object("gamorrean_guard", new location(-37, 5, 46, "tatooine", getCellId(self, "jabbaprivate")));
@@ -462,6 +513,7 @@ public class masterspawner extends script.base_script
         setObjVar(gamGuard9, "palace", self);
         setName(gamGuard9, "Rautog");
     }
+
     public void spawnGamGuard10(obj_id self) throws InterruptedException
     {
         obj_id gamGuard10 = create.object("gamorrean_guard", new location(-25, 5, 34, "tatooine", getCellId(self, "throneroom")));
@@ -471,6 +523,7 @@ public class masterspawner extends script.base_script
         setObjVar(gamGuard10, "palace", self);
         setName(gamGuard10, "Agtor");
     }
+
     public void spawnGamGuard11(obj_id self) throws InterruptedException
     {
         obj_id gamGuard11 = create.object("gamorrean_guard", new location(6, 4, 26, "tatooine", getCellId(self, "throneroom")));
@@ -480,6 +533,7 @@ public class masterspawner extends script.base_script
         setObjVar(gamGuard11, "palace", self);
         setName(gamGuard11, "Torgau");
     }
+
     public void spawnGamGuard12(obj_id self) throws InterruptedException
     {
         obj_id gamGuard12 = create.object("gamorrean_guard", new location(22, -9, 48, "tatooine", getCellId(self, "rancortrainer")));
@@ -489,6 +543,7 @@ public class masterspawner extends script.base_script
         setObjVar(gamGuard12, "palace", self);
         setName(gamGuard12, "Ugtaur");
     }
+
     public void spawnGamGuard13(obj_id self) throws InterruptedException
     {
         obj_id gamGuard13 = create.object("gamorrean_guard", new location(0.14f, 2.0f, 53.1f, "tatooine", getCellId(self, "throneroom")));
@@ -498,6 +553,7 @@ public class masterspawner extends script.base_script
         setName(gamGuard13, "Gurgot");
         setObjVar(gamGuard13, "palace", self);
     }
+
     public void spawnBomarrMonk1(obj_id self) throws InterruptedException
     {
         obj_id bomarrMonk1 = create.object("bomarr_monk", new location(-24, 10, 86, "tatooine", getCellId(self, "bibspawn")));
@@ -508,6 +564,7 @@ public class masterspawner extends script.base_script
         setObjVar(bomarrMonk1, "palace", self);
         setInvulnerable(bomarrMonk1, true);
     }
+
     public void spawnBomarrMonk2(obj_id self) throws InterruptedException
     {
         obj_id bomarrMonk2 = create.object("bomarr_monk", new location(-2, 4, 104, "tatooine", getCellId(self, "hall1")));
@@ -518,6 +575,7 @@ public class masterspawner extends script.base_script
         setObjVar(bomarrMonk2, "palace", self);
         setInvulnerable(bomarrMonk2, true);
     }
+
     public void spawnBomarrMonk3(obj_id self) throws InterruptedException
     {
         obj_id bomarrMonk3 = create.object("bomarr_monk", new location(-18, 9, 73, "tatooine", getCellId(self, "spawn1")));
@@ -528,6 +586,7 @@ public class masterspawner extends script.base_script
         setObjVar(bomarrMonk3, "palace", self);
         setInvulnerable(bomarrMonk3, true);
     }
+
     public void spawnBomarrMonk4(obj_id self) throws InterruptedException
     {
         obj_id bomarrMonk4 = create.object("bomarr_monk", new location(7, 6, 50, "tatooine", getCellId(self, "throneroom")));
@@ -538,6 +597,7 @@ public class masterspawner extends script.base_script
         setObjVar(bomarrMonk4, "palace", self);
         setInvulnerable(bomarrMonk4, true);
     }
+
     public void spawnBomarrMonk5(obj_id self) throws InterruptedException
     {
         obj_id bomarrMonk5 = create.object("bomarr_monk", new location(24, 4, -9, "tatooine", getCellId(self, "garage2")));
@@ -548,6 +608,7 @@ public class masterspawner extends script.base_script
         setObjVar(bomarrMonk5, "palace", self);
         setInvulnerable(bomarrMonk5, true);
     }
+
     public void spawnBomarrMonk6(obj_id self) throws InterruptedException
     {
         obj_id bomarrMonk6 = create.object("bomarr_monk", new location(-18, 7, 9, "tatooine", getCellId(self, "display")));
@@ -557,6 +618,7 @@ public class masterspawner extends script.base_script
         setObjVar(bomarrMonk6, "palace", self);
         setInvulnerable(bomarrMonk6, true);
     }
+
     public obj_id spawnJawa1(obj_id self) throws InterruptedException
     {
         obj_id jawa1 = create.staticObject("jawa", new location(-23, 5, 59, "tatooine", getCellId(self, "hall4")));
@@ -567,6 +629,7 @@ public class masterspawner extends script.base_script
         setInvulnerable(jawa1, true);
         return jawa1;
     }
+
     public void spawnJawa2(obj_id self) throws InterruptedException
     {
         obj_id jawa2 = create.staticObject("jawa", new location(-38, 5, 53, "tatooine", getCellId(self, "hall8")));
@@ -576,6 +639,7 @@ public class masterspawner extends script.base_script
         setObjVar(jawa2, "palace", self);
         setInvulnerable(jawa2, true);
     }
+
     public obj_id spawnJawa3(obj_id self) throws InterruptedException
     {
         obj_id jawa3 = create.staticObject("jawa", new location(-1, 5, 25, "tatooine", getCellId(self, "throneroom")));
@@ -586,6 +650,7 @@ public class masterspawner extends script.base_script
         setInvulnerable(jawa3, true);
         return jawa3;
     }
+
     public obj_id spawnJawa4(obj_id self) throws InterruptedException
     {
         obj_id jawa4 = create.staticObject("jawa", new location(-8, 5, 20, "tatooine", getCellId(self, "display")));
@@ -596,6 +661,7 @@ public class masterspawner extends script.base_script
         setInvulnerable(jawa4, true);
         return jawa4;
     }
+
     public void spawnJawa5(obj_id self) throws InterruptedException
     {
         obj_id jawa5 = create.staticObject("jawa", new location(-18, 5, 13, "tatooine", getCellId(self, "display")));
@@ -605,6 +671,7 @@ public class masterspawner extends script.base_script
         setObjVar(jawa5, "palace", self);
         setInvulnerable(jawa5, true);
     }
+
     public void spawnJawa6(obj_id self, obj_id jawa1) throws InterruptedException
     {
         obj_id jawa6 = create.staticObject("jawa", new location(-23, 5, 61, "tatooine", getCellId(self, "hall4")));
@@ -615,6 +682,7 @@ public class masterspawner extends script.base_script
         setObjVar(jawa6, "palace", self);
         setInvulnerable(jawa6, true);
     }
+
     public obj_id spawnJawa7(obj_id self) throws InterruptedException
     {
         obj_id jawa7 = create.staticObject("jawa", new location(8.73f, 2.0f, 23.58f, "tatooine", getCellId(self, "throneroom")));
@@ -625,6 +693,7 @@ public class masterspawner extends script.base_script
         setInvulnerable(jawa7, true);
         return jawa7;
     }
+
     public void spawnJawa8(obj_id self, obj_id jawa7) throws InterruptedException
     {
         obj_id jawa8 = create.staticObject("jawa", new location(9.22f, 2.0f, 25.22f, "tatooine", getCellId(self, "throneroom")));
@@ -638,6 +707,7 @@ public class masterspawner extends script.base_script
         setObjVar(jawa8, "palace", self);
         setInvulnerable(jawa8, true);
     }
+
     public obj_id spawnJawa9(obj_id self) throws InterruptedException
     {
         obj_id jawa9 = create.staticObject("jawa", new location(29.42f, 0.2f, 46.58f, "tatooine", getCellId(self, "hall3")));
@@ -648,6 +718,7 @@ public class masterspawner extends script.base_script
         setInvulnerable(jawa9, true);
         return jawa9;
     }
+
     public void spawnJawa10(obj_id self, obj_id jawa9) throws InterruptedException
     {
         obj_id jawa10 = create.staticObject("jawa", new location(29.44f, 0.2f, 45.39f, "tatooine", getCellId(self, "hall3")));
@@ -661,6 +732,7 @@ public class masterspawner extends script.base_script
         setObjVar(jawa10, "palace", self);
         setInvulnerable(jawa10, true);
     }
+
     public void spawnRandom1(obj_id self, obj_id gamGuard5) throws InterruptedException
     {
         obj_id random1 = create.staticObject("outlaw", new location(9, 7, 73, "tatooine", getCellId(self, "hall2")));
@@ -676,6 +748,7 @@ public class masterspawner extends script.base_script
         attachScript(random1, "theme_park.tatooine.jabbaspawner.behavior.conversing");
         setInvulnerable(random1, true);
     }
+
     public void spawnRandom2(obj_id self) throws InterruptedException
     {
         obj_id random2 = create.object("roughneck", new location(-25, 5, 61, "tatooine", getCellId(self, "hall4")));
@@ -687,6 +760,7 @@ public class masterspawner extends script.base_script
         ai_lib.setCustomIdleAnimation(random2, "conversation");
         setInvulnerable(random2, true);
     }
+
     public obj_id spawnRandom3(obj_id self) throws InterruptedException
     {
         obj_id random3 = create.staticObject("scoundrel", new location(5, 4, 44, "tatooine", getCellId(self, "throneroom")));
@@ -699,6 +773,7 @@ public class masterspawner extends script.base_script
         setInvulnerable(random3, true);
         return random3;
     }
+
     public void spawnRandom4(obj_id self, obj_id random3) throws InterruptedException
     {
         obj_id random4 = create.staticObject("wastrel", new location(5, 4, 45.5f, "tatooine", getCellId(self, "throneroom")));
@@ -714,6 +789,7 @@ public class masterspawner extends script.base_script
         attachScript(random4, "theme_park.tatooine.jabbaspawner.behavior.conversing");
         setInvulnerable(random4, true);
     }
+
     public obj_id spawnRandom5(obj_id self) throws InterruptedException
     {
         obj_id random5 = create.object("spacer", new location(-9, 5, 25, "tatooine", getCellId(self, "throneroom")));
@@ -726,6 +802,7 @@ public class masterspawner extends script.base_script
         setInvulnerable(random5, true);
         return random5;
     }
+
     public obj_id spawnRandom6(obj_id self) throws InterruptedException
     {
         obj_id random6 = create.staticObject("thug", new location(1.08f, 2.0f, 36.7f, "tatooine", getCellId(self, "throneroom")));
@@ -738,6 +815,7 @@ public class masterspawner extends script.base_script
         setInvulnerable(random6, true);
         return random6;
     }
+
     public obj_id spawnRandom7(obj_id self) throws InterruptedException
     {
         obj_id random7 = create.staticObject("slicer", new location(-9, 4, 51, "tatooine", getCellId(self, "throneroom")));
@@ -750,6 +828,7 @@ public class masterspawner extends script.base_script
         setInvulnerable(random7, true);
         return random7;
     }
+
     public void spawnRandom8(obj_id self, obj_id random7) throws InterruptedException
     {
         obj_id random8 = create.staticObject("fringer", new location(-8.69f, 4.0f, 49.57f, "tatooine", getCellId(self, "throneroom")));
@@ -765,6 +844,7 @@ public class masterspawner extends script.base_script
         ai_lib.setCustomIdleAnimation(random8, "conversation");
         setInvulnerable(random8, true);
     }
+
     public obj_id spawnRandom9(obj_id self) throws InterruptedException
     {
         obj_id random9 = create.staticObject("roughneck", new location(-5.88f, 2.0f, 43.07f, "tatooine", getCellId(self, "throneroom")));
@@ -776,6 +856,7 @@ public class masterspawner extends script.base_script
         setInvulnerable(random9, true);
         return random9;
     }
+
     public void spawnRandom10(obj_id self, obj_id random9) throws InterruptedException
     {
         obj_id random10 = create.staticObject("roughneck", new location(-5.72f, 2.0f, 44.11f, "tatooine", getCellId(self, "throneroom")));
@@ -791,6 +872,7 @@ public class masterspawner extends script.base_script
         ai_lib.setCustomIdleAnimation(random10, "conversation");
         setInvulnerable(random10, true);
     }
+
     public obj_id spawnRandom11(obj_id self) throws InterruptedException
     {
         obj_id random11 = create.staticObject("scoundrel", new location(-14.32f, 2.0f, 52.08f, "tatooine", getCellId(self, "throneroom")));
@@ -802,6 +884,7 @@ public class masterspawner extends script.base_script
         setInvulnerable(random11, true);
         return random11;
     }
+
     public void spawnRandom12(obj_id self, obj_id random11) throws InterruptedException
     {
         obj_id random12 = create.staticObject("thug", new location(-15.83f, 2.0f, 51.94f, "tatooine", getCellId(self, "throneroom")));
@@ -816,6 +899,7 @@ public class masterspawner extends script.base_script
         ai_lib.setCustomIdleAnimation(random12, "conversation");
         setInvulnerable(random12, true);
     }
+
     public void spawnRandom13(obj_id self, obj_id jawa3) throws InterruptedException
     {
         obj_id random13 = create.staticObject("thug", new location(-1.64f, 3.0f, 26.17f, "tatooine", getCellId(self, "throneroom")));
@@ -830,6 +914,7 @@ public class masterspawner extends script.base_script
         ai_lib.setCustomIdleAnimation(random13, "conversation");
         setInvulnerable(random13, true);
     }
+
     public void spawnRandom14(obj_id self, obj_id jawa4) throws InterruptedException
     {
         obj_id random14 = create.staticObject("thug", new location(-8.44f, 3.0f, 21.23f, "tatooine", getCellId(self, "throneroom")));
@@ -844,6 +929,7 @@ public class masterspawner extends script.base_script
         ai_lib.setCustomIdleAnimation(random14, "conversation");
         setInvulnerable(random14, true);
     }
+
     public void spawnRandom15(obj_id self, obj_id random5) throws InterruptedException
     {
         obj_id random15 = create.staticObject("thug", new location(-9.9f, 3.0f, 25.6f, "tatooine", getCellId(self, "throneroom")));
@@ -858,6 +944,7 @@ public class masterspawner extends script.base_script
         ai_lib.setCustomIdleAnimation(random15, "conversation");
         setInvulnerable(random15, true);
     }
+
     public void spawnRandom16(obj_id self, obj_id random6) throws InterruptedException
     {
         obj_id random16 = create.staticObject("thug", new location(1.08f, 2.0f, 35.07f, "tatooine", getCellId(self, "throneroom")));
@@ -872,6 +959,7 @@ public class masterspawner extends script.base_script
         ai_lib.setCustomIdleAnimation(random16, "conversation");
         setInvulnerable(random16, true);
     }
+
     public void spawnEv9d9(obj_id self) throws InterruptedException
     {
         obj_id ev9d9 = create.staticObject("ev_9d9", new location(24.47f, 0.2f, 87.86f, "tatooine", getCellId(self, "droidtorture")));
@@ -880,6 +968,7 @@ public class masterspawner extends script.base_script
         setObjVar(self, "PalaceInhabitants.ev9d9", ev9d9);
         setObjVar(ev9d9, "palace", self);
     }
+
     public void spawnDroid1(obj_id self) throws InterruptedException
     {
         obj_id droid1 = create.object("r2", new location(19.73f, 0.2f, 90.51f, "tatooine", getCellId(self, "droidtorture")));
@@ -890,6 +979,7 @@ public class masterspawner extends script.base_script
         setObjVar(droid1, "palace", self);
         setInvulnerable(droid1, true);
     }
+
     public void spawnDroid2(obj_id self) throws InterruptedException
     {
         obj_id droid2 = create.object("ra7_bug_droid", new location(13.33f, 0.2f, 88.72f, "tatooine", getCellId(self, "droidtorture")));
@@ -899,6 +989,7 @@ public class masterspawner extends script.base_script
         setObjVar(droid2, "palace", self);
         setInvulnerable(droid2, true);
     }
+
     public void spawnDroid3(obj_id self) throws InterruptedException
     {
         obj_id droid3 = create.object("protocol_droid_3po_red", new location(10.71f, 0.2f, 84.27f, "tatooine", getCellId(self, "droidtorture")));
@@ -908,6 +999,7 @@ public class masterspawner extends script.base_script
         setObjVar(droid3, "palace", self);
         setInvulnerable(droid3, true);
     }
+
     public void spawnDroid4(obj_id self) throws InterruptedException
     {
         obj_id droid4 = create.object("eg6_power_droid", new location(17.42f, 0.2f, 81.22f, "tatooine", getCellId(self, "droidtorture")));
@@ -918,6 +1010,7 @@ public class masterspawner extends script.base_script
         setObjVar(droid4, "palace", self);
         setInvulnerable(droid4, true);
     }
+
     public void spawnDroid5(obj_id self) throws InterruptedException
     {
         obj_id droid5 = create.object("le_repair_droid", new location(23.67f, 0.2f, 76.43f, "tatooine", getCellId(self, "droidtorture")));
@@ -927,6 +1020,7 @@ public class masterspawner extends script.base_script
         setObjVar(droid5, "palace", self);
         setInvulnerable(droid5, true);
     }
+
     public void spawnDroid6(obj_id self) throws InterruptedException
     {
         obj_id droid6 = create.object("eg6_power_droid", new location(43.29f, 0.2f, 7.14f, "tatooine", getCellId(self, "garage1")));
@@ -937,6 +1031,7 @@ public class masterspawner extends script.base_script
         setObjVar(droid6, "palace", self);
         setInvulnerable(droid6, true);
     }
+
     public void spawnPrisoner1(obj_id self) throws InterruptedException
     {
         obj_id prisoner1 = create.staticObject("commoner", new location(-33.83f, 0.2f, 76.58f, "tatooine", getCellId(self, "jail1")));
@@ -947,6 +1042,7 @@ public class masterspawner extends script.base_script
         setObjVar(prisoner1, "palace", self);
         setInvulnerable(prisoner1, true);
     }
+
     public void spawnPrisoner2(obj_id self) throws InterruptedException
     {
         obj_id prisoner2 = create.staticObject("commoner", new location(-37.43f, 0.2f, 76.85f, "tatooine", getCellId(self, "jail2")));
@@ -957,6 +1053,7 @@ public class masterspawner extends script.base_script
         setObjVar(prisoner2, "palace", self);
         setInvulnerable(prisoner2, true);
     }
+
     public void spawnPrisoner3(obj_id self) throws InterruptedException
     {
         obj_id prisoner3 = create.staticObject("commoner", new location(-34.48f, 0.2f, 88.22f, "tatooine", getCellId(self, "jail3")));
@@ -967,6 +1064,7 @@ public class masterspawner extends script.base_script
         setObjVar(prisoner3, "palace", self);
         setInvulnerable(prisoner3, true);
     }
+
     public void spawnPrisoner4(obj_id self) throws InterruptedException
     {
         obj_id prisoner4 = create.staticObject("commoner", new location(-38.7f, 0.2f, 88.24f, "tatooine", getCellId(self, "jail4")));
@@ -977,6 +1075,7 @@ public class masterspawner extends script.base_script
         setObjVar(prisoner4, "palace", self);
         setInvulnerable(prisoner4, true);
     }
+
     public void spawnPrisoner5(obj_id self) throws InterruptedException
     {
         obj_id prisoner5 = create.staticObject("commoner", new location(-10.07f, 0.2f, 77.54f, "tatooine", getCellId(self, "jail5")));
@@ -987,6 +1086,7 @@ public class masterspawner extends script.base_script
         setObjVar(prisoner5, "palace", self);
         setInvulnerable(prisoner5, true);
     }
+
     public void spawnPrisoner6(obj_id self) throws InterruptedException
     {
         obj_id prisoner6 = create.staticObject("commoner", new location(-13.62f, 0.2f, 77.52f, "tatooine", getCellId(self, "jail6")));
@@ -997,6 +1097,7 @@ public class masterspawner extends script.base_script
         setObjVar(prisoner6, "palace", self);
         setInvulnerable(prisoner6, true);
     }
+
     public void spawnPrisoner7(obj_id self) throws InterruptedException
     {
         obj_id prisoner7 = create.staticObject("commoner", new location(-10.88f, 0.2f, 87.49f, "tatooine", getCellId(self, "jail7")));
@@ -1007,6 +1108,7 @@ public class masterspawner extends script.base_script
         setObjVar(prisoner7, "palace", self);
         setInvulnerable(prisoner7, true);
     }
+
     public void spawnPrisoner8(obj_id self) throws InterruptedException
     {
         obj_id prisoner8 = create.staticObject("commoner", new location(-15.43f, 0.2f, 87.68f, "tatooine", getCellId(self, "jail8")));
@@ -1017,6 +1119,7 @@ public class masterspawner extends script.base_script
         setObjVar(prisoner8, "palace", self);
         setInvulnerable(prisoner8, true);
     }
+
     public void spawnJawl(obj_id self) throws InterruptedException
     {
         obj_id jawl = create.object("clone_relics_jawl", new location(-5.5f, 0.2f, 114.2f, "tatooine", getCellId(self, "foyer")));
@@ -1025,321 +1128,385 @@ public class masterspawner extends script.base_script
         setObjVar(self, "PalaceInhabitants.jawl", jawl);
         setObjVar(jawl, "palace", self);
     }
+
     public int bibDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnBib(self, getObjIdObjVar(self, "PalaceInhabitants.oola"));
         return SCRIPT_CONTINUE;
     }
+
     public int reeloDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnReelo(self);
         return SCRIPT_CONTINUE;
     }
+
     public int ephantDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnEphant(self);
         return SCRIPT_CONTINUE;
     }
+
     public int reeyeesDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnReeYees(self, getObjIdObjVar(self, "PalaceInhabitants.oola"));
         return SCRIPT_CONTINUE;
     }
+
     public int jawlDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnJawl(self);
         return SCRIPT_CONTINUE;
     }
+
     public int oolaDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnOola(self);
         return SCRIPT_CONTINUE;
     }
+
     public int maxDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnMax(self, getObjIdObjVar(self, "PalaceInhabitants.oola"));
         return SCRIPT_CONTINUE;
     }
+
     public int syDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnSy(self, getObjIdObjVar(self, "PalaceInhabitants.oola"));
         return SCRIPT_CONTINUE;
     }
+
     public int droopyDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnDroopy(self, getObjIdObjVar(self, "PalaceInhabitants.oola"));
         return SCRIPT_CONTINUE;
     }
+
     public int jabbaDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnJabba(self, getObjIdObjVar(self, "PalaceInhabitants.oola"));
         return SCRIPT_CONTINUE;
     }
+
     public int crumbDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnCrumb(self, getObjIdObjVar(self, "PalaceInhabitants.oola"));
         return SCRIPT_CONTINUE;
     }
+
     public int pDroidDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnPDroid(self, getObjIdObjVar(self, "PalaceInhabitants.oola"));
         return SCRIPT_CONTINUE;
     }
+
     public int baradaDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnBarada(self);
         return SCRIPT_CONTINUE;
     }
+
     public int klaatuDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnKlaatu(self);
         return SCRIPT_CONTINUE;
     }
+
     public int porcellusDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnPorcellus(self);
         return SCRIPT_CONTINUE;
     }
+
     public int malakiliDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnMalakili(self);
         return SCRIPT_CONTINUE;
     }
+
     public int rancorDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnRancor(self, getObjIdObjVar(self, "PalaceInhabitants.malakili"));
         return SCRIPT_CONTINUE;
     }
+
     public int bobaDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnBoba(self, getObjIdObjVar(self, "PalaceInhabitants.oola"));
         return SCRIPT_CONTINUE;
     }
+
     public int gamGuard1Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnGamGuard1(self, getObjIdObjVar(self, "PalaceInhabitants.ephant"));
         return SCRIPT_CONTINUE;
     }
+
     public int gamGuard2Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnGamGuard2(self, getObjIdObjVar(self, "PalaceInhabitants.gamGuard1"));
         return SCRIPT_CONTINUE;
     }
+
     public int gamGuard3Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnGamGuard3(self, getObjIdObjVar(self, "PalaceInhabitants.gamGuard1"));
         return SCRIPT_CONTINUE;
     }
+
     public int gamGuard4Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnGamGuard4(self, getObjIdObjVar(self, "PalaceInhabitants.ephant"));
         return SCRIPT_CONTINUE;
     }
+
     public int gamGuard5Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnGamGuard5(self);
         return SCRIPT_CONTINUE;
     }
+
     public int gamGuard6Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnGamGuard6(self);
         return SCRIPT_CONTINUE;
     }
+
     public int gamGuard7Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnGamGuard7(self, getObjIdObjVar(self, "PalaceInhabitants.gamGuard6"));
         return SCRIPT_CONTINUE;
     }
+
     public int gamGuard8Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnGamGuard8(self, getObjIdObjVar(self, "PalaceInhabitants.gamGuard6"));
         return SCRIPT_CONTINUE;
     }
+
     public int gamGuard9Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnGamGuard9(getObjIdObjVar(self, "PalaceInhabitants.jabba2"));
         return SCRIPT_CONTINUE;
     }
+
     public int gamGuard10Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnGamGuard10(self);
         return SCRIPT_CONTINUE;
     }
+
     public int gamGuard11Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnGamGuard11(self);
         return SCRIPT_CONTINUE;
     }
+
     public int gamGuard12Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnGamGuard12(self);
         return SCRIPT_CONTINUE;
     }
+
     public int gamGuard13Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnGamGuard13(self);
         return SCRIPT_CONTINUE;
     }
+
     public int bomarrMonk1Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnBomarrMonk1(self);
         return SCRIPT_CONTINUE;
     }
+
     public int bomarrMonk2Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnBomarrMonk2(self);
         return SCRIPT_CONTINUE;
     }
+
     public int bomarrMonk3Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnBomarrMonk3(self);
         return SCRIPT_CONTINUE;
     }
+
     public int bomarrMonk4Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnBomarrMonk4(self);
         return SCRIPT_CONTINUE;
     }
+
     public int bomarrMonk5Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnBomarrMonk5(self);
         return SCRIPT_CONTINUE;
     }
+
     public int bomarrMonk6Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnBomarrMonk6(self);
         return SCRIPT_CONTINUE;
     }
+
     public int jawa1Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnJawa1(self);
         return SCRIPT_CONTINUE;
     }
+
     public int jawa2Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnJawa2(self);
         return SCRIPT_CONTINUE;
     }
+
     public int jawa3Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnJawa3(self);
         return SCRIPT_CONTINUE;
     }
+
     public int jawa4Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnJawa4(self);
         return SCRIPT_CONTINUE;
     }
+
     public int jawa5Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnJawa5(self);
         return SCRIPT_CONTINUE;
     }
+
     public int jawa6Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnJawa6(self, getObjIdObjVar(self, "PalaceInhabitants.jawa1"));
         return SCRIPT_CONTINUE;
     }
+
     public int jawa7Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnJawa7(self);
         return SCRIPT_CONTINUE;
     }
+
     public int jawa8Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnJawa8(self, getObjIdObjVar(self, "PalaceInhabitants.jawa7"));
         return SCRIPT_CONTINUE;
     }
+
     public int jawa9Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnJawa9(self);
         return SCRIPT_CONTINUE;
     }
+
     public int jawa10Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnJawa10(self, getObjIdObjVar(self, "PalaceInhabitants.jawa9"));
         return SCRIPT_CONTINUE;
     }
+
     public int random1Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnRandom1(self, getObjIdObjVar(self, "PalaceInhabitants.gamGuard5"));
         return SCRIPT_CONTINUE;
     }
+
     public int random2Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnRandom2(self);
         return SCRIPT_CONTINUE;
     }
+
     public int random3Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnRandom3(self);
         return SCRIPT_CONTINUE;
     }
+
     public int random4Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnRandom4(self, getObjIdObjVar(self, "PalaceInhabitants.random3"));
         return SCRIPT_CONTINUE;
     }
+
     public int random5Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnRandom5(self);
         return SCRIPT_CONTINUE;
     }
+
     public int random6Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnRandom6(self);
         return SCRIPT_CONTINUE;
     }
+
     public int random7Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnRandom7(self);
         return SCRIPT_CONTINUE;
     }
+
     public int random8Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnRandom8(self, getObjIdObjVar(self, "PalaceInhabitants.random7"));
         return SCRIPT_CONTINUE;
     }
+
     public int random9Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnRandom9(self);
         return SCRIPT_CONTINUE;
     }
+
     public int random10Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnRandom10(self, getObjIdObjVar(self, "PalaceInhabitants.random9"));
         return SCRIPT_CONTINUE;
     }
+
     public int random11Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnRandom11(self);
         return SCRIPT_CONTINUE;
     }
+
     public int random12Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnRandom12(self, getObjIdObjVar(self, "PalaceInhabitants.random11"));
         return SCRIPT_CONTINUE;
     }
+
     public int random13Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnRandom13(self, getObjIdObjVar(self, "PalaceInhabitants.jawa3"));
         return SCRIPT_CONTINUE;
     }
+
     public int random14Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnRandom14(self, getObjIdObjVar(self, "PalaceInhabitants.jawa4"));
         return SCRIPT_CONTINUE;
     }
+
     public int random15Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnRandom15(self, getObjIdObjVar(self, "PalaceInhabitants.random5"));
         return SCRIPT_CONTINUE;
     }
+
     public int random16Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnRandom16(self, getObjIdObjVar(self, "PalaceInhabitants.random6"));
         return SCRIPT_CONTINUE;
     }
+
     public int ev9d9Died(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id existing = getObjIdObjVar(self, "PalaceInhabitants.ev9d9");
@@ -1349,82 +1516,98 @@ public class masterspawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int droid1Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnDroid1(self);
         return SCRIPT_CONTINUE;
     }
+
     public int droid2Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnDroid2(self);
         return SCRIPT_CONTINUE;
     }
+
     public int droid3Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnDroid3(self);
         return SCRIPT_CONTINUE;
     }
+
     public int droid4Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnDroid4(self);
         return SCRIPT_CONTINUE;
     }
+
     public int droid5Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnDroid5(self);
         return SCRIPT_CONTINUE;
     }
+
     public int droid6Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnDroid6(self);
         return SCRIPT_CONTINUE;
     }
+
     public int prisoner1Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnPrisoner1(self);
         return SCRIPT_CONTINUE;
     }
+
     public int prisoner2Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnPrisoner2(self);
         return SCRIPT_CONTINUE;
     }
+
     public int prisoner3Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnPrisoner3(self);
         return SCRIPT_CONTINUE;
     }
+
     public int prisoner4Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnPrisoner4(self);
         return SCRIPT_CONTINUE;
     }
+
     public int prisoner5Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnPrisoner5(self);
         return SCRIPT_CONTINUE;
     }
+
     public int prisoner6Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnPrisoner6(self);
         return SCRIPT_CONTINUE;
     }
+
     public int prisoner7Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnPrisoner7(self);
         return SCRIPT_CONTINUE;
     }
+
     public int prisoner8Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnPrisoner8(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         debugServerConsoleMsg(self, "Detaching Jabba's Palace Spawn Script");
         despawnEveryone(self);
         return SCRIPT_CONTINUE;
     }
+
     public int doGuards(obj_id self, dictionary params) throws InterruptedException
     {
         attachScript(getObjIdObjVar(self, "PalaceInhabitants.gamGuard1"), "theme_park.tatooine.jabbaspawner.palace_path");
@@ -1440,6 +1623,7 @@ public class masterspawner extends script.base_script
         attachScript(getObjIdObjVar(self, "PalaceInhabitants.gamGuard11"), "theme_park.tatooine.jabbaspawner.palace_path");
         return SCRIPT_CONTINUE;
     }
+
     public int doMonks(obj_id self, dictionary params) throws InterruptedException
     {
         attachScript(getObjIdObjVar(self, "PalaceInhabitants.bomarrMonk1"), "theme_park.tatooine.jabbaspawner.palace_path");
@@ -1449,6 +1633,7 @@ public class masterspawner extends script.base_script
         attachScript(getObjIdObjVar(self, "PalaceInhabitants.bomarrMonk5"), "theme_park.tatooine.jabbaspawner.palace_path");
         return SCRIPT_CONTINUE;
     }
+
     public void destroyCelebs(obj_id self) throws InterruptedException
     {
         destroyObject(getObjIdObjVar(self, "PalaceInhabitants.bib"));
@@ -1480,6 +1665,7 @@ public class masterspawner extends script.base_script
         destroyObject(getObjIdObjVar(self, "PalaceInhabitants.boba"));
         removeObjVar(self, "PalaceInhabitants.boba");
     }
+
     public void destroyGuards(obj_id self) throws InterruptedException
     {
         destroyObject(getObjIdObjVar(self, "PalaceInhabitants.ephant"));
@@ -1511,6 +1697,7 @@ public class masterspawner extends script.base_script
         destroyObject(getObjIdObjVar(self, "PalaceInhabitants.gamGuard13"));
         removeObjVar(self, "PalaceInhabitants.gamGuard13");
     }
+
     public void destroyMonks(obj_id self) throws InterruptedException
     {
         destroyObject(getObjIdObjVar(self, "PalaceInhabitants.bomarrMonk1"));
@@ -1526,6 +1713,7 @@ public class masterspawner extends script.base_script
         destroyObject(getObjIdObjVar(self, "PalaceInhabitants.bomarrMonk6"));
         removeObjVar(self, "PalaceInhabitants.bomarrMonk6");
     }
+
     public void destroyJawas(obj_id self) throws InterruptedException
     {
         destroyObject(getObjIdObjVar(self, "PalaceInhabitants.jawa1"));
@@ -1549,6 +1737,7 @@ public class masterspawner extends script.base_script
         destroyObject(getObjIdObjVar(self, "PalaceInhabitants.jawa10"));
         removeObjVar(self, "PalaceInhabitants.jawa10");
     }
+
     public void destroyRandom(obj_id self) throws InterruptedException
     {
         destroyObject(getObjIdObjVar(self, "PalaceInhabitants.random1"));
@@ -1584,6 +1773,7 @@ public class masterspawner extends script.base_script
         destroyObject(getObjIdObjVar(self, "PalaceInhabitants.random16"));
         removeObjVar(self, "PalaceInhabitants.random16");
     }
+
     public void destroyDroids(obj_id self) throws InterruptedException
     {
         destroyObject(getObjIdObjVar(self, "PalaceInhabitants.ev9d9"));
@@ -1601,6 +1791,7 @@ public class masterspawner extends script.base_script
         destroyObject(getObjIdObjVar(self, "PalaceInhabitants.droid6"));
         removeObjVar(self, "PalaceInhabitants.droid6");
     }
+
     public int doGating(obj_id self, dictionary params) throws InterruptedException
     {
         attachScript(getCellId(self, "hall1"), "theme_park.gating.jabba.stairs_block");
@@ -1611,6 +1802,7 @@ public class masterspawner extends script.base_script
         attachScript(getCellId(self, "hall8"), "theme_park.gating.jabba.master_block");
         return SCRIPT_CONTINUE;
     }
+
     public void despawnEveryone(obj_id self) throws InterruptedException
     {
         destroyCelebs(self);

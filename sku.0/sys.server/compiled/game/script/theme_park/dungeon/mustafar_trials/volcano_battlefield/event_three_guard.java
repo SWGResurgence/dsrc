@@ -1,26 +1,36 @@
 package script.theme_park.dungeon.mustafar_trials.volcano_battlefield;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.trial;
 import script.obj_id;
 
 public class event_three_guard extends script.base_script
 {
+    public static final boolean LOGGING = false;
+
     public event_three_guard()
     {
     }
-    public static final boolean LOGGING = false;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         trial.setHp(self, trial.HP_VOLCANO_THREE_GUARD);
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         messageTo(self, "destroySelf", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id parent = trial.getParent(self);
@@ -32,11 +42,13 @@ public class event_three_guard extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int beginAttack(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] players = trial.getValidTargetsInRadius(self, 100.0f);
@@ -55,6 +67,7 @@ public class event_three_guard extends script.base_script
         startCombat(self, toAttack);
         return SCRIPT_CONTINUE;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING || trial.VOLCANO_LOGGING)

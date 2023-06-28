@@ -1,5 +1,11 @@
 package script.theme_park.restuss_event;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.trial;
@@ -11,16 +17,19 @@ public class convoy_spawner extends script.base_script
     public convoy_spawner()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "createConvoy", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "createConvoy", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int createConvoy(obj_id self, dictionary params) throws InterruptedException
     {
         String faction = getStringObjVar(self, "alignment");
@@ -35,7 +44,7 @@ public class convoy_spawner extends script.base_script
                     location spawnLoc = new location(selfLoc.x + (i * 2), selfLoc.y, selfLoc.z);
                     newSpawn = create.object("restuss_imperial_load_lifter_ambush", spawnLoc);
                 }
-                else 
+                else
                 {
                     location spawnLoc = new location(selfLoc.x + (i * 2), selfLoc.y, selfLoc.z);
                     newSpawn = create.object("restuss_imperial_stormtrooper_st3", spawnLoc);
@@ -55,7 +64,7 @@ public class convoy_spawner extends script.base_script
                     location spawnLoc = new location(selfLoc.x - (i * 2), selfLoc.y, selfLoc.z);
                     newSpawn = create.object("restuss_rebel_load_lifter_ambush", spawnLoc);
                 }
-                else 
+                else
                 {
                     location spawnLoc = new location(selfLoc.x - (i * 2), selfLoc.y, selfLoc.z);
                     newSpawn = create.object("restuss_rebel_trooper_st3", spawnLoc);

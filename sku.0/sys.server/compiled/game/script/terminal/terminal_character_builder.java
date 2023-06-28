@@ -1,5 +1,11 @@
 package script.terminal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -7,132 +13,6 @@ import java.util.*;
 
 public class terminal_character_builder extends script.base_script
 {
-    public static class warp_location extends locations {
-        private int worldX, worldY, worldZ;
-        private int cellX, cellY, cellZ = 0;
-        private obj_id cell;
-        private String locationLabel, scene;
-
-        public warp_location(String locationLabel, String scene, int worldX, int worldY, int worldZ) {
-            this.locationLabel = locationLabel;
-            setScene(scene);
-            setWorldX(worldX);
-            setWorldY(worldY);
-            setWorldZ(worldZ);
-        }
-
-        public void warp(obj_id player) {
-            warpPlayer(
-                    player,
-                    getScene(),
-                    getWorldX(),
-                    getWorldY(),
-                    getWorldZ(),
-                    getCell(),
-                    getCellX(),
-                    getCellY(),
-                    getCellZ(),
-                    "",
-                    false
-            );
-        }
-
-        public String getSceneLabel() {
-            switch(this.scene) {
-                case "tatooine":
-                case "dantooine":
-                case "naboo":
-                case "corellia":
-                case "lok":
-                case "endor":
-                case "dathomir":
-                case "talus":
-                case "rori":
-                case "mustafar":
-                    return scene.substring(0, 1).toUpperCase() + scene.substring(1);
-                case "Yavin IV":
-                    return "Yavin IV";
-                case "kashyyyk_main":
-                    return "Kashyyyk";
-                case "dxun":
-                    return toUpper(scene, 0);
-                default:
-                    return scene;
-            }
-        }
-
-        public int getWorldX() {
-            return worldX;
-        }
-
-        public void setWorldX(int worldX) {
-            this.worldX = worldX;
-        }
-
-        public int getWorldY() {
-            return worldY;
-        }
-
-        public void setWorldY(int worldY) {
-            this.worldY = worldY;
-        }
-
-        public int getWorldZ() {
-            return worldZ;
-        }
-
-        public void setWorldZ(int worldZ) {
-            this.worldZ = worldZ;
-        }
-
-        public int getCellX() {
-            return cellX;
-        }
-
-        public void setCellX(int cellX) {
-            this.cellX = cellX;
-        }
-
-        public int getCellY() {
-            return cellY;
-        }
-
-        public void setCellY(int cellY) {
-            this.cellY = cellY;
-        }
-
-        public int getCellZ() {
-            return cellZ;
-        }
-
-        public void setCellZ(int cellZ) {
-            this.cellZ = cellZ;
-        }
-
-        public obj_id getCell() {
-            return cell;
-        }
-
-        public void setCell(obj_id cell) {
-            this.cell = cell;
-        }
-
-        public String getLocationLabel() {
-            return locationLabel;
-        }
-
-        public void setLocationLabel(String locationLabel) {
-            this.locationLabel = locationLabel;
-        }
-
-        public String getScene() {
-            return scene;
-        }
-
-        public void setScene(String scene) {
-            this.scene = scene;
-        }
-    }
     public static final int CASH_AMOUNT = 10000000;
     public static final int AMT = 10000000;
     public static final int FACTION_AMT = 5000;
@@ -733,7 +613,6 @@ public class terminal_character_builder extends script.base_script
             "blacksun_vaksai",
             "hutt_turret_ship"
     };
-    public static List<warp_location> WARP_OPTIONS;
     public static final String[] OTHER_SHIP_OPTIONS = {
             "Sorosuub",
             "Eta-2 Actis (Jedi Starfighter)",
@@ -1887,6 +1766,7 @@ public class terminal_character_builder extends script.base_script
                     15,
                     15
             };
+    public static List<warp_location> WARP_OPTIONS;
 
     public boolean checkConfigSetting(String configString) throws InterruptedException
     {
@@ -1913,7 +1793,7 @@ public class terminal_character_builder extends script.base_script
     {
         if (item == menu_info_types.ITEM_USE && (isGod(player) || checkConfigSetting("builderEnabled")))
         {
-            LOG("CustomerService", "Player: " + getName(player) + "(" + player + ") used Character Builder Terminal");
+            resurgence.logEtherealAction(player,"Player: " + getName(player) + "(" + player + ") used Character Builder Terminal");
             startCharacterBuilder(player);
         }
         if (item == menu_info_types.SERVER_MENU1)
@@ -1923,11 +1803,13 @@ public class terminal_character_builder extends script.base_script
             {
                 removeObjVar(self, "locked");
                 broadcast(player, "You have lifted the restricted access to this terminal.");
+                resurgence.logEtherealAction(player, "Player " + getPlayerFullName(player) + " lifted the restricted access to a terminal located at " + getLocation(self).toClipboardFormat("orange"));
             }
             else
             {
                 setObjVar(self, "locked", true);
                 broadcast(player, "You have restricted access to this terminal.");
+                resurgence.logEtherealAction(player, "Player " + getPlayerFullName(player) + " restricted access to a terminal located at " + getLocation(self).toClipboardFormat("orange"));
             }
         }
         if (item == menu_info_types.SERVER_MENU2)
@@ -1945,6 +1827,8 @@ public class terminal_character_builder extends script.base_script
                     setObjVar(duplicate, "noTrade", 1);
                     attachScript(duplicate, "item.special.nomove");
                     setObjVar(duplicate, "owner", player);
+                    setObjVar(duplicate, "locked", true);
+                    resurgence.logEtherealAction(player, "Player " + getPlayerFullName(player) + " duplicated a character builder terminal.");
                     sendSystemMessage(player, "Terminal duplicated.", null);
                 }
             }
@@ -9136,6 +9020,7 @@ public class terminal_character_builder extends script.base_script
                 false
         );
     }
+
     public int handleWarpSceneOptions(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -9171,6 +9056,7 @@ public class terminal_character_builder extends script.base_script
         );
         return SCRIPT_CONTINUE;
     }
+
     public int handleWarpOptions(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -9205,11 +9091,14 @@ public class terminal_character_builder extends script.base_script
         }
         String[] warpOptions = utils.getStringArrayLocalVar(self, "warp.options");
         Optional<warp_location> wl = WARP_OPTIONS.stream().filter(o -> o.getLocationLabel().equals(warpOptions[idx])).findFirst();
-        if(wl.isPresent()) {
+        if (wl.isPresent())
+        {
             warp_location w = wl.get();
             w.warp(player);
             WARP_OPTIONS = null;
-        } else {
+        }
+        else
+        {
             broadcast(player, "The system is unable to complete the transaction.");
             refreshMenu(
                     player,
@@ -11189,6 +11078,157 @@ public class terminal_character_builder extends script.base_script
     public int OnInitialize(obj_id self)
     {
         setName(self, toUpper(GENERIC_TITLE, 0));
+        setObjVar(self, "locked", true);
         return SCRIPT_CONTINUE;
+    }
+
+    public static class warp_location extends locations
+    {
+        private int worldX, worldY, worldZ;
+        private int cellX, cellY, cellZ = 0;
+        private obj_id cell;
+        private String locationLabel, scene;
+
+        public warp_location(String locationLabel, String scene, int worldX, int worldY, int worldZ)
+        {
+            this.locationLabel = locationLabel;
+            setScene(scene);
+            setWorldX(worldX);
+            setWorldY(worldY);
+            setWorldZ(worldZ);
+        }
+
+        public void warp(obj_id player)
+        {
+            warpPlayer(
+                    player,
+                    getScene(),
+                    getWorldX(),
+                    getWorldY(),
+                    getWorldZ(),
+                    getCell(),
+                    getCellX(),
+                    getCellY(),
+                    getCellZ(),
+                    "",
+                    false
+            );
+        }
+
+        public String getSceneLabel()
+        {
+            switch (this.scene)
+            {
+                case "tatooine":
+                case "dantooine":
+                case "naboo":
+                case "corellia":
+                case "lok":
+                case "endor":
+                case "dathomir":
+                case "talus":
+                case "rori":
+                case "mustafar":
+                    return scene.substring(0, 1).toUpperCase() + scene.substring(1);
+                case "Yavin IV":
+                    return "Yavin IV";
+                case "kashyyyk_main":
+                    return "Kashyyyk";
+                case "dxun":
+                    return toUpper(scene, 0);
+                default:
+                    return scene;
+            }
+        }
+
+        public int getWorldX()
+        {
+            return worldX;
+        }
+
+        public void setWorldX(int worldX)
+        {
+            this.worldX = worldX;
+        }
+
+        public int getWorldY()
+        {
+            return worldY;
+        }
+
+        public void setWorldY(int worldY)
+        {
+            this.worldY = worldY;
+        }
+
+        public int getWorldZ()
+        {
+            return worldZ;
+        }
+
+        public void setWorldZ(int worldZ)
+        {
+            this.worldZ = worldZ;
+        }
+
+        public int getCellX()
+        {
+            return cellX;
+        }
+
+        public void setCellX(int cellX)
+        {
+            this.cellX = cellX;
+        }
+
+        public int getCellY()
+        {
+            return cellY;
+        }
+
+        public void setCellY(int cellY)
+        {
+            this.cellY = cellY;
+        }
+
+        public int getCellZ()
+        {
+            return cellZ;
+        }
+
+        public void setCellZ(int cellZ)
+        {
+            this.cellZ = cellZ;
+        }
+
+        public obj_id getCell()
+        {
+            return cell;
+        }
+
+        public void setCell(obj_id cell)
+        {
+            this.cell = cell;
+        }
+
+        public String getLocationLabel()
+        {
+            return locationLabel;
+        }
+
+        public void setLocationLabel(String locationLabel)
+        {
+            this.locationLabel = locationLabel;
+        }
+
+        public String getScene()
+        {
+            return scene;
+        }
+
+        public void setScene(String scene)
+        {
+            this.scene = scene;
+        }
     }
 }

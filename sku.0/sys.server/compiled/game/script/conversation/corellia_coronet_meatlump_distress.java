@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,14 +14,17 @@ import script.*;
 
 public class corellia_coronet_meatlump_distress extends script.base_script
 {
+    public static String c_stringFile = "conversation/corellia_coronet_meatlump_distress";
+
     public corellia_coronet_meatlump_distress()
     {
     }
-    public static String c_stringFile = "conversation/corellia_coronet_meatlump_distress";
+
     public boolean corellia_coronet_meatlump_distress_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean corellia_coronet_meatlump_distress_condition_meatlumpLieutenant(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isTaskActive(player, "corellia_coronet_meatlump_act1_part3", "meatlumpsAct1_meatlumpLieutenant"))
@@ -29,8 +38,10 @@ public class corellia_coronet_meatlump_distress extends script.base_script
                 obj_id[] spawnList = getObjIdArrayObjVar(player, spawnListObjVarName);
                 if (spawnList != null)
                 {
-                    for (obj_id spawn : spawnList) {
-                        if (spawn == npc) {
+                    for (obj_id spawn : spawnList)
+                    {
+                        if (spawn == npc)
+                        {
                             return true;
                         }
                     }
@@ -39,34 +50,42 @@ public class corellia_coronet_meatlump_distress extends script.base_script
         }
         return false;
     }
+
     public boolean corellia_coronet_meatlump_distress_condition_gotPassword(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "corellia_coronet_meatlump_act1_end", "meatlumpsAct1_gotPassword");
     }
+
     public boolean corellia_coronet_meatlump_distress_condition_code1(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.getIntScriptVar(player, "meatlumpAct1.codeNumber") == 1;
     }
+
     public boolean corellia_coronet_meatlump_distress_condition_code2(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.getIntScriptVar(player, "meatlumpAct1.codeNumber") == 2;
     }
+
     public boolean corellia_coronet_meatlump_distress_condition_code3(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.getIntScriptVar(player, "meatlumpAct1.codeNumber") == 3;
     }
+
     public boolean corellia_coronet_meatlump_distress_condition_code4(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.getIntScriptVar(player, "meatlumpAct1.codeNumber") == 4;
     }
+
     public boolean corellia_coronet_meatlump_distress_condition_code5(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.getIntScriptVar(player, "meatlumpAct1.codeNumber") == 5;
     }
+
     public boolean corellia_coronet_meatlump_distress_condition_code6(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.getIntScriptVar(player, "meatlumpAct1.codeNumber") == 6;
     }
+
     public void corellia_coronet_meatlump_distress_action_pickCorrectCode(obj_id player, obj_id npc) throws InterruptedException
     {
         int species = getSpecies(player);
@@ -74,180 +93,181 @@ public class corellia_coronet_meatlump_distress extends script.base_script
         switch (species)
         {
             case SPECIES_HUMAN:
-            switch (codeNum)
-            {
-                case 1:
-                case 2:
-                codeNum = 1;
+                switch (codeNum)
+                {
+                    case 1:
+                    case 2:
+                        codeNum = 1;
+                        break;
+                    case 3:
+                    case 4:
+                        codeNum = 2;
+                        break;
+                    case 5:
+                    case 6:
+                        codeNum = 3;
+                        break;
+                }
                 break;
-                case 3:
-                case 4:
-                codeNum = 2;
-                break;
-                case 5:
-                case 6:
-                codeNum = 3;
-                break;
-            }
-            break;
             case SPECIES_RODIAN:
-            switch (codeNum)
-            {
-                case 1:
-                case 2:
-                codeNum = 4;
+                switch (codeNum)
+                {
+                    case 1:
+                    case 2:
+                        codeNum = 4;
+                        break;
+                    case 3:
+                    case 4:
+                        codeNum = 5;
+                        break;
+                    case 5:
+                    case 6:
+                        codeNum = 6;
+                        break;
+                }
                 break;
-                case 3:
-                case 4:
-                codeNum = 5;
-                break;
-                case 5:
-                case 6:
-                codeNum = 6;
-                break;
-            }
-            break;
             case SPECIES_TRANDOSHAN:
-            switch (codeNum)
-            {
-                case 1:
-                case 2:
-                codeNum = 2;
+                switch (codeNum)
+                {
+                    case 1:
+                    case 2:
+                        codeNum = 2;
+                        break;
+                    case 3:
+                    case 4:
+                        codeNum = 4;
+                        break;
+                    case 5:
+                    case 6:
+                        codeNum = 6;
+                        break;
+                }
                 break;
-                case 3:
-                case 4:
-                codeNum = 4;
-                break;
-                case 5:
-                case 6:
-                codeNum = 6;
-                break;
-            }
-            break;
             case SPECIES_MON_CALAMARI:
-            switch (codeNum)
-            {
-                case 1:
-                case 2:
-                codeNum = 1;
+                switch (codeNum)
+                {
+                    case 1:
+                    case 2:
+                        codeNum = 1;
+                        break;
+                    case 3:
+                    case 4:
+                        codeNum = 3;
+                        break;
+                    case 5:
+                    case 6:
+                        codeNum = 5;
+                        break;
+                }
                 break;
-                case 3:
-                case 4:
-                codeNum = 3;
-                break;
-                case 5:
-                case 6:
-                codeNum = 5;
-                break;
-            }
-            break;
             case SPECIES_WOOKIEE:
-            switch (codeNum)
-            {
-                case 1:
-                case 2:
-                codeNum = 1;
+                switch (codeNum)
+                {
+                    case 1:
+                    case 2:
+                        codeNum = 1;
+                        break;
+                    case 3:
+                    case 4:
+                        codeNum = 2;
+                        break;
+                    case 5:
+                    case 6:
+                        codeNum = 4;
+                        break;
+                }
                 break;
-                case 3:
-                case 4:
-                codeNum = 2;
-                break;
-                case 5:
-                case 6:
-                codeNum = 4;
-                break;
-            }
-            break;
             case SPECIES_BOTHAN:
-            switch (codeNum)
-            {
-                case 1:
-                case 2:
-                codeNum = 3;
+                switch (codeNum)
+                {
+                    case 1:
+                    case 2:
+                        codeNum = 3;
+                        break;
+                    case 3:
+                    case 4:
+                        codeNum = 5;
+                        break;
+                    case 5:
+                    case 6:
+                        codeNum = 6;
+                        break;
+                }
                 break;
-                case 3:
-                case 4:
-                codeNum = 5;
-                break;
-                case 5:
-                case 6:
-                codeNum = 6;
-                break;
-            }
-            break;
             case SPECIES_TWILEK:
-            switch (codeNum)
-            {
-                case 1:
-                case 2:
-                codeNum = 1;
+                switch (codeNum)
+                {
+                    case 1:
+                    case 2:
+                        codeNum = 1;
+                        break;
+                    case 3:
+                    case 4:
+                        codeNum = 4;
+                        break;
+                    case 5:
+                    case 6:
+                        codeNum = 5;
+                        break;
+                }
                 break;
-                case 3:
-                case 4:
-                codeNum = 4;
-                break;
-                case 5:
-                case 6:
-                codeNum = 5;
-                break;
-            }
-            break;
             case SPECIES_ZABRAK:
-            switch (codeNum)
-            {
-                case 1:
-                case 2:
-                codeNum = 2;
+                switch (codeNum)
+                {
+                    case 1:
+                    case 2:
+                        codeNum = 2;
+                        break;
+                    case 3:
+                    case 4:
+                        codeNum = 3;
+                        break;
+                    case 5:
+                    case 6:
+                        codeNum = 6;
+                        break;
+                }
                 break;
-                case 3:
-                case 4:
-                codeNum = 3;
-                break;
-                case 5:
-                case 6:
-                codeNum = 6;
-                break;
-            }
-            break;
             case SPECIES_ITHORIAN:
-            switch (codeNum)
-            {
-                case 1:
-                case 2:
-                codeNum = 1;
+                switch (codeNum)
+                {
+                    case 1:
+                    case 2:
+                        codeNum = 1;
+                        break;
+                    case 3:
+                    case 4:
+                        codeNum = 5;
+                        break;
+                    case 5:
+                    case 6:
+                        codeNum = 6;
+                        break;
+                }
                 break;
-                case 3:
-                case 4:
-                codeNum = 5;
-                break;
-                case 5:
-                case 6:
-                codeNum = 6;
-                break;
-            }
-            break;
             case SPECIES_SULLUSTAN:
-            switch (codeNum)
-            {
-                case 1:
-                case 2:
-                codeNum = 2;
+                switch (codeNum)
+                {
+                    case 1:
+                    case 2:
+                        codeNum = 2;
+                        break;
+                    case 3:
+                    case 4:
+                        codeNum = 3;
+                        break;
+                    case 5:
+                    case 6:
+                        codeNum = 4;
+                        break;
+                }
                 break;
-                case 3:
-                case 4:
-                codeNum = 3;
-                break;
-                case 5:
-                case 6:
-                codeNum = 4;
-                break;
-            }
-            break;
             default:
-            break;
+                break;
         }
         utils.setScriptVar(player, "meatlumpAct1.codeNumber", codeNum);
     }
+
     public void corellia_coronet_meatlump_distress_action_attack(obj_id player, obj_id npc) throws InterruptedException
     {
         setInvulnerable(npc, false);
@@ -255,10 +275,12 @@ public class corellia_coronet_meatlump_distress extends script.base_script
         clearCondition(npc, CONDITION_CONVERSABLE);
         detachScript(npc, "conversation.corellia_coronet_meatlump_distress");
     }
+
     public void corellia_coronet_meatlump_distress_action_givePassword(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "meatlumpsAct1_spokenPassword");
     }
+
     public int corellia_coronet_meatlump_distress_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_13"))
@@ -320,7 +342,7 @@ public class corellia_coronet_meatlump_distress extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_17");
@@ -353,7 +375,7 @@ public class corellia_coronet_meatlump_distress extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corellia_coronet_meatlump_distress.branchId");
                     chat.chat(npc, player, message);
@@ -376,6 +398,7 @@ public class corellia_coronet_meatlump_distress extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corellia_coronet_meatlump_distress_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_17"))
@@ -518,6 +541,7 @@ public class corellia_coronet_meatlump_distress extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -528,12 +552,14 @@ public class corellia_coronet_meatlump_distress extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         if (!ai_lib.isInCombat(self))
@@ -546,18 +572,21 @@ public class corellia_coronet_meatlump_distress extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.corellia_coronet_meatlump_distress");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -594,7 +623,7 @@ public class corellia_coronet_meatlump_distress extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_13");
@@ -606,7 +635,7 @@ public class corellia_coronet_meatlump_distress extends script.base_script
                 utils.setScriptVar(player, "conversation.corellia_coronet_meatlump_distress.branchId", 2);
                 npcStartConversation(player, npc, "corellia_coronet_meatlump_distress", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -621,6 +650,7 @@ public class corellia_coronet_meatlump_distress extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("corellia_coronet_meatlump_distress"))

@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.old_republic_facility;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,6 +14,7 @@ public class orf_initialize extends script.base_script
     public orf_initialize()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id entrance = getCellId(self, "entrance");
@@ -17,6 +24,7 @@ public class orf_initialize extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id entrance = getCellId(self, "entrance");
@@ -26,6 +34,7 @@ public class orf_initialize extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void setOrfDoorLocks(obj_id self) throws InterruptedException
     {
         obj_id core_tower8 = getCellId(self, "core_tower8");
@@ -47,10 +56,12 @@ public class orf_initialize extends script.base_script
         permissionsMakePrivate(smallroom20);
         permissionsMakePrivate(smallroom31);
     }
+
     public void initializeOrfObjVars(obj_id self) throws InterruptedException
     {
         removeObjVar(self, "status");
     }
+
     public int beginSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         for (int x = 0; x < 200; x++)

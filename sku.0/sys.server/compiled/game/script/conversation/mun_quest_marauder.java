@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,139 +14,173 @@ import script.*;
 
 public class mun_quest_marauder extends script.base_script
 {
+    public static String c_stringFile = "conversation/mun_quest_marauder";
+
     public mun_quest_marauder()
     {
     }
-    public static String c_stringFile = "conversation/mun_quest_marauder";
+
     public boolean mun_quest_marauder_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean mun_quest_marauder_condition_onQuest1(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "mun_marauder_1");
     }
+
     public boolean mun_quest_marauder_condition_onLastTaskQ1(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "mun_marauder_1", "final_task");
     }
+
     public boolean mun_quest_marauder_condition_finishedQ1(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "mun_marauder_1");
     }
+
     public boolean mun_quest_marauder_condition_onQuest2(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "mun_marauder_2");
     }
+
     public boolean mun_quest_marauder_condition_onLastTaskQ2(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "mun_marauder_2", "final_task");
     }
+
     public boolean mun_quest_marauder_condition_finishedQ2(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "mun_marauder_2");
     }
+
     public boolean mun_quest_marauder_condition_onQuest3(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "mun_marauder_3");
     }
+
     public boolean mun_quest_marauder_condition_onLastTaskQ3(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "mun_marauder_3", "final_task");
     }
+
     public boolean mun_quest_marauder_condition_finishedQ3(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "mun_marauder_3");
     }
+
     public boolean mun_quest_marauder_condition_onQuest4(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "mun_marauder_4");
     }
+
     public boolean mun_quest_marauder_condition_onLastTaskQ4(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "mun_marauder_4", "final_task");
     }
+
     public boolean mun_quest_marauder_condition_finishedQ4(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "mun_marauder_4");
     }
+
     public boolean mun_quest_marauder_condition_onQuest5(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "mun_marauder_5");
     }
+
     public boolean mun_quest_marauder_condition_onLastTaskQ5(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "mun_marauder_5", "final_task");
     }
+
     public boolean mun_quest_marauder_condition_finishedQ5(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "mun_marauder_5");
     }
+
     public boolean mun_quest_marauder_condition_onQuest6(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "mun_marauder_6");
     }
+
     public boolean mun_quest_marauder_condition_onLastTaskQ6(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "mun_marauder_6", "final_task");
     }
+
     public boolean mun_quest_marauder_condition_finishedQ6(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "mun_marauder_6");
     }
+
     public boolean mun_quest_marauder_condition_onQuest7(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "mun_marauder_7");
     }
+
     public boolean mun_quest_marauder_condition_onLastTaskQ7(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "mun_marauder_7", "final_task");
     }
+
     public boolean mun_quest_marauder_condition_finishedQ7(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "mun_marauder_7");
     }
+
     public boolean mun_quest_marauder_condition_onQuest8(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "mun_marauder_8");
     }
+
     public boolean mun_quest_marauder_condition_onLastTaskQ8(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "mun_marauder_8", "final_task");
     }
+
     public boolean mun_quest_marauder_condition_finishedQ8(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "mun_marauder_8");
     }
+
     public boolean mun_quest_marauder_condition_onQuest9(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "mun_marauder_9");
     }
+
     public boolean mun_quest_marauder_condition_onLastTaskQ9(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "mun_marauder_9", "final_task");
     }
+
     public boolean mun_quest_marauder_condition_finishedQ9(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "mun_marauder_9");
     }
+
     public boolean mun_quest_marauder_condition_isMunCrafterLvl86(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasSkill(player, "class_munitions_phase4_05");
     }
+
     public boolean mun_quest_marauder_condition_hasHighQualityQ1(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean mun_quest_marauder_condition_isCraftedByPlayerQ1(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] compositeBoots = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/composite/armor_composite_boots.iff", true, false);
         obj_id[] boneBoots = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/bone/armor_bone_s01_boots.iff", true, false);
         obj_id[] mabariBoots = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/zam/armor_zam_wesell_boots.iff", true, false);
         int count = 0;
-        for (obj_id compositeBoot : compositeBoots) {
+        for (obj_id compositeBoot : compositeBoots)
+        {
             obj_id crafter = getCrafter(compositeBoot);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 ++count;
             }
         }
@@ -149,9 +189,11 @@ public class mun_quest_marauder extends script.base_script
             return false;
         }
         count = 0;
-        for (obj_id boneBoot : boneBoots) {
+        for (obj_id boneBoot : boneBoots)
+        {
             obj_id crafter = getCrafter(boneBoot);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 ++count;
             }
         }
@@ -160,18 +202,17 @@ public class mun_quest_marauder extends script.base_script
             return false;
         }
         count = 0;
-        for (obj_id mabariBoot : mabariBoots) {
+        for (obj_id mabariBoot : mabariBoots)
+        {
             obj_id crafter = getCrafter(mabariBoot);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 ++count;
             }
         }
-        if (count < 3)
-        {
-            return false;
-        }
-        return true;
+        return count >= 3;
     }
+
     public boolean mun_quest_marauder_condition_hasAllItemsQ1(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] compositeBoots = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/composite/armor_composite_boots.iff", true, false);
@@ -185,12 +226,9 @@ public class mun_quest_marauder extends script.base_script
         {
             return false;
         }
-        if (mabariBoots == null || mabariBoots.length < 3)
-        {
-            return false;
-        }
-        return true;
+        return mabariBoots != null && mabariBoots.length >= 3;
     }
+
     public boolean mun_quest_marauder_condition_hasAllItemsQ2(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] compositeBracers = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/composite/armor_composite_bracer_l.iff", true, false);
@@ -204,21 +242,20 @@ public class mun_quest_marauder extends script.base_script
         {
             return false;
         }
-        if (paddedBracers == null || paddedBracers.length < 3)
-        {
-            return false;
-        }
-        return true;
+        return paddedBracers != null && paddedBracers.length >= 3;
     }
+
     public boolean mun_quest_marauder_condition_isCraftedByPlayerQ2(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] compositeBracers = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/composite/armor_composite_bracer_l.iff", true, false);
         obj_id[] boneBracers = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/bone/armor_bone_s01_bracer_l.iff", true, false);
         obj_id[] paddedBracers = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/padded/armor_padded_s01_bracer_l.iff", true, false);
         int count = 0;
-        for (obj_id compositeBracer : compositeBracers) {
+        for (obj_id compositeBracer : compositeBracers)
+        {
             obj_id crafter = getCrafter(compositeBracer);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 ++count;
             }
         }
@@ -227,9 +264,11 @@ public class mun_quest_marauder extends script.base_script
             return false;
         }
         count = 0;
-        for (obj_id boneBracer : boneBracers) {
+        for (obj_id boneBracer : boneBracers)
+        {
             obj_id crafter = getCrafter(boneBracer);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 ++count;
             }
         }
@@ -238,18 +277,17 @@ public class mun_quest_marauder extends script.base_script
             return false;
         }
         count = 0;
-        for (obj_id paddedBracer : paddedBracers) {
+        for (obj_id paddedBracer : paddedBracers)
+        {
             obj_id crafter = getCrafter(paddedBracer);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 ++count;
             }
         }
-        if (count < 3)
-        {
-            return false;
-        }
-        return true;
+        return count >= 3;
     }
+
     public boolean mun_quest_marauder_condition_hasAllItemsQ3(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] compositeBracers = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/composite/armor_composite_bracer_r.iff", true, false);
@@ -263,21 +301,20 @@ public class mun_quest_marauder extends script.base_script
         {
             return false;
         }
-        if (paddedBracers == null || paddedBracers.length < 3)
-        {
-            return false;
-        }
-        return true;
+        return paddedBracers != null && paddedBracers.length >= 3;
     }
+
     public boolean mun_quest_marauder_condition_isCraftedByPlayerQ3(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] compositeBracers = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/composite/armor_composite_bracer_r.iff", true, false);
         obj_id[] boneBracers = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/bone/armor_bone_s01_bracer_r.iff", true, false);
         obj_id[] paddedBracers = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/padded/armor_padded_s01_bracer_r.iff", true, false);
         int count = 0;
-        for (obj_id compositeBracer : compositeBracers) {
+        for (obj_id compositeBracer : compositeBracers)
+        {
             obj_id crafter = getCrafter(compositeBracer);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 ++count;
             }
         }
@@ -286,9 +323,11 @@ public class mun_quest_marauder extends script.base_script
             return false;
         }
         count = 0;
-        for (obj_id boneBracer : boneBracers) {
+        for (obj_id boneBracer : boneBracers)
+        {
             obj_id crafter = getCrafter(boneBracer);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 ++count;
             }
         }
@@ -297,18 +336,17 @@ public class mun_quest_marauder extends script.base_script
             return false;
         }
         count = 0;
-        for (obj_id paddedBracer : paddedBracers) {
+        for (obj_id paddedBracer : paddedBracers)
+        {
             obj_id crafter = getCrafter(paddedBracer);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 ++count;
             }
         }
-        if (count < 3)
-        {
-            return false;
-        }
-        return true;
+        return count >= 3;
     }
+
     public boolean mun_quest_marauder_condition_hasAllItemsQ4(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] compositeBiceps = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/composite/armor_composite_bicep_r.iff", true, false);
@@ -322,21 +360,20 @@ public class mun_quest_marauder extends script.base_script
         {
             return false;
         }
-        if (paddedBiceps == null || paddedBiceps.length < 3)
-        {
-            return false;
-        }
-        return true;
+        return paddedBiceps != null && paddedBiceps.length >= 3;
     }
+
     public boolean mun_quest_marauder_condition_isCraftedByPlayerQ4(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] compositeBiceps = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/composite/armor_composite_bicep_r.iff", true, false);
         obj_id[] boneBiceps = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/bone/armor_bone_s01_bicep_r.iff", true, false);
         obj_id[] paddedBiceps = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/padded/armor_padded_s01_bicep_r.iff", true, false);
         int count = 0;
-        for (obj_id compositeBicep : compositeBiceps) {
+        for (obj_id compositeBicep : compositeBiceps)
+        {
             obj_id crafter = getCrafter(compositeBicep);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 ++count;
             }
         }
@@ -345,9 +382,11 @@ public class mun_quest_marauder extends script.base_script
             return false;
         }
         count = 0;
-        for (obj_id boneBicep : boneBiceps) {
+        for (obj_id boneBicep : boneBiceps)
+        {
             obj_id crafter = getCrafter(boneBicep);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 ++count;
             }
         }
@@ -356,18 +395,17 @@ public class mun_quest_marauder extends script.base_script
             return false;
         }
         count = 0;
-        for (obj_id paddedBicep : paddedBiceps) {
+        for (obj_id paddedBicep : paddedBiceps)
+        {
             obj_id crafter = getCrafter(paddedBicep);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 ++count;
             }
         }
-        if (count < 3)
-        {
-            return false;
-        }
-        return true;
+        return count >= 3;
     }
+
     public boolean mun_quest_marauder_condition_hasAllItemsQ5(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] compositeBiceps = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/composite/armor_composite_bicep_l.iff", true, false);
@@ -381,21 +419,20 @@ public class mun_quest_marauder extends script.base_script
         {
             return false;
         }
-        if (paddedBiceps == null || paddedBiceps.length < 3)
-        {
-            return false;
-        }
-        return true;
+        return paddedBiceps != null && paddedBiceps.length >= 3;
     }
+
     public boolean mun_quest_marauder_condition_isCraftedByPlayerQ5(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] compositeBiceps = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/composite/armor_composite_bicep_l.iff", true, false);
         obj_id[] boneBiceps = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/bone/armor_bone_s01_bicep_l.iff", true, false);
         obj_id[] paddedBiceps = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/padded/armor_padded_s01_bicep_l.iff", true, false);
         int count = 0;
-        for (obj_id compositeBicep : compositeBiceps) {
+        for (obj_id compositeBicep : compositeBiceps)
+        {
             obj_id crafter = getCrafter(compositeBicep);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 ++count;
             }
         }
@@ -404,9 +441,11 @@ public class mun_quest_marauder extends script.base_script
             return false;
         }
         count = 0;
-        for (obj_id boneBicep : boneBiceps) {
+        for (obj_id boneBicep : boneBiceps)
+        {
             obj_id crafter = getCrafter(boneBicep);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 ++count;
             }
         }
@@ -415,18 +454,17 @@ public class mun_quest_marauder extends script.base_script
             return false;
         }
         count = 0;
-        for (obj_id paddedBicep : paddedBiceps) {
+        for (obj_id paddedBicep : paddedBiceps)
+        {
             obj_id crafter = getCrafter(paddedBicep);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 ++count;
             }
         }
-        if (count < 3)
-        {
-            return false;
-        }
-        return true;
+        return count >= 3;
     }
+
     public boolean mun_quest_marauder_condition_hasAllItemsQ6(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] compositeGloves = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/composite/armor_composite_gloves.iff", true, false);
@@ -440,21 +478,20 @@ public class mun_quest_marauder extends script.base_script
         {
             return false;
         }
-        if (mabariGloves == null || mabariGloves.length < 3)
-        {
-            return false;
-        }
-        return true;
+        return mabariGloves != null && mabariGloves.length >= 3;
     }
+
     public boolean mun_quest_marauder_condition_isCraftedByPlayerQ6(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] compositeGloves = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/composite/armor_composite_gloves.iff", true, false);
         obj_id[] boneGloves = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/bone/armor_bone_s01_gloves.iff", true, false);
         obj_id[] mabariGloves = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/zam/armor_zam_wesell_gloves.iff", true, false);
         int count = 0;
-        for (obj_id compositeGlove : compositeGloves) {
+        for (obj_id compositeGlove : compositeGloves)
+        {
             obj_id crafter = getCrafter(compositeGlove);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 ++count;
             }
         }
@@ -463,9 +500,11 @@ public class mun_quest_marauder extends script.base_script
             return false;
         }
         count = 0;
-        for (obj_id boneGlove : boneGloves) {
+        for (obj_id boneGlove : boneGloves)
+        {
             obj_id crafter = getCrafter(boneGlove);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 ++count;
             }
         }
@@ -474,18 +513,17 @@ public class mun_quest_marauder extends script.base_script
             return false;
         }
         count = 0;
-        for (obj_id mabariGlove : mabariGloves) {
+        for (obj_id mabariGlove : mabariGloves)
+        {
             obj_id crafter = getCrafter(mabariGlove);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 ++count;
             }
         }
-        if (count < 3)
-        {
-            return false;
-        }
-        return true;
+        return count >= 3;
     }
+
     public boolean mun_quest_marauder_condition_hasAllItemsQ7(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] compositeHelmets = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/composite/armor_composite_helmet.iff", true, false);
@@ -499,21 +537,20 @@ public class mun_quest_marauder extends script.base_script
         {
             return false;
         }
-        if (mabariHelmets == null || mabariHelmets.length < 3)
-        {
-            return false;
-        }
-        return true;
+        return mabariHelmets != null && mabariHelmets.length >= 3;
     }
+
     public boolean mun_quest_marauder_condition_isCraftedByPlayerQ7(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] compositeHelmets = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/composite/armor_composite_helmet.iff", true, false);
         obj_id[] boneHelmets = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/bone/armor_bone_s01_helmet.iff", true, false);
         obj_id[] mabariHelmets = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/zam/armor_zam_wesell_helmet.iff", true, false);
         int count = 0;
-        for (obj_id compositeHelmet : compositeHelmets) {
+        for (obj_id compositeHelmet : compositeHelmets)
+        {
             obj_id crafter = getCrafter(compositeHelmet);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 ++count;
             }
         }
@@ -522,9 +559,11 @@ public class mun_quest_marauder extends script.base_script
             return false;
         }
         count = 0;
-        for (obj_id boneHelmet : boneHelmets) {
+        for (obj_id boneHelmet : boneHelmets)
+        {
             obj_id crafter = getCrafter(boneHelmet);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 ++count;
             }
         }
@@ -533,27 +572,28 @@ public class mun_quest_marauder extends script.base_script
             return false;
         }
         count = 0;
-        for (obj_id mabariHelmet : mabariHelmets) {
+        for (obj_id mabariHelmet : mabariHelmets)
+        {
             obj_id crafter = getCrafter(mabariHelmet);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 ++count;
             }
         }
-        if (count < 3)
-        {
-            return false;
-        }
-        return true;
+        return count >= 3;
     }
+
     public boolean mun_quest_marauder_condition_isCraftedByPlayerQ8(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] compositeLeggings = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/composite/armor_composite_leggings.iff", true, false);
         obj_id[] boneLeggings = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/bone/armor_bone_s01_leggings.iff", true, false);
         obj_id[] mabariLeggings = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/zam/armor_zam_wesell_pants.iff", true, false);
         int count = 0;
-        for (obj_id compositeLegging : compositeLeggings) {
+        for (obj_id compositeLegging : compositeLeggings)
+        {
             obj_id crafter = getCrafter(compositeLegging);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 ++count;
             }
         }
@@ -562,9 +602,11 @@ public class mun_quest_marauder extends script.base_script
             return false;
         }
         count = 0;
-        for (obj_id boneLegging : boneLeggings) {
+        for (obj_id boneLegging : boneLeggings)
+        {
             obj_id crafter = getCrafter(boneLegging);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 ++count;
             }
         }
@@ -573,18 +615,17 @@ public class mun_quest_marauder extends script.base_script
             return false;
         }
         count = 0;
-        for (obj_id mabariLegging : mabariLeggings) {
+        for (obj_id mabariLegging : mabariLeggings)
+        {
             obj_id crafter = getCrafter(mabariLegging);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 ++count;
             }
         }
-        if (count < 3)
-        {
-            return false;
-        }
-        return true;
+        return count >= 3;
     }
+
     public boolean mun_quest_marauder_condition_hasAllItemsQ8(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] compositeLeggings = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/composite/armor_composite_leggings.iff", true, false);
@@ -598,12 +639,9 @@ public class mun_quest_marauder extends script.base_script
         {
             return false;
         }
-        if (mabariLeggings == null || mabariLeggings.length < 3)
-        {
-            return false;
-        }
-        return true;
+        return mabariLeggings != null && mabariLeggings.length >= 3;
     }
+
     public boolean mun_quest_marauder_condition_hasAllItemsQ9(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] compositeChests = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/composite/armor_composite_chest_plate.iff", true, false);
@@ -617,21 +655,20 @@ public class mun_quest_marauder extends script.base_script
         {
             return false;
         }
-        if (mabariChests == null || mabariChests.length < 3)
-        {
-            return false;
-        }
-        return true;
+        return mabariChests != null && mabariChests.length >= 3;
     }
+
     public boolean mun_quest_marauder_condition_isCraftedByPlayerQ9(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] compositeChests = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/composite/armor_composite_chest_plate.iff", true, false);
         obj_id[] boneChests = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/bone/armor_bone_s01_chest_plate.iff", true, false);
         obj_id[] mabariChests = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/zam/armor_zam_wesell_chest_plate.iff", true, false);
         int count = 0;
-        for (obj_id compositeChest : compositeChests) {
+        for (obj_id compositeChest : compositeChests)
+        {
             obj_id crafter = getCrafter(compositeChest);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 ++count;
             }
         }
@@ -640,9 +677,11 @@ public class mun_quest_marauder extends script.base_script
             return false;
         }
         count = 0;
-        for (obj_id boneChest : boneChests) {
+        for (obj_id boneChest : boneChests)
+        {
             obj_id crafter = getCrafter(boneChest);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 ++count;
             }
         }
@@ -651,423 +690,521 @@ public class mun_quest_marauder extends script.base_script
             return false;
         }
         count = 0;
-        for (obj_id mabariChest : mabariChests) {
+        for (obj_id mabariChest : mabariChests)
+        {
             obj_id crafter = getCrafter(mabariChest);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 ++count;
             }
         }
-        if (count < 3)
-        {
-            return false;
-        }
-        return true;
+        return count >= 3;
     }
+
     public void mun_quest_marauder_action_grantQuest1(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "mun_marauder_1");
         groundquests.grantQuest(player, "mun_marauder_1");
     }
+
     public void mun_quest_marauder_action_signalQ1(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] compositeBoots = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/composite/armor_composite_boots.iff", true, false);
         obj_id[] boneBoots = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/bone/armor_bone_s01_boots.iff", true, false);
         obj_id[] mabariBoots = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/zam/armor_zam_wesell_boots.iff", true, false);
         int count = 0;
-        for (obj_id compositeBoot : compositeBoots) {
-            if (count >= 3) {
+        for (obj_id compositeBoot : compositeBoots)
+        {
+            if (count >= 3)
+            {
                 break;
             }
             obj_id crafter = getCrafter(compositeBoot);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 destroyObject(compositeBoot);
                 ++count;
             }
         }
         count = 0;
-        for (obj_id boneBoot : boneBoots) {
-            if (count >= 3) {
+        for (obj_id boneBoot : boneBoots)
+        {
+            if (count >= 3)
+            {
                 break;
             }
             obj_id crafter = getCrafter(boneBoot);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 destroyObject(boneBoot);
                 ++count;
             }
         }
         count = 0;
-        for (obj_id mabariBoot : mabariBoots) {
-            if (count >= 3) {
+        for (obj_id mabariBoot : mabariBoots)
+        {
+            if (count >= 3)
+            {
                 break;
             }
             obj_id crafter = getCrafter(mabariBoot);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 destroyObject(mabariBoot);
                 ++count;
             }
         }
         groundquests.sendSignal(player, "mun_marauder_1_signal");
     }
+
     public void mun_quest_marauder_action_grantQuest2(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "mun_marauder_2");
         groundquests.grantQuest(player, "mun_marauder_2");
     }
+
     public void mun_quest_marauder_action_grantQuest3(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "mun_marauder_3");
         groundquests.grantQuest(player, "mun_marauder_3");
     }
+
     public void mun_quest_marauder_action_signalQ2(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] compositeBracers = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/composite/armor_composite_bracer_l.iff", true, false);
         obj_id[] boneBracers = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/bone/armor_bone_s01_bracer_l.iff", true, false);
         obj_id[] paddedBracers = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/padded/armor_padded_s01_bracer_l.iff", true, false);
         int count = 0;
-        for (obj_id compositeBracer : compositeBracers) {
-            if (count >= 3) {
+        for (obj_id compositeBracer : compositeBracers)
+        {
+            if (count >= 3)
+            {
                 break;
             }
             obj_id crafter = getCrafter(compositeBracer);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 destroyObject(compositeBracer);
                 ++count;
             }
         }
         count = 0;
-        for (obj_id boneBracer : boneBracers) {
-            if (count >= 3) {
+        for (obj_id boneBracer : boneBracers)
+        {
+            if (count >= 3)
+            {
                 break;
             }
             obj_id crafter = getCrafter(boneBracer);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 destroyObject(boneBracer);
                 ++count;
             }
         }
         count = 0;
-        for (obj_id paddedBracer : paddedBracers) {
-            if (count >= 3) {
+        for (obj_id paddedBracer : paddedBracers)
+        {
+            if (count >= 3)
+            {
                 break;
             }
             obj_id crafter = getCrafter(paddedBracer);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 destroyObject(paddedBracer);
                 ++count;
             }
         }
         groundquests.sendSignal(player, "mun_marauder_2_signal");
     }
+
     public void mun_quest_marauder_action_signalQ3(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] compositeBracers = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/composite/armor_composite_bracer_r.iff", true, false);
         obj_id[] boneBracers = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/bone/armor_bone_s01_bracer_r.iff", true, false);
         obj_id[] paddedBracers = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/padded/armor_padded_s01_bracer_r.iff", true, false);
         int count = 0;
-        for (obj_id compositeBracer : compositeBracers) {
-            if (count >= 3) {
+        for (obj_id compositeBracer : compositeBracers)
+        {
+            if (count >= 3)
+            {
                 break;
             }
             obj_id crafter = getCrafter(compositeBracer);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 destroyObject(compositeBracer);
                 ++count;
             }
         }
         count = 0;
-        for (obj_id boneBracer : boneBracers) {
-            if (count >= 3) {
+        for (obj_id boneBracer : boneBracers)
+        {
+            if (count >= 3)
+            {
                 break;
             }
             obj_id crafter = getCrafter(boneBracer);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 destroyObject(boneBracer);
                 ++count;
             }
         }
         count = 0;
-        for (obj_id paddedBracer : paddedBracers) {
-            if (count >= 3) {
+        for (obj_id paddedBracer : paddedBracers)
+        {
+            if (count >= 3)
+            {
                 break;
             }
             obj_id crafter = getCrafter(paddedBracer);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 destroyObject(paddedBracer);
                 ++count;
             }
         }
         groundquests.sendSignal(player, "mun_marauder_3_signal");
     }
+
     public void mun_quest_marauder_action_grantQuest4(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "mun_marauder_4");
         groundquests.grantQuest(player, "mun_marauder_4");
     }
+
     public void mun_quest_marauder_action_signalQ4(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] compositeBiceps = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/composite/armor_composite_bicep_r.iff", true, false);
         obj_id[] boneBiceps = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/bone/armor_bone_s01_bicep_r.iff", true, false);
         obj_id[] paddedBiceps = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/padded/armor_padded_s01_bicep_r.iff", true, false);
         int count = 0;
-        for (obj_id compositeBicep : compositeBiceps) {
-            if (count >= 3) {
+        for (obj_id compositeBicep : compositeBiceps)
+        {
+            if (count >= 3)
+            {
                 break;
             }
             obj_id crafter = getCrafter(compositeBicep);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 destroyObject(compositeBicep);
                 ++count;
             }
         }
         count = 0;
-        for (obj_id boneBicep : boneBiceps) {
-            if (count >= 3) {
+        for (obj_id boneBicep : boneBiceps)
+        {
+            if (count >= 3)
+            {
                 break;
             }
             obj_id crafter = getCrafter(boneBicep);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 destroyObject(boneBicep);
                 ++count;
             }
         }
         count = 0;
-        for (obj_id paddedBicep : paddedBiceps) {
-            if (count >= 3) {
+        for (obj_id paddedBicep : paddedBiceps)
+        {
+            if (count >= 3)
+            {
                 break;
             }
             obj_id crafter = getCrafter(paddedBicep);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 destroyObject(paddedBicep);
                 ++count;
             }
         }
         groundquests.sendSignal(player, "mun_marauder_4_signal");
     }
+
     public void mun_quest_marauder_action_grantQuest5(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "mun_marauder_5");
         groundquests.grantQuest(player, "mun_marauder_5");
     }
+
     public void mun_quest_marauder_action_signalQ5(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] compositeBiceps = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/composite/armor_composite_bicep_l.iff", true, false);
         obj_id[] boneBiceps = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/bone/armor_bone_s01_bicep_l.iff", true, false);
         obj_id[] paddedBiceps = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/padded/armor_padded_s01_bicep_l.iff", true, false);
         int count = 0;
-        for (obj_id compositeBicep : compositeBiceps) {
-            if (count >= 3) {
+        for (obj_id compositeBicep : compositeBiceps)
+        {
+            if (count >= 3)
+            {
                 break;
             }
             obj_id crafter = getCrafter(compositeBicep);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 destroyObject(compositeBicep);
                 ++count;
             }
         }
         count = 0;
-        for (obj_id boneBicep : boneBiceps) {
-            if (count >= 3) {
+        for (obj_id boneBicep : boneBiceps)
+        {
+            if (count >= 3)
+            {
                 break;
             }
             obj_id crafter = getCrafter(boneBicep);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 destroyObject(boneBicep);
                 ++count;
             }
         }
         count = 0;
-        for (obj_id paddedBicep : paddedBiceps) {
-            if (count >= 3) {
+        for (obj_id paddedBicep : paddedBiceps)
+        {
+            if (count >= 3)
+            {
                 break;
             }
             obj_id crafter = getCrafter(paddedBicep);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 destroyObject(paddedBicep);
                 ++count;
             }
         }
         groundquests.sendSignal(player, "mun_marauder_5_signal");
     }
+
     public void mun_quest_marauder_action_grantQuest6(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "mun_marauder_6");
         groundquests.grantQuest(player, "mun_marauder_6");
     }
+
     public void mun_quest_marauder_action_signalQ6(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] compositeGloves = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/composite/armor_composite_gloves.iff", true, false);
         obj_id[] boneGloves = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/bone/armor_bone_s01_gloves.iff", true, false);
         obj_id[] mabariGloves = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/zam/armor_zam_wesell_gloves.iff", true, false);
         int count = 0;
-        for (obj_id compositeGlove : compositeGloves) {
-            if (count >= 3) {
+        for (obj_id compositeGlove : compositeGloves)
+        {
+            if (count >= 3)
+            {
                 break;
             }
             obj_id crafter = getCrafter(compositeGlove);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 destroyObject(compositeGlove);
                 ++count;
             }
         }
         count = 0;
-        for (obj_id boneGlove : boneGloves) {
-            if (count >= 3) {
+        for (obj_id boneGlove : boneGloves)
+        {
+            if (count >= 3)
+            {
                 break;
             }
             obj_id crafter = getCrafter(boneGlove);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 destroyObject(boneGlove);
                 ++count;
             }
         }
         count = 0;
-        for (obj_id mabariGlove : mabariGloves) {
-            if (count >= 3) {
+        for (obj_id mabariGlove : mabariGloves)
+        {
+            if (count >= 3)
+            {
                 break;
             }
             obj_id crafter = getCrafter(mabariGlove);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 destroyObject(mabariGlove);
                 ++count;
             }
         }
         groundquests.sendSignal(player, "mun_marauder_6_signal");
     }
+
     public void mun_quest_marauder_action_grantQuest7(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "mun_marauder_7");
         groundquests.grantQuest(player, "mun_marauder_7");
     }
+
     public void mun_quest_marauder_action_signalQ7(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] compositeHelmets = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/composite/armor_composite_helmet.iff", true, false);
         obj_id[] boneHelmets = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/bone/armor_bone_s01_helmet.iff", true, false);
         obj_id[] mabariHelmets = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/zam/armor_zam_wesell_helmet.iff", true, false);
         int count = 0;
-        for (obj_id compositeHelmet : compositeHelmets) {
-            if (count >= 3) {
+        for (obj_id compositeHelmet : compositeHelmets)
+        {
+            if (count >= 3)
+            {
                 break;
             }
             obj_id crafter = getCrafter(compositeHelmet);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 destroyObject(compositeHelmet);
                 ++count;
             }
         }
         count = 0;
-        for (obj_id boneHelmet : boneHelmets) {
-            if (count >= 3) {
+        for (obj_id boneHelmet : boneHelmets)
+        {
+            if (count >= 3)
+            {
                 break;
             }
             obj_id crafter = getCrafter(boneHelmet);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 destroyObject(boneHelmet);
                 ++count;
             }
         }
         count = 0;
-        for (obj_id mabariHelmet : mabariHelmets) {
-            if (count >= 3) {
+        for (obj_id mabariHelmet : mabariHelmets)
+        {
+            if (count >= 3)
+            {
                 break;
             }
             obj_id crafter = getCrafter(mabariHelmet);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 destroyObject(mabariHelmet);
                 ++count;
             }
         }
         groundquests.sendSignal(player, "mun_marauder_7_signal");
     }
+
     public void mun_quest_marauder_action_grantQuest8(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "mun_marauder_8");
         groundquests.grantQuest(player, "mun_marauder_8");
     }
+
     public void mun_quest_marauder_action_signalQ8(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] compositeLeggings = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/composite/armor_composite_leggings.iff", true, false);
         obj_id[] boneLeggings = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/bone/armor_bone_s01_leggings.iff", true, false);
         obj_id[] mabariLeggings = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/zam/armor_zam_wesell_pants.iff", true, false);
         int count = 0;
-        for (obj_id compositeLegging : compositeLeggings) {
-            if (count >= 3) {
+        for (obj_id compositeLegging : compositeLeggings)
+        {
+            if (count >= 3)
+            {
                 break;
             }
             obj_id crafter = getCrafter(compositeLegging);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 destroyObject(compositeLegging);
                 ++count;
             }
         }
         count = 0;
-        for (obj_id boneLegging : boneLeggings) {
-            if (count >= 3) {
+        for (obj_id boneLegging : boneLeggings)
+        {
+            if (count >= 3)
+            {
                 break;
             }
             obj_id crafter = getCrafter(boneLegging);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 destroyObject(boneLegging);
                 ++count;
             }
         }
         count = 0;
-        for (obj_id mabariLegging : mabariLeggings) {
-            if (count >= 3) {
+        for (obj_id mabariLegging : mabariLeggings)
+        {
+            if (count >= 3)
+            {
                 break;
             }
             obj_id crafter = getCrafter(mabariLegging);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 destroyObject(mabariLegging);
                 ++count;
             }
         }
         groundquests.sendSignal(player, "mun_marauder_8_signal");
     }
+
     public void mun_quest_marauder_action_grantQuest9(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "mun_marauder_9");
         groundquests.grantQuest(player, "mun_marauder_9");
     }
+
     public void mun_quest_marauder_action_signalQ9(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] compositeChests = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/composite/armor_composite_chest_plate.iff", true, false);
         obj_id[] boneChests = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/bone/armor_bone_s01_chest_plate.iff", true, false);
         obj_id[] mabariChests = utils.getAllItemsInContainerByTemplate(player, "object/tangible/wearables/armor/zam/armor_zam_wesell_chest_plate.iff", true, false);
         int count = 0;
-        for (obj_id compositeChest : compositeChests) {
-            if (count >= 3) {
+        for (obj_id compositeChest : compositeChests)
+        {
+            if (count >= 3)
+            {
                 break;
             }
             obj_id crafter = getCrafter(compositeChest);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 destroyObject(compositeChest);
                 ++count;
             }
         }
         count = 0;
-        for (obj_id boneChest : boneChests) {
-            if (count >= 3) {
+        for (obj_id boneChest : boneChests)
+        {
+            if (count >= 3)
+            {
                 break;
             }
             obj_id crafter = getCrafter(boneChest);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 destroyObject(boneChest);
                 ++count;
             }
         }
         count = 0;
-        for (obj_id mabariChest : mabariChests) {
-            if (count >= 3) {
+        for (obj_id mabariChest : mabariChests)
+        {
+            if (count >= 3)
+            {
                 break;
             }
             obj_id crafter = getCrafter(mabariChest);
-            if (crafter == player) {
+            if (crafter == player)
+            {
                 destroyObject(mabariChest);
                 ++count;
             }
         }
         groundquests.sendSignal(player, "mun_marauder_9_signal");
     }
+
     public int mun_quest_marauder_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_121"))
@@ -1087,7 +1224,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_252");
@@ -1096,7 +1233,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1118,7 +1255,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_258");
@@ -1127,7 +1264,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1145,6 +1282,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_252"))
@@ -1159,6 +1297,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_258"))
@@ -1173,6 +1312,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_117"))
@@ -1209,7 +1349,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_278");
@@ -1222,7 +1362,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1232,6 +1372,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_278"))
@@ -1257,6 +1398,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_115"))
@@ -1272,6 +1414,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_111"))
@@ -1291,7 +1434,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_252");
@@ -1300,7 +1443,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1322,7 +1465,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_258");
@@ -1331,7 +1474,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1354,7 +1497,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_113");
@@ -1363,7 +1506,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1373,6 +1516,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_252"))
@@ -1387,6 +1531,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_258"))
@@ -1401,6 +1546,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_113"))
@@ -1416,6 +1562,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_107"))
@@ -1452,7 +1599,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_274");
@@ -1465,7 +1612,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1475,6 +1622,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_274"))
@@ -1500,6 +1648,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_103"))
@@ -1515,6 +1664,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_93"))
@@ -1534,7 +1684,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_252");
@@ -1543,7 +1693,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1565,7 +1715,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_258");
@@ -1574,7 +1724,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1597,7 +1747,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_105");
@@ -1606,7 +1756,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1616,6 +1766,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_252"))
@@ -1630,6 +1781,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_258"))
@@ -1644,6 +1796,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_105"))
@@ -1659,6 +1812,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_89"))
@@ -1695,7 +1849,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_309");
@@ -1708,7 +1862,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1718,6 +1872,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_309"))
@@ -1743,6 +1898,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_87"))
@@ -1758,6 +1914,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_83"))
@@ -1777,7 +1934,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_252");
@@ -1786,7 +1943,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1808,7 +1965,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_258");
@@ -1817,7 +1974,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1840,7 +1997,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_85");
@@ -1849,7 +2006,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1859,6 +2016,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_252"))
@@ -1873,6 +2031,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_258"))
@@ -1887,6 +2046,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_85"))
@@ -1902,6 +2062,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_79"))
@@ -1938,7 +2099,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_305");
@@ -1951,7 +2112,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1961,6 +2122,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_305"))
@@ -1986,6 +2148,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_92"))
@@ -2001,6 +2164,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_110"))
@@ -2020,7 +2184,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_252");
@@ -2029,7 +2193,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2051,7 +2215,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_258");
@@ -2060,7 +2224,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2083,7 +2247,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_126");
@@ -2092,7 +2256,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2102,6 +2266,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_252"))
@@ -2116,6 +2281,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_258"))
@@ -2130,6 +2296,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_126"))
@@ -2145,6 +2312,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_132"))
@@ -2181,7 +2349,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_301");
@@ -2194,7 +2362,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2204,6 +2372,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch48(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_301"))
@@ -2229,6 +2398,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_144"))
@@ -2244,6 +2414,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_148"))
@@ -2263,7 +2434,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_252");
@@ -2272,7 +2443,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2294,7 +2465,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_258");
@@ -2303,7 +2474,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2326,7 +2497,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_154");
@@ -2335,7 +2506,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2345,6 +2516,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch52(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_252"))
@@ -2359,6 +2531,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch53(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_258"))
@@ -2373,6 +2546,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_154"))
@@ -2388,6 +2562,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch56(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_160"))
@@ -2424,7 +2599,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_297");
@@ -2437,7 +2612,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2447,6 +2622,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch58(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_297"))
@@ -2472,6 +2648,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch60(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_172"))
@@ -2487,6 +2664,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch61(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_176"))
@@ -2506,7 +2684,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_252");
@@ -2515,7 +2693,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2537,7 +2715,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_258");
@@ -2546,7 +2724,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2569,7 +2747,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_182");
@@ -2578,7 +2756,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2588,6 +2766,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch62(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_252"))
@@ -2602,6 +2781,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch63(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_258"))
@@ -2616,6 +2796,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch64(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_182"))
@@ -2631,6 +2812,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch66(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_188"))
@@ -2667,7 +2849,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_293");
@@ -2680,7 +2862,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2690,6 +2872,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch68(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_293"))
@@ -2715,6 +2898,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch70(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_200"))
@@ -2730,6 +2914,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch71(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_204"))
@@ -2749,7 +2934,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_252");
@@ -2758,7 +2943,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2780,7 +2965,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_258");
@@ -2789,7 +2974,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2812,7 +2997,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_212");
@@ -2821,7 +3006,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2831,6 +3016,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch72(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_252"))
@@ -2845,6 +3031,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch73(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_258"))
@@ -2859,6 +3046,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch74(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_212"))
@@ -2874,6 +3062,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch76(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_222"))
@@ -2910,7 +3099,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_289");
@@ -2923,7 +3112,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2933,6 +3122,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch78(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_289"))
@@ -2958,6 +3148,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch80(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_244"))
@@ -2973,6 +3164,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch81(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_248"))
@@ -2992,7 +3184,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_252");
@@ -3001,7 +3193,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3023,7 +3215,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_258");
@@ -3032,7 +3224,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3055,7 +3247,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_264");
@@ -3064,7 +3256,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3074,6 +3266,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch82(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_252"))
@@ -3088,6 +3281,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch84(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_258"))
@@ -3102,6 +3296,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch86(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_264"))
@@ -3117,6 +3312,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch88(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_282"))
@@ -3153,7 +3349,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_314");
@@ -3166,7 +3362,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3176,6 +3372,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch90(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_314"))
@@ -3201,6 +3398,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch93(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_324"))
@@ -3220,7 +3418,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_328");
@@ -3229,7 +3427,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3239,6 +3437,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch94(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_328"))
@@ -3258,7 +3457,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_332");
@@ -3267,7 +3466,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3277,6 +3476,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch95(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_332"))
@@ -3296,7 +3496,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_336");
@@ -3305,7 +3505,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3315,6 +3515,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch96(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_336"))
@@ -3335,7 +3536,7 @@ public class mun_quest_marauder extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_340");
@@ -3344,7 +3545,7 @@ public class mun_quest_marauder extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mun_quest_marauder.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3354,6 +3555,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mun_quest_marauder_handleBranch97(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_340"))
@@ -3368,6 +3570,7 @@ public class mun_quest_marauder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -3377,11 +3580,13 @@ public class mun_quest_marauder extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -3390,18 +3595,21 @@ public class mun_quest_marauder extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.mun_quest_marauder");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -3430,7 +3638,7 @@ public class mun_quest_marauder extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -3438,7 +3646,7 @@ public class mun_quest_marauder extends script.base_script
                 utils.setScriptVar(player, "conversation.mun_quest_marauder.branchId", 2);
                 npcStartConversation(player, npc, "mun_quest_marauder", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3466,7 +3674,7 @@ public class mun_quest_marauder extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_117");
@@ -3478,7 +3686,7 @@ public class mun_quest_marauder extends script.base_script
                 utils.setScriptVar(player, "conversation.mun_quest_marauder.branchId", 6);
                 npcStartConversation(player, npc, "mun_quest_marauder", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3499,7 +3707,7 @@ public class mun_quest_marauder extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_115");
@@ -3507,7 +3715,7 @@ public class mun_quest_marauder extends script.base_script
                 utils.setScriptVar(player, "conversation.mun_quest_marauder.branchId", 10);
                 npcStartConversation(player, npc, "mun_quest_marauder", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3528,7 +3736,7 @@ public class mun_quest_marauder extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_111");
@@ -3536,7 +3744,7 @@ public class mun_quest_marauder extends script.base_script
                 utils.setScriptVar(player, "conversation.mun_quest_marauder.branchId", 11);
                 npcStartConversation(player, npc, "mun_quest_marauder", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3564,7 +3772,7 @@ public class mun_quest_marauder extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -3576,7 +3784,7 @@ public class mun_quest_marauder extends script.base_script
                 utils.setScriptVar(player, "conversation.mun_quest_marauder.branchId", 16);
                 npcStartConversation(player, npc, "mun_quest_marauder", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3597,7 +3805,7 @@ public class mun_quest_marauder extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_103");
@@ -3605,7 +3813,7 @@ public class mun_quest_marauder extends script.base_script
                 utils.setScriptVar(player, "conversation.mun_quest_marauder.branchId", 20);
                 npcStartConversation(player, npc, "mun_quest_marauder", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3626,7 +3834,7 @@ public class mun_quest_marauder extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_93");
@@ -3634,7 +3842,7 @@ public class mun_quest_marauder extends script.base_script
                 utils.setScriptVar(player, "conversation.mun_quest_marauder.branchId", 21);
                 npcStartConversation(player, npc, "mun_quest_marauder", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3662,7 +3870,7 @@ public class mun_quest_marauder extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_89");
@@ -3674,7 +3882,7 @@ public class mun_quest_marauder extends script.base_script
                 utils.setScriptVar(player, "conversation.mun_quest_marauder.branchId", 26);
                 npcStartConversation(player, npc, "mun_quest_marauder", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3695,7 +3903,7 @@ public class mun_quest_marauder extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_87");
@@ -3703,7 +3911,7 @@ public class mun_quest_marauder extends script.base_script
                 utils.setScriptVar(player, "conversation.mun_quest_marauder.branchId", 30);
                 npcStartConversation(player, npc, "mun_quest_marauder", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3724,7 +3932,7 @@ public class mun_quest_marauder extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_83");
@@ -3732,7 +3940,7 @@ public class mun_quest_marauder extends script.base_script
                 utils.setScriptVar(player, "conversation.mun_quest_marauder.branchId", 31);
                 npcStartConversation(player, npc, "mun_quest_marauder", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3760,7 +3968,7 @@ public class mun_quest_marauder extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_79");
@@ -3772,7 +3980,7 @@ public class mun_quest_marauder extends script.base_script
                 utils.setScriptVar(player, "conversation.mun_quest_marauder.branchId", 36);
                 npcStartConversation(player, npc, "mun_quest_marauder", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3793,7 +4001,7 @@ public class mun_quest_marauder extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_92");
@@ -3801,7 +4009,7 @@ public class mun_quest_marauder extends script.base_script
                 utils.setScriptVar(player, "conversation.mun_quest_marauder.branchId", 40);
                 npcStartConversation(player, npc, "mun_quest_marauder", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3822,7 +4030,7 @@ public class mun_quest_marauder extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_110");
@@ -3830,7 +4038,7 @@ public class mun_quest_marauder extends script.base_script
                 utils.setScriptVar(player, "conversation.mun_quest_marauder.branchId", 41);
                 npcStartConversation(player, npc, "mun_quest_marauder", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3858,7 +4066,7 @@ public class mun_quest_marauder extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_132");
@@ -3870,7 +4078,7 @@ public class mun_quest_marauder extends script.base_script
                 utils.setScriptVar(player, "conversation.mun_quest_marauder.branchId", 46);
                 npcStartConversation(player, npc, "mun_quest_marauder", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3891,7 +4099,7 @@ public class mun_quest_marauder extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_144");
@@ -3899,7 +4107,7 @@ public class mun_quest_marauder extends script.base_script
                 utils.setScriptVar(player, "conversation.mun_quest_marauder.branchId", 50);
                 npcStartConversation(player, npc, "mun_quest_marauder", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3920,7 +4128,7 @@ public class mun_quest_marauder extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_148");
@@ -3928,7 +4136,7 @@ public class mun_quest_marauder extends script.base_script
                 utils.setScriptVar(player, "conversation.mun_quest_marauder.branchId", 51);
                 npcStartConversation(player, npc, "mun_quest_marauder", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3956,7 +4164,7 @@ public class mun_quest_marauder extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -3968,7 +4176,7 @@ public class mun_quest_marauder extends script.base_script
                 utils.setScriptVar(player, "conversation.mun_quest_marauder.branchId", 56);
                 npcStartConversation(player, npc, "mun_quest_marauder", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3989,7 +4197,7 @@ public class mun_quest_marauder extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_172");
@@ -3997,7 +4205,7 @@ public class mun_quest_marauder extends script.base_script
                 utils.setScriptVar(player, "conversation.mun_quest_marauder.branchId", 60);
                 npcStartConversation(player, npc, "mun_quest_marauder", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -4018,7 +4226,7 @@ public class mun_quest_marauder extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_176");
@@ -4026,7 +4234,7 @@ public class mun_quest_marauder extends script.base_script
                 utils.setScriptVar(player, "conversation.mun_quest_marauder.branchId", 61);
                 npcStartConversation(player, npc, "mun_quest_marauder", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -4054,7 +4262,7 @@ public class mun_quest_marauder extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_188");
@@ -4066,7 +4274,7 @@ public class mun_quest_marauder extends script.base_script
                 utils.setScriptVar(player, "conversation.mun_quest_marauder.branchId", 66);
                 npcStartConversation(player, npc, "mun_quest_marauder", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -4087,7 +4295,7 @@ public class mun_quest_marauder extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_200");
@@ -4095,7 +4303,7 @@ public class mun_quest_marauder extends script.base_script
                 utils.setScriptVar(player, "conversation.mun_quest_marauder.branchId", 70);
                 npcStartConversation(player, npc, "mun_quest_marauder", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -4116,7 +4324,7 @@ public class mun_quest_marauder extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_204");
@@ -4124,7 +4332,7 @@ public class mun_quest_marauder extends script.base_script
                 utils.setScriptVar(player, "conversation.mun_quest_marauder.branchId", 71);
                 npcStartConversation(player, npc, "mun_quest_marauder", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -4152,7 +4360,7 @@ public class mun_quest_marauder extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_222");
@@ -4164,7 +4372,7 @@ public class mun_quest_marauder extends script.base_script
                 utils.setScriptVar(player, "conversation.mun_quest_marauder.branchId", 76);
                 npcStartConversation(player, npc, "mun_quest_marauder", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -4185,7 +4393,7 @@ public class mun_quest_marauder extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_244");
@@ -4193,7 +4401,7 @@ public class mun_quest_marauder extends script.base_script
                 utils.setScriptVar(player, "conversation.mun_quest_marauder.branchId", 80);
                 npcStartConversation(player, npc, "mun_quest_marauder", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -4214,7 +4422,7 @@ public class mun_quest_marauder extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_248");
@@ -4222,7 +4430,7 @@ public class mun_quest_marauder extends script.base_script
                 utils.setScriptVar(player, "conversation.mun_quest_marauder.branchId", 81);
                 npcStartConversation(player, npc, "mun_quest_marauder", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -4250,7 +4458,7 @@ public class mun_quest_marauder extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_282");
@@ -4262,7 +4470,7 @@ public class mun_quest_marauder extends script.base_script
                 utils.setScriptVar(player, "conversation.mun_quest_marauder.branchId", 88);
                 npcStartConversation(player, npc, "mun_quest_marauder", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -4283,7 +4491,7 @@ public class mun_quest_marauder extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_324");
@@ -4291,7 +4499,7 @@ public class mun_quest_marauder extends script.base_script
                 utils.setScriptVar(player, "conversation.mun_quest_marauder.branchId", 93);
                 npcStartConversation(player, npc, "mun_quest_marauder", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -4306,6 +4514,7 @@ public class mun_quest_marauder extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("mun_quest_marauder"))

@@ -1,5 +1,11 @@
 package script.systems.pet_tradein;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.callable;
 import script.library.chat;
@@ -15,6 +21,7 @@ public class pet_tradein extends script.base_script
     public static final String TRADE_DATA = "datatables/dispenser/creature_trade_in.iff";
     public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
     public static final String CREATURE_NAME_FILE = "mob/creature_names";
+
     public pet_tradein()
     {
     }
@@ -48,7 +55,7 @@ public class pet_tradein extends script.base_script
             }
             else
             {
-                if (hasSkill(player, "outdoors_creaturehandler_novice") == true)
+                if (hasSkill(player, "outdoors_creaturehandler_novice"))
                 {
                     string_id sysmessage = new string_id(CREATURE_TRADEIN, "cant");
                     sendSystemMessage(player, sysmessage);

@@ -1,14 +1,22 @@
 package script.theme_park.dungeon.diant_zuy;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.chat;
 
 public class destruct extends script.base_script
 {
+    public static final string_id DESTRUCT_ENGAGED = new string_id("dungeon/diant_bunker", "destruct_engaged");
+
     public destruct()
     {
     }
-    public static final string_id DESTRUCT_ENGAGED = new string_id("dungeon/diant_bunker", "destruct_engaged");
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);
@@ -22,6 +30,7 @@ public class destruct extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         obj_id bldg = getTopMostContainer(self);
@@ -57,6 +66,7 @@ public class destruct extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int blowUp(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);

@@ -1,5 +1,11 @@
 package script.systems.crafting.item;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.craftinglib;
 import script.library.utils;
 import script.obj_id;
@@ -21,7 +27,7 @@ public class item_component_attribute extends script.base_script
         {
             names[idx] = "stationmod";
             float attrib = utils.roundFloatByDecimal(getFloatObjVar(self, "crafting.stationMod"));
-            attribs[idx] = "" + attrib;
+            attribs[idx] = String.valueOf(attrib);
             idx++;
             if (idx >= names.length)
             {
@@ -32,7 +38,7 @@ public class item_component_attribute extends script.base_script
         {
             names[idx] = "stationmod";
             float attrib = utils.roundFloatByDecimal(getFloatObjVar(self, "crafting.stationMod_1"));
-            attribs[idx] = "" + attrib;
+            attribs[idx] = String.valueOf(attrib);
             idx++;
             if (idx >= names.length)
             {
@@ -43,7 +49,7 @@ public class item_component_attribute extends script.base_script
         {
             names[idx] = "usemodifier";
             float attrib = utils.roundFloatByDecimal(getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + ".useModifier"));
-            attribs[idx] = "" + attrib;
+            attribs[idx] = String.valueOf(attrib);
             idx++;
             if (idx >= names.length)
             {
@@ -54,7 +60,7 @@ public class item_component_attribute extends script.base_script
         {
             names[idx] = "mechanism_quality";
             float attrib = utils.roundFloatByDecimal(getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + ".mechanism_quality"));
-            attribs[idx] = "" + attrib;
+            attribs[idx] = String.valueOf(attrib);
             idx++;
             if (idx >= names.length)
             {

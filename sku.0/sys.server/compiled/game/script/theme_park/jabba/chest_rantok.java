@@ -1,5 +1,11 @@
 package script.theme_park.jabba;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class chest_rantok extends script.base_script
@@ -7,6 +13,7 @@ public class chest_rantok extends script.base_script
     public chest_rantok()
     {
     }
+
     public int OnAboutToLoseItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         String itemName = getTemplateName(item);

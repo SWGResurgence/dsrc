@@ -1,5 +1,11 @@
 package script.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.qa;
 import script.library.sui;
@@ -8,40 +14,37 @@ import script.obj_id;
 
 public class qaweapon extends script.base_script
 {
-    public qaweapon()
-    {
-    }
     public static final String SCRIPTVAR = "qaweapon";
-    public static final String[] WEAPON_DAMAGE = 
-    {
-        "1",
-        "10",
-        "50",
-        "100",
-        "500",
-        "1000",
-        "5000"
-    };
-    public static final String[] WEAPON_ELEMENT_TYPE = 
-    {
-        "None",
-        "Heat",
-        "Cold",
-        "Acid",
-        "Electric"
-    };
-    public static final String[] WEAPON_TYPE = 
-    {
-        "Pistol",
-        "Carbine",
-        "Rifle",
-        "Unarmed",
-        "1-Handed",
-        "2-Handed",
-        "Polearm",
-        "Heavy Weapon",
-        "Flame Thrower"
-    };
+    public static final String[] WEAPON_DAMAGE =
+            {
+                    "1",
+                    "10",
+                    "50",
+                    "100",
+                    "500",
+                    "1000",
+                    "5000"
+            };
+    public static final String[] WEAPON_ELEMENT_TYPE =
+            {
+                    "None",
+                    "Heat",
+                    "Cold",
+                    "Acid",
+                    "Electric"
+            };
+    public static final String[] WEAPON_TYPE =
+            {
+                    "Pistol",
+                    "Carbine",
+                    "Rifle",
+                    "Unarmed",
+                    "1-Handed",
+                    "2-Handed",
+                    "Polearm",
+                    "Heavy Weapon",
+                    "Flame Thrower"
+            };
     public static final int PISTOL = 0;
     public static final int CARBINE = 1;
     public static final int RIFLE = 2;
@@ -63,6 +66,10 @@ public class qaweapon extends script.base_script
     public static final int ELEMENT_64 = 2;
     public static final int ELEMENT_128 = 3;
     public static final int ELEMENT_256 = 4;
+    public qaweapon()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (isGod(self))
@@ -79,6 +86,7 @@ public class qaweapon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (isGod(self))
@@ -91,6 +99,7 @@ public class qaweapon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleWeaponTypeOptions(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -117,49 +126,50 @@ public class qaweapon extends script.base_script
             switch (idx)
             {
                 case PISTOL:
-                utils.setScriptVar(player, SCRIPTVAR + ".weaponTypeChoice", "Pistol");
-                weaponDamageMenu(player);
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".weaponTypeChoice", "Pistol");
+                    weaponDamageMenu(player);
+                    break;
                 case CARBINE:
-                utils.setScriptVar(player, SCRIPTVAR + ".weaponTypeChoice", "Carbine");
-                weaponDamageMenu(player);
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".weaponTypeChoice", "Carbine");
+                    weaponDamageMenu(player);
+                    break;
                 case RIFLE:
-                utils.setScriptVar(player, SCRIPTVAR + ".weaponTypeChoice", "Rifle");
-                weaponDamageMenu(player);
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".weaponTypeChoice", "Rifle");
+                    weaponDamageMenu(player);
+                    break;
                 case UNARMED:
-                utils.setScriptVar(player, SCRIPTVAR + ".weaponTypeChoice", "Unarmed");
-                weaponDamageMenu(player);
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".weaponTypeChoice", "Unarmed");
+                    weaponDamageMenu(player);
+                    break;
                 case ONE_HANDED:
-                utils.setScriptVar(player, SCRIPTVAR + ".weaponTypeChoice", "1-Handed");
-                weaponDamageMenu(player);
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".weaponTypeChoice", "1-Handed");
+                    weaponDamageMenu(player);
+                    break;
                 case TWO_HANDED:
-                utils.setScriptVar(player, SCRIPTVAR + ".weaponTypeChoice", "2-Handed");
-                weaponDamageMenu(player);
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".weaponTypeChoice", "2-Handed");
+                    weaponDamageMenu(player);
+                    break;
                 case POLEARM:
-                utils.setScriptVar(player, SCRIPTVAR + ".weaponTypeChoice", "Polearm");
-                weaponDamageMenu(player);
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".weaponTypeChoice", "Polearm");
+                    weaponDamageMenu(player);
+                    break;
                 case HEAVY:
-                utils.setScriptVar(player, SCRIPTVAR + ".weaponTypeChoice", "Heavy Weapon");
-                weaponDamageMenu(player);
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".weaponTypeChoice", "Heavy Weapon");
+                    weaponDamageMenu(player);
+                    break;
                 case FLAMETHROWER:
-                utils.setScriptVar(player, SCRIPTVAR + ".weaponTypeChoice", "Flame Thrower");
-                weaponDamageMenu(player);
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".weaponTypeChoice", "Flame Thrower");
+                    weaponDamageMenu(player);
+                    break;
                 default:
-                qa.removePlayer(player, SCRIPTVAR, "There was an error with your selection, Please try again.");
-                weaponTypeMenu(self);
-                return SCRIPT_CONTINUE;
+                    qa.removePlayer(player, SCRIPTVAR, "There was an error with your selection, Please try again.");
+                    weaponTypeMenu(self);
+                    return SCRIPT_CONTINUE;
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleWeaponLevelOptions(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -185,41 +195,42 @@ public class qaweapon extends script.base_script
             switch (idx)
             {
                 case DAMAGE_1:
-                utils.setScriptVar(player, SCRIPTVAR + ".damageChoice", 1);
-                elementalTypeMenu(player);
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".damageChoice", 1);
+                    elementalTypeMenu(player);
+                    break;
                 case DAMAGE_10:
-                utils.setScriptVar(player, SCRIPTVAR + ".damageChoice", 10);
-                elementalTypeMenu(player);
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".damageChoice", 10);
+                    elementalTypeMenu(player);
+                    break;
                 case DAMAGE_50:
-                utils.setScriptVar(player, SCRIPTVAR + ".damageChoice", 50);
-                elementalTypeMenu(player);
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".damageChoice", 50);
+                    elementalTypeMenu(player);
+                    break;
                 case DAMAGE_100:
-                utils.setScriptVar(player, SCRIPTVAR + ".damageChoice", 100);
-                elementalTypeMenu(player);
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".damageChoice", 100);
+                    elementalTypeMenu(player);
+                    break;
                 case DAMAGE_500:
-                utils.setScriptVar(player, SCRIPTVAR + ".damageChoice", 500);
-                elementalTypeMenu(player);
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".damageChoice", 500);
+                    elementalTypeMenu(player);
+                    break;
                 case DAMAGE_1000:
-                utils.setScriptVar(player, SCRIPTVAR + ".damageChoice", 1000);
-                elementalTypeMenu(player);
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".damageChoice", 1000);
+                    elementalTypeMenu(player);
+                    break;
                 case DAMAGE_5000:
-                utils.setScriptVar(player, SCRIPTVAR + ".damageChoice", 5000);
-                elementalTypeMenu(player);
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".damageChoice", 5000);
+                    elementalTypeMenu(player);
+                    break;
                 default:
-                qa.removePlayer(player, SCRIPTVAR, "There was an error with your selection, Please try again.");
-                weaponTypeMenu(self);
-                return SCRIPT_CONTINUE;
+                    qa.removePlayer(player, SCRIPTVAR, "There was an error with your selection, Please try again.");
+                    weaponTypeMenu(self);
+                    return SCRIPT_CONTINUE;
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleWeaponElementalOptions(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -245,33 +256,34 @@ public class qaweapon extends script.base_script
             switch (idx)
             {
                 case ELEMENT_0:
-                utils.setScriptVar(player, SCRIPTVAR + ".elementChoice", 0);
-                createQAWeapon(player);
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".elementChoice", 0);
+                    createQAWeapon(player);
+                    break;
                 case ELEMENT_32:
-                utils.setScriptVar(player, SCRIPTVAR + ".elementChoice", 32);
-                elementalDamageMenu(player);
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".elementChoice", 32);
+                    elementalDamageMenu(player);
+                    break;
                 case ELEMENT_64:
-                utils.setScriptVar(player, SCRIPTVAR + ".elementChoice", 64);
-                elementalDamageMenu(player);
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".elementChoice", 64);
+                    elementalDamageMenu(player);
+                    break;
                 case ELEMENT_128:
-                utils.setScriptVar(player, SCRIPTVAR + ".elementChoice", 128);
-                elementalDamageMenu(player);
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".elementChoice", 128);
+                    elementalDamageMenu(player);
+                    break;
                 case ELEMENT_256:
-                utils.setScriptVar(player, SCRIPTVAR + ".elementChoice", 256);
-                elementalDamageMenu(player);
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".elementChoice", 256);
+                    elementalDamageMenu(player);
+                    break;
                 default:
-                qa.removePlayer(player, SCRIPTVAR, "There was an error with your selection, Please try again.");
-                weaponTypeMenu(self);
-                return SCRIPT_CONTINUE;
+                    qa.removePlayer(player, SCRIPTVAR, "There was an error with your selection, Please try again.");
+                    weaponTypeMenu(self);
+                    return SCRIPT_CONTINUE;
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleWeaponElementalDamage(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -297,57 +309,62 @@ public class qaweapon extends script.base_script
             switch (idx)
             {
                 case DAMAGE_1:
-                utils.setScriptVar(player, SCRIPTVAR + ".elementalDamage", 1);
-                createQAWeapon(player);
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".elementalDamage", 1);
+                    createQAWeapon(player);
+                    break;
                 case DAMAGE_10:
-                utils.setScriptVar(player, SCRIPTVAR + ".elementalDamage", 10);
-                createQAWeapon(player);
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".elementalDamage", 10);
+                    createQAWeapon(player);
+                    break;
                 case DAMAGE_50:
-                utils.setScriptVar(player, SCRIPTVAR + ".elementalDamage", 50);
-                createQAWeapon(player);
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".elementalDamage", 50);
+                    createQAWeapon(player);
+                    break;
                 case DAMAGE_100:
-                utils.setScriptVar(player, SCRIPTVAR + ".elementalDamage", 100);
-                createQAWeapon(player);
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".elementalDamage", 100);
+                    createQAWeapon(player);
+                    break;
                 case DAMAGE_500:
-                utils.setScriptVar(player, SCRIPTVAR + ".elementalDamage", 500);
-                createQAWeapon(player);
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".elementalDamage", 500);
+                    createQAWeapon(player);
+                    break;
                 case DAMAGE_1000:
-                utils.setScriptVar(player, SCRIPTVAR + ".elementalDamage", 1000);
-                createQAWeapon(player);
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".elementalDamage", 1000);
+                    createQAWeapon(player);
+                    break;
                 case DAMAGE_5000:
-                utils.setScriptVar(player, SCRIPTVAR + ".elementalDamage", 5000);
-                createQAWeapon(player);
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".elementalDamage", 5000);
+                    createQAWeapon(player);
+                    break;
                 default:
-                qa.removePlayer(player, SCRIPTVAR, "There was an error with your selection, Please try again.");
-                weaponTypeMenu(self);
-                return SCRIPT_CONTINUE;
+                    qa.removePlayer(player, SCRIPTVAR, "There was an error with your selection, Please try again.");
+                    weaponTypeMenu(self);
+                    return SCRIPT_CONTINUE;
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public void weaponTypeMenu(obj_id player) throws InterruptedException
     {
         qa.refreshMenu(player, "-Weapon Type Select Menu-\nChoose the type of weapon you wish to use for testing.", "QA Test Weapon Tool", WEAPON_TYPE, "handleWeaponTypeOptions", SCRIPTVAR + ".pid", SCRIPTVAR + ".weaponTypeMenu", sui.OK_CANCEL_REFRESH);
     }
+
     public void weaponDamageMenu(obj_id player) throws InterruptedException
     {
         qa.refreshMenu(player, "-Weapon Damage Select Menu-\nSelect the amount of damage you want the weapon to have.\nNOTE: The Min/Max damage of all weapons will be the same.", "QA Test Weapon Tool", WEAPON_DAMAGE, "handleWeaponLevelOptions", SCRIPTVAR + ".pid", SCRIPTVAR + ".damageMenu", sui.OK_CANCEL_REFRESH);
     }
+
     public void elementalTypeMenu(obj_id player) throws InterruptedException
     {
         qa.refreshMenu(player, "-Weapon Damage Select Menu-\nSelect the elemental damage type you want the weapon to use.", "QA Test Weapon Tool", WEAPON_ELEMENT_TYPE, "handleWeaponElementalOptions", SCRIPTVAR + ".pid", SCRIPTVAR + ".elementalTypeMenu", sui.OK_CANCEL_REFRESH);
     }
+
     public void elementalDamageMenu(obj_id player) throws InterruptedException
     {
         qa.refreshMenu(player, "-Weapon Damage Select Menu-\nSelect the amount of elemental damage you want add to the weapon.\nNOTE: The Min/Max damage of all weapons will be the same.", "QA Test Weapon Tool", WEAPON_DAMAGE, "handleWeaponElementalDamage", SCRIPTVAR + ".pid", SCRIPTVAR + ".elementalTypeMenu", sui.OK_CANCEL_REFRESH);
     }
+
     public void checkInventory(obj_id player) throws InterruptedException
     {
         obj_id inventory = utils.getInventoryContainer(player);
@@ -357,6 +374,7 @@ public class qaweapon extends script.base_script
             broadcast(player, "You do not have enough space in your inventory, please delete some items and try again.");
         }
     }
+
     public void createQAWeapon(obj_id player) throws InterruptedException
     {
         if (utils.hasScriptVar(player, SCRIPTVAR + ".damageChoice") && utils.hasScriptVar(player, SCRIPTVAR + ".weaponTypeChoice"))
@@ -369,7 +387,8 @@ public class qaweapon extends script.base_script
             float speed = 0.00f;
             String weaponObject = "";
             String weaponType = utils.getStringScriptVar(player, SCRIPTVAR + ".weaponTypeChoice");
-            switch (weaponType) {
+            switch (weaponType)
+            {
                 case "Pistol":
                     speed = 0.40f;
                     weaponObject = "object/weapon/ranged/pistol/pistol_cdef.iff";
@@ -391,7 +410,8 @@ public class qaweapon extends script.base_script
             else if (weaponType.equals("Unarmed") || weaponType.equals("1-Handed") || weaponType.equals("2-Handed") || weaponType.equals("Polearm") || weaponType.equals("Heavy Weapon"))
             {
                 speed = 1.00f;
-                switch (weaponType) {
+                switch (weaponType)
+                {
                     case "Heavy Weapon":
                         weaponObject = "object/weapon/ranged/heavy/heavy_rocket_launcher.iff";
                         break;
@@ -424,7 +444,7 @@ public class qaweapon extends script.base_script
             broadcast(player, "The QAWeapon has been placed in your backpack.");
             qa.removePlayer(player, SCRIPTVAR, "");
         }
-        else 
+        else
         {
             broadcast(player, "There was an error with the QA Test Weapon Tool - Please Try Again.");
             qa.removePlayer(player, SCRIPTVAR, "");

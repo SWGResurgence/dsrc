@@ -1,106 +1,109 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class som_kenobi_epo_qetora extends script.base_script
 {
+    public static String c_stringFile = "conversation/som_kenobi_epo_qetora";
+
     public som_kenobi_epo_qetora()
     {
     }
-    public static String c_stringFile = "conversation/som_kenobi_epo_qetora";
+
     public boolean som_kenobi_epo_qetora_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean som_kenobi_epo_qetora_condition_onQuest(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isQuestActive(player, "som_kenobi_historian_1") || groundquests.isQuestActive(player, "som_kenobi_historian_smuggler"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.isQuestActive(player, "som_kenobi_historian_1") || groundquests.isQuestActive(player, "som_kenobi_historian_smuggler");
     }
+
     public boolean som_kenobi_epo_qetora_condition_isSmuggler(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasSkill(player, "class_smuggler_phase1_novice");
     }
+
     public boolean som_kenobi_epo_qetora_condition_haveDisk(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "som_kenobi_historian_1", "success") || groundquests.isTaskActive(player, "som_kenobi_historian_smuggler", "success") || groundquests.isTaskActive(player, "som_kenobi_historian_1", "done") || groundquests.isTaskActive(player, "som_kenobi_historian_smuggler", "done"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.isTaskActive(player, "som_kenobi_historian_1", "success") || groundquests.isTaskActive(player, "som_kenobi_historian_smuggler", "success") || groundquests.isTaskActive(player, "som_kenobi_historian_1", "done") || groundquests.isTaskActive(player, "som_kenobi_historian_smuggler", "done");
     }
+
     public boolean som_kenobi_epo_qetora_condition_finishedQuestAll(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.hasCompletedQuest(player, "som_kenobi_historian_1") || groundquests.hasCompletedQuest(player, "som_kenobi_historian_smuggler"))
         {
             return groundquests.hasCompletedQuest(player, "som_kenobi_historian_2");
         }
-        else 
+        else
         {
             return false;
         }
     }
+
     public boolean som_kenobi_epo_qetora_condition_finishedQuest1(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.hasCompletedQuest(player, "som_kenobi_historian_1") || groundquests.hasCompletedQuest(player, "som_kenobi_historian_smuggler"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.hasCompletedQuest(player, "som_kenobi_historian_1") || groundquests.hasCompletedQuest(player, "som_kenobi_historian_smuggler");
     }
+
     public boolean som_kenobi_epo_qetora_condition_onQuest2(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "som_kenobi_historian_2"));
     }
+
     public boolean som_kenobi_epo_qetora_condition_rewardQuest2(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "som_kenobi_historian_2", "retrievedPieces");
     }
+
     public void som_kenobi_epo_qetora_action_giveQuestSmuggler(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "som_kenobi_historian_smuggler");
     }
+
     public void som_kenobi_epo_qetora_action_giveQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "som_kenobi_historian_1");
     }
+
     public void som_kenobi_epo_qetora_action_reward(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "successDone");
     }
+
     public void som_kenobi_epo_qetora_action_giveQuest2(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "som_kenobi_historian_2");
     }
+
     public void som_kenobi_epo_qetora_action_reward2(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "piecesRetrieved");
     }
+
     public void som_kenobi_epo_qetora_action_rewardBattle(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "battlePicked");
     }
+
     public void som_kenobi_epo_qetora_action_rewardRecon(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "reconPicked");
     }
+
     public void som_kenobi_epo_qetora_action_rewardAssault(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "assaultPicked");
     }
+
     public void som_kenobi_epo_qetora_action_rewardRifle(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id item = static_item.createNewItemFunction("weapon_tow_rifle_03_02", player);
@@ -110,6 +113,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         pp = prose.setTO(pp, name);
         sendQuestSystemMessage(player, pp);
     }
+
     public void som_kenobi_epo_qetora_action_rewardCarbine(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id item = static_item.createNewItemFunction("weapon_tow_carbine_03_01", player);
@@ -119,6 +123,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         pp = prose.setTO(pp, name);
         sendQuestSystemMessage(player, pp);
     }
+
     public void som_kenobi_epo_qetora_action_rewardPistol(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id item = static_item.createNewItemFunction("weapon_tow_pistol_03_01", player);
@@ -128,10 +133,12 @@ public class som_kenobi_epo_qetora extends script.base_script
         pp = prose.setTO(pp, name);
         sendQuestSystemMessage(player, pp);
     }
+
     public void som_kenobi_epo_qetora_action_finishQuest1(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "completed");
     }
+
     public int som_kenobi_epo_qetora_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_106"))
@@ -152,7 +159,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_134");
@@ -161,7 +168,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_epo_qetora.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -188,7 +195,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_124");
@@ -201,7 +208,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_epo_qetora.branchId");
                     prose_package pp = new prose_package();
@@ -215,6 +222,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_134"))
@@ -250,7 +258,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_262");
@@ -267,7 +275,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_epo_qetora.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -277,6 +285,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_262"))
@@ -296,7 +305,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_266");
@@ -305,7 +314,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_epo_qetora.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -330,7 +339,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_274");
@@ -339,7 +348,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_epo_qetora.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -364,7 +373,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_298");
@@ -373,7 +382,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_epo_qetora.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -383,6 +392,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_266"))
@@ -405,6 +415,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_274"))
@@ -427,6 +438,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_298"))
@@ -449,6 +461,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_124"))
@@ -484,7 +497,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_278");
@@ -501,7 +514,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_epo_qetora.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -511,6 +524,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_278"))
@@ -530,7 +544,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_282");
@@ -539,7 +553,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_epo_qetora.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -564,7 +578,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_290");
@@ -573,7 +587,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_epo_qetora.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -598,7 +612,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_258");
@@ -607,7 +621,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_epo_qetora.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -617,6 +631,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_282"))
@@ -639,6 +654,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_290"))
@@ -661,6 +677,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_258"))
@@ -683,6 +700,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_84"))
@@ -699,6 +717,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_66"))
@@ -719,7 +738,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_73");
@@ -728,7 +747,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_epo_qetora.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -754,7 +773,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_90");
@@ -763,7 +782,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_epo_qetora.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -805,6 +824,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_73"))
@@ -832,7 +852,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_75");
@@ -845,7 +865,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_epo_qetora.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -855,6 +875,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_75"))
@@ -875,7 +896,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_79");
@@ -884,7 +905,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_epo_qetora.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -906,6 +927,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_79"))
@@ -923,6 +945,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_90"))
@@ -950,7 +973,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_94");
@@ -963,7 +986,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_epo_qetora.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -973,6 +996,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_94"))
@@ -993,7 +1017,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_98");
@@ -1002,7 +1026,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_epo_qetora.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1024,6 +1048,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_98"))
@@ -1045,6 +1070,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_89"))
@@ -1066,7 +1092,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_97");
@@ -1075,7 +1101,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_epo_qetora.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1102,7 +1128,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_128");
@@ -1111,7 +1137,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_epo_qetora.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1121,6 +1147,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_97"))
@@ -1156,7 +1183,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_210");
@@ -1173,7 +1200,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_epo_qetora.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1183,6 +1210,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_210"))
@@ -1204,7 +1232,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_214");
@@ -1213,7 +1241,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_epo_qetora.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1240,7 +1268,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_192");
@@ -1249,7 +1277,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_epo_qetora.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1276,7 +1304,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_198");
@@ -1285,7 +1313,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_epo_qetora.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1295,6 +1323,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_214"))
@@ -1317,6 +1346,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_192"))
@@ -1339,6 +1369,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_198"))
@@ -1361,6 +1392,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_128"))
@@ -1396,7 +1428,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_218");
@@ -1413,7 +1445,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_epo_qetora.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1423,6 +1455,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_218"))
@@ -1444,7 +1477,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_222");
@@ -1453,7 +1486,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_epo_qetora.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1480,7 +1513,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_230");
@@ -1489,7 +1522,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_epo_qetora.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1516,7 +1549,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_238");
@@ -1525,7 +1558,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_epo_qetora.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1535,6 +1568,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch45(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_222"))
@@ -1557,6 +1591,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_230"))
@@ -1579,6 +1614,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_238"))
@@ -1601,6 +1637,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_148"))
@@ -1617,6 +1654,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch53(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_154"))
@@ -1638,7 +1676,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_158");
@@ -1647,7 +1685,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_epo_qetora.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1674,7 +1712,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_186");
@@ -1683,7 +1721,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_epo_qetora.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1717,6 +1755,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_158"))
@@ -1745,7 +1784,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -1758,7 +1797,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_epo_qetora.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1768,6 +1807,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch55(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_162"))
@@ -1789,7 +1829,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_166");
@@ -1798,7 +1838,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_epo_qetora.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1821,7 +1861,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_172");
@@ -1830,7 +1870,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_epo_qetora.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1852,6 +1892,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch56(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_166"))
@@ -1869,6 +1910,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch58(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_172"))
@@ -1886,6 +1928,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch61(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_186"))
@@ -1914,7 +1957,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_191");
@@ -1927,7 +1970,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_epo_qetora.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1937,6 +1980,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch62(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_191"))
@@ -1958,7 +2002,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_199");
@@ -1967,7 +2011,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_epo_qetora.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1990,7 +2034,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_206");
@@ -1999,7 +2043,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_epo_qetora.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2021,6 +2065,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch63(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_199"))
@@ -2038,6 +2083,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_epo_qetora_handleBranch65(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_206"))
@@ -2055,6 +2101,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -2066,6 +2113,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_INTERESTING);
@@ -2073,6 +2121,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -2081,18 +2130,21 @@ public class som_kenobi_epo_qetora extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.som_kenobi_epo_qetora");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -2136,7 +2188,7 @@ public class som_kenobi_epo_qetora extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -2152,7 +2204,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "som_kenobi_epo_qetora", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -2178,7 +2230,7 @@ public class som_kenobi_epo_qetora extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_84");
@@ -2186,7 +2238,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 utils.setScriptVar(player, "conversation.som_kenobi_epo_qetora.branchId", 19);
                 npcStartConversation(player, npc, "som_kenobi_epo_qetora", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2230,7 +2282,7 @@ public class som_kenobi_epo_qetora extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_66");
@@ -2254,7 +2306,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "som_kenobi_epo_qetora", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -2288,7 +2340,7 @@ public class som_kenobi_epo_qetora extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_89");
@@ -2304,7 +2356,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "som_kenobi_epo_qetora", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -2330,7 +2382,7 @@ public class som_kenobi_epo_qetora extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_148");
@@ -2338,7 +2390,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 utils.setScriptVar(player, "conversation.som_kenobi_epo_qetora.branchId", 51);
                 npcStartConversation(player, npc, "som_kenobi_epo_qetora", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2382,7 +2434,7 @@ public class som_kenobi_epo_qetora extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_154");
@@ -2402,7 +2454,7 @@ public class som_kenobi_epo_qetora extends script.base_script
                 utils.setScriptVar(player, "conversation.som_kenobi_epo_qetora.branchId", 53);
                 npcStartConversation(player, npc, "som_kenobi_epo_qetora", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2411,6 +2463,7 @@ public class som_kenobi_epo_qetora extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("som_kenobi_epo_qetora"))

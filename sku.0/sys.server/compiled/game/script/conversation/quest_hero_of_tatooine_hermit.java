@@ -1,72 +1,65 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class quest_hero_of_tatooine_hermit extends script.base_script
 {
+    public static String c_stringFile = "conversation/quest_hero_of_tatooine_hermit";
+
     public quest_hero_of_tatooine_hermit()
     {
     }
-    public static String c_stringFile = "conversation/quest_hero_of_tatooine_hermit";
+
     public boolean quest_hero_of_tatooine_hermit_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean quest_hero_of_tatooine_hermit_condition_hasSquillSkull(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isTaskActive(player, "quest_hero_of_tatooine_main", "hero_of_tatooine_main_02"))
         {
-            if (utils.playerHasItemByTemplate(player, "object/tangible/loot/quest/hero_of_tatooine/squill_skull.iff"))
-            {
-                return true;
-            }
+            return utils.playerHasItemByTemplate(player, "object/tangible/loot/quest/hero_of_tatooine/squill_skull.iff");
         }
         return false;
     }
+
     public boolean quest_hero_of_tatooine_hermit_condition_BadgeAltruism(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (!badge.hasBadge(player, "poi_factoryliberation"))
-        {
-            return true;
-        }
-        return false;
+        return !badge.hasBadge(player, "poi_factoryliberation");
     }
+
     public boolean quest_hero_of_tatooine_hermit_condition_BadgeIntellect(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (!badge.hasBadge(player, "poi_twoliars"))
-        {
-            return true;
-        }
-        return false;
+        return !badge.hasBadge(player, "poi_twoliars");
     }
+
     public boolean quest_hero_of_tatooine_hermit_condition_BadgeCourage(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (!badge.hasBadge(player, "poi_rabidbeast"))
-        {
-            return true;
-        }
-        return false;
+        return !badge.hasBadge(player, "poi_rabidbeast");
     }
+
     public boolean quest_hero_of_tatooine_hermit_condition_BadgeHonor(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (!badge.hasBadge(player, "poi_prisonbreak"))
-        {
-            return true;
-        }
-        return false;
+        return !badge.hasBadge(player, "poi_prisonbreak");
     }
+
     public boolean quest_hero_of_tatooine_hermit_condition_questHasAllMarks(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "quest.hero_of_tatooine.badgequests") || groundquests.hasCompletedTask(player, "quest_hero_of_tatooine_main", "hero_of_tatooine_main_02"))
         {
-            if (badge.hasBadge(player, "poi_prisonbreak") && badge.hasBadge(player, "poi_factoryliberation") && badge.hasBadge(player, "poi_rabidbeast") && badge.hasBadge(player, "poi_twoliars"))
-            {
-                return true;
-            }
+            return badge.hasBadge(player, "poi_prisonbreak") && badge.hasBadge(player, "poi_factoryliberation") && badge.hasBadge(player, "poi_rabidbeast") && badge.hasBadge(player, "poi_twoliars");
         }
         return false;
     }
+
     public boolean quest_hero_of_tatooine_hermit_condition_heroOfTatooineActive(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "quest.hero_of_tatooine.task") || hasObjVar(player, "quest.hero_of_tatooine.badgequests"))
@@ -75,36 +68,33 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
         }
         return groundquests.isQuestActive(player, "quest_hero_of_tatooine_main");
     }
+
     public boolean quest_hero_of_tatooine_hermit_condition_OnSkullQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasObjVar(player, "quest.hero_of_tatooine.task") || groundquests.isTaskActive(player, "quest_hero_of_tatooine_main", "hero_of_tatooine_main_skull");
     }
+
     public boolean quest_hero_of_tatooine_hermit_condition_heroOfTatooineComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "quest.hero_of_tatooine.complete"))
         {
             return true;
         }
-        if (badge.hasBadge(player, "poi_heromark"))
-        {
-            return true;
-        }
-        return false;
+        return badge.hasBadge(player, "poi_heromark");
     }
+
     public boolean quest_hero_of_tatooine_hermit_condition_IsOwedItems(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasObjVar(player, "quest.hero_of_tatooine.owed");
     }
+
     public boolean quest_hero_of_tatooine_hermit_condition_IsInvFull(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id inv = utils.getInventoryContainer(player);
         int free = getVolumeFree(inv);
-        if (free <= 0)
-        {
-            return true;
-        }
-        return false;
+        return free <= 0;
     }
+
     public boolean quest_hero_of_tatooine_hermit_condition_GrantOwed(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id inv = utils.getInventoryContainer(player);
@@ -115,7 +105,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
             {
                 removeObjVar(player, "quest.hero_of_tatooine.owed.altruism");
             }
-            else 
+            else
             {
                 return true;
             }
@@ -127,7 +117,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
             {
                 removeObjVar(player, "quest.hero_of_tatooine.owed.intellect");
             }
-            else 
+            else
             {
                 return true;
             }
@@ -139,7 +129,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
             {
                 removeObjVar(player, "quest.hero_of_tatooine.owed.honor");
             }
-            else 
+            else
             {
                 return true;
             }
@@ -151,25 +141,29 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
             {
                 removeObjVar(player, "quest.hero_of_tatooine.owed.hero");
             }
-            else 
+            else
             {
                 return true;
             }
         }
         return false;
     }
+
     public boolean quest_hero_of_tatooine_hermit_condition_collectingMarks(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasObjVar(player, "quest.hero_of_tatooine.badgequests") || groundquests.isTaskActive(player, "quest_hero_of_tatooine_main", "hero_of_tatooine_main_03");
     }
+
     public boolean quest_hero_of_tatooine_hermit_condition_alreadyHasAllMarks(obj_id player, obj_id npc) throws InterruptedException
     {
         return badge.hasBadge(player, "poi_prisonbreak") && badge.hasBadge(player, "poi_factoryliberation") && badge.hasBadge(player, "poi_rabidbeast") && badge.hasBadge(player, "poi_twoliars");
     }
+
     public void quest_hero_of_tatooine_hermit_action_QuestAccepted(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest_hero_of_tatooine_main");
     }
+
     public void quest_hero_of_tatooine_hermit_action_QuestCompleted(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "quest.hero_of_tatooine.badgequests") || groundquests.isTaskActive(player, "quest_hero_of_tatooine_main", "hero_of_tatooine_main_04"))
@@ -190,8 +184,8 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
             badge.grantBadge(player, "poi_heromark");
             CustomerServiceLog("quest", "HERO OF TATOOINE - %TU has acquired the Mark of the Hero", player);
         }
-        return;
     }
+
     public void quest_hero_of_tatooine_hermit_action_TakeSquillSkull(obj_id player, obj_id npc) throws InterruptedException
     {
         if (isIdValid(player))
@@ -202,24 +196,31 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 obj_id[] objContents = utils.getContents(objInventory);
                 if (objContents != null)
                 {
-                    for (obj_id objContent : objContents) {
-                        if (isIdValid(objContent)) {
+                    for (obj_id objContent : objContents)
+                    {
+                        if (isIdValid(objContent))
+                        {
                             obj_id inventoryItem = objContent;
                             String strItemTemplate = getTemplateName(inventoryItem);
-                            if (strItemTemplate.equals("object/tangible/loot/quest/hero_of_tatooine/squill_skull.iff")) {
+                            if (strItemTemplate.equals("object/tangible/loot/quest/hero_of_tatooine/squill_skull.iff"))
+                            {
                                 setObjVar(inventoryItem, "hero_of_tatooine_skull_to_hermit", true);
                                 destroyObject(inventoryItem);
                                 groundquests.sendSignal(player, "hero_of_tatooine_main_02");
-                                if (badge.hasBadge(player, "poi_factoryliberation")) {
+                                if (badge.hasBadge(player, "poi_factoryliberation"))
+                                {
                                     groundquests.sendSignal(player, "hero_of_tatooine_main_altruism");
                                 }
-                                if (badge.hasBadge(player, "poi_rabidbeast")) {
+                                if (badge.hasBadge(player, "poi_rabidbeast"))
+                                {
                                     groundquests.sendSignal(player, "hero_of_tatooine_main_courage");
                                 }
-                                if (badge.hasBadge(player, "poi_prisonbreak")) {
+                                if (badge.hasBadge(player, "poi_prisonbreak"))
+                                {
                                     groundquests.sendSignal(player, "hero_of_tatooine_main_honor");
                                 }
-                                if (badge.hasBadge(player, "poi_twoliars")) {
+                                if (badge.hasBadge(player, "poi_twoliars"))
+                                {
                                     groundquests.sendSignal(player, "hero_of_tatooine_main_intellect");
                                 }
                                 removeObjVar(player, "quest.hero_of_tatooine.task");
@@ -229,13 +230,13 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 }
             }
         }
-        return;
     }
+
     public void quest_hero_of_tatooine_hermit_action_face_to(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
-        return;
     }
+
     public void quest_hero_of_tatooine_hermit_action_grantOwedItems(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id inv = utils.getInventoryContainer(player);
@@ -246,7 +247,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
             {
                 removeObjVar(player, "quest.hero_of_tatooine.owed.altruism");
             }
-            else 
+            else
             {
                 return;
             }
@@ -258,7 +259,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
             {
                 removeObjVar(player, "quest.hero_of_tatooine.owed.intellect");
             }
-            else 
+            else
             {
                 return;
             }
@@ -270,12 +271,12 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
             {
                 removeObjVar(player, "quest.hero_of_tatooine.owed.honor");
             }
-            else 
+            else
             {
-                return;
             }
         }
     }
+
     public int quest_hero_of_tatooine_hermit_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6441a2a6"))
@@ -304,6 +305,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_hermit_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_cfb883ed"))
@@ -318,6 +320,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_hermit_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_cd2c070a"))
@@ -337,7 +340,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48bfa35f");
@@ -346,7 +349,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_hermit.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -373,7 +376,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_101");
@@ -382,7 +385,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_hermit.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -405,7 +408,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1bb3475f");
@@ -414,7 +417,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_hermit.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -484,7 +487,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_41");
@@ -513,7 +516,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_hermit.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -533,6 +536,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_hermit_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_48bfa35f"))
@@ -549,6 +553,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_hermit_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_101"))
@@ -568,7 +573,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48bfa35f");
@@ -577,7 +582,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_hermit.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -587,6 +592,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_hermit_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_48bfa35f"))
@@ -603,6 +609,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_hermit_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1bb3475f"))
@@ -650,7 +657,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cb535214");
@@ -675,7 +682,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_hermit.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -685,6 +692,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_hermit_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_cb535214"))
@@ -704,7 +712,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b9b27823");
@@ -713,7 +721,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_hermit.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -738,7 +746,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_25");
@@ -747,7 +755,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_hermit.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -772,7 +780,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_29");
@@ -781,7 +789,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_hermit.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -806,7 +814,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_33");
@@ -815,7 +823,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_hermit.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -835,6 +843,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_hermit_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b9b27823"))
@@ -882,7 +891,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cb535214");
@@ -907,7 +916,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_hermit.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -917,6 +926,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_hermit_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_25"))
@@ -964,7 +974,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cb535214");
@@ -989,7 +999,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_hermit.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -999,6 +1009,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_hermit_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_29"))
@@ -1046,7 +1057,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cb535214");
@@ -1071,7 +1082,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_hermit.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1081,6 +1092,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_hermit_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_33"))
@@ -1128,7 +1140,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cb535214");
@@ -1153,7 +1165,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_hermit.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1163,6 +1175,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_hermit_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_41"))
@@ -1182,7 +1195,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_45");
@@ -1191,7 +1204,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_hermit.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1216,7 +1229,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_50");
@@ -1225,7 +1238,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_hermit.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1250,7 +1263,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_56");
@@ -1259,7 +1272,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_hermit.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1284,7 +1297,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_62");
@@ -1293,7 +1306,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_hermit.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1318,7 +1331,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_66");
@@ -1327,7 +1340,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_hermit.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1347,6 +1360,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_hermit_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_45"))
@@ -1401,7 +1415,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_41");
@@ -1430,7 +1444,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_hermit.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1440,6 +1454,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_hermit_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_50"))
@@ -1494,7 +1509,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_41");
@@ -1523,7 +1538,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_hermit.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1533,6 +1548,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_hermit_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_56"))
@@ -1587,7 +1603,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_41");
@@ -1616,7 +1632,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_hermit.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1626,6 +1642,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_hermit_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_62"))
@@ -1680,7 +1697,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_41");
@@ -1709,7 +1726,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_hermit.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1719,6 +1736,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_hermit_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_66"))
@@ -1773,7 +1791,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_41");
@@ -1802,7 +1820,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_hermit.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1812,6 +1830,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_hermit_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1bb7b1eb"))
@@ -1831,7 +1850,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e9bd97f9");
@@ -1840,7 +1859,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_hermit.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1850,6 +1869,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_hermit_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_e9bd97f9"))
@@ -1869,7 +1889,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2d0b6a");
@@ -1878,7 +1898,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_hermit.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1888,6 +1908,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_hermit_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2d0b6a"))
@@ -1907,7 +1928,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f297414");
@@ -1916,7 +1937,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_hermit.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1926,6 +1947,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_hermit_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f297414"))
@@ -1952,7 +1974,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8bfb7334");
@@ -1965,7 +1987,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_hermit.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1975,6 +1997,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_hermit_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_8bfb7334"))
@@ -1994,7 +2017,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9b634554");
@@ -2003,7 +2026,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_hermit.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2023,6 +2046,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_hermit_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9b634554"))
@@ -2042,7 +2066,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7abf0913");
@@ -2051,7 +2075,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_hermit.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2061,6 +2085,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_hermit_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_7abf0913"))
@@ -2080,7 +2105,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cf3b7067");
@@ -2089,7 +2114,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_hermit.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2099,6 +2124,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_hermit_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_cf3b7067"))
@@ -2118,7 +2144,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8ecd39ce");
@@ -2127,7 +2153,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_hermit.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2137,6 +2163,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_hermit_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_8ecd39ce"))
@@ -2156,7 +2183,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_66270434");
@@ -2165,7 +2192,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_hermit.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2175,6 +2202,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_hermit_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_66270434"))
@@ -2194,7 +2222,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d111fbf4");
@@ -2203,7 +2231,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_hermit.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2213,6 +2241,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_hermit_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d111fbf4"))
@@ -2228,6 +2257,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -2238,12 +2268,14 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
         setCondition(self, CONDITION_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setCondition(self, CONDITION_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -2252,18 +2284,21 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.quest_hero_of_tatooine_hermit");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -2286,7 +2321,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_6441a2a6");
@@ -2294,7 +2329,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 utils.setScriptVar(player, "conversation.quest_hero_of_tatooine_hermit.branchId", 1);
                 npcStartConversation(player, npc, "quest_hero_of_tatooine_hermit", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2317,7 +2352,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_cfb883ed");
@@ -2325,7 +2360,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 utils.setScriptVar(player, "conversation.quest_hero_of_tatooine_hermit.branchId", 5);
                 npcStartConversation(player, npc, "quest_hero_of_tatooine_hermit", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2375,7 +2410,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_cd2c070a");
@@ -2399,7 +2434,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 utils.setScriptVar(player, "conversation.quest_hero_of_tatooine_hermit.branchId", 7);
                 npcStartConversation(player, npc, "quest_hero_of_tatooine_hermit", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2422,7 +2457,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1bb7b1eb");
@@ -2430,7 +2465,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 utils.setScriptVar(player, "conversation.quest_hero_of_tatooine_hermit.branchId", 28);
                 npcStartConversation(player, npc, "quest_hero_of_tatooine_hermit", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2439,6 +2474,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("quest_hero_of_tatooine_hermit"))

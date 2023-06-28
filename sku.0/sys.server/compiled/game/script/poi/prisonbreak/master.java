@@ -1,5 +1,11 @@
 package script.poi.prisonbreak;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -9,9 +15,6 @@ import java.util.Vector;
 
 public class master extends script.theme_park.poi.base
 {
-    public master()
-    {
-    }
     public static final String SCENARIO_NAME = "prisonbreak";
     public static final String LOG_NAME = "poiPrisonBreak Master";
     public static final String SCENARIO_THEATER = "object/building/poi//tatooine_prison_break.iff";
@@ -31,21 +34,25 @@ public class master extends script.theme_park.poi.base
     public static final String ANTAGONIST_HARD = "ANTAGONIST_TEMPLATE_HARD";
     public static final String ANTAGONIST_TYPE = "ANTAGONIST_TYPE";
     public static final int DEFAULT_ANTAGONIST_COUNT = 1;
-    public static final int mediatorCoordsX[] = 
-    {
-        -13,
-        -16,
-        -5,
-        3
-    };
-    public static final int mediatorCoordsZ[] = 
-    {
-        0,
-        -20,
-        14,
-        -18
-    };
+    public static final int[] mediatorCoordsX =
+            {
+                    -13,
+                    -16,
+                    -5,
+                    3
+            };
+    public static final int[] mediatorCoordsZ =
+            {
+                    0,
+                    -20,
+                    14,
+                    -18
+            };
     public static final int MAX_DIFF = 70;
+    public master()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!scenario.initScenario(self, TBL))
@@ -54,26 +61,31 @@ public class master extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         scenario.cleanup(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnUnloadedFromMemory(obj_id self) throws InterruptedException
     {
         scenario.cleanup(self);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanupScenario(obj_id self, dictionary params) throws InterruptedException
     {
         scenario.cleanup(self);
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int initScenario(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -102,7 +114,7 @@ public class master extends script.theme_park.poi.base
             setObjVar(self, ANTAGONIST_TYPE, getStringObjVar(self, ANTAGONIST_MEDIUM));
             setObjVar(self, MEDIATOR_TYPE, getStringObjVar(self, MEDIATOR_MEDIUM));
         }
-        else 
+        else
         {
             if (difficultyLevel > MAX_DIFF)
             {
@@ -112,7 +124,7 @@ public class master extends script.theme_park.poi.base
             setObjVar(self, MEDIATOR_TYPE, getStringObjVar(self, MEDIATOR_HARD));
         }
         scenario.createTeam(self, "antagonist", self.toString() + "_antagonist");
-        scenario.createTeam(self, "mediator", self.toString() + "_mediator");
+        scenario.createTeam(self, "mediator", self + "_mediator");
         if (!createTheater(self))
         {
             scenario.cleanup(self);
@@ -140,6 +152,7 @@ public class master extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean createTheater(obj_id self) throws InterruptedException
     {
         obj_id theater = poi.createObject(SCENARIO_THEATER, 0, 0);
@@ -150,12 +163,14 @@ public class master extends script.theme_park.poi.base
         setObjVar(self, "theater", theater);
         return true;
     }
+
     public int handleTheaterComplete(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id donetheater = params.getObjId(theater.DICT_MASTER);
         attachWallScripts(self, donetheater);
         return SCRIPT_CONTINUE;
     }
+
     public void attachWallScripts(obj_id self, obj_id prison) throws InterruptedException
     {
         if ((prison == null) || (prison == obj_id.NULL_ID))
@@ -167,25 +182,34 @@ public class master extends script.theme_park.poi.base
         {
             return;
         }
-        else 
+        else
         {
             int j = 0;
-            for (obj_id child : children) {
-                if ((child == null) || (child == obj_id.NULL_ID)) {
-                } else {
+            for (obj_id child : children)
+            {
+                if ((child == null) || (child == obj_id.NULL_ID))
+                {
+                }
+                else
+                {
                     String childname = getName(child);
                     LOG(LOG_NAME, "Child found:  Name = " + childname);
-                    if (childname.equals("battlefield:barbed_wall")) {
-                        if (j == 0) {
+                    if (childname.equals("battlefield:barbed_wall"))
+                    {
+                        if (j == 0)
+                        {
                             String convo = getStringObjVar(self, scenario.VAR_SCENARIO_CONVO);
-                            if (convo.equals("")) {
+                            if (convo.equals(""))
+                            {
                                 return;
                             }
                             attachScript(child, "poi.prisonbreak.bombed_wall");
                             location loc = getLocation(child);
                             setObjVar(self, "weakwallLoc", loc);
                             setObjVar(self, "weakwall", child);
-                        } else {
+                        }
+                        else
+                        {
                             attachScript(child, "poi.factoryliberation.invulnerable_wall");
                         }
                         setObjVar(child, POI_BASE_OBJECT, self);
@@ -194,8 +218,8 @@ public class master extends script.theme_park.poi.base
                 }
             }
         }
-        return;
     }
+
     public boolean createAntagonist(obj_id self) throws InterruptedException
     {
         String type = getStringObjVar(self, ANTAGONIST_TYPE);
@@ -213,6 +237,7 @@ public class master extends script.theme_park.poi.base
         ai_lib.setDefaultCalmBehavior(antagonist, ai_lib.BEHAVIOR_SENTINEL);
         return true;
     }
+
     public boolean createAntagonistMinions(obj_id self) throws InterruptedException
     {
         location baseloc = getLocation(self);
@@ -240,7 +265,7 @@ public class master extends script.theme_park.poi.base
                 {
                     LOG(LOG_NAME, "Couldn't create antagonist minion.");
                 }
-                else 
+                else
                 {
                     setYaw(antagonist, rand(0, 359));
                     attachScript(antagonist, SCRIPT_ANTAGONIST);
@@ -252,6 +277,7 @@ public class master extends script.theme_park.poi.base
         }
         return true;
     }
+
     public boolean createMediator(obj_id self) throws InterruptedException
     {
         String type = getStringObjVar(self, MEDIATOR_TYPE);
@@ -270,6 +296,7 @@ public class master extends script.theme_park.poi.base
         ai_lib.setDefaultCalmBehavior(mediator, ai_lib.BEHAVIOR_SENTINEL);
         return true;
     }
+
     public boolean createMediatorMinions(obj_id self) throws InterruptedException
     {
         location baseloc = getLocation(self);
@@ -287,7 +314,7 @@ public class master extends script.theme_park.poi.base
                 {
                     LOG(LOG_NAME, "Couldn't create mediator minion.");
                 }
-                else 
+                else
                 {
                     setYaw(mediator, rand(0, 359));
                     attachScript(mediator, SCRIPT_MEDIATOR);
@@ -300,7 +327,7 @@ public class master extends script.theme_park.poi.base
                         ai_lib.setDefaultCalmBehavior(mediator, ai_lib.BEHAVIOR_SENTINEL);
                         setObjVar(mediator, "guard", true);
                     }
-                    else 
+                    else
                     {
                         ai_lib.setDefaultCalmBehavior(mediator, ai_lib.BEHAVIOR_SENTINEL);
                         ai_lib.setLoiterRanges(mediator, 0, 3);
@@ -310,6 +337,7 @@ public class master extends script.theme_park.poi.base
         }
         return true;
     }
+
     public int startAttack(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id guard = poi.findObject("mediator_1");
@@ -320,6 +348,7 @@ public class master extends script.theme_park.poi.base
         messageTo(guard, "goPee", null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int guardGone(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id m = poi.findObject("antagonist_0");
@@ -348,33 +377,40 @@ public class master extends script.theme_park.poi.base
         ai_lib.aiPathTo(a, bombloc);
         return SCRIPT_CONTINUE;
     }
+
     public int blowBomb(obj_id self, dictionary params) throws InterruptedException
     {
         location bombloc = getLocationObjVar(self, "weakwallLoc");
         bombloc.z -= 1.5;
-        obj_id players[] = getPlayerCreaturesInRange(bombloc, 40);
-        for (obj_id player : players) {
-            if ((player != null) && (player != obj_id.NULL_ID)) {
+        obj_id[] players = getPlayerCreaturesInRange(bombloc, 40);
+        for (obj_id player : players)
+        {
+            if ((player != null) && (player != obj_id.NULL_ID))
+            {
                 playClientEffectLoc(player, "clienteffect/combat_grenade_large_01.cef", bombloc, 0);
             }
         }
         messageTo(self, "destroyBombedWall", null, 0.25f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int blowDroppedBomb(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(poi.getBaseObject(self), "playerSabotage", true);
         location bombloc = getLocationObjVar(self, "weakwallLoc");
         bombloc.x += 5;
-        obj_id players[] = getPlayerCreaturesInRange(bombloc, 40);
-        for (obj_id player : players) {
-            if ((player != null) && (player != obj_id.NULL_ID)) {
+        obj_id[] players = getPlayerCreaturesInRange(bombloc, 40);
+        for (obj_id player : players)
+        {
+            if ((player != null) && (player != obj_id.NULL_ID))
+            {
                 playClientEffectLoc(player, "clienteffect/combat_grenade_large_01.cef", bombloc, 0);
             }
         }
         messageTo(self, "destroyBombedWallDeath", null, 0.25f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int destroyBombedWall(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id bombedWall = getBombedWall(self);
@@ -391,6 +427,7 @@ public class master extends script.theme_park.poi.base
         messageTo(m, "attackEveryone", null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int destroyBombedWallDeath(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id bombedWall = getBombedWall(self);
@@ -419,7 +456,7 @@ public class master extends script.theme_park.poi.base
             {
                 setHealth(found, -50);
             }
-            else 
+            else
             {
                 setHealth(found, getMaxHealth(found) / 3);
             }
@@ -434,6 +471,7 @@ public class master extends script.theme_park.poi.base
         messageTo(m, "attackEveryone", parms, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleActorDeath(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -448,7 +486,7 @@ public class master extends script.theme_park.poi.base
         {
             deadlist = scenario.VAR_SCENARIO_DEAD_ANTAGONIST;
         }
-        else 
+        else
         {
             deadlist = scenario.VAR_SCENARIO_DEAD_MEDIATOR;
         }
@@ -458,7 +496,7 @@ public class master extends script.theme_park.poi.base
         {
             setObjVar(self, deadlist, dead);
         }
-        else 
+        else
         {
             if (hasObjVar(self, deadlist))
             {
@@ -467,6 +505,7 @@ public class master extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public obj_id getBombedWall(obj_id self) throws InterruptedException
     {
         obj_id myTheater = getObjIdObjVar(self, "theater");
@@ -479,15 +518,21 @@ public class master extends script.theme_park.poi.base
         {
             return null;
         }
-        else 
+        else
         {
             int j = 0;
-            for (obj_id child : children) {
-                if ((child == null) || (child == obj_id.NULL_ID)) {
-                } else {
+            for (obj_id child : children)
+            {
+                if ((child == null) || (child == obj_id.NULL_ID))
+                {
+                }
+                else
+                {
                     String childname = getName(child);
-                    if (childname.equals("battlefield:barbed_wall")) {
-                        if (j == 0) {
+                    if (childname.equals("battlefield:barbed_wall"))
+                    {
+                        if (j == 0)
+                        {
                             return child;
                         }
                         j++;
@@ -497,6 +542,7 @@ public class master extends script.theme_park.poi.base
         }
         return null;
     }
+
     public int enableBombedWall(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id weakwall = getObjIdObjVar(self, "weakwall");
@@ -507,6 +553,7 @@ public class master extends script.theme_park.poi.base
         messageTo(weakwall, "enableBombedWall", null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int wallDamaged(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)

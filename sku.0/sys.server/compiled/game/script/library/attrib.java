@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 public class attrib extends script.base_script
 {
     public static final int ALL = 1;
@@ -22,6 +28,7 @@ public class attrib extends script.base_script
     public static final int OUTBREAK_SURVIVOR = 17;
     public static final int OUTBREAK_AFFLICTED = 18;
     public static final int OUTBREAK_SURVIVOR_GUARD = 19;
+
     public attrib()
     {
     }

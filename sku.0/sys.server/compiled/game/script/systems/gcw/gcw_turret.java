@@ -1,5 +1,11 @@
 package script.systems.gcw;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -7,6 +13,7 @@ public class gcw_turret extends script.base_script
 {
     public static final string_id SID_MNU_REPAIR = new string_id("sui", "mnu_repair");
     public static final string_id SID_MNU_DEFEND = new string_id("sui", "mnu_defend");
+
     public gcw_turret()
     {
     }
@@ -53,7 +60,7 @@ public class gcw_turret extends script.base_script
         int repairCount = getIntObjVar(self, gcw.GCW_OBJECT_REPAIR_COUNT);
         if (repairCount > 0)
         {
-            attribs[idx] = "" + repairCount + " out of " + gcw.REPAIR_COUNT_MAX;
+            attribs[idx] = repairCount + " out of " + gcw.REPAIR_COUNT_MAX;
         }
         else
         {

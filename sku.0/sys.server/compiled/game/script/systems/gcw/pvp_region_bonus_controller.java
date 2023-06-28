@@ -1,5 +1,11 @@
 package script.systems.gcw;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.factions;
 import script.library.gcw;
@@ -18,6 +24,7 @@ public class pvp_region_bonus_controller extends script.base_script
     public static final String CYCLE_ITTERATION = "gcw_pvp_region.cycle_itteration";
     public static final String GCW_REGION_DATA = "gcw_pvp_region";
     public static final String LAST_CYCLE = "gcw_pvp_region.lastCycle";
+
     public pvp_region_bonus_controller()
     {
     }
@@ -175,7 +182,7 @@ public class pvp_region_bonus_controller extends script.base_script
             return recordList;
         }
         doLogging("xx", "Player is " + faction);
-        String newEntry = "" + player + "-" + faction + "-" + uniqueHits + "-" + deaths;
+        String newEntry = player + "-" + faction + "-" + uniqueHits + "-" + deaths;
         utils.addElement(recordList, newEntry);
         doLogging("xx", "Adding element to array: " + newEntry);
         return recordList;
@@ -225,7 +232,7 @@ public class pvp_region_bonus_controller extends script.base_script
         String[] parse = split(((String) recordList.get(playerData)), '-');
         int uniqueHits = utils.stringToInt(parse[2]);
         uniqueHits += 1;
-        String updatedData = "" + parse[0] + "-" + parse[1] + "-" + uniqueHits + "-" + parse[3];
+        String updatedData = parse[0] + "-" + parse[1] + "-" + uniqueHits + "-" + parse[3];
         doLogging("incrementUpdateHitsByPlayer", "Updating Data: " + recordList.get(playerData) + " to " + updatedData);
         recordList.set(playerData, updatedData);
         return recordList;
@@ -241,7 +248,7 @@ public class pvp_region_bonus_controller extends script.base_script
         {
             deaths = gcw.MAX_DEATH_BY_PLAYER;
         }
-        String updatedData = "" + parse[0] + "-" + parse[1] + "-" + parse[2] + "-" + deaths;
+        String updatedData = parse[0] + "-" + parse[1] + "-" + parse[2] + "-" + deaths;
         doLogging("incrementDeathsByPlayer", "updating Data: " + recordList.get(playerData) + " to " + updatedData);
         recordList.set(playerData, updatedData);
         return recordList;

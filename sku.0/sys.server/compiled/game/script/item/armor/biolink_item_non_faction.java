@@ -1,5 +1,11 @@
 package script.item.armor;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.combat;
 import script.library.sui;
@@ -15,6 +21,7 @@ public class biolink_item_non_faction extends script.base_script
     public static final string_id SID_BIO_LINK_MSG_PROMPT = new string_id("sui", "bio_link_item_prompt");
     public static final string_id SID_BIO_LINK_MSG_TITLE = new string_id("sui", "bio_link_item_title");
     public static final string_id SID_SPECIES_CANNOT_EQUIP = new string_id("base_player", "species_cannot_equip");
+
     public biolink_item_non_faction()
     {
     }

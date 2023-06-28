@@ -1,5 +1,11 @@
 package script.item.comestible;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.consumable;
 import script.library.metrics;
@@ -10,6 +16,7 @@ public class spice extends script.base_script
     public static final string_id SID_SYS_ALREADY_SPICED = new string_id("spice/spice", "sys_already_spiced");
     public static final String EXAM_ATTRIB_MOD = "attribmods";
     public static final String EXAM_NONE = "@consumable:none";
+
     public spice()
     {
     }

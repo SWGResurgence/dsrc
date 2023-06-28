@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.clone_relic;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,13 +14,14 @@ public class spawned_creature_died extends script.base_script
     public spawned_creature_died()
     {
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "respawn_called"))
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             setObjVar(self, "respawn_called", 1);
         }
@@ -37,13 +44,14 @@ public class spawned_creature_died extends script.base_script
         messageTo(mom, "tellingMomIDied", info, respawnTime, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDisabled(obj_id self, obj_id killer) throws InterruptedException
     {
         if (hasObjVar(self, "respawn_called"))
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             setObjVar(self, "respawn_called", 1);
         }

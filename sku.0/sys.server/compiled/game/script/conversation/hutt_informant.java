@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.utils;
@@ -7,28 +13,30 @@ import script.*;
 
 public class hutt_informant extends script.base_script
 {
+    public static String c_stringFile = "conversation/hutt_informant";
+
     public hutt_informant()
     {
     }
-    public static String c_stringFile = "conversation/hutt_informant";
+
     public boolean hutt_informant_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean hutt_informant_condition_HasItem(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "bestine.mess"))
         {
-            if (utils.playerHasItemByTemplate(player, "object/tangible/loot/quest/sean_history_disk.iff"))
-            {
-                return true;
-            }
+            return utils.playerHasItemByTemplate(player, "object/tangible/loot/quest/sean_history_disk.iff");
         }
         return false;
     }
+
     public void hutt_informant_action__defaultAction(obj_id player, obj_id npc) throws InterruptedException
     {
     }
+
     public void hutt_informant_action_destroyDisk(obj_id player, obj_id npc) throws InterruptedException
     {
         if (isIdValid(player))
@@ -58,8 +66,8 @@ public class hutt_informant extends script.base_script
                 }
             }
         }
-        return;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -69,6 +77,7 @@ public class hutt_informant extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -78,6 +87,7 @@ public class hutt_informant extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -86,12 +96,14 @@ public class hutt_informant extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "npc.conversation.hutt_informant");
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -113,7 +125,7 @@ public class hutt_informant extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_f660c800");
@@ -121,7 +133,7 @@ public class hutt_informant extends script.base_script
                 setObjVar(player, "conversation.hutt_informant.branchId", 1);
                 npcStartConversation(player, self, "hutt_informant", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -136,6 +148,7 @@ public class hutt_informant extends script.base_script
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("hutt_informant"))
@@ -174,7 +187,7 @@ public class hutt_informant extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_139f41b9");
@@ -191,7 +204,7 @@ public class hutt_informant extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.hutt_informant.branchId");
                     npcSpeak(player, message);
@@ -219,7 +232,7 @@ public class hutt_informant extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_54b54bd0");
@@ -228,7 +241,7 @@ public class hutt_informant extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.hutt_informant.branchId");
                     npcSpeak(player, message);

@@ -1,31 +1,43 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class sheeli extends script.base_script
 {
+    public static String c_stringFile = "conversation/sheeli";
+
     public sheeli()
     {
     }
-    public static String c_stringFile = "conversation/sheeli";
+
     public boolean sheeli_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean sheeli_condition_isRescuer(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "u16_nym_themepark_rescue_sheeli", "rescueSheeli");
     }
+
     public boolean sheeli_condition_hasArrived(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "u16_nym_themepark_rescue_sheeli", "waitingForShuttle");
     }
+
     public boolean sheeli_condition_isTraveling(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return hasObjVar(npc, "traveling") && getIntObjVar(npc, "traveling") == 1 && groundquests.isTaskActive(player, "u16_nym_themepark_rescue_sheeli", "getToPickUp");
     }
+
     public void sheeli_action_startEscort(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "hasRescuedSheeli");
@@ -38,12 +50,14 @@ public class sheeli extends script.base_script
         setMaster(npc, player);
         messageTo(npc, "checkArrivalLoopHandler", null, 5, false);
     }
+
     public void sheeli_action_walkFaster(obj_id player, obj_id npc) throws InterruptedException
     {
         setMovementRun(npc);
         setBaseRunSpeed(npc, (getBaseRunSpeed(npc) - 8));
         ai_lib.aiFollow(npc, player, 1.0f, 3.0f);
     }
+
     public int sheeli_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_8"))
@@ -60,6 +74,7 @@ public class sheeli extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -69,6 +84,7 @@ public class sheeli extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -76,6 +92,7 @@ public class sheeli extends script.base_script
         messageTo(self, "startFollowingOwner", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         if (!hasObjVar(self, "quest.owner"))
@@ -95,17 +112,20 @@ public class sheeli extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.sheeli");
         return SCRIPT_CONTINUE;
     }
+
     public int handleDestroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int startFollowingOwner(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "quest.owner"))
@@ -130,6 +150,7 @@ public class sheeli extends script.base_script
         messageTo(self, "checkArrivalLoopHandler", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int checkArrivalLoopHandler(obj_id self, dictionary params) throws InterruptedException
     {
         CustomerServiceLog("nyms_themepark", "checkArrivalLoopHandler - Setting move to run.");
@@ -166,6 +187,7 @@ public class sheeli extends script.base_script
         messageTo(self, "checkArrivalLoopHandler", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleUpdatePrisonerRescueQuest(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self))
@@ -183,6 +205,7 @@ public class sheeli extends script.base_script
         groundquests.sendSignal(player, "shuttleHasArrived");
         return SCRIPT_CONTINUE;
     }
+
     public boolean callShuttle(obj_id self, obj_id player) throws InterruptedException
     {
         CustomerServiceLog("nyms_themepark", "callShuttle - Shuttle Called");
@@ -228,6 +251,7 @@ public class sheeli extends script.base_script
         messageTo(self, "handleDestroySelf", null, 32, false);
         return true;
     }
+
     public boolean failRescueQuest(obj_id self) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, "quest.owne");
@@ -240,12 +264,14 @@ public class sheeli extends script.base_script
         messageTo(self, "handleDestroySelf", null, 1, false);
         return true;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -283,7 +309,7 @@ public class sheeli extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_8");
@@ -291,7 +317,7 @@ public class sheeli extends script.base_script
                 utils.setScriptVar(player, "conversation.sheeli.branchId", 3);
                 npcStartConversation(player, npc, "sheeli", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -306,6 +332,7 @@ public class sheeli extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("sheeli"))

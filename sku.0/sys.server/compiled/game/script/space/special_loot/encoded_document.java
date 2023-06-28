@@ -1,5 +1,11 @@
 package script.space.special_loot;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -7,9 +13,6 @@ import java.util.StringTokenizer;
 
 public class encoded_document extends script.base_script
 {
-    public encoded_document()
-    {
-    }
     public static final string_id SID_USE = new string_id("space/encoded_doc", "use");
     public static final string_id SID_READ = new string_id("space/encoded_doc", "read");
     public static final string_id STORE_WAYPOINT = new string_id("space/encoded_doc", "stored_waypoint");
@@ -22,6 +25,10 @@ public class encoded_document extends script.base_script
     public static final String SID_CLOSE = "@space/encoded_doc:close";
     public static final String EVENT_TABLE = "datatables/spacequest/encoded_doc.iff";
     public static final String VAR_INDEX = "idx";
+    public encoded_document()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         dictionary eventEntry = scenario.getRandomScenario(EVENT_TABLE);
@@ -33,6 +40,7 @@ public class encoded_document extends script.base_script
         setObjVar(self, VAR_INDEX, idx);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         dictionary eventEntry = dataTableGetRow(EVENT_TABLE, getIntObjVar(self, VAR_INDEX));
@@ -41,6 +49,7 @@ public class encoded_document extends script.base_script
         mi.addSubMenu(mnu, menu_info_types.SERVER_MENU3, new string_id("space/encoded_doc", eventEntry.getString("useOption")));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU2)
@@ -53,24 +62,29 @@ public class encoded_document extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public obj_id getWaypoint(obj_id self, obj_id player) throws InterruptedException
     {
         location eventLoc = getLocationObjVar(self, "eventLoc");
         obj_id[] data = getWaypointsInDatapad(player);
         if (data != null)
         {
-            for (obj_id datum : data) {
-                if (datum == null) {
+            for (obj_id datum : data)
+            {
+                if (datum == null)
+                {
                     continue;
                 }
                 location waypointLoc = getWaypointLocation(datum);
-                if ((waypointLoc != null) && (waypointLoc.equals(eventLoc))) {
+                if ((waypointLoc != null) && (waypointLoc.equals(eventLoc)))
+                {
                     return datum;
                 }
             }
         }
         return null;
     }
+
     public void displayDialog(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id inventory = getObjectInSlot(player, "inventory");
@@ -97,6 +111,7 @@ public class encoded_document extends script.base_script
         }
         createDialog(self, player, text, title);
     }
+
     public int createDialog(obj_id self, obj_id player, String text, String title) throws InterruptedException
     {
         if (player == null)
@@ -112,6 +127,7 @@ public class encoded_document extends script.base_script
         sui.showSUIPage(pid);
         return pid;
     }
+
     public int handleDialogInput(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -123,13 +139,14 @@ public class encoded_document extends script.base_script
         switch (bp)
         {
             case sui.BP_CANCEL:
-            storeWaypoint(self, player);
-            return SCRIPT_CONTINUE;
+                storeWaypoint(self, player);
+                return SCRIPT_CONTINUE;
             case sui.BP_OK:
-            return SCRIPT_CONTINUE;
+                return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public void storeWaypoint(obj_id self, obj_id player) throws InterruptedException
     {
         dictionary eventEntry = dataTableGetRow(EVENT_TABLE, getIntObjVar(self, VAR_INDEX));
@@ -148,7 +165,7 @@ public class encoded_document extends script.base_script
             {
                 locx = rand(0, 7000);
             }
-            else 
+            else
             {
                 locx = rand(0, 7000);
             }
@@ -156,7 +173,7 @@ public class encoded_document extends script.base_script
             {
                 locy = rand(0, 7000);
             }
-            else 
+            else
             {
                 locy = rand(0, 7000);
             }
@@ -164,14 +181,14 @@ public class encoded_document extends script.base_script
             {
                 locz = rand(0, 7000);
             }
-            else 
+            else
             {
                 locz = rand(0, 7000);
             }
             eventLoc = new location(locx, locy, locz);
             setObjVar(self, "storedLoc", eventLoc);
         }
-        else 
+        else
         {
             eventLoc = getLocationObjVar(self, "storedLoc");
         }
@@ -190,6 +207,7 @@ public class encoded_document extends script.base_script
             sendSystemMessage(player, STORE_WAYPOINT);
         }
     }
+
     public void doAction(obj_id self, obj_id player) throws InterruptedException
     {
         dictionary eventEntry = dataTableGetRow(EVENT_TABLE, getIntObjVar(self, VAR_INDEX));
@@ -219,6 +237,7 @@ public class encoded_document extends script.base_script
         outparams.put("player", player);
         messageTo(self, "timerDone", outparams, 30 + rand(30, 120), false);
     }
+
     public int timerDone(obj_id self, dictionary params) throws InterruptedException
     {
         dictionary eventEntry = dataTableGetRow(EVENT_TABLE, getIntObjVar(self, VAR_INDEX));
@@ -246,21 +265,22 @@ public class encoded_document extends script.base_script
                 switch (shipBehaviors[i])
                 {
                     case 0:
-                    ship_ai.spaceAttack(newship, getPilotedShip(player));
-                    break;
+                        ship_ai.spaceAttack(newship, getPilotedShip(player));
+                        break;
                     case 1:
-                    break;
+                        break;
                     case 2:
-                    String[] navPoints = dataTableGetStringColumn("datatables/spacequest/navlists/" + patrolLists[i] + ".iff", "navPoints");
-                    transform[] epts = getEnemyPatrolTransforms(self, navPoints);
-                    ship_ai.spacePatrol(newship, epts);
-                    break;
+                        String[] navPoints = dataTableGetStringColumn("datatables/spacequest/navlists/" + patrolLists[i] + ".iff", "navPoints");
+                        transform[] epts = getEnemyPatrolTransforms(self, navPoints);
+                        ship_ai.spacePatrol(newship, epts);
+                        break;
                 }
             }
         }
         sendSystemMessage(player, new string_id("space/encoded_doc", "event_" + entryName));
         return SCRIPT_CONTINUE;
     }
+
     public transform[] getEnemyPatrolTransforms(obj_id self, String[] navPoints) throws InterruptedException
     {
         obj_id questManager = getNamedObject(space_quest.QUEST_MANAGER);
@@ -272,13 +292,15 @@ public class encoded_document extends script.base_script
         transform[] translist = new transform[navPoints.length];
         for (int j = 0; j < navPoints.length; j++)
         {
-            for (obj_id point : points) {
+            for (obj_id point : points)
+            {
                 String pointName = getStringObjVar(point, "nav_name");
                 String nName = navPoints[j];
                 StringTokenizer st = new StringTokenizer(nName, ":");
                 String scene = st.nextToken();
                 nName = st.nextToken();
-                if ((pointName != null) && pointName.equals(nName)) {
+                if ((pointName != null) && pointName.equals(nName))
+                {
                     translist[j] = getTransform_o2w(point);
                     break;
                 }

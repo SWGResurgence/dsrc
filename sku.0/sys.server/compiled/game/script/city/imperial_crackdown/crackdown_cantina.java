@@ -1,5 +1,11 @@
 package script.city.imperial_crackdown;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -8,16 +14,19 @@ import script.string_id;
 
 public class crackdown_cantina extends script.base_script
 {
+    public static String CONVO = "npc_reaction/imperial_crackdown_cantina";
+
     public crackdown_cantina()
     {
     }
-    public static String CONVO = "npc_reaction/imperial_crackdown_cantina";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id foyer = getCellId(self, "foyer1");
         attachScript(foyer, "city.imperial_crackdown.door_check");
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "resetCrackDown", null, 1, false);
@@ -27,6 +36,7 @@ public class crackdown_cantina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int resetCrackDown(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "crackdownHappened"))
@@ -35,6 +45,7 @@ public class crackdown_cantina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int doTroubleCheck(obj_id self, dictionary params) throws InterruptedException
     {
         removeObjVar(self, "crackdownHappened");
@@ -51,7 +62,7 @@ public class crackdown_cantina extends script.base_script
             messageTo(self, "createTrouble", null, 15, false);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             String trouble = getConfigSetting("Imperial Crackdown", "troubleChance");
             int chanceOfTrouble = utils.stringToInt(trouble);
@@ -65,7 +76,7 @@ public class crackdown_cantina extends script.base_script
                 messageTo(self, "createTrouble", null, 15, false);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 if (hasObjVar(self, "checkingForTrouble"))
                 {
@@ -75,6 +86,7 @@ public class crackdown_cantina extends script.base_script
             }
         }
     }
+
     public int createTrouble(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, "crackdownHappened", 1);
@@ -108,7 +120,7 @@ public class crackdown_cantina extends script.base_script
             troublemaker = "crackdown_stormtrooper";
             faction = "imperial";
         }
-        else 
+        else
         {
             troublemaker = "crackdown_rebel_command_security_guard";
             faction = "rebel";
@@ -122,6 +134,7 @@ public class crackdown_cantina extends script.base_script
         messageTo(trooper, "startMoving", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int createFight(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id foyer = getCellId(self, "foyer1");
@@ -134,6 +147,7 @@ public class crackdown_cantina extends script.base_script
         pathTo(trooper, fight);
         return SCRIPT_CONTINUE;
     }
+
     public int sendBackup(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id attacker = params.getObjId("attacker");
@@ -149,7 +163,7 @@ public class crackdown_cantina extends script.base_script
         {
             troublemaker = "crackdown_rebel_command_security_guard";
         }
-        else 
+        else
         {
             troublemaker = "crackdown_stormtrooper";
         }
@@ -161,7 +175,8 @@ public class crackdown_cantina extends script.base_script
 
         obj_id backup;
 
-        for (location impLoc : impLocs) {
+        for (location impLoc : impLocs)
+        {
             backup = create.object(troublemaker, impLoc);
             attachScript(backup, "city.imperial_crackdown.imperial_backup");
             setObjVar(backup, "whereToFight", where);

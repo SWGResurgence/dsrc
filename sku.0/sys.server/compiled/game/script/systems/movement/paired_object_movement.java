@@ -1,5 +1,11 @@
 package script.systems.movement;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.instance;
 import script.library.trial;
 import script.library.utils;
@@ -21,6 +27,7 @@ public class paired_object_movement extends script.base_script
                     menu_info_types.SERVER_MENU4,
                     menu_info_types.SERVER_MENU5
             };
+
     public paired_object_movement()
     {
     }

@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 public class poi extends script.base_script
@@ -28,6 +34,7 @@ public class poi extends script.base_script
     public static final String POI_FACTION_VALUE = "poi.factionValue";
     public static final String POI_OBJECTIVE = "poi.objective";
     public static final String POI_OBJECT_SCRIPT = "theme_park.poi.poi_object";
+
     public poi()
     {
     }

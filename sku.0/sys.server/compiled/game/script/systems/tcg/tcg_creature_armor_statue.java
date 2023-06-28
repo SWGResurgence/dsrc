@@ -1,5 +1,11 @@
 package script.systems.tcg;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.player_structure;
@@ -16,6 +22,7 @@ public class tcg_creature_armor_statue extends script.base_script
     public static final string_id SID_NO_CREATURE_IN_DP = new string_id("tcg", "no_creature_in_dp");
     public static final string_id SID_VAC_ARMOR_ADDED = new string_id("tcg", "armor_added");
     public static final string_id SID_VAC_ARMOR_REMOVED = new string_id("tcg", "armor_removed");
+
     public tcg_creature_armor_statue()
     {
     }
@@ -83,7 +90,7 @@ public class tcg_creature_armor_statue extends script.base_script
             {
                 String cName = getStringObjVar(bcd, "pet.creatureName");
                 String[] eligibleMounts = getEligibleBeastsList(self);
-                if (eligibleMounts != null && eligibleMounts.length > 0)
+                if (eligibleMounts != null)
                 {
                     for (String mountName : eligibleMounts)
                     {

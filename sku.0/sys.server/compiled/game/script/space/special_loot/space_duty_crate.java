@@ -1,5 +1,11 @@
 package script.space.special_loot;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.smuggler;
 import script.library.static_item;
 import script.library.utils;
@@ -10,16 +16,18 @@ import script.string_id;
 
 public class space_duty_crate extends script.base_script
 {
+    public static final string_id SID_OPEN_CRATE = new string_id("spam", "open_crate");
+    public static final String LOOT_LIST = "datatables/space_loot/piracy_loot/crate_list.iff";
     public space_duty_crate()
     {
     }
-    public static final string_id SID_OPEN_CRATE = new string_id("spam", "open_crate");
-    public static final String LOOT_LIST = "datatables/space_loot/piracy_loot/crate_list.iff";
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.ITEM_USE, new string_id(SID_OPEN_CRATE));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(self))
@@ -44,6 +52,7 @@ public class space_duty_crate extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void createLoot(obj_id self, obj_id player, int difficulty) throws InterruptedException
     {
         obj_id inventory = utils.getInventoryContainer(player);
@@ -109,7 +118,7 @@ public class space_duty_crate extends script.base_script
                     {
                         incrementCount(module, rand(1, 2));
                     }
-                    else 
+                    else
                     {
                         static_item.createNewItemFunction("item_reward_modify_pistol_01_01", player);
                         module = utils.getStaticItemInInventory(player, "item_reward_modify_pistol_01_01");
@@ -120,6 +129,7 @@ public class space_duty_crate extends script.base_script
         }
         destroyObject(self);
     }
+
     public String generateRegularItem(obj_id player) throws InterruptedException
     {
         String[] compType = dataTableGetStringColumnNoDefaults(LOOT_LIST, "componentType");
@@ -128,8 +138,10 @@ public class space_duty_crate extends script.base_script
             return null;
         }
         int realCompTypeLength = 0;
-        for (String s : compType) {
-            if (s != null && s.length() > 0) {
+        for (String s : compType)
+        {
+            if (s != null && s.length() > 0)
+            {
                 realCompTypeLength++;
             }
         }
@@ -145,6 +157,7 @@ public class space_duty_crate extends script.base_script
         String item = compList[rand(0, (compList.length - 1))];
         return item;
     }
+
     public String generateRareItem(obj_id player, String type) throws InterruptedException
     {
         String[] compList = dataTableGetStringColumnNoDefaults(LOOT_LIST, type);

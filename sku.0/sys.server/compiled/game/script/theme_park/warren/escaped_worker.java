@@ -1,16 +1,23 @@
 package script.theme_park.warren;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.*;
 
 public class escaped_worker extends script.base_script
 {
+    public static final String CONVO_FILE = "theme_park/warren/warren";
+    public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
     public escaped_worker()
     {
     }
-    public static final String CONVO_FILE = "theme_park/warren/warren";
-    public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_LOITER);
@@ -21,6 +28,7 @@ public class escaped_worker extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int mnu = mi.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -28,6 +36,7 @@ public class escaped_worker extends script.base_script
         mdata.setServerNotify(false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(speaker) || ai_lib.aiIsDead(self))
@@ -37,12 +46,13 @@ public class escaped_worker extends script.base_script
         chat.setChatMood(self, chat.MOOD_SCARED);
         faceToBehavior(self, speaker);
         string_id greeting = new string_id(CONVO_FILE, "worker_start");
-        string_id response[] = new string_id[2];
+        string_id[] response = new string_id[2];
         response[0] = new string_id(CONVO_FILE, "worker_reply_1");
         response[1] = new string_id(CONVO_FILE, "worker_reply_2");
         npcStartConversation(speaker, self, CONVO_FILE, greeting, response);
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convo, obj_id player, string_id response) throws InterruptedException
     {
         if (!convo.equals(CONVO_FILE))
@@ -92,6 +102,7 @@ public class escaped_worker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         obj_id warren = getObjIdObjVar(self, "warren.bldg");

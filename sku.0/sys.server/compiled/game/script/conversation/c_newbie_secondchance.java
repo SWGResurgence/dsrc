@@ -1,166 +1,174 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class c_newbie_secondchance extends script.base_script
 {
+    public static String c_stringFile = "conversation/c_newbie_secondchance";
+
     public c_newbie_secondchance()
     {
     }
-    public static String c_stringFile = "conversation/c_newbie_secondchance";
+
     public boolean c_newbie_secondchance_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean c_newbie_secondchance_condition_combatHigh(obj_id player, obj_id npc) throws InterruptedException
     {
-        if ((combat.getLevel(player)) > 9)
-        {
-            return true;
-        }
-        return false;
+        return (combat.getLevel(player)) > 9;
     }
+
     public boolean c_newbie_secondchance_condition_combatLow(obj_id player, obj_id npc) throws InterruptedException
     {
-        if ((combat.getLevel(player)) < 10)
-        {
-            return true;
-        }
-        return false;
+        return (combat.getLevel(player)) < 10;
     }
+
     public boolean c_newbie_secondchance_condition_safety(obj_id player, obj_id npc) throws InterruptedException
     {
         return false;
     }
+
     public boolean c_newbie_secondchance_condition_impOnQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "tatooine_eisley_gotoimp");
     }
+
     public boolean c_newbie_secondchance_condition_smugOnQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "tatooine_eisley_gotosmug");
     }
+
     public boolean c_newbie_secondchance_condition_rebOnQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "tatooine_eisley_gotoreb");
     }
+
     public boolean c_newbie_secondchance_condition_pilotOnQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         boolean imp = groundquests.isQuestActive(player, "quest/tatooine_eisley_gotoimp");
         boolean reb = groundquests.isQuestActive(player, "tatooine_eisley_gotoreb");
         boolean smug = groundquests.isQuestActive(player, "tatooine_eisley_gotosmug");
-        if (imp || reb || smug)
-        {
-            return false;
-        }
-        return true;
+        return !imp && !reb && !smug;
     }
+
     public boolean c_newbie_secondchance_condition_trehlaOnQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActiveOrComplete(player, "tatooine_eisley_gototrehla_v2");
     }
+
     public boolean c_newbie_secondchance_condition_newbieStart(obj_id player, obj_id npc) throws InterruptedException
     {
         boolean niko = groundquests.isQuestActiveOrComplete(player, "tatooine_eisley_gotoniko");
         boolean mayor = groundquests.isQuestActiveOrComplete(player, "tatooine_eisley_gotomayor");
-        if (niko || mayor)
-        {
-            return false;
-        }
-        return true;
+        return !niko && !mayor;
     }
+
     public boolean c_newbie_secondchance_condition_mayorAndTen(obj_id player, obj_id npc) throws InterruptedException
     {
         return ((groundquests.hasCompletedQuest(player, "newbie_scout_pt6") || groundquests.hasCompletedQuest(player, "purvis_kill_warriors") || groundquests.hasCompletedQuest(player, "newbie_mayor_vaigon_shinn")) && (c_newbie_secondchance_condition_combatHigh(player, npc)));
     }
+
     public boolean c_newbie_secondchance_condition_bibOnQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         boolean niko = groundquests.isQuestActive(player, "tatooine_eisley_gotoniko");
         boolean mayor = groundquests.isQuestActive(player, "tatooine_eisley_gotomayor");
-        if (niko || mayor)
-        {
-            return true;
-        }
-        return false;
+        return niko || mayor;
     }
+
     public boolean c_newbie_secondchance_condition_isAcquiringVehicle(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isQuestActive(player, "quest/steal_speeder") || groundquests.isQuestActive(player, "quest/build_speeder"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isQuestActive(player, "quest/steal_speeder") || groundquests.isQuestActive(player, "quest/build_speeder");
     }
+
     public boolean c_newbie_secondchance_condition_needsVehicle(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.hasCompletedQuest(player, "quest/build_speeder") || groundquests.hasCompletedQuest(player, "quest/steal_speeder"))
-        {
-            return false;
-        }
-        return true;
+        return !groundquests.hasCompletedQuest(player, "quest/build_speeder") && !groundquests.hasCompletedQuest(player, "quest/steal_speeder");
     }
+
     public boolean c_newbie_secondchance_condition_alreadyOnNiko(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActiveOrComplete(player, "tatooine_eisley_nikos_coins");
     }
+
     public boolean c_newbie_secondchance_condition_allComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "tatooine_eisley_faceevil");
     }
+
     public boolean c_newbie_secondchance_condition_onTrehla(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "quest/c_newbie_quest1") || groundquests.isQuestActive(player, "quest/c_newbie_quest1a") || groundquests.isQuestActive(player, "quest/c_newbie_quest4") || groundquests.isQuestActive(player, "quest/c_newbie_quest5") || groundquests.isQuestActive(player, "quest/c_newbie_quest6") || groundquests.isQuestActive(player, "quest/tatooine_eisley_gototrehla_v2"));
     }
+
     public boolean c_newbie_secondchance_condition_FinishedAllMayor(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "newbie_scout_pt6") && groundquests.hasCompletedQuest(player, "purvis_kill_warriors") && groundquests.hasCompletedQuest(player, "newbie_mayor_vaigon_shinn"));
     }
+
     public boolean c_newbie_secondchance_condition_fromMayor(obj_id player, obj_id npc) throws InterruptedException
     {
         return (c_newbie_secondchance_condition_mayorAndTen(player, npc) || c_newbie_secondchance_condition_FinishedAllMayor(player, npc));
     }
+
     public void c_newbie_secondchance_action_signalOffer(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "tat_eisley_legacy_e2");
     }
+
     public void c_newbie_secondchance_action_facePlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
     }
+
     public void c_newbie_secondchance_action_sendToMajolnir(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "tat_eisley_legacy_e2");
         groundquests.requestGrantQuest(player, "quest/find_majolnir");
     }
+
     public void c_newbie_secondchance_action_signalGotoVourk(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "newbie_goto_vourk");
     }
+
     public void c_newbie_secondchance_action_facePlayerAndSignalVourk(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "newbie_goto_vourk");
         faceTo(npc, player);
     }
+
     public void c_newbie_secondchance_action_grantImp(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/tatooine_eisley_gotoimp");
         groundquests.grantQuest(questId, player, npc, true);
     }
+
     public void c_newbie_secondchance_action_grantReb(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/tatooine_eisley_gotoreb");
         groundquests.grantQuest(questId, player, npc, true);
     }
+
     public void c_newbie_secondchance_action_grantSmug(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/tatooine_eisley_gotosmug");
         groundquests.grantQuest(questId, player, npc, true);
     }
+
     public void c_newbie_secondchance_action_grantTrehla(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "tatooine_eisley_gototrehla_v2");
     }
+
     public void c_newbie_secondchance_action_grantStart(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "tat_eisley_legacy_e2");
@@ -169,17 +177,19 @@ public class c_newbie_secondchance extends script.base_script
             int questId = questGetQuestId("quest/tatooine_eisley_gotoniko");
             groundquests.grantQuest(questId, player, npc, true);
         }
-        else 
+        else
         {
             int questId1 = questGetQuestId("quest/tatooine_eisley_gotomayor");
             groundquests.grantQuest(questId1, player, npc, true);
         }
     }
+
     public void c_newbie_secondchance_action_grantTalkNiko(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/tatooine_eisley_talkniko");
         groundquests.grantQuest(questId, player, npc, true);
     }
+
     public int c_newbie_secondchance_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_86"))
@@ -199,7 +209,7 @@ public class c_newbie_secondchance extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_90");
@@ -208,7 +218,7 @@ public class c_newbie_secondchance extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_secondchance.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -218,6 +228,7 @@ public class c_newbie_secondchance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_secondchance_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_90"))
@@ -237,7 +248,7 @@ public class c_newbie_secondchance extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_94");
@@ -246,7 +257,7 @@ public class c_newbie_secondchance extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_secondchance.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -256,6 +267,7 @@ public class c_newbie_secondchance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_secondchance_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_94"))
@@ -272,6 +284,7 @@ public class c_newbie_secondchance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_secondchance_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_100"))
@@ -292,7 +305,7 @@ public class c_newbie_secondchance extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_104");
@@ -301,7 +314,7 @@ public class c_newbie_secondchance extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_secondchance.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -326,7 +339,7 @@ public class c_newbie_secondchance extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_112");
@@ -335,7 +348,7 @@ public class c_newbie_secondchance extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_secondchance.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -345,6 +358,7 @@ public class c_newbie_secondchance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_secondchance_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_104"))
@@ -359,6 +373,7 @@ public class c_newbie_secondchance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_secondchance_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_112"))
@@ -373,6 +388,7 @@ public class c_newbie_secondchance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_secondchance_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_62"))
@@ -388,6 +404,7 @@ public class c_newbie_secondchance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_secondchance_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_118"))
@@ -415,7 +432,7 @@ public class c_newbie_secondchance extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_122");
@@ -428,7 +445,7 @@ public class c_newbie_secondchance extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_secondchance.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -438,6 +455,7 @@ public class c_newbie_secondchance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_secondchance_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_122"))
@@ -457,7 +475,7 @@ public class c_newbie_secondchance extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_126");
@@ -466,7 +484,7 @@ public class c_newbie_secondchance extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_secondchance.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -493,7 +511,7 @@ public class c_newbie_secondchance extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_64");
@@ -502,7 +520,7 @@ public class c_newbie_secondchance extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_secondchance.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -512,6 +530,7 @@ public class c_newbie_secondchance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_secondchance_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_126"))
@@ -531,7 +550,7 @@ public class c_newbie_secondchance extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_130");
@@ -540,7 +559,7 @@ public class c_newbie_secondchance extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_secondchance.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -550,6 +569,7 @@ public class c_newbie_secondchance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_secondchance_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_130"))
@@ -583,7 +603,7 @@ public class c_newbie_secondchance extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_134");
@@ -600,7 +620,7 @@ public class c_newbie_secondchance extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_secondchance.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -610,6 +630,7 @@ public class c_newbie_secondchance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_secondchance_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_134"))
@@ -669,7 +690,7 @@ public class c_newbie_secondchance extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_146");
@@ -686,7 +707,7 @@ public class c_newbie_secondchance extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_secondchance.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -696,6 +717,7 @@ public class c_newbie_secondchance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_secondchance_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_146"))
@@ -715,7 +737,7 @@ public class c_newbie_secondchance extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_150");
@@ -724,7 +746,7 @@ public class c_newbie_secondchance extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_secondchance.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -749,7 +771,7 @@ public class c_newbie_secondchance extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_158");
@@ -758,7 +780,7 @@ public class c_newbie_secondchance extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_secondchance.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -783,7 +805,7 @@ public class c_newbie_secondchance extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_166");
@@ -792,7 +814,7 @@ public class c_newbie_secondchance extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_secondchance.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -802,6 +824,7 @@ public class c_newbie_secondchance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_secondchance_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_150"))
@@ -836,7 +859,7 @@ public class c_newbie_secondchance extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_134");
@@ -853,7 +876,7 @@ public class c_newbie_secondchance extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_secondchance.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -863,6 +886,7 @@ public class c_newbie_secondchance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_secondchance_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_134"))
@@ -922,7 +946,7 @@ public class c_newbie_secondchance extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_146");
@@ -939,7 +963,7 @@ public class c_newbie_secondchance extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_secondchance.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -949,6 +973,7 @@ public class c_newbie_secondchance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_secondchance_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_158"))
@@ -983,7 +1008,7 @@ public class c_newbie_secondchance extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_134");
@@ -1000,7 +1025,7 @@ public class c_newbie_secondchance extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_secondchance.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1010,6 +1035,7 @@ public class c_newbie_secondchance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_secondchance_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_134"))
@@ -1069,7 +1095,7 @@ public class c_newbie_secondchance extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_146");
@@ -1086,7 +1112,7 @@ public class c_newbie_secondchance extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_secondchance.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1096,6 +1122,7 @@ public class c_newbie_secondchance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_secondchance_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_166"))
@@ -1130,7 +1157,7 @@ public class c_newbie_secondchance extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_134");
@@ -1147,7 +1174,7 @@ public class c_newbie_secondchance extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_secondchance.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1157,6 +1184,7 @@ public class c_newbie_secondchance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_secondchance_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_134"))
@@ -1216,7 +1244,7 @@ public class c_newbie_secondchance extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_146");
@@ -1233,7 +1261,7 @@ public class c_newbie_secondchance extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_secondchance.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1243,6 +1271,7 @@ public class c_newbie_secondchance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_secondchance_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_64"))
@@ -1264,7 +1293,7 @@ public class c_newbie_secondchance extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_68");
@@ -1273,7 +1302,7 @@ public class c_newbie_secondchance extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_secondchance.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1283,6 +1312,7 @@ public class c_newbie_secondchance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_secondchance_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_68"))
@@ -1302,7 +1332,7 @@ public class c_newbie_secondchance extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_72");
@@ -1311,7 +1341,7 @@ public class c_newbie_secondchance extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_secondchance.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1321,6 +1351,7 @@ public class c_newbie_secondchance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_secondchance_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_72"))
@@ -1340,7 +1371,7 @@ public class c_newbie_secondchance extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -1349,7 +1380,7 @@ public class c_newbie_secondchance extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_secondchance.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1359,6 +1390,7 @@ public class c_newbie_secondchance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_secondchance_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_76"))
@@ -1378,7 +1410,7 @@ public class c_newbie_secondchance extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_83");
@@ -1387,7 +1419,7 @@ public class c_newbie_secondchance extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_secondchance.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1397,6 +1429,7 @@ public class c_newbie_secondchance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_secondchance_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_83"))
@@ -1430,7 +1463,7 @@ public class c_newbie_secondchance extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_134");
@@ -1447,7 +1480,7 @@ public class c_newbie_secondchance extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_secondchance.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1457,6 +1490,7 @@ public class c_newbie_secondchance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -1469,6 +1503,7 @@ public class c_newbie_secondchance extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -1477,6 +1512,7 @@ public class c_newbie_secondchance extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -1485,18 +1521,21 @@ public class c_newbie_secondchance extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.c_newbie_secondchance");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1534,7 +1573,7 @@ public class c_newbie_secondchance extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_86");
@@ -1542,7 +1581,7 @@ public class c_newbie_secondchance extends script.base_script
                 utils.setScriptVar(player, "conversation.c_newbie_secondchance.branchId", 3);
                 npcStartConversation(player, npc, "c_newbie_secondchance", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1571,7 +1610,7 @@ public class c_newbie_secondchance extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_100");
@@ -1583,7 +1622,7 @@ public class c_newbie_secondchance extends script.base_script
                 utils.setScriptVar(player, "conversation.c_newbie_secondchance.branchId", 7);
                 npcStartConversation(player, npc, "c_newbie_secondchance", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1604,7 +1643,7 @@ public class c_newbie_secondchance extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_62");
@@ -1612,7 +1651,7 @@ public class c_newbie_secondchance extends script.base_script
                 utils.setScriptVar(player, "conversation.c_newbie_secondchance.branchId", 12);
                 npcStartConversation(player, npc, "c_newbie_secondchance", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1634,7 +1673,7 @@ public class c_newbie_secondchance extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_118");
@@ -1642,7 +1681,7 @@ public class c_newbie_secondchance extends script.base_script
                 utils.setScriptVar(player, "conversation.c_newbie_secondchance.branchId", 14);
                 npcStartConversation(player, npc, "c_newbie_secondchance", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1658,6 +1697,7 @@ public class c_newbie_secondchance extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("c_newbie_secondchance"))

@@ -1,5 +1,11 @@
 package script.developer.soe.working;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.deltadictionary;
 import script.library.skill;
 import script.obj_id;

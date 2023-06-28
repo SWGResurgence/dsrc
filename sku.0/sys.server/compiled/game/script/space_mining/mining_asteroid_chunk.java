@@ -1,14 +1,22 @@
 package script.space_mining;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class mining_asteroid_chunk extends script.base_script
 {
+    public static final int MAX_RESOURCE = 1000000;
+
     public mining_asteroid_chunk()
     {
     }
-    public static final int MAX_RESOURCE = 1000000;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setHitpoints(self, 25);
@@ -16,6 +24,7 @@ public class mining_asteroid_chunk extends script.base_script
         LOG("space_mining", "OnAttach " + self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnShipInternalDamageOverTimeRemoved(obj_id self, int chassisSlot, float damageRate, float damageThreshold) throws InterruptedException
     {
         obj_id pilot = getPilotId(self);
@@ -24,6 +33,7 @@ public class mining_asteroid_chunk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean shipAbsorbAsteroid(obj_id asteroid, obj_id attacker, int amount) throws InterruptedException
     {
         LOG("space_mining", "shipAbsorbAsteroid " + asteroid + ", " + attacker + ", " + amount);
@@ -53,7 +63,7 @@ public class mining_asteroid_chunk extends script.base_script
         LOG("space_mining", "shipAbsorbAsteroid 2");
         if (buff.hasBuff(attackingPilot, "tcg_series4_falleens_fist"))
         {
-            amount = (int)(amount * 1.5f);
+            amount = (int) (amount * 1.5f);
             LOG("space_mining", "Falleen's Fist Buff: Granting 50% increase in resources for Pilot: " + attackingPilot);
         }
         String resourceClassName = getResourceClassNameForAsteroid(strAsteroidType);
@@ -66,6 +76,7 @@ public class mining_asteroid_chunk extends script.base_script
         messageTo(attackingPilot, "handleAsteroidMined", d, 0, false);
         return true;
     }
+
     public int OnShipWasHit(obj_id self, obj_id attacker, int weaponIndex, boolean isMissile, int missileType, int chassisSlot, boolean isPlayerAutoTurret, float hitLocationX_o, float hitLocationY_o, float hitLocationZ_o) throws InterruptedException
     {
         obj_id attackingPilot = space_utils.getPilotForRealsies(attacker);
@@ -117,7 +128,7 @@ public class mining_asteroid_chunk extends script.base_script
             fltDamage = fltDamage / 100;
             int maxHitpoints = getMaxHitpoints(self);
             int oldHitpoints = getHitpoints(self);
-            setHitpoints(self, oldHitpoints - (int)fltDamage);
+            setHitpoints(self, oldHitpoints - (int) fltDamage);
             int newHitpoints = getHitpoints(self);
             if (newHitpoints <= 0)
             {
@@ -125,7 +136,7 @@ public class mining_asteroid_chunk extends script.base_script
                 grantRareAsteroid(attackingPilot);
                 handleShipDestruction(self, 1.0f);
             }
-            else 
+            else
             {
                 vector hitLocation_o = new vector(hitLocationX_o, hitLocationY_o, hitLocationZ_o);
                 notifyShipHit(self, attackingLocation_o, hitLocation_o, ship_hit_type.HT_chassis, 0.5f, 1.0f);
@@ -133,6 +144,7 @@ public class mining_asteroid_chunk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public obj_id getResourceStack(obj_id objContainer, obj_id objResource) throws InterruptedException
     {
         if (!isIdValid(objContainer))
@@ -144,17 +156,21 @@ public class mining_asteroid_chunk extends script.base_script
         {
             return null;
         }
-        for (obj_id objContent : objContents) {
+        for (obj_id objContent : objContents)
+        {
             obj_id objType = getResourceContainerResourceType(objContent);
-            if (objType == objResource) {
+            if (objType == objResource)
+            {
                 int intCount = getResourceContainerQuantity(objContent);
-                if (intCount < MAX_RESOURCE) {
+                if (intCount < MAX_RESOURCE)
+                {
                     return objContent;
                 }
             }
         }
         return null;
     }
+
     public obj_id grantRareAsteroid(obj_id player) throws InterruptedException
     {
         obj_id playerInv = utils.getInventoryContainer(player);
@@ -177,14 +193,16 @@ public class mining_asteroid_chunk extends script.base_script
             sendSystemMessage(player, gotRare);
             return rare;
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public String getResourceClassNameForAsteroid(String strAsteroidType) throws InterruptedException
     {
-        switch (strAsteroidType) {
+        switch (strAsteroidType)
+        {
             case "iron":
                 return "space_metal_iron";
             case "carbonaceous":

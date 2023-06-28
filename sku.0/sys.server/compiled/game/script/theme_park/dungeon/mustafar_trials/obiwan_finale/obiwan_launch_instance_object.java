@@ -1,13 +1,16 @@
 package script.theme_park.dungeon.mustafar_trials.obiwan_finale;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class obiwan_launch_instance_object extends script.base_script
 {
-    public obiwan_launch_instance_object()
-    {
-    }
     public static final string_id SID_LAST_QUEST = new string_id(mustafar.STF_OBI_MSGS, "obiwan_quest_almost_complete");
     public static final string_id SID_LAUNCH = new string_id(mustafar.STF_OBI_MSGS, "obiwan_finale_launch");
     public static final string_id SID_EJECT = new string_id(mustafar.STF_OBI_MSGS, "obiwan_finale_eject");
@@ -21,16 +24,22 @@ public class obiwan_launch_instance_object extends script.base_script
     public static final string_id SID_LAIR_CRYSTAL = new string_id("travel/zone_transition", "lair_of_the_crystal");
     public static final string_id SID_NO_PERMISSION = new string_id("travel/zone_transition", "default_no_access");
     public static final boolean CONST_FLAG_DO_LOGGING = false;
+    public obiwan_launch_instance_object()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         launchObjectTriggerVolumeInitializer(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         launchObjectTriggerVolumeInitializer(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         debugLogging("OnTriggerVolumeEntered: ", " entered.");
@@ -49,6 +58,7 @@ public class obiwan_launch_instance_object extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info item) throws InterruptedException
     {
         if (hasObjVar(player, "didMustafarCrystalLair"))
@@ -90,6 +100,7 @@ public class obiwan_launch_instance_object extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         LOG("space_dungeon", "theme_park.dungeon.mustafar_trials.obiwan_finale.launch_instance_object.OnObjectMenuSelect()");
@@ -116,6 +127,7 @@ public class obiwan_launch_instance_object extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void debugLogging(String section, String message) throws InterruptedException
     {
         if (CONST_FLAG_DO_LOGGING)
@@ -123,14 +135,12 @@ public class obiwan_launch_instance_object extends script.base_script
             LOG("debug/obiwan_launch_instance_object/" + section, message);
         }
     }
+
     public boolean readyForLair(obj_id player) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "som_kenobi_main_quest_3", "talkKenobi3") || groundquests.isTaskActive(player, "som_kenobi_main_quest_3_b", "talkKenobi3") || groundquests.isTaskActive(player, "som_kenobi_main_quest_3", "killSinistro") || groundquests.isTaskActive(player, "som_kenobi_main_quest_3_b", "killSinistro"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isTaskActive(player, "som_kenobi_main_quest_3", "talkKenobi3") || groundquests.isTaskActive(player, "som_kenobi_main_quest_3_b", "talkKenobi3") || groundquests.isTaskActive(player, "som_kenobi_main_quest_3", "killSinistro") || groundquests.isTaskActive(player, "som_kenobi_main_quest_3_b", "killSinistro");
     }
+
     public void confirmLaunch(obj_id player, obj_id terminal) throws InterruptedException
     {
         debugLogging("confirmLaunch: ", " entered.");
@@ -163,8 +173,8 @@ public class obiwan_launch_instance_object extends script.base_script
         int pid = sui.msgbox(terminal, player, pp, sui.YES_NO, title, "msgDungeonLaunchConfirmed");
         utils.setScriptVar(terminal, "player", player);
         debugLogging("//*************// confirmLaunch: ", "////>>>> just fired off the SUI.");
-        return;
     }
+
     public void confirmEject(obj_id player, obj_id terminal) throws InterruptedException
     {
         if (hasScript(player, "theme_park.dungeon.mustafar_trials.obiwan_finale.obiwan_event_player"))
@@ -177,38 +187,40 @@ public class obiwan_launch_instance_object extends script.base_script
             prose.setTU(pp, getEncodedName(player));
             int pid = sui.msgbox(terminal, player, pp, sui.YES_NO, title, "msgDungeonEjectConfirmed");
         }
-        else 
+        else
         {
             warpPlayer(player, "mustafar", -670, 18, -137, null, -670, 18, -137);
         }
-        return;
     }
+
     public void launchObjectTriggerVolumeInitializer(obj_id self) throws InterruptedException
     {
         if (!hasTriggerVolume(self, TRIGGER_VOLUME_OBI))
         {
             createTriggerVolume(TRIGGER_VOLUME_OBI, OBI_INTEREST_RADIUS, true);
         }
-        else 
+        else
         {
             obj_id[] denizens = getTriggerVolumeContents(self, TRIGGER_VOLUME_OBI);
-            for (obj_id denizen : denizens) {
-                if (isPlayer(denizen) && !isIncapacitated(denizen)) {
-                    if (mustafar.canCallObiwan(denizen, self)) {
+            for (obj_id denizen : denizens)
+            {
+                if (isPlayer(denizen) && !isIncapacitated(denizen))
+                {
+                    if (mustafar.canCallObiwan(denizen, self))
+                    {
                         spawnObi(denizen, self);
                         return;
                     }
                 }
             }
         }
-        return;
     }
+
     public void spawnObi(obj_id player, obj_id landmark) throws InterruptedException
     {
         obj_id obiwan = mustafar.callObiwan(player, landmark, true);
         prose_package pp = prose.getPackage(SID_LAST_QUEST);
         prose.setTT(pp, player);
         chat.chat(obiwan, player, pp);
-        return;
     }
 }

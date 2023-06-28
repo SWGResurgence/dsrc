@@ -1,5 +1,11 @@
 package script.poi.tusken_attack;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.locations;
@@ -10,9 +16,6 @@ import script.obj_id;
 
 public class master extends script.theme_park.poi.base
 {
-    public master()
-    {
-    }
     public static final String SCENARIO_NAME = "tusken_attack";
     public static final String LOG_NAME = "poiTuskenAttack Master";
     public static final String BASE_PATH = "poi." + SCENARIO_NAME;
@@ -31,14 +34,18 @@ public class master extends script.theme_park.poi.base
     public static final String THEATER_FILE = "THEATER_FILE";
     public static final int DEFAULT_ANTAGONIST_COUNT = 1;
     public static final int MAX_DIFF = 70;
-    public static final String joyEmotes[] = 
+    public static final String[] joyEmotes =
+            {
+                    "cheer",
+                    "applaud",
+                    "laugh",
+                    "yes",
+                    "glow"
+            };
+    public master()
     {
-        "cheer",
-        "applaud",
-        "laugh",
-        "yes",
-        "glow"
-    };
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!scenario.initScenario(self, TBL))
@@ -47,26 +54,31 @@ public class master extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         scenario.cleanup(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnUnloadedFromMemory(obj_id self) throws InterruptedException
     {
         scenario.cleanup(self);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanupScenario(obj_id self, dictionary params) throws InterruptedException
     {
         scenario.cleanup(self);
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int initScenario(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -84,7 +96,7 @@ public class master extends script.theme_park.poi.base
         setObjVar(self, ANTAGONIST_COUNT, params.getInt(ANTAGONIST_COUNT));
         setObjVar(self, THEATER_FILE, params.getString(THEATER_FILE));
         scenario.createTeam(self, "mediator", self.toString() + "_mediator");
-        scenario.createTeam(self, "antagonist", self.toString() + "_antagonist");
+        scenario.createTeam(self, "antagonist", self + "_antagonist");
         if (!createTheater(self))
         {
             scenario.cleanup(self);
@@ -114,6 +126,7 @@ public class master extends script.theme_park.poi.base
         messageTo(a, "startAttack", null, 90, false);
         return SCRIPT_CONTINUE;
     }
+
     public boolean createTheater(obj_id self) throws InterruptedException
     {
         String theater_file = getStringObjVar(self, THEATER_FILE);
@@ -129,10 +142,12 @@ public class master extends script.theme_park.poi.base
         setObjVar(self, "theater", theater);
         return true;
     }
+
     public int handleTheaterComplete(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public boolean createAntagonist(obj_id self) throws InterruptedException
     {
         String type = getStringObjVar(self, ANTAGONIST_LEADER_TYPE);
@@ -163,6 +178,7 @@ public class master extends script.theme_park.poi.base
         attachScript(antagonist, SCRIPT_ANTAGONIST);
         return true;
     }
+
     public boolean createAntagonistMinions(obj_id self) throws InterruptedException
     {
         location baseloc = getLocation(self);
@@ -183,7 +199,7 @@ public class master extends script.theme_park.poi.base
                 {
                     LOG(LOG_NAME, "Couldn't create antagonist minion.");
                 }
-                else 
+                else
                 {
                     ai_lib.setDefaultCalmBehavior(minion, ai_lib.BEHAVIOR_SENTINEL);
                     attachScript(minion, SCRIPT_ANTAGONIST);
@@ -204,7 +220,7 @@ public class master extends script.theme_park.poi.base
                 {
                     LOG(LOG_NAME, "Couldn't create antagonist beast.");
                 }
-                else 
+                else
                 {
                     ai_lib.setDefaultCalmBehavior(beast, ai_lib.BEHAVIOR_SENTINEL);
                     attachScript(beast, SCRIPT_BEAST);
@@ -213,6 +229,7 @@ public class master extends script.theme_park.poi.base
         }
         return true;
     }
+
     public boolean createMediator(obj_id self) throws InterruptedException
     {
         String type = getStringObjVar(self, MEDIATOR_LEADER_TYPE);
@@ -229,6 +246,7 @@ public class master extends script.theme_park.poi.base
         attachScript(mediator, SCRIPT_MEDIATOR);
         return true;
     }
+
     public boolean createMediatorMinions(obj_id self) throws InterruptedException
     {
         location baseloc = getLocation(self);
@@ -250,7 +268,7 @@ public class master extends script.theme_park.poi.base
                 {
                     mediator = scenario.createTeamNpc(self, "mediator", beasttype, ident, loiterloc);
                 }
-                else 
+                else
                 {
                     mediator = scenario.createTeamNpc(self, "mediator", type, ident, loiterloc);
                 }
@@ -258,7 +276,7 @@ public class master extends script.theme_park.poi.base
                 {
                     LOG(LOG_NAME, "Couldn't create mediator minion.");
                 }
-                else 
+                else
                 {
                     setYaw(mediator, 180);
                     ai_lib.setDefaultCalmBehavior(mediator, ai_lib.BEHAVIOR_SENTINEL);
@@ -268,6 +286,7 @@ public class master extends script.theme_park.poi.base
         }
         return true;
     }
+
     public int handleActorDeath(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] antagonists = scenario.getTeamMembers("antagonist");
@@ -294,15 +313,19 @@ public class master extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public void celebrateVictory(obj_id[] team, String comment) throws InterruptedException
     {
         int j = 0;
-        for (obj_id obj_id : team) {
-            if (isIncapacitated(obj_id) || isDead(obj_id)) {
+        for (obj_id obj_id : team)
+        {
+            if (isIncapacitated(obj_id) || isDead(obj_id))
+            {
                 continue;
             }
             String skeleton = dataTableGetString("datatables/ai/species.iff", ai_lib.aiGetSpecies(obj_id), "Skeleton");
-            if (!skeleton.equals("human")) {
+            if (!skeleton.equals("human"))
+            {
                 continue;
             }
             ai_lib.setDefaultCalmBehavior(obj_id, ai_lib.BEHAVIOR_WANDER);
@@ -310,7 +333,8 @@ public class master extends script.theme_park.poi.base
             int whichsocial = rand(0, 4);
             queueCommand(obj_id, (1780871594), null, joyEmotes[whichsocial], COMMAND_PRIORITY_DEFAULT);
             messageTo(obj_id, "resumeDefaultCalmBehavior", null, 3, false);
-            if (j == 0) {
+            if (j == 0)
+            {
                 poi.quickSay(obj_id, comment);
             }
             j++;

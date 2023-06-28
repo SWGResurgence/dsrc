@@ -1,5 +1,11 @@
 package script.theme_park.heroic.exar_kun;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.buff;
 import script.library.chat;
@@ -11,18 +17,21 @@ public class ct_guard extends script.base_script
     public ct_guard()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         trial.setHp(self, 65000);
         setName(self, "a Caretaker Protector");
         return SCRIPT_CONTINUE;
     }
+
     public int start_boss_buff(obj_id self, dictionary params) throws InterruptedException
     {
         messageTo(self, "buff_boss", trial.getSessionDict(self, "buff"), 0.0f, false);
         buff.applyBuff(self, "caretaker_guard_buff");
         return SCRIPT_CONTINUE;
     }
+
     public int buff_boss(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params, "buff"))
@@ -38,6 +47,7 @@ public class ct_guard extends script.base_script
         messageTo(self, "buff_boss", trial.getSessionDict(self, "buff"), rand(12.0f, 30.0f), false);
         return SCRIPT_CONTINUE;
     }
+
     public int activateGuard(obj_id self, dictionary params) throws InterruptedException
     {
         trial.bumpSession(self, "buff");
@@ -49,11 +59,13 @@ public class ct_guard extends script.base_script
         kill(prisoner);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         messageTo(self, "cleanup", null, 3.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanup(obj_id self, dictionary params) throws InterruptedException
     {
         trial.cleanupObject(self);

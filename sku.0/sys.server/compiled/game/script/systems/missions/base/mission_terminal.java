@@ -1,5 +1,11 @@
 package script.systems.missions.base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.prose;
 import script.library.slicing;
@@ -15,6 +21,7 @@ public class mission_terminal extends script.base_script
     public static final string_id SID_FAIL_SLICE = new string_id("slicing/slicing", "terminal_fail");
     public static final string_id SID_SUCCESS_SLICE = new string_id("slicing/slicing", "terminal_success");
     public static final string_id SID_NOT_YET = new string_id("slicing/slicing", "not_yet");
+
     public mission_terminal()
     {
     }

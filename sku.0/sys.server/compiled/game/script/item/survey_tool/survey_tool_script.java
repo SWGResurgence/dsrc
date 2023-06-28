@@ -1,5 +1,11 @@
 package script.item.survey_tool;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -40,6 +46,7 @@ public class survey_tool_script extends script.base_script
     public static final string_id SID_NO_SURVEY_WATER = new string_id("survey", "no_survey_in_water");
     public static final String STF = "survey";
     public static dictionary dctParams = new dictionary();
+
     public survey_tool_script()
     {
     }
@@ -808,7 +815,7 @@ public class survey_tool_script extends script.base_script
     public int resourceHarvest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
-        if (player.isAuthoritative() == false)
+        if (!player.isAuthoritative())
         {
             debugServerConsoleMsg(player, "player has gone offline or something. BAD! Not authoritative");
             return SCRIPT_CONTINUE;
@@ -912,7 +919,7 @@ public class survey_tool_script extends script.base_script
         obj_id resourceType = getResourceTypeByName(resource);
         boolean energy = isResourceDerivedFrom(resourceType, "energy");
         boolean gas = isResourceDerivedFrom(resourceType, "gas");
-        if (gas == true || energy == true)
+        if (gas || energy)
         {
             int energySwitch = rand(1, 2);
             if (energySwitch == 1)

@@ -1,5 +1,11 @@
 package script.npe;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.weapons;
 import script.obj_id;
 
@@ -8,6 +14,7 @@ public class weak_dungeon extends script.base_script
     public weak_dungeon()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id weapon = aiGetPrimaryWeapon(self);
@@ -16,6 +23,7 @@ public class weak_dungeon extends script.base_script
         weapons.setWeaponData(weapon);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id weapon = aiGetPrimaryWeapon(self);

@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 public class bounty_hunter extends script.base_script
@@ -283,7 +289,6 @@ public class bounty_hunter extends script.base_script
                 }
                 else
                 {
-                    return;
                 }
             }
             else

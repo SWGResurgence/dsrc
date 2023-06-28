@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,94 +14,117 @@ import script.*;
 
 public class tatooine_entha_draknus extends script.base_script
 {
+    public static String c_stringFile = "conversation/tatooine_entha_draknus";
+
     public tatooine_entha_draknus()
     {
     }
-    public static String c_stringFile = "conversation/tatooine_entha_draknus";
+
     public boolean tatooine_entha_draknus_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean tatooine_entha_draknus_condition_onTalkedAnKwee(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "tatooine_espa_pod_retrieval_v2", "tat_espa_pod_retrieval_e2");
     }
+
     public boolean tatooine_entha_draknus_condition_completedQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "talus_nashal_rescue_operation");
     }
+
     public boolean tatooine_entha_draknus_condition_onRace1(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "tatooine_entha_podracers_race1");
     }
+
     public boolean tatooine_entha_draknus_condition_completedRace1(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "tatooine_entha_podracers_race1");
     }
+
     public boolean tatooine_entha_draknus_condition_completedRace2(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "tatooine_entha_podracers_race2");
     }
+
     public boolean tatooine_entha_draknus_condition_completedRace3(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "tatooine_entha_podracers_race3");
     }
+
     public boolean tatooine_entha_draknus_condition_onRace2(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "tatooine_entha_podracers_race2");
     }
+
     public boolean tatooine_entha_draknus_condition_onRace3(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "tatooine_entha_podracers_race3");
     }
+
     public boolean tatooine_entha_draknus_condition_completedPod(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "tatooine_espa_pod_retrieval_v2");
     }
+
     public boolean tatooine_entha_draknus_condition_skip3(obj_id player, obj_id npc) throws InterruptedException
     {
         return false;
     }
+
     public boolean tatooine_entha_draknus_condition_skip2(obj_id player, obj_id npc) throws InterruptedException
     {
         return false;
     }
+
     public boolean tatooine_entha_draknus_condition_skip1(obj_id player, obj_id npc) throws InterruptedException
     {
         return false;
     }
+
     public void tatooine_entha_draknus_action_grantRace1(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "tatooine_entha_podracers_race1");
     }
+
     public void tatooine_entha_draknus_action_grantRace2(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "tatooine_entha_podracers_race2");
     }
+
     public void tatooine_entha_draknus_action_grantRace3(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "tatooine_entha_podracers_race3");
     }
+
     public void tatooine_entha_draknus_action_clearRace1(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "tatooine_entha_podracers_race1");
     }
+
     public void tatooine_entha_draknus_action_clearRace2(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "tatooine_entha_podracers_race2");
     }
+
     public void tatooine_entha_draknus_action_clearRace3(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "tatooine_entha_podracers_race3");
     }
+
     public void tatooine_entha_draknus_action_signalGotoDraknus(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "tat_entha_goto_draknus_e1");
     }
+
     public void tatooine_entha_draknus_action_signalReturnDraknus(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "tatooine_entha_return_draknus_e1");
     }
+
     public int tatooine_entha_draknus_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_71"))
@@ -115,7 +144,7 @@ public class tatooine_entha_draknus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_73");
@@ -124,7 +153,7 @@ public class tatooine_entha_draknus extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_entha_draknus.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -134,6 +163,7 @@ public class tatooine_entha_draknus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_entha_draknus_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_73"))
@@ -148,6 +178,7 @@ public class tatooine_entha_draknus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_entha_draknus_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_75"))
@@ -167,7 +198,7 @@ public class tatooine_entha_draknus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_77");
@@ -180,7 +211,7 @@ public class tatooine_entha_draknus extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_entha_draknus.branchId");
                     prose_package pp = new prose_package();
@@ -194,6 +225,7 @@ public class tatooine_entha_draknus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_entha_draknus_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_77"))
@@ -208,6 +240,7 @@ public class tatooine_entha_draknus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_entha_draknus_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_81"))
@@ -228,6 +261,7 @@ public class tatooine_entha_draknus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_entha_draknus_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_83"))
@@ -247,7 +281,7 @@ public class tatooine_entha_draknus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_85");
@@ -256,7 +290,7 @@ public class tatooine_entha_draknus extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_entha_draknus.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -266,6 +300,7 @@ public class tatooine_entha_draknus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_entha_draknus_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_85"))
@@ -281,6 +316,7 @@ public class tatooine_entha_draknus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_entha_draknus_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_91"))
@@ -301,6 +337,7 @@ public class tatooine_entha_draknus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_entha_draknus_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_42"))
@@ -320,7 +357,7 @@ public class tatooine_entha_draknus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -329,7 +366,7 @@ public class tatooine_entha_draknus extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_entha_draknus.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -339,6 +376,7 @@ public class tatooine_entha_draknus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_entha_draknus_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_46"))
@@ -354,6 +392,7 @@ public class tatooine_entha_draknus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_entha_draknus_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_62"))
@@ -374,7 +413,7 @@ public class tatooine_entha_draknus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_66");
@@ -387,7 +426,7 @@ public class tatooine_entha_draknus extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_entha_draknus.branchId");
                     prose_package pp = new prose_package();
@@ -401,6 +440,7 @@ public class tatooine_entha_draknus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_entha_draknus_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_66"))
@@ -420,6 +460,7 @@ public class tatooine_entha_draknus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_entha_draknus_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_94"))
@@ -439,7 +480,7 @@ public class tatooine_entha_draknus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_98");
@@ -448,7 +489,7 @@ public class tatooine_entha_draknus extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_entha_draknus.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -473,7 +514,7 @@ public class tatooine_entha_draknus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -482,7 +523,7 @@ public class tatooine_entha_draknus extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_entha_draknus.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -492,6 +533,7 @@ public class tatooine_entha_draknus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_entha_draknus_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_98"))
@@ -511,6 +553,7 @@ public class tatooine_entha_draknus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_entha_draknus_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_106"))
@@ -529,6 +572,7 @@ public class tatooine_entha_draknus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_entha_draknus_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_112"))
@@ -543,6 +587,7 @@ public class tatooine_entha_draknus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_entha_draknus_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_79"))
@@ -557,6 +602,7 @@ public class tatooine_entha_draknus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_entha_draknus_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_87"))
@@ -576,7 +622,7 @@ public class tatooine_entha_draknus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_89");
@@ -589,7 +635,7 @@ public class tatooine_entha_draknus extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_entha_draknus.branchId");
                     prose_package pp = new prose_package();
@@ -603,6 +649,7 @@ public class tatooine_entha_draknus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_entha_draknus_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_89"))
@@ -617,6 +664,7 @@ public class tatooine_entha_draknus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_entha_draknus_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_101"))
@@ -636,7 +684,7 @@ public class tatooine_entha_draknus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_109");
@@ -645,7 +693,7 @@ public class tatooine_entha_draknus extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_entha_draknus.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -655,6 +703,7 @@ public class tatooine_entha_draknus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_entha_draknus_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_109"))
@@ -669,6 +718,7 @@ public class tatooine_entha_draknus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -678,11 +728,13 @@ public class tatooine_entha_draknus extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -691,18 +743,21 @@ public class tatooine_entha_draknus extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.tatooine_entha_draknus");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -725,7 +780,7 @@ public class tatooine_entha_draknus extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_71");
@@ -737,7 +792,7 @@ public class tatooine_entha_draknus extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "tatooine_entha_draknus", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -763,7 +818,7 @@ public class tatooine_entha_draknus extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_75");
@@ -771,7 +826,7 @@ public class tatooine_entha_draknus extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_entha_draknus.branchId", 4);
                 npcStartConversation(player, npc, "tatooine_entha_draknus", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -792,7 +847,7 @@ public class tatooine_entha_draknus extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_81");
@@ -800,7 +855,7 @@ public class tatooine_entha_draknus extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_entha_draknus.branchId", 7);
                 npcStartConversation(player, npc, "tatooine_entha_draknus", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -822,7 +877,7 @@ public class tatooine_entha_draknus extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_83");
@@ -830,7 +885,7 @@ public class tatooine_entha_draknus extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_entha_draknus.branchId", 9);
                 npcStartConversation(player, npc, "tatooine_entha_draknus", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -851,7 +906,7 @@ public class tatooine_entha_draknus extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -859,7 +914,7 @@ public class tatooine_entha_draknus extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_entha_draknus.branchId", 12);
                 npcStartConversation(player, npc, "tatooine_entha_draknus", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -881,7 +936,7 @@ public class tatooine_entha_draknus extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_42");
@@ -893,7 +948,7 @@ public class tatooine_entha_draknus extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "tatooine_entha_draknus", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -918,7 +973,7 @@ public class tatooine_entha_draknus extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_62");
@@ -926,7 +981,7 @@ public class tatooine_entha_draknus extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_entha_draknus.branchId", 17);
                 npcStartConversation(player, npc, "tatooine_entha_draknus", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -956,7 +1011,7 @@ public class tatooine_entha_draknus extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_94");
@@ -972,7 +1027,7 @@ public class tatooine_entha_draknus extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "tatooine_entha_draknus", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -997,7 +1052,7 @@ public class tatooine_entha_draknus extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_112");
@@ -1005,7 +1060,7 @@ public class tatooine_entha_draknus extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_entha_draknus.branchId", 25);
                 npcStartConversation(player, npc, "tatooine_entha_draknus", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1026,7 +1081,7 @@ public class tatooine_entha_draknus extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_79");
@@ -1034,7 +1089,7 @@ public class tatooine_entha_draknus extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_entha_draknus.branchId", 27);
                 npcStartConversation(player, npc, "tatooine_entha_draknus", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1055,7 +1110,7 @@ public class tatooine_entha_draknus extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_87");
@@ -1063,7 +1118,7 @@ public class tatooine_entha_draknus extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_entha_draknus.branchId", 29);
                 npcStartConversation(player, npc, "tatooine_entha_draknus", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1084,7 +1139,7 @@ public class tatooine_entha_draknus extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_101");
@@ -1096,7 +1151,7 @@ public class tatooine_entha_draknus extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "tatooine_entha_draknus", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1109,6 +1164,7 @@ public class tatooine_entha_draknus extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("tatooine_entha_draknus"))

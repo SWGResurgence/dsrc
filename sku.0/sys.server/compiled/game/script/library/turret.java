@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.location;
 import script.obj_id;
 import script.region;
@@ -21,6 +27,7 @@ public class turret extends script.base_script
     public static final String SCRIPTVAR_TARGETS = VAR_TURRET_BASE + ".targetList";
     public static final String OBJVAR_CAN_ATTACK = "turret.validTargetObjVar";
     public static final String OBJVAR_TURRET_FRIEND = "turret.isFriend";
+
     public turret()
     {
     }

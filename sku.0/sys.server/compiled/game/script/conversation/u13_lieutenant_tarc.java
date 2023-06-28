@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,89 +14,109 @@ import script.*;
 
 public class u13_lieutenant_tarc extends script.base_script
 {
+    public static String c_stringFile = "conversation/u13_lieutenant_tarc";
+
     public u13_lieutenant_tarc()
     {
     }
-    public static String c_stringFile = "conversation/u13_lieutenant_tarc";
+
     public boolean u13_lieutenant_tarc_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean u13_lieutenant_tarc_condition_active_ponda_pointer(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActiveOrComplete(player, "u13_ponda_pointer");
     }
+
     public boolean u13_lieutenant_tarc_condition_active_ponda_01(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "u13_ponda_01");
     }
+
     public boolean u13_lieutenant_tarc_condition_returning_ponda_01(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "u13_ponda_01", "u13_ponda_01_03") || groundquests.hasCompletedQuest(player, "u13_ponda_01");
     }
+
     public boolean u13_lieutenant_tarc_condition_active_ponda_02(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "u13_ponda_02");
     }
+
     public boolean u13_lieutenant_tarc_condition_returning_ponda_02(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "u13_ponda_02", "u13_ponda_02_06") || groundquests.hasCompletedQuest(player, "u13_ponda_02");
     }
+
     public boolean u13_lieutenant_tarc_condition_active_ponda_03(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "u13_ponda_03");
     }
+
     public boolean u13_lieutenant_tarc_condition_returning_ponda_03(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "u13_ponda_03", "u13_ponda_03_04") || groundquests.hasCompletedQuest(player, "u13_ponda_03");
     }
+
     public boolean u13_lieutenant_tarc_condition_alreadyDoneMeatlumpQuests(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActiveOrComplete(player, "mtp_hideout_access_high_01") || groundquests.isQuestActiveOrComplete(player, "mtp_hideout_access_01");
     }
+
     public boolean u13_lieutenant_tarc_condition_needsMeatlumpPointer(obj_id player, obj_id npc) throws InterruptedException
     {
         return !groundquests.isQuestActiveOrComplete(player, "mtp_hideout_access_high_01") && !groundquests.isQuestActiveOrComplete(player, "mtp_hideout_access_01") && !groundquests.isQuestActiveOrComplete(player, "corellia_coronet_meatlump_act1_pointer") && !groundquests.isQuestActiveOrComplete(player, "corellia_coronet_meatlump_act2_pointer");
     }
+
     public void u13_lieutenant_tarc_action_signal_ponda_pointer(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "u13_ponda_pointer");
     }
+
     public void u13_lieutenant_tarc_action_grant_ponda_01(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "u13_ponda_01");
     }
+
     public void u13_lieutenant_tarc_action_signal_ponda_01_03(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "u13_ponda_01_03");
     }
+
     public void u13_lieutenant_tarc_action_grant_ponda_02(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "u13_ponda_02");
     }
+
     public void u13_lieutenant_tarc_action_signal_ponda_02_06(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "u13_ponda_02_06");
     }
+
     public void u13_lieutenant_tarc_action_grant_ponda_03(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "u13_ponda_03");
     }
+
     public void u13_lieutenant_tarc_action_signal_ponda_03_04(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "u13_ponda_03_04");
     }
+
     public void u13_lieutenant_tarc_action_meatlumps_pointer(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!groundquests.isQuestActiveOrComplete(player, "corellia_coronet_meatlump_act1_begin"))
         {
             groundquests.requestGrantQuest(player, "corellia_coronet_meatlump_act1_pointer");
         }
-        else 
+        else
         {
             groundquests.requestGrantQuest(player, "corellia_coronet_meatlump_act2_pointer");
         }
     }
+
     public int u13_lieutenant_tarc_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_17"))
@@ -110,7 +136,7 @@ public class u13_lieutenant_tarc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_19");
@@ -119,7 +145,7 @@ public class u13_lieutenant_tarc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.u13_lieutenant_tarc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -129,6 +155,7 @@ public class u13_lieutenant_tarc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int u13_lieutenant_tarc_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_19"))
@@ -151,6 +178,7 @@ public class u13_lieutenant_tarc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int u13_lieutenant_tarc_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_15"))
@@ -166,6 +194,7 @@ public class u13_lieutenant_tarc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int u13_lieutenant_tarc_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_28"))
@@ -181,6 +210,7 @@ public class u13_lieutenant_tarc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int u13_lieutenant_tarc_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_36"))
@@ -200,7 +230,7 @@ public class u13_lieutenant_tarc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_41");
@@ -209,7 +239,7 @@ public class u13_lieutenant_tarc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.u13_lieutenant_tarc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -219,6 +249,7 @@ public class u13_lieutenant_tarc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int u13_lieutenant_tarc_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_41"))
@@ -234,6 +265,7 @@ public class u13_lieutenant_tarc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -243,11 +275,13 @@ public class u13_lieutenant_tarc extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -256,18 +290,21 @@ public class u13_lieutenant_tarc extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.u13_lieutenant_tarc");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -291,7 +328,7 @@ public class u13_lieutenant_tarc extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_17");
@@ -299,7 +336,7 @@ public class u13_lieutenant_tarc extends script.base_script
                 utils.setScriptVar(player, "conversation.u13_lieutenant_tarc.branchId", 1);
                 npcStartConversation(player, npc, "u13_lieutenant_tarc", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -327,7 +364,7 @@ public class u13_lieutenant_tarc extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_15");
@@ -335,7 +372,7 @@ public class u13_lieutenant_tarc extends script.base_script
                 utils.setScriptVar(player, "conversation.u13_lieutenant_tarc.branchId", 6);
                 npcStartConversation(player, npc, "u13_lieutenant_tarc", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -363,7 +400,7 @@ public class u13_lieutenant_tarc extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -371,7 +408,7 @@ public class u13_lieutenant_tarc extends script.base_script
                 utils.setScriptVar(player, "conversation.u13_lieutenant_tarc.branchId", 9);
                 npcStartConversation(player, npc, "u13_lieutenant_tarc", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -399,7 +436,7 @@ public class u13_lieutenant_tarc extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_36");
@@ -407,7 +444,7 @@ public class u13_lieutenant_tarc extends script.base_script
                 utils.setScriptVar(player, "conversation.u13_lieutenant_tarc.branchId", 12);
                 npcStartConversation(player, npc, "u13_lieutenant_tarc", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -422,6 +459,7 @@ public class u13_lieutenant_tarc extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("u13_lieutenant_tarc"))

@@ -1,5 +1,11 @@
 package script.developer.soe.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.deltadictionary;
 import script.dictionary;
 import script.library.buff;
@@ -8,9 +14,6 @@ import script.obj_id;
 
 public class swyckoff_test extends script.base.remote_object_requester
 {
-    public swyckoff_test()
-    {
-    }
     public static final String FINISH_PLANET = "tatooine";
     public static final float FINISH_X = 3528.0f;
     public static final float FINISH_Z = -4804.0f;
@@ -21,20 +24,24 @@ public class swyckoff_test extends script.base.remote_object_requester
     public static final String MINIGAME_VARNAME_PLAYER = "player";
     public static final String MINIGAME_GAMENAME_MAHJONG = "mahjong";
     public static final String MINIGAME_VARNAME_MAHJONG_LAYOUT = "layout";
-    public static final String[] COMMAND_LIST = 
+    public static final String[] COMMAND_LIST =
+            {
+                    "sw_remove_mods",
+                    "sw_kill",
+                    "sw_buff_apply",
+                    "sw_buff_remove",
+                    "sw_buff_list",
+                    "sw_scriptvar_set",
+                    "sw_scriptvar_list",
+                    "sw_scriptvar_remove",
+                    "sw_garbage_collect",
+                    "sw_objid_isvalid",
+                    "sw_mahjong"
+            };
+    public swyckoff_test()
     {
-        "sw_remove_mods",
-        "sw_kill",
-        "sw_buff_apply",
-        "sw_buff_remove",
-        "sw_buff_list",
-        "sw_scriptvar_set",
-        "sw_scriptvar_list",
-        "sw_scriptvar_remove",
-        "sw_garbage_collect",
-        "sw_objid_isvalid",
-        "sw_mahjong"
-    };
+    }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (true)
@@ -46,7 +53,8 @@ public class swyckoff_test extends script.base.remote_object_requester
                 if (command.equalsIgnoreCase("sw_list_commands"))
                 {
                     String outstring = "commands possible:";
-                    for (String s : COMMAND_LIST) {
+                    for (String s : COMMAND_LIST)
+                    {
                         outstring += " " + s;
                     }
                     debugConsoleMsg(self, outstring);
@@ -91,12 +99,12 @@ public class swyckoff_test extends script.base.remote_object_requester
                             debugConsoleMsg(self, "buff " + buffname + " applied to " + oid);
                             debugConsoleMsg(oid, "buff " + buffname + " applied by " + self);
                         }
-                        else 
+                        else
                         {
                             debugConsoleMsg(self, "failed to apply buff " + buffname + " to " + oid);
                         }
                     }
-                    else 
+                    else
                     {
                         debugConsoleMsg(self, "usage: sw_buff_apply <buffname> [target oid]");
                     }
@@ -117,12 +125,12 @@ public class swyckoff_test extends script.base.remote_object_requester
                             debugConsoleMsg(self, "buff " + buffname + " removed from " + oid);
                             debugConsoleMsg(oid, "buff " + buffname + " removed by " + self);
                         }
-                        else 
+                        else
                         {
                             debugConsoleMsg(self, "failed to remove buff " + buffname + " to " + oid);
                         }
                     }
-                    else 
+                    else
                     {
                         debugConsoleMsg(self, "usage: sw_buff_remove <buffname> [target oid]");
                     }
@@ -137,7 +145,8 @@ public class swyckoff_test extends script.base.remote_object_requester
                     }
                     int[] buffcrcs = buff.getAllBuffs(oid);
                     String outstring = "Buffs on " + oid;
-                    for (int buffcrc : buffcrcs) {
+                    for (int buffcrc : buffcrcs)
+                    {
                         outstring += " " + buff.getBuffNameFromCrc(buffcrc);
                     }
                     debugConsoleMsg(self, outstring);
@@ -176,9 +185,9 @@ public class swyckoff_test extends script.base.remote_object_requester
                     {
                         debugConsoleMsg(self, "NONE!");
                     }
-                    else 
+                    else
                     {
-                        debugConsoleMsg(self, "dd = " + delta.toString());
+                        debugConsoleMsg(self, "dd = " + delta);
                     }
                 }
                 if (command.equalsIgnoreCase("sw_scriptvar_remove"))
@@ -212,12 +221,12 @@ public class swyckoff_test extends script.base.remote_object_requester
                         {
                             debugConsoleMsg(self, "the obj_id " + oid + " is valid.");
                         }
-                        else 
+                        else
                         {
                             debugConsoleMsg(self, "the obj_id " + oid + " is NOT valid.");
                         }
                     }
-                    else 
+                    else
                     {
                         debugConsoleMsg(self, "requires an id to verify");
                     }
@@ -244,18 +253,18 @@ public class swyckoff_test extends script.base.remote_object_requester
                                     data.put(MINIGAME_VARNAME_TABLE, owneroid);
                                 }
                             }
-                            else 
+                            else
                             {
                                 debugConsoleMsg(self, "target is not valid");
                             }
                         }
-                        else 
+                        else
                         {
                             if (clientMinigameOpen(self, data))
                             {
                                 debugConsoleMsg(self, "no target, opened minigame on self");
                             }
-                            else 
+                            else
                             {
                                 debugConsoleMsg(self, "no target, failed to open minigame on self");
                             }
@@ -268,7 +277,7 @@ public class swyckoff_test extends script.base.remote_object_requester
                                 {
                                     debugConsoleMsg(self, "opened minigame on " + player);
                                 }
-                                else 
+                                else
                                 {
                                     debugConsoleMsg(self, "failed to open minigame on " + player);
                                 }
@@ -284,24 +293,30 @@ public class swyckoff_test extends script.base.remote_object_requester
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        if (!isGod(self) || getGodLevel(self) < 50 || !isPlayer(self)) {
+        if (!isGod(self) || getGodLevel(self) < 50 || !isPlayer(self))
+        {
             detachScript(self, "test.swyckoff_test");
         }
-        else {
+        else
+        {
             debugConsoleMsg(self, "attached swyckoff_test");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int startPerform(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int stopPerform(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int clientMinigameResult(obj_id self, dictionary params) throws InterruptedException
     {
         debugConsoleMsg(self, "minigame params: " + params.toString());

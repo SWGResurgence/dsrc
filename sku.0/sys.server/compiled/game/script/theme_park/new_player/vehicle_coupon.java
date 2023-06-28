@@ -1,13 +1,16 @@
 package script.theme_park.new_player;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class vehicle_coupon extends script.base_script
 {
-    public vehicle_coupon()
-    {
-    }
     public static final String STF = "new_player";
     public static final String VEHICLE_TYPE = "spdrbike";
     public static final string_id MENU_CALL = new string_id(STF, "vehicle_coupon_menu_call");
@@ -15,11 +18,16 @@ public class vehicle_coupon extends script.base_script
     public static final string_id IS_NOT_OWNER = new string_id(STF, "vehicle_coupon_is_not_owner");
     public static final int USES = 5;
     public static final int MAX_HP = 1500;
+    public vehicle_coupon()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.VEHICLE_GENERATE, MENU_CALL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!hasObjVar(self, "owner"))
@@ -67,6 +75,7 @@ public class vehicle_coupon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public obj_id createCraftedCreatureDevice(obj_id player, obj_id deed) throws InterruptedException
     {
         if (!hasScript(player, "ai.pet_master"))
@@ -86,7 +95,7 @@ public class vehicle_coupon extends script.base_script
             broadcast(player, "Failed to create pet control device for vehicle");
             return null;
         }
-        else 
+        else
         {
             setObjVar(petControlDevice, "pet.crafted", true);
             setObjVar(petControlDevice, "pet.uses_left", USES);
@@ -119,7 +128,7 @@ public class vehicle_coupon extends script.base_script
         {
             return petControlDevice;
         }
-        else 
+        else
         {
             setObjVar(petControlDevice, "ai.pet.trainedMount", 1);
         }
@@ -127,6 +136,7 @@ public class vehicle_coupon extends script.base_script
         callable.setCallableLinks(player, petControlDevice, pet);
         return petControlDevice;
     }
+
     public void initCraftedStats(obj_id device, obj_id deed, obj_id pet) throws InterruptedException
     {
         int hitPoints = MAX_HP;

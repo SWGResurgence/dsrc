@@ -1,5 +1,11 @@
 package script.space.ship_control_device;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -368,7 +374,7 @@ public class ship_control_device extends script.base_script
                     return SCRIPT_CONTINUE;
                 }
                 boolean belowLimit = space_transition.isPlayerBelowShipLimit(player, destContainer);
-                if (belowLimit == true)
+                if (belowLimit)
                 {
                     return SCRIPT_CONTINUE;
                 }
@@ -470,7 +476,7 @@ public class ship_control_device extends script.base_script
         }
         obj_id player = sui.getPlayerId(params);
         String newShipName = sui.getInputBoxText(params);
-        if (isNameReserved(newShipName, ignoreRules) != true && newShipName.length() < 21)
+        if (!isNameReserved(newShipName, ignoreRules) && newShipName.length() < 21)
         {
             setName(self, newShipName);
             obj_id objShip = space_transition.getShipFromShipControlDevice(self);
@@ -534,7 +540,6 @@ public class ship_control_device extends script.base_script
                 sendSystemMessage(player, strSpam);
             }
         }
-        return;
     }
 
     public boolean giveResourceReward(obj_id objResourceId, obj_id player, int intAmount, obj_id objShip) throws InterruptedException
@@ -622,7 +627,6 @@ public class ship_control_device extends script.base_script
                 setObjVar(objShip, "structure.capacity_override", 150);
             }
         }
-        return;
     }
 
     public boolean blog(String category, String msg) throws InterruptedException

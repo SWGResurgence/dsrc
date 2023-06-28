@@ -1,5 +1,11 @@
 package script.systems.crafting.space.repair;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.craftinglib;
 import script.resource_weight;
 
@@ -34,6 +40,7 @@ public class crafting_basic_ship_repair_artisan extends script.systems.crafting.
                                     new resource_weight.weight(craftinglib.RESOURCE_QUALITY, 3)
                             })
             };
+
     public crafting_basic_ship_repair_artisan()
     {
     }

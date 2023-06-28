@@ -1,5 +1,11 @@
 package script.systems.beast;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -15,6 +21,7 @@ public class beast_egg extends script.base_script
     public static final string_id SID_MAKE_HOLOPET = new string_id("beast", "egg_make_holopet");
     public static final string_id SID_HOLOBEAST_CONVERT_PROMPT = new string_id("beast", "egg_make_holobeast_prompt");
     public static final string_id SID_HOLOBEAST_CONVERT_TITLE = new string_id("beast", "egg_make_holobeast_title");
+
     public beast_egg()
     {
     }
@@ -156,13 +163,13 @@ public class beast_egg extends script.base_script
                         if (!name.equals("block_value_bonus"))
                         {
                             names[idx] = beast_lib.DISPLAY_NAMES[i];
-                            attribs[idx] = "" + utils.roundFloatByDecimal(stat * beast_lib.DISPLAY_OBJVAR_CONVERSION_RATES[i]) + "%";
+                            attribs[idx] = utils.roundFloatByDecimal(stat * beast_lib.DISPLAY_OBJVAR_CONVERSION_RATES[i]) + "%";
                             idx++;
                         }
                         else
                         {
                             names[idx] = beast_lib.DISPLAY_NAMES[i];
-                            attribs[idx] = "" + stat;
+                            attribs[idx] = String.valueOf(stat);
                             idx++;
                         }
                         continue;
@@ -170,7 +177,7 @@ public class beast_egg extends script.base_script
                     else
                     {
                         names[idx] = beast_lib.DISPLAY_NAMES[i];
-                        attribs[idx] = "" + stat;
+                        attribs[idx] = String.valueOf(stat);
                         idx++;
                         continue;
                     }
@@ -192,7 +199,7 @@ public class beast_egg extends script.base_script
                         templateId = new string_id("mob/creature_names", template);
                     }
                 }
-                attribs[idx] = "" + localize(templateId);
+                attribs[idx] = localize(templateId);
                 idx++;
                 if (idx >= names.length)
                 {
@@ -210,7 +217,7 @@ public class beast_egg extends script.base_script
                 {
                     templateId = new string_id("mob/creature_names", template);
                 }
-                attribs[idx] = "" + localize(templateId);
+                attribs[idx] = localize(templateId);
                 idx++;
                 if (idx >= names.length)
                 {
@@ -242,7 +249,7 @@ public class beast_egg extends script.base_script
             {
                 color eggColor = getPalcolorCustomVarSelectedColor(self, hue.INDEX_1);
                 String attrib = "";
-                attrib += "" + eggColor.getR() + ", " + eggColor.getG() + ", " + eggColor.getB();
+                attrib += eggColor.getR() + ", " + eggColor.getG() + ", " + eggColor.getB();
                 names[idx] = "bm_rgb_values";
                 attribs[idx] = attrib;
                 idx++;

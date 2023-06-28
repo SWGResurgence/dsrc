@@ -1,5 +1,11 @@
 package script.item.gcw_buff_banner;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.create;
 import script.library.factions;
@@ -15,6 +21,7 @@ public class pvp_captain_banner_click extends script.base_script
     public static final String IMPERIAL_BANNER = "object/tangible/gcw/pvp_rank_rewards/pvp_imperial_battle_banner.iff";
     public static final string_id SID_ALREADY_HAVE = new string_id("gcw", "banner_already_used");
     public static final string_id SID_WRONG_FACTION = new string_id("gcw", "wrong_faction");
+
     public pvp_captain_banner_click()
     {
     }

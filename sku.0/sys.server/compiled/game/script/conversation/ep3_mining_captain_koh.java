@@ -1,139 +1,164 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class ep3_mining_captain_koh extends script.base_script
 {
+    public static String c_stringFile = "conversation/ep3_mining_captain_koh";
+
     public ep3_mining_captain_koh()
     {
     }
-    public static String c_stringFile = "conversation/ep3_mining_captain_koh";
+
     public boolean ep3_mining_captain_koh_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean ep3_mining_captain_koh_condition_hasQuestFour(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "ep3_mining_quest_4");
     }
+
     public boolean ep3_mining_captain_koh_condition_isQuest5Active(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasQuest(player, "space_mining_destroy", "kashyyyk_mining_quest_5");
     }
+
     public boolean ep3_mining_captain_koh_condition_hasCompletedQuest5(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasWonQuest(player, "space_mining_destroy", "kashyyyk_mining_quest_5") && !space_quest.hasReceivedReward(player, "space_mining_destroy", "kashyyyk_mining_quest_5"));
     }
+
     public boolean ep3_mining_captain_koh_condition_isReadyForQuest5(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "ep3_mining_quest_4") && !space_quest.hasQuest(player, "space_mining_destroy", "kashyyyk_mining_quest_5") && !space_quest.hasWonQuest(player, "space_mining_destroy", "kashyyyk_mining_quest_5"));
     }
+
     public boolean ep3_mining_captain_koh_condition_isReadyForQuest6(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasReceivedReward(player, "space_mining_destroy", "kashyyyk_mining_quest_5") && !space_quest.hasQuest(player, "space_mining_destroy", "lok_mining_quest_6") && !space_quest.hasWonQuest(player, "space_mining_destroy", "lok_mining_quest_6"));
     }
+
     public boolean ep3_mining_captain_koh_condition_isQuest6Active(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasQuest(player, "space_mining_destroy", "lok_mining_quest_6");
     }
+
     public boolean ep3_mining_captain_koh_condition_hasCompletedQuest6(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasWonQuest(player, "space_mining_destroy", "lok_mining_quest_6") && !space_quest.hasReceivedReward(player, "space_mining_destroy", "lok_mining_quest_6"));
     }
+
     public boolean ep3_mining_captain_koh_condition_isReadyForQuest7(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasReceivedReward(player, "space_mining_destroy", "lok_mining_quest_6") && !space_quest.hasQuest(player, "salvage", "corellia_mining_quest_7") && !space_quest.hasWonQuest(player, "salvage", "corellia_mining_quest_7"));
     }
+
     public boolean ep3_mining_captain_koh_condition_isQuest7Active(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasQuest(player, "salvage", "corellia_mining_quest_7");
     }
+
     public boolean ep3_mining_captain_koh_condition_hasCompletedQuest7(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasWonQuest(player, "salvage", "corellia_mining_quest_7") && !space_quest.hasReceivedReward(player, "salvage", "corellia_mining_quest_7"));
     }
+
     public boolean ep3_mining_captain_koh_condition_isReadyForQuest8(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasReceivedReward(player, "salvage", "corellia_mining_quest_7") && !space_quest.hasQuest(player, "space_mining_destroy", "kashyyyk_mining_quest_8") && !space_quest.hasWonQuest(player, "space_mining_destroy", "kashyyyk_mining_quest_8"));
     }
+
     public boolean ep3_mining_captain_koh_condition_isQuest8Active(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasQuest(player, "space_mining_destroy", "kashyyyk_mining_quest_8") || space_quest.hasQuest(player, "space_mining_destroy", "endor_mining_quest_9") || space_quest.hasQuest(player, "space_mining_destroy", "dathomir_mining_quest_10"));
     }
+
     public boolean ep3_mining_captain_koh_condition_hasCompletedQuest8(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasWonQuest(player, "space_mining_destroy", "dathomir_mining_quest_10") && !space_quest.hasReceivedReward(player, "space_mining_destroy", "dathomir_mining_quest_10"));
     }
+
     public boolean ep3_mining_captain_koh_condition_isReadyForQuest9(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasReceivedReward(player, "space_mining_destroy", "dathomir_mining_quest_10") && !space_quest.hasQuest(player, "convoy", "kashyyyk_mining_quest_11") && !space_quest.hasWonQuest(player, "convoy", "kashyyyk_mining_quest_11"));
     }
+
     public boolean ep3_mining_captain_koh_condition_isQuest9Active(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasQuest(player, "convoy", "kashyyyk_mining_quest_11");
     }
+
     public boolean ep3_mining_captain_koh_condition_hasCompletedQuest9(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasWonQuest(player, "convoy", "kashyyyk_mining_quest_11") && !space_quest.hasReceivedReward(player, "convoy", "kashyyyk_mining_quest_11"));
     }
+
     public boolean ep3_mining_captain_koh_condition_isReadyForQuest10(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasReceivedReward(player, "convoy", "kashyyyk_mining_quest_11") && !space_quest.hasQuest(player, "assassinate", "kashyyyk_mining_quest_12") && !space_quest.hasWonQuest(player, "assassinate", "kashyyyk_mining_quest_12"));
     }
+
     public boolean ep3_mining_captain_koh_condition_isQuest10Active(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasQuest(player, "assassinate", "kashyyyk_mining_quest_12");
     }
+
     public boolean ep3_mining_captain_koh_condition_hasCompletedQuest10(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasWonQuest(player, "assassinate", "kashyyyk_mining_quest_12") && !space_quest.hasReceivedReward(player, "assassinate", "kashyyyk_mining_quest_12"));
     }
+
     public boolean ep3_mining_captain_koh_condition_isReadyForQuest11(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasReceivedReward(player, "assassinate", "kashyyyk_mining_quest_12") && !space_quest.hasQuest(player, "space_mining_destroy", "kessel_mining_quest_13") && !space_quest.hasWonQuest(player, "space_mining_destroy", "kessel_mining_quest_13"));
     }
+
     public boolean ep3_mining_captain_koh_condition_isQuest11Active(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasQuest(player, "space_mining_destroy", "kessel_mining_quest_13");
     }
+
     public boolean ep3_mining_captain_koh_condition_hasCompletedQuest11(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasWonQuest(player, "space_mining_destroy", "kessel_mining_quest_13") && !space_quest.hasReceivedReward(player, "space_mining_destroy", "kessel_mining_quest_13"));
     }
+
     public boolean ep3_mining_captain_koh_condition_hasFailedQuest5(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasAbortedQuest(player, "space_mining_destroy", "kashyyyk_mining_quest_5") || space_quest.hasFailedQuest(player, "space_mining_destroy", "kashyyyk_mining_quest_5"))
         {
-            if (!space_quest.hasWonQuest(player, "space_mining_destroy", "kashyyyk_mining_quest_5"))
-            {
-                return true;
-            }
+            return !space_quest.hasWonQuest(player, "space_mining_destroy", "kashyyyk_mining_quest_5");
         }
         return false;
     }
+
     public boolean ep3_mining_captain_koh_condition_hasFailedQuest6(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasAbortedQuest(player, "space_mining_destroy", "lok_mining_quest_6") || space_quest.hasFailedQuest(player, "space_mining_destroy", "lok_mining_quest_6"))
         {
-            if (!space_quest.hasWonQuest(player, "space_mining_destroy", "lok_mining_quest_6"))
-            {
-                return true;
-            }
+            return !space_quest.hasWonQuest(player, "space_mining_destroy", "lok_mining_quest_6");
         }
         return false;
     }
+
     public boolean ep3_mining_captain_koh_condition_hasFailedQuest7(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasAbortedQuest(player, "salvage", "corellia_mining_quest_7") || space_quest.hasFailedQuest(player, "salvage", "corellia_mining_quest_7"))
         {
-            if (!space_quest.hasWonQuest(player, "salvage", "corellia_mining_quest_7"))
-            {
-                return true;
-            }
+            return !space_quest.hasWonQuest(player, "salvage", "corellia_mining_quest_7");
         }
         return false;
     }
+
     public boolean ep3_mining_captain_koh_condition_hasFailedQuest8(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasAbortedQuest(player, "space_mining_destroy", "kashyyyk_mining_quest_8") || space_quest.hasFailedQuest(player, "space_mining_destroy", "kashyyyk_mining_quest_8"))
@@ -152,54 +177,48 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         if (space_quest.hasAbortedQuest(player, "space_mining_destroy", "dathomir_mining_quest_10") || space_quest.hasFailedQuest(player, "space_mining_destroy", "dathomir_mining_quest_10"))
         {
-            if (!space_quest.hasWonQuest(player, "space_mining_destroy", "dathomir_mining_quest_10"))
-            {
-                return true;
-            }
+            return !space_quest.hasWonQuest(player, "space_mining_destroy", "dathomir_mining_quest_10");
         }
         return false;
     }
+
     public boolean ep3_mining_captain_koh_condition_hasFailedQuest9(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasAbortedQuest(player, "convoy", "kashyyyk_mining_quest_11") || space_quest.hasFailedQuest(player, "convoy", "kashyyyk_mining_quest_11"))
         {
-            if (!space_quest.hasWonQuest(player, "convoy", "kashyyyk_mining_quest_11"))
-            {
-                return true;
-            }
+            return !space_quest.hasWonQuest(player, "convoy", "kashyyyk_mining_quest_11");
         }
         return false;
     }
+
     public boolean ep3_mining_captain_koh_condition_hasFailedQuest10(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasAbortedQuest(player, "assassinate", "kashyyyk_mining_quest_12") || space_quest.hasFailedQuest(player, "assassinate", "kashyyyk_mining_quest_12"))
         {
-            if (!space_quest.hasWonQuest(player, "assassinate", "kashyyyk_mining_quest_12"))
-            {
-                return true;
-            }
+            return !space_quest.hasWonQuest(player, "assassinate", "kashyyyk_mining_quest_12");
         }
         return false;
     }
+
     public boolean ep3_mining_captain_koh_condition_hasFailedQuest11(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasAbortedQuest(player, "space_mining_destroy", "kessel_mining_quest_13") || space_quest.hasFailedQuest(player, "space_mining_destroy", "kessel_mining_quest_13"))
         {
-            if (!space_quest.hasWonQuest(player, "space_mining_destroy", "kessel_mining_quest_13"))
-            {
-                return true;
-            }
+            return !space_quest.hasWonQuest(player, "space_mining_destroy", "kessel_mining_quest_13");
         }
         return false;
     }
+
     public void ep3_mining_captain_koh_action_sendSignalToPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "talkedToKoh");
     }
+
     public void ep3_mining_captain_koh_action_grantQuest5(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "space_mining_destroy", "kashyyyk_mining_quest_5");
     }
+
     public void ep3_mining_captain_koh_action_grantReward5(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasReceivedReward(player, "space_mining_destroy", "kashyyyk_mining_quest_5"))
@@ -209,10 +228,12 @@ public class ep3_mining_captain_koh extends script.base_script
         space_quest.giveReward(player, "space_mining_destroy", "kashyyyk_mining_quest_5", 5000);
         createObjectInInventoryAllowOverload("object/tangible/ship/components/cargo_hold/crg_starfighter_large.iff", player);
     }
+
     public void ep3_mining_captain_koh_action_grantQuest6(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "space_mining_destroy", "lok_mining_quest_6");
     }
+
     public void ep3_mining_captain_koh_action_grantReward6(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasReceivedReward(player, "space_mining_destroy", "lok_mining_quest_6"))
@@ -221,10 +242,12 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         space_quest.giveReward(player, "space_mining_destroy", "lok_mining_quest_6", 7500, "object/tangible/ship/components/weapon/wpn_tractor_pulse_gun.iff");
     }
+
     public void ep3_mining_captain_koh_action_grantQuest7(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "salvage", "corellia_mining_quest_7");
     }
+
     public void ep3_mining_captain_koh_action_grantReward7(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasReceivedReward(player, "salvage", "corellia_mining_quest_7"))
@@ -233,10 +256,12 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         space_quest.giveReward(player, "salvage", "corellia_mining_quest_7", 7500);
     }
+
     public void ep3_mining_captain_koh_action_grantQuest8(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "space_mining_destroy", "kashyyyk_mining_quest_8");
     }
+
     public void ep3_mining_captain_koh_action_grantReward8(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasReceivedReward(player, "space_mining_destroy", "dathomir_mining_quest_10"))
@@ -245,10 +270,12 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         space_quest.giveReward(player, "space_mining_destroy", "dathomir_mining_quest_10", 10000, "object/tangible/ship/components/weapon/wpn_mining_laser_mk2.iff");
     }
+
     public void ep3_mining_captain_koh_action_grantQuest9(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "convoy", "kashyyyk_mining_quest_11");
     }
+
     public void ep3_mining_captain_koh_action_grantReward9(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasReceivedReward(player, "convoy", "kashyyyk_mining_quest_11"))
@@ -257,10 +284,12 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         space_quest.giveReward(player, "convoy", "kashyyyk_mining_quest_11", 10000);
     }
+
     public void ep3_mining_captain_koh_action_grantQuest10(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "assassinate", "kashyyyk_mining_quest_12");
     }
+
     public void ep3_mining_captain_koh_action_grantReward10(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasReceivedReward(player, "assassinate", "kashyyyk_mining_quest_12"))
@@ -269,10 +298,12 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         space_quest.giveReward(player, "assassinate", "kashyyyk_mining_quest_12", 12500);
     }
+
     public void ep3_mining_captain_koh_action_grantQuest11(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "space_mining_destroy", "kessel_mining_quest_13");
     }
+
     public void ep3_mining_captain_koh_action_grantReward11(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasReceivedReward(player, "space_mining_destroy", "kessel_mining_quest_13"))
@@ -282,6 +313,7 @@ public class ep3_mining_captain_koh extends script.base_script
         space_quest.giveReward(player, "space_mining_destroy", "kessel_mining_quest_13", 15000, "object/tangible/space/special_loot/y8_deed.iff");
         createObjectInInventoryAllowOverload("object/tangible/ship/components/cargo_hold/crg_mining_small.iff", player);
     }
+
     public int ep3_mining_captain_koh_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_248"))
@@ -297,6 +329,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_204"))
@@ -316,7 +349,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_206");
@@ -325,7 +358,7 @@ public class ep3_mining_captain_koh extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_mining_captain_koh.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -335,6 +368,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_206"))
@@ -355,7 +389,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_208");
@@ -364,7 +398,7 @@ public class ep3_mining_captain_koh extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_mining_captain_koh.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -374,6 +408,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_208"))
@@ -389,6 +424,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_194"))
@@ -408,7 +444,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_196");
@@ -417,7 +453,7 @@ public class ep3_mining_captain_koh extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_mining_captain_koh.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -427,6 +463,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_196"))
@@ -446,7 +483,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_198");
@@ -455,7 +492,7 @@ public class ep3_mining_captain_koh extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_mining_captain_koh.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -465,6 +502,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_198"))
@@ -491,7 +529,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_200");
@@ -504,7 +542,7 @@ public class ep3_mining_captain_koh extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_mining_captain_koh.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -514,6 +552,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_200"))
@@ -540,6 +579,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_246"))
@@ -555,6 +595,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_170"))
@@ -574,7 +615,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_172");
@@ -583,7 +624,7 @@ public class ep3_mining_captain_koh extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_mining_captain_koh.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -593,6 +634,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_172"))
@@ -608,6 +650,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_160"))
@@ -627,7 +670,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -636,7 +679,7 @@ public class ep3_mining_captain_koh extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_mining_captain_koh.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -646,6 +689,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_162"))
@@ -665,7 +709,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -674,7 +718,7 @@ public class ep3_mining_captain_koh extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_mining_captain_koh.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -684,6 +728,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_164"))
@@ -710,7 +755,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_166");
@@ -723,7 +768,7 @@ public class ep3_mining_captain_koh extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_mining_captain_koh.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -733,6 +778,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_166"))
@@ -758,6 +804,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_244"))
@@ -773,6 +820,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_146"))
@@ -788,6 +836,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_142"))
@@ -807,7 +856,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_144");
@@ -816,7 +865,7 @@ public class ep3_mining_captain_koh extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_mining_captain_koh.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -826,6 +875,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_144"))
@@ -841,6 +891,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_242"))
@@ -856,6 +907,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_119"))
@@ -876,7 +928,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -885,7 +937,7 @@ public class ep3_mining_captain_koh extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_mining_captain_koh.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -895,6 +947,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_121"))
@@ -914,7 +967,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_123");
@@ -923,7 +976,7 @@ public class ep3_mining_captain_koh extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_mining_captain_koh.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -933,6 +986,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_123"))
@@ -947,6 +1001,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_112"))
@@ -973,7 +1028,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_114");
@@ -986,7 +1041,7 @@ public class ep3_mining_captain_koh extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_mining_captain_koh.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -996,6 +1051,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_114"))
@@ -1021,6 +1077,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch45(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_240"))
@@ -1036,6 +1093,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_86"))
@@ -1056,7 +1114,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_88");
@@ -1065,7 +1123,7 @@ public class ep3_mining_captain_koh extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_mining_captain_koh.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1075,6 +1133,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch48(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_88"))
@@ -1089,6 +1148,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_92"))
@@ -1108,7 +1168,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_96");
@@ -1117,7 +1177,7 @@ public class ep3_mining_captain_koh extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_mining_captain_koh.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1127,6 +1187,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch52(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_96"))
@@ -1153,7 +1214,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_101");
@@ -1166,7 +1227,7 @@ public class ep3_mining_captain_koh extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_mining_captain_koh.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1176,6 +1237,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch53(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_101"))
@@ -1201,6 +1263,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch56(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_238"))
@@ -1216,6 +1279,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch58(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_129"))
@@ -1236,7 +1300,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_133");
@@ -1245,7 +1309,7 @@ public class ep3_mining_captain_koh extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_mining_captain_koh.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1255,6 +1319,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch59(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_133"))
@@ -1274,7 +1339,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_137");
@@ -1283,7 +1348,7 @@ public class ep3_mining_captain_koh extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_mining_captain_koh.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1293,6 +1358,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch60(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_137"))
@@ -1308,6 +1374,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch63(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_154"))
@@ -1327,7 +1394,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_175");
@@ -1336,7 +1403,7 @@ public class ep3_mining_captain_koh extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_mining_captain_koh.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1346,6 +1413,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch64(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_175"))
@@ -1365,7 +1433,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_179");
@@ -1374,7 +1442,7 @@ public class ep3_mining_captain_koh extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_mining_captain_koh.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1384,6 +1452,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch65(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_179"))
@@ -1399,6 +1468,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch67(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_236"))
@@ -1414,6 +1484,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch69(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_188"))
@@ -1434,7 +1505,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_211");
@@ -1443,7 +1514,7 @@ public class ep3_mining_captain_koh extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_mining_captain_koh.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1453,6 +1524,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch70(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_211"))
@@ -1467,6 +1539,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch73(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_219"))
@@ -1492,6 +1565,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch76(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_250"))
@@ -1512,7 +1586,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_254");
@@ -1521,7 +1595,7 @@ public class ep3_mining_captain_koh extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_mining_captain_koh.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1531,6 +1605,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch77(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_254"))
@@ -1557,7 +1632,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_258");
@@ -1570,7 +1645,7 @@ public class ep3_mining_captain_koh extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_mining_captain_koh.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1580,6 +1655,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch78(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_258"))
@@ -1600,7 +1676,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_262");
@@ -1609,7 +1685,7 @@ public class ep3_mining_captain_koh extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_mining_captain_koh.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1629,6 +1705,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_mining_captain_koh_handleBranch79(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_262"))
@@ -1643,6 +1720,7 @@ public class ep3_mining_captain_koh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -1654,6 +1732,7 @@ public class ep3_mining_captain_koh extends script.base_script
         setName(self, "Captain Koh");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -1661,6 +1740,7 @@ public class ep3_mining_captain_koh extends script.base_script
         setName(self, "Captain Koh");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -1670,18 +1750,21 @@ public class ep3_mining_captain_koh extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.ep3_mining_captain_koh");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1704,7 +1787,7 @@ public class ep3_mining_captain_koh extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_248");
@@ -1712,7 +1795,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_mining_captain_koh.branchId", 1);
                 npcStartConversation(player, npc, "ep3_mining_captain_koh", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1733,7 +1816,7 @@ public class ep3_mining_captain_koh extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_204");
@@ -1741,7 +1824,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_mining_captain_koh.branchId", 3);
                 npcStartConversation(player, npc, "ep3_mining_captain_koh", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1768,7 +1851,7 @@ public class ep3_mining_captain_koh extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_194");
@@ -1776,7 +1859,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_mining_captain_koh.branchId", 8);
                 npcStartConversation(player, npc, "ep3_mining_captain_koh", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1797,7 +1880,7 @@ public class ep3_mining_captain_koh extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_246");
@@ -1805,7 +1888,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_mining_captain_koh.branchId", 14);
                 npcStartConversation(player, npc, "ep3_mining_captain_koh", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1826,7 +1909,7 @@ public class ep3_mining_captain_koh extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_170");
@@ -1834,7 +1917,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_mining_captain_koh.branchId", 16);
                 npcStartConversation(player, npc, "ep3_mining_captain_koh", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1861,7 +1944,7 @@ public class ep3_mining_captain_koh extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -1869,7 +1952,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_mining_captain_koh.branchId", 20);
                 npcStartConversation(player, npc, "ep3_mining_captain_koh", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1890,7 +1973,7 @@ public class ep3_mining_captain_koh extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_244");
@@ -1898,7 +1981,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_mining_captain_koh.branchId", 26);
                 npcStartConversation(player, npc, "ep3_mining_captain_koh", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1919,7 +2002,7 @@ public class ep3_mining_captain_koh extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_146");
@@ -1927,7 +2010,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_mining_captain_koh.branchId", 28);
                 npcStartConversation(player, npc, "ep3_mining_captain_koh", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1954,7 +2037,7 @@ public class ep3_mining_captain_koh extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_142");
@@ -1962,7 +2045,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_mining_captain_koh.branchId", 31);
                 npcStartConversation(player, npc, "ep3_mining_captain_koh", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1983,7 +2066,7 @@ public class ep3_mining_captain_koh extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_242");
@@ -1991,7 +2074,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_mining_captain_koh.branchId", 34);
                 npcStartConversation(player, npc, "ep3_mining_captain_koh", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2012,7 +2095,7 @@ public class ep3_mining_captain_koh extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_119");
@@ -2020,7 +2103,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_mining_captain_koh.branchId", 36);
                 npcStartConversation(player, npc, "ep3_mining_captain_koh", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2047,7 +2130,7 @@ public class ep3_mining_captain_koh extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_112");
@@ -2055,7 +2138,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_mining_captain_koh.branchId", 41);
                 npcStartConversation(player, npc, "ep3_mining_captain_koh", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2076,7 +2159,7 @@ public class ep3_mining_captain_koh extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_240");
@@ -2084,7 +2167,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_mining_captain_koh.branchId", 45);
                 npcStartConversation(player, npc, "ep3_mining_captain_koh", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2105,7 +2188,7 @@ public class ep3_mining_captain_koh extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_86");
@@ -2113,7 +2196,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_mining_captain_koh.branchId", 47);
                 npcStartConversation(player, npc, "ep3_mining_captain_koh", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2140,7 +2223,7 @@ public class ep3_mining_captain_koh extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_92");
@@ -2148,7 +2231,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_mining_captain_koh.branchId", 51);
                 npcStartConversation(player, npc, "ep3_mining_captain_koh", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2169,7 +2252,7 @@ public class ep3_mining_captain_koh extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_238");
@@ -2177,7 +2260,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_mining_captain_koh.branchId", 56);
                 npcStartConversation(player, npc, "ep3_mining_captain_koh", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2198,7 +2281,7 @@ public class ep3_mining_captain_koh extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_129");
@@ -2206,7 +2289,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_mining_captain_koh.branchId", 58);
                 npcStartConversation(player, npc, "ep3_mining_captain_koh", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2234,7 +2317,7 @@ public class ep3_mining_captain_koh extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_154");
@@ -2242,7 +2325,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_mining_captain_koh.branchId", 63);
                 npcStartConversation(player, npc, "ep3_mining_captain_koh", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2263,7 +2346,7 @@ public class ep3_mining_captain_koh extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_236");
@@ -2271,7 +2354,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_mining_captain_koh.branchId", 67);
                 npcStartConversation(player, npc, "ep3_mining_captain_koh", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2292,7 +2375,7 @@ public class ep3_mining_captain_koh extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_188");
@@ -2300,7 +2383,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_mining_captain_koh.branchId", 69);
                 npcStartConversation(player, npc, "ep3_mining_captain_koh", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2334,7 +2417,7 @@ public class ep3_mining_captain_koh extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_219");
@@ -2346,7 +2429,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_mining_captain_koh.branchId", 73);
                 npcStartConversation(player, npc, "ep3_mining_captain_koh", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2367,7 +2450,7 @@ public class ep3_mining_captain_koh extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_250");
@@ -2375,7 +2458,7 @@ public class ep3_mining_captain_koh extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_mining_captain_koh.branchId", 76);
                 npcStartConversation(player, npc, "ep3_mining_captain_koh", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2390,6 +2473,7 @@ public class ep3_mining_captain_koh extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("ep3_mining_captain_koh"))

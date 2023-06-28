@@ -1,5 +1,11 @@
 package script.quest.task.ground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.groundquests;
 import script.library.utils;
@@ -9,9 +15,6 @@ import java.util.Vector;
 
 public class wait_for_tasks extends script.quest.task.ground.base_task
 {
-    public wait_for_tasks()
-    {
-    }
     public static final String dataTableQuestNamePre = "TASK_QUEST_NAME_";
     public static final String dataTableTaskNamePre = "TASK_TASK_NAME_";
     public static final String dataTableDisplayStringIdPre = "TASK_DISPLAY_STRING_";
@@ -21,6 +24,10 @@ public class wait_for_tasks extends script.quest.task.ground.base_task
     public static final String completedListObjVarName = "completed";
     public static final String taskType = "wait_for_tasks";
     public static final String dot = ".";
+    public wait_for_tasks()
+    {
+    }
+
     public int OnTaskActivated(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskActivated", taskType + " task activated.");
@@ -59,12 +66,12 @@ public class wait_for_tasks extends script.quest.task.ground.base_task
                         questSetQuestTaskCounter(self, questGetQuestName(questCrc), taskId, displayStringId, 0, 1);
                     }
                 }
-                else 
+                else
                 {
                     done = true;
                 }
             }
-            else 
+            else
             {
                 done = true;
             }
@@ -114,12 +121,12 @@ public class wait_for_tasks extends script.quest.task.ground.base_task
                 setObjVar(self, baseObjVar + dot + taskIndexesListObjVarName, taskIndexesList);
                 setObjVar(self, baseObjVar + dot + completedListObjVarName, completedList);
             }
-            else 
+            else
             {
                 groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskActivated", "[designer bug] No valid tasks to wait for found, are the task names valid names in the given quests?");
             }
         }
-        else 
+        else
         {
             groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskActivated", "[programmer bug] Task arrays mismatched, this shouldn't happen.");
         }
@@ -129,6 +136,7 @@ public class wait_for_tasks extends script.quest.task.ground.base_task
         messageTo(self, "checkForAlreadyCompletedTasks", webster, 1, false);
         return super.OnTaskActivated(self, questCrc, taskId);
     }
+
     public int checkForAlreadyCompletedTasks(obj_id self, dictionary params) throws InterruptedException
     {
         int questCrc = params.getInt("questCrc");
@@ -156,28 +164,31 @@ public class wait_for_tasks extends script.quest.task.ground.base_task
                     }
                     ++waitForTaskIndex;
                 }
-                else 
+                else
                 {
                     done = true;
                 }
             }
-            else 
+            else
             {
                 done = true;
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSomeTaskCompleted(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         handleSomeTaskFinished(self, questCrc, taskId);
         return SCRIPT_CONTINUE;
     }
+
     public int OnSomeTaskFailed(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         handleSomeTaskFinished(self, questCrc, taskId);
         return SCRIPT_CONTINUE;
     }
+
     public void handleSomeTaskFinished(obj_id player, int finishedTaskQuestCrc, int finishedTaskTaskId) throws InterruptedException
     {
         dictionary tasks = groundquests.getActiveTasksForTaskType(player, taskType);
@@ -186,18 +197,22 @@ public class wait_for_tasks extends script.quest.task.ground.base_task
             java.util.Enumeration keys = tasks.keys();
             while (keys.hasMoreElements())
             {
-                String questCrcString = (String)keys.nextElement();
+                String questCrcString = (String) keys.nextElement();
                 int questCrc = utils.stringToInt(questCrcString);
                 int[] tasksForCurrentQuest = tasks.getIntArray(questCrcString);
-                for (int taskId : tasksForCurrentQuest) {
+                for (int taskId : tasksForCurrentQuest)
+                {
                     String baseObjVar = groundquests.getBaseObjVar(player, taskType, questGetQuestName(questCrc), taskId);
                     int[] questCrcsList = getIntArrayObjVar(player, baseObjVar + dot + questCrcsListObjVarName);
                     int[] taskIdsList = getIntArrayObjVar(player, baseObjVar + dot + taskIdsListObjVarName);
                     int[] taskIndexesList = getIntArrayObjVar(player, baseObjVar + dot + taskIndexesListObjVarName);
                     int[] completedList = getIntArrayObjVar(player, baseObjVar + dot + completedListObjVarName);
-                    if (questCrcsList != null) {
-                        for (int i = 0; i < questCrcsList.length; ++i) {
-                            if ((finishedTaskQuestCrc == questCrcsList[i]) && (finishedTaskTaskId == taskIdsList[i])) {
+                    if (questCrcsList != null)
+                    {
+                        for (int i = 0; i < questCrcsList.length; ++i)
+                        {
+                            if ((finishedTaskQuestCrc == questCrcsList[i]) && (finishedTaskTaskId == taskIdsList[i]))
+                            {
                                 String dataTableDisplayStringId = dataTableDisplayStringIdPre + taskIndexesList[i];
                                 String displayStringId = groundquests.getTaskStringDataEntry(questCrc, taskId, dataTableDisplayStringId);
                                 questSetQuestTaskCounter(player, questGetQuestName(questCrc), taskId, displayStringId, 1, 1);
@@ -211,52 +226,69 @@ public class wait_for_tasks extends script.quest.task.ground.base_task
                                 taskIndexesListResizable.setSize(0);
                                 Vector completedListResizable = new Vector();
                                 completedListResizable.setSize(0);
-                                for (int l = 0; l < questCrcsList.length; ++l) {
+                                for (int l = 0; l < questCrcsList.length; ++l)
+                                {
                                     utils.addElement(questCrcsListResizable, questCrcsList[l]);
                                     utils.addElement(taskIdsListResizable, taskIdsList[l]);
                                     utils.addElement(taskIndexesListResizable, taskIndexesList[l]);
-                                    if (l == i) {
+                                    if (l == i)
+                                    {
                                         utils.addElement(completedListResizable, 1);
-                                    } else {
+                                    }
+                                    else
+                                    {
                                         utils.addElement(completedListResizable, completedList[l]);
                                     }
                                 }
                                 boolean allTasksComplete = true;
-                                for (Object o : completedListResizable) {
-                                    if ((Integer) o != 1) {
+                                for (Object o : completedListResizable)
+                                {
+                                    if ((Integer) o != 1)
+                                    {
                                         allTasksComplete = false;
                                         break;
                                     }
                                 }
-                                if (allTasksComplete) {
+                                if (allTasksComplete)
+                                {
                                     questCompleteTask(questCrc, taskId, player);
                                     return;
-                                } else {
+                                }
+                                else
+                                {
                                     int[] newQuestCrcsList = new int[0];
-                                    if (questCrcsListResizable != null) {
+                                    if (questCrcsListResizable != null)
+                                    {
                                         newQuestCrcsList = new int[questCrcsListResizable.size()];
-                                        for (int _i = 0; _i < questCrcsListResizable.size(); ++_i) {
+                                        for (int _i = 0; _i < questCrcsListResizable.size(); ++_i)
+                                        {
                                             newQuestCrcsList[_i] = (Integer) questCrcsListResizable.get(_i);
                                         }
                                     }
                                     int[] newTaskIdsList = new int[0];
-                                    if (taskIdsListResizable != null) {
+                                    if (taskIdsListResizable != null)
+                                    {
                                         newTaskIdsList = new int[taskIdsListResizable.size()];
-                                        for (int _i = 0; _i < taskIdsListResizable.size(); ++_i) {
+                                        for (int _i = 0; _i < taskIdsListResizable.size(); ++_i)
+                                        {
                                             newTaskIdsList[_i] = (Integer) taskIdsListResizable.get(_i);
                                         }
                                     }
                                     int[] newTaskIndexesList = new int[0];
-                                    if (taskIndexesListResizable != null) {
+                                    if (taskIndexesListResizable != null)
+                                    {
                                         newTaskIndexesList = new int[taskIndexesListResizable.size()];
-                                        for (int _i = 0; _i < taskIndexesListResizable.size(); ++_i) {
+                                        for (int _i = 0; _i < taskIndexesListResizable.size(); ++_i)
+                                        {
                                             newTaskIndexesList[_i] = (Integer) taskIndexesListResizable.get(_i);
                                         }
                                     }
                                     int[] newCompletedList = new int[0];
-                                    if (completedListResizable != null) {
+                                    if (completedListResizable != null)
+                                    {
                                         newCompletedList = new int[completedListResizable.size()];
-                                        for (int _i = 0; _i < completedListResizable.size(); ++_i) {
+                                        for (int _i = 0; _i < completedListResizable.size(); ++_i)
+                                        {
                                             newCompletedList[_i] = (Integer) completedListResizable.get(_i);
                                         }
                                     }
@@ -272,24 +304,28 @@ public class wait_for_tasks extends script.quest.task.ground.base_task
             }
         }
     }
+
     public int OnTaskCompleted(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         cleanup(self, questCrc, taskId);
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskCompleted", taskType + " task completed.");
         return super.OnTaskCompleted(self, questCrc, taskId);
     }
+
     public int OnTaskFailed(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         cleanup(self, questCrc, taskId);
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskFailed", taskType + " task failed.");
         return super.OnTaskFailed(self, questCrc, taskId);
     }
+
     public int OnTaskCleared(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         cleanup(self, questCrc, taskId);
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskCleared", taskType + " task cleared.");
         return super.OnTaskCleared(self, questCrc, taskId);
     }
+
     public int handleClientLogin(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         dictionary tasks = groundquests.getActiveTasksForTaskType(self, taskType);
@@ -298,15 +334,18 @@ public class wait_for_tasks extends script.quest.task.ground.base_task
             java.util.Enumeration keys = tasks.keys();
             while (keys.hasMoreElements())
             {
-                String questCrcString = (String)keys.nextElement();
+                String questCrcString = (String) keys.nextElement();
                 int questCrc = utils.stringToInt(questCrcString);
                 int[] tasksForCurrentQuest = tasks.getIntArray(questCrcString);
-                for (int taskId : tasksForCurrentQuest) {
+                for (int taskId : tasksForCurrentQuest)
+                {
                     String baseObjVar = groundquests.getBaseObjVar(self, taskType, questGetQuestName(questCrc), taskId);
                     int[] taskIndexesList = getIntArrayObjVar(self, baseObjVar + dot + taskIndexesListObjVarName);
                     int[] completedList = getIntArrayObjVar(self, baseObjVar + dot + completedListObjVarName);
-                    if (taskIndexesList != null) {
-                        for (int i = 0; i < taskIndexesList.length; ++i) {
+                    if (taskIndexesList != null)
+                    {
+                        for (int i = 0; i < taskIndexesList.length; ++i)
+                        {
                             String dataTableDisplayStringId = dataTableDisplayStringIdPre + taskIndexesList[i];
                             String displayStringId = groundquests.getTaskStringDataEntry(questCrc, taskId, dataTableDisplayStringId);
                             questSetQuestTaskCounter(self, questGetQuestName(questCrc), taskId, displayStringId, completedList[i], 1);
@@ -317,10 +356,12 @@ public class wait_for_tasks extends script.quest.task.ground.base_task
         }
         return SCRIPT_CONTINUE;
     }
+
     public void cleanup(obj_id player, int questCrc, int taskId) throws InterruptedException
     {
         groundquests.clearBaseObjVar(player, taskType, questGetQuestName(questCrc), taskId);
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         String legacyObjVarName = "quest.wait_for_tasks";

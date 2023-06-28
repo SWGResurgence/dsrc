@@ -1,5 +1,11 @@
 package script.event.gcwlaunch;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.locations;
 import script.location;
@@ -7,14 +13,15 @@ import script.obj_id;
 
 public class gcwlaunch extends script.base_script
 {
-    public gcwlaunch()
-    {
-    }
     public static final String SHUTTLE = "object/creature/npc/theme_park/player_shuttle.iff";
     public static final String ESCORT = "wookiee_brawler";
     public static final String CELEB = "trandoshan_slavemaster";
     public static final String STF_FILE = "event/ep3_trando_herald";
     public static final float ONE_HOUR = 60 * 60;
+    public gcwlaunch()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         location here = getLocation(self);
@@ -27,12 +34,14 @@ public class gcwlaunch extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int repurposeToNewGCWEvents(obj_id self, dictionary params) throws InterruptedException
     {
         attachScript(self, "event.gcwraids.gcwraid");
         messageTo(self, "detachGCWLaunchScript", null, 30, false);
         return SCRIPT_CONTINUE;
     }
+
     public int detachGCWLaunchScript(obj_id self, dictionary params) throws InterruptedException
     {
         detachScript(self, "event.gcwlaunch.gcwlaunch");

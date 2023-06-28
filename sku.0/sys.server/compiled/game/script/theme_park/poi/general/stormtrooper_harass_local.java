@@ -1,5 +1,11 @@
 package script.theme_park.poi.general;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class stormtrooper_harass_local extends script.theme_park.poi.base
@@ -7,10 +13,12 @@ public class stormtrooper_harass_local extends script.theme_park.poi.base
     public stormtrooper_harass_local()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         String objective = poiGetObjective(self);

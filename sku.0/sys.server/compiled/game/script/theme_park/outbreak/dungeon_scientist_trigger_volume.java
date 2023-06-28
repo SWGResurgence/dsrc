@@ -1,5 +1,11 @@
 package script.theme_park.outbreak;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.groundquests;
 import script.library.utils;
@@ -7,9 +13,6 @@ import script.obj_id;
 
 public class dungeon_scientist_trigger_volume extends script.base_script
 {
-    public dungeon_scientist_trigger_volume()
-    {
-    }
     public static final boolean LOGGING_ON = true;
     public static final String SCRIPT_LOG = "outbreak_trigger";
     public static final String TRIGGER_NAME_PREFIX = "scientist_spawning_trigger_";
@@ -24,6 +27,10 @@ public class dungeon_scientist_trigger_volume extends script.base_script
     public static final float TRIGGER_RADIUS = 3.0f;
     public static final float SPAWNER_RADIUS = 6.0f;
     public static final int TOTAL_SPAWNERS = 5;
+    public dungeon_scientist_trigger_volume()
+    {
+    }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         blog("Spawner: heard speach");
@@ -45,16 +52,19 @@ public class dungeon_scientist_trigger_volume extends script.base_script
         blog("Spawner: command success");
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         createTriggerVolume(TRIGGER_NAME_PREFIX + self, TRIGGER_RADIUS, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id whoTriggeredMe) throws InterruptedException
     {
         blog("OnTriggerVolumeEntered INIT: " + whoTriggeredMe);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volumeName, obj_id whoTriggeredMe) throws InterruptedException
     {
         blog("Exited trigger volume: " + whoTriggeredMe);
@@ -89,6 +99,7 @@ public class dungeon_scientist_trigger_volume extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean sendMessageToSpawnActors(obj_id self, obj_id whoTriggeredMe) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -112,7 +123,7 @@ public class dungeon_scientist_trigger_volume extends script.base_script
                 CustomerServiceLog("outbreak_themepark", "dungeon_scientist_trigger_volume.sendMessageToSpawnActors() The trigger object retrieved too many spawners for Player: " + getPlayerName(whoTriggeredMe) + " (" + whoTriggeredMe + ")");
                 return false;
             }
-            else 
+            else
             {
                 CustomerServiceLog("outbreak_themepark", "dungeon_scientist_trigger_volume.sendMessageToSpawnActors() The trigger object failed to get all spawners for Player: " + getPlayerName(whoTriggeredMe) + " (" + whoTriggeredMe + ")");
                 return false;
@@ -120,13 +131,15 @@ public class dungeon_scientist_trigger_volume extends script.base_script
         }
         dictionary parms = new dictionary();
         parms.put("owner", whoTriggeredMe);
-        for (obj_id survivorSpawnLoc : survivorSpawnLocs) {
+        for (obj_id survivorSpawnLoc : survivorSpawnLocs)
+        {
             messageTo(survivorSpawnLoc, "spawnRescuedActor", parms, 1, false);
         }
         utils.setScriptVar(whoTriggeredMe, "survivorsRescued", true);
         CustomerServiceLog("outbreak_themepark", "dungeon_scientist_trigger_volume.OnTriggerVolumeExited() Nodes were messaged to spawn actors for Player: " + getPlayerName(whoTriggeredMe) + " (" + whoTriggeredMe + ").");
         return true;
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON)

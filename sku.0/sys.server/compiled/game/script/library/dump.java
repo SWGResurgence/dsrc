@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 import java.util.StringTokenizer;
@@ -92,6 +98,7 @@ public class dump extends script.base_script
                             "Shoes: "
                     }
             };
+
     public dump()
     {
     }

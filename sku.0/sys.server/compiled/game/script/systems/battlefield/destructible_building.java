@@ -1,5 +1,11 @@
 package script.systems.battlefield;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.battlefield;
 import script.library.factions;
@@ -12,6 +18,7 @@ public class destructible_building extends script.base_script
     public static final string_id SID_CONSTRUCTION_SITE = new string_id("battlefield", "construction_site");
     public static final string_id SID_DESTROY_STRUCTURE = new string_id("battlefield", "destroy_structure");
     public static final string_id SID_REPAIR_STRUCTURE = new string_id("battlefield", "repair_structure");
+
     public destructible_building()
     {
     }

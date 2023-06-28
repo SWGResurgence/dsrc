@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 import java.util.Vector;
@@ -62,6 +68,7 @@ public class slots extends script.base_script
                     WRIST_L,
                     WRIST_R
             };
+
     public slots()
     {
     }

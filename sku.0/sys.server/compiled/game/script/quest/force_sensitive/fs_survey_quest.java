@@ -1,5 +1,11 @@
 package script.quest.force_sensitive;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.utils;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class fs_survey_quest extends script.base_script
     public fs_survey_quest()
     {
     }
+
     public int forceSensitiveQuestInfo(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id resource = params.getObjId("resource");
@@ -18,7 +25,7 @@ public class fs_survey_quest extends script.base_script
             sample = getStringObjVar(self, "fs_quest.searchingFor");
         }
         boolean lookingFor = isResourceDerivedFrom(resource, sample);
-        if (lookingFor == true)
+        if (lookingFor)
         {
             int tries = 0;
             int needs = 0;
@@ -26,7 +33,7 @@ public class fs_survey_quest extends script.base_script
             {
                 needs = utils.getIntScriptVar(self, "fs_quest.fsNeeds");
             }
-            else 
+            else
             {
                 needs = rand(5, 10);
                 utils.setScriptVar(self, "fs_quest.fsNeeds", needs);
@@ -37,7 +44,7 @@ public class fs_survey_quest extends script.base_script
                 tries = tries + 1;
                 utils.setScriptVar(self, "fs_quest.fsTries", tries);
             }
-            else 
+            else
             {
                 tries = 1;
                 utils.setScriptVar(self, "fs_quest.fsTries", tries);
@@ -50,7 +57,7 @@ public class fs_survey_quest extends script.base_script
                 {
                     utils.removeScriptVar(self, "fs_quest");
                 }
-                else 
+                else
                 {
                     debugSpeakMsg(self, "You got too much stuff in your backpack.  Get rid of some and keep sampling to find the resource you need.");
                 }

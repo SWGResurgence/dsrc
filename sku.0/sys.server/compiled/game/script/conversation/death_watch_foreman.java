@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.chat;
@@ -8,14 +14,17 @@ import script.library.utils;
 
 public class death_watch_foreman extends script.base_script
 {
+    public static String c_stringFile = "conversation/death_watch_foreman";
+
     public death_watch_foreman()
     {
     }
-    public static String c_stringFile = "conversation/death_watch_foreman";
+
     public boolean death_watch_foreman_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean death_watch_foreman_condition_startMission(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "death_watch.drill_completed") || hasObjVar(player, "death_watch.drill_kill"))
@@ -27,12 +36,9 @@ public class death_watch_foreman extends script.base_script
             return false;
         }
         obj_id structure = getTopMostContainer(npc);
-        if (!hasObjVar(structure, "death_watch.haldo") && !hasObjVar(player, "death_watch.drill_01"))
-        {
-            return true;
-        }
-        return false;
+        return !hasObjVar(structure, "death_watch.haldo") && !hasObjVar(player, "death_watch.drill_01");
     }
+
     public boolean death_watch_foreman_condition_notCompleted(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "death_watch.medicine_success") || hasObjVar(player, "death_watch.medicine_kill"))
@@ -43,21 +49,16 @@ public class death_watch_foreman extends script.base_script
         obj_id oldPlayer = getObjIdObjVar(structure, "death_watch.haldo_player");
         if (hasObjVar(player, "death_watch.drill_01"))
         {
-            if (hasObjVar(structure, "death_watch.haldo") && oldPlayer == player)
-            {
-                return true;
-            }
+            return hasObjVar(structure, "death_watch.haldo") && oldPlayer == player;
         }
         return false;
     }
+
     public boolean death_watch_foreman_condition_helpedHaldo(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (hasObjVar(player, "death_watch.drill_01") && hasObjVar(player, "death_watch.medicine_success"))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(player, "death_watch.drill_01") && hasObjVar(player, "death_watch.medicine_success");
     }
+
     public boolean death_watch_foreman_condition_alreadyBeingHelped(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "death_watch.drill_completed") || hasObjVar(player, "death_watch.drill_kill"))
@@ -69,20 +70,14 @@ public class death_watch_foreman extends script.base_script
             return false;
         }
         obj_id structure = getTopMostContainer(npc);
-        if (hasObjVar(structure, "death_watch.haldo") && !hasObjVar(player, "death_watch.drill_01"))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(structure, "death_watch.haldo") && !hasObjVar(player, "death_watch.drill_01");
     }
+
     public boolean death_watch_foreman_condition_killedHaldo(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (hasObjVar(player, "death_watch.drill_01") && hasObjVar(player, "death_watch.medicine_kill"))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(player, "death_watch.drill_01") && hasObjVar(player, "death_watch.medicine_kill");
     }
+
     public boolean death_watch_foreman_condition_notCompletedBattery(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "death_watch.drill_02"))
@@ -92,15 +87,18 @@ public class death_watch_foreman extends script.base_script
         obj_id[] objContents = utils.getContents(player, true);
         if (objContents != null)
         {
-            for (obj_id objContent : objContents) {
+            for (obj_id objContent : objContents)
+            {
                 String strItemTemplate = getTemplateName(objContent);
-                if (strItemTemplate.equals("object/tangible/dungeon/death_watch_bunker/drill_battery_clean.iff")) {
+                if (strItemTemplate.equals("object/tangible/dungeon/death_watch_bunker/drill_battery_clean.iff"))
+                {
                     return false;
                 }
             }
         }
         return true;
     }
+
     public boolean death_watch_foreman_condition_batteryCleaned(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(npc);
@@ -119,15 +117,18 @@ public class death_watch_foreman extends script.base_script
         obj_id[] objContents = utils.getContents(player, true);
         if (objContents != null)
         {
-            for (obj_id objContent : objContents) {
+            for (obj_id objContent : objContents)
+            {
                 String strItemTemplate = getTemplateName(objContent);
-                if (strItemTemplate.equals("object/tangible/dungeon/death_watch_bunker/drill_battery_clean.iff")) {
+                if (strItemTemplate.equals("object/tangible/dungeon/death_watch_bunker/drill_battery_clean.iff"))
+                {
                     return true;
                 }
             }
         }
         return false;
     }
+
     public boolean death_watch_foreman_condition_waterPressureStartnoKill(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(npc);
@@ -135,12 +136,9 @@ public class death_watch_foreman extends script.base_script
         {
             return false;
         }
-        if (hasObjVar(player, "death_watch.drill_03") && hasObjVar(player, "death_watch.medicine_success"))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(player, "death_watch.drill_03") && hasObjVar(player, "death_watch.medicine_success");
     }
+
     public boolean death_watch_foreman_condition_waterPressureStartKill(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(npc);
@@ -148,12 +146,9 @@ public class death_watch_foreman extends script.base_script
         {
             return false;
         }
-        if (hasObjVar(player, "death_watch.drill_03") && hasObjVar(player, "death_watch.medicine_kill"))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(player, "death_watch.drill_03") && hasObjVar(player, "death_watch.medicine_kill");
     }
+
     public boolean death_watch_foreman_condition_batteryCleanedKill(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "death_watch.drill_02"))
@@ -167,15 +162,18 @@ public class death_watch_foreman extends script.base_script
         obj_id[] objContents = utils.getContents(player, true);
         if (objContents != null)
         {
-            for (obj_id objContent : objContents) {
+            for (obj_id objContent : objContents)
+            {
                 String strItemTemplate = getTemplateName(objContent);
-                if (strItemTemplate.equals("object/tangible/dungeon/death_watch_bunker/drill_battery_clean.iff")) {
+                if (strItemTemplate.equals("object/tangible/dungeon/death_watch_bunker/drill_battery_clean.iff"))
+                {
                     return true;
                 }
             }
         }
         return false;
     }
+
     public boolean death_watch_foreman_condition_notCompletedWater(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(npc);
@@ -184,38 +182,30 @@ public class death_watch_foreman extends script.base_script
             if (hasObjVar(player, "death_watch.water_pressure"))
             {
                 obj_id oldPlayer = getObjIdObjVar(structure, "death_watch.water_pressure_mission");
-                if (oldPlayer == player)
-                {
-                    return true;
-                }
+                return oldPlayer == player;
             }
         }
         return false;
     }
+
     public boolean death_watch_foreman_condition_waterPressureSuccess(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "death_watch.drill_03"))
         {
             return false;
         }
-        if (hasObjVar(player, "death_watch.water_pressure_success") && !hasObjVar(player, "death_watch.medicine_kill"))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(player, "death_watch.water_pressure_success") && !hasObjVar(player, "death_watch.medicine_kill");
     }
+
     public boolean death_watch_foreman_condition_waterPressureSuccessKill(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "death_watch.drill_03"))
         {
             return false;
         }
-        if (hasObjVar(player, "death_watch.water_pressure_success") && hasObjVar(player, "death_watch.medicine_kill"))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(player, "death_watch.water_pressure_success") && hasObjVar(player, "death_watch.medicine_kill");
     }
+
     public boolean death_watch_foreman_condition_getMoreOreNotReady(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "death_watch.drill_completed"))
@@ -231,13 +221,11 @@ public class death_watch_foreman extends script.base_script
         {
             int killTime = getIntObjVar(player, "death_watch.drill_kill");
             int curTime = getGameTime();
-            if (curTime < killTime + 269200)
-            {
-                return true;
-            }
+            return curTime < killTime + 269200;
         }
         return false;
     }
+
     public boolean death_watch_foreman_condition_getMoreOreReady(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "death_watch.drill_completed"))
@@ -253,13 +241,11 @@ public class death_watch_foreman extends script.base_script
         {
             int killTime = getIntObjVar(player, "death_watch.drill_kill");
             int curTime = getGameTime();
-            if (curTime > killTime + 269200)
-            {
-                return true;
-            }
+            return curTime > killTime + 269200;
         }
         return false;
     }
+
     public boolean death_watch_foreman_condition_waterPressureFail(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "death_watch.drill_completed") || hasObjVar(player, "death_watch.drill_kill"))
@@ -269,39 +255,32 @@ public class death_watch_foreman extends script.base_script
         if (hasObjVar(player, "death_watch.water_pressure_failed") || hasObjVar(player, "death_watch.drill_03"))
         {
             obj_id structure = getTopMostContainer(npc);
-            if (hasObjVar(structure, "death_watch.water_pressure_mission"))
-            {
-                return false;
-            }
-            return true;
+            return !hasObjVar(structure, "death_watch.water_pressure_mission");
         }
         return false;
     }
+
     public boolean death_watch_foreman_condition_waterPressureBusy(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(npc);
         if (hasObjVar(structure, "death_watch.water_pressure_mission"))
         {
             obj_id oldPlayer = getObjIdObjVar(structure, "death_watch.water_pressure_mission");
-            if (oldPlayer != player)
-            {
-                return true;
-            }
+            return oldPlayer != player;
         }
         return false;
     }
+
     public boolean death_watch_foreman_condition_haldoFailed(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(npc);
         if (hasObjVar(player, "death_watch.drill_01"))
         {
-            if (!hasObjVar(structure, "death_watch.haldo"))
-            {
-                return true;
-            }
+            return !hasObjVar(structure, "death_watch.haldo");
         }
         return false;
     }
+
     public boolean death_watch_foreman_condition_noInvRoom(obj_id player, obj_id npc) throws InterruptedException
     {
         boolean hasNoInvRoom = false;
@@ -316,6 +295,7 @@ public class death_watch_foreman extends script.base_script
         }
         return hasNoInvRoom;
     }
+
     public void death_watch_foreman_action_helpHaldo(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "death_watch.drill_01", 1);
@@ -323,20 +303,23 @@ public class death_watch_foreman extends script.base_script
         params.put("player", player);
         messageTo(npc, "handleSpawnHaldo", params, 1.0f, false);
     }
+
     public void death_watch_foreman_action_cleanBattery(obj_id player, obj_id npc) throws InterruptedException
     {
         removeObjVar(player, "death_watch.drill_01");
         setObjVar(player, "death_watch.drill_02", 1);
-        return;
     }
+
     public void death_watch_foreman_action_takeBattery(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] objContents = utils.getContents(player, true);
         if (objContents != null)
         {
-            for (obj_id objContent : objContents) {
+            for (obj_id objContent : objContents)
+            {
                 String strItemTemplate = getTemplateName(objContent);
-                if (strItemTemplate.equals("object/tangible/dungeon/death_watch_bunker/drill_battery_clean.iff")) {
+                if (strItemTemplate.equals("object/tangible/dungeon/death_watch_bunker/drill_battery_clean.iff"))
+                {
                     obj_id battery = objContent;
                     destroyObject(battery);
                 }
@@ -344,8 +327,8 @@ public class death_watch_foreman extends script.base_script
         }
         removeObjVar(player, "death_watch.drill_02");
         setObjVar(player, "death_watch.drill_03", 1);
-        return;
     }
+
     public void death_watch_foreman_action_startWaterPressure(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "death_watch.water_pressure", 1);
@@ -357,8 +340,8 @@ public class death_watch_foreman extends script.base_script
         }
         setObjVar(structure, "death_watch.water_pressure_mission", player);
         messageTo(structure, "handleWaterPumpReset", null, 1.0f, false);
-        return;
     }
+
     public void death_watch_foreman_action_finishMission(obj_id player, obj_id npc) throws InterruptedException
     {
         int time = getGameTime();
@@ -369,7 +352,7 @@ public class death_watch_foreman extends script.base_script
             removeObjVar(player, "death_watch.water_pressure_success");
             setObjVar(player, "death_watch.drill_kill", time);
         }
-        else 
+        else
         {
             removeObjVar(player, "death_watch.medicine_success");
             removeObjVar(player, "death_watch.drill_03");
@@ -381,8 +364,8 @@ public class death_watch_foreman extends script.base_script
         {
             obj_id item = createObject("object/tangible/loot/dungeon/death_watch_bunker/mining_drill_reward.iff", playerInv, "");
         }
-        return;
     }
+
     public void death_watch_foreman_action_giveReward(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "death_watch.drill_completed"))
@@ -400,31 +383,31 @@ public class death_watch_foreman extends script.base_script
         {
             obj_id item = createObject("object/tangible/loot/dungeon/death_watch_bunker/mining_drill_reward.iff", playerInv, "");
         }
-        return;
     }
+
     public void death_watch_foreman_action_declineHaldo(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(npc);
         obj_id haldo = getObjIdObjVar(structure, "death_watch.haldo");
         messageTo(haldo, "handleCrazedCleanup", null, 1.0f, false);
-        return;
     }
+
     public void death_watch_foreman_action_declineWater(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(npc);
         removeObjVar(player, "death_watch.water_pressure");
         removeObjVar(structure, "death_watch.water_pressure_mission");
         setObjVar(player, "death_watch.water_pressure_failed", 1);
-        return;
     }
+
     public void death_watch_foreman_action_cleanOldPlayers(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "death_watch.water_pressure"))
         {
             removeObjVar(player, "death_watch.water_pressure");
         }
-        return;
     }
+
     public int death_watch_foreman_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1c4d0bbb"))
@@ -451,7 +434,7 @@ public class death_watch_foreman extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7d65b570");
@@ -464,7 +447,7 @@ public class death_watch_foreman extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_foreman.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -496,7 +479,7 @@ public class death_watch_foreman extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_57097d43");
@@ -509,7 +492,7 @@ public class death_watch_foreman extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_foreman.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -519,6 +502,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_7d65b570"))
@@ -538,7 +522,7 @@ public class death_watch_foreman extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82599d96");
@@ -547,7 +531,7 @@ public class death_watch_foreman extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_foreman.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -579,7 +563,7 @@ public class death_watch_foreman extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_42");
@@ -592,7 +576,7 @@ public class death_watch_foreman extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_foreman.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -602,6 +586,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_82599d96"))
@@ -628,7 +613,7 @@ public class death_watch_foreman extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_687ef712");
@@ -641,7 +626,7 @@ public class death_watch_foreman extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_foreman.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -651,6 +636,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_687ef712"))
@@ -677,7 +663,7 @@ public class death_watch_foreman extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8bbe4b84");
@@ -690,7 +676,7 @@ public class death_watch_foreman extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_foreman.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -715,7 +701,7 @@ public class death_watch_foreman extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_58a87fe");
@@ -724,7 +710,7 @@ public class death_watch_foreman extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_foreman.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -734,6 +720,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_8bbe4b84"))
@@ -760,7 +747,7 @@ public class death_watch_foreman extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2236f9d7");
@@ -773,7 +760,7 @@ public class death_watch_foreman extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_foreman.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -798,7 +785,7 @@ public class death_watch_foreman extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_35");
@@ -807,7 +794,7 @@ public class death_watch_foreman extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_foreman.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -817,6 +804,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2236f9d7"))
@@ -836,7 +824,7 @@ public class death_watch_foreman extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6c1f32dd");
@@ -845,7 +833,7 @@ public class death_watch_foreman extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_foreman.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -870,7 +858,7 @@ public class death_watch_foreman extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f73c5ae7");
@@ -879,7 +867,7 @@ public class death_watch_foreman extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_foreman.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -889,6 +877,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6c1f32dd"))
@@ -915,7 +904,7 @@ public class death_watch_foreman extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ce027a15");
@@ -928,7 +917,7 @@ public class death_watch_foreman extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_foreman.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -938,6 +927,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ce027a15"))
@@ -963,6 +953,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f73c5ae7"))
@@ -989,7 +980,7 @@ public class death_watch_foreman extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_26");
@@ -1002,7 +993,7 @@ public class death_watch_foreman extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_foreman.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1012,6 +1003,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_26"))
@@ -1037,6 +1029,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_35"))
@@ -1063,7 +1056,7 @@ public class death_watch_foreman extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2236f9d7");
@@ -1076,7 +1069,7 @@ public class death_watch_foreman extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_foreman.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1086,6 +1079,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_58a87fe"))
@@ -1112,7 +1106,7 @@ public class death_watch_foreman extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8bbe4b84");
@@ -1125,7 +1119,7 @@ public class death_watch_foreman extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_foreman.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1135,6 +1129,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_42"))
@@ -1161,7 +1156,7 @@ public class death_watch_foreman extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8bbe4b84");
@@ -1174,7 +1169,7 @@ public class death_watch_foreman extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_foreman.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1199,7 +1194,7 @@ public class death_watch_foreman extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4e099c6a");
@@ -1208,7 +1203,7 @@ public class death_watch_foreman extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_foreman.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1218,6 +1213,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4e099c6a"))
@@ -1244,7 +1240,7 @@ public class death_watch_foreman extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8bbe4b84");
@@ -1257,7 +1253,7 @@ public class death_watch_foreman extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_foreman.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1267,6 +1263,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_57097d43"))
@@ -1293,7 +1290,7 @@ public class death_watch_foreman extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f2b532b6");
@@ -1306,7 +1303,7 @@ public class death_watch_foreman extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_foreman.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1331,7 +1328,7 @@ public class death_watch_foreman extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82599d96");
@@ -1340,7 +1337,7 @@ public class death_watch_foreman extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_foreman.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1350,6 +1347,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f2b532b6"))
@@ -1376,7 +1374,7 @@ public class death_watch_foreman extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8bbe4b84");
@@ -1389,7 +1387,7 @@ public class death_watch_foreman extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_foreman.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1409,6 +1407,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c825f420"))
@@ -1434,6 +1433,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_bdb717fb"))
@@ -1460,7 +1460,7 @@ public class death_watch_foreman extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_dd657c44");
@@ -1473,7 +1473,7 @@ public class death_watch_foreman extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_foreman.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1483,6 +1483,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_dd657c44"))
@@ -1520,7 +1521,7 @@ public class death_watch_foreman extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4d8102d5");
@@ -1533,7 +1534,7 @@ public class death_watch_foreman extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_foreman.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1543,6 +1544,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4d8102d5"))
@@ -1568,6 +1570,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_145fd34"))
@@ -1592,6 +1595,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d62e85a9"))
@@ -1611,7 +1615,7 @@ public class death_watch_foreman extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5dbddef");
@@ -1620,7 +1624,7 @@ public class death_watch_foreman extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_foreman.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1630,6 +1634,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_5dbddef"))
@@ -1656,7 +1661,7 @@ public class death_watch_foreman extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b5a845f9");
@@ -1669,7 +1674,7 @@ public class death_watch_foreman extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_foreman.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1679,6 +1684,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b5a845f9"))
@@ -1716,7 +1722,7 @@ public class death_watch_foreman extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6204ccac");
@@ -1729,7 +1735,7 @@ public class death_watch_foreman extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_foreman.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1739,6 +1745,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6204ccac"))
@@ -1764,6 +1771,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_7fe1c6d7"))
@@ -1783,7 +1791,7 @@ public class death_watch_foreman extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_44bb7cbc");
@@ -1792,7 +1800,7 @@ public class death_watch_foreman extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_foreman.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1824,7 +1832,7 @@ public class death_watch_foreman extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_83d1549d");
@@ -1837,7 +1845,7 @@ public class death_watch_foreman extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_foreman.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1847,6 +1855,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_44bb7cbc"))
@@ -1873,7 +1882,7 @@ public class death_watch_foreman extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_83d1549d");
@@ -1886,7 +1895,7 @@ public class death_watch_foreman extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_foreman.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1896,6 +1905,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_83d1549d"))
@@ -1922,7 +1932,7 @@ public class death_watch_foreman extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d4b1da9f");
@@ -1935,7 +1945,7 @@ public class death_watch_foreman extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_foreman.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1967,7 +1977,7 @@ public class death_watch_foreman extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -1980,7 +1990,7 @@ public class death_watch_foreman extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_foreman.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1990,6 +2000,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d4b1da9f"))
@@ -2023,6 +2034,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_107"))
@@ -2056,6 +2068,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a33b6055"))
@@ -2075,7 +2088,7 @@ public class death_watch_foreman extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_120");
@@ -2084,7 +2097,7 @@ public class death_watch_foreman extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_foreman.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2116,7 +2129,7 @@ public class death_watch_foreman extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_83d1549d");
@@ -2129,7 +2142,7 @@ public class death_watch_foreman extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_foreman.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2139,6 +2152,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_120"))
@@ -2165,7 +2179,7 @@ public class death_watch_foreman extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_83d1549d");
@@ -2178,7 +2192,7 @@ public class death_watch_foreman extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_foreman.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2188,6 +2202,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch52(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9bea7011"))
@@ -2213,6 +2228,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch55(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_5597accd"))
@@ -2232,7 +2248,7 @@ public class death_watch_foreman extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ed0d4e5a");
@@ -2241,7 +2257,7 @@ public class death_watch_foreman extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_foreman.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2251,6 +2267,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch56(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ed0d4e5a"))
@@ -2273,6 +2290,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch59(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c04f0d0d"))
@@ -2292,7 +2310,7 @@ public class death_watch_foreman extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_140");
@@ -2301,7 +2319,7 @@ public class death_watch_foreman extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_foreman.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2311,6 +2329,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch60(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_140"))
@@ -2333,6 +2352,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch64(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_dbf0d0f9"))
@@ -2355,6 +2375,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch68(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_e55f453d"))
@@ -2380,6 +2401,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_foreman_handleBranch72(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_26fa42a7"))
@@ -2405,6 +2427,7 @@ public class death_watch_foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -2414,11 +2437,13 @@ public class death_watch_foreman extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -2427,18 +2452,21 @@ public class death_watch_foreman extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.death_watch_foreman");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -2468,7 +2496,7 @@ public class death_watch_foreman extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1c4d0bbb");
@@ -2480,7 +2508,7 @@ public class death_watch_foreman extends script.base_script
                 utils.setScriptVar(player, "conversation.death_watch_foreman.branchId", 1);
                 npcStartConversation(player, npc, "death_watch_foreman", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2508,7 +2536,7 @@ public class death_watch_foreman extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_c825f420");
@@ -2520,7 +2548,7 @@ public class death_watch_foreman extends script.base_script
                 utils.setScriptVar(player, "conversation.death_watch_foreman.branchId", 21);
                 npcStartConversation(player, npc, "death_watch_foreman", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2541,7 +2569,7 @@ public class death_watch_foreman extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_bdb717fb");
@@ -2549,7 +2577,7 @@ public class death_watch_foreman extends script.base_script
                 utils.setScriptVar(player, "conversation.death_watch_foreman.branchId", 24);
                 npcStartConversation(player, npc, "death_watch_foreman", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2577,7 +2605,7 @@ public class death_watch_foreman extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_145fd34");
@@ -2589,7 +2617,7 @@ public class death_watch_foreman extends script.base_script
                 utils.setScriptVar(player, "conversation.death_watch_foreman.branchId", 30);
                 npcStartConversation(player, npc, "death_watch_foreman", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2610,7 +2638,7 @@ public class death_watch_foreman extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_d62e85a9");
@@ -2618,7 +2646,7 @@ public class death_watch_foreman extends script.base_script
                 utils.setScriptVar(player, "conversation.death_watch_foreman.branchId", 33);
                 npcStartConversation(player, npc, "death_watch_foreman", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2647,7 +2675,7 @@ public class death_watch_foreman extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_7fe1c6d7");
@@ -2659,7 +2687,7 @@ public class death_watch_foreman extends script.base_script
                 utils.setScriptVar(player, "conversation.death_watch_foreman.branchId", 39);
                 npcStartConversation(player, npc, "death_watch_foreman", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2688,7 +2716,7 @@ public class death_watch_foreman extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_a33b6055");
@@ -2700,7 +2728,7 @@ public class death_watch_foreman extends script.base_script
                 utils.setScriptVar(player, "conversation.death_watch_foreman.branchId", 50);
                 npcStartConversation(player, npc, "death_watch_foreman", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2728,7 +2756,7 @@ public class death_watch_foreman extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_9bea7011");
@@ -2740,7 +2768,7 @@ public class death_watch_foreman extends script.base_script
                 utils.setScriptVar(player, "conversation.death_watch_foreman.branchId", 52);
                 npcStartConversation(player, npc, "death_watch_foreman", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2761,7 +2789,7 @@ public class death_watch_foreman extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_5597accd");
@@ -2769,7 +2797,7 @@ public class death_watch_foreman extends script.base_script
                 utils.setScriptVar(player, "conversation.death_watch_foreman.branchId", 55);
                 npcStartConversation(player, npc, "death_watch_foreman", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2790,7 +2818,7 @@ public class death_watch_foreman extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_c04f0d0d");
@@ -2798,7 +2826,7 @@ public class death_watch_foreman extends script.base_script
                 utils.setScriptVar(player, "conversation.death_watch_foreman.branchId", 59);
                 npcStartConversation(player, npc, "death_watch_foreman", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2825,7 +2853,7 @@ public class death_watch_foreman extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_dbf0d0f9");
@@ -2833,7 +2861,7 @@ public class death_watch_foreman extends script.base_script
                 utils.setScriptVar(player, "conversation.death_watch_foreman.branchId", 64);
                 npcStartConversation(player, npc, "death_watch_foreman", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2867,7 +2895,7 @@ public class death_watch_foreman extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_e55f453d");
@@ -2879,7 +2907,7 @@ public class death_watch_foreman extends script.base_script
                 utils.setScriptVar(player, "conversation.death_watch_foreman.branchId", 68);
                 npcStartConversation(player, npc, "death_watch_foreman", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2914,7 +2942,7 @@ public class death_watch_foreman extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_26fa42a7");
@@ -2926,7 +2954,7 @@ public class death_watch_foreman extends script.base_script
                 utils.setScriptVar(player, "conversation.death_watch_foreman.branchId", 72);
                 npcStartConversation(player, npc, "death_watch_foreman", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2935,6 +2963,7 @@ public class death_watch_foreman extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("death_watch_foreman"))

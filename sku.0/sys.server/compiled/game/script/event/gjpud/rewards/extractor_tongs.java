@@ -1,5 +1,11 @@
 package script.event.gjpud.rewards;
 /*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
+/*
 @Filename: script.event.gjpud.rewards.
 @Author: BubbaJoeX
 @Purpose: Extractor Tongs script for GJPUD.
@@ -16,6 +22,7 @@ public class extractor_tongs extends script.base_script
 {
     public static int COOLDOWN_TIME = 480; // 8 minutes.
     public static int currentGameTime = getCalendarTime();
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -42,6 +49,7 @@ public class extractor_tongs extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self)
     {
         return SCRIPT_CONTINUE;
@@ -82,6 +90,7 @@ public class extractor_tongs extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int attemptExtraction(obj_id self, obj_id player) throws InterruptedException
     {
         String CEF = "clienteffect/somebombassclienteffect.cef";

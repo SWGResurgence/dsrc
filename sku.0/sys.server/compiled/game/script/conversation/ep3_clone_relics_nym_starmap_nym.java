@@ -1,140 +1,179 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class ep3_clone_relics_nym_starmap_nym extends script.base_script
 {
+    public static String c_stringFile = "conversation/ep3_clone_relics_nym_starmap_nym";
+
     public ep3_clone_relics_nym_starmap_nym()
     {
     }
-    public static String c_stringFile = "conversation/ep3_clone_relics_nym_starmap_nym";
+
     public boolean ep3_clone_relics_nym_starmap_nym_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean ep3_clone_relics_nym_starmap_nym_condition_onQuest1(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "ep3_clone_relics_nym_starmap_1"));
     }
+
     public boolean ep3_clone_relics_nym_starmap_nym_condition_onTask1(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "ep3_clone_relics_nym_starmap_1", "talkToNym1"));
     }
+
     public boolean ep3_clone_relics_nym_starmap_nym_condition_foundFirstMap(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "ep3_clone_relics_nym_starmap_1", "foundFirstMap"));
     }
+
     public boolean ep3_clone_relics_nym_starmap_nym_condition_completedQuest1(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "ep3_clone_relics_nym_starmap_1"));
     }
+
     public boolean ep3_clone_relics_nym_starmap_nym_condition_onQuest2(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "ep3_clone_relics_nym_starmap_2"));
     }
+
     public boolean ep3_clone_relics_nym_starmap_nym_condition_foundSecondMap(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "ep3_clone_relics_nym_starmap_2", "foundSecondMap"));
     }
+
     public boolean ep3_clone_relics_nym_starmap_nym_condition_completedQuest2(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "ep3_clone_relics_nym_starmap_2"));
     }
+
     public boolean ep3_clone_relics_nym_starmap_nym_condition_onQuest3(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "ep3_clone_relics_nym_starmap_3"));
     }
+
     public boolean ep3_clone_relics_nym_starmap_nym_condition_foundThirdMap(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "ep3_clone_relics_nym_starmap_3", "foundThirdMap"));
     }
+
     public boolean ep3_clone_relics_nym_starmap_nym_condition_completedQuest3(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "ep3_clone_relics_nym_starmap_3"));
     }
+
     public boolean ep3_clone_relics_nym_starmap_nym_condition_onQuest4(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "ep3_clone_relics_nym_starmap_4"));
     }
+
     public boolean ep3_clone_relics_nym_starmap_nym_condition_talkedToSolo1(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "ep3_clone_relics_nym_starmap_4", "talkedToSolo1"));
     }
+
     public boolean ep3_clone_relics_nym_starmap_nym_condition_foundFourthMap(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "ep3_clone_relics_nym_starmap_4", "foundFourthMap"));
     }
+
     public boolean ep3_clone_relics_nym_starmap_nym_condition_isGm(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasObjVar(player, "gm"));
     }
+
     public boolean ep3_clone_relics_nym_starmap_nym_condition_completedQuest4(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "ep3_clone_relics_nym_starmap_4"));
     }
+
     public boolean ep3_clone_relics_nym_starmap_nym_condition_notHighEnough(obj_id player, obj_id npc) throws InterruptedException
     {
         int phase = skill.getProfessionPhase(player);
         return (phase < skill.PHASE_TWO);
     }
+
     public void ep3_clone_relics_nym_starmap_nym_action_sendSignalTalked1(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "findMap1");
     }
+
     public void ep3_clone_relics_nym_starmap_nym_action_removeQuest1(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "ep3_clone_relics_nym_starmap_1");
     }
+
     public void ep3_clone_relics_nym_starmap_nym_action_sendSignalWantedCash(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "gotCash");
     }
+
     public void ep3_clone_relics_nym_starmap_nym_action_sendSignalGaveFirstMap(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "foundMap1");
     }
+
     public void ep3_clone_relics_nym_starmap_nym_action_grantQuest2(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_clone_relics_nym_starmap_2");
     }
+
     public void ep3_clone_relics_nym_starmap_nym_action_sendSignalGaveSecondMap(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "foundMap2");
     }
+
     public void ep3_clone_relics_nym_starmap_nym_action_sendSignalGaveThirdMap(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "foundMap3");
     }
+
     public void ep3_clone_relics_nym_starmap_nym_action_grantQuest4(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_clone_relics_nym_starmap_4");
     }
+
     public void ep3_clone_relics_nym_starmap_nym_action_grantQuest3(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_clone_relics_nym_starmap_3");
     }
+
     public void ep3_clone_relics_nym_starmap_nym_action_sendSignalGiveMoneyToSolo(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "giveMoneyToSolo");
     }
+
     public void ep3_clone_relics_nym_starmap_nym_action_sendSignalGaveFourthMap(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "foundMap4");
         setObjVar(player, "doneWithNym", 1);
     }
+
     public void ep3_clone_relics_nym_starmap_nym_action_removeQuest2(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "ep3_clone_relics_nym_starmap_2");
     }
+
     public void ep3_clone_relics_nym_starmap_nym_action_removeQuest3(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "ep3_clone_relics_nym_starmap_3");
     }
+
     public void ep3_clone_relics_nym_starmap_nym_action_removeQuest4(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "ep3_clone_relics_nym_starmap_4");
     }
+
     public void ep3_clone_relics_nym_starmap_nym_action_removeQuestAll(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "ep3_clone_relics_nym_starmap_1");
@@ -142,6 +181,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         groundquests.clearQuest(player, "ep3_clone_relics_nym_starmap_3");
         groundquests.clearQuest(player, "ep3_clone_relics_nym_starmap_4");
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_382"))
@@ -162,7 +202,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_386");
@@ -171,7 +211,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -224,7 +264,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_253");
@@ -249,7 +289,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -259,6 +299,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_386"))
@@ -278,7 +319,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_390");
@@ -287,7 +328,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -297,6 +338,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_390"))
@@ -317,7 +359,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_394");
@@ -330,7 +372,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     prose_package pp = new prose_package();
@@ -344,6 +386,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_394"))
@@ -360,6 +403,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_400"))
@@ -379,7 +423,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_404");
@@ -388,7 +432,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -441,7 +485,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_253");
@@ -466,7 +510,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -476,6 +520,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_404"))
@@ -496,7 +541,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_408");
@@ -505,7 +550,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -515,6 +560,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_408"))
@@ -531,6 +577,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_414"))
@@ -600,7 +647,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_253");
@@ -625,7 +672,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -635,6 +682,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_424"))
@@ -669,7 +717,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_432");
@@ -678,7 +726,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -731,7 +779,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_253");
@@ -756,7 +804,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -766,6 +814,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_432"))
@@ -785,7 +834,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_436");
@@ -794,7 +843,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -804,6 +853,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_436"))
@@ -820,6 +870,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_442"))
@@ -839,7 +890,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_446");
@@ -848,7 +899,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -901,7 +952,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_253");
@@ -926,7 +977,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -936,6 +987,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_446"))
@@ -955,7 +1007,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_450");
@@ -968,7 +1020,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     prose_package pp = new prose_package();
@@ -982,6 +1034,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_450"))
@@ -998,6 +1051,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_456"))
@@ -1029,7 +1083,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_464");
@@ -1038,7 +1092,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1091,7 +1145,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_253");
@@ -1116,7 +1170,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1126,6 +1180,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_464"))
@@ -1145,6 +1200,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_470"))
@@ -1165,7 +1221,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_474");
@@ -1174,7 +1230,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1238,7 +1294,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_253");
@@ -1263,7 +1319,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1273,6 +1329,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_474"))
@@ -1293,7 +1350,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_478");
@@ -1302,7 +1359,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1312,6 +1369,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_478"))
@@ -1328,6 +1386,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_488"))
@@ -1348,7 +1407,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_492");
@@ -1361,7 +1420,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     prose_package pp = new prose_package();
@@ -1418,7 +1477,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_253");
@@ -1443,7 +1502,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1453,6 +1512,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_492"))
@@ -1472,7 +1532,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_496");
@@ -1481,7 +1541,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1491,6 +1551,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_496"))
@@ -1511,7 +1572,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_500");
@@ -1520,7 +1581,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1530,6 +1591,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_500"))
@@ -1549,7 +1611,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_504");
@@ -1558,7 +1620,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1568,6 +1630,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_504"))
@@ -1584,6 +1647,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_510"))
@@ -1614,7 +1678,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_518");
@@ -1623,7 +1687,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1676,7 +1740,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_253");
@@ -1701,7 +1765,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1711,6 +1775,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_518"))
@@ -1726,6 +1791,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_524"))
@@ -1746,7 +1812,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_528");
@@ -1755,7 +1821,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1781,7 +1847,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_548");
@@ -1790,7 +1856,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1843,7 +1909,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_253");
@@ -1868,7 +1934,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1878,6 +1944,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_528"))
@@ -1898,7 +1965,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_532");
@@ -1907,7 +1974,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1917,6 +1984,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_532"))
@@ -1943,7 +2011,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_536");
@@ -1956,7 +2024,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1966,6 +2034,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch45(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_536"))
@@ -1993,6 +2062,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch48(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_548"))
@@ -2008,6 +2078,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_554"))
@@ -2034,7 +2105,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_558");
@@ -2047,7 +2118,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2079,7 +2150,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_615");
@@ -2092,7 +2163,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2102,6 +2173,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_558"))
@@ -2121,7 +2193,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_562");
@@ -2130,7 +2202,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2155,7 +2227,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_570");
@@ -2164,7 +2236,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2174,6 +2246,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch52(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_562"))
@@ -2189,6 +2262,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_570"))
@@ -2208,7 +2282,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_562");
@@ -2217,7 +2291,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2227,6 +2301,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch56(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_595"))
@@ -2257,7 +2332,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_603");
@@ -2266,7 +2341,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2319,7 +2394,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_253");
@@ -2344,7 +2419,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2354,6 +2429,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch58(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_603"))
@@ -2380,7 +2456,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_607");
@@ -2393,7 +2469,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2403,6 +2479,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch59(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_607"))
@@ -2437,7 +2514,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_611");
@@ -2454,7 +2531,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2480,7 +2557,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_669");
@@ -2489,7 +2566,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2499,6 +2576,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch60(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_611"))
@@ -2525,7 +2603,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_615");
@@ -2538,7 +2616,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2571,7 +2649,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_649");
@@ -2584,7 +2662,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2617,7 +2695,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_659");
@@ -2630,7 +2708,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2640,6 +2718,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch61(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_615"))
@@ -2667,7 +2746,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_619");
@@ -2680,7 +2759,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2712,7 +2791,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_639");
@@ -2725,7 +2804,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2735,6 +2814,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch62(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_619"))
@@ -2774,7 +2854,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_627");
@@ -2787,7 +2867,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2797,6 +2877,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch64(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_627"))
@@ -2824,6 +2905,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch67(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_639"))
@@ -2851,7 +2933,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_619");
@@ -2864,7 +2946,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2886,6 +2968,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch69(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_649"))
@@ -2913,7 +2996,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_615");
@@ -2926,7 +3009,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2948,6 +3031,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch71(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_659"))
@@ -2988,7 +3072,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_615");
@@ -3001,7 +3085,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3011,6 +3095,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch73(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_669"))
@@ -3045,7 +3130,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_611");
@@ -3062,7 +3147,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3072,6 +3157,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch74(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_253"))
@@ -3131,6 +3217,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch80(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_574"))
@@ -3158,7 +3245,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_578");
@@ -3171,7 +3258,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3196,7 +3283,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_590");
@@ -3205,7 +3292,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3258,7 +3345,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_253");
@@ -3283,7 +3370,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3293,6 +3380,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch81(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_578"))
@@ -3320,6 +3408,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_nym_starmap_nym_handleBranch84(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_590"))
@@ -3335,6 +3424,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -3346,6 +3436,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         setName(self, new string_id("ep3/npc_names", "clone_relics_nym"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -3353,6 +3444,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         setName(self, new string_id("ep3/npc_names", "clone_relics_nym"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -3361,18 +3453,21 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.ep3_clone_relics_nym_starmap_nym");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -3413,7 +3508,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_382");
@@ -3425,7 +3520,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId", 2);
                 npcStartConversation(player, npc, "ep3_clone_relics_nym_starmap_nym", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3454,7 +3549,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_400");
@@ -3470,7 +3565,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "ep3_clone_relics_nym_starmap_nym", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -3510,7 +3605,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_414");
@@ -3526,7 +3621,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId", 11);
                 npcStartConversation(player, npc, "ep3_clone_relics_nym_starmap_nym", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3562,7 +3657,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_424");
@@ -3578,7 +3673,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId", 14);
                 npcStartConversation(player, npc, "ep3_clone_relics_nym_starmap_nym", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3607,7 +3702,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_442");
@@ -3619,7 +3714,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId", 19);
                 npcStartConversation(player, npc, "ep3_clone_relics_nym_starmap_nym", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3655,7 +3750,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_456");
@@ -3675,7 +3770,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "ep3_clone_relics_nym_starmap_nym", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -3715,7 +3810,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_470");
@@ -3731,7 +3826,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId", 27);
                 npcStartConversation(player, npc, "ep3_clone_relics_nym_starmap_nym", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3760,7 +3855,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_488");
@@ -3772,7 +3867,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId", 32);
                 npcStartConversation(player, npc, "ep3_clone_relics_nym_starmap_nym", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3808,7 +3903,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_510");
@@ -3824,7 +3919,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId", 38);
                 npcStartConversation(player, npc, "ep3_clone_relics_nym_starmap_nym", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3860,7 +3955,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_524");
@@ -3876,7 +3971,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId", 42);
                 npcStartConversation(player, npc, "ep3_clone_relics_nym_starmap_nym", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3905,7 +4000,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_554");
@@ -3917,7 +4012,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId", 50);
                 npcStartConversation(player, npc, "ep3_clone_relics_nym_starmap_nym", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3960,7 +4055,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_595");
@@ -3976,7 +4071,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId", 56);
                 npcStartConversation(player, npc, "ep3_clone_relics_nym_starmap_nym", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -4012,7 +4107,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_574");
@@ -4028,7 +4123,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_nym_starmap_nym.branchId", 80);
                 npcStartConversation(player, npc, "ep3_clone_relics_nym_starmap_nym", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -4044,6 +4139,7 @@ public class ep3_clone_relics_nym_starmap_nym extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("ep3_clone_relics_nym_starmap_nym"))

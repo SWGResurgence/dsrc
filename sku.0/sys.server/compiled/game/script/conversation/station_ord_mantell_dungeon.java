@@ -1,18 +1,27 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class station_ord_mantell_dungeon extends script.base_script
 {
+    public static String c_stringFile = "conversation/station_ord_mantell_dungeon";
+
     public station_ord_mantell_dungeon()
     {
     }
-    public static String c_stringFile = "conversation/station_ord_mantell_dungeon";
+
     public boolean station_ord_mantell_dungeon_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean station_ord_mantell_dungeon_condition_isTooFar(obj_id player, obj_id npc) throws InterruptedException
     {
         space_combat.playCombatTauntSound(player);
@@ -20,18 +29,22 @@ public class station_ord_mantell_dungeon extends script.base_script
         location playerLoc = getLocation(space_transition.getContainingShip(player));
         return (getDistance(stationLoc, playerLoc) > space_transition.STATION_COMM_MAX_DISTANCE);
     }
+
     public boolean station_ord_mantell_dungeon_condition_canAfford100(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.canAffordShipRepairs(player, npc, 1.0f);
     }
+
     public boolean station_ord_mantell_dungeon_condition_canAfford25(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_crafting.canAffordShipRepairs(player, npc, 0.25f) && space_crafting.isDamaged(player));
     }
+
     public boolean station_ord_mantell_dungeon_condition_needsRepairs(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.isDamaged(player);
     }
+
     public void station_ord_mantell_dungeon_action_land(obj_id player, obj_id npc) throws InterruptedException
     {
         location stationLoc = getLocation(npc);
@@ -42,28 +55,33 @@ public class station_ord_mantell_dungeon extends script.base_script
             string_id strSpam = new string_id("space/space_interaction", "too_far");
             sendSystemMessage(player, strSpam);
         }
-        else 
+        else
         {
             npe.movePlayerFromOrdMantellSpaceToOrdMantellDungeon(player);
             groundquests.sendSignal(player, "leaving_station");
         }
     }
+
     public void station_ord_mantell_dungeon_action_fix100(obj_id player, obj_id npc) throws InterruptedException
     {
         space_crafting.doStationToShipRepairs(player, npc, 1.0f);
     }
+
     public void station_ord_mantell_dungeon_action_fix25(obj_id player, obj_id npc) throws InterruptedException
     {
         space_crafting.doStationToShipRepairs(player, npc, 0.25f);
     }
+
     public int station_ord_mantell_dungeon_tokenDI_get100FixCost(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.getStationRepairCost(player, npc, 1.0f);
     }
+
     public int station_ord_mantell_dungeon_tokenDI_get25FixCost(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.getStationRepairCost(player, npc, 0.25f);
     }
+
     public int station_ord_mantell_dungeon_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_8"))
@@ -108,7 +126,7 @@ public class station_ord_mantell_dungeon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_16");
@@ -129,7 +147,7 @@ public class station_ord_mantell_dungeon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_ord_mantell_dungeon.branchId");
                     prose_package pp = new prose_package();
@@ -143,6 +161,7 @@ public class station_ord_mantell_dungeon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_ord_mantell_dungeon_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_16"))
@@ -169,7 +188,7 @@ public class station_ord_mantell_dungeon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_20");
@@ -187,7 +206,7 @@ public class station_ord_mantell_dungeon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_ord_mantell_dungeon.branchId");
                     prose_package pp = new prose_package();
@@ -224,7 +243,7 @@ public class station_ord_mantell_dungeon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_32");
@@ -242,7 +261,7 @@ public class station_ord_mantell_dungeon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_ord_mantell_dungeon.branchId");
                     prose_package pp = new prose_package();
@@ -267,6 +286,7 @@ public class station_ord_mantell_dungeon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_ord_mantell_dungeon_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_20"))
@@ -292,6 +312,7 @@ public class station_ord_mantell_dungeon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_ord_mantell_dungeon_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_32"))
@@ -317,6 +338,7 @@ public class station_ord_mantell_dungeon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -326,11 +348,13 @@ public class station_ord_mantell_dungeon extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -339,18 +363,21 @@ public class station_ord_mantell_dungeon extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.station_ord_mantell_dungeon");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -386,7 +413,7 @@ public class station_ord_mantell_dungeon extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_8");
@@ -398,7 +425,7 @@ public class station_ord_mantell_dungeon extends script.base_script
                 utils.setScriptVar(player, "conversation.station_ord_mantell_dungeon.branchId", 2);
                 npcStartConversation(player, npc, "station_ord_mantell_dungeon", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -407,6 +434,7 @@ public class station_ord_mantell_dungeon extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("station_ord_mantell_dungeon"))

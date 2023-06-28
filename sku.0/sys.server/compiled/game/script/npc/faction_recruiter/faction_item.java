@@ -1,5 +1,11 @@
 package script.npc.faction_recruiter;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.factions;
 import script.library.utils;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class faction_item extends script.base_script
     public faction_item()
     {
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (isPlayer(destContainer))
@@ -32,6 +39,7 @@ public class faction_item extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         if (isIdValid(self) && exists(self))

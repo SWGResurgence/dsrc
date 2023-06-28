@@ -1,5 +1,11 @@
 package script.quest.ep3;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.features;
 import script.library.utils;
@@ -11,11 +17,13 @@ public class loot_ep3_clone_relics_jedi_starfighter extends script.base_script
     public loot_ep3_clone_relics_jedi_starfighter()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "makeMoreLoot", null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToOpenContainer(obj_id self, obj_id who) throws InterruptedException
     {
         if (!features.hasEpisode3Expansion(who))
@@ -24,6 +32,7 @@ public class loot_ep3_clone_relics_jedi_starfighter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_OPEN)
@@ -32,18 +41,20 @@ public class loot_ep3_clone_relics_jedi_starfighter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToLoseItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (isGod(transferer))
         {
             messageTo(self, "makeMoreLoot", null, 10, false);
         }
-        else 
+        else
         {
             messageTo(self, "makeMoreLoot", null, 1800, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int makeMoreLoot(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] boxContent = getContents(self);

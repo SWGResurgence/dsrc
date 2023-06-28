@@ -1,5 +1,11 @@
 package script.item.camp;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.camping;
 import script.obj_id;
@@ -23,7 +29,7 @@ public class camp_advanced extends script.base_script
             return SCRIPT_CONTINUE;
         }
         obj_id[] modules = getObjIdArrayObjVar(self, "modules.ids");
-        if (modules == null || modules.length == 0)
+        if (modules == null)
         {
             return SCRIPT_CONTINUE;
         }
@@ -38,7 +44,7 @@ public class camp_advanced extends script.base_script
     {
         float radius = camping.getAdvancedCampRadius(self);
         obj_id[] objects = getNonCreaturesInRange(self, radius);
-        if (objects == null || objects.length == 0)
+        if (objects == null)
         {
             return SCRIPT_CONTINUE;
         }

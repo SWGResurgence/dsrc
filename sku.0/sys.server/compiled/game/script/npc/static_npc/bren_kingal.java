@@ -1,5 +1,11 @@
 package script.npc.static_npc;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.chat;
@@ -12,6 +18,7 @@ public class bren_kingal extends script.base_script
     public bren_kingal()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id shirt = createObject("object/tangible/wearables/armor/padded/armor_padded_s01_chest_plate.iff", self, "");
@@ -51,6 +58,7 @@ public class bren_kingal extends script.base_script
         messageTo(self, "setChatMood", null, 5, true);
         return SCRIPT_CONTINUE;
     }
+
     public int setChatMood(obj_id self, dictionary params) throws InterruptedException
     {
         chat.setNeutralMood(self);

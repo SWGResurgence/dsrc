@@ -1,5 +1,11 @@
 package script.developer.soe.beta;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class character_age extends script.base_script
@@ -7,6 +13,7 @@ public class character_age extends script.base_script
     public character_age()
     {
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         obj_id target = getLookAtTarget(self);

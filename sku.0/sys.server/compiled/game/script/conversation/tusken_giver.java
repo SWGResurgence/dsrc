@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,45 +14,56 @@ import script.*;
 
 public class tusken_giver extends script.base_script
 {
+    public static String c_stringFile = "conversation/tusken_giver";
+
     public tusken_giver()
     {
     }
-    public static String c_stringFile = "conversation/tusken_giver";
+
     public boolean tusken_giver_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean tusken_giver_condition_startQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActiveOrComplete(player, "found_tusken_encounter");
     }
+
     public boolean tusken_giver_condition_onQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "feeder_tusken_01", "feeder_tusken_tasks_01") || groundquests.hasCompletedQuest(player, "found_tusken_encounter"));
     }
+
     public boolean tusken_giver_condition_lastLeg(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "feeder_tusken_01", "feeder_tusken_wait_01");
     }
+
     public boolean tusken_giver_condition_doneQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "feeder_tusken_01") || groundquests.isTaskActive(player, "feeder_tusken_01", "feeder_tusken_wait_02"));
     }
+
     public void tusken_giver_action_giveQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "feeder_tusken_01");
     }
+
     public void tusken_giver_action_giveEventQuest(obj_id player, obj_id npc) throws InterruptedException
     {
     }
+
     public void tusken_giver_action_finishPointer(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "found_tusken_encounter_signal_01");
     }
+
     public void tusken_giver_action_finishQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "feeder_tusken_signal_01");
     }
+
     public int tusken_giver_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_22"))
@@ -67,7 +84,7 @@ public class tusken_giver extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_24");
@@ -76,7 +93,7 @@ public class tusken_giver extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tusken_giver.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -86,6 +103,7 @@ public class tusken_giver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tusken_giver_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_24"))
@@ -101,6 +119,7 @@ public class tusken_giver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tusken_giver_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_16"))
@@ -127,7 +146,7 @@ public class tusken_giver extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_18");
@@ -140,7 +159,7 @@ public class tusken_giver extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tusken_giver.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -150,6 +169,7 @@ public class tusken_giver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tusken_giver_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_18"))
@@ -175,6 +195,7 @@ public class tusken_giver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tusken_giver_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_32"))
@@ -194,7 +215,7 @@ public class tusken_giver extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_36");
@@ -203,7 +224,7 @@ public class tusken_giver extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tusken_giver.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -213,6 +234,7 @@ public class tusken_giver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tusken_giver_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_36"))
@@ -232,7 +254,7 @@ public class tusken_giver extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_40");
@@ -241,7 +263,7 @@ public class tusken_giver extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tusken_giver.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -251,6 +273,7 @@ public class tusken_giver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tusken_giver_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_40"))
@@ -271,7 +294,7 @@ public class tusken_giver extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_44");
@@ -280,7 +303,7 @@ public class tusken_giver extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tusken_giver.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -290,6 +313,7 @@ public class tusken_giver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tusken_giver_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_44"))
@@ -305,6 +329,7 @@ public class tusken_giver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -314,11 +339,13 @@ public class tusken_giver extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -327,18 +354,21 @@ public class tusken_giver extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.tusken_giver");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -367,7 +397,7 @@ public class tusken_giver extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_22");
@@ -375,7 +405,7 @@ public class tusken_giver extends script.base_script
                 utils.setScriptVar(player, "conversation.tusken_giver.branchId", 2);
                 npcStartConversation(player, npc, "tusken_giver", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -396,7 +426,7 @@ public class tusken_giver extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_16");
@@ -404,7 +434,7 @@ public class tusken_giver extends script.base_script
                 utils.setScriptVar(player, "conversation.tusken_giver.branchId", 5);
                 npcStartConversation(player, npc, "tusken_giver", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -425,7 +455,7 @@ public class tusken_giver extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_32");
@@ -433,7 +463,7 @@ public class tusken_giver extends script.base_script
                 utils.setScriptVar(player, "conversation.tusken_giver.branchId", 9);
                 npcStartConversation(player, npc, "tusken_giver", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -448,6 +478,7 @@ public class tusken_giver extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("tusken_giver"))

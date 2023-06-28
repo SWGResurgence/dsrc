@@ -1,5 +1,11 @@
 package script.theme_park.tatooine.mos_taike;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.utils;
@@ -11,12 +17,14 @@ public class cantina_receiver extends script.base_script
     public cantina_receiver()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         attachScript(self, "npc.converse.npc_converse_menu");
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         String datatable = "datatables/theme_park/mos_taike_cantina.iff";
@@ -32,7 +40,7 @@ public class cantina_receiver extends script.base_script
             if (courier == self)
             {
                 obj_id playerInv = utils.getInventoryContainer(speaker);
-                if (checkForItem(playerInv) == true)
+                if (checkForItem(playerInv))
                 {
                     String reward = "npc_thanks_" + (questNum);
                     string_id message = new string_id(CONVO, reward);
@@ -40,28 +48,28 @@ public class cantina_receiver extends script.base_script
                     messageTo(speaker, "finishQuest", null, 0, true);
                     return SCRIPT_OVERRIDE;
                 }
-                else 
+                else
                 {
                     string_id work = new string_id(CONVO, "gotowork");
                     chat.chat(self, work);
                     return SCRIPT_CONTINUE;
                 }
             }
-            else 
+            else
             {
                 string_id cant = new string_id(CONVO, "cantwork");
                 chat.chat(self, cant);
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             String npcGreet = "npc_1_" + questNum;
             String response1 = "player_1_" + questNum;
             String response2 = "player_2_" + questNum;
             String response3 = "player_3_" + questNum;
             string_id greeting = new string_id(CONVO, npcGreet);
-            string_id response[] = new string_id[3];
+            string_id[] response = new string_id[3];
             response[0] = new string_id(CONVO, response1);
             response[1] = new string_id(CONVO, response2);
             response[2] = new string_id(CONVO, response3);
@@ -69,6 +77,7 @@ public class cantina_receiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean checkForItem(obj_id inv) throws InterruptedException
     {
         String datatable = "datatables/theme_park/mos_taike_cantina.iff";
@@ -76,9 +85,11 @@ public class cantina_receiver extends script.base_script
         String giveMe = dataTableGetString(datatable, 0, questNum - 1);
         boolean hadIt = false;
         obj_id[] contents = getContents(inv);
-        for (obj_id content : contents) {
+        for (obj_id content : contents)
+        {
             String itemInInventory = getTemplateName(content);
-            if (itemInInventory.equals(giveMe)) {
+            if (itemInInventory.equals(giveMe))
+            {
                 destroyObject(content);
                 hadIt = true;
             }

@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,25 +14,29 @@ import script.*;
 
 public class wod_rubina extends script.base_script
 {
+    public static String c_stringFile = "conversation/wod_rubina";
+
     public wod_rubina()
     {
     }
-    public static String c_stringFile = "conversation/wod_rubina";
+
     public boolean wod_rubina_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean wod_rubina_condition_onReturnWalkabout2(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "wod_prologue_walkabout_02", "speakWithRubina");
     }
+
     public boolean wod_rubina_condition_walkabout2Finished(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "wod_prologue_quests"))
         {
             setObjVar(player, "wod_prologue_quests", 0);
         }
-        else 
+        else
         {
             if (getIntObjVar(player, "wod_prologue_quests") > 8)
             {
@@ -79,148 +89,126 @@ public class wod_rubina extends script.base_script
         }
         return questIsQuestComplete(questGetQuestId("quest/wod_prologue_walkabout_02"), player);
     }
+
     public boolean wod_rubina_condition_oneQuestComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         int status = getIntObjVar(player, "wod_prologue_quests");
-        if (status == 1 || status == -1)
-        {
-            return true;
-        }
-        return false;
+        return status == 1 || status == -1;
     }
+
     public boolean wod_rubina_condition_SMSlight(obj_id player, obj_id npc) throws InterruptedException
     {
         int status = getIntObjVar(player, "wod_prologue_quests");
-        if (status < -1)
-        {
-            return true;
-        }
-        return false;
+        return status < -1;
     }
+
     public boolean wod_rubina_condition_NSSlight(obj_id player, obj_id npc) throws InterruptedException
     {
         int status = getIntObjVar(player, "wod_prologue_quests");
-        if (status > 1)
-        {
-            return true;
-        }
-        return false;
+        return status > 1;
     }
+
     public boolean wod_rubina_condition_SMMost(obj_id player, obj_id npc) throws InterruptedException
     {
         int status = getIntObjVar(player, "wod_prologue_quests");
-        if (status < -4)
-        {
-            return true;
-        }
-        return false;
+        return status < -4;
     }
+
     public boolean wod_rubina_condition_NSMost(obj_id player, obj_id npc) throws InterruptedException
     {
         int status = getIntObjVar(player, "wod_prologue_quests");
-        if (status > 4)
-        {
-            return true;
-        }
-        return false;
+        return status > 4;
     }
+
     public boolean wod_rubina_condition_SMFull(obj_id player, obj_id npc) throws InterruptedException
     {
         int status = getIntObjVar(player, "wod_prologue_quests");
-        if (status < -7)
-        {
-            return true;
-        }
-        return false;
+        return status < -7;
     }
+
     public boolean wod_rubina_condition_NSFull(obj_id player, obj_id npc) throws InterruptedException
     {
         int status = getIntObjVar(player, "wod_prologue_quests");
-        if (status > 7)
-        {
-            return true;
-        }
-        return false;
+        return status > 7;
     }
+
     public boolean wod_rubina_condition_onReturnHerbsNS(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "wod_prologue_herb_gathering", "returnForTreatNightsister");
     }
+
     public boolean wod_rubina_condition_onReturnRancorNS(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "wod_prologue_kill_rancor", "waitForRubinaNightsisterRancor") || groundquests.isTaskActive(player, "wod_prologue_kill_spider_clan", "waitForRubinaNightsisterSpider");
     }
+
     public boolean wod_rubina_condition_zeroQuestComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         int status = getIntObjVar(player, "wod_prologue_quests");
-        if (status == 0)
-        {
-            return true;
-        }
-        return false;
+        return status == 0;
     }
+
     public boolean wod_rubina_condition_onReturnWisdomSM(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "wod_outcast_1", "talkRubinaSinging") || groundquests.isTaskActive(player, "wod_outcast_2", "talkRubinaSinging") || groundquests.isTaskActive(player, "wod_outcast_3", "talkRubinaSinging") || groundquests.isTaskActive(player, "wod_outcast_4", "talkRubinaSinging") || groundquests.isTaskActive(player, "wod_outcast_5", "talkRubinaSinging") || groundquests.isTaskActive(player, "wod_outcast_6", "talkRubinaSinging") || groundquests.isTaskActive(player, "wod_outcast_7", "talkRubinaSinging");
     }
+
     public boolean wod_rubina_condition_onReturnHerbsSM(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "wod_prologue_herb_gathering", "returnForTreatSinging");
     }
+
     public boolean wod_rubina_condition_onReturnWisdomNS(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "wod_outcast_1", "talkRubinaNightsister") || groundquests.isTaskActive(player, "wod_outcast_2", "talkRubinaNightsister") || groundquests.isTaskActive(player, "wod_outcast_3", "talkRubinaNightsister") || groundquests.isTaskActive(player, "wod_outcast_4", "talkRubinaNightsister") || groundquests.isTaskActive(player, "wod_outcast_5", "talkRubinaNightsister") || groundquests.isTaskActive(player, "wod_outcast_6", "talkRubinaNightsister") || groundquests.isTaskActive(player, "wod_outcast_7", "talkRubinaNightsister");
     }
+
     public boolean wod_rubina_condition_onReturnRancorSM(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "wod_prologue_kill_rancor", "waitForRubinaSingingRancor") || groundquests.isTaskActive(player, "wod_prologue_kill_spider_clan", "waitForRubinaSingingSpider");
     }
+
     public boolean wod_rubina_condition_hasQuestsActive(obj_id player, obj_id npc) throws InterruptedException
     {
         return questIsQuestActive(questGetQuestId("quest/wod_prologue_kill_rancor"), player) || questIsQuestActive(questGetQuestId("quest/wod_prologue_kill_spider_clan"), player) || questIsQuestActive(questGetQuestId("quest/wod_prologue_herb_gathering"), player) || questIsQuestActive(questGetQuestId("quest/wod_outcast_1"), player) || questIsQuestActive(questGetQuestId("quest/wod_outcast_2"), player) || questIsQuestActive(questGetQuestId("quest/wod_outcast_3"), player) || questIsQuestActive(questGetQuestId("quest/wod_outcast_4"), player) || questIsQuestActive(questGetQuestId("quest/wod_outcast_5"), player) || questIsQuestActive(questGetQuestId("quest/wod_outcast_6"), player) || questIsQuestActive(questGetQuestId("quest/wod_outcast_7"), player);
     }
+
     public boolean wod_rubina_condition_readyToGoNS(obj_id player, obj_id npc) throws InterruptedException
     {
         int status = getIntObjVar(player, "wod_prologue_quests");
-        if ((status > 7) && (!groundquests.hasCompletedQuest(player, "wod_rubina_goto_ns")))
-        {
-            return true;
-        }
-        return false;
+        return (status > 7) && (!groundquests.hasCompletedQuest(player, "wod_rubina_goto_ns"));
     }
+
     public boolean wod_rubina_condition_readyToGoSM(obj_id player, obj_id npc) throws InterruptedException
     {
         int status = getIntObjVar(player, "wod_prologue_quests");
-        if ((status < -7) && (!groundquests.hasCompletedQuest(player, "wod_rubina_goto_sm")))
-        {
-            return true;
-        }
-        return false;
+        return (status < -7) && (!groundquests.hasCompletedQuest(player, "wod_rubina_goto_sm"));
     }
+
     public boolean wod_rubina_condition_onReturnChest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isTaskActive(player, "wod_rubina_chest", "giveCylinder"))
         {
             return true;
         }
-        else if (groundquests.hasCompletedQuest(player, "wod_rubina_chest") && !groundquests.hasCompletedQuest(player, "wod_left_behind") && !questIsQuestActive(questGetQuestId("quest/wod_left_behind"), player))
-        {
-            return true;
-        }
-        return false;
+        else return groundquests.hasCompletedQuest(player, "wod_rubina_chest") && !groundquests.hasCompletedQuest(player, "wod_left_behind") && !questIsQuestActive(questGetQuestId("quest/wod_left_behind"), player);
     }
+
     public boolean wod_rubina_condition_onReturnLeftBehind(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "wod_left_behind", "giveCache");
     }
+
     public void wod_rubina_action_sendReturnedSignalWalkabout2(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "speakWithRubina");
     }
+
     public void wod_rubina_action_grantPrologueHerbs(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest/wod_prologue_herb_gathering");
     }
+
     public void wod_rubina_action_grantPrologueEnemies(obj_id player, obj_id npc) throws InterruptedException
     {
         int rng = rand(0, 100);
@@ -228,15 +216,17 @@ public class wod_rubina extends script.base_script
         {
             groundquests.grantQuest(player, "quest/wod_prologue_kill_rancor");
         }
-        else 
+        else
         {
             groundquests.grantQuest(player, "quest/wod_prologue_kill_spider_clan");
         }
     }
+
     public void wod_rubina_action_grantPrologueWisdom(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest/wod_outcast_" + rand(1, 7));
     }
+
     public void wod_rubina_action_sendReturnedRancorNS(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isTaskActive(player, "wod_prologue_kill_rancor", "waitForRubinaNightsisterRancor"))
@@ -252,6 +242,7 @@ public class wod_rubina extends script.base_script
             modifyCollectionSlotValue(player, "wod_prologue_kill_spiders_01", 1);
         }
     }
+
     public void wod_rubina_action_sendReturnedRancorSM(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isTaskActive(player, "wod_prologue_kill_rancor", "waitForRubinaSingingRancor"))
@@ -267,54 +258,65 @@ public class wod_rubina extends script.base_script
             modifyCollectionSlotValue(player, "wod_prologue_kill_spiders_01", 1);
         }
     }
+
     public void wod_rubina_action_sendReturnedHerbsNS(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "selectBasketNightsister");
         setObjVar(player, "wod_prologue_quests", getIntObjVar(player, "wod_prologue_quests") + 1);
         modifyCollectionSlotValue(player, "wod_prologue_ns_herb_01", 1);
     }
+
     public void wod_rubina_action_sendReturnedHerbsSM(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "selectBasketSiging");
         setObjVar(player, "wod_prologue_quests", getIntObjVar(player, "wod_prologue_quests") - 1);
         modifyCollectionSlotValue(player, "wod_prologue_herb_01", 1);
     }
+
     public void wod_rubina_action_sendReturnedWisdomNS(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "wod_outcast_nightsister_win_2");
         setObjVar(player, "wod_prologue_quests", getIntObjVar(player, "wod_prologue_quests") + 1);
         modifyCollectionSlotValue(player, "wod_prologue_nightsister_outcasts_01", 1);
     }
+
     public void wod_rubina_action_sendReturnedWisdomSM(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "wod_outcast_singing_win_2");
         setObjVar(player, "wod_prologue_quests", getIntObjVar(player, "wod_prologue_quests") - 1);
         modifyCollectionSlotValue(player, "wod_prologue_singing_outcasts_01", 1);
     }
+
     public void wod_rubina_action_grantGoToNS(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest/wod_rubina_goto_ns");
     }
+
     public void wod_rubina_action_grantGoToSM(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest/wod_rubina_goto_sm");
     }
+
     public void wod_rubina_action_sendReturnedSignalChest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "hasGivenCylinder");
     }
+
     public void wod_rubina_action_grantLeftBehind(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest/wod_left_behind");
     }
+
     public void wod_rubina_action_sendReturnedSignalLeftBehind(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "gaveCache");
     }
+
     public float wod_rubina_tokenDF_tokenDF0001(obj_id player, obj_id npc) throws InterruptedException
     {
         return 0.f;
     }
+
     public int wod_rubina_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6"))
@@ -330,6 +332,7 @@ public class wod_rubina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_rubina_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_63"))
@@ -345,6 +348,7 @@ public class wod_rubina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_rubina_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_64"))
@@ -360,6 +364,7 @@ public class wod_rubina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_rubina_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_67"))
@@ -375,6 +380,7 @@ public class wod_rubina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_rubina_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_68"))
@@ -390,6 +396,7 @@ public class wod_rubina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_rubina_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_140"))
@@ -405,6 +412,7 @@ public class wod_rubina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_rubina_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_139"))
@@ -420,6 +428,7 @@ public class wod_rubina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_rubina_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_188"))
@@ -439,7 +448,7 @@ public class wod_rubina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_190");
@@ -448,7 +457,7 @@ public class wod_rubina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_rubina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -458,6 +467,7 @@ public class wod_rubina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_rubina_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_190"))
@@ -478,7 +488,7 @@ public class wod_rubina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_197");
@@ -487,7 +497,7 @@ public class wod_rubina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_rubina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -497,6 +507,7 @@ public class wod_rubina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_rubina_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_197"))
@@ -512,6 +523,7 @@ public class wod_rubina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_rubina_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_200"))
@@ -531,7 +543,7 @@ public class wod_rubina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_202");
@@ -540,7 +552,7 @@ public class wod_rubina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_rubina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -550,6 +562,7 @@ public class wod_rubina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_rubina_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_202"))
@@ -569,7 +582,7 @@ public class wod_rubina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_204");
@@ -578,7 +591,7 @@ public class wod_rubina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_rubina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -588,6 +601,7 @@ public class wod_rubina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_rubina_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_204"))
@@ -603,6 +617,7 @@ public class wod_rubina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_rubina_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_45"))
@@ -643,7 +658,7 @@ public class wod_rubina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_49");
@@ -664,7 +679,7 @@ public class wod_rubina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_rubina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -738,7 +753,7 @@ public class wod_rubina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_104");
@@ -775,7 +790,7 @@ public class wod_rubina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_rubina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -807,7 +822,7 @@ public class wod_rubina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_174");
@@ -820,7 +835,7 @@ public class wod_rubina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_rubina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -849,7 +864,7 @@ public class wod_rubina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_182");
@@ -862,7 +877,7 @@ public class wod_rubina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_rubina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -928,6 +943,7 @@ public class wod_rubina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_rubina_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_49"))
@@ -961,7 +977,7 @@ public class wod_rubina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_53");
@@ -978,7 +994,7 @@ public class wod_rubina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_rubina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1021,6 +1037,7 @@ public class wod_rubina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_rubina_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_53"))
@@ -1040,7 +1057,7 @@ public class wod_rubina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_57");
@@ -1049,7 +1066,7 @@ public class wod_rubina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_rubina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1074,7 +1091,7 @@ public class wod_rubina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_77");
@@ -1083,7 +1100,7 @@ public class wod_rubina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_rubina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1108,7 +1125,7 @@ public class wod_rubina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_89");
@@ -1117,7 +1134,7 @@ public class wod_rubina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_rubina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1127,6 +1144,7 @@ public class wod_rubina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_rubina_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_57"))
@@ -1146,7 +1164,7 @@ public class wod_rubina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_69");
@@ -1155,7 +1173,7 @@ public class wod_rubina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_rubina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1165,6 +1183,7 @@ public class wod_rubina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_rubina_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_69"))
@@ -1180,6 +1199,7 @@ public class wod_rubina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_rubina_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_77"))
@@ -1199,7 +1219,7 @@ public class wod_rubina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_81");
@@ -1208,7 +1228,7 @@ public class wod_rubina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_rubina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1218,6 +1238,7 @@ public class wod_rubina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_rubina_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_81"))
@@ -1233,6 +1254,7 @@ public class wod_rubina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_rubina_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_89"))
@@ -1252,7 +1274,7 @@ public class wod_rubina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_93");
@@ -1261,7 +1283,7 @@ public class wod_rubina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_rubina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1271,6 +1293,7 @@ public class wod_rubina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_rubina_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_93"))
@@ -1286,6 +1309,7 @@ public class wod_rubina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_rubina_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_104"))
@@ -1305,7 +1329,7 @@ public class wod_rubina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_108");
@@ -1314,7 +1338,7 @@ public class wod_rubina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_rubina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1394,6 +1418,7 @@ public class wod_rubina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_rubina_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_108"))
@@ -1413,7 +1438,7 @@ public class wod_rubina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_112");
@@ -1422,7 +1447,7 @@ public class wod_rubina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_rubina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1432,6 +1457,7 @@ public class wod_rubina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_rubina_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_112"))
@@ -1446,6 +1472,7 @@ public class wod_rubina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_rubina_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_174"))
@@ -1490,7 +1517,7 @@ public class wod_rubina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_45");
@@ -1507,7 +1534,7 @@ public class wod_rubina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_rubina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1517,6 +1544,7 @@ public class wod_rubina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_rubina_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_45"))
@@ -1557,7 +1585,7 @@ public class wod_rubina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_49");
@@ -1578,7 +1606,7 @@ public class wod_rubina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_rubina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1652,7 +1680,7 @@ public class wod_rubina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_104");
@@ -1689,7 +1717,7 @@ public class wod_rubina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_rubina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1721,7 +1749,7 @@ public class wod_rubina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_174");
@@ -1734,7 +1762,7 @@ public class wod_rubina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_rubina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1763,7 +1791,7 @@ public class wod_rubina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_182");
@@ -1776,7 +1804,7 @@ public class wod_rubina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_rubina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1842,6 +1870,7 @@ public class wod_rubina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_rubina_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_182"))
@@ -1886,7 +1915,7 @@ public class wod_rubina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_45");
@@ -1903,7 +1932,7 @@ public class wod_rubina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_rubina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1913,6 +1942,7 @@ public class wod_rubina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_rubina_handleBranch52(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_45"))
@@ -1953,7 +1983,7 @@ public class wod_rubina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_49");
@@ -1974,7 +2004,7 @@ public class wod_rubina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_rubina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2048,7 +2078,7 @@ public class wod_rubina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_104");
@@ -2085,7 +2115,7 @@ public class wod_rubina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_rubina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2117,7 +2147,7 @@ public class wod_rubina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_174");
@@ -2130,7 +2160,7 @@ public class wod_rubina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_rubina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2159,7 +2189,7 @@ public class wod_rubina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_182");
@@ -2172,7 +2202,7 @@ public class wod_rubina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_rubina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2238,6 +2268,7 @@ public class wod_rubina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -2245,37 +2276,42 @@ public class wod_rubina extends script.base_script
             detachScript(self, "conversation.wod_rubina");
         }
         setCondition(self, CONDITION_CONVERSABLE);
-		setCondition(self, CONDITION_INTERESTING);
+        setCondition(self, CONDITION_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
-		setCondition(self, CONDITION_INTERESTING);
+        setCondition(self, CONDITION_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
         menu_info_data menuInfoData = menuInfo.getMenuItemById(menu);
         menuInfoData.setServerNotify(false);
         setCondition(self, CONDITION_CONVERSABLE);
-		setCondition(self, CONDITION_INTERESTING);
+        setCondition(self, CONDITION_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
-		setCondition(self, CONDITION_INTERESTING);
+        setCondition(self, CONDITION_INTERESTING);
         detachScript(self, "conversation.wod_rubina");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -2298,7 +2334,7 @@ public class wod_rubina extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_6");
@@ -2306,7 +2342,7 @@ public class wod_rubina extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_rubina.branchId", 1);
                 npcStartConversation(player, npc, "wod_rubina", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2327,7 +2363,7 @@ public class wod_rubina extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_63");
@@ -2335,7 +2371,7 @@ public class wod_rubina extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_rubina.branchId", 3);
                 npcStartConversation(player, npc, "wod_rubina", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2356,7 +2392,7 @@ public class wod_rubina extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_64");
@@ -2364,7 +2400,7 @@ public class wod_rubina extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_rubina.branchId", 5);
                 npcStartConversation(player, npc, "wod_rubina", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2385,7 +2421,7 @@ public class wod_rubina extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_67");
@@ -2393,7 +2429,7 @@ public class wod_rubina extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_rubina.branchId", 7);
                 npcStartConversation(player, npc, "wod_rubina", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2414,7 +2450,7 @@ public class wod_rubina extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_68");
@@ -2422,7 +2458,7 @@ public class wod_rubina extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_rubina.branchId", 9);
                 npcStartConversation(player, npc, "wod_rubina", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2443,7 +2479,7 @@ public class wod_rubina extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_140");
@@ -2451,7 +2487,7 @@ public class wod_rubina extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_rubina.branchId", 11);
                 npcStartConversation(player, npc, "wod_rubina", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2472,7 +2508,7 @@ public class wod_rubina extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_139");
@@ -2480,7 +2516,7 @@ public class wod_rubina extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_rubina.branchId", 13);
                 npcStartConversation(player, npc, "wod_rubina", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2501,7 +2537,7 @@ public class wod_rubina extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_188");
@@ -2509,7 +2545,7 @@ public class wod_rubina extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_rubina.branchId", 15);
                 npcStartConversation(player, npc, "wod_rubina", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2530,7 +2566,7 @@ public class wod_rubina extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_200");
@@ -2538,7 +2574,7 @@ public class wod_rubina extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_rubina.branchId", 19);
                 npcStartConversation(player, npc, "wod_rubina", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2579,7 +2615,7 @@ public class wod_rubina extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_45");
@@ -2595,7 +2631,7 @@ public class wod_rubina extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_rubina.branchId", 24);
                 npcStartConversation(player, npc, "wod_rubina", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2610,6 +2646,7 @@ public class wod_rubina extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("wod_rubina"))

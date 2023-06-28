@@ -1,5 +1,11 @@
 package script.poi.template.scene.camp.jawa;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.locations;
 import script.library.theater;
@@ -12,10 +18,12 @@ import java.util.Vector;
 
 public class camp_sm extends script.poi.template.scene.camp.jawa.base
 {
+    public static final int COL_MAX = 1;
+
     public camp_sm()
     {
     }
-    public static final int COL_MAX = 1;
+
     public int handleTheaterSetup(obj_id self, dictionary params) throws InterruptedException
     {
         if (dataTableOpen(TBL))
@@ -39,7 +47,7 @@ public class camp_sm extends script.poi.template.scene.camp.jawa.base
                 for (int i = 0; i < cnt; i++)
                 {
                     int idx = rand(0, tpf.size() - 1);
-                    String template = ((String)tpf.get(idx));
+                    String template = ((String) tpf.get(idx));
                     if ((template != null) && (!template.equals("")))
                     {
                         location myLoc = getLocation(self);
@@ -58,7 +66,7 @@ public class camp_sm extends script.poi.template.scene.camp.jawa.base
                         if ((child == null) || (child == obj_id.NULL_ID))
                         {
                         }
-                        else 
+                        else
                         {
                             setYaw(child, rand(-180, 180));
                             children = utils.addElement(children, child);
@@ -69,7 +77,7 @@ public class camp_sm extends script.poi.template.scene.camp.jawa.base
             if ((children == null) || (children.size() == 0))
             {
             }
-            else 
+            else
             {
                 setObjVar(self, theater.VAR_CHILDREN, children);
             }

@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.jedi_trials;
@@ -8,14 +14,17 @@ import script.*;
 
 public class padawan_artist_01 extends script.base_script
 {
+    public static String c_stringFile = "conversation/padawan_artist_01";
+
     public padawan_artist_01()
     {
     }
-    public static String c_stringFile = "conversation/padawan_artist_01";
+
     public boolean padawan_artist_01_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean padawan_artist_01_condition_isTrialPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id trialPlayer = getObjIdObjVar(npc, jedi_trials.PADAWAN_TRIAL_PLAYER_OBJVAR);
@@ -29,6 +38,7 @@ public class padawan_artist_01 extends script.base_script
         }
         return false;
     }
+
     public boolean padawan_artist_01_condition_spokeToTarget(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id trialPlayer = getObjIdObjVar(npc, jedi_trials.PADAWAN_TRIAL_PLAYER_OBJVAR);
@@ -38,6 +48,7 @@ public class padawan_artist_01 extends script.base_script
         }
         return false;
     }
+
     public boolean padawan_artist_01_condition_acceptedQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id trialPlayer = getObjIdObjVar(npc, jedi_trials.PADAWAN_TRIAL_PLAYER_OBJVAR);
@@ -47,6 +58,7 @@ public class padawan_artist_01 extends script.base_script
         }
         return false;
     }
+
     public boolean padawan_artist_01_condition_completedSuccess(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id trialPlayer = getObjIdObjVar(npc, jedi_trials.PADAWAN_TRIAL_PLAYER_OBJVAR);
@@ -60,25 +72,26 @@ public class padawan_artist_01 extends script.base_script
         }
         return false;
     }
+
     public void padawan_artist_01_action_questFailure(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(npc, "padawan_trials.playerFailed", true);
         messageTo(player, "handleQuestFailure", null, 1, false);
-        return;
     }
+
     public void padawan_artist_01_action_questSuccess(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(npc, "padawan_trials.playerSucceeded", true);
         messageTo(player, "handleTrialComplete", null, 1, false);
-        return;
     }
+
     public void padawan_artist_01_action_sendToNextNpc(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(npc, "padawan_trials.playerAccepted", true);
         setObjVar(player, "jedi_trials.padawan_trials.temp.acceptedTask", true);
         messageTo(player, "handleSetSecondLoc", null, 1, false);
-        return;
     }
+
     public int padawan_artist_01_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_705f9dd1"))
@@ -98,7 +111,7 @@ public class padawan_artist_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d21432e3");
@@ -107,7 +120,7 @@ public class padawan_artist_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.padawan_artist_01.branchId");
                     chat.chat(npc, player, message);
@@ -131,6 +144,7 @@ public class padawan_artist_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int padawan_artist_01_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d21432e3"))
@@ -148,6 +162,7 @@ public class padawan_artist_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int padawan_artist_01_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_593d8ed6"))
@@ -176,6 +191,7 @@ public class padawan_artist_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int padawan_artist_01_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a51658ea"))
@@ -195,7 +211,7 @@ public class padawan_artist_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_bdf1fbc8");
@@ -204,7 +220,7 @@ public class padawan_artist_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.padawan_artist_01.branchId");
                     chat.chat(npc, player, message);
@@ -215,6 +231,7 @@ public class padawan_artist_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int padawan_artist_01_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_bdf1fbc8"))
@@ -241,7 +258,7 @@ public class padawan_artist_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f9a16624");
@@ -254,7 +271,7 @@ public class padawan_artist_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.padawan_artist_01.branchId");
                     chat.chat(npc, player, message);
@@ -265,6 +282,7 @@ public class padawan_artist_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int padawan_artist_01_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f9a16624"))
@@ -294,6 +312,7 @@ public class padawan_artist_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -303,11 +322,13 @@ public class padawan_artist_01 extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -316,18 +337,21 @@ public class padawan_artist_01 extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.padawan_artist_01");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -365,7 +389,7 @@ public class padawan_artist_01 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_705f9dd1");
@@ -377,7 +401,7 @@ public class padawan_artist_01 extends script.base_script
                 utils.setScriptVar(player, "conversation.padawan_artist_01.branchId", 2);
                 npcStartConversation(player, npc, "padawan_artist_01", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -406,7 +430,7 @@ public class padawan_artist_01 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_593d8ed6");
@@ -418,7 +442,7 @@ public class padawan_artist_01 extends script.base_script
                 utils.setScriptVar(player, "conversation.padawan_artist_01.branchId", 6);
                 npcStartConversation(player, npc, "padawan_artist_01", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -439,7 +463,7 @@ public class padawan_artist_01 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_a51658ea");
@@ -447,7 +471,7 @@ public class padawan_artist_01 extends script.base_script
                 utils.setScriptVar(player, "conversation.padawan_artist_01.branchId", 9);
                 npcStartConversation(player, npc, "padawan_artist_01", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -463,6 +487,7 @@ public class padawan_artist_01 extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("padawan_artist_01"))

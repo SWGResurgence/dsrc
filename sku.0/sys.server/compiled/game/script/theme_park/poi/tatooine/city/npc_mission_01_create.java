@@ -1,5 +1,11 @@
 package script.theme_park.poi.tatooine.city;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.location;
@@ -7,10 +13,12 @@ import script.obj_id;
 
 public class npc_mission_01_create extends script.base_script
 {
+    public static final String npcTable = "datatables/poi/city/convo_npc.iff";
+
     public npc_mission_01_create()
     {
     }
-    public static final String npcTable = "datatables/poi/city/convo_npc.iff";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         spawnGuyOne(self);
@@ -19,6 +27,7 @@ public class npc_mission_01_create extends script.base_script
         messageTo(self, "checkForScripts", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "alreadySpawned"))
@@ -31,6 +40,7 @@ public class npc_mission_01_create extends script.base_script
         messageTo(self, "checkForScripts", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleChatting(obj_id self, dictionary params) throws InterruptedException
     {
         messageTo(self, "handleChatting", null, 600, false);
@@ -46,16 +56,19 @@ public class npc_mission_01_create extends script.base_script
         setAnimationMood(guy2, "conversation");
         return SCRIPT_CONTINUE;
     }
+
     public int handleGuyOneKilled(obj_id self, dictionary params) throws InterruptedException
     {
         spawnGuyOne(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleGuyTwoKilled(obj_id self, dictionary params) throws InterruptedException
     {
         spawnGuyTwo(self);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnGuyOne(obj_id baseObject) throws InterruptedException
     {
         obj_id guy1 = create.themeParkObject(getRandomGuy(), 1, 0, "handleGuyOneKilled", 0);
@@ -63,6 +76,7 @@ public class npc_mission_01_create extends script.base_script
         setInvulnerable(guy1, true);
         setObjVar(baseObject, "guy1", guy1);
     }
+
     public void spawnGuyTwo(obj_id baseObject) throws InterruptedException
     {
         obj_id guy2 = create.themeParkObject(getRandomGuy(), 1, 1, "handleGuyTwoKilled", 0);
@@ -70,6 +84,7 @@ public class npc_mission_01_create extends script.base_script
         setInvulnerable(guy2, true);
         setObjVar(baseObject, "guy2", guy2);
     }
+
     public String getRandomGuy() throws InterruptedException
     {
         location here = getLocation(getSelf());
@@ -79,6 +94,7 @@ public class npc_mission_01_create extends script.base_script
         String npc = npcList[npcNum];
         return npc;
     }
+
     public int checkForScripts(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasScript(self, "theme_park.poi.launch"))

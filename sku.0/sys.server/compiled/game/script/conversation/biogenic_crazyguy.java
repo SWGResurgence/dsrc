@@ -1,63 +1,65 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.*;
 
 public class biogenic_crazyguy extends script.base_script
 {
+    public static String c_stringFile = "conversation/biogenic_crazyguy";
+
     public biogenic_crazyguy()
     {
     }
-    public static String c_stringFile = "conversation/biogenic_crazyguy";
+
     public boolean biogenic_crazyguy_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean biogenic_crazyguy_condition_get_tracker_1(obj_id player, obj_id npc) throws InterruptedException
     {
         int convo_tracker = getIntObjVar(player, "biogenic.crazy_convo");
-        if (convo_tracker == 1)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return convo_tracker == 1;
     }
+
     public boolean biogenic_crazyguy_condition_get_tracker_2(obj_id player, obj_id npc) throws InterruptedException
     {
         int convo_tracker = getIntObjVar(player, "biogenic.crazy_convo");
-        if (convo_tracker >= 2)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return convo_tracker >= 2;
     }
+
     public void biogenic_crazyguy_action__defaultAction(obj_id player, obj_id npc) throws InterruptedException
     {
     }
+
     public void biogenic_crazyguy_action_set_tracker_1(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "biogenic.crazy_convo", 1);
     }
+
     public void biogenic_crazyguy_action_set_tracker_2(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "biogenic.crazy_convo", 2);
     }
+
     public void biogenic_crazyguy_action_set_mood(obj_id player, obj_id npc) throws InterruptedException
     {
         setAnimationMood(npc, chat.MOOD_NERVOUS);
         faceToBehavior(npc, player);
     }
+
     public void biogenic_crazyguy_action_face_to(obj_id player, obj_id npc) throws InterruptedException
     {
         faceToBehavior(npc, player);
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -68,12 +70,14 @@ public class biogenic_crazyguy extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -82,12 +86,14 @@ public class biogenic_crazyguy extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "npc.conversation.biogenic_crazyguy");
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -124,7 +130,7 @@ public class biogenic_crazyguy extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_a64c5d9e");
@@ -136,7 +142,7 @@ public class biogenic_crazyguy extends script.base_script
                 setObjVar(player, "conversation.biogenic_crazyguy.branchId", 2);
                 npcStartConversation(player, self, "biogenic_crazyguy", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -172,7 +178,7 @@ public class biogenic_crazyguy extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_e7953fb5");
@@ -188,7 +194,7 @@ public class biogenic_crazyguy extends script.base_script
                 setObjVar(player, "conversation.biogenic_crazyguy.branchId", 15);
                 npcStartConversation(player, self, "biogenic_crazyguy", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -197,6 +203,7 @@ public class biogenic_crazyguy extends script.base_script
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("biogenic_crazyguy"))
@@ -235,7 +242,7 @@ public class biogenic_crazyguy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a9f69fb7");
@@ -252,7 +259,7 @@ public class biogenic_crazyguy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_crazyguy.branchId");
                     npcSpeak(player, message);
@@ -300,7 +307,7 @@ public class biogenic_crazyguy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e1fbb5ed");
@@ -313,7 +320,7 @@ public class biogenic_crazyguy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_crazyguy.branchId");
                     npcSpeak(player, message);
@@ -341,7 +348,7 @@ public class biogenic_crazyguy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_be321a24");
@@ -350,7 +357,7 @@ public class biogenic_crazyguy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_crazyguy.branchId");
                     npcSpeak(player, message);
@@ -398,7 +405,7 @@ public class biogenic_crazyguy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1c8bddbb");
@@ -411,7 +418,7 @@ public class biogenic_crazyguy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_crazyguy.branchId");
                     npcSpeak(player, message);
@@ -460,7 +467,7 @@ public class biogenic_crazyguy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6b830d");
@@ -473,7 +480,7 @@ public class biogenic_crazyguy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_crazyguy.branchId");
                     npcSpeak(player, message);
@@ -561,7 +568,7 @@ public class biogenic_crazyguy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9c653067");
@@ -574,7 +581,7 @@ public class biogenic_crazyguy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_crazyguy.branchId");
                     npcSpeak(player, message);
@@ -617,7 +624,7 @@ public class biogenic_crazyguy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5d16248c");
@@ -634,7 +641,7 @@ public class biogenic_crazyguy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_crazyguy.branchId");
                     npcSpeak(player, message);
@@ -689,7 +696,7 @@ public class biogenic_crazyguy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5d16248c");
@@ -706,7 +713,7 @@ public class biogenic_crazyguy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_crazyguy.branchId");
                     npcSpeak(player, message);
@@ -761,7 +768,7 @@ public class biogenic_crazyguy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a9f69fb7");
@@ -778,7 +785,7 @@ public class biogenic_crazyguy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_crazyguy.branchId");
                     npcSpeak(player, message);
@@ -820,7 +827,7 @@ public class biogenic_crazyguy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7d4e91e1");
@@ -837,7 +844,7 @@ public class biogenic_crazyguy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_crazyguy.branchId");
                     npcSpeak(player, message);
@@ -885,7 +892,7 @@ public class biogenic_crazyguy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e1fbb5ed");
@@ -898,7 +905,7 @@ public class biogenic_crazyguy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_crazyguy.branchId");
                     npcSpeak(player, message);
@@ -926,7 +933,7 @@ public class biogenic_crazyguy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_be321a24");
@@ -935,7 +942,7 @@ public class biogenic_crazyguy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_crazyguy.branchId");
                     npcSpeak(player, message);
@@ -983,7 +990,7 @@ public class biogenic_crazyguy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1c8bddbb");
@@ -996,7 +1003,7 @@ public class biogenic_crazyguy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_crazyguy.branchId");
                     npcSpeak(player, message);
@@ -1045,7 +1052,7 @@ public class biogenic_crazyguy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6b830d");
@@ -1058,7 +1065,7 @@ public class biogenic_crazyguy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_crazyguy.branchId");
                     npcSpeak(player, message);
@@ -1152,7 +1159,7 @@ public class biogenic_crazyguy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a9f69fb7");
@@ -1169,7 +1176,7 @@ public class biogenic_crazyguy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_crazyguy.branchId");
                     npcSpeak(player, message);
@@ -1204,7 +1211,7 @@ public class biogenic_crazyguy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d87072f3");
@@ -1217,7 +1224,7 @@ public class biogenic_crazyguy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_crazyguy.branchId");
                     npcSpeak(player, message);
@@ -1265,7 +1272,7 @@ public class biogenic_crazyguy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e1fbb5ed");
@@ -1278,7 +1285,7 @@ public class biogenic_crazyguy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_crazyguy.branchId");
                     npcSpeak(player, message);
@@ -1306,7 +1313,7 @@ public class biogenic_crazyguy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_be321a24");
@@ -1315,7 +1322,7 @@ public class biogenic_crazyguy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_crazyguy.branchId");
                     npcSpeak(player, message);
@@ -1363,7 +1370,7 @@ public class biogenic_crazyguy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1c8bddbb");
@@ -1376,7 +1383,7 @@ public class biogenic_crazyguy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_crazyguy.branchId");
                     npcSpeak(player, message);
@@ -1425,7 +1432,7 @@ public class biogenic_crazyguy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6b830d");
@@ -1438,7 +1445,7 @@ public class biogenic_crazyguy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_crazyguy.branchId");
                     npcSpeak(player, message);
@@ -1518,7 +1525,7 @@ public class biogenic_crazyguy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_20413fbf");
@@ -1527,7 +1534,7 @@ public class biogenic_crazyguy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_crazyguy.branchId");
                     npcSpeak(player, message);
@@ -1595,7 +1602,7 @@ public class biogenic_crazyguy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a9f69fb7");
@@ -1612,7 +1619,7 @@ public class biogenic_crazyguy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_crazyguy.branchId");
                     npcSpeak(player, message);
@@ -1654,7 +1661,7 @@ public class biogenic_crazyguy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7d4e91e1");
@@ -1671,7 +1678,7 @@ public class biogenic_crazyguy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_crazyguy.branchId");
                     npcSpeak(player, message);
@@ -1719,7 +1726,7 @@ public class biogenic_crazyguy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e1fbb5ed");
@@ -1732,7 +1739,7 @@ public class biogenic_crazyguy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_crazyguy.branchId");
                     npcSpeak(player, message);
@@ -1760,7 +1767,7 @@ public class biogenic_crazyguy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_be321a24");
@@ -1769,7 +1776,7 @@ public class biogenic_crazyguy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_crazyguy.branchId");
                     npcSpeak(player, message);
@@ -1817,7 +1824,7 @@ public class biogenic_crazyguy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1c8bddbb");
@@ -1830,7 +1837,7 @@ public class biogenic_crazyguy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_crazyguy.branchId");
                     npcSpeak(player, message);
@@ -1879,7 +1886,7 @@ public class biogenic_crazyguy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6b830d");
@@ -1892,7 +1899,7 @@ public class biogenic_crazyguy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_crazyguy.branchId");
                     npcSpeak(player, message);
@@ -1986,7 +1993,7 @@ public class biogenic_crazyguy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a9f69fb7");
@@ -2003,7 +2010,7 @@ public class biogenic_crazyguy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_crazyguy.branchId");
                     npcSpeak(player, message);
@@ -2038,7 +2045,7 @@ public class biogenic_crazyguy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d87072f3");
@@ -2051,7 +2058,7 @@ public class biogenic_crazyguy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_crazyguy.branchId");
                     npcSpeak(player, message);
@@ -2099,7 +2106,7 @@ public class biogenic_crazyguy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e1fbb5ed");
@@ -2112,7 +2119,7 @@ public class biogenic_crazyguy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_crazyguy.branchId");
                     npcSpeak(player, message);
@@ -2140,7 +2147,7 @@ public class biogenic_crazyguy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_be321a24");
@@ -2149,7 +2156,7 @@ public class biogenic_crazyguy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_crazyguy.branchId");
                     npcSpeak(player, message);
@@ -2197,7 +2204,7 @@ public class biogenic_crazyguy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1c8bddbb");
@@ -2210,7 +2217,7 @@ public class biogenic_crazyguy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_crazyguy.branchId");
                     npcSpeak(player, message);
@@ -2259,7 +2266,7 @@ public class biogenic_crazyguy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6b830d");
@@ -2272,7 +2279,7 @@ public class biogenic_crazyguy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_crazyguy.branchId");
                     npcSpeak(player, message);
@@ -2352,7 +2359,7 @@ public class biogenic_crazyguy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_20413fbf");
@@ -2361,7 +2368,7 @@ public class biogenic_crazyguy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_crazyguy.branchId");
                     npcSpeak(player, message);

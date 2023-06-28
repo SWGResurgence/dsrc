@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.utils;
@@ -7,14 +13,17 @@ import script.*;
 
 public class death_watch_medical_droid extends script.base_script
 {
+    public static String c_stringFile = "conversation/death_watch_medical_droid";
+
     public death_watch_medical_droid()
     {
     }
-    public static String c_stringFile = "conversation/death_watch_medical_droid";
+
     public boolean death_watch_medical_droid_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean death_watch_medical_droid_condition_hasObjVarMedicine(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "death_watch.drill_01"))
@@ -22,9 +31,11 @@ public class death_watch_medical_droid extends script.base_script
             obj_id[] objContents = utils.getContents(player, true);
             if (objContents != null)
             {
-                for (obj_id objContent : objContents) {
+                for (obj_id objContent : objContents)
+                {
                     String strItemTemplate = getTemplateName(objContent);
-                    if (strItemTemplate.equals("object/tangible/dungeon/death_watch_bunker/crazed_miner_medicine.iff")) {
+                    if (strItemTemplate.equals("object/tangible/dungeon/death_watch_bunker/crazed_miner_medicine.iff"))
+                    {
                         return false;
                     }
                 }
@@ -33,6 +44,7 @@ public class death_watch_medical_droid extends script.base_script
         }
         return false;
     }
+
     public boolean death_watch_medical_droid_condition_noInvSpace(obj_id player, obj_id npc) throws InterruptedException
     {
         boolean hasNoInvRoom = false;
@@ -47,29 +59,35 @@ public class death_watch_medical_droid extends script.base_script
         }
         return hasNoInvRoom;
     }
+
     public void death_watch_medical_droid_action__defaultAction(obj_id player, obj_id npc) throws InterruptedException
     {
     }
+
     public void death_watch_medical_droid_action_giveMedicine(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] objContents = utils.getContents(player, true);
         if (objContents != null)
         {
-            for (obj_id objContent : objContents) {
+            for (obj_id objContent : objContents)
+            {
                 String strItemTemplate = getTemplateName(objContent);
-                if (!strItemTemplate.equals("object/tangible/dungeon/death_watch_bunker/crazed_miner_medicine.iff")) {
+                if (!strItemTemplate.equals("object/tangible/dungeon/death_watch_bunker/crazed_miner_medicine.iff"))
+                {
                     obj_id playerInv = getObjectInSlot(player, "inventory");
-                    if (isIdValid(playerInv)) {
+                    if (isIdValid(playerInv))
+                    {
                         obj_id item = createObject("object/tangible/dungeon/death_watch_bunker/crazed_miner_medicine.iff", playerInv, "");
-                        if (isIdValid(item)) {
+                        if (isIdValid(item))
+                        {
                             return;
                         }
                     }
                 }
             }
         }
-        return;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -79,6 +97,7 @@ public class death_watch_medical_droid extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -87,6 +106,7 @@ public class death_watch_medical_droid extends script.base_script
         setName(self, "G12-4J (a medical droid)");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -95,12 +115,14 @@ public class death_watch_medical_droid extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "npc.conversation.death_watch_medical_droid");
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -129,7 +151,7 @@ public class death_watch_medical_droid extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_ab36bcfc");
@@ -141,7 +163,7 @@ public class death_watch_medical_droid extends script.base_script
                 setObjVar(player, "conversation.death_watch_medical_droid.branchId", 1);
                 npcStartConversation(player, self, "death_watch_medical_droid", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -150,6 +172,7 @@ public class death_watch_medical_droid extends script.base_script
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("death_watch_medical_droid"))

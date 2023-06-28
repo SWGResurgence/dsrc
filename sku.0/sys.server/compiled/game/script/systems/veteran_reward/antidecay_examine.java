@@ -1,5 +1,11 @@
 package script.systems.veteran_reward;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.utils;
 import script.menu_info;
 import script.menu_info_types;
@@ -14,6 +20,7 @@ public class antidecay_examine extends script.base_script
     public static final string_id SID_KIT_CREATED = new string_id(STF_VETERAN, "kit_created");
     public static final string_id SID_DETACH_KIT = new string_id(STF_VETERAN, "detach_kit");
     public static final String ANTIDECAYKIT = "object/tangible/veteran_reward/antidecay.iff";
+
     public antidecay_examine()
     {
     }

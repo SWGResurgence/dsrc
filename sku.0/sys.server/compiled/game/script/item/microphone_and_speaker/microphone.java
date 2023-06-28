@@ -1,5 +1,11 @@
 package script.item.microphone_and_speaker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.debug;
 import script.library.utils;
@@ -15,6 +21,7 @@ public class microphone extends script.base_script
     public static final string_id SID_DEACTIVATE_MSG = new string_id("sui", "mic_deactivation_msg");
     public static final String VAR_IS_ACTIVE = "microphone_is_active";
     public static final String SPEAKER_TEMPLATE = "object/tangible/speaker/speaker.iff";
+
     public microphone()
     {
     }

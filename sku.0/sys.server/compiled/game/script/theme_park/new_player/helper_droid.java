@@ -1,5 +1,11 @@
 package script.theme_park.new_player;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -7,9 +13,6 @@ import java.util.Vector;
 
 public class helper_droid extends script.base_script
 {
-    public helper_droid()
-    {
-    }
     public static final String NEW_PLAYER_SCRIPT = "theme_park.new_player.new_player";
     public static final string_id SID_DEFAULT_TEXT_MSG = new string_id("new_player", "default_text_msg");
     public static final string_id SID_DEFAULT_OK_BUTTON = new string_id("new_player", "default_ok_button");
@@ -48,11 +51,16 @@ public class helper_droid extends script.base_script
     public static final String TRAVEL_COUPON = "object/tangible/item/new_player/new_player_travel_coupon.iff";
     public static final String VEHICLE_COUPON = "object/tangible/item/new_player/new_player_vehicle_coupon.iff";
     public static final String NEW_PLAYER_LOG = "NEW_PLAYER_QUESTS";
+    public helper_droid()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleOnAttach", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id master = getMaster(self);
@@ -62,6 +70,7 @@ public class helper_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!newPlayerQuestsEnabled())
@@ -124,6 +133,7 @@ public class helper_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!newPlayerQuestsEnabled())
@@ -152,7 +162,7 @@ public class helper_droid extends script.base_script
                 messageTo(master, "handleSpaceIntroBegin", null, 1, false);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 String custLogMsg = "New Player Quests: %TU tried to use the helper droid radial menu for space info, but does not have the space edition of the game.";
                 CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, player);
@@ -168,7 +178,7 @@ public class helper_droid extends script.base_script
                 openHolocronToPage(player, "WelcomeToSWG.WhereDoIBegin.ThingsToDo.MissionTerminals");
                 openHolocronToPage(player, "WelcomeToSWG.WhereDoIBegin.ThingsToDo");
             }
-            else 
+            else
             {
                 openHolocronToPage(player, "WelcomeToSWG");
             }
@@ -254,13 +264,14 @@ public class helper_droid extends script.base_script
             {
                 messageTo(player, "handleGiveQuestMessage", null, 1, false);
             }
-            else 
+            else
             {
                 messageTo(player, "handleGiveNewProfessionQuestPrompt", null, 1, false);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleOnAttach(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id master = getMaster(self);
@@ -309,6 +320,7 @@ public class helper_droid extends script.base_script
         messageTo(self, "handleDroidInitiateGreeting", null, 4, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleDroidInitiateGreeting(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id master = getMaster(self);
@@ -356,7 +368,7 @@ public class helper_droid extends script.base_script
                     CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, master);
                     messageTo(master, "handleSpaceIntroBegin", null, 1, false);
                 }
-                else 
+                else
                 {
                     int msgNum = utils.getIntScriptVar(self, "msgNum");
                     string_id greetingBegin = new string_id("new_player", "droid_greeting_begin_0" + msgNum);
@@ -366,7 +378,7 @@ public class helper_droid extends script.base_script
                     twoButtonSui(master, master, "handleNewProfessionGreetingResponse", droidName, textMsgStr, okButton, cancelButton);
                 }
             }
-            else 
+            else
             {
                 String profession = getStringObjVar(master, CURRENT_PROFESSION_OBJVAR);
                 String questObjVar = QUEST_OBJVAR_BASE + profession;
@@ -374,7 +386,7 @@ public class helper_droid extends script.base_script
                 {
                     messageTo(master, "handleGiveProfessionAddedMessage", null, 1, false);
                 }
-                else 
+                else
                 {
                     if (utils.hasScriptVar(master, "new_player.giveDroidGreeting"))
                     {
@@ -390,7 +402,7 @@ public class helper_droid extends script.base_script
                             showProfessionsListbox(master, self, greetingEnd);
                         }
                     }
-                    else 
+                    else
                     {
                         messageTo(master, "handleGiveQuestMessage", null, 1, false);
                     }
@@ -399,15 +411,18 @@ public class helper_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean newPlayerQuestsEnabled() throws InterruptedException
     {
         return false;
     }
+
     public int twoButtonSui(obj_id controller, obj_id player, String handler, String title, string_id textMsg, string_id okButton, string_id cancelButton) throws InterruptedException
     {
         String TEXTMSG = utils.packStringId(textMsg);
         return twoButtonSui(controller, player, handler, title, TEXTMSG, okButton, cancelButton);
     }
+
     public int twoButtonSui(obj_id controller, obj_id player, String handler, String title, String textMsg, string_id okButton, string_id cancelButton) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "new_player.openSui"))
@@ -433,6 +448,7 @@ public class helper_droid extends script.base_script
         sui.showSUIPage(pid);
         return pid;
     }
+
     public void showProfessionsListbox(obj_id player, obj_id droid, string_id greetingEnd) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "new_player.openSui"))
@@ -493,8 +509,8 @@ public class helper_droid extends script.base_script
                 showSUIPage(pid);
             }
         }
-        return;
     }
+
     public int getNumProfessionQuests(obj_id player) throws InterruptedException
     {
         int num = 0;

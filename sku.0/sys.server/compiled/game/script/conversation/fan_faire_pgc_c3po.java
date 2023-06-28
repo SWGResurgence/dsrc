@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.chat;
@@ -7,28 +13,33 @@ import script.library.utils;
 
 public class fan_faire_pgc_c3po extends script.base_script
 {
+    public static String c_stringFile = "conversation/fan_faire_pgc_c3po";
+
     public fan_faire_pgc_c3po()
     {
     }
-    public static String c_stringFile = "conversation/fan_faire_pgc_c3po";
+
     public boolean fan_faire_pgc_c3po_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean fan_faire_pgc_c3po_condition_needsProfession(obj_id player, obj_id npc) throws InterruptedException
     {
         return !hasSkill(player, "class_chronicles_novice");
     }
+
     public boolean fan_faire_pgc_c3po_condition_relicEnabled(obj_id player, obj_id npc) throws InterruptedException
     {
         return false;
     }
+
     public void fan_faire_pgc_c3po_action_grantProfession(obj_id player, obj_id npc) throws InterruptedException
     {
         grantSkill(player, "class_chronicles_novice");
         sendSystemMessage(player, "You are now a Chronicle Apprentice.", "");
-        return;
     }
+
     public int fan_faire_pgc_c3po_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_28"))
@@ -97,7 +108,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -134,7 +145,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -208,7 +219,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -245,7 +256,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -319,7 +330,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -356,7 +367,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -430,7 +441,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -467,7 +478,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -541,7 +552,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -578,7 +589,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -652,7 +663,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -689,7 +700,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -763,7 +774,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -800,7 +811,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -875,7 +886,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -912,7 +923,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -922,6 +933,7 @@ public class fan_faire_pgc_c3po extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int fan_faire_pgc_c3po_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_28"))
@@ -990,7 +1002,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -1027,7 +1039,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1101,7 +1113,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -1138,7 +1150,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1212,7 +1224,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -1249,7 +1261,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1323,7 +1335,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -1360,7 +1372,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1434,7 +1446,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -1471,7 +1483,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1545,7 +1557,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -1582,7 +1594,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1656,7 +1668,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -1693,7 +1705,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1768,7 +1780,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -1805,7 +1817,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1815,6 +1827,7 @@ public class fan_faire_pgc_c3po extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int fan_faire_pgc_c3po_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_28"))
@@ -1883,7 +1896,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -1920,7 +1933,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1994,7 +2007,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -2031,7 +2044,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2105,7 +2118,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -2142,7 +2155,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2216,7 +2229,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -2253,7 +2266,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2327,7 +2340,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -2364,7 +2377,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2438,7 +2451,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -2475,7 +2488,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2549,7 +2562,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -2586,7 +2599,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2661,7 +2674,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -2698,7 +2711,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2708,6 +2721,7 @@ public class fan_faire_pgc_c3po extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int fan_faire_pgc_c3po_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_47"))
@@ -2776,7 +2790,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -2813,7 +2827,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2887,7 +2901,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -2924,7 +2938,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2998,7 +3012,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -3035,7 +3049,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3109,7 +3123,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -3146,7 +3160,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3220,7 +3234,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -3257,7 +3271,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3331,7 +3345,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -3368,7 +3382,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3442,7 +3456,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -3479,7 +3493,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3553,7 +3567,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -3590,7 +3604,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3600,6 +3614,7 @@ public class fan_faire_pgc_c3po extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int fan_faire_pgc_c3po_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_47"))
@@ -3668,7 +3683,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -3705,7 +3720,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3779,7 +3794,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -3816,7 +3831,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3890,7 +3905,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -3927,7 +3942,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4001,7 +4016,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -4038,7 +4053,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4112,7 +4127,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -4149,7 +4164,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4223,7 +4238,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -4260,7 +4275,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4334,7 +4349,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -4371,7 +4386,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4445,7 +4460,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -4482,7 +4497,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4492,6 +4507,7 @@ public class fan_faire_pgc_c3po extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int fan_faire_pgc_c3po_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_47"))
@@ -4560,7 +4576,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -4597,7 +4613,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4671,7 +4687,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -4708,7 +4724,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4782,7 +4798,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -4819,7 +4835,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4893,7 +4909,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -4930,7 +4946,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5004,7 +5020,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -5041,7 +5057,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5115,7 +5131,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -5152,7 +5168,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5226,7 +5242,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -5263,7 +5279,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5337,7 +5353,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -5374,7 +5390,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5384,6 +5400,7 @@ public class fan_faire_pgc_c3po extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int fan_faire_pgc_c3po_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_47"))
@@ -5452,7 +5469,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -5489,7 +5506,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5563,7 +5580,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -5600,7 +5617,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5674,7 +5691,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -5711,7 +5728,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5785,7 +5802,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -5822,7 +5839,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5896,7 +5913,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -5933,7 +5950,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6007,7 +6024,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -6044,7 +6061,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6118,7 +6135,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -6155,7 +6172,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6229,7 +6246,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -6266,7 +6283,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6276,6 +6293,7 @@ public class fan_faire_pgc_c3po extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int fan_faire_pgc_c3po_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_47"))
@@ -6344,7 +6362,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -6381,7 +6399,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6455,7 +6473,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -6492,7 +6510,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6566,7 +6584,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -6603,7 +6621,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6677,7 +6695,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -6714,7 +6732,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6788,7 +6806,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -6825,7 +6843,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6899,7 +6917,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -6936,7 +6954,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7010,7 +7028,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -7047,7 +7065,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7121,7 +7139,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -7158,7 +7176,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7168,6 +7186,7 @@ public class fan_faire_pgc_c3po extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int fan_faire_pgc_c3po_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_47"))
@@ -7236,7 +7255,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -7273,7 +7292,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7347,7 +7366,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -7384,7 +7403,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7458,7 +7477,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -7495,7 +7514,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7569,7 +7588,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -7606,7 +7625,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7680,7 +7699,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -7717,7 +7736,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7791,7 +7810,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -7828,7 +7847,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7902,7 +7921,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -7939,7 +7958,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8013,7 +8032,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -8050,7 +8069,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8060,6 +8079,7 @@ public class fan_faire_pgc_c3po extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int fan_faire_pgc_c3po_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_47"))
@@ -8128,7 +8148,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -8165,7 +8185,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8239,7 +8259,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -8276,7 +8296,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8350,7 +8370,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -8387,7 +8407,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8461,7 +8481,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -8498,7 +8518,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8572,7 +8592,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -8609,7 +8629,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8683,7 +8703,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -8720,7 +8740,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8794,7 +8814,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -8831,7 +8851,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8905,7 +8925,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -8942,7 +8962,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8952,6 +8972,7 @@ public class fan_faire_pgc_c3po extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int fan_faire_pgc_c3po_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_47"))
@@ -9020,7 +9041,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -9057,7 +9078,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9131,7 +9152,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -9168,7 +9189,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9242,7 +9263,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -9279,7 +9300,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9353,7 +9374,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -9390,7 +9411,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9464,7 +9485,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -9501,7 +9522,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9575,7 +9596,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -9612,7 +9633,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9686,7 +9707,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -9723,7 +9744,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9797,7 +9818,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -9834,7 +9855,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9844,6 +9865,7 @@ public class fan_faire_pgc_c3po extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int fan_faire_pgc_c3po_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_28"))
@@ -9912,7 +9934,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -9949,7 +9971,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10023,7 +10045,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -10060,7 +10082,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10134,7 +10156,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -10171,7 +10193,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10245,7 +10267,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -10282,7 +10304,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10356,7 +10378,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -10393,7 +10415,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10467,7 +10489,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -10504,7 +10526,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10578,7 +10600,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -10615,7 +10637,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10690,7 +10712,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -10727,7 +10749,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10737,6 +10759,7 @@ public class fan_faire_pgc_c3po extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int fan_faire_pgc_c3po_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_28"))
@@ -10805,7 +10828,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -10842,7 +10865,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10916,7 +10939,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -10953,7 +10976,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11027,7 +11050,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -11064,7 +11087,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11138,7 +11161,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -11175,7 +11198,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11249,7 +11272,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -11286,7 +11309,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11360,7 +11383,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -11397,7 +11420,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11471,7 +11494,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -11508,7 +11531,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11583,7 +11606,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -11620,7 +11643,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11630,6 +11653,7 @@ public class fan_faire_pgc_c3po extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int fan_faire_pgc_c3po_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_28"))
@@ -11698,7 +11722,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -11735,7 +11759,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11809,7 +11833,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -11846,7 +11870,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11920,7 +11944,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -11957,7 +11981,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12031,7 +12055,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -12068,7 +12092,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12142,7 +12166,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -12179,7 +12203,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12253,7 +12277,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -12290,7 +12314,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12364,7 +12388,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -12401,7 +12425,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12476,7 +12500,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -12513,7 +12537,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12523,6 +12547,7 @@ public class fan_faire_pgc_c3po extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int fan_faire_pgc_c3po_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_28"))
@@ -12591,7 +12616,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -12628,7 +12653,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12702,7 +12727,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -12739,7 +12764,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12813,7 +12838,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -12850,7 +12875,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12924,7 +12949,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -12961,7 +12986,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13035,7 +13060,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -13072,7 +13097,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13146,7 +13171,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -13183,7 +13208,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13257,7 +13282,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -13294,7 +13319,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13369,7 +13394,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -13406,7 +13431,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13416,6 +13441,7 @@ public class fan_faire_pgc_c3po extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int fan_faire_pgc_c3po_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_28"))
@@ -13484,7 +13510,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -13521,7 +13547,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13595,7 +13621,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -13632,7 +13658,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13706,7 +13732,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -13743,7 +13769,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13817,7 +13843,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -13854,7 +13880,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13928,7 +13954,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -13965,7 +13991,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -14039,7 +14065,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -14076,7 +14102,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -14150,7 +14176,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -14187,7 +14213,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -14262,7 +14288,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -14299,7 +14325,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -14309,6 +14335,7 @@ public class fan_faire_pgc_c3po extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int fan_faire_pgc_c3po_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_28"))
@@ -14377,7 +14404,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -14414,7 +14441,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -14488,7 +14515,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -14525,7 +14552,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -14599,7 +14626,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -14636,7 +14663,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -14710,7 +14737,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -14747,7 +14774,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -14821,7 +14848,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -14858,7 +14885,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -14932,7 +14959,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -14969,7 +14996,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -15043,7 +15070,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -15080,7 +15107,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -15155,7 +15182,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -15192,7 +15219,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -15202,6 +15229,7 @@ public class fan_faire_pgc_c3po extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -15212,12 +15240,14 @@ public class fan_faire_pgc_c3po extends script.base_script
         messageTo(self, "handleFanFairec3poSetup", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         messageTo(self, "handleFanFairec3poSetup", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleFanFairec3poSetup(obj_id self, dictionary params) throws InterruptedException
     {
         String scriptName = "conversation";
@@ -15228,6 +15258,7 @@ public class fan_faire_pgc_c3po extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -15236,18 +15267,21 @@ public class fan_faire_pgc_c3po extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.fan_faire_pgc_c3po");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -15319,7 +15353,7 @@ public class fan_faire_pgc_c3po extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -15355,7 +15389,7 @@ public class fan_faire_pgc_c3po extends script.base_script
                 utils.setScriptVar(player, "conversation.fan_faire_pgc_c3po.branchId", 1);
                 npcStartConversation(player, npc, "fan_faire_pgc_c3po", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -15364,6 +15398,7 @@ public class fan_faire_pgc_c3po extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("fan_faire_pgc_c3po"))

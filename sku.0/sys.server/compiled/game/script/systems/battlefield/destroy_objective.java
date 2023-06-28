@@ -1,5 +1,11 @@
 package script.systems.battlefield;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.battlefield;
 import script.library.factions;
@@ -15,6 +21,7 @@ public class destroy_objective extends script.base_script
     public static final String VAR_WARNING_LEVEL = "battlefield.warning_level";
     public static final String VAR_FACTION = "battlefield.faction";
     public static final string_id SID_REPAIR_STRUCTURE = new string_id("battlefield", "repair_structure");
+
     public destroy_objective()
     {
     }

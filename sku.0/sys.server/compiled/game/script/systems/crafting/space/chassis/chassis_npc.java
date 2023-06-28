@@ -1,5 +1,11 @@
 package script.systems.crafting.space.chassis;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.space_crafting;
 import script.library.space_transition;
 import script.library.utils;

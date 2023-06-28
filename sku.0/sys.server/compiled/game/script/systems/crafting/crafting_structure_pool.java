@@ -1,5 +1,11 @@
 package script.systems.crafting;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.base_script;
 import script.library.craftinglib;
 import script.obj_id;
@@ -9,20 +15,26 @@ public class crafting_structure_pool extends base_script
     public static final String OBJVAR_CRAFTING_TYPE = "crafting.type";
     public static final String INVISIBLE_CRAFTING_STATION_TEMPLATE = "object/tangible/crafting/station/inivisible_crafting_station.iff";
     public static final String PLAYER_HOUSE_POOL = "player_house_tcg_relaxation_pool";
-    public int OnInitialize(obj_id self) {
+
+    public int OnInitialize(obj_id self)
+    {
         String buildingTemplate = getTemplateName(self);
-        if (buildingTemplate == null || buildingTemplate.equals("")) {
+        if (buildingTemplate == null || buildingTemplate.equals(""))
+        {
             return SCRIPT_CONTINUE;
         }
-        if (buildingTemplate.indexOf(PLAYER_HOUSE_POOL) > 0) {
+        if (buildingTemplate.indexOf(PLAYER_HOUSE_POOL) > 0)
+        {
             spawnInvCraftingStation(self, craftinglib.STATION_TYPE_POOL);
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean spawnInvCraftingStation(obj_id building, int craftingBuff)
     {
         return spawnInvCraftingStation(building, craftingBuff, null);
     }
+
     public boolean spawnInvCraftingStation(obj_id building, int craftingBuff, String specificCell)
     {
         if (!isValidId(building) || !exists(building))

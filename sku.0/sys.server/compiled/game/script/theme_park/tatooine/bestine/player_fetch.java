@@ -1,5 +1,11 @@
 package script.theme_park.tatooine.bestine;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.chat;
 import script.library.create;
@@ -10,10 +16,12 @@ import script.string_id;
 
 public class player_fetch extends script.base_script
 {
+    public static final String CONVO = "theme_park_bestine/curator";
+
     public player_fetch()
     {
     }
-    public static final String CONVO = "theme_park_bestine/curator";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         location questLoc = getLocationObjVar(self, "bestine.curator.fetchLoc");
@@ -21,6 +29,7 @@ public class player_fetch extends script.base_script
         addLocationTarget("spawnGuy", questLoc, 100);
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String name) throws InterruptedException
     {
         int questNum = getIntObjVar(self, "bestine.curator_quest");
@@ -64,6 +73,7 @@ public class player_fetch extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int finishQuest(obj_id self, dictionary params) throws InterruptedException
     {
         location questGiver = getLocationObjVar(self, "bestine.curator.guardLoc");

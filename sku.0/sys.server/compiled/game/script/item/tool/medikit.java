@@ -1,5 +1,11 @@
 package script.item.tool;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.menu_info;
 import script.menu_info_types;
@@ -19,6 +25,7 @@ public class medikit extends script.base_script
     public static final string_id SID_OTHER_PLAYERS_ONLY = new string_id(STF, "other_players_only");
     public static final string_id SID_DO_NOT_HEAL = new string_id(STF, "do_not_heal");
     public static final string_id SID_MUST_BE_PLAYER_OR_PET = new string_id(STF, "must_be_player_or_pet");
+
     public medikit()
     {
     }

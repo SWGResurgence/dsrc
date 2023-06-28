@@ -1,5 +1,11 @@
 package script.systems.jedi;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -125,7 +131,7 @@ public class jedi_saber_component extends script.base_script
             return SCRIPT_CONTINUE;
         }
         obj_id[] contents = getContents(inv);
-        if (contents == null || contents.length == 0)
+        if (contents == null)
         {
             return SCRIPT_CONTINUE;
         }
@@ -155,7 +161,7 @@ public class jedi_saber_component extends script.base_script
         {
             name = localize(getNameStringId(self));
         }
-        name = colors_hex.HEADER + colors_hex.RED + "" + name + " (broken)\\#.";
+        name = colors_hex.HEADER + colors_hex.RED + name + " (broken)\\#.";
         LOG("saber_test", "Setting Crystal name to: " + name);
         setName(self, name);
         return SCRIPT_CONTINUE;

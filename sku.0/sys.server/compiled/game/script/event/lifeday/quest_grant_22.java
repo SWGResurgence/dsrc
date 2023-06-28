@@ -4,6 +4,12 @@ package script.event.lifeday;/*
 @Purpose: Grants the new lifeday quest for 2022 on use.
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.groundquests;
 import script.menu_info;
 import script.menu_info_types;
@@ -27,6 +33,7 @@ public class quest_grant_22 extends script.base_script
         mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("Answer Call"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)

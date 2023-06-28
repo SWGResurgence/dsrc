@@ -1,5 +1,11 @@
 package script.planet_map;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.planetary_map;
 import script.library.utils;
@@ -10,10 +16,12 @@ import java.util.Vector;
 
 public class active_registered extends script.base_script
 {
+    public static final string_id SID_LOCATION_REGISTRATION_CANCELLED = new string_id("travel", "location_registration_cancelled");
+
     public active_registered()
     {
     }
-    public static final string_id SID_LOCATION_REGISTRATION_CANCELLED = new string_id("travel", "location_registration_cancelled");
+
     public int OnLostItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (utils.isNestedWithin(destContainer, self))
@@ -23,6 +31,7 @@ public class active_registered extends script.base_script
         removeRegistrant(self, item);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volName, obj_id who) throws InterruptedException
     {
         if (who == self)
@@ -35,12 +44,14 @@ public class active_registered extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int removeRegistrant(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objItem = params.getObjId("objItem");
         removeRegistrant(self, objItem);
         return SCRIPT_CONTINUE;
     }
+
     public void removeRegistrant(obj_id self, obj_id item) throws InterruptedException
     {
         if (!isIdValid(self) || !isIdValid(item) || !isPlayer(item))
@@ -62,7 +73,7 @@ public class active_registered extends script.base_script
                         detachScript(self, "planet_map.active_registered");
                     }
                 }
-                else 
+                else
                 {
                     utils.setBatchScriptVar(self, "registrants", registrants);
                 }
@@ -71,7 +82,6 @@ public class active_registered extends script.base_script
                     sendSystemMessage(item, SID_LOCATION_REGISTRATION_CANCELLED);
                     utils.removeScriptVar(item, "registerWithLocation");
                 }
-                return;
             }
         }
     }

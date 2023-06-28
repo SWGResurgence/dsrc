@@ -1,5 +1,11 @@
 package script.theme_park.dathomir.spider_cave;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.location;
@@ -10,19 +16,21 @@ public class spider_cave_spawner extends script.base_script
     public spider_cave_spawner()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         spawnNightsisterElder(self);
         spawnSpiderQueen(self);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnEveryone(obj_id self) throws InterruptedException
     {
         spawnNightsisterElder(self);
         spawnSpiderQueen(self);
         spawnGiantSpider(self);
-        return;
     }
+
     public void spawnNightsisterElder(obj_id self) throws InterruptedException
     {
         boolean spawnNightsisterElder = true;
@@ -46,8 +54,8 @@ public class spider_cave_spawner extends script.base_script
             setObjVar(nightsisterElder, "spawner", self);
             setObjVar(nightsisterElder, "useOnIncapTrigger", self);
         }
-        return;
     }
+
     public void spawnSpiderQueen(obj_id self) throws InterruptedException
     {
         boolean spawnSpiderQueen = true;
@@ -71,8 +79,8 @@ public class spider_cave_spawner extends script.base_script
             setObjVar(spiderQueen, "spawner", self);
             setObjVar(spiderQueen, "useOnIncapTrigger", self);
         }
-        return;
     }
+
     public void spawnGiantSpider(obj_id self) throws InterruptedException
     {
         boolean spawnGiantSpider = true;
@@ -93,8 +101,8 @@ public class spider_cave_spawner extends script.base_script
             setYaw(giantSpider, giantSpider_yaw);
             setObjVar(self, "spiderCaveInhabitants.giantSpider", giantSpider);
         }
-        return;
     }
+
     public int npcDied(obj_id self, dictionary params) throws InterruptedException
     {
         String npc_type = params.getString("npc_type");
@@ -109,16 +117,19 @@ public class spider_cave_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int spawnSpiderQueen(obj_id self, dictionary params) throws InterruptedException
     {
         spawnSpiderQueen(self);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnNightsisterElder(obj_id self, dictionary params) throws InterruptedException
     {
         spawnNightsisterElder(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (!hasObjVar(speaker, "gm_testing"))
@@ -167,6 +178,7 @@ public class spider_cave_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void killEveryone(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "spiderCaveInhabitants.nightsisterElder"))
@@ -190,8 +202,8 @@ public class spider_cave_spawner extends script.base_script
             destroyObject(giantSpider);
             removeObjVar(self, "spiderCaveInhabitants.giantSpider");
         }
-        return;
     }
+
     public void killNightsisterElder(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "spiderCaveInhabitants.nightsisterElder"))
@@ -201,8 +213,8 @@ public class spider_cave_spawner extends script.base_script
             destroyObject(nightsisterElder);
             removeObjVar(self, "spiderCaveInhabitants.nightsisterElder");
         }
-        return;
     }
+
     public void killSpiderQueen(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "spiderCaveInhabitants.spiderQueen"))
@@ -212,8 +224,8 @@ public class spider_cave_spawner extends script.base_script
             destroyObject(spiderQueen);
             removeObjVar(self, "spiderCaveInhabitants.spiderQueen");
         }
-        return;
     }
+
     public void killGiantSpider(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "spiderCaveInhabitants.giantSpider"))
@@ -223,6 +235,5 @@ public class spider_cave_spawner extends script.base_script
             destroyObject(giantSpider);
             removeObjVar(self, "spiderCaveInhabitants.giantSpider");
         }
-        return;
     }
 }

@@ -9,4 +9,4 @@
 objectName = "wearables_name" "armor_scout_trooper_utility_belt"
 detailedDescription = "wearables_detail" "armor_scout_trooper_utility_belt"
 appearanceFilename = "appearance/armor_scout_trooper_belt_camo_m.sat"
-gameObjectType = GOT_armor_misc
+

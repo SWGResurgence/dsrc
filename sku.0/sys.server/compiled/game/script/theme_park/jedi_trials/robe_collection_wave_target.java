@@ -1,13 +1,16 @@
 package script.theme_park.jedi_trials;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class robe_collection_wave_target extends script.base_script
 {
-    public robe_collection_wave_target()
-    {
-    }
     public static final String DATATABLE = "datatables/quest/jedi_collection/jedi_robe_collection.iff";
     public static final String DATA_UTTERANCE = "utterance_msg";
     public static final String DATA_SLOT_AWARDED = "slot_awarded";
@@ -20,6 +23,10 @@ public class robe_collection_wave_target extends script.base_script
     public static final int LIGHT_JEDI_EVENT_DURATION = 180;
     public static final String OBJVAR_EVENT_NAME = "jediRobeEventName";
     public static final String SCRIPTVAR_EVENT_PLAYER = "jediRobeEventPlayer";
+    public robe_collection_wave_target()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
@@ -27,6 +34,7 @@ public class robe_collection_wave_target extends script.base_script
         messageTo(self, "jediEventInitializeNpc", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int jediEventInitializeNpc(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, SCRIPTVAR_EVENT_PLAYER);
@@ -67,7 +75,7 @@ public class robe_collection_wave_target extends script.base_script
                 dictionary resetDict = trial.getSessionDict(parent);
                 messageTo(self, "jediEventLightJediHandler", resetDict, LIGHT_JEDI_EVENT_DURATION, false);
             }
-            else 
+            else
             {
                 buff.applyBuff(self, "jedi_statue_self_dps_debuff");
             }
@@ -77,12 +85,13 @@ public class robe_collection_wave_target extends script.base_script
                 addHate(self, player, 1000.0f);
             }
         }
-        else 
+        else
         {
             messageTo(self, "handleJediEventDestroySelf", null, 2, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int jediEventLightJediHandler(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id parent = trial.getParent(self);
@@ -94,6 +103,7 @@ public class robe_collection_wave_target extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int jediEventDistanceCheck(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isInvulnerable(self) && !hasFailedJediEvent(self))
@@ -117,7 +127,7 @@ public class robe_collection_wave_target extends script.base_script
                 setJediEventFailed(self, player);
                 jediEventEnded(self, player);
             }
-            else 
+            else
             {
                 dictionary webster = new dictionary();
                 webster.put("player", player);
@@ -126,6 +136,7 @@ public class robe_collection_wave_target extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int jediEventCombatCheck(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isInvulnerable(self))
@@ -173,6 +184,7 @@ public class robe_collection_wave_target extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id wpn, int[] damage) throws InterruptedException
     {
         if (hasFailedJediEvent(self))
@@ -209,11 +221,11 @@ public class robe_collection_wave_target extends script.base_script
             }
             jediEventEnded(self, attacker);
         }
-        else 
+        else
         {
             int maxAction = getUnmodifiedMaxAttrib(self, ACTION);
             int currentAction = getAttrib(self, ACTION);
-            int actionMod = (int)(maxAction * 0.1);
+            int actionMod = (int) (maxAction * 0.1);
             int newAction = currentAction + actionMod;
             if (newAction > maxAction)
             {
@@ -223,6 +235,7 @@ public class robe_collection_wave_target extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int makeJediEventStopCombat(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "ai.combat.isInCombat");
@@ -260,7 +273,7 @@ public class robe_collection_wave_target extends script.base_script
             endMsg = eventData.getString(DATA_FAILURE_MSG);
             CustomerServiceLog("jedi_cloak_statue_event", "(" + player + ") " + getName(player) + " has FAILED against the " + eventName + " statue event with buff list: (" + buffListForCSLog(player) + ")");
         }
-        else 
+        else
         {
             modifyCollectionSlotValue(player, slotAwarded, 1);
             CustomerServiceLog("jedi_cloak_statue_event", "(" + player + ") " + getName(player) + " has BEATEN the " + eventName + " statue event with buff list: (" + buffListForCSLog(player) + ")");
@@ -269,6 +282,7 @@ public class robe_collection_wave_target extends script.base_script
         messageTo(self, "handleJediEventExit", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public String buffListForCSLog(obj_id player) throws InterruptedException
     {
         String buffsString = "none";
@@ -293,6 +307,7 @@ public class robe_collection_wave_target extends script.base_script
         }
         return buffsString;
     }
+
     public int OnHateTargetAdded(obj_id self, obj_id target) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, SCRIPTVAR_EVENT_PLAYER);
@@ -319,7 +334,7 @@ public class robe_collection_wave_target extends script.base_script
                     setJediEventFailed(self, player);
                     jediEventEnded(self, player);
                 }
-                else 
+                else
                 {
                     if (hateList[0] != player)
                     {
@@ -335,6 +350,7 @@ public class robe_collection_wave_target extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnLostTarget(obj_id self, obj_id oldTarget) throws InterruptedException
     {
         if (hasFailedJediEvent(self))
@@ -365,7 +381,7 @@ public class robe_collection_wave_target extends script.base_script
             setJediEventFailed(self, oldTarget);
             jediEventEnded(self, oldTarget);
         }
-        else 
+        else
         {
             if (!isInvulnerable(self))
             {
@@ -375,6 +391,7 @@ public class robe_collection_wave_target extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitateTarget(obj_id self, obj_id victim) throws InterruptedException
     {
         if (isGod(victim))
@@ -385,6 +402,7 @@ public class robe_collection_wave_target extends script.base_script
         jediEventEnded(self, victim);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, SCRIPTVAR_EVENT_PLAYER);
@@ -398,12 +416,14 @@ public class robe_collection_wave_target extends script.base_script
         messageTo(parent, "jediEventChildDestroyed", webster, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleJediEventExit(obj_id self, dictionary params) throws InterruptedException
     {
         setState(self, STATE_GLOWING_JEDI, true);
         messageTo(self, "handleJediEventDestroySelf", null, 1.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleJediEventDestroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, SCRIPTVAR_EVENT_PLAYER);
@@ -414,6 +434,7 @@ public class robe_collection_wave_target extends script.base_script
         trial.cleanupObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public void setJediEventFailed(obj_id self, obj_id player) throws InterruptedException
     {
         utils.setScriptVar(self, "playerFailedjediEvent", true);
@@ -424,16 +445,13 @@ public class robe_collection_wave_target extends script.base_script
             String failureBuff = eventData.getString(DATA_FAILURE_DEBUFF);
             buff.applyBuff(player, failureBuff);
         }
-        return;
     }
+
     public boolean hasFailedJediEvent(obj_id self) throws InterruptedException
     {
-        if (utils.hasScriptVar(self, "playerFailedjediEvent"))
-        {
-            return true;
-        }
-        return false;
+        return utils.hasScriptVar(self, "playerFailedjediEvent");
     }
+
     public void jediEventEnded(obj_id self, obj_id player) throws InterruptedException
     {
         int maxHealth = getUnmodifiedMaxAttrib(self, HEALTH);
@@ -445,6 +463,5 @@ public class robe_collection_wave_target extends script.base_script
         dictionary webster = new dictionary();
         webster.put("attacker", player);
         messageTo(self, "makeJediEventStopCombat", webster, 1, false);
-        return;
     }
 }

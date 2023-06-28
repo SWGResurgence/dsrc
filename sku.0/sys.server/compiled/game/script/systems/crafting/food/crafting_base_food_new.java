@@ -1,5 +1,11 @@
 package script.systems.crafting.food;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.draft_schematic;
 import script.obj_id;
@@ -8,6 +14,7 @@ public class crafting_base_food_new extends script.systems.crafting.crafting_bas
 {
     public static final String VERSION = "v1.00.00";
     public static final String FOOD_DATA = "datatables/food/food_data.iff";
+
     public crafting_base_food_new()
     {
     }

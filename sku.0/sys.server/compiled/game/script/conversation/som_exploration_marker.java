@@ -1,54 +1,72 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class som_exploration_marker extends script.base_script
 {
+    public static String c_stringFile = "conversation/som_exploration_marker";
+
     public som_exploration_marker()
     {
     }
-    public static String c_stringFile = "conversation/som_exploration_marker";
+
     public boolean som_exploration_marker_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean som_exploration_marker_condition_miningFacility(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActiveOrComplete(player, "som_exploration_mining");
     }
+
     public boolean som_exploration_marker_condition_crystalFlats(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActiveOrComplete(player, "som_exploration_crystal");
     }
+
     public boolean som_exploration_marker_condition_smokingForest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActiveOrComplete(player, "som_exploration_smoking");
     }
+
     public boolean som_exploration_marker_condition_centralVolcano(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActiveOrComplete(player, "som_exploration_volcano");
     }
+
     public boolean som_exploration_marker_condition_burningPlains(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActiveOrComplete(player, "som_exploration_burning");
     }
+
     public boolean som_exploration_marker_condition_berkensFlow(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActiveOrComplete(player, "som_exploration_berken");
     }
+
     public boolean som_exploration_marker_condition_tulrusNesting(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActiveOrComplete(player, "som_exploration_tulrus");
     }
+
     public boolean som_exploration_marker_condition_completeAll(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "som_exploration_volcano") && groundquests.hasCompletedQuest(player, "som_exploration_burning") && groundquests.hasCompletedQuest(player, "som_exploration_berken") && groundquests.hasCompletedQuest(player, "som_exploration_tulrus") && groundquests.hasCompletedQuest(player, "som_exploration_smoking") && groundquests.hasCompletedQuest(player, "som_exploration_crystal") && groundquests.hasCompletedQuest(player, "som_exploration_mining");
     }
+
     public boolean som_exploration_marker_condition_completedReward(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasObjVar(player, "mustafar.tanray_heart");
     }
+
     public boolean som_exploration_marker_condition_hasAcceptedOne(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isQuestActiveOrComplete(player, "som_exploration_volcano") || groundquests.isQuestActiveOrComplete(player, "som_exploration_burning"))
@@ -63,43 +81,44 @@ public class som_exploration_marker extends script.base_script
         {
             return true;
         }
-        if (groundquests.isQuestActiveOrComplete(player, "som_exploration_mining"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.isQuestActiveOrComplete(player, "som_exploration_mining");
     }
+
     public void som_exploration_marker_action_grantCentral(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "som_exploration_volcano");
     }
+
     public void som_exploration_marker_action_grantBurning(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "som_exploration_burning");
     }
+
     public void som_exploration_marker_action_grantBerken(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "som_exploration_berken");
     }
+
     public void som_exploration_marker_action_grantTulrus(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "som_exploration_tulrus");
     }
+
     public void som_exploration_marker_action_grantSmoking(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "som_exploration_smoking");
     }
+
     public void som_exploration_marker_action_grantCrystal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "som_exploration_crystal");
     }
+
     public void som_exploration_marker_action_grantMining(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "som_exploration_mining");
     }
+
     public void som_exploration_marker_action_grantReward(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -107,6 +126,7 @@ public class som_exploration_marker extends script.base_script
         setObjVar(player, "mustafar.tanray_heart", 1);
         badge.grantBadge(player, "bdg_must_mustafar_exploration");
     }
+
     public int som_exploration_marker_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_41"))
@@ -123,6 +143,7 @@ public class som_exploration_marker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_exploration_marker_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_38"))
@@ -186,7 +207,7 @@ public class som_exploration_marker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -219,7 +240,7 @@ public class som_exploration_marker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_exploration_marker.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -240,6 +261,7 @@ public class som_exploration_marker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_exploration_marker_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_46"))
@@ -328,6 +350,7 @@ public class som_exploration_marker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_exploration_marker_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_17"))
@@ -348,7 +371,7 @@ public class som_exploration_marker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_21");
@@ -357,7 +380,7 @@ public class som_exploration_marker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_exploration_marker.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -378,6 +401,7 @@ public class som_exploration_marker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_exploration_marker_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_21"))
@@ -398,7 +422,7 @@ public class som_exploration_marker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_25");
@@ -407,7 +431,7 @@ public class som_exploration_marker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_exploration_marker.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -417,6 +441,7 @@ public class som_exploration_marker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_exploration_marker_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_25"))
@@ -437,7 +462,7 @@ public class som_exploration_marker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_29");
@@ -446,7 +471,7 @@ public class som_exploration_marker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_exploration_marker.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -456,6 +481,7 @@ public class som_exploration_marker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_exploration_marker_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_29"))
@@ -476,7 +502,7 @@ public class som_exploration_marker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_33");
@@ -485,7 +511,7 @@ public class som_exploration_marker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_exploration_marker.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -495,6 +521,7 @@ public class som_exploration_marker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_exploration_marker_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_33"))
@@ -522,7 +549,7 @@ public class som_exploration_marker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_37");
@@ -535,7 +562,7 @@ public class som_exploration_marker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_exploration_marker.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -545,6 +572,7 @@ public class som_exploration_marker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_exploration_marker_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_37"))
@@ -607,7 +635,7 @@ public class som_exploration_marker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -640,7 +668,7 @@ public class som_exploration_marker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_exploration_marker.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -661,6 +689,7 @@ public class som_exploration_marker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_exploration_marker_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_46"))
@@ -749,6 +778,7 @@ public class som_exploration_marker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -760,6 +790,7 @@ public class som_exploration_marker extends script.base_script
         setCondition(self, CONDITION_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -767,6 +798,7 @@ public class som_exploration_marker extends script.base_script
         setCondition(self, CONDITION_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -775,18 +807,21 @@ public class som_exploration_marker extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.som_exploration_marker");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -817,7 +852,7 @@ public class som_exploration_marker extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_41");
@@ -825,7 +860,7 @@ public class som_exploration_marker extends script.base_script
                 utils.setScriptVar(player, "conversation.som_exploration_marker.branchId", 2);
                 npcStartConversation(player, npc, "som_exploration_marker", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -854,7 +889,7 @@ public class som_exploration_marker extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_38");
@@ -866,7 +901,7 @@ public class som_exploration_marker extends script.base_script
                 utils.setScriptVar(player, "conversation.som_exploration_marker.branchId", 4);
                 npcStartConversation(player, npc, "som_exploration_marker", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -895,7 +930,7 @@ public class som_exploration_marker extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_17");
@@ -907,7 +942,7 @@ public class som_exploration_marker extends script.base_script
                 utils.setScriptVar(player, "conversation.som_exploration_marker.branchId", 6);
                 npcStartConversation(player, npc, "som_exploration_marker", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -916,6 +951,7 @@ public class som_exploration_marker extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("som_exploration_marker"))

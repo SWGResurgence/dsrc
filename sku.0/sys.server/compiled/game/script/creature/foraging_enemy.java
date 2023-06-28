@@ -1,5 +1,11 @@
 package script.creature;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.anims;
 import script.library.chat;
@@ -11,13 +17,14 @@ import script.string_id;
 
 public class foraging_enemy extends script.base_script
 {
-    public foraging_enemy()
-    {
-    }
     public static final String STRING_PREFIX = "foraging/forage_enemy";
     public static final string_id SID_STEAL_SLOT = new string_id(STRING_PREFIX, "slot_removed");
     public static final String FORAGING_ENEMY_TABLE = "datatables/foraging/forage_enemy.iff";
     public static final String FORAGING_COLLECTION = "kill_forage_worm";
+    public foraging_enemy()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "cleanUpGuard", null, 400, true);
@@ -25,6 +32,7 @@ public class foraging_enemy extends script.base_script
         messageTo(self, "barkAttack", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitateTarget(obj_id self, obj_id victim) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, "player");
@@ -39,16 +47,19 @@ public class foraging_enemy extends script.base_script
         messageTo(self, "expression", null, 7, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLoiterMoving(obj_id self) throws InterruptedException
     {
         messageTo(self, "cleanUpGuard", null, 6, true);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanUpGuard(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int expression(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, "player");
@@ -62,12 +73,14 @@ public class foraging_enemy extends script.base_script
         messageTo(self, "runAwayThenCleanUpGuard", null, 4, false);
         return SCRIPT_CONTINUE;
     }
+
     public int runAwayThenCleanUpGuard(obj_id self, dictionary params) throws InterruptedException
     {
         pathTo(self, groundquests.getRandom2DLocationAroundPlayer(self, 20, 50));
         messageTo(self, "cleanUpGuard", null, 12, true);
         return SCRIPT_CONTINUE;
     }
+
     public int attackForager(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, "player");
@@ -78,13 +91,17 @@ public class foraging_enemy extends script.base_script
         startCombat(self, player);
         return SCRIPT_CONTINUE;
     }
-    public boolean isThief(obj_id mob) throws InterruptedException {
-        if (!isValidId(mob)) {
+
+    public boolean isThief(obj_id mob) throws InterruptedException
+    {
+        if (!isValidId(mob))
+        {
             return false;
         }
         String mobName = getStringObjVar(mob, "creature_type");
         return !((mobName == null) || (mobName.equals(""))) && mobName.indexOf("forage_") == 0;
     }
+
     public boolean removeFirstSlotFound(obj_id player) throws InterruptedException
     {
         if (!isValidId(player))
@@ -96,9 +113,11 @@ public class foraging_enemy extends script.base_script
             return false;
         }
         String[] slotsInCollection = getAllCollectionSlotsInCollection(FORAGING_COLLECTION);
-        for (String aSlotsInCollection : slotsInCollection) {
+        for (String aSlotsInCollection : slotsInCollection)
+        {
             long collectionSlotValue = getCollectionSlotValue(player, aSlotsInCollection);
-            if (collectionSlotValue > 0) {
+            if (collectionSlotValue > 0)
+            {
                 modifyCollectionSlotValue(player, aSlotsInCollection, (collectionSlotValue * -1));
                 prose_package pp = new prose_package();
                 prose.setStringId(pp, SID_STEAL_SLOT);
@@ -109,6 +128,7 @@ public class foraging_enemy extends script.base_script
         }
         return true;
     }
+
     public int barkAttack(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -133,6 +153,7 @@ public class foraging_enemy extends script.base_script
         chat.chat(self, chat.CHAT_SHOUT, chat.MOOD_ANGRY, new string_id("foraging/forage_enemy", "bark_" + type));
         return SCRIPT_CONTINUE;
     }
+
     public int barkDefeat(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -157,6 +178,7 @@ public class foraging_enemy extends script.base_script
         messageTo(self, "removeASlot", null, 4, true);
         return SCRIPT_CONTINUE;
     }
+
     public int removeASlot(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)

@@ -1,5 +1,11 @@
 package script.item.structure_deed.crafting_station;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 public class weapon_crafting_station_deed extends script.base_script

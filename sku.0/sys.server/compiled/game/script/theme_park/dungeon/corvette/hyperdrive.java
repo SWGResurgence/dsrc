@@ -1,14 +1,22 @@
 package script.theme_park.dungeon.corvette;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.sui;
 
 public class hyperdrive extends script.base_script
 {
+    public static final String MSGS = "dungeon/corvette";
+
     public hyperdrive()
     {
     }
-    public static final String MSGS = "dungeon/corvette";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         string_id hypr = new string_id(MSGS, "hyper_name");
@@ -16,6 +24,7 @@ public class hyperdrive extends script.base_script
         setName(self, name);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);
@@ -26,6 +35,7 @@ public class hyperdrive extends script.base_script
         mid.setServerNotify(true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -34,7 +44,7 @@ public class hyperdrive extends script.base_script
             {
                 showEngineSettings(self, player);
             }
-            else 
+            else
             {
                 string_id wrongMission = new string_id(MSGS, "does_nothing");
                 sendSystemMessage(player, wrongMission);
@@ -42,6 +52,7 @@ public class hyperdrive extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int showEngineSettings(obj_id pcd, obj_id player) throws InterruptedException
     {
         string_id textMsg = new string_id(MSGS, "hyperdrive_settings");
@@ -61,6 +72,7 @@ public class hyperdrive extends script.base_script
         sui.showSUIPage(pid);
         return pid;
     }
+
     public int CorvetteEngine(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);
@@ -76,75 +88,76 @@ public class hyperdrive extends script.base_script
         switch (bp)
         {
             case sui.BP_OK:
-            string_id engineIs = new string_id(MSGS, "engine_is");
-            string_id fuelIs = new string_id(MSGS, "fuel_is");
-            string_id result = new string_id(MSGS, "engine_result");
-            if (revert != null && !revert.equals(""))
-            {
-                string_id hypr40 = new string_id(MSGS, "hypr_40");
-                sendSystemMessage(player, hypr40);
-                setObjVar(top, "hyperdrive", 40);
-                if (engine == 0)
+                string_id engineIs = new string_id(MSGS, "engine_is");
+                string_id fuelIs = new string_id(MSGS, "fuel_is");
+                string_id result = new string_id(MSGS, "engine_result");
+                if (revert != null && !revert.equals(""))
                 {
-                    sendSystemMessage(player, fuelIs);
-                    sendSystemMessage(player, "" + fuel, null);
-                    sendSystemMessage(player, result);
+                    string_id hypr40 = new string_id(MSGS, "hypr_40");
+                    sendSystemMessage(player, hypr40);
+                    setObjVar(top, "hyperdrive", 40);
+                    if (engine == 0)
+                    {
+                        sendSystemMessage(player, fuelIs);
+                        sendSystemMessage(player, String.valueOf(fuel), null);
+                        sendSystemMessage(player, result);
+                    }
+                    else
+                    {
+                        sendSystemMessage(player, fuelIs);
+                        sendSystemMessage(player, String.valueOf(fuel), null);
+                        sendSystemMessage(player, engineIs);
+                        sendSystemMessage(player, String.valueOf(engine), null);
+                    }
+                    checkForDestroy(player, top, 40);
                 }
-                else 
+                else
                 {
-                    sendSystemMessage(player, fuelIs);
-                    sendSystemMessage(player, "" + fuel, null);
-                    sendSystemMessage(player, engineIs);
-                    sendSystemMessage(player, "" + engine, null);
+                    string_id hypr20 = new string_id(MSGS, "hypr_20");
+                    sendSystemMessage(player, hypr20);
+                    setObjVar(top, "hyperdrive", 20);
+                    if (engine == 0)
+                    {
+                        sendSystemMessage(player, fuelIs);
+                        sendSystemMessage(player, String.valueOf(fuel), null);
+                        sendSystemMessage(player, result);
+                    }
+                    else
+                    {
+                        sendSystemMessage(player, fuelIs);
+                        sendSystemMessage(player, String.valueOf(fuel), null);
+                        sendSystemMessage(player, engineIs);
+                        sendSystemMessage(player, String.valueOf(engine), null);
+                    }
+                    checkForDestroy(player, top, 20);
                 }
-                checkForDestroy(player, top, 40);
-            }
-            else 
-            {
-                string_id hypr20 = new string_id(MSGS, "hypr_20");
-                sendSystemMessage(player, hypr20);
-                setObjVar(top, "hyperdrive", 20);
-                if (engine == 0)
-                {
-                    sendSystemMessage(player, fuelIs);
-                    sendSystemMessage(player, "" + fuel, null);
-                    sendSystemMessage(player, result);
-                }
-                else 
-                {
-                    sendSystemMessage(player, fuelIs);
-                    sendSystemMessage(player, "" + fuel, null);
-                    sendSystemMessage(player, engineIs);
-                    sendSystemMessage(player, "" + engine, null);
-                }
-                checkForDestroy(player, top, 20);
-            }
-            return SCRIPT_CONTINUE;
+                return SCRIPT_CONTINUE;
             case sui.BP_CANCEL:
-            string_id hypr60 = new string_id(MSGS, "hypr_60");
-            sendSystemMessage(player, hypr60);
-            setObjVar(top, "hyperdrive", 60);
-            string_id engine_is = new string_id(MSGS, "engine_is");
-            string_id fuel_is = new string_id(MSGS, "fuel_is");
-            string_id result_is = new string_id(MSGS, "engine_result");
-            if (engine == 0)
-            {
-                sendSystemMessage(player, fuel_is);
-                sendSystemMessage(player, "" + fuel, null);
-                sendSystemMessage(player, result_is);
-            }
-            else 
-            {
-                sendSystemMessage(player, fuel_is);
-                sendSystemMessage(player, "" + fuel, null);
-                sendSystemMessage(player, engine_is);
-                sendSystemMessage(player, "" + engine, null);
-            }
-            checkForDestroy(player, top, 60);
-            return SCRIPT_CONTINUE;
+                string_id hypr60 = new string_id(MSGS, "hypr_60");
+                sendSystemMessage(player, hypr60);
+                setObjVar(top, "hyperdrive", 60);
+                string_id engine_is = new string_id(MSGS, "engine_is");
+                string_id fuel_is = new string_id(MSGS, "fuel_is");
+                string_id result_is = new string_id(MSGS, "engine_result");
+                if (engine == 0)
+                {
+                    sendSystemMessage(player, fuel_is);
+                    sendSystemMessage(player, String.valueOf(fuel), null);
+                    sendSystemMessage(player, result_is);
+                }
+                else
+                {
+                    sendSystemMessage(player, fuel_is);
+                    sendSystemMessage(player, String.valueOf(fuel), null);
+                    sendSystemMessage(player, engine_is);
+                    sendSystemMessage(player, String.valueOf(engine), null);
+                }
+                checkForDestroy(player, top, 60);
+                return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public void checkForDestroy(obj_id player, obj_id top, int hyper) throws InterruptedException
     {
         int fuel = getIntObjVar(top, "fuel");
@@ -153,6 +166,5 @@ public class hyperdrive extends script.base_script
             string_id reset = new string_id(MSGS, "engine_reset");
             sendSystemMessage(player, reset);
         }
-        return;
     }
 }

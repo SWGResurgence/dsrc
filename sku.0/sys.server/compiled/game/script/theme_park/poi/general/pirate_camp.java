@@ -1,5 +1,11 @@
 package script.theme_park.poi.general;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.factions;
@@ -11,16 +17,19 @@ public class pirate_camp extends script.theme_park.poi.base
     public pirate_camp()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         initializePoi(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         initializePoi(self);
         return SCRIPT_CONTINUE;
     }
+
     public void initializePoi(obj_id poiBaseObject) throws InterruptedException
     {
         String diff = poiGetDifficulty();
@@ -40,7 +49,8 @@ public class pirate_camp extends script.theme_park.poi.base
             poiCreateObject("object/tangible/camp/camp_tent_s1.iff", 1.5f, -10.7f);
         }
         int numGuards = 5;
-        switch (diff) {
+        switch (diff)
+        {
             case "medium":
                 numGuards += 2;
                 break;
@@ -58,6 +68,7 @@ public class pirate_camp extends script.theme_park.poi.base
             messageTo(poiBaseObject, "handleSpawnGuard", params, 1 + (i * 2), false);
         }
     }
+
     public int handleSpawnGuard(obj_id self, dictionary params) throws InterruptedException
     {
         int guardNum = params.getInt("guardNum");
@@ -70,19 +81,20 @@ public class pirate_camp extends script.theme_park.poi.base
         {
             case 5:
             case 6:
-            diff = "medium";
-            break;
+                diff = "medium";
+                break;
             case 7:
             case 8:
-            diff = "hard";
-            break;
+                diff = "hard";
+                break;
             case 9:
-            diff = "veryHard";
+                diff = "veryHard";
         }
         params.put("guard", pirate);
         messageTo(self, "handleEquipGuard", params, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleEquipGuard(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id guard = params.getObjId("guard");
@@ -97,19 +109,20 @@ public class pirate_camp extends script.theme_park.poi.base
         {
             case 5:
             case 6:
-            weapons.createWeapon("object/weapon/ranged/pistol/pistol_dl44.iff", inv, rand(0.6f, 1.0f));
-            break;
+                weapons.createWeapon("object/weapon/ranged/pistol/pistol_dl44.iff", inv, rand(0.6f, 1.0f));
+                break;
             case 7:
             case 8:
-            weapons.createWeapon("object/weapon/ranged/rifle/rifle_dlt20.iff", inv, rand(0.6f, 1.0f));
-            break;
+                weapons.createWeapon("object/weapon/ranged/rifle/rifle_dlt20.iff", inv, rand(0.6f, 1.0f));
+                break;
             case 9:
-            weapons.createWeapon("object/weapon/ranged/rifle/rifle_dlt20.iff", inv, rand(0.6f, 1.0f));
-            setObjVar(guard, "ai.grenadeType", "object/weapon/ranged/grenade/grenade_fragmentation");
+                weapons.createWeapon("object/weapon/ranged/rifle/rifle_dlt20.iff", inv, rand(0.6f, 1.0f));
+                setObjVar(guard, "ai.grenadeType", "object/weapon/ranged/grenade/grenade_fragmentation");
         }
         setupPatrol(guard);
         return SCRIPT_CONTINUE;
     }
+
     public void setupPatrol(obj_id npc) throws InterruptedException
     {
         if (rand(1, 3) != 1)

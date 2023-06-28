@@ -1,21 +1,29 @@
 package script.theme_park.warren;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.utils;
 
 public class core_rod_maker extends script.base_script
 {
+    public static final String COREROD_TEMPLATE = "object/tangible/mission/quest_item/warren_core_control_rod_s01.iff";
+    public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
     public core_rod_maker()
     {
     }
-    public static final String COREROD_TEMPLATE = "object/tangible/mission/quest_item/warren_core_control_rod_s01.iff";
-    public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         utils.setScriptVar(self, "messageSent", true);
         messageTo(self, "respawncoreRod", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public void spawncoreRod(obj_id container) throws InterruptedException
     {
         obj_id[] contents = getContents(container);
@@ -38,12 +46,14 @@ public class core_rod_maker extends script.base_script
         setName(coreRod, "");
         setName(coreRod, new string_id(SYSTEM_MESSAGES, "core_rod_name"));
     }
+
     public int respawncoreRod(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "messageSent");
         spawncoreRod(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnClosedContainer(obj_id self, obj_id player) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "messageSent"))
@@ -53,8 +63,10 @@ public class core_rod_maker extends script.base_script
         obj_id[] contents = getContents(self);
         if (contents != null)
         {
-            for (obj_id content : contents) {
-                if (hasObjVar(content, "warren.reactorControlRod")) {
+            for (obj_id content : contents)
+            {
+                if (hasObjVar(content, "warren.reactorControlRod"))
+                {
                     return SCRIPT_CONTINUE;
                 }
             }
@@ -63,6 +75,7 @@ public class core_rod_maker extends script.base_script
         utils.setScriptVar(self, "messageSent", true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info item) throws InterruptedException
     {
         location here = getLocation(player);
@@ -75,6 +88,7 @@ public class core_rod_maker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnOpenedContainer(obj_id self, obj_id player) throws InterruptedException
     {
         location here = getLocation(player);

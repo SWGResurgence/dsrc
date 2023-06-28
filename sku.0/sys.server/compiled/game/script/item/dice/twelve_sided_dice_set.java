@@ -1,5 +1,11 @@
 package script.item.dice;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.craftinglib;
 import script.library.debug;
@@ -12,6 +18,7 @@ public class twelve_sided_dice_set extends script.item.dice.base.base_dice
     public static final int FACE_COUNT = 12;
     public static final int DEFAULT_DICE_COUNT = 1;
     public static final String TYPE_NAME = "twelve_sided_dice_set";
+
     public twelve_sided_dice_set()
     {
     }

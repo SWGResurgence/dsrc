@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.avatar_platform;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.player_structure;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class avatar_destruction extends script.base_script
     public avatar_destruction()
     {
     }
+
     public int handleDestruct(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -17,6 +24,7 @@ public class avatar_destruction extends script.base_script
         messageTo(self, "handleEffectScript", who, 1.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleEffectScript(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -29,7 +37,8 @@ public class avatar_destruction extends script.base_script
         int numPlayers = players.length;
         if (numPlayers > 0)
         {
-            for (obj_id player1 : players) {
+            for (obj_id player1 : players)
+            {
                 attachScript(player1, "theme_park.dungeon.avatar_platform.avatar_destruction_player");
             }
         }

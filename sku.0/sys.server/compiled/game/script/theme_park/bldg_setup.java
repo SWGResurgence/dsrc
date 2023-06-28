@@ -1,5 +1,11 @@
 package script.theme_park;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.location;
 import script.obj_id;
 
@@ -8,6 +14,7 @@ public class bldg_setup extends script.base_script
     public bldg_setup()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         createTriggerVolume("guards", 20.0f, true);
@@ -20,6 +27,7 @@ public class bldg_setup extends script.base_script
         attachScript(destructor, "theme_park.bldg_destroy");
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (!isPlayer(breacher))

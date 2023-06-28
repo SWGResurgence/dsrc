@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,138 +14,172 @@ import script.*;
 
 public class c_newbie_melee_combat extends script.base_script
 {
+    public static String c_stringFile = "conversation/c_newbie_melee_combat";
+
     public c_newbie_melee_combat()
     {
     }
-    public static String c_stringFile = "conversation/c_newbie_melee_combat";
+
     public boolean c_newbie_melee_combat_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean c_newbie_melee_combat_condition_sentByMayor(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "c_melee_combat_trainer", "newbie_goto_peawp_02") || groundquests.hasCompletedQuest(player, "c_melee_combat_trainer");
     }
+
     public boolean c_newbie_melee_combat_condition_completedPeawpQuests(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "newbie_mayor_vaigon_shinn", "mayor_vaigon_shinn_03") || groundquests.isTaskActive(player, "newbie_mayor_vaigon_shinn", "mayor_vaigon_shinn_04") || groundquests.hasCompletedQuest(player, "newbie_mayor_vaigon_shinn"));
     }
+
     public boolean c_newbie_melee_combat_condition_returningViagonShinn(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "newbie_mayor_vaigon_shinn", "mayor_vaigon_shinn_02") || groundquests.hasCompletedQuest(player, "newbie_mayor_vaigon_shinn");
     }
+
     public boolean c_newbie_melee_combat_condition_onSwoopers(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "newbie_mayor_hooligans_swoopers") || groundquests.isQuestActive(player, "newbie_mayor_hooligans_swoopers_2"));
     }
+
     public boolean c_newbie_melee_combat_condition_returningSwoopers(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "newbie_mayor_hooligans_swoopers", "mayor_hooligans_swoopers_02") || groundquests.hasCompletedQuest(player, "newbie_mayor_hooligans_swoopers") || groundquests.hasCompletedQuest(player, "newbie_mayor_hooligans_swoopers_2"));
     }
+
     public boolean c_newbie_melee_combat_condition_onScavengers(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "newbie_mayor_hooligans_water_thief", "mayor_water_thief_00") || groundquests.isTaskActive(player, "newbie_mayor_hooligans_water_thief_2", "mayor_water_thief_00"));
     }
+
     public boolean c_newbie_melee_combat_condition_returningWaterThief(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "newbie_mayor_hooligans_water_thief", "mayor_water_thief_02") || groundquests.hasCompletedQuest(player, "newbie_mayor_hooligans_water_thief") || groundquests.hasCompletedQuest(player, "newbie_mayor_hooligans_water_thief_2"));
     }
+
     public boolean c_newbie_melee_combat_condition_onWaterThief(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedTask(player, "newbie_mayor_hooligans_water_thief", "mayor_water_thief_00") || groundquests.hasCompletedTask(player, "newbie_mayor_hooligans_water_thief_2", "mayor_water_thief_00"));
     }
+
     public boolean c_newbie_melee_combat_condition_returningGunrunners(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "newbie_mayor_hooligans_gunrunners", "mayor_gunrunner_02") || groundquests.hasCompletedQuest(player, "newbie_mayor_hooligans_gunrunners") || groundquests.hasCompletedQuest(player, "newbie_mayor_hooligans_gunrunners_2"));
     }
+
     public boolean c_newbie_melee_combat_condition_onGunrunners(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "newbie_mayor_hooligans_gunrunners") || groundquests.isQuestActive(player, "newbie_mayor_hooligans_gunrunners_2"));
     }
+
     public boolean c_newbie_melee_combat_condition_onDroids(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "newbie_mayor_hooligans_criminals", "mayor_criminals_00") || groundquests.isTaskActive(player, "newbie_mayor_hooligans_criminals_2", "mayor_criminals_00"));
     }
+
     public boolean c_newbie_melee_combat_condition_returningCriminals(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "newbie_mayor_hooligans_criminals", "mayor_criminals_02") || groundquests.hasCompletedQuest(player, "newbie_mayor_hooligans_criminals_2") || groundquests.hasCompletedQuest(player, "newbie_mayor_hooligans_criminals"));
     }
+
     public boolean c_newbie_melee_combat_condition_onCriminals(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedTask(player, "newbie_mayor_hooligans_criminals", "mayor_criminals_00") || groundquests.hasCompletedTask(player, "newbie_mayor_hooligans_criminals_2", "mayor_criminals_00"));
     }
+
     public boolean c_newbie_melee_combat_condition_returningMuggers(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "newbie_mayor_shinn_muggers", "mayor_shinn_mugger_02") || groundquests.hasCompletedQuest(player, "newbie_mayor_shinn_muggers") || groundquests.hasCompletedQuest(player, "newbie_mayor_shinn_muggers_2"));
     }
+
     public boolean c_newbie_melee_combat_condition_onMuggers(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "newbie_mayor_shinn_muggers") || groundquests.isQuestActive(player, "newbie_mayor_shinn_muggers_2"));
     }
+
     public boolean c_newbie_melee_combat_condition_onVaigonShinn(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "newbie_mayor_vaigon_shinn");
     }
+
     public void c_newbie_melee_combat_action_sendToMayor(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "mayor_vaigon_shinn_02");
     }
+
     public void c_newbie_melee_combat_action_signal_pickingPocket(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "peawpsPocketPicked");
     }
+
     public void c_newbie_melee_combat_action_grantSwoopers(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "newbie_mayor_hooligans_swoopers_2");
     }
+
     public void c_newbie_melee_combat_action_grantScavengers(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "newbie_mayor_hooligans_scavengers");
     }
+
     public void c_newbie_melee_combat_action_grantWaterThief(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "newbie_mayor_hooligans_water_thief_2");
     }
+
     public void c_newbie_melee_combat_action_grantGunrunners(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "newbie_mayor_hooligans_gunrunners_2");
     }
+
     public void c_newbie_melee_combat_action_grantCriminals(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "newbie_mayor_hooligans_criminals_2");
     }
+
     public void c_newbie_melee_combat_action_grantMuggers(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "newbie_mayor_shinn_muggers_2");
     }
+
     public void c_newbie_melee_combat_action_grantVaigonShin(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "newbie_mayor_vaigon_shinn");
     }
+
     public void c_newbie_melee_combat_action_endSwoopers(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "mayor_hooligans_swoopers_02");
     }
+
     public void c_newbie_melee_combat_action_endWaterThief(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "mayor_water_thief_02");
     }
+
     public void c_newbie_melee_combat_action_endGunrunners(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "mayor_gunrunner_02");
     }
+
     public void c_newbie_melee_combat_action_endCriminals(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "mayor_criminals_02");
     }
+
     public void c_newbie_melee_combat_action_endMuggers(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "mayor_shinn_mugger_02");
     }
+
     public void c_newbie_melee_combat_action_endFromMayor(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "newbie_goto_peawp_02");
     }
+
     public int c_newbie_melee_combat_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_13"))
@@ -154,6 +194,7 @@ public class c_newbie_melee_combat extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_melee_combat_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_20"))
@@ -169,6 +210,7 @@ public class c_newbie_melee_combat extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_melee_combat_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_58"))
@@ -184,6 +226,7 @@ public class c_newbie_melee_combat extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_melee_combat_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_96"))
@@ -205,7 +248,7 @@ public class c_newbie_melee_combat extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_99");
@@ -214,7 +257,7 @@ public class c_newbie_melee_combat extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_melee_combat.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -224,6 +267,7 @@ public class c_newbie_melee_combat extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_melee_combat_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_99"))
@@ -239,6 +283,7 @@ public class c_newbie_melee_combat extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_melee_combat_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_93"))
@@ -253,6 +298,7 @@ public class c_newbie_melee_combat extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_melee_combat_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_45"))
@@ -268,6 +314,7 @@ public class c_newbie_melee_combat extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_melee_combat_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_43"))
@@ -283,6 +330,7 @@ public class c_newbie_melee_combat extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_melee_combat_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_67"))
@@ -298,6 +346,7 @@ public class c_newbie_melee_combat extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_melee_combat_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_81"))
@@ -317,7 +366,7 @@ public class c_newbie_melee_combat extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_85");
@@ -326,7 +375,7 @@ public class c_newbie_melee_combat extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_melee_combat.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -336,6 +385,7 @@ public class c_newbie_melee_combat extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_melee_combat_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_85"))
@@ -352,6 +402,7 @@ public class c_newbie_melee_combat extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -365,6 +416,7 @@ public class c_newbie_melee_combat extends script.base_script
         setName(self, new string_id("npc_name", "peawp_rdawc"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);
@@ -374,6 +426,7 @@ public class c_newbie_melee_combat extends script.base_script
         setName(self, new string_id("npc_name", "peawp_rdawc"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -382,18 +435,21 @@ public class c_newbie_melee_combat extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.c_newbie_melee_combat");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -418,7 +474,7 @@ public class c_newbie_melee_combat extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_13");
@@ -426,7 +482,7 @@ public class c_newbie_melee_combat extends script.base_script
                 utils.setScriptVar(player, "conversation.c_newbie_melee_combat.branchId", 1);
                 npcStartConversation(player, npc, "c_newbie_melee_combat", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -447,7 +503,7 @@ public class c_newbie_melee_combat extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_20");
@@ -455,7 +511,7 @@ public class c_newbie_melee_combat extends script.base_script
                 utils.setScriptVar(player, "conversation.c_newbie_melee_combat.branchId", 3);
                 npcStartConversation(player, npc, "c_newbie_melee_combat", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -483,7 +539,7 @@ public class c_newbie_melee_combat extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_58");
@@ -491,7 +547,7 @@ public class c_newbie_melee_combat extends script.base_script
                 utils.setScriptVar(player, "conversation.c_newbie_melee_combat.branchId", 6);
                 npcStartConversation(player, npc, "c_newbie_melee_combat", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -519,7 +575,7 @@ public class c_newbie_melee_combat extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_96");
@@ -527,7 +583,7 @@ public class c_newbie_melee_combat extends script.base_script
                 utils.setScriptVar(player, "conversation.c_newbie_melee_combat.branchId", 9);
                 npcStartConversation(player, npc, "c_newbie_melee_combat", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -548,7 +604,7 @@ public class c_newbie_melee_combat extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_93");
@@ -556,7 +612,7 @@ public class c_newbie_melee_combat extends script.base_script
                 utils.setScriptVar(player, "conversation.c_newbie_melee_combat.branchId", 12);
                 npcStartConversation(player, npc, "c_newbie_melee_combat", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -584,7 +640,7 @@ public class c_newbie_melee_combat extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_45");
@@ -592,7 +648,7 @@ public class c_newbie_melee_combat extends script.base_script
                 utils.setScriptVar(player, "conversation.c_newbie_melee_combat.branchId", 15);
                 npcStartConversation(player, npc, "c_newbie_melee_combat", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -620,7 +676,7 @@ public class c_newbie_melee_combat extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_43");
@@ -628,7 +684,7 @@ public class c_newbie_melee_combat extends script.base_script
                 utils.setScriptVar(player, "conversation.c_newbie_melee_combat.branchId", 18);
                 npcStartConversation(player, npc, "c_newbie_melee_combat", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -662,7 +718,7 @@ public class c_newbie_melee_combat extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_67");
@@ -670,7 +726,7 @@ public class c_newbie_melee_combat extends script.base_script
                 utils.setScriptVar(player, "conversation.c_newbie_melee_combat.branchId", 22);
                 npcStartConversation(player, npc, "c_newbie_melee_combat", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -698,7 +754,7 @@ public class c_newbie_melee_combat extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_81");
@@ -706,7 +762,7 @@ public class c_newbie_melee_combat extends script.base_script
                 utils.setScriptVar(player, "conversation.c_newbie_melee_combat.branchId", 25);
                 npcStartConversation(player, npc, "c_newbie_melee_combat", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -721,6 +777,7 @@ public class c_newbie_melee_combat extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("c_newbie_melee_combat"))

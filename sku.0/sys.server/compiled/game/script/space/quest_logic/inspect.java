@@ -1,5 +1,11 @@
 package script.space.quest_logic;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.space_quest;
 import script.library.space_transition;
@@ -11,13 +17,14 @@ import java.util.StringTokenizer;
 
 public class inspect extends script.base_script
 {
-    public inspect()
-    {
-    }
     public static final string_id SID_TARGET_WAYPOINTS = new string_id("space/quest", "inspect_target_waypoints");
     public static final string_id SID_ABANDONED_INSPECT = new string_id("space/quest", "inspect_abandoned");
     public static final string_id SID_RECOVERED_CARGO = new string_id("space/quest", "inspect_recovered_cargo");
     public static final string_id SID_FOUND_CARGO = new string_id("space/quest", "inspect_found_cargo");
+    public inspect()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String questName = getStringObjVar(self, space_quest.QUEST_NAME);
@@ -59,6 +66,7 @@ public class inspect extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int initializedQuestPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -141,12 +149,14 @@ public class inspect extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int notifyTargetWaypoints(obj_id self, dictionary params) throws InterruptedException
     {
         int added = params.getInt("added");
         space_quest.showQuestUpdate(self, SID_TARGET_WAYPOINTS, added);
         return SCRIPT_CONTINUE;
     }
+
     public int createdWaypointToSpawner(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -161,18 +171,16 @@ public class inspect extends script.base_script
             waypoints[0] = newpoint;
             setObjVar(self, "target_waypoints", waypoints);
         }
-        else 
+        else
         {
             obj_id[] newlist = new obj_id[waypoints.length + 1];
-            for (int i = 0; i < waypoints.length; i++)
-            {
-                newlist[i] = waypoints[i];
-            }
+            System.arraycopy(waypoints, 0, newlist, 0, waypoints.length);
             newlist[waypoints.length] = newpoint;
             setObjVar(self, "target_waypoints", newlist);
         }
         return SCRIPT_CONTINUE;
     }
+
     public void questCompleted(obj_id self) throws InterruptedException
     {
         String questName = getStringObjVar(self, space_quest.QUEST_NAME);
@@ -189,6 +197,7 @@ public class inspect extends script.base_script
         clearTargetWaypoints(self);
         space_quest.setQuestWon(player, self);
     }
+
     public int playerShipDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -203,6 +212,7 @@ public class inspect extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int abortMission(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "noAbort"))
@@ -214,19 +224,23 @@ public class inspect extends script.base_script
         space_quest.setQuestAborted(player, self);
         return SCRIPT_CONTINUE;
     }
+
     public void clearTargetWaypoints(obj_id self) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
         obj_id[] waypoints = getObjIdArrayObjVar(self, "target_waypoints");
         if (waypoints != null)
         {
-            for (obj_id waypoint : waypoints) {
-                if (isIdValid(waypoint)) {
+            for (obj_id waypoint : waypoints)
+            {
+                if (isIdValid(waypoint))
+                {
                     destroyWaypointInDatapad(waypoint, player);
                 }
             }
         }
     }
+
     public int removeQuest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -241,6 +255,7 @@ public class inspect extends script.base_script
         space_quest._removeQuest(player, self);
         return SCRIPT_CONTINUE;
     }
+
     public boolean checkSpecialEvent(obj_id self, obj_id player, int inspectCount) throws InterruptedException
     {
         if (!hasObjVar(self, space_quest.QUEST_TRIGGER_EVENT))
@@ -268,6 +283,7 @@ public class inspect extends script.base_script
         messageTo(player, "doSpecialEvent", params, triggerDelay, false);
         return false;
     }
+
     public int inspectedShip(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -299,6 +315,7 @@ public class inspect extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int recoveredCargo(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -310,28 +327,36 @@ public class inspect extends script.base_script
         obj_id player = params.getObjId("player");
         String[] shipTypes = getStringArrayObjVar(self, "shipTypes");
         String spawnerName = params.getString("spawner");
-        for (String type : shipTypes) {
-            if (type.equals(shiptype)) {
-                if (hasObjVar(self, "validSpawns")) {
+        for (String type : shipTypes)
+        {
+            if (type.equals(shiptype))
+            {
+                if (hasObjVar(self, "validSpawns"))
+                {
                     String[] spawns = getStringArrayObjVar(self, "validSpawns");
-                    if (spawns != null) {
+                    if (spawns != null)
+                    {
                         boolean match = false;
-                        for (String spawn : spawns) {
+                        for (String spawn : spawns)
+                        {
                             StringTokenizer st = new StringTokenizer(spawn, ":");
                             String scene = st.nextToken();
                             String point = st.nextToken();
-                            if ((spawnerName != null) && spawnerName.equals(point)) {
+                            if ((spawnerName != null) && spawnerName.equals(point))
+                            {
                                 match = true;
                                 break;
                             }
                         }
-                        if (!match) {
+                        if (!match)
+                        {
                             return SCRIPT_CONTINUE;
                         }
                     }
                 }
                 String cargoType = getStringObjVar(self, "cargo");
-                if ((cargo != null) && cargo.equals(cargoType)) {
+                if ((cargo != null) && cargo.equals(cargoType))
+                {
                     space_quest.showQuestUpdate(self, SID_RECOVERED_CARGO);
                     questCompleted(self);
                     return SCRIPT_CONTINUE;

@@ -1,5 +1,11 @@
 package script.player;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.guild;
 import script.library.player_structure;
@@ -14,9 +20,6 @@ import java.util.Vector;
 
 public class player_guild extends script.base_script
 {
-    public player_guild()
-    {
-    }
     public static final string_id SID_GUILDREMOVE_NOT_IN_GUILD = new string_id("base_player", "guildremove_not_in_guild");
     public static final string_id SID_GUILDSTATUS_NOT_PLAYER = new string_id("base_player", "guildstatus_not_player");
     public static final string_id SID_GUILDSTATUS_NOT_IN_GUILD = new string_id("base_player", "guildstatus_not_in_guild");
@@ -31,6 +34,10 @@ public class player_guild extends script.base_script
     public static final string_id SID_GUILD_NOTIFICATION_ON = new string_id("spam", "guild_notification_on");
     public static final string_id SID_GUILD_NOTIFICATION_OFF = new string_id("spam", "guild_notification_off");
     public static final string_id SID_GUILD_NOTIFY_TOO_SOON = new string_id("spam", "guild_notify_too_soon");
+    public player_guild()
+    {
+    }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "guild.loginNotified"))
@@ -43,6 +50,7 @@ public class player_guild extends script.base_script
         messageTo(self, "handleStatusUpdate", params, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogout(obj_id self) throws InterruptedException
     {
         utils.removeScriptVar(self, "guild.loginNotified");
@@ -51,6 +59,7 @@ public class player_guild extends script.base_script
         messageTo(self, "handleStatusUpdate", params, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdGuildNotify(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         int guildId = getGuildId(self);
@@ -72,6 +81,7 @@ public class player_guild extends script.base_script
         messageTo(self, "toggleGuildNotifyMessage", dict, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int toggleGuildNotifyMessage(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -89,12 +99,13 @@ public class player_guild extends script.base_script
         {
             sendSystemMessage(self, SID_GUILD_NOTIFICATION_ON);
         }
-        else 
+        else
         {
             sendSystemMessage(self, SID_GUILD_NOTIFICATION_OFF);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdGuildremove(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         int guildId = getGuildId(self);
@@ -125,17 +136,18 @@ public class player_guild extends script.base_script
             {
                 guild.leave(self);
             }
-            else 
+            else
             {
                 guild.kick(guildId, self, name);
             }
         }
-        else 
+        else
         {
             sendSystemMessage(self, SID_GUILDREMOVE_NOT_IN_GUILD);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdGuildstatus(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id intendedTarget = getIntendedTarget(self);
@@ -144,7 +156,7 @@ public class player_guild extends script.base_script
         {
             target = lookAtTarget;
         }
-        else 
+        else
         {
             target = intendedTarget;
         }
@@ -152,13 +164,13 @@ public class player_guild extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             if (!isPlayer(target))
             {
                 sendSystemMessage(self, SID_GUILDSTATUS_NOT_PLAYER);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.actor.set(getName(target));
@@ -167,7 +179,7 @@ public class player_guild extends script.base_script
                 {
                     pp.stringId = SID_GUILDSTATUS_NOT_IN_GUILD;
                 }
-                else 
+                else
                 {
                     String title = guildGetMemberTitle(guildId, target);
                     pp.target.set(guildGetName(guildId));
@@ -178,18 +190,18 @@ public class player_guild extends script.base_script
                         {
                             pp.stringId = SID_GUILDSTATUS_LEADER_TITLE;
                         }
-                        else 
+                        else
                         {
                             pp.stringId = SID_GUILDSTATUS_LEADER;
                         }
                     }
-                    else 
+                    else
                     {
                         if (title.length() != 0)
                         {
                             pp.stringId = SID_GUILDSTATUS_MEMBER_TITLE;
                         }
-                        else 
+                        else
                         {
                             pp.stringId = SID_GUILDSTATUS_MEMBER;
                         }
@@ -200,6 +212,7 @@ public class player_guild extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdGuildShow(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         int guildId = getGuildId(self);
@@ -217,12 +230,13 @@ public class player_guild extends script.base_script
             }
             guild.showGuildMembers(self, self, 0, -1, "", "");
         }
-        else 
+        else
         {
             sendSystemMessage(self, SID_GUILDREMOVE_NOT_IN_GUILD);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdGuildShowAlpha(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (guild.hasWindowPid(self))
@@ -240,12 +254,13 @@ public class player_guild extends script.base_script
             }
             guild.showGuildMembers(self, self, 0, -1, "", "");
         }
-        else 
+        else
         {
             sendSystemMessage(self, SID_GUILDREMOVE_NOT_IN_GUILD);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdGuildShowTitle(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (guild.hasWindowPid(self))
@@ -264,12 +279,13 @@ public class player_guild extends script.base_script
             }
             guild.showGuildMembers(self, self, 0, -1, "", "");
         }
-        else 
+        else
         {
             sendSystemMessage(self, SID_GUILDREMOVE_NOT_IN_GUILD);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdGuildShowPermission(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (guild.hasWindowPid(self))
@@ -288,12 +304,13 @@ public class player_guild extends script.base_script
             }
             guild.showPermissionList(self, guildId);
         }
-        else 
+        else
         {
             sendSystemMessage(self, SID_GUILDREMOVE_NOT_IN_GUILD);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdGuildShowName(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (guild.hasWindowPid(self))
@@ -312,12 +329,13 @@ public class player_guild extends script.base_script
             }
             guild.showGuildMembers(self, self, 0, -1, "", "");
         }
-        else 
+        else
         {
             sendSystemMessage(self, SID_GUILDREMOVE_NOT_IN_GUILD);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdGuildInfo(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         int guildId = getGuildId(self);
@@ -330,12 +348,13 @@ public class player_guild extends script.base_script
             }
             guild.showGuildInfo(self);
         }
-        else 
+        else
         {
             sendSystemMessage(self, SID_GUILDREMOVE_NOT_IN_GUILD);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdGuildSponsor(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (guild.hasWindowPid(self))
@@ -359,12 +378,13 @@ public class player_guild extends script.base_script
             int pid = sui.inputbox(self, self, guild.STR_GUILD_SPONSOR_PROMPT, sui.OK_CANCEL, guild.STR_GUILD_SPONSOR_TITLE, sui.INPUT_NORMAL, null, "onGuildSponsorResponse");
             guild.setWindowPid(self, pid);
         }
-        else 
+        else
         {
             sendSystemMessage(self, SID_GUILD_NO_PERMISSION);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdGuildChangeName(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (guild.hasWindowPid(self))
@@ -390,12 +410,13 @@ public class player_guild extends script.base_script
             int pid = sui.inputbox(self, self, guild.STR_GUILD_NAMECHANGE_NAME_PROMPT, sui.OK_CANCEL, guild.STR_GUILD_NAMECHANGE_NAME_TITLE, sui.INPUT_NORMAL, null, "onGuildNamechangeNameResponse");
             guild.setWindowPid(self, pid);
         }
-        else 
+        else
         {
             sendSystemMessage(self, SID_GUILD_NO_PERMISSION);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdGuildDisband(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (guild.hasWindowPid(self))
@@ -421,12 +442,13 @@ public class player_guild extends script.base_script
             int pid = sui.msgbox(self, self, guild.STR_GUILD_DISBAND_PROMPT, sui.YES_NO, guild.STR_GUILD_DISBAND_TITLE, sui.MSG_NORMAL, "onGuildDisbandResponse");
             guild.setWindowPid(self, pid);
         }
-        else 
+        else
         {
             sendSystemMessage(self, SID_GUILD_NO_PERMISSION);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int startGuildSponsorSui(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -459,6 +481,7 @@ public class player_guild extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int guildSponsorSuiDone(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = self;
@@ -482,7 +505,7 @@ public class player_guild extends script.base_script
             messageTo(player, "onGuildSponsorVerifyResponseProse", dict, 0, false);
             guild.sponsor(guildId, player, name);
         }
-        else 
+        else
         {
             messageTo(player, "onGuildSponsorVerifyResponseProse", dict, 0, false);
         }
@@ -490,6 +513,7 @@ public class player_guild extends script.base_script
         guild.removeWindowPid(self);
         return SCRIPT_CONTINUE;
     }
+
     public int onGuildSponsorVerifyResponseProse(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -523,7 +547,7 @@ public class player_guild extends script.base_script
         {
             pp.stringId = guild.SID_GUILD_SPONSOR_ACCEPT;
         }
-        else 
+        else
         {
             if (proseSID == null)
             {
@@ -533,6 +557,7 @@ public class player_guild extends script.base_script
         sendSystemMessageProse(self, pp);
         return SCRIPT_CONTINUE;
     }
+
     public int onGuildSponsorVerifyResponse(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -545,6 +570,7 @@ public class player_guild extends script.base_script
         sendSystemMessage(player, stringMessage);
         return SCRIPT_CONTINUE;
     }
+
     public int onGuildPermissionsResponse(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -628,7 +654,7 @@ public class player_guild extends script.base_script
                 guild.selectPermissions(self, player, target, guildId);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 if (row == 0)
                 {
@@ -642,17 +668,18 @@ public class player_guild extends script.base_script
             {
                 guild.showPermissionSummary(self, player);
             }
-            else 
+            else
             {
                 guild.showGuildMembers(self, self, 0, -1, "", "");
             }
         }
-        else 
+        else
         {
             guild.removeWindowPid(player);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int selectPermissionsMessage(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -668,7 +695,7 @@ public class player_guild extends script.base_script
             {
                 perms[0] = "+ " + localize(guild.SID_GUILD_PERMISSION_MAIL);
             }
-            else 
+            else
             {
                 perms[0] = "- " + localize(guild.SID_GUILD_PERMISSION_MAIL);
             }
@@ -676,7 +703,7 @@ public class player_guild extends script.base_script
             {
                 perms[1] = "+ " + localize(guild.SID_GUILD_PERMISSION_SPONSOR);
             }
-            else 
+            else
             {
                 perms[1] = "- " + localize(guild.SID_GUILD_PERMISSION_SPONSOR);
             }
@@ -684,7 +711,7 @@ public class player_guild extends script.base_script
             {
                 perms[2] = "+ " + localize(guild.SID_GUILD_PERMISSION_TITLE);
             }
-            else 
+            else
             {
                 perms[2] = "- " + localize(guild.SID_GUILD_PERMISSION_TITLE);
             }
@@ -692,7 +719,7 @@ public class player_guild extends script.base_script
             {
                 perms[3] = "+ " + localize(guild.SID_GUILD_PERMISSION_ACCEPT);
             }
-            else 
+            else
             {
                 perms[3] = "- " + localize(guild.SID_GUILD_PERMISSION_ACCEPT);
             }
@@ -700,7 +727,7 @@ public class player_guild extends script.base_script
             {
                 perms[4] = "+ " + localize(guild.SID_GUILD_PERMISSION_KICK);
             }
-            else 
+            else
             {
                 perms[4] = "- " + localize(guild.SID_GUILD_PERMISSION_KICK);
             }
@@ -708,7 +735,7 @@ public class player_guild extends script.base_script
             {
                 perms[5] = "+ " + localize(guild.SID_GUILD_PERMISSION_WAR);
             }
-            else 
+            else
             {
                 perms[5] = "- " + localize(guild.SID_GUILD_PERMISSION_WAR);
             }
@@ -716,7 +743,7 @@ public class player_guild extends script.base_script
             {
                 perms[6] = "+ " + localize(guild.SID_GUILD_PERMISSION_NAMECHANGE);
             }
-            else 
+            else
             {
                 perms[6] = "- " + localize(guild.SID_GUILD_PERMISSION_NAMECHANGE);
             }
@@ -724,7 +751,7 @@ public class player_guild extends script.base_script
             {
                 perms[7] = "+ " + localize(guild.SID_GUILD_PERMISSION_DISBAND);
             }
-            else 
+            else
             {
                 perms[7] = "- " + localize(guild.SID_GUILD_PERMISSION_DISBAND);
             }
@@ -732,7 +759,7 @@ public class player_guild extends script.base_script
             {
                 perms[8] = "+ " + localize(guild.SID_GUILD_PERMISSION_RANK);
             }
-            else 
+            else
             {
                 perms[8] = "- " + localize(guild.SID_GUILD_PERMISSION_RANK);
             }
@@ -740,7 +767,7 @@ public class player_guild extends script.base_script
             {
                 perms[9] = "+ " + localize(guild.SID_GUILD_PERMISSION_WAR_EXCLUDE);
             }
-            else 
+            else
             {
                 perms[9] = "- " + localize(guild.SID_GUILD_PERMISSION_WAR_EXCLUDE);
             }
@@ -748,12 +775,12 @@ public class player_guild extends script.base_script
             {
                 perms[10] = "+ " + localize(guild.SID_GUILD_PERMISSION_WAR_INCLUDE);
             }
-            else 
+            else
             {
                 perms[10] = "- " + localize(guild.SID_GUILD_PERMISSION_WAR_INCLUDE);
             }
         }
-        else 
+        else
         {
             if (player == target)
             {
@@ -762,12 +789,12 @@ public class player_guild extends script.base_script
                 {
                     perms[0] = "+ " + localize(guild.SID_GUILD_PERMISSION_WAR_EXCLUDE);
                 }
-                else 
+                else
                 {
                     perms[0] = "- " + localize(guild.SID_GUILD_PERMISSION_WAR_EXCLUDE);
                 }
             }
-            else 
+            else
             {
                 guild.showGuildMembers(self, self, 0, -1, "", "");
             }
@@ -780,6 +807,7 @@ public class player_guild extends script.base_script
         messageTo(self, "permissionsChangeSuiHandler", dict, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int onGuildMembersResponse(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -815,7 +843,7 @@ public class player_guild extends script.base_script
                 sendSystemMessage(player, SID_GUILD_NO_PERMISSION);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 if ((entries == null || entries.length <= 0) && player == target)
                 {
@@ -829,13 +857,14 @@ public class player_guild extends script.base_script
             sui.showSUIPage(pid);
             guild.setWindowPid(player, pid);
         }
-        else 
+        else
         {
             utils.removeScriptVarTree(self, "guildShow");
             guild.removeWindowPid(player);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int onGuildMemberOptionsResponse(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -857,7 +886,8 @@ public class player_guild extends script.base_script
             }
             if (row >= 0 && row < entries.length)
             {
-                switch (entries[row]) {
+                switch (entries[row])
+                {
                     case guild.STR_GUILD_TITLE:
                         guild.chooseTitle(self, player, name);
                         return SCRIPT_CONTINUE;
@@ -870,9 +900,11 @@ public class player_guild extends script.base_script
                     case guild.STR_GUILD_RANK:
                         guild.selectRank(self, player, name, guildId);
                         return SCRIPT_CONTINUE;
-                    case guild.STR_GUILD_WAR_EXCLUDE_TOGGLE: {
+                    case guild.STR_GUILD_WAR_EXCLUDE_TOGGLE:
+                    {
                         obj_id target = guild.findMemberIdByName(guildId, name, false, true);
-                        if (!isIdValid(target)) {
+                        if (!isIdValid(target))
+                        {
                             return SCRIPT_CONTINUE;
                         }
                         params.put("warExclusion", guild.hasGuildPermission(guildId, target, guild.GUILD_PERMISSION_WAR_EXCLUSION));
@@ -884,9 +916,11 @@ public class player_guild extends script.base_script
                         guild.toggleWarExclusion(player, guildId, name);
                         break;
                     }
-                    case guild.STR_GUILD_WAR_INCLUDE_TOGGLE: {
+                    case guild.STR_GUILD_WAR_INCLUDE_TOGGLE:
+                    {
                         obj_id target = guild.findMemberIdByName(guildId, name, false, true);
-                        if (!isIdValid(target)) {
+                        if (!isIdValid(target))
+                        {
                             return SCRIPT_CONTINUE;
                         }
                         params.put("warInclusion", guild.hasGuildPermission(guildId, target, guild.GUILD_PERMISSION_WAR_INCLUSION));
@@ -905,7 +939,7 @@ public class player_guild extends script.base_script
         {
             guild.showGuildMembers(self, self, 0, -1, "", "");
         }
-        else 
+        else
         {
             utils.removeScriptVar(self, "guildMemberName");
             utils.removeScriptVar(self, "guildId");
@@ -913,6 +947,7 @@ public class player_guild extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int delayWarExcludeConsistencyCheck(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -939,6 +974,7 @@ public class player_guild extends script.base_script
         guild.showGuildMembers(self, self, 0, -1, "", "");
         return SCRIPT_CONTINUE;
     }
+
     public int delayWarIncludeConsistencyCheck(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -965,6 +1001,7 @@ public class player_guild extends script.base_script
         guild.showGuildMembers(self, self, 0, -1, "", "");
         return SCRIPT_CONTINUE;
     }
+
     public int onGuildRankSummaryResponse(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -994,8 +1031,10 @@ public class player_guild extends script.base_script
                 if (ranksPreferred != null && ranksPreferred.length > 0)
                 {
                     boolean found = false;
-                    for (int i1 : ranksPreferred) {
-                        if (i1 == row) {
+                    for (int i1 : ranksPreferred)
+                    {
+                        if (i1 == row)
+                        {
                             found = true;
                             continue;
                         }
@@ -1006,7 +1045,7 @@ public class player_guild extends script.base_script
                         utils.addElement(newRanksPreferred, row);
                     }
                 }
-                else 
+                else
                 {
                     utils.addElement(newRanksPreferred, row);
                 }
@@ -1014,14 +1053,14 @@ public class player_guild extends script.base_script
                 {
                     removeObjVar(player, "guild.ranksPreferred");
                 }
-                else 
+                else
                 {
                     java.util.Collections.sort(newRanksPreferred);
                     setObjVar(player, "guild.ranksPreferred", newRanksPreferred);
                 }
                 guild.showRankSummary(self, player);
             }
-            else 
+            else
             {
                 guild.showRankList(self, player);
             }
@@ -1030,7 +1069,7 @@ public class player_guild extends script.base_script
         {
             guild.showGuildMembers(self, self, 0, -1, "", "");
         }
-        else 
+        else
         {
             utils.removeScriptVar(self, "guildMemberName");
             utils.removeScriptVar(self, "guildId");
@@ -1039,6 +1078,7 @@ public class player_guild extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int onGuildRankListResponse(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -1065,12 +1105,12 @@ public class player_guild extends script.base_script
                 {
                     guild.selectRank(self, player, name, guildId);
                 }
-                else 
+                else
                 {
                     guild.showRankList(self, player);
                 }
             }
-            else 
+            else
             {
                 utils.removeScriptVar(self, "guildMemberName");
                 utils.removeScriptVar(self, "guildId");
@@ -1082,7 +1122,7 @@ public class player_guild extends script.base_script
         {
             guild.showGuildMembers(self, self, 0, -1, "", "");
         }
-        else 
+        else
         {
             utils.removeScriptVar(self, "guildMemberName");
             utils.removeScriptVar(self, "guildId");
@@ -1091,6 +1131,7 @@ public class player_guild extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int onRankOptionsResponse(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -1121,7 +1162,7 @@ public class player_guild extends script.base_script
                     guildRemoveMemberRank(guildId, memberId, entries[row]);
                     rankSelected = row;
                 }
-                else 
+                else
                 {
                     guildAddMemberRank(guildId, memberId, entries[row]);
                     rankSelected = row;
@@ -1136,13 +1177,13 @@ public class player_guild extends script.base_script
                 params.put("counter", 0);
                 messageTo(self, "delayRankConsistencyCheck", params, 1, false);
             }
-            else 
+            else
             {
                 if (lastInterface == guild.INTERFACE_GUILD_RANK_LIST)
                 {
                     guild.showRankList(self, player);
                 }
-                else 
+                else
                 {
                     guild.showGuildMembers(self, self, 0, -1, "", "");
                 }
@@ -1154,12 +1195,12 @@ public class player_guild extends script.base_script
             {
                 guild.showRankList(self, player);
             }
-            else 
+            else
             {
                 guild.showGuildMembers(self, self, 0, -1, "", "");
             }
         }
-        else 
+        else
         {
             utils.removeScriptVar(self, "guildMemberName");
             utils.removeScriptVar(self, "guildId");
@@ -1168,6 +1209,7 @@ public class player_guild extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int delayRankConsistencyCheck(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -1196,6 +1238,7 @@ public class player_guild extends script.base_script
         guild.selectRank(self, player, name, guildId);
         return SCRIPT_CONTINUE;
     }
+
     public int selectRankMessage(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -1216,6 +1259,7 @@ public class player_guild extends script.base_script
         guild.setWindowPid(player, pid);
         return SCRIPT_CONTINUE;
     }
+
     public int onGuildPermissionListResponse(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -1244,12 +1288,12 @@ public class player_guild extends script.base_script
                 {
                     guild.selectPermissions(self, player, name, guildId);
                 }
-                else 
+                else
                 {
                     guild.showPermissionSummary(self, player);
                 }
             }
-            else 
+            else
             {
                 utils.removeScriptVar(self, "guildMemberName");
                 utils.removeScriptVar(self, "guildId");
@@ -1261,7 +1305,7 @@ public class player_guild extends script.base_script
         {
             guild.showPermissionSummary(self, player);
         }
-        else 
+        else
         {
             utils.removeScriptVar(self, "guildMemberName");
             utils.removeScriptVar(self, "guildId");
@@ -1270,6 +1314,7 @@ public class player_guild extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int onGuildVotingResponse(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -1302,7 +1347,7 @@ public class player_guild extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             utils.removeScriptVar(self, "guildMemberName");
             utils.removeScriptVar(self, "guildId");
@@ -1310,6 +1355,7 @@ public class player_guild extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int votingConsistencyCheck(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -1331,6 +1377,7 @@ public class player_guild extends script.base_script
         guild.showStandings(player, player);
         return SCRIPT_CONTINUE;
     }
+
     public int permissionsChangeSuiHandler(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -1350,6 +1397,7 @@ public class player_guild extends script.base_script
         guild.setWindowPid(player, pid);
         return SCRIPT_CONTINUE;
     }
+
     public int onGuildKickResponse(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -1371,6 +1419,7 @@ public class player_guild extends script.base_script
         guild.removeWindowPid(player);
         return SCRIPT_CONTINUE;
     }
+
     public int onGuildTitleResponse(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -1386,7 +1435,7 @@ public class player_guild extends script.base_script
             String newTitle = sui.getInputBoxText(params);
             guild.title(guildId, player, name, newTitle);
         }
-        else 
+        else
         {
             guild.removeWindowPid(player);
         }
@@ -1396,6 +1445,7 @@ public class player_guild extends script.base_script
         guild.setWindowPid(player, pid);
         return SCRIPT_CONTINUE;
     }
+
     public int onGuildMembersFilter(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -1420,26 +1470,27 @@ public class player_guild extends script.base_script
             switch (idx)
             {
                 case 0:
-                guild.showGuildMembers(player, player, 0, -1, "", "");
-                break;
+                    guild.showGuildMembers(player, player, 0, -1, "", "");
+                    break;
                 case 1:
-                guild.showPermissionList(player, guildId);
-                break;
+                    guild.showPermissionList(player, guildId);
+                    break;
                 case 2:
-                guild.showTitleList(player, guildId);
-                break;
+                    guild.showTitleList(player, guildId);
+                    break;
                 case 3:
-                int pid = sui.inputbox(player, player, guild.STR_GUILD_MEMBERS_NAME_PROMPT, sui.OK_CANCEL, guild.STR_GUILD_MEMBERS_TITLE, sui.INPUT_NORMAL, null, "onGuildMemberNameResponse");
-                guild.setWindowPid(player, pid);
-                break;
+                    int pid = sui.inputbox(player, player, guild.STR_GUILD_MEMBERS_NAME_PROMPT, sui.OK_CANCEL, guild.STR_GUILD_MEMBERS_TITLE, sui.INPUT_NORMAL, null, "onGuildMemberNameResponse");
+                    guild.setWindowPid(player, pid);
+                    break;
             }
         }
-        else 
+        else
         {
             guild.removeWindowPid(self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int onGuildMembersPermissionsResponse(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -1464,31 +1515,31 @@ public class player_guild extends script.base_script
             switch (idx)
             {
                 case 0:
-                guild.showGuildMembers(player, player, 0, guild.GUILD_PERMISSION_MAIL, "", "");
-                break;
+                    guild.showGuildMembers(player, player, 0, guild.GUILD_PERMISSION_MAIL, "", "");
+                    break;
                 case 1:
-                guild.showGuildMembers(player, player, 0, guild.GUILD_PERMISSION_SPONSOR, "", "");
-                break;
+                    guild.showGuildMembers(player, player, 0, guild.GUILD_PERMISSION_SPONSOR, "", "");
+                    break;
                 case 2:
-                guild.showGuildMembers(player, player, 0, guild.GUILD_PERMISSION_TITLE, "", "");
-                break;
+                    guild.showGuildMembers(player, player, 0, guild.GUILD_PERMISSION_TITLE, "", "");
+                    break;
                 case 3:
-                guild.showGuildMembers(player, player, 0, guild.GUILD_PERMISSION_ACCEPT, "", "");
-                break;
+                    guild.showGuildMembers(player, player, 0, guild.GUILD_PERMISSION_ACCEPT, "", "");
+                    break;
                 case 4:
-                guild.showGuildMembers(player, player, 0, guild.GUILD_PERMISSION_KICK, "", "");
-                break;
+                    guild.showGuildMembers(player, player, 0, guild.GUILD_PERMISSION_KICK, "", "");
+                    break;
                 case 5:
-                guild.showGuildMembers(player, player, 0, guild.GUILD_PERMISSION_WAR, "", "");
-                break;
+                    guild.showGuildMembers(player, player, 0, guild.GUILD_PERMISSION_WAR, "", "");
+                    break;
                 case 6:
-                guild.showGuildMembers(player, player, 0, guild.GUILD_PERMISSION_NAMECHANGE, "", "");
-                break;
+                    guild.showGuildMembers(player, player, 0, guild.GUILD_PERMISSION_NAMECHANGE, "", "");
+                    break;
                 case 7:
-                guild.showGuildMembers(player, player, 0, guild.GUILD_PERMISSION_DISBAND, "", "");
-                break;
+                    guild.showGuildMembers(player, player, 0, guild.GUILD_PERMISSION_DISBAND, "", "");
+                    break;
                 case 8:
-                guild.showGuildMembers(player, player, 0, 0, "", "");
+                    guild.showGuildMembers(player, player, 0, 0, "", "");
             }
         }
         else if (btn == sui.BP_REVERT)
@@ -1496,12 +1547,13 @@ public class player_guild extends script.base_script
             int pid = sui.listbox(self, self, guild.STR_GUILD_MEMBERS_FILTER_PROMPT, sui.OK_CANCEL, guild.STR_GUILD_MEMBERS_TITLE, guild.MEMBER_FILTER_LIST, "onGuildMembersFilter", true, true);
             guild.setWindowPid(player, pid);
         }
-        else 
+        else
         {
             guild.removeWindowPid(player);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int onGuildMembersTitlesResponse(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -1537,6 +1589,7 @@ public class player_guild extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int onGuildMemberNameResponse(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -1553,12 +1606,13 @@ public class player_guild extends script.base_script
             String name = sui.getInputBoxText(params);
             guild.showGuildMembers(player, player, 0, -1, "", name);
         }
-        else 
+        else
         {
             guild.removeWindowPid(player);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int onGuildEnemiesResponse(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -1579,7 +1633,7 @@ public class player_guild extends script.base_script
                     int pid = sui.inputbox(self, player, guild.STR_GUILD_WAR_ENEMY_NAME_PROMPT, sui.OK_CANCEL, guild.STR_GUILD_WAR_ENEMY_NAME_TITLE, sui.INPUT_NORMAL, null, "onGuildWarEnemyNameResponse");
                     guild.setWindowPid(player, pid);
                 }
-                else 
+                else
                 {
                     if (row > 0 && row <= enemyIds.length)
                     {
@@ -1588,7 +1642,7 @@ public class player_guild extends script.base_script
                         {
                             guild.peace(guildId, player, enemyId);
                         }
-                        else 
+                        else
                         {
                             guild.war(guildId, player, enemyId);
                         }
@@ -1597,12 +1651,13 @@ public class player_guild extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             guild.removeWindowPid(player);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int onGuildWarEnemyNameResponse(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -1620,6 +1675,7 @@ public class player_guild extends script.base_script
         guild.showGuildEnemies(player);
         return SCRIPT_CONTINUE;
     }
+
     public int showGuildEnemiesMessage(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -1664,6 +1720,7 @@ public class player_guild extends script.base_script
         guild.setWindowPid(player, pid);
         return SCRIPT_CONTINUE;
     }
+
     public int showGuildSponsoredMessage(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -1680,6 +1737,7 @@ public class player_guild extends script.base_script
         guild.setWindowPid(player, pid);
         return SCRIPT_CONTINUE;
     }
+
     public int onGuildSponsoredResponse(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -1708,17 +1766,18 @@ public class player_guild extends script.base_script
                 int pid = sui.listbox(player, player, guild.buildFakeLocalizedProse(guild.STR_GUILD_SPONSORED_OPTIONS_PROMPT, name, ""), sui.OK_CANCEL, guild.STR_GUILD_SPONSORED_OPTIONS_TITLE, entries, "onGuildSponsoredOptionsResponse");
                 guild.setWindowPid(player, pid);
             }
-            else 
+            else
             {
                 guild.removeWindowPid(player);
             }
         }
-        else 
+        else
         {
             guild.removeWindowPid(player);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int onGuildSponsoredOptionsResponse(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -1749,17 +1808,18 @@ public class player_guild extends script.base_script
                 guild.removeWindowPid(player);
                 guild.showGuildSponsored(player);
             }
-            else 
+            else
             {
                 guild.removeWindowPid(player);
             }
         }
-        else 
+        else
         {
             guild.removeWindowPid(player);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int onGuildNamechangeNameResponse(obj_id self, dictionary params) throws InterruptedException
     {
         if (!guild.hasWindowPid(self))
@@ -1774,12 +1834,13 @@ public class player_guild extends script.base_script
             int pid = sui.inputbox(player, player, guild.STR_GUILD_NAMECHANGE_ABBREV_PROMPT, sui.OK_CANCEL, guild.STR_GUILD_NAMECHANGE_ABBREV_TITLE, sui.INPUT_NORMAL, null, "onGuildNamechangeAbbrevResponse");
             guild.setWindowPid(self, pid);
         }
-        else 
+        else
         {
             guild.removeWindowPid(self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int onGuildNamechangeAbbrevResponse(obj_id self, dictionary params) throws InterruptedException
     {
         if (!guild.hasWindowPid(self))
@@ -1798,6 +1859,7 @@ public class player_guild extends script.base_script
         guild.removeWindowPid(self);
         return SCRIPT_CONTINUE;
     }
+
     public int onGuildSponsorResponse(obj_id self, dictionary params) throws InterruptedException
     {
         if (!guild.hasWindowPid(self))
@@ -1823,7 +1885,7 @@ public class player_guild extends script.base_script
                 d.put("title", guild.STR_GUILD_SPONSOR_VERIFY_TITLE);
                 messageTo(target, "startGuildSponsorSui", d, 0, false);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.actor.set(sponsorName);
@@ -1834,6 +1896,7 @@ public class player_guild extends script.base_script
         guild.removeWindowPid(self);
         return SCRIPT_CONTINUE;
     }
+
     public int onGuildDisbandResponse(obj_id self, dictionary params) throws InterruptedException
     {
         if (!guild.hasWindowPid(self))
@@ -1849,16 +1912,19 @@ public class player_guild extends script.base_script
         guild.removeWindowPid(self);
         return SCRIPT_CONTINUE;
     }
+
     public int onMasterGuildWarTableDictionaryResponse(obj_id self, dictionary params) throws InterruptedException
     {
         guild.closedMasterGuildWarTableDictionary(self);
         return SCRIPT_CONTINUE;
     }
+
     public int onInactiveGuildWarTableDictionaryResponse(obj_id self, dictionary params) throws InterruptedException
     {
         guild.closedInactiveGuildWarTableDictionary(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleStatusUpdate(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -1873,6 +1939,7 @@ public class player_guild extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleStatusNotification(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -1896,24 +1963,25 @@ public class player_guild extends script.base_script
         if (login)
         {
             pp.stringId = SID_GUILD_MEMBER_LOGIN;
-            obj_id[] clients = 
-            {
-                self
-            };
+            obj_id[] clients =
+                    {
+                            self
+                    };
             playClientEffectObj(clients, "sound/wep_landmine_on.snd", self, "");
         }
-        else 
+        else
         {
             pp.stringId = SID_GUILD_MEMBER_LOGOFF;
-            obj_id[] clients = 
-            {
-                self
-            };
+            obj_id[] clients =
+                    {
+                            self
+                    };
             playClientEffectObj(clients, "sound/wep_landmine_off.snd", self, "");
         }
         sendSystemMessageProse(self, pp);
         return SCRIPT_CONTINUE;
     }
+
     public int handleGuildGcwRegionDefenderChoice(obj_id self, dictionary params) throws InterruptedException
     {
         final int bp = sui.getIntButtonPressed(params);
@@ -1978,29 +2046,29 @@ public class player_guild extends script.base_script
             final int cooldown = timeLeftPreviousGcwDefenderRegion + (isGod(self) ? 10 : 86400) - getCalendarTime();
             if ((cooldown > 0) && !selectedGcwDefenderRegion.equals(gcwPreviousDefenderRegion))
             {
-                String cooldownStr = "" + cooldown + "s";
+                String cooldownStr = cooldown + "s";
                 int[] convertedTime = player_structure.convertSecondsTime(cooldown);
                 if ((convertedTime != null) && (convertedTime.length == 4))
                 {
                     if (convertedTime[0] > 0)
                     {
-                        cooldownStr = "" + convertedTime[0] + "d:" + convertedTime[1] + "h:" + convertedTime[2] + "m:" + convertedTime[3] + "s";
+                        cooldownStr = convertedTime[0] + "d:" + convertedTime[1] + "h:" + convertedTime[2] + "m:" + convertedTime[3] + "s";
                     }
                     else if (convertedTime[1] > 0)
                     {
-                        cooldownStr = "" + convertedTime[1] + "h:" + convertedTime[2] + "m:" + convertedTime[3] + "s";
+                        cooldownStr = convertedTime[1] + "h:" + convertedTime[2] + "m:" + convertedTime[3] + "s";
                     }
                     else if (convertedTime[2] > 0)
                     {
-                        cooldownStr = "" + convertedTime[2] + "m:" + convertedTime[3] + "s";
+                        cooldownStr = convertedTime[2] + "m:" + convertedTime[3] + "s";
                     }
                     else if (convertedTime[3] > 0)
                     {
-                        cooldownStr = "" + convertedTime[3] + "s";
+                        cooldownStr = convertedTime[3] + "s";
                     }
-                    else 
+                    else
                     {
-                        cooldownStr = "" + cooldown + "s";
+                        cooldownStr = cooldown + "s";
                     }
                 }
                 sendSystemMessage(self, "You must wait " + cooldownStr + " before you can defend a different GCW region. You can immediately defend the GCW region you most recently defended (" + localize(new string_id("gcw_regions", gcwPreviousDefenderRegion)) + ").", "");

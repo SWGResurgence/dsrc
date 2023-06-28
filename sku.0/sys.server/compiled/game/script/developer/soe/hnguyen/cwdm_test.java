@@ -1,11 +1,18 @@
 package script.developer.soe.hnguyen;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 public class cwdm_test extends script.base_script
 {
+    public static final String PROP_TEXT = "Text";
+
     public cwdm_test()
     {
     }
-    public static final String PROP_TEXT = "Text";
     /*
     public int OnHearSpeech(obj_id self, obj_id objSpeaker, String strText) throws InterruptedException
     {

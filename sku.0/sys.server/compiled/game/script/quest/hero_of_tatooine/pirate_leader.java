@@ -1,5 +1,11 @@
 package script.quest.hero_of_tatooine;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.buff;
@@ -10,10 +16,12 @@ import script.string_id;
 
 public class pirate_leader extends script.base_script
 {
+    public static final String STF_FILE = "quest/pirates";
+
     public pirate_leader()
     {
     }
-    public static final String STF_FILE = "quest/pirates";
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id wpn, int[] damage) throws InterruptedException
     {
         final float DAMAGE_THRESHOLD = 0.50f;
@@ -36,6 +44,7 @@ public class pirate_leader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int attackPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
@@ -49,6 +58,7 @@ public class pirate_leader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int makePirateLeaderAttackable(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isInNpcConversation(self))
@@ -61,12 +71,13 @@ public class pirate_leader extends script.base_script
             }
             setInvulnerable(self, false);
         }
-        else 
+        else
         {
             messageTo(self, "makePirateLeaderAttackable", null, 99, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int makePirateLeaderInvulnerable(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "ai.combat.isInCombat");

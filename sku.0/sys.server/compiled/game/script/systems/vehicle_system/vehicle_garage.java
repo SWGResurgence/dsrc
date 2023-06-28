@@ -1,5 +1,11 @@
 package script.systems.vehicle_system;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -11,6 +17,7 @@ public class vehicle_garage extends script.base_script
     public static final string_id SID_REPAIRED_TO_MAX = new string_id(STF_PET, "repaired_to_max");
     public static final string_id SID_REPAIRS_COMPLETE = new string_id(STF_PET, "repairs_complete");
     public static final string_id SID_REPAIR_FAILED_DUE_TO_FUNDS = new string_id(STF_PET, "repair_failed_due_to_funds");
+
     public vehicle_garage()
     {
     }

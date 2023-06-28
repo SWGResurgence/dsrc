@@ -1,5 +1,11 @@
 package script.item.loot_cube;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.prose;
 import script.library.static_item;
@@ -34,6 +40,7 @@ public class republic_assembly_tool extends script.base_script
                     "object/tangible/component/structure/mustafar/must_micro_fiber_weave.iff",
                     "object/tangible/component/structure/mustafar/must_adhesive_friction_surface.iff"
             };
+
     public republic_assembly_tool()
     {
     }
@@ -44,10 +51,6 @@ public class republic_assembly_tool extends script.base_script
         fixBrokenComponents(item);
         double ingredientCRC = 0;
         if (utils.hasScriptVar(self, "ingredientCRC"))
-        {
-
-        }
-
         {
             ingredientCRC = utils.getDoubleScriptVar(self, "ingredientCRC");
             debugLogging("OnReceivedItem", "found a pre-existing CRC. It was: " + ingredientCRC);

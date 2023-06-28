@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.location;
 import script.obj_id;
@@ -79,6 +85,7 @@ public class structure extends script.base_script
     public static final String VAR_FILLER_SPAWN_CURRENT_EGG = "fillerSpawn.current.egg";
     public static final String VAR_FILLER_SPAWN_CURRENT_LOC = "fillerSpawn.current.loc";
     public static final String HANDLER_CLEANUP_SELF = "handleCleanupSelf";
+
     public structure()
     {
     }

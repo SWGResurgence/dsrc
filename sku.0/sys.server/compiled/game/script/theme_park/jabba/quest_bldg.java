@@ -1,5 +1,11 @@
 package script.theme_park.jabba;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.factions;
@@ -12,6 +18,7 @@ public class quest_bldg extends script.base_script
     public quest_bldg()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String datatable = getStringObjVar(self, "quest_table");
@@ -27,6 +34,7 @@ public class quest_bldg extends script.base_script
         addLocationTarget("spawnGuy", questLoc, 100);
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String name) throws InterruptedException
     {
         String datatable = getStringObjVar(self, "quest_table");
@@ -63,6 +71,7 @@ public class quest_bldg extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int finishQuest(obj_id self, dictionary params) throws InterruptedException
     {
         sendSystemMessage(self, "Return to Jabba's Palace for your reward, the mission is complete.", null);
@@ -81,6 +90,7 @@ public class quest_bldg extends script.base_script
         quests.addThemeParkWaypoint(self, null, "home", home, 190, questID, file, entry);
         return SCRIPT_CONTINUE;
     }
+
     public void createGuards(obj_id bldg) throws InterruptedException
     {
         location g1 = getLocation(bldg);
@@ -107,10 +117,9 @@ public class quest_bldg extends script.base_script
         setObjVar(bldg, "guard2", guard2);
         setObjVar(bldg, "guard3", guard3);
         setObjVar(bldg, "guard4", guard4);
-        return;
     }
+
     public void setUpNpc(obj_id newNpc) throws InterruptedException
     {
-        return;
     }
 }

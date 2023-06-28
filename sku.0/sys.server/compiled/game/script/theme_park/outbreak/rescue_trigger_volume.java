@@ -1,5 +1,11 @@
 package script.theme_park.outbreak;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.groundquests;
@@ -10,9 +16,6 @@ import script.obj_id;
 
 public class rescue_trigger_volume extends script.base_script
 {
-    public rescue_trigger_volume()
-    {
-    }
     public static final boolean LOGGING_ON = true;
     public static final String TRIGGER_NAME_PREFIX = "rescue_trigger_";
     public static final String TRIGGER = "meatlump_spy_trigger";
@@ -28,31 +31,36 @@ public class rescue_trigger_volume extends script.base_script
     public static final String WAYPOINT_LOCS = "wayPtLocs";
     public static final float TRIGGER_RADIUS = 3.0f;
     public static final int RADIUS = 300;
-    public static final String[] MOB_FOR_QUEST = 
+    public static final String[] MOB_FOR_QUEST =
+            {
+                    "outbreak_rescue_inquisitor",
+                    "outbreak_rescue_officer",
+                    "outbreak_rescue_prisoner",
+                    "outbreak_rescue_scientist",
+                    "outbreak_rescue_inquisitor",
+                    "outbreak_rescue_inquisitor",
+                    "outbreak_rescue_inquisitor",
+                    "outbreak_rescue_officer",
+                    "outbreak_rescue_officer",
+                    "outbreak_rescue_officer",
+                    "outbreak_rescue_prisoner",
+                    "outbreak_rescue_prisoner",
+                    "outbreak_rescue_prisoner",
+                    "outbreak_rescue_scientist",
+                    "outbreak_rescue_scientist",
+                    "outbreak_rescue_scientist"
+            };
+    public rescue_trigger_volume()
     {
-        "outbreak_rescue_inquisitor",
-        "outbreak_rescue_officer",
-        "outbreak_rescue_prisoner",
-        "outbreak_rescue_scientist",
-        "outbreak_rescue_inquisitor",
-        "outbreak_rescue_inquisitor",
-        "outbreak_rescue_inquisitor",
-        "outbreak_rescue_officer",
-        "outbreak_rescue_officer",
-        "outbreak_rescue_officer",
-        "outbreak_rescue_prisoner",
-        "outbreak_rescue_prisoner",
-        "outbreak_rescue_prisoner",
-        "outbreak_rescue_scientist",
-        "outbreak_rescue_scientist",
-        "outbreak_rescue_scientist"
-    };
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         createTriggerVolume(TRIGGER_NAME_PREFIX + self, TRIGGER_RADIUS, true);
         messageTo(self, "getAllEscortPathNodes", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id whoTriggeredMe) throws InterruptedException
     {
         if (!isPlayer(whoTriggeredMe))
@@ -123,10 +131,12 @@ public class rescue_trigger_volume extends script.base_script
         CustomerServiceLog("outbreak_themepark", "rescue_trigger_volume.OnTriggerVolumeEntered() NPC spawned " + mob + " for Player: " + getPlayerName(whoTriggeredMe) + " (" + whoTriggeredMe + "). This NPC is now ready to talk to the player");
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volumeName, obj_id whoTriggeredMe) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int getAllEscortPathNodes(obj_id self, dictionary params) throws InterruptedException
     {
         CustomerServiceLog("outbreak_themepark", "rescue_trigger_volume.getAllEscortPathNodes() the spawner " + self + " is attempting to get all path nodes for escort quests.");
@@ -151,9 +161,11 @@ public class rescue_trigger_volume extends script.base_script
             return SCRIPT_CONTINUE;
         }
         location[] wayPtLocs = new location[wayPointList.length];
-        for (obj_id obj_id : wayPointList) {
+        for (obj_id obj_id : wayPointList)
+        {
             int orderNumber = getIntObjVar(obj_id, creatureType) - 1;
-            if (orderNumber < 0) {
+            if (orderNumber < 0)
+            {
                 continue;
             }
             wayPtLocs[orderNumber] = getLocation(obj_id);

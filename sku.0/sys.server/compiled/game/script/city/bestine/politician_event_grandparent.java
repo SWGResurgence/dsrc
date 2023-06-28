@@ -1,24 +1,32 @@
 package script.city.bestine;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.utils;
 
 public class politician_event_grandparent extends script.base_script
 {
-    public politician_event_grandparent()
-    {
-    }
     public static final String MASTER_OBJECT_TEMPLATE = "object/tangible/poi/tatooine/bestine/bestine_politician_event_master_object.iff";
     public static final String VARNAME_ELECTION_STATUS = "strElectionStatus";
     public static final String VARNAME_ELECTION_WINNER = "strElectionWinner";
     public static final String VARNAME_ELECTION_NUM = "intElectionNum";
     public static final String MISSING_NPC_TEMPLATE = "object/tangible/spawning/static_npc/victor_questn_capitol.iff";
+    public politician_event_grandparent()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "bootStrap", null, 2, false);
         messageTo(self, "spawnMissingNpc", null, 120, false);
         return SCRIPT_CONTINUE;
     }
+
     public int bootStrap(obj_id self, dictionary params) throws InterruptedException
     {
         deltadictionary dctScriptVars = self.getScriptVars();
@@ -28,7 +36,7 @@ public class politician_event_grandparent extends script.base_script
             dctScriptVars.put("objMasterObjectId", objMasterObjectIds[0]);
             updatePoliticianEventStatus(self);
         }
-        else 
+        else
         {
             location locTest = getLocation(self);
             locTest.x = locTest.x + 1;
@@ -43,18 +51,21 @@ public class politician_event_grandparent extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int spawnMissingNpc(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objCapitolLobby = getCellId(self, "lobby");
         location locMissingNpcSpawnerLocation = new location(6.10f, 0.30f, -0.49f, "tatooine", objCapitolLobby);
         obj_id[] objMissingNpcSpawnerIds = getAllObjectsWithTemplate(locMissingNpcSpawnerLocation, 10, MISSING_NPC_TEMPLATE);
 
-        if ( objMissingNpcSpawnerIds == null || objMissingNpcSpawnerIds.length < 1 ) {
+        if (objMissingNpcSpawnerIds == null || objMissingNpcSpawnerIds.length < 1)
+        {
             createObject(MISSING_NPC_TEMPLATE, locMissingNpcSpawnerLocation);
         }
 
         return SCRIPT_CONTINUE;
     }
+
     public void updatePoliticianEventStatus(obj_id self) throws InterruptedException
     {
         deltadictionary dctScriptVars = self.getScriptVars();
@@ -69,7 +80,8 @@ public class politician_event_grandparent extends script.base_script
             {
                 obj_var var = varList.getObjVar(i);
                 String varName = var.getName();
-                switch (varName) {
+                switch (varName)
+                {
                     case "electionStarted":
                         intElectionNum = var.getIntData();
                         dctScriptVars.put(VARNAME_ELECTION_STATUS, "electionStarted");
@@ -100,6 +112,7 @@ public class politician_event_grandparent extends script.base_script
             }
         }
     }
+
     public int handlePoliticianEventStateChange(obj_id self, dictionary params) throws InterruptedException
     {
         updatePoliticianEventStatus(self);
@@ -121,6 +134,7 @@ public class politician_event_grandparent extends script.base_script
 
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetElectionWinner(obj_id self, dictionary params) throws InterruptedException
     {
         String strElectionWinner = params.getString(VARNAME_ELECTION_WINNER);
@@ -135,6 +149,7 @@ public class politician_event_grandparent extends script.base_script
         broadcastMessage("handlePoliticianEventStatusResponse", dctParams);
         return SCRIPT_CONTINUE;
     }
+
     public int handleGovernorSetupRequest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objRequester = params.getObjId("objRequester");
@@ -153,6 +168,7 @@ public class politician_event_grandparent extends script.base_script
         messageTo(objRequester, "handleGovernorSetupResponse", dctParams, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int processGovernorDataStorageRequest(obj_id self, dictionary params) throws InterruptedException
     {
         int intVotesForSean = params.getInt("intVotesForSean");
@@ -163,6 +179,7 @@ public class politician_event_grandparent extends script.base_script
         setObjVar(masterObjectId, "bestine.votesForVictor", intVotesForVictor);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePoliticianEventStatusRequest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objRequester = params.getObjId("objRequester");

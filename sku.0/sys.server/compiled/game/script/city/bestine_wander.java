@@ -1,5 +1,11 @@
 package script.city;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,16 +14,19 @@ public class bestine_wander extends script.base_script
     public bestine_wander()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "pathRandom", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "pathRandom", null, rand(10, 20), false);
         return SCRIPT_CONTINUE;
     }
+
     public int pathRandom(obj_id self, dictionary params) throws InterruptedException
     {
         String waypoint = pickDestination();
@@ -26,12 +35,13 @@ public class bestine_wander extends script.base_script
             setObjVar(self, "ai.persistentPathingWaypoint", waypoint);
             messageTo(self, "resumeDefaultCalmBehavior", null, 0, false);
         }
-        else 
+        else
         {
             pathTo(self, waypoint);
         }
         return SCRIPT_CONTINUE;
     }
+
     public String pickDestination() throws InterruptedException
     {
         String waypoint = "exit";
@@ -76,11 +86,13 @@ public class bestine_wander extends script.base_script
         }
         return waypoint;
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         messageTo(self, "pathRandom", null, rand(30, 60), false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathNotFound(obj_id self) throws InterruptedException
     {
         messageTo(self, "pathRandom", null, rand(30, 60), false);

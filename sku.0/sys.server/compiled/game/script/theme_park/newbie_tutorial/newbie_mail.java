@@ -1,5 +1,11 @@
 package script.theme_park.newbie_tutorial;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class newbie_mail extends script.theme_park.newbie_tutorial.tutorial_base
@@ -7,11 +13,13 @@ public class newbie_mail extends script.theme_park.newbie_tutorial.tutorial_base
     public newbie_mail()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         newbieTutorialRequest(self, "clientReady");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNewbieTutorialResponse(obj_id self, String action) throws InterruptedException
     {
         if (action.equals("clientReady"))
@@ -27,6 +35,7 @@ public class newbie_mail extends script.theme_park.newbie_tutorial.tutorial_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public void getStartLocationWaypoint(obj_id player) throws InterruptedException
     {
         obj_id wayp = createWaypointInDatapad(player, getLocation(player));

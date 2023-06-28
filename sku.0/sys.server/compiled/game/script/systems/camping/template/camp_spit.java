@@ -1,5 +1,11 @@
 package script.systems.camping.template;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.camping;
 import script.location;
@@ -16,6 +22,7 @@ public class camp_spit extends script.base_script
     public static final String TEMPLATE_LOGS_ASH = "object/tangible/camp/campfire_logs_ash.iff";
     public static final String TEMPLATE_CAMPFIRE = "object/static/particle/particle_campfire_style_1.iff";
     public static final String TEMPLATE_CAMPFIRE_SMOLDER = "object/static/particle/particle_smoke.iff";
+
     public camp_spit()
     {
     }

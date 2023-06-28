@@ -8,6 +8,12 @@
 package script.event.lifeday;
 
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.obj_id;
@@ -15,9 +21,6 @@ import script.obj_id;
 
 public class celebration_actor extends script.base_script
 {
-    public celebration_actor()
-    {
-    }
     public static String[] actorChatter =
             {
                     "Man, I am tired. I hope this is the last one.",
@@ -30,6 +33,10 @@ public class celebration_actor extends script.base_script
                     "I wonder what the parade is going to be like this year.",
             };
 
+    public celebration_actor()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);
@@ -38,15 +45,18 @@ public class celebration_actor extends script.base_script
         chirp(self);
         return SCRIPT_CONTINUE;
     }
+
     public void chirp(obj_id self) throws InterruptedException
     {
         chat.chat(self, getRandomEntry(actorChatter));
         messageTo(self, "continueChirping", null, 10f, false);
     }
+
     public void continueChirping(obj_id self) throws InterruptedException
     {
         messageTo(self, "chirp", null, 1f, false);
     }
+
     public String getRandomEntry(String[] array) throws InterruptedException
     {
         int randomIndex = rand(0, array.length - 1);

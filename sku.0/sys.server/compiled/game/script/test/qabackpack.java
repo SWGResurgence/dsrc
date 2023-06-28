@@ -1,5 +1,11 @@
 package script.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.qa;
 import script.library.utils;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class qabackpack extends script.base_script
     public qabackpack()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (isGod(self))
@@ -26,6 +33,7 @@ public class qabackpack extends script.base_script
         sendSystemMessage(self, "QA Backpack script attached.\nAny item received will be moved into a QA backpack.\nAny items moved from the backpack should not be automatically moved into the backpack.\nDetach script test.qabackpack to remove qabackpack automatic inventory functions.", null);
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         obj_id player = self;
@@ -44,11 +52,13 @@ public class qabackpack extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnContainerChildGainItem(obj_id self, obj_id item, obj_id source, obj_id transferer) throws InterruptedException
     {
         putInQaBackpack(item, self, source);
         return SCRIPT_CONTINUE;
     }
+
     public void putInQaBackpack(obj_id item, obj_id player, obj_id source) throws InterruptedException
     {
         obj_id testerInventoryId = utils.getInventoryContainer(player);
@@ -69,6 +79,5 @@ public class qabackpack extends script.base_script
             return;
         }
         putInOverloaded(item, myBag);
-        return;
     }
 }

@@ -1,5 +1,11 @@
 package script.systems.gcw;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.factions;
 import script.library.hq;
@@ -14,6 +20,7 @@ public class factional_dungeon_parent extends script.base_script
     public static final int OBJECTIVE_RESPAWN_TIME = 28800;
     public static final String IMPERIAL_TO_REBEL_FILENAME = "datatables/poi/imperial_rebel_lookup/imperial_to_rebel.iff";
     public static final String REBEL_TO_IMPERIAL_FILENAME = "datatables/poi/imperial_rebel_lookup/rebel_to_imperial.iff";
+
     public factional_dungeon_parent()
     {
     }
@@ -249,7 +256,6 @@ public class factional_dungeon_parent extends script.base_script
             }
             setObjVar(objSpawner, "type", strNewType);
         }
-        return;
     }
 
     public void changeMobs(obj_id objSpawner, String strFaction) throws InterruptedException

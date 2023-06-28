@@ -1,5 +1,11 @@
 package script.systems.gcw;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.factions;
@@ -22,6 +28,7 @@ public class gcw_city_kit_medic extends script.systems.gcw.gcw_city_kit
                     "gcw_city_rebel_commando_assault",
                     "gcw_city_rebel_specforce_assault"
             };
+
     public gcw_city_kit_medic()
     {
     }

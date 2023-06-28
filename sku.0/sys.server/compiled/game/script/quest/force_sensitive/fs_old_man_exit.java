@@ -1,5 +1,11 @@
 package script.quest.force_sensitive;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.chat;
@@ -14,12 +20,14 @@ public class fs_old_man_exit extends script.base_script
     public fs_old_man_exit()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         createTriggerVolume("fs_oldman_messagerange", 12, true);
         messageTo(self, "approach", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int approach(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id owner = null;
@@ -32,6 +40,7 @@ public class fs_old_man_exit extends script.base_script
         messageTo(self, "approachFail", null, 180, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id target) throws InterruptedException
     {
         if (volumeName.equals("fs_oldman_messagerange"))
@@ -50,6 +59,7 @@ public class fs_old_man_exit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int approachFail(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "contact"))
@@ -62,12 +72,13 @@ public class fs_old_man_exit extends script.base_script
         {
             fs_quests.oldManDepart(owner, self, 2);
         }
-        else 
+        else
         {
             messageTo(self, "cleanUp", null, 1, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int timeout(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id owner = null;
@@ -79,6 +90,7 @@ public class fs_old_man_exit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cleanUp(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);

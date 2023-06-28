@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.valley_battleground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.utils;
@@ -8,16 +14,18 @@ import script.obj_id;
 
 public class turret_droid_controller extends script.base_script
 {
+    public static final String controllerObject = "object/tangible/dungeon/mustafar/valley_battlefield/turret_controller_object.iff";
+    public static final boolean LOGGING = false;
     public turret_droid_controller()
     {
     }
-    public static final String controllerObject = "object/tangible/dungeon/mustafar/valley_battlefield/turret_controller_object.iff";
-    public static final boolean LOGGING = false;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         stop(self);
         return SCRIPT_CONTINUE;
     }
+
     public int buildTurret(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id controller = params.getObjId("turretController");
@@ -31,6 +39,7 @@ public class turret_droid_controller extends script.base_script
         setHomeLocation(self, pathLoc);
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         String turretType = utils.getStringScriptVar(self, "turretType");
@@ -49,6 +58,7 @@ public class turret_droid_controller extends script.base_script
         messageTo(controller, "builtTurret", dict, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING)

@@ -1,5 +1,11 @@
 package script.theme_park.rebel;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -10,6 +16,7 @@ public class rtp_han_solo_general_otto extends script.base_script
     public rtp_han_solo_general_otto()
     {
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id wpn, int[] damage) throws InterruptedException
     {
         final float DAMAGE_THRESHOLD = 0.20f;
@@ -20,7 +27,8 @@ public class rtp_han_solo_general_otto extends script.base_script
         {
             check = true;
         }
-        for (int i1 : damage) {
+        for (int i1 : damage)
+        {
             currentHealth = currentHealth - i1;
         }
         if (currentHealth <= 0)
@@ -42,6 +50,7 @@ public class rtp_han_solo_general_otto extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int takeGeneralOttoOutOfCombat(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "ai.combat.isInCombat");
@@ -55,7 +64,7 @@ public class rtp_han_solo_general_otto extends script.base_script
         {
             flee(self, attacker, 5, 15);
         }
-        else 
+        else
         {
             ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_LOITER);
         }
@@ -65,6 +74,7 @@ public class rtp_han_solo_general_otto extends script.base_script
         xp.applyHealingCredit(self);
         return SCRIPT_CONTINUE;
     }
+
     public int deleteGeneralOtto(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);

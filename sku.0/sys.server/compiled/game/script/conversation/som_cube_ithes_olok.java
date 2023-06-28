@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,46 +14,52 @@ import script.*;
 
 public class som_cube_ithes_olok extends script.base_script
 {
+    public static String c_stringFile = "conversation/som_cube_ithes_olok";
+
     public som_cube_ithes_olok()
     {
     }
-    public static String c_stringFile = "conversation/som_cube_ithes_olok";
+
     public boolean som_cube_ithes_olok_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean som_cube_ithes_olok_condition_isOnQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "som_jenha_tar_cube");
     }
+
     public boolean som_cube_ithes_olok_condition_hasNotes(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedTask(player, "som_jenha_tar_cube", "take_notes");
     }
+
     public boolean som_cube_ithes_olok_condition_completedQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "som_jenha_tar_cube");
     }
+
     public boolean som_cube_ithes_olok_condition_lostCube(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (utils.playerHasItemByTemplateInBankOrInventory(player, "object/tangible/container/loot/som_cube.iff"))
-        {
-            return false;
-        }
-        return true;
+        return !utils.playerHasItemByTemplateInBankOrInventory(player, "object/tangible/container/loot/som_cube.iff");
     }
+
     public void som_cube_ithes_olok_action_grantCubeQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "som_jenha_tar_cube");
     }
+
     public void som_cube_ithes_olok_action_sendCompleteSignal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "somCubeSuccess");
     }
+
     public void som_cube_ithes_olok_action_giveAnotherCube(obj_id player, obj_id npc) throws InterruptedException
     {
         createObjectInInventoryAllowOverload("object/tangible/container/loot/som_cube.iff", player);
     }
+
     public int som_cube_ithes_olok_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_193"))
@@ -68,7 +80,7 @@ public class som_cube_ithes_olok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_195");
@@ -77,7 +89,7 @@ public class som_cube_ithes_olok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_cube_ithes_olok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -109,7 +121,7 @@ public class som_cube_ithes_olok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_127");
@@ -122,7 +134,7 @@ public class som_cube_ithes_olok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_cube_ithes_olok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -142,6 +154,7 @@ public class som_cube_ithes_olok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_cube_ithes_olok_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_195"))
@@ -168,7 +181,7 @@ public class som_cube_ithes_olok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_198");
@@ -181,7 +194,7 @@ public class som_cube_ithes_olok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_cube_ithes_olok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -191,6 +204,7 @@ public class som_cube_ithes_olok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_cube_ithes_olok_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_198"))
@@ -217,7 +231,7 @@ public class som_cube_ithes_olok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_127");
@@ -230,7 +244,7 @@ public class som_cube_ithes_olok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_cube_ithes_olok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -250,6 +264,7 @@ public class som_cube_ithes_olok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_cube_ithes_olok_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_127"))
@@ -276,7 +291,7 @@ public class som_cube_ithes_olok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_132");
@@ -289,7 +304,7 @@ public class som_cube_ithes_olok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_cube_ithes_olok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -309,6 +324,7 @@ public class som_cube_ithes_olok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_cube_ithes_olok_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_127"))
@@ -335,7 +351,7 @@ public class som_cube_ithes_olok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_132");
@@ -348,7 +364,7 @@ public class som_cube_ithes_olok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_cube_ithes_olok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -368,6 +384,7 @@ public class som_cube_ithes_olok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_cube_ithes_olok_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_119"))
@@ -395,7 +412,7 @@ public class som_cube_ithes_olok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_123");
@@ -408,7 +425,7 @@ public class som_cube_ithes_olok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_cube_ithes_olok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -428,6 +445,7 @@ public class som_cube_ithes_olok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_cube_ithes_olok_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_123"))
@@ -454,7 +472,7 @@ public class som_cube_ithes_olok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_127");
@@ -467,7 +485,7 @@ public class som_cube_ithes_olok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_cube_ithes_olok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -487,6 +505,7 @@ public class som_cube_ithes_olok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_cube_ithes_olok_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_127"))
@@ -513,7 +532,7 @@ public class som_cube_ithes_olok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_132");
@@ -526,7 +545,7 @@ public class som_cube_ithes_olok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_cube_ithes_olok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -546,6 +565,7 @@ public class som_cube_ithes_olok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_cube_ithes_olok_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_132"))
@@ -565,7 +585,7 @@ public class som_cube_ithes_olok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_145");
@@ -574,7 +594,7 @@ public class som_cube_ithes_olok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_cube_ithes_olok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -594,6 +614,7 @@ public class som_cube_ithes_olok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_cube_ithes_olok_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_145"))
@@ -613,7 +634,7 @@ public class som_cube_ithes_olok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_148");
@@ -622,7 +643,7 @@ public class som_cube_ithes_olok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_cube_ithes_olok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -632,6 +653,7 @@ public class som_cube_ithes_olok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_cube_ithes_olok_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_148"))
@@ -646,6 +668,7 @@ public class som_cube_ithes_olok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_cube_ithes_olok_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_40"))
@@ -672,7 +695,7 @@ public class som_cube_ithes_olok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_44");
@@ -685,7 +708,7 @@ public class som_cube_ithes_olok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_cube_ithes_olok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -717,7 +740,7 @@ public class som_cube_ithes_olok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_199");
@@ -730,7 +753,7 @@ public class som_cube_ithes_olok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_cube_ithes_olok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -740,6 +763,7 @@ public class som_cube_ithes_olok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_cube_ithes_olok_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_44"))
@@ -773,7 +797,7 @@ public class som_cube_ithes_olok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48");
@@ -790,7 +814,7 @@ public class som_cube_ithes_olok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_cube_ithes_olok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -810,6 +834,7 @@ public class som_cube_ithes_olok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_cube_ithes_olok_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_48"))
@@ -836,7 +861,7 @@ public class som_cube_ithes_olok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_52");
@@ -849,7 +874,7 @@ public class som_cube_ithes_olok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_cube_ithes_olok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -888,7 +913,7 @@ public class som_cube_ithes_olok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_56");
@@ -905,7 +930,7 @@ public class som_cube_ithes_olok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_cube_ithes_olok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -925,6 +950,7 @@ public class som_cube_ithes_olok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_cube_ithes_olok_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_52"))
@@ -958,7 +984,7 @@ public class som_cube_ithes_olok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_56");
@@ -975,7 +1001,7 @@ public class som_cube_ithes_olok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_cube_ithes_olok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -995,6 +1021,7 @@ public class som_cube_ithes_olok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_cube_ithes_olok_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_56"))
@@ -1021,7 +1048,7 @@ public class som_cube_ithes_olok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -1034,7 +1061,7 @@ public class som_cube_ithes_olok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_cube_ithes_olok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1066,7 +1093,7 @@ public class som_cube_ithes_olok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -1079,7 +1106,7 @@ public class som_cube_ithes_olok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_cube_ithes_olok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1099,6 +1126,7 @@ public class som_cube_ithes_olok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_cube_ithes_olok_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_61"))
@@ -1125,7 +1153,7 @@ public class som_cube_ithes_olok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_65");
@@ -1138,7 +1166,7 @@ public class som_cube_ithes_olok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_cube_ithes_olok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1158,6 +1186,7 @@ public class som_cube_ithes_olok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_cube_ithes_olok_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_65"))
@@ -1184,7 +1213,7 @@ public class som_cube_ithes_olok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70");
@@ -1197,7 +1226,7 @@ public class som_cube_ithes_olok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_cube_ithes_olok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1217,6 +1246,7 @@ public class som_cube_ithes_olok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_cube_ithes_olok_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_70"))
@@ -1243,7 +1273,7 @@ public class som_cube_ithes_olok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_77");
@@ -1256,7 +1286,7 @@ public class som_cube_ithes_olok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_cube_ithes_olok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1276,6 +1306,7 @@ public class som_cube_ithes_olok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_cube_ithes_olok_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_77"))
@@ -1302,7 +1333,7 @@ public class som_cube_ithes_olok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_84");
@@ -1315,7 +1346,7 @@ public class som_cube_ithes_olok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_cube_ithes_olok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1335,6 +1366,7 @@ public class som_cube_ithes_olok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_cube_ithes_olok_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_84"))
@@ -1361,7 +1393,7 @@ public class som_cube_ithes_olok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -1374,7 +1406,7 @@ public class som_cube_ithes_olok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_cube_ithes_olok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1394,6 +1426,7 @@ public class som_cube_ithes_olok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_cube_ithes_olok_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_91"))
@@ -1420,7 +1453,7 @@ public class som_cube_ithes_olok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_95");
@@ -1433,7 +1466,7 @@ public class som_cube_ithes_olok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_cube_ithes_olok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1453,6 +1486,7 @@ public class som_cube_ithes_olok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_cube_ithes_olok_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_95"))
@@ -1479,7 +1513,7 @@ public class som_cube_ithes_olok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_100");
@@ -1492,7 +1526,7 @@ public class som_cube_ithes_olok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_cube_ithes_olok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1512,6 +1546,7 @@ public class som_cube_ithes_olok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_cube_ithes_olok_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_100"))
@@ -1538,7 +1573,7 @@ public class som_cube_ithes_olok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -1551,7 +1586,7 @@ public class som_cube_ithes_olok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_cube_ithes_olok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1571,6 +1606,7 @@ public class som_cube_ithes_olok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_cube_ithes_olok_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_107"))
@@ -1597,7 +1633,7 @@ public class som_cube_ithes_olok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_111");
@@ -1610,7 +1646,7 @@ public class som_cube_ithes_olok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_cube_ithes_olok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1630,6 +1666,7 @@ public class som_cube_ithes_olok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_cube_ithes_olok_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_111"))
@@ -1655,6 +1692,7 @@ public class som_cube_ithes_olok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_cube_ithes_olok_handleBranch45(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_61"))
@@ -1681,7 +1719,7 @@ public class som_cube_ithes_olok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_65");
@@ -1694,7 +1732,7 @@ public class som_cube_ithes_olok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_cube_ithes_olok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1714,6 +1752,7 @@ public class som_cube_ithes_olok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_cube_ithes_olok_handleBranch48(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_56"))
@@ -1740,7 +1779,7 @@ public class som_cube_ithes_olok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -1753,7 +1792,7 @@ public class som_cube_ithes_olok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_cube_ithes_olok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1785,7 +1824,7 @@ public class som_cube_ithes_olok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -1798,7 +1837,7 @@ public class som_cube_ithes_olok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_cube_ithes_olok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1818,6 +1857,7 @@ public class som_cube_ithes_olok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_cube_ithes_olok_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_199"))
@@ -1851,7 +1891,7 @@ public class som_cube_ithes_olok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48");
@@ -1868,7 +1908,7 @@ public class som_cube_ithes_olok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_cube_ithes_olok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1888,6 +1928,7 @@ public class som_cube_ithes_olok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_cube_ithes_olok_handleBranch52(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_48"))
@@ -1914,7 +1955,7 @@ public class som_cube_ithes_olok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_52");
@@ -1927,7 +1968,7 @@ public class som_cube_ithes_olok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_cube_ithes_olok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1966,7 +2007,7 @@ public class som_cube_ithes_olok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_56");
@@ -1983,7 +2024,7 @@ public class som_cube_ithes_olok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_cube_ithes_olok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2003,6 +2044,7 @@ public class som_cube_ithes_olok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -2013,12 +2055,14 @@ public class som_cube_ithes_olok extends script.base_script
         setName(self, "Ithes Olok");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setName(self, "Ithes Olok");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -2027,18 +2071,21 @@ public class som_cube_ithes_olok extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.som_cube_ithes_olok");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -2075,7 +2122,7 @@ public class som_cube_ithes_olok extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_193");
@@ -2091,7 +2138,7 @@ public class som_cube_ithes_olok extends script.base_script
                 utils.setScriptVar(player, "conversation.som_cube_ithes_olok.branchId", 1);
                 npcStartConversation(player, npc, "som_cube_ithes_olok", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2119,7 +2166,7 @@ public class som_cube_ithes_olok extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_119");
@@ -2131,7 +2178,7 @@ public class som_cube_ithes_olok extends script.base_script
                 utils.setScriptVar(player, "conversation.som_cube_ithes_olok.branchId", 8);
                 npcStartConversation(player, npc, "som_cube_ithes_olok", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2159,7 +2206,7 @@ public class som_cube_ithes_olok extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_40");
@@ -2171,7 +2218,7 @@ public class som_cube_ithes_olok extends script.base_script
                 utils.setScriptVar(player, "conversation.som_cube_ithes_olok.branchId", 19);
                 npcStartConversation(player, npc, "som_cube_ithes_olok", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2180,6 +2227,7 @@ public class som_cube_ithes_olok extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("som_cube_ithes_olok"))

@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.diant_zuy;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.player_structure;
 import script.location;
@@ -8,26 +14,30 @@ import script.string_id;
 
 public class explosion_player extends script.base_script
 {
+    public static final String SCRIPT_EXPLOSION = "theme_park.dungeon.diant_zuy.explosion_player";
+    public static final string_id BUNKER_EXPLODING = new string_id("dungeon/diant_bunker", "bunker_exploding");
     public explosion_player()
     {
     }
-    public static final String SCRIPT_EXPLOSION = "theme_park.dungeon.diant_zuy.explosion_player";
-    public static final string_id BUNKER_EXPLODING = new string_id("dungeon/diant_bunker", "bunker_exploding");
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleExplodingBunker", null, 30.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleExplodingBunker", null, 30.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         detachScript(self, SCRIPT_EXPLOSION);
         return SCRIPT_CONTINUE;
     }
+
     public int handleExplodingBunker(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id structure = player_structure.getStructure(self);
@@ -64,29 +74,29 @@ public class explosion_player extends script.base_script
         obj_id top = getTopMostContainer(self);
         double intensity = getFloatObjVar(top, "diant.explosionIntensity");
         double healthcostDbl = StrictMath.pow(85, intensity);
-        int healthcost = (int)healthcostDbl;
+        int healthcost = (int) healthcostDbl;
         int dmgLocation = 0;
         int hitLoc = rand(1, 5);
         switch (hitLoc)
         {
             case 1:
-            dmgLocation = HIT_LOCATION_R_ARM;
-            break;
+                dmgLocation = HIT_LOCATION_R_ARM;
+                break;
             case 2:
-            dmgLocation = HIT_LOCATION_L_ARM;
-            break;
+                dmgLocation = HIT_LOCATION_L_ARM;
+                break;
             case 3:
-            dmgLocation = HIT_LOCATION_BODY;
-            break;
+                dmgLocation = HIT_LOCATION_BODY;
+                break;
             case 4:
-            dmgLocation = HIT_LOCATION_R_LEG;
-            break;
+                dmgLocation = HIT_LOCATION_R_LEG;
+                break;
             case 5:
-            dmgLocation = HIT_LOCATION_HEAD;
-            break;
+                dmgLocation = HIT_LOCATION_HEAD;
+                break;
             default:
-            dmgLocation = HIT_LOCATION_L_LEG;
-            break;
+                dmgLocation = HIT_LOCATION_L_LEG;
+                break;
         }
         damage(self, DAMAGE_BLAST, dmgLocation, healthcost);
         location playerLoc = getLocation(self);

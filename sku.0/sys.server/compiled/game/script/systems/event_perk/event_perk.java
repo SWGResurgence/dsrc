@@ -1,5 +1,11 @@
 package script.systems.event_perk;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.prose;
 import script.library.utils;
@@ -208,7 +214,6 @@ public class event_perk extends script.base_script
         {
             sendSystemMessage(player, new string_id("event_perk", "redeed_failed"));
         }
-        return;
     }
 
     public void disbandHonorguard(obj_id player, obj_id self) throws InterruptedException
@@ -219,7 +224,6 @@ public class event_perk extends script.base_script
             obj_id guardMember = getObjIdObjVar(self, "event_perk.honorguard_num_" + i);
             destroyObject(guardMember);
         }
-        return;
     }
 
     public void checkTimeLimit(obj_id self) throws InterruptedException
@@ -233,7 +237,6 @@ public class event_perk extends script.base_script
             CustomerServiceLog("EventPerk", "(Spawned Object - [" + self + "]) lifespan expired so it was destroyed.");
             destroyObject(self);
         }
-        return;
     }
 
     public int OnAddedToWorld(obj_id self) throws InterruptedException

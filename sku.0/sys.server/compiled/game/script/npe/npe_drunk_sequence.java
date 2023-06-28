@@ -1,5 +1,11 @@
 package script.npe;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.utils;
 import script.obj_id;
@@ -9,16 +15,18 @@ public class npe_drunk_sequence extends script.base_script
     public npe_drunk_sequence()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);
         messageTo(self, "npeSetName", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnPreloadComplete(obj_id self) throws InterruptedException
     {
         boolean setting = utils.checkConfigFlag("ScriptFlags", "npeSequencersActive");
-        if (setting == true)
+        if (setting)
         {
             String myName = utils.getStringObjVar(self, "strSequenceIdentifier");
             if (myName.equals("drunk"))
@@ -28,6 +36,7 @@ public class npe_drunk_sequence extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npeSetName(obj_id self, dictionary params) throws InterruptedException
     {
         String myName = utils.getStringObjVar(self, "strSequenceIdentifier");
@@ -35,7 +44,7 @@ public class npe_drunk_sequence extends script.base_script
         {
             setName(self, "Pacus");
         }
-        else 
+        else
         {
             setName(self, "Irving");
             obj_id cup = createObject("object/tangible/item/con_drinking_glass_01.iff", self, "hold_l");
@@ -43,6 +52,7 @@ public class npe_drunk_sequence extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int getglass(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id inv = getObjectInSlot(self, "inventory");
@@ -50,6 +60,7 @@ public class npe_drunk_sequence extends script.base_script
         equip(cup, self);
         return SCRIPT_CONTINUE;
     }
+
     public int removeglass(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id myInv = utils.getInventoryContainer(self);
@@ -57,11 +68,13 @@ public class npe_drunk_sequence extends script.base_script
         destroyObject(glass);
         return SCRIPT_CONTINUE;
     }
+
     public int npeaddconvo(obj_id self, dictionary params) throws InterruptedException
     {
         attachScript(self, "conversation.npe_drunk");
         return SCRIPT_CONTINUE;
     }
+
     public int nperemoveconvo(obj_id self, dictionary params) throws InterruptedException
     {
         detachScript(self, "conversation.npe_drunk");

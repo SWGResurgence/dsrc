@@ -1,5 +1,11 @@
 package script.player;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -10,6 +16,7 @@ public class player_instance extends script.base_script
     public player_instance()
     {
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (!isGod(self))
@@ -31,7 +38,7 @@ public class player_instance extends script.base_script
             {
                 instance.requestInstanceMovement(self, parse[1], utils.stringToInt(parse[2]), parse[3]);
             }
-            else 
+            else
             {
                 instance.requestInstanceMovement(self, parse[1]);
             }
@@ -46,6 +53,7 @@ public class player_instance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnUnsticking(obj_id self) throws InterruptedException
     {
         obj_id instanceController = instance.getAreaInstanceController(self);
@@ -70,6 +78,7 @@ public class player_instance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDuelRequest(obj_id self, obj_id actor, obj_id target) throws InterruptedException
     {
         if (instance.isInInstanceArea(actor) || instance.isInInstanceArea(target))
@@ -80,12 +89,13 @@ public class player_instance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         String area_name = locations.getBuildoutAreaName(self);
         int area_row = locations.getBuildoutAreaRow(self);
         obj_id planet = getPlanetByName(getLocation(self).area);
-        String instance_controller = "" + area_name + "_" + area_row;
+        String instance_controller = area_name + "_" + area_row;
         obj_id areaInstanceController = utils.hasScriptVar(planet, instance_controller) ? utils.getObjIdScriptVar(planet, instance_controller) : null;
         if (!instance.isInInstanceArea(self))
         {
@@ -101,6 +111,7 @@ public class player_instance extends script.base_script
         messageTo(areaInstanceController, "validatePlayer", dict, 1.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnClusterWideDataResponse(obj_id self, String manage_name, String name, int request_id, String[] element_name_list, dictionary[] data, int lock_key) throws InterruptedException
     {
         CustomerServiceLog(instance.INSTANCE_DEBUG_LOG, "OnClusterWideDataResponse-player " + self + "(" + getPlayerName(self) + ")recieved trigger");
@@ -162,9 +173,9 @@ public class player_instance extends script.base_script
                             String newList = "";
                             if (groupList.equals("none"))
                             {
-                                newList = "" + self;
+                                newList = String.valueOf(self);
                             }
-                            else 
+                            else
                             {
                                 newList = groupList.concat("_" + self);
                             }
@@ -188,7 +199,7 @@ public class player_instance extends script.base_script
                         instance.setRequestResolved(self);
                         return SCRIPT_CONTINUE;
                     }
-                    else 
+                    else
                     {
                         CustomerServiceLog(instance.INSTANCE_DEBUG_LOG, "movePlayerToInstance-isValidatedByLockoutData returned false for player " + getFirstName(self) + "(" + self + "). Sending messageTo 'instanceFailureMessage'");
                         dict.put("fail_reason", instance.FAIL_INVALID_LOCKOUT);
@@ -223,7 +234,7 @@ public class player_instance extends script.base_script
                 String strName = newDict.getString("instance_name");
                 obj_id objName = newDict.getObjId("instance_id");
                 name = strName + "_" + objName;
-                String groupList = "" + self;
+                String groupList = String.valueOf(self);
                 CustomerServiceLog(instance.INSTANCE_DEBUG_LOG, "OnClusterWideDataResponse-player " + self + "(" + getPlayerName(self) + ")'s new groupList is " + groupList);
                 if (team == 1)
                 {
@@ -241,7 +252,7 @@ public class player_instance extends script.base_script
                 instance.setRequestResolved(self);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 sendSystemMessage(self, new string_id("instance", "all_full"));
             }
@@ -286,6 +297,7 @@ public class player_instance extends script.base_script
         instance.setRequestResolved(self);
         return SCRIPT_CONTINUE;
     }
+
     public int movePlayerToInstance(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -357,8 +369,10 @@ public class player_instance extends script.base_script
             {
                 obj_id[] players = getGroupMemberIds(groupId);
                 CustomerServiceLog("instance-" + instance_name, "GROUP LIST");
-                for (obj_id player : players) {
-                    if (player == self) {
+                for (obj_id player : players)
+                {
+                    if (player == self)
+                    {
                         continue;
                     }
                     CustomerServiceLog("instance-" + instance_name, "Member: " + getPlayerName(player));
@@ -377,8 +391,10 @@ public class player_instance extends script.base_script
             {
                 obj_id[] players = getGroupMemberIds(groupId);
                 CustomerServiceLog("instance-" + instance_name, "GROUP LIST");
-                for (obj_id player : players) {
-                    if (player == self) {
+                for (obj_id player : players)
+                {
+                    if (player == self)
+                    {
                         continue;
                     }
                     CustomerServiceLog("instance-" + instance_name, "Member: " + getPlayerName(player));
@@ -387,6 +403,7 @@ public class player_instance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdShowInstanceInformation(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "showInstanceSui"))
@@ -409,16 +426,16 @@ public class player_instance extends script.base_script
         Vector listId = new Vector();
         listId.setSize(0);
         String header = utils.packStringId(new string_id("instance", "instance_sui_heading"));
-        addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, "" + idx);
+        addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, String.valueOf(idx));
         setSUIProperty(pid, sui.LISTBOX_DATASOURCE + "." + idx, sui.PROP_TEXT, header);
         idx++;
         if (instance_data == null || instance_data.length == 0)
         {
-            addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, "" + idx);
+            addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, String.valueOf(idx));
             setSUIProperty(pid, sui.LISTBOX_DATASOURCE + "." + idx, sui.PROP_TEXT, "No Instance Data");
             idx++;
         }
-        else 
+        else
         {
             for (int i = 0; i < instance_data.length; i++)
             {
@@ -438,7 +455,7 @@ public class player_instance extends script.base_script
                 {
                     timeToClose = 0;
                 }
-                playerRaidId = getRaidId("" + startTime, "" + instance_id, "" + owner);
+                playerRaidId = getRaidId(String.valueOf(startTime), String.valueOf(instance_id), String.valueOf(owner));
                 listId.add(instance_name + "-" + playerRaidId);
                 int timeDifference = time - getCalendarTime();
                 String timeString = utils.formatTimeVerbose(timeDifference);
@@ -451,7 +468,7 @@ public class player_instance extends script.base_script
                     isClosed = true;
                     closeString = "Instance Closed";
                 }
-                else 
+                else
                 {
                     isClosed = false;
                     closeString = utils.formatTimeVerbose(timeToClose);
@@ -461,7 +478,7 @@ public class player_instance extends script.base_script
                 {
                     pp.stringId = new string_id("instance", "player_closed");
                 }
-                else 
+                else
                 {
                     pp.stringId = new string_id("instance", "player_open");
                 }
@@ -470,8 +487,8 @@ public class player_instance extends script.base_script
                 pp.other.set(timeString);
                 pp.target.set(closeString);
                 String dataPoint = " \0" + packOutOfBandProsePackage(null, pp);
-                dataPoint = "" + instanceName + dataPoint;
-                addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, "" + idx);
+                dataPoint = instanceName + dataPoint;
+                addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, String.valueOf(idx));
                 setSUIProperty(pid, sui.LISTBOX_DATASOURCE + "." + idx, sui.PROP_TEXT, dataPoint);
                 idx++;
             }
@@ -482,14 +499,17 @@ public class player_instance extends script.base_script
             obj_id[] members = getGroupMemberIds(groupId);
             if (members != null || members.length > 0)
             {
-                addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, "" + idx);
+                addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, String.valueOf(idx));
                 setSUIProperty(pid, sui.LISTBOX_DATASOURCE + "." + idx, sui.PROP_TEXT, "Group Members In Range");
                 idx++;
-                for (obj_id member : members) {
-                    if (!isIdValid(member) || !exists(member)) {
+                for (obj_id member : members)
+                {
+                    if (!isIdValid(member) || !exists(member))
+                    {
                         continue;
                     }
-                    if (!isPlayer(member) || member == self) {
+                    if (!isPlayer(member) || member == self)
+                    {
                         continue;
                     }
                     String playerName = getPlayerFullName(member);
@@ -497,17 +517,22 @@ public class player_instance extends script.base_script
                     namePackage.stringId = new string_id("instance", "gold_text");
                     namePackage.actor.set(playerName);
                     playerName = "\0" + packOutOfBandProsePackage(null, namePackage);
-                    addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, "" + idx);
+                    addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, String.valueOf(idx));
                     setSUIProperty(pid, sui.LISTBOX_DATASOURCE + "." + idx, sui.PROP_TEXT, playerName);
                     idx++;
                     dictionary[] groupMemberInstanceData = instance.getAllLockoutData(member);
-                    if (groupMemberInstanceData == null || groupMemberInstanceData.length == 0) {
-                        addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, "" + idx);
+                    if (groupMemberInstanceData == null || groupMemberInstanceData.length == 0)
+                    {
+                        addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, String.valueOf(idx));
                         setSUIProperty(pid, sui.LISTBOX_DATASOURCE + "." + idx, sui.PROP_TEXT, "No Instance Data");
                         idx++;
-                    } else {
-                        for (dictionary groupMemberInstanceDatum : groupMemberInstanceData) {
-                            if (groupMemberInstanceDatum == null) {
+                    }
+                    else
+                    {
+                        for (dictionary groupMemberInstanceDatum : groupMemberInstanceData)
+                        {
+                            if (groupMemberInstanceDatum == null)
+                            {
                                 continue;
                             }
                             int time = groupMemberInstanceDatum.getInt("time");
@@ -517,42 +542,46 @@ public class player_instance extends script.base_script
                             int startTime = groupMemberInstanceDatum.getInt("start_time");
                             int timeToClose = startTime + instance.getInstanceDuration(instance_name) - getGameTime();
                             String xxTimeToClose = getCalendarTimeStringLocal(getCalendarTime() + timeToClose);
-                            if (timeToClose < 0) {
+                            if (timeToClose < 0)
+                            {
                                 timeToClose = 0;
                             }
-                            String raidId = getRaidId("" + startTime, "" + instance_id, "" + owner);
+                            String raidId = getRaidId(String.valueOf(startTime), String.valueOf(instance_id), String.valueOf(owner));
                             prose_package raidProse = new prose_package();
                             boolean bClose = false;
                             boolean bMatch = false;
                             String passedId = getPassedId(listId, instance_name);
-                            if (!passedId.equals("") && raidId.equals(passedId)) {
-                                bMatch = true;
-                            } else {
-                                bMatch = false;
-                            }
+                            bMatch = !passedId.equals("") && raidId.equals(passedId);
                             int timeDifference = time - getCalendarTime();
                             String timeString = utils.formatTimeVerbose(timeDifference);
                             String xxTimeString = getCalendarTimeStringLocal(getCalendarTime() + timeDifference);
                             prose_package statusProse = new prose_package();
                             String closeString = "";
-                            if (timeToClose == 0) {
+                            if (timeToClose == 0)
+                            {
                                 bClose = true;
                                 closeString = "Instance Closed";
-                            } else {
+                            }
+                            else
+                            {
                                 bClose = false;
                                 closeString = utils.formatTimeVerbose(timeToClose);
                             }
                             prose_package pp = new prose_package();
-                            if (bClose && bMatch) {
+                            if (bClose && bMatch)
+                            {
                                 pp.stringId = new string_id("instance", "close_same");
                             }
-                            if (bClose && !bMatch) {
+                            if (bClose && !bMatch)
+                            {
                                 pp.stringId = new string_id("instance", "close_different");
                             }
-                            if (!bClose && bMatch) {
+                            if (!bClose && bMatch)
+                            {
                                 pp.stringId = new string_id("instance", "open_same");
                             }
-                            if (!bClose && !bMatch) {
+                            if (!bClose && !bMatch)
+                            {
                                 pp.stringId = new string_id("instance", "open_different");
                             }
                             String instanceName = "@" + new string_id("instance", instance_name);
@@ -560,8 +589,8 @@ public class player_instance extends script.base_script
                             pp.target.set(closeString);
                             pp.actor.set(raidId);
                             String dataPoint = " \0" + packOutOfBandProsePackage(null, pp);
-                            dataPoint = "" + instanceName + dataPoint;
-                            addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, "" + idx);
+                            dataPoint = instanceName + dataPoint;
+                            addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, String.valueOf(idx));
                             setSUIProperty(pid, sui.LISTBOX_DATASOURCE + "." + idx, sui.PROP_TEXT, dataPoint);
                             idx++;
                         }
@@ -578,6 +607,7 @@ public class player_instance extends script.base_script
         utils.setScriptVar(self, "showInstanceSui", pid);
         return SCRIPT_CONTINUE;
     }
+
     public String getShowInstanceInformationPrompt(obj_id self) throws InterruptedException
     {
         String concatenatedAtrocity = getString(new string_id("instance", "flagging_header"));
@@ -590,11 +620,14 @@ public class player_instance extends script.base_script
             obj_id[] members = getGroupMemberIds(groupId);
             if (members != null || members.length > 0)
             {
-                for (obj_id member : members) {
-                    if (!isIdValid(member) || !exists(member)) {
+                for (obj_id member : members)
+                {
+                    if (!isIdValid(member) || !exists(member))
+                    {
                         continue;
                     }
-                    if (!isPlayer(member) || member == self) {
+                    if (!isPlayer(member) || member == self)
+                    {
                         continue;
                     }
                     concatenatedAtrocity += getUnflaggedInstancesString(member);
@@ -604,6 +637,7 @@ public class player_instance extends script.base_script
         }
         return concatenatedAtrocity;
     }
+
     public String getUnflaggedInstancesString(obj_id player) throws InterruptedException
     {
         String[] instanceList = new String[dataTableGetNumRows(instance.INSTANCE_DATATABLE)];
@@ -633,58 +667,66 @@ public class player_instance extends script.base_script
         {
             preambleString += getString(new string_id("instance", "flagging_all_flags"));
         }
-        else 
+        else
         {
             preambleString += getString(new string_id("instance", "flagging_not_flagged_for"));
         }
         unflaggedInstancesString += preambleString + instancesString;
         return unflaggedInstancesString;
     }
+
     public String getRaidId(String time, String instance, String owner) throws InterruptedException
     {
-        String subTime = time.substring(time.length() - 3, time.length());
-        String subInstance = instance.substring(instance.length() - 3, instance.length());
-        String subOwner = owner.substring(owner.length() - 3, owner.length());
+        String subTime = time.substring(time.length() - 3);
+        String subInstance = instance.substring(instance.length() - 3);
+        String subOwner = owner.substring(owner.length() - 3);
         return subTime + subInstance + subOwner;
     }
+
     public String getPassedId(Vector listId, String instance_name) throws InterruptedException
     {
         if (listId == null || listId.size() == 0)
         {
             return "";
         }
-        for (Object o : listId) {
-            if (((String) o).equals("")) {
+        for (Object o : listId)
+        {
+            if (o.equals(""))
+            {
                 continue;
             }
             String[] parse = split(((String) o), '-');
             String passedName = parse[0];
             String passedId = parse[1];
-            if (passedName.equals(instance_name)) {
+            if (passedName.equals(instance_name))
+            {
                 return passedId;
             }
         }
         return "";
     }
+
     public void doLogging(String message) throws InterruptedException
     {
         LOG("doLogging/player_instance", message);
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         LOG("doLogging/player_instance/" + section, message);
     }
+
     public int handleAwardtoken(obj_id self, dictionary params) throws InterruptedException
     {
-		obj_id instanceController = instance.getAreaInstanceController(self);
-		if (!isIdValid(instanceController))
-		{
-			return SCRIPT_CONTINUE;
-		}
-		if (!instance.isPlayerInPlayerList(self, instance.getPlayerList(instanceController)))
-		{
-			return SCRIPT_CONTINUE;
-		}
+        obj_id instanceController = instance.getAreaInstanceController(self);
+        if (!isIdValid(instanceController))
+        {
+            return SCRIPT_CONTINUE;
+        }
+        if (!instance.isPlayerInPlayerList(self, instance.getPlayerList(instanceController)))
+        {
+            return SCRIPT_CONTINUE;
+        }
         int tokenIndex = params.getInt("tokenIndex");
         int count = 1;
         if (params.containsKey("tokenCount"))
@@ -694,7 +736,7 @@ public class player_instance extends script.base_script
         float multiplier = utils.stringToFloat(getConfigSetting("GameServer", "heroicTokenBonus"));
         if (multiplier > 1)
         {
-            count = (int)(count * (float)multiplier);
+            count = (int) (count * multiplier);
         }
         if (tokenIndex < 0 || tokenIndex >= trial.HEROIC_TOKENS.length)
         {
@@ -708,7 +750,7 @@ public class player_instance extends script.base_script
         {
             pp = prose.setStringId(pp, new string_id("set_bonus", "recieve_heroic_token_multi"));
         }
-        else 
+        else
         {
             pp = prose.setStringId(pp, new string_id("set_bonus", "recieve_heroic_token"));
         }
@@ -725,6 +767,7 @@ public class player_instance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int instanceFailureMessage(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -737,36 +780,37 @@ public class player_instance extends script.base_script
         switch (reason)
         {
             case instance.FAIL_INSTANCE_FULL:
-            sendSystemMessage(self, new string_id("instance", "fail_instance_full"));
-            break;
+                sendSystemMessage(self, new string_id("instance", "fail_instance_full"));
+                break;
             case instance.FAIL_NOT_MEMBER:
-            sendSystemMessage(self, new string_id("instance", "fail_not_member"));
-            break;
+                sendSystemMessage(self, new string_id("instance", "fail_not_member"));
+                break;
             case instance.INSTANCE_TIMEOUT:
-            sendSystemMessage(self, new string_id("instance", "instance_time_out"));
-            break;
+                sendSystemMessage(self, new string_id("instance", "instance_time_out"));
+                break;
             case instance.FAIL_INVALID_LOCKOUT:
-            sendSystemMessage(self, new string_id("instance", "fail_invalid_lockout"));
-            break;
+                sendSystemMessage(self, new string_id("instance", "fail_invalid_lockout"));
+                break;
             case instance.FAIL_INSTANCE_CLOSED:
-            broadcast(self, "The instance you are attempting to enter is currently inactive");
-            break;
+                broadcast(self, "The instance you are attempting to enter is currently inactive");
+                break;
             case instance.FAIL_INSTANCE_FEW_PLAYERS:
-            sendSystemMessage(self, new string_id("instance", "fail_under_player_limit"));
-            break;
+                sendSystemMessage(self, new string_id("instance", "fail_under_player_limit"));
+                break;
             case instance.FAIL_WARN_TOO_FEW:
-            int limit = params.getInt("player_low_limit");
-            prose_package pp = new prose_package();
-            pp = prose.setStringId(pp, new string_id("instance", "fail_under_player_limit_warning"));
-            pp = prose.setDI(pp, limit);
-            sendSystemMessageProse(self, pp);
-            break;
+                int limit = params.getInt("player_low_limit");
+                prose_package pp = new prose_package();
+                pp = prose.setStringId(pp, new string_id("instance", "fail_under_player_limit_warning"));
+                pp = prose.setDI(pp, limit);
+                sendSystemMessageProse(self, pp);
+                break;
             default:
-            CustomerServiceLog(instance.INSTANCE_DEBUG_LOG, "instanceFailureMessage-switch statement reached the default case this means no system message to player and we died.");
-            break;
+                CustomerServiceLog(instance.INSTANCE_DEBUG_LOG, "instanceFailureMessage-switch statement reached the default case this means no system message to player and we died.");
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int requestInstance(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id enterObject = getFirstObjectWithObjVar(getLocation(trial.getTop(self)), 1000.0f, "instance_name");
@@ -779,12 +823,14 @@ public class player_instance extends script.base_script
         instance.requestInstanceMovement(self, instance_name);
         return SCRIPT_CONTINUE;
     }
+
     public int delayInstanceRequest(obj_id self, dictionary params) throws InterruptedException
     {
         String instance_name = params.getString("instance_name");
         instance.requestInstanceMovement(self, instance_name);
         return SCRIPT_CONTINUE;
     }
+
     public int clearInstanceScriptVar(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVarTree(self, "instance");

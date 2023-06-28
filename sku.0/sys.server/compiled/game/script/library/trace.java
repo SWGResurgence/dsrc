@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class trace extends script.base_script
@@ -9,6 +15,7 @@ public class trace extends script.base_script
     public static final int TL_CS_LOG = 4;
     public static final int TL_WARNING = 8;
     public static final String DESIGNER_CS_DEBUG_LOG = "designer_debug";
+
     public trace()
     {
     }

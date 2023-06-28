@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.combat_engine;
 import script.obj_id;
 
@@ -10,6 +16,7 @@ public class metrics extends script.base_script
     public static final String CONFIG_BUFF_METRICS = "logBuffMetrics";
     public static final String CONFIG_WEAPON_METRICS = "logWeaponMetrics";
     public static final String CONFIG_ARMOR_METRICS = "logArmorMetrics";
+
     public metrics()
     {
     }

@@ -1,5 +1,11 @@
 package script.developer.soe.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.buff;
 import script.library.city;
 import script.library.house_pet;
@@ -13,13 +19,16 @@ public class millbarge_test extends script.base_script
     public millbarge_test()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        if (!isGod(self) || getGodLevel(self) < 50 || !isPlayer(self)) {
+        if (!isGod(self) || getGodLevel(self) < 50 || !isPlayer(self))
+        {
             detachScript(self, "test.millbarge_test");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (isGod(self))
@@ -109,7 +118,7 @@ public class millbarge_test extends script.base_script
                 obj_id brokenId = obj_id.NULL_ID;
                 for (int i = 0; i < spawnedList.size(); i++)
                 {
-                    broadcast(self, "Breaking Spawner - previous ID: " + ((obj_id)spawnedList.get(i)));
+                    broadcast(self, "Breaking Spawner - previous ID: " + spawnedList.get(i));
                     spawnedList.set(i, brokenId);
                 }
                 utils.setScriptVar(myTarget, "myCreations", spawnedList);
@@ -126,7 +135,7 @@ public class millbarge_test extends script.base_script
                     removeObjVar(myTarget, house_pet.SCURRIER_SNACK_LAST_FED);
                     broadcast(self, "Scurrier Snack Time has been reset");
                 }
-                else 
+                else
                 {
                     broadcast(self, "Scurrier Snack Time objvar could not be found.  You must target the Controller (Feeding Bowl) for this command to work.");
                 }

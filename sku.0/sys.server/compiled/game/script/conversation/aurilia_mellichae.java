@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.obj_id;
@@ -16,6 +22,7 @@ public class aurilia_mellichae extends script.conversation.base.conversation_bas
         super.conversation = conversation;
         super.c_stringFile = c_stringFile;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -26,6 +33,7 @@ public class aurilia_mellichae extends script.conversation.base.conversation_bas
         chat.chat(self, player, new string_id(c_stringFile, "s_4"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals(scriptName))

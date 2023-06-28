@@ -1,81 +1,88 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
 {
+    public static String c_stringFile = "conversation/ep3_trandoshan_boshaz_zssik_01";
+
     public ep3_trandoshan_boshaz_zssik_01()
     {
     }
-    public static String c_stringFile = "conversation/ep3_trandoshan_boshaz_zssik_01";
+
     public boolean ep3_trandoshan_boshaz_zssik_01_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean ep3_trandoshan_boshaz_zssik_01_condition_isOnSpaceMission(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasQuest(player);
     }
+
     public boolean ep3_trandoshan_boshaz_zssik_01_condition_hasCompletedSpaceMission(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasReceivedReward(player, "escort", "ep3_trando_boshaz_zssik_01");
     }
+
     public boolean ep3_trandoshan_boshaz_zssik_01_condition_hasFailedSpaceMission(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuest(player, "escort", "ep3_trando_boshaz_zssik_01") || space_quest.hasAbortedQuest(player, "escort", "ep3_trando_boshaz_zssik_01"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasFailedQuest(player, "escort", "ep3_trando_boshaz_zssik_01") || space_quest.hasAbortedQuest(player, "escort", "ep3_trando_boshaz_zssik_01");
     }
+
     public boolean ep3_trandoshan_boshaz_zssik_01_condition_hasWonSpaceMission(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasWonQuest(player, "escort", "ep3_trando_boshaz_zssik_01") && !space_quest.hasReceivedReward(player, "escort", "ep3_trando_boshaz_zssik_01"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasWonQuest(player, "escort", "ep3_trando_boshaz_zssik_01") && !space_quest.hasReceivedReward(player, "escort", "ep3_trando_boshaz_zssik_01");
     }
+
     public boolean ep3_trandoshan_boshaz_zssik_01_condition_isOnGroundQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "ep3_trando_boshaz_zssik_02");
     }
+
     public boolean ep3_trandoshan_boshaz_zssik_01_condition_isOnTask01(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "ep3_trando_boshaz_zssik_02", "talkToBoshaz");
     }
+
     public boolean ep3_trandoshan_boshaz_zssik_01_condition_hasCompletedGroundQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "ep3_trando_boshaz_zssik_02");
     }
+
     public void ep3_trandoshan_boshaz_zssik_01_action_giveSpaceMission(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "escort", "ep3_trando_boshaz_zssik_01");
     }
+
     public void ep3_trandoshan_boshaz_zssik_01_action_giveRewardSpaceMission(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.giveReward(player, "escort", "ep3_trando_boshaz_zssik_01", 5000);
     }
+
     public void ep3_trandoshan_boshaz_zssik_01_action_giveGroundQuest01(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_trando_boshaz_zssik_02");
     }
+
     public void ep3_trandoshan_boshaz_zssik_01_action_doSignal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "rewardBoshaz");
         groundquests.grantQuest(player, "ep3_trando_boshaz_transfer");
     }
+
     public void ep3_trandoshan_boshaz_zssik_01_action_clearGroundQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "ep3_trando_boshaz_zssik_02");
     }
+
     public int ep3_trandoshan_boshaz_zssik_01_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_603"))
@@ -96,7 +103,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_607");
@@ -105,7 +112,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_trandoshan_boshaz_zssik_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -115,6 +122,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_boshaz_zssik_01_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_607"))
@@ -131,6 +139,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_boshaz_zssik_01_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_613"))
@@ -148,6 +157,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_boshaz_zssik_01_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_619"))
@@ -168,7 +178,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_633");
@@ -177,7 +187,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_trandoshan_boshaz_zssik_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -198,6 +208,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_boshaz_zssik_01_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_625"))
@@ -226,7 +237,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_629");
@@ -239,7 +250,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_trandoshan_boshaz_zssik_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -249,6 +260,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_boshaz_zssik_01_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_629"))
@@ -269,7 +281,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_633");
@@ -278,7 +290,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_trandoshan_boshaz_zssik_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -299,6 +311,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_boshaz_zssik_01_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_633"))
@@ -326,7 +339,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_637");
@@ -339,7 +352,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_trandoshan_boshaz_zssik_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -349,6 +362,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_boshaz_zssik_01_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_637"))
@@ -369,7 +383,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_641");
@@ -378,7 +392,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_trandoshan_boshaz_zssik_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -404,7 +418,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_707");
@@ -413,7 +427,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_trandoshan_boshaz_zssik_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -423,6 +437,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_boshaz_zssik_01_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_641"))
@@ -450,7 +465,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_108");
@@ -463,7 +478,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_trandoshan_boshaz_zssik_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -473,6 +488,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_boshaz_zssik_01_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_108"))
@@ -492,7 +508,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_110");
@@ -501,7 +517,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_trandoshan_boshaz_zssik_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -527,7 +543,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_649");
@@ -536,7 +552,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_trandoshan_boshaz_zssik_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -546,6 +562,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_boshaz_zssik_01_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_110"))
@@ -566,7 +583,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_649");
@@ -575,7 +592,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_trandoshan_boshaz_zssik_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -585,6 +602,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_boshaz_zssik_01_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_649"))
@@ -612,7 +630,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_653");
@@ -625,7 +643,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_trandoshan_boshaz_zssik_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -635,6 +653,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_boshaz_zssik_01_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_653"))
@@ -662,7 +681,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_657");
@@ -675,7 +694,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_trandoshan_boshaz_zssik_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -708,7 +727,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_657");
@@ -721,7 +740,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_trandoshan_boshaz_zssik_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -731,6 +750,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_boshaz_zssik_01_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_657"))
@@ -751,7 +771,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_661");
@@ -760,7 +780,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_trandoshan_boshaz_zssik_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -781,6 +801,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_boshaz_zssik_01_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_661"))
@@ -801,7 +822,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_665");
@@ -810,7 +831,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_trandoshan_boshaz_zssik_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -820,6 +841,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_boshaz_zssik_01_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_665"))
@@ -840,7 +862,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_669");
@@ -849,7 +871,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_trandoshan_boshaz_zssik_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -859,6 +881,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_boshaz_zssik_01_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_669"))
@@ -886,7 +909,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_673");
@@ -899,7 +922,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_trandoshan_boshaz_zssik_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -909,6 +932,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_boshaz_zssik_01_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_673"))
@@ -929,7 +953,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_677");
@@ -938,7 +962,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_trandoshan_boshaz_zssik_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -964,7 +988,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_693");
@@ -973,7 +997,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_trandoshan_boshaz_zssik_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -983,6 +1007,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_boshaz_zssik_01_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_677"))
@@ -1003,7 +1028,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_681");
@@ -1012,7 +1037,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_trandoshan_boshaz_zssik_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1022,6 +1047,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_boshaz_zssik_01_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_681"))
@@ -1042,7 +1068,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_685");
@@ -1051,7 +1077,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_trandoshan_boshaz_zssik_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1061,6 +1087,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_boshaz_zssik_01_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_685"))
@@ -1081,7 +1108,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_155");
@@ -1090,7 +1117,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_trandoshan_boshaz_zssik_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1100,6 +1127,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_boshaz_zssik_01_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_155"))
@@ -1115,6 +1143,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_boshaz_zssik_01_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_693"))
@@ -1135,7 +1164,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_677");
@@ -1144,7 +1173,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_trandoshan_boshaz_zssik_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1154,6 +1183,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_boshaz_zssik_01_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_657"))
@@ -1174,7 +1204,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_661");
@@ -1183,7 +1213,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_trandoshan_boshaz_zssik_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1204,6 +1234,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_boshaz_zssik_01_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_707"))
@@ -1231,7 +1262,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_108");
@@ -1244,7 +1275,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_trandoshan_boshaz_zssik_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1254,6 +1285,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_boshaz_zssik_01_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_715"))
@@ -1281,6 +1313,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_boshaz_zssik_01_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_727"))
@@ -1308,7 +1341,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_731");
@@ -1321,7 +1354,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_trandoshan_boshaz_zssik_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1331,6 +1364,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_boshaz_zssik_01_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_731"))
@@ -1358,7 +1392,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_735");
@@ -1371,7 +1405,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_trandoshan_boshaz_zssik_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1392,6 +1426,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_boshaz_zssik_01_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_735"))
@@ -1419,6 +1454,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -1431,6 +1467,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
         setName(self, "Boshaz");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -1439,6 +1476,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
         setName(self, "Boshaz");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -1448,18 +1486,21 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.ep3_trandoshan_boshaz_zssik_01");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1490,7 +1531,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_603");
@@ -1498,7 +1539,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_trandoshan_boshaz_zssik_01.branchId", 2);
                 npcStartConversation(player, npc, "ep3_trandoshan_boshaz_zssik_01", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1520,7 +1561,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_613");
@@ -1528,7 +1569,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_trandoshan_boshaz_zssik_01.branchId", 5);
                 npcStartConversation(player, npc, "ep3_trandoshan_boshaz_zssik_01", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1557,7 +1598,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_619");
@@ -1569,7 +1610,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_trandoshan_boshaz_zssik_01.branchId", 7);
                 npcStartConversation(player, npc, "ep3_trandoshan_boshaz_zssik_01", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1591,7 +1632,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_625");
@@ -1599,7 +1640,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_trandoshan_boshaz_zssik_01.branchId", 8);
                 npcStartConversation(player, npc, "ep3_trandoshan_boshaz_zssik_01", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1628,7 +1669,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_715");
@@ -1640,7 +1681,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_trandoshan_boshaz_zssik_01.branchId", 32);
                 npcStartConversation(player, npc, "ep3_trandoshan_boshaz_zssik_01", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1669,7 +1710,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_727");
@@ -1677,7 +1718,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_trandoshan_boshaz_zssik_01.branchId", 36);
                 npcStartConversation(player, npc, "ep3_trandoshan_boshaz_zssik_01", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1686,6 +1727,7 @@ public class ep3_trandoshan_boshaz_zssik_01 extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("ep3_trandoshan_boshaz_zssik_01"))

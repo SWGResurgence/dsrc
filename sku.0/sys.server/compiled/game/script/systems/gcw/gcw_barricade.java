@@ -1,5 +1,11 @@
 package script.systems.gcw;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -46,7 +52,7 @@ public class gcw_barricade extends script.base_script
         int repairCount = getIntObjVar(self, gcw.GCW_OBJECT_REPAIR_COUNT);
         if (repairCount > 0)
         {
-            attribs[idx] = "" + repairCount + " out of " + gcw.REPAIR_COUNT_MAX;
+            attribs[idx] = repairCount + " out of " + gcw.REPAIR_COUNT_MAX;
         }
         else
         {
@@ -187,7 +193,7 @@ public class gcw_barricade extends script.base_script
         {
             faction = utils.getIntScriptVar(self, "faction");
         }
-        if (objects != null && objects.length > 0)
+        if (objects != null)
         {
             for (obj_id object : objects)
             {
@@ -264,7 +270,6 @@ public class gcw_barricade extends script.base_script
         {
             gcw.signalAllParticipantsForDamage(self, gcw.GCW_DESTROY_BARRICADE, gcw.GCW_REB_DESTROY_BARRICADE_TASK, gcw.GCW_REB_DESTROY_BARRICADE_SIGNAL);
         }
-        return;
     }
 
     public void blog(String text) throws InterruptedException

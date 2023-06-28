@@ -1,5 +1,11 @@
 package script.theme_park.outbreak;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.factions;
 import script.library.groundquests;
@@ -11,12 +17,14 @@ public class blackwing_canister_destroy extends script.base_script
     public blackwing_canister_destroy()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         CustomerServiceLog("outbreak_themepark", "blackwing_canister_destroy.OnAttach() Canister (" + self + ") has the proper script");
         messageTo(self, "setUp", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int setUp(obj_id self, dictionary params) throws InterruptedException
     {
         CustomerServiceLog("outbreak_themepark", "blackwing_canister_destroy.setUp() Canister (" + self + ") is getting the player owner OID.");
@@ -29,6 +37,7 @@ public class blackwing_canister_destroy extends script.base_script
         messageTo(self, "blowUp", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int blowUp(obj_id self, dictionary params) throws InterruptedException
     {
         CustomerServiceLog("outbreak_themepark", "blackwing_canister_destroy.blowUp() blowUp (" + self + ") is blowing up. the player owner OID.");
@@ -118,14 +127,18 @@ public class blackwing_canister_destroy extends script.base_script
         if (npcTargets != null && npcTargets.length > 0)
         {
             CustomerServiceLog("outbreak_themepark", "beast_pathing.blowUp() Valid NPCs in radius.");
-            for (obj_id npcTarget : npcTargets) {
-                if (!isValidId(npcTarget) || !exists(npcTarget)) {
+            for (obj_id npcTarget : npcTargets)
+            {
+                if (!isValidId(npcTarget) || !exists(npcTarget))
+                {
                     continue;
                 }
-                if (!hasObjVar(npcTarget, factions.FACTION)) {
+                if (!hasObjVar(npcTarget, factions.FACTION))
+                {
                     continue;
                 }
-                if ((factions.getFaction(npcTarget)).equals("afflicted")) {
+                if ((factions.getFaction(npcTarget)).equals("afflicted"))
+                {
                     setPosture(npcTarget, POSTURE_INCAPACITATED);
                 }
             }

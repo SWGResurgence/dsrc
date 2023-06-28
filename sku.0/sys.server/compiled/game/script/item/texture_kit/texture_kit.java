@@ -1,5 +1,11 @@
 package script.item.texture_kit;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.pet_lib;
 import script.library.sui;
@@ -15,6 +21,7 @@ public class texture_kit extends script.base_script
     public static final String CONFIRM_TITLE = "@" + STF + ":confirm_title";
     public static final String CONFIRM_PROMPT = "@" + STF + ":confirm_prompt";
     public static final String PID_NAME = "texturePid";
+
     public texture_kit()
     {
     }

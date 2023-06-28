@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -23,6 +29,7 @@ public class cts extends script.base_script
     public static final String CTS_PAINTING_OBJVAR = "cts.greeter.painting";
     public static final String CTS_UNRESTRICTED_GIFT_BOX_OBJVAR = "cts.greeter.unrestricted_box";
     public static final String SCRIPTVAR_CTS_ITEM_ID = "ctsItemId";
+
     public cts()
     {
     }

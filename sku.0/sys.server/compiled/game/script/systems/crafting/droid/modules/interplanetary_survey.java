@@ -1,5 +1,11 @@
 package script.systems.crafting.droid.modules;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -42,6 +48,7 @@ public class interplanetary_survey extends script.base_script
                     "lok",
                     "yavin4"
             };
+
     public interplanetary_survey()
     {
     }
@@ -224,7 +231,7 @@ public class interplanetary_survey extends script.base_script
             String template = getTemplateName(content);
             if (template.contains("survey_tool"))
             {
-                if (surveyTemplateList.indexOf(template) == -1)
+                if (!surveyTemplateList.contains(template))
                 {
                     String resourceClass = getStringObjVar(content, "survey.resource_class");
                     surveyToolList.add(utils.packStringId(getNameFromTemplate(template)));
@@ -293,7 +300,7 @@ public class interplanetary_survey extends script.base_script
         {
             names[idx] = "mechanism_quality";
             int value = (int) getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + ".mechanism_quality");
-            attribs[idx] = "" + value;
+            attribs[idx] = String.valueOf(value);
             idx++;
             if (idx >= names.length)
             {

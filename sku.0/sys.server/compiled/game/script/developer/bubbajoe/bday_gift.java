@@ -4,6 +4,12 @@ package script.developer.bubbajoe;/*
 @Purpose: Cake slice script
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.buff;
 import script.library.collection;
@@ -16,6 +22,7 @@ public class bday_gift extends script.base_script
     private static final int BDAY_BURST_VAL = 83;
     public static int COOLDOWN_TIME = 14400 * 2;
     public static String NULL_DESC_PREFIX = "Cut from the most beautiful cake Master Abbub has ever made, this tasty slice will make you feel all cozy inside. \n\n\\#7FFFD4Happy Birthday, ";
+
     public int OnAttach(obj_id self)
     {
         setObjVar(self, "used.timestamp", getGameTime() - COOLDOWN_TIME);
@@ -53,6 +60,7 @@ public class bday_gift extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!hasObjVar(self, "bday_gift.consumed"))
@@ -82,8 +90,8 @@ public class bday_gift extends script.base_script
                 }
                 broadcast(player, "You have taken a few bites of this cake. However, you wish to preserve this to display to your friends the most fabulous cake made by Master Abbub, solely for you.");
                 setDescriptionStringId(self, new string_id(NULL_DESC_PREFIX + getPlayerFullName(player) + "!" + colors_hex.FOOTER));
-                setObjVar(self, "bday_gift.consumed",1);
-                setObjVar(self, "bday_gift.show_admire_menu",1);
+                setObjVar(self, "bday_gift.consumed", 1);
+                setObjVar(self, "bday_gift.show_admire_menu", 1);
                 setObjVar(self, "null_desc", NULL_DESC_PREFIX + getPlayerFullName(player) + "!" + colors_hex.FOOTER);
                 attachScript(self, "developer.bubbajoe.sync");
             }
@@ -103,6 +111,7 @@ public class bday_gift extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         if (hasObjVar(self, "bday_gift.consumed"))

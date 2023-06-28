@@ -1,5 +1,11 @@
 package script.npe;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.groundquests;
 import script.library.npe;
 import script.library.space_utils;
@@ -7,19 +13,23 @@ import script.*;
 
 public class ord_mantell_dungeon_terminal extends script.base_script
 {
+    public static final string_id LAUNCH = new string_id("npe", "leave_dungeon");
+
     public ord_mantell_dungeon_terminal()
     {
     }
-    public static final string_id LAUNCH = new string_id("npe", "leave_dungeon");
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.ITEM_USE, LAUNCH);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -40,6 +50,7 @@ public class ord_mantell_dungeon_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean checkGod(obj_id self) throws InterruptedException
     {
         if (isGod(self))

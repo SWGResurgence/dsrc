@@ -1,5 +1,11 @@
 package script.systems.beast;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -10,6 +16,7 @@ public class decoration_item extends script.base_script
     public static final string_id SID_CONVERT_TITLE = new string_id("incubator", "convert_pet_item_title");
     public static final string_id SID_REPORT_PET_CONVERSION_FAIL = new string_id("incubator", "report_pet_conversion_fail");
     public static final string_id PCOLOR = new string_id("sui", "set_primary_color");
+
     public decoration_item()
     {
     }

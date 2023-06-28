@@ -1,13 +1,16 @@
 package script.terminal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class cloning extends script.terminal.base.base_terminal
 {
-    public cloning()
-    {
-    }
     public static final String HANDLER_CLONE_CONFIRM = "handleCloneConfirm";
     public static final String HANDLER_CLONE_COUPON_CONFIRM = "handleCloneCouponConfirm";
     public static final string_id SID_SET_BIND_PT = new string_id("sui", "mnu_clone");
@@ -19,6 +22,10 @@ public class cloning extends script.terminal.base.base_terminal
     public static final string_id SID_HAVE_COUPON_NOT_AUTH = new string_id("base_player", "have_coupon_not_auth");
     public static final string_id SID_HAVE_COUPON_NOT_VALID = new string_id("base_player", "have_coupon_not_valid");
     public static final String CLONING_COUPON = "object/tangible/item/new_player/new_player_cloning_coupon.iff";
+    public cloning()
+    {
+    }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -31,7 +38,7 @@ public class cloning extends script.terminal.base.base_terminal
                 {
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     if (topMost == bound)
                     {
@@ -56,7 +63,7 @@ public class cloning extends script.terminal.base.base_terminal
                             sui.msgbox(self, player, promptCoupon, sui.YES_NO, titleCoupon, HANDLER_CLONE_COUPON_CONFIRM);
                             return SCRIPT_CONTINUE;
                         }
-                        else 
+                        else
                         {
                             String custLogMsg = "New Player Rewards: %TU tried to use a cloning facility coupon but isn't the owner. Rightful owner is %TT";
                             CustomerServiceLog("NEW_PLAYER_QUESTS", custLogMsg, player, owner);
@@ -67,7 +74,7 @@ public class cloning extends script.terminal.base.base_terminal
                         }
                     }
                 }
-                else 
+                else
                 {
                     String custLogMsg = "New Player Rewards: %TU tried to use a cloning facility coupon it is invalid - does not have an owner.";
                     CustomerServiceLog("NEW_PLAYER_QUESTS", custLogMsg, player);
@@ -95,6 +102,7 @@ public class cloning extends script.terminal.base.base_terminal
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleCloneCouponConfirm(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -106,27 +114,27 @@ public class cloning extends script.terminal.base.base_terminal
         switch (btnPressed)
         {
             case sui.BP_OK:
-            queueCommand(player, (727283009), self, "", COMMAND_PRIORITY_DEFAULT);
-            break;
+                queueCommand(player, (727283009), self, "", COMMAND_PRIORITY_DEFAULT);
+                break;
             case sui.BP_CANCEL:
-            utils.removeScriptVar(player, cloninglib.SCRVAR_CLONE_COUPON);
-            if (!cloninglib.verifyFundsForCloning(player))
-            {
-                return SCRIPT_CONTINUE;
-            }
-            String prompt = utils.packStringId(SID_CONFIRM_PROMPT);
-            String title = utils.packStringId(SID_CONFIRM_TITLE);
-            sui.msgbox(self, player, prompt, sui.YES_NO, title, HANDLER_CLONE_CONFIRM);
-            break;
+                utils.removeScriptVar(player, cloninglib.SCRVAR_CLONE_COUPON);
+                if (!cloninglib.verifyFundsForCloning(player))
+                {
+                    return SCRIPT_CONTINUE;
+                }
+                String prompt = utils.packStringId(SID_CONFIRM_PROMPT);
+                String title = utils.packStringId(SID_CONFIRM_TITLE);
+                sui.msgbox(self, player, prompt, sui.YES_NO, title, HANDLER_CLONE_CONFIRM);
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleCloneConfirm(obj_id self, dictionary params) throws InterruptedException
     {
         int btnPressed = sui.getIntButtonPressed(params);
-        switch (btnPressed)
+        if (btnPressed == sui.BP_CANCEL)
         {
-            case sui.BP_CANCEL:
             return SCRIPT_CONTINUE;
         }
         obj_id player = sui.getPlayerId(params);
@@ -137,6 +145,7 @@ public class cloning extends script.terminal.base.base_terminal
         queueCommand(player, (727283009), self, "", COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
+
     public int handleRequestedClone(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))

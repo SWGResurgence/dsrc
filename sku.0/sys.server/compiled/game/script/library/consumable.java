@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 public class consumable extends script.base_script
@@ -53,6 +59,7 @@ public class consumable extends script.base_script
     public static final int MT_HEAL_ENHANCE = 4;
     public static final int MT_REVIVE_PLAYER = 5;
     public static final String FORAGED_DATA = "datatables/foraging/forage_global.iff";
+
     public consumable()
     {
     }

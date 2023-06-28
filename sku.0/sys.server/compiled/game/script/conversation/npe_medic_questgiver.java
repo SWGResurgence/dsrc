@@ -1,85 +1,110 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class npe_medic_questgiver extends script.base_script
 {
+    public static String c_stringFile = "conversation/npe_medic_questgiver";
+
     public npe_medic_questgiver()
     {
     }
-    public static String c_stringFile = "conversation/npe_medic_questgiver";
+
     public boolean npe_medic_questgiver_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean npe_medic_questgiver_condition_isTaskCompleteBacta(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "npe_medic", "npe_medic_return");
     }
+
     public boolean npe_medic_questgiver_condition_canTakeDna(obj_id player, obj_id npc) throws InterruptedException
     {
         return (!groundquests.isQuestActiveOrComplete(player, "npe_side_dungeon_dna") && npe_medic_questgiver_condition_hasCompletedTemplate(player, npc));
     }
+
     public boolean npe_medic_questgiver_condition_isTaskCompleteDna(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "npe_side_dungeon_dna", "npe_side_dungeon_dna_signal");
     }
+
     public boolean npe_medic_questgiver_condition_isMedicTaskActive(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "npe_medic", "npe_medic_heal_1");
     }
+
     public boolean npe_medic_questgiver_condition_hasCompletedMedicQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "npe_medic");
     }
+
     public boolean npe_medic_questgiver_condition_isDnaTaskActive(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "npe_side_dungeon_dna", "npe_side_dungeon_dna_wait");
     }
+
     public boolean npe_medic_questgiver_condition_isAnyTaskActive(obj_id player, obj_id npc) throws InterruptedException
     {
         return (npe_medic_questgiver_condition_isMedicTaskActive(player, npc) || npe_medic_questgiver_condition_isDnaTaskActive(player, npc));
     }
+
     public boolean npe_medic_questgiver_condition_needsPack(obj_id player, obj_id npc) throws InterruptedException
     {
         boolean needsItem = false;
         boolean hasItem = false;
         obj_id[] playerStuff = getInventoryAndEquipment(player);
-        for (obj_id obj_id : playerStuff) {
+        for (obj_id obj_id : playerStuff)
+        {
             String templateName = static_item.getStaticItemName(obj_id);
-            if (templateName != null) {
-                if (templateName.equals("item_bactapack_01_01")) {
+            if (templateName != null)
+            {
+                if (templateName.equals("item_bactapack_01_01"))
+                {
                     hasItem = true;
                 }
             }
         }
-        if (groundquests.isTaskActive(player, "npe_medic", "npe_medic_heal_1") && hasItem == false)
+        if (groundquests.isTaskActive(player, "npe_medic", "npe_medic_heal_1") && !hasItem)
         {
             needsItem = true;
         }
         return needsItem;
     }
+
     public boolean npe_medic_questgiver_condition_hasCompletedSolo(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "npe_solo_profession");
     }
+
     public boolean npe_medic_questgiver_condition_needsToFinishTraining(obj_id player, obj_id npc) throws InterruptedException
     {
         return (!npe_medic_questgiver_condition_hasCompletedTemplate(player, npc) && npe_medic_questgiver_condition_isTaskCompleteBacta(player, npc));
     }
+
     public boolean npe_medic_questgiver_condition_pointedToHere(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "npe_pointer_medic");
     }
+
     public boolean npe_medic_questgiver_condition_cantHelp(obj_id player, obj_id npc) throws InterruptedException
     {
         return !npe_medic_questgiver_condition_pointedToHere(player, npc) && !npe_medic_questgiver_condition_hasCompletedTemplate(player, npc);
     }
+
     public boolean npe_medic_questgiver_condition_hasCompletedTemplate(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasObjVar(player, "npe.finishedTemplate");
     }
+
     public void npe_medic_questgiver_action_giveMedicQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "npe_medic");
@@ -87,17 +112,20 @@ public class npe_medic_questgiver extends script.base_script
         npe.giveHealPopUp(player, npc);
         boolean hasItem = false;
         obj_id[] playerStuff = getInventoryAndEquipment(player);
-        for (obj_id obj_id : playerStuff) {
+        for (obj_id obj_id : playerStuff)
+        {
             String templateName = static_item.getStaticItemName(obj_id);
-            if (templateName != null) {
-                if (templateName.equals("item_bactapack_01_01")) {
+            if (templateName != null)
+            {
+                if (templateName.equals("item_bactapack_01_01"))
+                {
                     hasItem = true;
                     newbieTutorialSetToolbarElement(player, 5, obj_id);
                     newbieTutorialHighlightUIElement(player, "/GroundHUD.Toolbar.volume.5", 5.0f);
                 }
             }
         }
-        if (hasItem == false)
+        if (!hasItem)
         {
             obj_id bactaPack = static_item.createNewItemFunction("item_bactapack_01_01", player);
             obj_id[] items = new obj_id[1];
@@ -111,11 +139,13 @@ public class npe_medic_questgiver extends script.base_script
             messageTo(player, "makeUiElementAnimate", dic, 0.25f, true);
         }
     }
+
     public void npe_medic_questgiver_action_giveSignalHealDone(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "npe_medic_done_healing");
         groundquests.sendSignal(player, "finished_aja");
     }
+
     public void npe_medic_questgiver_action_giveNewPack(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id bactaPack = static_item.createNewItemFunction("item_bactapack_01_01", player);
@@ -129,10 +159,12 @@ public class npe_medic_questgiver extends script.base_script
         dic.put("time", 5.0f);
         messageTo(player, "makeUiElementAnimate", dic, 0.25f, true);
     }
+
     public void npe_medic_questgiver_action_facePlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
     }
+
     public void npe_medic_questgiver_action_giveDnaQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "npe_side_dungeon_dna");
@@ -142,10 +174,12 @@ public class npe_medic_questgiver extends script.base_script
             setObjVar(player, npe.QUEST_REWORK_VAR, npe.QUEST_ENUMERATION);
         }
     }
+
     public void npe_medic_questgiver_action_giveSignalDna(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "npe_side_dungeon_dna_signal");
     }
+
     public int npe_medic_questgiver_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_52"))
@@ -165,6 +199,7 @@ public class npe_medic_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_medic_questgiver_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_65"))
@@ -181,6 +216,7 @@ public class npe_medic_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_medic_questgiver_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_96"))
@@ -207,7 +243,7 @@ public class npe_medic_questgiver extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_55");
@@ -220,7 +256,7 @@ public class npe_medic_questgiver extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_medic_questgiver.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -252,7 +288,7 @@ public class npe_medic_questgiver extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_54");
@@ -265,7 +301,7 @@ public class npe_medic_questgiver extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_medic_questgiver.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -285,6 +321,7 @@ public class npe_medic_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_medic_questgiver_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_55"))
@@ -312,6 +349,7 @@ public class npe_medic_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_medic_questgiver_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_54"))
@@ -331,7 +369,7 @@ public class npe_medic_questgiver extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_62");
@@ -340,7 +378,7 @@ public class npe_medic_questgiver extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_medic_questgiver.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -365,7 +403,7 @@ public class npe_medic_questgiver extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_37");
@@ -374,7 +412,7 @@ public class npe_medic_questgiver extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_medic_questgiver.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -384,6 +422,7 @@ public class npe_medic_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_medic_questgiver_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_62"))
@@ -399,6 +438,7 @@ public class npe_medic_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_medic_questgiver_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_37"))
@@ -418,7 +458,7 @@ public class npe_medic_questgiver extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_62");
@@ -427,7 +467,7 @@ public class npe_medic_questgiver extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_medic_questgiver.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -437,6 +477,7 @@ public class npe_medic_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_medic_questgiver_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_32"))
@@ -456,7 +497,7 @@ public class npe_medic_questgiver extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -465,7 +506,7 @@ public class npe_medic_questgiver extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_medic_questgiver.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -475,6 +516,7 @@ public class npe_medic_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_medic_questgiver_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_106"))
@@ -490,6 +532,7 @@ public class npe_medic_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_medic_questgiver_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_44"))
@@ -509,7 +552,7 @@ public class npe_medic_questgiver extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_129");
@@ -518,7 +561,7 @@ public class npe_medic_questgiver extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_medic_questgiver.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -528,6 +571,7 @@ public class npe_medic_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_medic_questgiver_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_129"))
@@ -543,6 +587,7 @@ public class npe_medic_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -555,6 +600,7 @@ public class npe_medic_questgiver extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -563,6 +609,7 @@ public class npe_medic_questgiver extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -571,18 +618,21 @@ public class npe_medic_questgiver extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.npe_medic_questgiver");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -605,7 +655,7 @@ public class npe_medic_questgiver extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_52");
@@ -613,7 +663,7 @@ public class npe_medic_questgiver extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_medic_questgiver.branchId", 1);
                 npcStartConversation(player, npc, "npe_medic_questgiver", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -635,7 +685,7 @@ public class npe_medic_questgiver extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_65");
@@ -643,7 +693,7 @@ public class npe_medic_questgiver extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_medic_questgiver.branchId", 3);
                 npcStartConversation(player, npc, "npe_medic_questgiver", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -679,7 +729,7 @@ public class npe_medic_questgiver extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_96");
@@ -699,7 +749,7 @@ public class npe_medic_questgiver extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "npe_medic_questgiver", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -732,7 +782,7 @@ public class npe_medic_questgiver extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_32");
@@ -740,7 +790,7 @@ public class npe_medic_questgiver extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_medic_questgiver.branchId", 15);
                 npcStartConversation(player, npc, "npe_medic_questgiver", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -762,7 +812,7 @@ public class npe_medic_questgiver extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_44");
@@ -770,7 +820,7 @@ public class npe_medic_questgiver extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_medic_questgiver.branchId", 18);
                 npcStartConversation(player, npc, "npe_medic_questgiver", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -800,6 +850,7 @@ public class npe_medic_questgiver extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("npe_medic_questgiver"))

@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 import java.util.Arrays;
@@ -144,6 +150,7 @@ public class battlefield extends script.base_script
     public static final String STRING_TRIG_BOUNDARY = "battlefield_boundary";
     public static final String STRING_TRIG_OUTER_PERIMETER = "battlefield_outer_perimeter";
     public static final String GAME_SCRIPT_PATH = "systems.battlefield.game_";
+
     public battlefield()
     {
     }

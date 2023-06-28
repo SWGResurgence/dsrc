@@ -1,5 +1,11 @@
 package script.theme_park.poi.tatooine.tusken_raider;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,16 +14,19 @@ public class tusken_spawner extends script.theme_park.poi.base
     public tusken_spawner()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "doSpawning", null, 10, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "doSpawning", null, 10, true);
         return SCRIPT_CONTINUE;
     }
+
     public int doSpawning(obj_id self, dictionary params) throws InterruptedException
     {
         int tuskensSpawned = getIntObjVar(self, "tuskensSpawned");

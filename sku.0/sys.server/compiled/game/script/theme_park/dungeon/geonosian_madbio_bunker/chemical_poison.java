@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.geonosian_madbio_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.dot;
 import script.library.utils;
@@ -9,10 +15,12 @@ import script.string_id;
 
 public class chemical_poison extends script.base_script
 {
+    public static final String MSGS = "dungeon/geonosian_madbio";
+
     public chemical_poison()
     {
     }
-    public static final String MSGS = "dungeon/geonosian_madbio";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         createTriggerVolume("poison_trap", 4.0f, true);
@@ -24,34 +32,35 @@ public class chemical_poison extends script.base_script
                 makeShutOffSwitches(self);
             }
         }
-        else 
+        else
         {
             makeShutOffSwitches(self);
         }
         messageTo(self, "showGas", null, 1, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id whoTriggeredMe) throws InterruptedException
     {
         if (!isPlayer(whoTriggeredMe))
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             if (hasObjVar(self, "trap_off"))
             {
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
-                if (checkForGasMask(whoTriggeredMe) != true)
+                if (!checkForGasMask(whoTriggeredMe))
                 {
                     string_id toxic = new string_id(MSGS, "toxic_fumes");
                     sendSystemMessage(whoTriggeredMe, toxic);
                     dot.applyDotEffect(whoTriggeredMe, self, dot.DOT_POISON, "geonosian_poison_cloud", HEALTH, 100, 150, 300);
                 }
-                else 
+                else
                 {
                     string_id gasmask = new string_id(MSGS, "gasmask");
                     sendSystemMessage(whoTriggeredMe, gasmask);
@@ -60,6 +69,7 @@ public class chemical_poison extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trapShutOff(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id trap = getObjIdObjVar(self, "trap");
@@ -70,6 +80,7 @@ public class chemical_poison extends script.base_script
         messageTo(self, "turnGasOn", null, 20, true);
         return SCRIPT_CONTINUE;
     }
+
     public int turnGasOn(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "trap_off"))
@@ -79,6 +90,7 @@ public class chemical_poison extends script.base_script
         messageTo(self, "showGas", null, 2, true);
         return SCRIPT_CONTINUE;
     }
+
     public void makeShutOffSwitches(obj_id self) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);
@@ -92,8 +104,8 @@ public class chemical_poison extends script.base_script
         setObjVar(self, "shutoff1", shutoff);
         setObjVar(self, "valve", valve);
         setYaw(shutoff, 180);
-        return;
     }
+
     public int showGas(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "trap_off"))
@@ -108,17 +120,21 @@ public class chemical_poison extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean checkForGasMask(obj_id player) throws InterruptedException
     {
         obj_id[] objContents = utils.getContents(player, true);
         if (objContents != null)
         {
-            for (obj_id objContent : objContents) {
+            for (obj_id objContent : objContents)
+            {
                 String strItemTemplate = getTemplateName(objContent);
-                if (strItemTemplate.equals("object/tangible/wearables/goggles/rebreather.iff")) {
+                if (strItemTemplate.equals("object/tangible/wearables/goggles/rebreather.iff"))
+                {
                     obj_id mask = objContent;
                     obj_id holder = getContainedBy(mask);
-                    if (holder == player) {
+                    if (holder == player)
+                    {
                         return true;
                     }
                 }

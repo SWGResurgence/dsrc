@@ -1,5 +1,11 @@
 package script.theme_park.singing_mountain;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,11 +14,13 @@ public class stronghold extends script.base_script
     public stronghold()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         spawnEveryone(self);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnEveryone(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "spawn_table"))
@@ -20,16 +28,16 @@ public class stronghold extends script.base_script
             setObjVar(self, "spawn_table", "datatables/spawning/dungeon/singing_mountain_stronghold.iff");
         }
         messageTo(self, "scriptFix", null, 2, false);
-        return;
     }
+
     public int scriptFix(obj_id self, dictionary params) throws InterruptedException
     {
         permissionsMakePublic(self);
         if (!hasScript(self, "theme_park.dungeon.generic_spawner"))
         {
-            
+
         }
-        
+
         {
             attachScript(self, "theme_park.dungeon.generic_spawner");
         }

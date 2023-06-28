@@ -1,68 +1,75 @@
 package script.theme_park.racing.lok;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class race_coordinator extends script.base_script
 {
+    public static final String RACING_STF = "theme_park/racing/racing";
+    public static final int[] CHECK_POINT =
+            {
+                    946,
+                    0,
+                    4634,
+                    1065,
+                    0,
+                    3156,
+                    3825,
+                    0,
+                    -540,
+                    3337,
+                    0,
+                    -2425,
+                    3364,
+                    0,
+                    -3819,
+                    2962,
+                    0,
+                    -4546,
+                    3080,
+                    0,
+                    -4671,
+                    3009,
+                    0,
+                    -4798,
+                    2893,
+                    0,
+                    -4782,
+                    2744,
+                    0,
+                    -4458,
+                    509,
+                    0,
+                    -2924,
+                    -497,
+                    0,
+                    -624,
+                    427,
+                    0,
+                    705,
+                    838,
+                    0,
+                    2738,
+                    -19,
+                    0,
+                    4059,
+                    -26,
+                    0,
+                    4558,
+                    275,
+                    0,
+                    5073
+            };
     public race_coordinator()
     {
     }
-    public static final String RACING_STF = "theme_park/racing/racing";
-    public static final int[] CHECK_POINT = 
-    {
-        946,
-        0,
-        4634,
-        1065,
-        0,
-        3156,
-        3825,
-        0,
-        -540,
-        3337,
-        0,
-        -2425,
-        3364,
-        0,
-        -3819,
-        2962,
-        0,
-        -4546,
-        3080,
-        0,
-        -4671,
-        3009,
-        0,
-        -4798,
-        2893,
-        0,
-        -4782,
-        2744,
-        0,
-        -4458,
-        509,
-        0,
-        -2924,
-        -497,
-        0,
-        -624,
-        427,
-        0,
-        705,
-        838,
-        0,
-        2738,
-        -19,
-        0,
-        4059,
-        -26,
-        0,
-        4558,
-        275,
-        0,
-        5073
-    };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
@@ -76,6 +83,7 @@ public class race_coordinator extends script.base_script
         messageTo(self, "resetDailyTime", null, 60 * 60 * 24, false);
         return SCRIPT_CONTINUE;
     }
+
     public int resetDailyTime(obj_id self, dictionary params) throws InterruptedException
     {
         float topRecord = 2885.0f;
@@ -85,6 +93,7 @@ public class race_coordinator extends script.base_script
         messageTo(self, "resetDailyTime", null, 60 * 60 * 24, false);
         return SCRIPT_CONTINUE;
     }
+
     public int messageStartMission(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -104,7 +113,7 @@ public class race_coordinator extends script.base_script
         {
             returnLoc = getLocation(npc);
         }
-        else 
+        else
         {
             returnLoc = getLocation(building);
         }
@@ -129,7 +138,7 @@ public class race_coordinator extends script.base_script
         {
             messageTo(player, "handleRestartMission", params, 0, false);
         }
-        else 
+        else
         {
             attachScript(player, "theme_park.racing.lok.player_racing");
         }
@@ -137,6 +146,7 @@ public class race_coordinator extends script.base_script
         CustomerServiceLog("Racing", "Player " + playerName + " [" + player + "] started the Lok Marathon race.");
         return SCRIPT_CONTINUE;
     }
+
     public int messageRegisterBest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -160,9 +170,9 @@ public class race_coordinator extends script.base_script
             {
                 if (!badge.hasBadge(player, "bdg_racing_lok_marathon"))
                 {
-                    
+
                 }
-                
+
                 {
                     badge.grantBadge(player, "bdg_racing_lok_marathon");
                 }
@@ -213,6 +223,7 @@ public class race_coordinator extends script.base_script
         CustomerServiceLog("Racing", "Player " + playerName + " [" + player + "] finished the Lok Marathon race in " + bestTime + " seconds.");
         return SCRIPT_CONTINUE;
     }
+
     public int messageDisplayLeader(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -221,9 +232,10 @@ public class race_coordinator extends script.base_script
         String playerName = getStringObjVar(npc, "racing.lok.topRecordName");
         string_id currentRecordHolder = new string_id(RACING_STF, "current_record_holder");
         sendSystemMessage(player, currentRecordHolder);
-        sendSystemMessage(player, "" + playerName + " with a time of " + topRecord + " seconds.", null);
+        sendSystemMessage(player, playerName + " with a time of " + topRecord + " seconds.", null);
         return SCRIPT_CONTINUE;
     }
+
     public int messageWhatsMyTime(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -238,6 +250,7 @@ public class race_coordinator extends script.base_script
         chat.publicChat(self, null, null, null, myBestTime);
         return SCRIPT_CONTINUE;
     }
+
     public int messageErasePersonalBest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");

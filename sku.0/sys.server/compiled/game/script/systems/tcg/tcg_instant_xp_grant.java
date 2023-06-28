@@ -1,5 +1,11 @@
 package script.systems.tcg;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.collection;
 import script.library.prose;
 import script.library.utils;
@@ -10,6 +16,7 @@ public class tcg_instant_xp_grant extends script.base_script
 {
     public static final String TBL_PLAYER_LEVEL_XP = "datatables/player/player_level.iff";
     public static final string_id SID_REWARD_XP = new string_id("collection", "reward_xp_amount");
+
     public tcg_instant_xp_grant()
     {
     }

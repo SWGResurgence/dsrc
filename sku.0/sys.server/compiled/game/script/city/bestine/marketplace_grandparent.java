@@ -1,20 +1,29 @@
 package script.city.bestine;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.location;
 import script.obj_id;
 
 public class marketplace_grandparent extends script.base_script
 {
+    public static final String MASTER_OBJECT = "object/tangible/poi/tatooine/bestine/bestine_marketplace_spawner_object.iff";
+
     public marketplace_grandparent()
     {
     }
-    public static final String MASTER_OBJECT = "object/tangible/poi/tatooine/bestine/bestine_marketplace_spawner_object.iff";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "bootStrap", null, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int bootStrap(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] objMarketplaceSpawners = getAllObjectsWithTemplate(getLocation(self), 10, MASTER_OBJECT);
@@ -22,7 +31,7 @@ public class marketplace_grandparent extends script.base_script
         {
             setObjVar(self, "objMarketplaceSpawner", objMarketplaceSpawners[0]);
         }
-        else 
+        else
         {
             location locTest = getLocation(self);
             locTest.x = locTest.x + 1;

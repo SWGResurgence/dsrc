@@ -1,5 +1,11 @@
 package script.systems.crafting.droid;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.draft_schematic;
 import script.library.craftinglib;
@@ -15,6 +21,7 @@ public class crafting_base_droid extends script.systems.crafting.crafting_base
     public static final String TBL_MOB_STAT_BALANCE = "datatables/mob/stat_balance.iff";
     public static final String TBL_DROID_COMBAT = "datatables/combat/droid_combat_capabilities.iff";
     public static final String DROID_RANGED_WEAPON = "object/weapon/ranged/vehicle/droid_weapon.iff";
+
     public crafting_base_droid()
     {
     }

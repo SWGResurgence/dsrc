@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.location;
 import script.obj_id;
@@ -90,6 +96,7 @@ public class fs_dyn_village extends script.base_script
     public static final String SCRIPT_VAR_DATA_REQUEST = "fs_quest.data_request";
     public static final String SCRIPT_VAR_PARAMS_REQUEST = "fs_quest.data_request_params";
     public static final String SCRIPT_VAR_HANDLER_REQ = "fs_quest.handler_request";
+
     public fs_dyn_village()
     {
     }

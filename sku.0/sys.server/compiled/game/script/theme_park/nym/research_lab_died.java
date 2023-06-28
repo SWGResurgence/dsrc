@@ -1,5 +1,11 @@
 package script.theme_park.nym;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,6 +14,7 @@ public class research_lab_died extends script.base_script
     public research_lab_died()
     {
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id mom = getObjIdObjVar(self, "mom");

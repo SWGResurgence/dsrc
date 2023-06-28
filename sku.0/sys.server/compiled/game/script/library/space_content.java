@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 public class space_content extends script.base_script
@@ -12,6 +18,7 @@ public class space_content extends script.base_script
     public static final String LAUNCH_LOCATION_COLUMN_GROUND_Z = "groundZ";
     public static final string_id SID_BAD_TRAVEL_POINT = new string_id("space/space_interaction", "bad_travel_point");
     public static final string_id SID_NO_HOMING_BEACON = new string_id("space/space_interaction", "no_homing_beacon");
+
     public space_content()
     {
     }

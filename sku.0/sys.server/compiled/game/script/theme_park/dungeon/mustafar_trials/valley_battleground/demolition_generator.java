@@ -1,14 +1,17 @@
 package script.theme_park.dungeon.mustafar_trials.valley_battleground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.trial;
 import script.library.utils;
 import script.*;
 
 public class demolition_generator extends script.base_script
 {
-    public demolition_generator()
-    {
-    }
     public static final String DATA_TABLE = "datatables/combat/npc_landmines.iff";
     public static final String STF = "npc_landmines";
     public static final string_id PLACE_CHARGE = new string_id(STF, "place_charge");
@@ -16,6 +19,10 @@ public class demolition_generator extends script.base_script
     public static final String DET_TEMPLATE = "object/tangible/dungeon/mustafar/valley_battlefield/demo_detonator.iff";
     public static final String DET_GENERATOR = "object/tangible/dungeon/mustafar/valley_battlefield/demo_pack.iff";
     public static final boolean LOGGING = false;
+    public demolition_generator()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.verifyLocationBasedDestructionAnchor(self, 500))
@@ -30,6 +37,7 @@ public class demolition_generator extends script.base_script
         mi.addRootMenu(menu_info_types.ITEM_USE, PLACE_CHARGE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!hasBeenPickedUp(self))
@@ -43,14 +51,17 @@ public class demolition_generator extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public void regenerateInPlayerInventory(obj_id player, obj_id self) throws InterruptedException
     {
         obj_id detPack = createObjectInInventoryAllowOverload(DET_GENERATOR, player);
@@ -63,14 +74,12 @@ public class demolition_generator extends script.base_script
         utils.setScriptVar(detPack, "currentMineCount", utils.getIntScriptVar(self, "currentMineCount"));
         destroyObject(self);
     }
+
     public boolean hasBeenPickedUp(obj_id self) throws InterruptedException
     {
-        if (utils.hasScriptVar(self, "inWorld"))
-        {
-            return false;
-        }
-        return true;
+        return !utils.hasScriptVar(self, "inWorld");
     }
+
     public void placeDetonationCharge(obj_id player) throws InterruptedException
     {
         location chargePoint = getLocation(player);
@@ -81,8 +90,8 @@ public class demolition_generator extends script.base_script
             return;
         }
         generateDetonationDevice(player, charge);
-        return;
     }
+
     public obj_id createCharge(location spawnPoint, obj_id player) throws InterruptedException
     {
         String chargeLevel = "demolitionCharge_" + getCommandoModifyLevel(player);
@@ -100,24 +109,28 @@ public class demolition_generator extends script.base_script
         attachScript(charge, "theme_park.dungeon.mustafar_trials.valley_battleground.demolition_pack");
         return charge;
     }
+
     public int getCommandoModifyLevel(obj_id player) throws InterruptedException
     {
         int level = 0;
-        String[] commandoLevel = 
+        String[] commandoLevel =
+                {
+                        "class_commando_phase1_novice",
+                        "class_commando_phase2_novice",
+                        "class_commando_phase3_novice",
+                        "class_commando_phase4_novice",
+                        "class_commando_phase4_master"
+                };
+        for (String s : commandoLevel)
         {
-            "class_commando_phase1_novice",
-            "class_commando_phase2_novice",
-            "class_commando_phase3_novice",
-            "class_commando_phase4_novice",
-            "class_commando_phase4_master"
-        };
-        for (String s : commandoLevel) {
-            if (hasSkill(player, s)) {
+            if (hasSkill(player, s))
+            {
                 level += 1;
             }
         }
         return level;
     }
+
     public void generateDetonationDevice(obj_id player, obj_id charge) throws InterruptedException
     {
         obj_id detonator = createObjectInInventoryAllowOverload(DET_TEMPLATE, player);
@@ -132,17 +145,19 @@ public class demolition_generator extends script.base_script
         utils.verifyLocationBasedDestructionAnchor(detonator, here, 500);
         decrimentMineCount(getSelf());
     }
+
     public int getCurrentMineCount(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "currentMineCount"))
         {
             return utils.getIntScriptVar(self, "currentMineCount");
         }
-        else 
+        else
         {
             return 0;
         }
     }
+
     public int decrimentMineCount(obj_id self) throws InterruptedException
     {
         int current = getCurrentMineCount(self);
@@ -156,6 +171,7 @@ public class demolition_generator extends script.base_script
         utils.setScriptVar(self, "currentMineCount", current);
         return getCurrentMineCount(self);
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING || trial.VALLEY_LOGGING)

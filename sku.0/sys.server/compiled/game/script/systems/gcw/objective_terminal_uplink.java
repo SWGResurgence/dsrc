@@ -1,5 +1,11 @@
 package script.systems.gcw;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -12,6 +18,7 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
     public static final int STAGE_NONE = 0;
     public static final int STAGE_BAND = 1;
     public static final int STAGE_FREQ = 2;
+
     public objective_terminal_uplink()
     {
     }

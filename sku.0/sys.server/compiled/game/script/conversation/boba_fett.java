@@ -1,162 +1,178 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class boba_fett extends script.base_script
 {
+    public static String c_stringFile = "conversation/boba_fett";
+
     public boba_fett()
     {
     }
-    public static String c_stringFile = "conversation/boba_fett";
+
     public boolean boba_fett_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean boba_fett_condition_AcknowledgeCheck(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (hasObjVar(player, "mand.acknowledge"))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(player, "mand.acknowledge");
     }
+
     public boolean boba_fett_condition_dungeonInactive(obj_id player, obj_id npc) throws InterruptedException
     {
         String isDungeonActive = getConfigSetting("Dungeon", "Death_Watch");
-        if (isDungeonActive == null || isDungeonActive.equals("false") || isDungeonActive.equals("0"))
-        {
-            return true;
-        }
-        return false;
+        return isDungeonActive == null || isDungeonActive.equals("false") || isDungeonActive.equals("0");
     }
+
     public boolean boba_fett_condition_hasCompletedQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!groundquests.hasCompletedQuest(player, "ep3_clone_relics_boba_fett_7") && groundquests.hasCompletedQuest(player, "ep3_clone_relics_boba_fett_1"))
         {
             return true;
         }
-        else if (groundquests.isQuestActive(player, "ep3_clone_relics_boba_fett_1"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        else return groundquests.isQuestActive(player, "ep3_clone_relics_boba_fett_1");
     }
+
     public boolean boba_fett_condition_hasCompletedQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasWonQuest(player, "destroy_surpriseattack", "ep3_clone_relics_boba_fett_3") && !groundquests.hasCompletedQuest(player, "ep3_clone_relics_boba_fett_7"));
     }
+
     public boolean boba_fett_condition_onQuestFourTaskFive(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "ep3_clone_relics_boba_fett_4", "haveGun"));
     }
+
     public boolean boba_fett_condition_hasCompletedQuestFour(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "ep3_clone_relics_boba_fett_4") && !groundquests.hasCompletedQuest(player, "ep3_clone_relics_boba_fett_7"));
     }
+
     public boolean boba_fett_condition_onQuestSixTaskTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "ep3_clone_relics_boba_fett_6", 1));
     }
+
     public boolean boba_fett_condition_onQuestFiveOrSix(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isQuestActive(player, "ep3_clone_relics_boba_fett_5") || groundquests.isQuestActive(player, "ep3_clone_relics_boba_fett_6"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.isQuestActive(player, "ep3_clone_relics_boba_fett_5") || groundquests.isQuestActive(player, "ep3_clone_relics_boba_fett_6");
     }
+
     public boolean boba_fett_condition_completedQuestSix(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "ep3_clone_relics_boba_fett_6") && !groundquests.hasCompletedQuest(player, "ep3_clone_relics_boba_fett_7"));
     }
+
     public boolean boba_fett_condition_onQuestSevenTaskNine(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "ep3_clone_relics_boba_fett_7", "returned"));
     }
+
     public boolean boba_fett_condition_onQuestSeven(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "ep3_clone_relics_boba_fett_7"));
     }
+
     public boolean boba_fett_condition_completedQuestSeven(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "ep3_clone_relics_boba_fett_7"));
     }
+
     public boolean boba_fett_condition_onQuestFour(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "ep3_clone_relics_boba_fett_4"));
     }
+
     public boolean boba_fett_condition_isGm(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasObjVar(player, "gm"));
     }
+
     public boolean boba_fett_condition_hasEp3(obj_id player, obj_id npc) throws InterruptedException
     {
         return features.hasEpisode3Expansion(player);
     }
+
     public boolean boba_fett_condition_hasCompletetedQuestFive(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "ep3_clone_relics_boba_fett_5") && !groundquests.hasCompletedQuest(player, "ep3_clone_relics_boba_fett_7");
     }
+
     public void boba_fett_action_Acknowledge(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "mand.acknowledge", true);
         faceTo(npc, player);
     }
+
     public void boba_fett_action_face_to(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
     }
+
     public void boba_fett_action_grantQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_clone_relics_boba_fett_1");
     }
+
     public void boba_fett_action_signalTalkedFett(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "talkedToFett");
     }
+
     public void boba_fett_action_grantQuestFive(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_clone_relics_boba_fett_5");
     }
+
     public void boba_fett_action_reGrantQuestSix(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_clone_relics_boba_fett_6");
     }
+
     public void boba_fett_action_signalDatapad(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "datapadReturned");
     }
+
     public void boba_fett_action_signalCarbine(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "carbine");
     }
+
     public void boba_fett_action_signalRifle(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "rifle");
     }
+
     public void boba_fett_action_grantQuestSeven(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_clone_relics_boba_fett_7");
     }
+
     public void boba_fett_action_clearQuestSeven(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "ep3_clone_relics_boba_fett_7");
     }
+
     public void boba_fett_action_signalHelmet(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "receivedReward");
     }
+
     public void boba_fett_action_signalReward(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "receivedReward");
     }
+
     public void boba_fett_action_removeQuest1(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "ep3_clone_relics_boba_fett_1");
@@ -165,30 +181,37 @@ public class boba_fett extends script.base_script
         space_quest.clearQuestFlags(player, "recovery", "ep3_clone_relics_boba_fett_2");
         space_quest.clearQuestFlags(player, "destroy_surpriseattack", "ep3_clone_relics_boba_fett_3");
     }
+
     public void boba_fett_action_removeQuest2(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "ep3_clone_relics_boba_fett_2");
     }
+
     public void boba_fett_action_removeQuest3(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "ep3_clone_relics_boba_fett_3");
     }
+
     public void boba_fett_action_removeQuest4(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "ep3_clone_relics_boba_fett_4");
     }
+
     public void boba_fett_action_removeQuest5(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "ep3_clone_relics_boba_fett_5");
     }
+
     public void boba_fett_action_removeQuest6(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "ep3_clone_relics_boba_fett_6");
     }
+
     public void boba_fett_action_removeQuest7(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "ep3_clone_relics_boba_fett_7");
     }
+
     public void boba_fett_action_removeQuestAll(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "ep3_clone_relics_boba_fett_1");
@@ -201,10 +224,12 @@ public class boba_fett extends script.base_script
         space_quest.clearQuestFlags(player, "recovery", "ep3_clone_relics_boba_fett_2");
         space_quest.clearQuestFlags(player, "destroy_surpriseattack", "ep3_clone_relics_boba_fett_3");
     }
+
     public float boba_fett_tokenDF_tokenDF0001(obj_id player, obj_id npc) throws InterruptedException
     {
         return 0.0f;
     }
+
     public int boba_fett_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_462"))
@@ -225,7 +250,7 @@ public class boba_fett extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_466");
@@ -234,7 +259,7 @@ public class boba_fett extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.boba_fett.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -308,7 +333,7 @@ public class boba_fett extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_672");
@@ -345,7 +370,7 @@ public class boba_fett extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.boba_fett.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -355,6 +380,7 @@ public class boba_fett extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int boba_fett_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_466"))
@@ -375,7 +401,7 @@ public class boba_fett extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_470");
@@ -384,7 +410,7 @@ public class boba_fett extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.boba_fett.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -394,6 +420,7 @@ public class boba_fett extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int boba_fett_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_470"))
@@ -421,7 +448,7 @@ public class boba_fett extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_474");
@@ -434,7 +461,7 @@ public class boba_fett extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.boba_fett.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -444,6 +471,7 @@ public class boba_fett extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int boba_fett_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_474"))
@@ -474,6 +502,7 @@ public class boba_fett extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int boba_fett_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_486"))
@@ -565,7 +594,7 @@ public class boba_fett extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_672");
@@ -602,7 +631,7 @@ public class boba_fett extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.boba_fett.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -612,6 +641,7 @@ public class boba_fett extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int boba_fett_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_498"))
@@ -651,7 +681,7 @@ public class boba_fett extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_506");
@@ -664,7 +694,7 @@ public class boba_fett extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.boba_fett.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -738,7 +768,7 @@ public class boba_fett extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_672");
@@ -775,7 +805,7 @@ public class boba_fett extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.boba_fett.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -785,6 +815,7 @@ public class boba_fett extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int boba_fett_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_506"))
@@ -812,6 +843,7 @@ public class boba_fett extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int boba_fett_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_518"))
@@ -838,7 +870,7 @@ public class boba_fett extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_522");
@@ -851,7 +883,7 @@ public class boba_fett extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.boba_fett.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -925,7 +957,7 @@ public class boba_fett extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_672");
@@ -962,7 +994,7 @@ public class boba_fett extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.boba_fett.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -972,6 +1004,7 @@ public class boba_fett extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int boba_fett_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_522"))
@@ -1002,6 +1035,7 @@ public class boba_fett extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int boba_fett_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_534"))
@@ -1081,7 +1115,7 @@ public class boba_fett extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_672");
@@ -1118,7 +1152,7 @@ public class boba_fett extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.boba_fett.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1128,6 +1162,7 @@ public class boba_fett extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int boba_fett_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_154"))
@@ -1153,6 +1188,7 @@ public class boba_fett extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int boba_fett_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_546"))
@@ -1173,7 +1209,7 @@ public class boba_fett extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_550");
@@ -1182,7 +1218,7 @@ public class boba_fett extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.boba_fett.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1267,7 +1303,7 @@ public class boba_fett extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_672");
@@ -1304,7 +1340,7 @@ public class boba_fett extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.boba_fett.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1314,6 +1350,7 @@ public class boba_fett extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int boba_fett_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_550"))
@@ -1341,7 +1378,7 @@ public class boba_fett extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_554");
@@ -1354,7 +1391,7 @@ public class boba_fett extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.boba_fett.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1364,6 +1401,7 @@ public class boba_fett extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int boba_fett_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_554"))
@@ -1391,6 +1429,7 @@ public class boba_fett extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int boba_fett_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_570"))
@@ -1418,7 +1457,7 @@ public class boba_fett extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_574");
@@ -1431,7 +1470,7 @@ public class boba_fett extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.boba_fett.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1505,7 +1544,7 @@ public class boba_fett extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_672");
@@ -1542,7 +1581,7 @@ public class boba_fett extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.boba_fett.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1552,6 +1591,7 @@ public class boba_fett extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int boba_fett_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_574"))
@@ -1579,7 +1619,7 @@ public class boba_fett extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_578");
@@ -1592,7 +1632,7 @@ public class boba_fett extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.boba_fett.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1618,7 +1658,7 @@ public class boba_fett extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_604");
@@ -1627,7 +1667,7 @@ public class boba_fett extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.boba_fett.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1637,6 +1677,7 @@ public class boba_fett extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int boba_fett_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_578"))
@@ -1657,7 +1698,7 @@ public class boba_fett extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_582");
@@ -1666,7 +1707,7 @@ public class boba_fett extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.boba_fett.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1692,7 +1733,7 @@ public class boba_fett extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_598");
@@ -1701,7 +1742,7 @@ public class boba_fett extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.boba_fett.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1711,6 +1752,7 @@ public class boba_fett extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int boba_fett_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_582"))
@@ -1731,7 +1773,7 @@ public class boba_fett extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_586");
@@ -1740,7 +1782,7 @@ public class boba_fett extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.boba_fett.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1750,6 +1792,7 @@ public class boba_fett extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int boba_fett_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_586"))
@@ -1771,7 +1814,7 @@ public class boba_fett extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_590");
@@ -1780,7 +1823,7 @@ public class boba_fett extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.boba_fett.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1790,6 +1833,7 @@ public class boba_fett extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int boba_fett_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_590"))
@@ -1805,6 +1849,7 @@ public class boba_fett extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int boba_fett_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_598"))
@@ -1825,7 +1870,7 @@ public class boba_fett extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_582");
@@ -1834,7 +1879,7 @@ public class boba_fett extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.boba_fett.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1844,6 +1889,7 @@ public class boba_fett extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int boba_fett_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_604"))
@@ -1864,7 +1910,7 @@ public class boba_fett extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_582");
@@ -1873,7 +1919,7 @@ public class boba_fett extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.boba_fett.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1883,6 +1929,7 @@ public class boba_fett extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int boba_fett_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_610"))
@@ -1974,7 +2021,7 @@ public class boba_fett extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_672");
@@ -2011,7 +2058,7 @@ public class boba_fett extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.boba_fett.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2021,6 +2068,7 @@ public class boba_fett extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int boba_fett_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_622"))
@@ -2112,7 +2160,7 @@ public class boba_fett extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_672");
@@ -2149,7 +2197,7 @@ public class boba_fett extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.boba_fett.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2159,6 +2207,7 @@ public class boba_fett extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int boba_fett_handleBranch45(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_634"))
@@ -2250,7 +2299,7 @@ public class boba_fett extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_672");
@@ -2287,7 +2336,7 @@ public class boba_fett extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.boba_fett.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2297,6 +2346,7 @@ public class boba_fett extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int boba_fett_handleBranch48(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_646"))
@@ -2365,7 +2415,7 @@ public class boba_fett extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_672");
@@ -2402,7 +2452,7 @@ public class boba_fett extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.boba_fett.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2412,6 +2462,7 @@ public class boba_fett extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int boba_fett_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_650"))
@@ -2438,7 +2489,7 @@ public class boba_fett extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_654");
@@ -2451,7 +2502,7 @@ public class boba_fett extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.boba_fett.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2484,7 +2535,7 @@ public class boba_fett extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_730");
@@ -2497,7 +2548,7 @@ public class boba_fett extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.boba_fett.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2571,7 +2622,7 @@ public class boba_fett extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_672");
@@ -2608,7 +2659,7 @@ public class boba_fett extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.boba_fett.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2618,6 +2669,7 @@ public class boba_fett extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int boba_fett_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_654"))
@@ -2637,7 +2689,7 @@ public class boba_fett extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_658");
@@ -2646,7 +2698,7 @@ public class boba_fett extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.boba_fett.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2666,6 +2718,7 @@ public class boba_fett extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int boba_fett_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_658"))
@@ -2680,6 +2733,7 @@ public class boba_fett extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int boba_fett_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_672"))
@@ -2772,6 +2826,7 @@ public class boba_fett extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int boba_fett_handleBranch63(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_706"))
@@ -2810,7 +2865,7 @@ public class boba_fett extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_714");
@@ -2823,7 +2878,7 @@ public class boba_fett extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.boba_fett.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2856,7 +2911,7 @@ public class boba_fett extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_730");
@@ -2869,7 +2924,7 @@ public class boba_fett extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.boba_fett.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2879,6 +2934,7 @@ public class boba_fett extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int boba_fett_handleBranch65(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_714"))
@@ -2898,7 +2954,7 @@ public class boba_fett extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_718");
@@ -2907,7 +2963,7 @@ public class boba_fett extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.boba_fett.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2927,6 +2983,7 @@ public class boba_fett extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int boba_fett_handleBranch66(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_718"))
@@ -2941,6 +2998,7 @@ public class boba_fett extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int boba_fett_handleBranch69(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_730"))
@@ -2967,7 +3025,7 @@ public class boba_fett extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_734");
@@ -2984,7 +3042,7 @@ public class boba_fett extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.boba_fett.branchId");
                     prose_package pp = new prose_package();
@@ -3009,6 +3067,7 @@ public class boba_fett extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int boba_fett_handleBranch70(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_734"))
@@ -3043,7 +3102,7 @@ public class boba_fett extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_738");
@@ -3060,7 +3119,7 @@ public class boba_fett extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.boba_fett.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3081,6 +3140,7 @@ public class boba_fett extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int boba_fett_handleBranch71(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_738"))
@@ -3101,7 +3161,7 @@ public class boba_fett extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_742");
@@ -3110,7 +3170,7 @@ public class boba_fett extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.boba_fett.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3142,6 +3202,7 @@ public class boba_fett extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int boba_fett_handleBranch72(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_742"))
@@ -3158,6 +3219,7 @@ public class boba_fett extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -3167,11 +3229,13 @@ public class boba_fett extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -3181,18 +3245,21 @@ public class boba_fett extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.boba_fett");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -3222,7 +3289,7 @@ public class boba_fett extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_462");
@@ -3234,7 +3301,7 @@ public class boba_fett extends script.base_script
                 utils.setScriptVar(player, "conversation.boba_fett.branchId", 1);
                 npcStartConversation(player, npc, "boba_fett", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3269,7 +3336,7 @@ public class boba_fett extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_486");
@@ -3285,7 +3352,7 @@ public class boba_fett extends script.base_script
                 utils.setScriptVar(player, "conversation.boba_fett.branchId", 7);
                 npcStartConversation(player, npc, "boba_fett", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3320,7 +3387,7 @@ public class boba_fett extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_498");
@@ -3336,7 +3403,7 @@ public class boba_fett extends script.base_script
                 utils.setScriptVar(player, "conversation.boba_fett.branchId", 10);
                 npcStartConversation(player, npc, "boba_fett", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3364,7 +3431,7 @@ public class boba_fett extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_518");
@@ -3376,7 +3443,7 @@ public class boba_fett extends script.base_script
                 utils.setScriptVar(player, "conversation.boba_fett.branchId", 15);
                 npcStartConversation(player, npc, "boba_fett", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3404,7 +3471,7 @@ public class boba_fett extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_534");
@@ -3416,7 +3483,7 @@ public class boba_fett extends script.base_script
                 utils.setScriptVar(player, "conversation.boba_fett.branchId", 19);
                 npcStartConversation(player, npc, "boba_fett", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3444,7 +3511,7 @@ public class boba_fett extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_154");
@@ -3456,7 +3523,7 @@ public class boba_fett extends script.base_script
                 utils.setScriptVar(player, "conversation.boba_fett.branchId", 21);
                 npcStartConversation(player, npc, "boba_fett", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3491,7 +3558,7 @@ public class boba_fett extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_546");
@@ -3507,7 +3574,7 @@ public class boba_fett extends script.base_script
                 utils.setScriptVar(player, "conversation.boba_fett.branchId", 24);
                 npcStartConversation(player, npc, "boba_fett", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3535,7 +3602,7 @@ public class boba_fett extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_570");
@@ -3547,7 +3614,7 @@ public class boba_fett extends script.base_script
                 utils.setScriptVar(player, "conversation.boba_fett.branchId", 30);
                 npcStartConversation(player, npc, "boba_fett", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3582,7 +3649,7 @@ public class boba_fett extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_610");
@@ -3598,7 +3665,7 @@ public class boba_fett extends script.base_script
                 utils.setScriptVar(player, "conversation.boba_fett.branchId", 39);
                 npcStartConversation(player, npc, "boba_fett", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3633,7 +3700,7 @@ public class boba_fett extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_622");
@@ -3649,7 +3716,7 @@ public class boba_fett extends script.base_script
                 utils.setScriptVar(player, "conversation.boba_fett.branchId", 42);
                 npcStartConversation(player, npc, "boba_fett", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3684,7 +3751,7 @@ public class boba_fett extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_634");
@@ -3700,7 +3767,7 @@ public class boba_fett extends script.base_script
                 utils.setScriptVar(player, "conversation.boba_fett.branchId", 45);
                 npcStartConversation(player, npc, "boba_fett", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3721,7 +3788,7 @@ public class boba_fett extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_646");
@@ -3729,7 +3796,7 @@ public class boba_fett extends script.base_script
                 utils.setScriptVar(player, "conversation.boba_fett.branchId", 48);
                 npcStartConversation(player, npc, "boba_fett", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3765,7 +3832,7 @@ public class boba_fett extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_650");
@@ -3781,7 +3848,7 @@ public class boba_fett extends script.base_script
                 utils.setScriptVar(player, "conversation.boba_fett.branchId", 49);
                 npcStartConversation(player, npc, "boba_fett", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3816,7 +3883,7 @@ public class boba_fett extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_706");
@@ -3832,7 +3899,7 @@ public class boba_fett extends script.base_script
                 utils.setScriptVar(player, "conversation.boba_fett.branchId", 63);
                 npcStartConversation(player, npc, "boba_fett", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3841,6 +3908,7 @@ public class boba_fett extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("boba_fett"))

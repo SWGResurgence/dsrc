@@ -1,5 +1,11 @@
 package script.ai;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.callable;
 import script.library.pet_lib;
@@ -8,9 +14,6 @@ import script.obj_id;
 
 public class pet_ping extends script.base_script
 {
-    public pet_ping()
-    {
-    }
     public static final String PCDPING_PCD_SCRIPT_NAME = "ai.pcd_ping_response";
     public static final String PCDPING_SEND_MESSAGE_NUMBER = "pcdping.sendMsgNumber";
     public static final String PCDPING_LAST_ACK_MESSAGE_NUMBER = "pcdping.lastAckNumber";
@@ -24,6 +27,10 @@ public class pet_ping extends script.base_script
     public static final int PCDPING_PING_INTERVAL_STANDARD = 300;
     public static final int PCDPING_PING_INTERVAL_RETRY = 30;
     public static final boolean debug = false;
+    public pet_ping()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (debug)
@@ -39,6 +46,7 @@ public class pet_ping extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int petPingCallback(obj_id self, dictionary params) throws InterruptedException
     {
         if (debug)
@@ -67,7 +75,7 @@ public class pet_ping extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 LOG("mounts-bug", "pet_ping.petPingCallback(): doPingBasedKill() failed for pet=[" + self + "], continuing ping loop so that we can try to kill it later.");
             }
@@ -82,12 +90,12 @@ public class pet_ping extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 LOG("mounts-bug", "pet_ping.petPingCallback(): doPingBasedKill() failed for pet=[" + self + "], continuing ping loop so that we can try to kill it later.");
             }
         }
-        else 
+        else
         {
             dictionary messageData = new dictionary();
             messageData.put(PCDPING_MESSAGE_PET_ID_NAME, self);
@@ -110,6 +118,7 @@ public class pet_ping extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePositiveAcknowledgementFromPcd(obj_id self, dictionary params) throws InterruptedException
     {
         if (debug)
@@ -126,7 +135,7 @@ public class pet_ping extends script.base_script
                 LOG("pcdping-debug", "pet_ping.handlePositiveAcknowledgementFromPcd(): processed newer positive PCD ack number=[" + ackMessageNumber + "]");
             }
         }
-        else 
+        else
         {
             if (debug)
             {
@@ -139,6 +148,7 @@ public class pet_ping extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleNegativeAcknowledgementFromPcd(obj_id self, dictionary params) throws InterruptedException
     {
         if (debug)
@@ -156,6 +166,7 @@ public class pet_ping extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean doPingBasedKill(obj_id pet, String reason) throws InterruptedException
     {
         if (debug)
@@ -186,6 +197,7 @@ public class pet_ping extends script.base_script
         }
         return killSuccess;
     }
+
     public void ensurePcdHasSisterScript(obj_id pet) throws InterruptedException
     {
         obj_id controlDevice = callable.getCallableCD(pet);
@@ -197,7 +209,7 @@ public class pet_ping extends script.base_script
             }
             attachScript(controlDevice, PCDPING_PCD_SCRIPT_NAME);
         }
-        else 
+        else
         {
             if (debug)
             {

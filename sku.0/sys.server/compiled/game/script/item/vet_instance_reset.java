@@ -4,11 +4,18 @@ package script.item;/*
 @Purpose: Stops spam from the vet instance reset script until it gets cycled out of the database.
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class vet_instance_reset extends script.base_script
 {
     public int DUMMY_SCRIPT = 1;
+
     public int OnAttach(obj_id self)
     {
         return DUMMY_SCRIPT;

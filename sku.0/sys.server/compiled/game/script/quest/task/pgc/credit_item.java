@@ -1,5 +1,11 @@
 package script.quest.task.pgc;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.money;
 import script.library.prose;
 import script.library.utils;
@@ -10,10 +16,12 @@ public class credit_item extends script.base_script
     public credit_item()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int credits = getIntObjVar(self, "loot.cashAmount");
@@ -26,11 +34,13 @@ public class credit_item extends script.base_script
         attribs[idx] = Integer.toString(credits);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id objPlayer, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("space/space_loot", "use_credit_chip"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         obj_id containingPlayer = utils.getContainingPlayer(self);

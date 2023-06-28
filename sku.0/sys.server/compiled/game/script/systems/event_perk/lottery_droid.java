@@ -1,5 +1,11 @@
 package script.systems.event_perk;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.money;
 import script.library.prose;
@@ -472,7 +478,6 @@ public class lottery_droid extends script.base_script
             messageTo(self, "lotteryTimerPing", null, 300, false);
             return;
         }
-        return;
     }
 
     public void showDurationList(obj_id self, obj_id player) throws InterruptedException
@@ -484,7 +489,6 @@ public class lottery_droid extends script.base_script
             duration[i] = "@event_perk:lottery_dur_hours_" + rawDuration[i];
         }
         sui.listbox(self, player, "@event_perk:lottery_dur_description", sui.OK_CANCEL, "@event_perk:lottery_dur_title", duration, "selectDuration", true);
-        return;
     }
 
     public void showPayoutPercentList(obj_id self, obj_id player) throws InterruptedException
@@ -496,7 +500,6 @@ public class lottery_droid extends script.base_script
             payout[i] = "@event_perk:lottery_payout_percent_" + rawPayout[i];
         }
         sui.listbox(self, player, "@event_perk:lottery_payout_description", sui.OK_CANCEL, "@event_perk:lottery_payout_title", payout, "selectPayout", true);
-        return;
     }
 
     public int showTicketCostSUI(obj_id self, obj_id player) throws InterruptedException

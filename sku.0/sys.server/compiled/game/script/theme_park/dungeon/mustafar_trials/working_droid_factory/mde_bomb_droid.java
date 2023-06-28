@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.working_droid_factory;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.combat;
@@ -10,25 +16,29 @@ import java.util.Vector;
 
 public class mde_bomb_droid extends script.base_script
 {
+    public static final int DROID_DAMAGE = 500;
+    public static final boolean LOGGING = false;
     public mde_bomb_droid()
     {
     }
-    public static final int DROID_DAMAGE = 500;
-    public static final boolean LOGGING = false;
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         messageTo(self, "destroySelf", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int path(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] points = trial.getObjectsInDungeonWithObjVar(self, "de_random");
@@ -45,12 +55,14 @@ public class mde_bomb_droid extends script.base_script
         setMovementRun(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);
         messageTo(self, "path", null, rand(1, 23), false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, false);
@@ -61,8 +73,10 @@ public class mde_bomb_droid extends script.base_script
         }
         Vector valid = new Vector();
         valid.setSize(0);
-        for (obj_id player : players) {
-            if (!isDead(player)) {
+        for (obj_id player : players)
+        {
+            if (!isDead(player))
+            {
                 utils.addElement(valid, player);
             }
         }
@@ -71,12 +85,13 @@ public class mde_bomb_droid extends script.base_script
             messageTo(self, "path", null, 3, false);
             return SCRIPT_CONTINUE;
         }
-        ai_lib.aiFollow(self, ((obj_id)valid.get(rand(0, valid.size() - 1))), 1, 2);
+        ai_lib.aiFollow(self, ((obj_id) valid.get(rand(0, valid.size() - 1))), 1, 2);
         dictionary dict = new dictionary();
         dict.put("count", 3);
         messageTo(self, "countdown", dict, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int countdown(obj_id self, dictionary params) throws InterruptedException
     {
         if (ai_lib.isAiDead(self))
@@ -93,18 +108,20 @@ public class mde_bomb_droid extends script.base_script
             params.put("count", count);
             messageTo(self, "countdown", params, 2.5f, false);
         }
-        else 
+        else
         {
             detonateDroid(self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public void detonateDroid(obj_id self) throws InterruptedException
     {
         obj_id[] targets = trial.getValidTargetsInRadius(self, 7);
-        if (targets != null && targets.length > 0)
+        if (targets != null)
         {
-            for (obj_id target : targets) {
+            for (obj_id target : targets)
+            {
                 int damage = DROID_DAMAGE;
                 prose_package pp = new prose_package();
                 pp.stringId = new string_id("cbt_spam", "detonation_droid");
@@ -119,6 +136,7 @@ public class mde_bomb_droid extends script.base_script
         }
         trial.cleanupNpc(self);
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING || trial.WORKING_LOGGING)

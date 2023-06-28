@@ -1,77 +1,74 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class restuss_imperial_weapon_crafting extends script.base_script
 {
+    public static String c_stringFile = "conversation/restuss_imperial_weapon_crafting";
+
     public restuss_imperial_weapon_crafting()
     {
     }
-    public static String c_stringFile = "conversation/restuss_imperial_weapon_crafting";
+
     public boolean restuss_imperial_weapon_crafting_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean restuss_imperial_weapon_crafting_condition_completedCrafting1(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "restuss_imperial_carbine_crafting_1", "returnPofko");
     }
+
     public boolean restuss_imperial_weapon_crafting_condition_craftingActive1(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "restuss_imperial_carbine_crafting_1");
     }
+
     public boolean restuss_imperial_weapon_crafting_condition_completedCrafting2(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "restuss_imperial_carbine_crafting_2", "returnPofko2");
     }
+
     public boolean restuss_imperial_weapon_crafting_condition_craftingActive2(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "restuss_imperial_carbine_crafting_2");
     }
+
     public boolean restuss_imperial_weapon_crafting_condition_inPhase2(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id object = trial.getParent(npc);
-        if (factions.isImperial(player) && (restuss_event.getPhase(object) == 2))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return factions.isImperial(player) && (restuss_event.getPhase(object) == 2);
     }
+
     public boolean restuss_imperial_weapon_crafting_condition_inPhase1(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (factions.isImperial(player))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return factions.isImperial(player);
     }
+
     public boolean restuss_imperial_weapon_crafting_condition_enoughWeapons(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id object = trial.getParent(npc);
-        if (factions.isImperial(player) && (restuss_event.getPhase(object) == 3))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return factions.isImperial(player) && (restuss_event.getPhase(object) == 3);
     }
+
     public boolean restuss_imperial_weapon_crafting_condition_isRebelPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         return factions.isRebel(player);
     }
+
     public void restuss_imperial_weapon_crafting_action_giveCrafting1(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "restuss_imperial_carbine_crafting_1");
     }
+
     public void restuss_imperial_weapon_crafting_action_signalDone(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "returnedPofko");
@@ -91,14 +88,15 @@ public class restuss_imperial_weapon_crafting extends script.base_script
             if (restuss_event.isRequiredCountMet(npc, "restuss_imperial_carbine_crafting_1"))
             {
                 restuss_event.incrimentPhase(npc);
-                return;
             }
         }
     }
+
     public void restuss_imperial_weapon_crafting_action_giveCrafting2(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "restuss_imperial_carbine_crafting_2");
     }
+
     public void restuss_imperial_weapon_crafting_action_signalDone2(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "returnedPofko2");
@@ -109,14 +107,15 @@ public class restuss_imperial_weapon_crafting extends script.base_script
             if (restuss_event.isRequiredCountMet(npc, "restuss_imperial_carbine_crafting_2"))
             {
                 restuss_event.incrimentPhase(npc);
-                return;
             }
         }
     }
+
     public void restuss_imperial_weapon_crafting_action_eject(obj_id player, obj_id npc) throws InterruptedException
     {
         expelFromBuilding(player);
     }
+
     public int restuss_imperial_weapon_crafting_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_38"))
@@ -147,6 +146,7 @@ public class restuss_imperial_weapon_crafting extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int restuss_imperial_weapon_crafting_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_30"))
@@ -177,6 +177,7 @@ public class restuss_imperial_weapon_crafting extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int restuss_imperial_weapon_crafting_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_24"))
@@ -207,6 +208,7 @@ public class restuss_imperial_weapon_crafting extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -216,11 +218,13 @@ public class restuss_imperial_weapon_crafting extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -229,18 +233,21 @@ public class restuss_imperial_weapon_crafting extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.restuss_imperial_weapon_crafting");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -313,7 +320,7 @@ public class restuss_imperial_weapon_crafting extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_38");
@@ -325,7 +332,7 @@ public class restuss_imperial_weapon_crafting extends script.base_script
                 utils.setScriptVar(player, "conversation.restuss_imperial_weapon_crafting.branchId", 6);
                 npcStartConversation(player, npc, "restuss_imperial_weapon_crafting", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -355,7 +362,7 @@ public class restuss_imperial_weapon_crafting extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_30");
@@ -367,7 +374,7 @@ public class restuss_imperial_weapon_crafting extends script.base_script
                 utils.setScriptVar(player, "conversation.restuss_imperial_weapon_crafting.branchId", 9);
                 npcStartConversation(player, npc, "restuss_imperial_weapon_crafting", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -397,7 +404,7 @@ public class restuss_imperial_weapon_crafting extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_24");
@@ -409,7 +416,7 @@ public class restuss_imperial_weapon_crafting extends script.base_script
                 utils.setScriptVar(player, "conversation.restuss_imperial_weapon_crafting.branchId", 12);
                 npcStartConversation(player, npc, "restuss_imperial_weapon_crafting", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -425,6 +432,7 @@ public class restuss_imperial_weapon_crafting extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("restuss_imperial_weapon_crafting"))

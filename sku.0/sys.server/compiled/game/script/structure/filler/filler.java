@@ -1,5 +1,11 @@
 package script.structure.filler;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.structure;
 import script.obj_id;
@@ -10,6 +16,7 @@ public class filler extends script.base_script
     public static final float DELAY_TIME = 5.0f;
     public static final String HANDLER_INIT_FILLER_SPAWN = "handleInitFillerSpawn";
     public static final String HANDLER_CLEANUP_FILLER_SPAWN = "handleCleanupFillerSpawn";
+
     public filler()
     {
     }

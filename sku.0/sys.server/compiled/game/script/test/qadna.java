@@ -1,5 +1,11 @@
 package script.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -8,9 +14,6 @@ import java.util.Vector;
 
 public class qadna extends script.base_script
 {
-    public qadna()
-    {
-    }
     public static final String INCUBATOR_TEMPLATES = "datatables/beast/incubator_templates.iff";
     public static final String SCRIPTVAR = "qadna";
     public static final String DNA_PROMPT = "Choose the creature you want to get DNA from. \nThe chosen DNA will be created in your inventory.";
@@ -18,6 +21,10 @@ public class qadna extends script.base_script
     public static final String[] QATOOL_MAIN_MENU = dataTableGetStringColumn("datatables/test/qa_tool_menu.iff", "main_tool");
     public static final String QATOOL_TITLE = "QA Tools";
     public static final String QATOOL_PROMPT = "Choose the tool you want to use";
+    public qadna()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!isGod(self))
@@ -34,6 +41,7 @@ public class qadna extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (isGod(self))
@@ -46,6 +54,7 @@ public class qadna extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePetOptionsTool(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isGod(self))
@@ -70,26 +79,27 @@ public class qadna extends script.base_script
                 utils.removeScriptVarTree(player, "qadna");
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 switch (idx)
                 {
                     case 0:
-                    getCreatureList(self);
-                    break;
+                        getCreatureList(self);
+                        break;
                     case 1:
-                    broadcast(self, "These pet options are not yet available.");
-                    qa.refreshMenu(self, QATOOL_PROMPT, QATOOL_TITLE, QATOOL_MAIN_MENU, "toolMainMenu", true, "qatool.pid");
-                    utils.removeScriptVarTree(player, "qadna");
-                    break;
+                        broadcast(self, "These pet options are not yet available.");
+                        qa.refreshMenu(self, QATOOL_PROMPT, QATOOL_TITLE, QATOOL_MAIN_MENU, "toolMainMenu", true, "qatool.pid");
+                        utils.removeScriptVarTree(player, "qadna");
+                        break;
                     default:
-                    removePlayer(player, "Default Option on Switch");
-                    return SCRIPT_CONTINUE;
+                        removePlayer(player, "Default Option on Switch");
+                        return SCRIPT_CONTINUE;
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleDnaOptions(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isGod(self))
@@ -119,7 +129,7 @@ public class qadna extends script.base_script
                 removePlayer(player, "Index less than zero");
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 String chosenDnaItem = dataTableGetString(INCUBATOR_TEMPLATES, idx, "initial_template");
                 String creature = getDisplayName(chosenDnaItem);
@@ -128,17 +138,20 @@ public class qadna extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void toolMainMenu(obj_id self, String[] dnaCreatureArray) throws InterruptedException
     {
         qa.refreshMenu(self, DNA_PROMPT, DNA_TITLE, dnaCreatureArray, "handleDnaOptions", SCRIPTVAR + ".pid", SCRIPTVAR + ".mainMenu", sui.OK_CANCEL_REFRESH);
     }
+
     public void getCreatureList(obj_id self) throws InterruptedException
     {
         Vector dnaCreatures = new Vector();
         String[] dnaCreatureStringColumn = dataTableGetStringColumn(INCUBATOR_TEMPLATES, "initial_template");
         if (dnaCreatureStringColumn.length > -1)
         {
-            for (String s : dnaCreatureStringColumn) {
+            for (String s : dnaCreatureStringColumn)
+            {
                 String creatureDisplayName = getDisplayName(s);
                 dnaCreatures.add(creatureDisplayName);
             }
@@ -148,18 +161,19 @@ public class qadna extends script.base_script
                 dnaCreatures.toArray(dnaCreatureArray);
                 toolMainMenu(self, dnaCreatureArray);
             }
-            else 
+            else
             {
                 broadcast(self, "There is an error with this tool, if the issue persists, please contact the tool team.");
                 removePlayer(self, "");
             }
         }
-        else 
+        else
         {
             broadcast(self, "There is an error with this tool, if the issue persists, please contact the tool team.");
             removePlayer(self, "");
         }
     }
+
     public String getDisplayName(String creatureName) throws InterruptedException
     {
         if (creatureName.contains("/"))
@@ -175,6 +189,7 @@ public class qadna extends script.base_script
         creatureName = beast_lib.stripBmFromType(creatureName);
         return creatureName;
     }
+
     public void setUpDnaWithDummyData(obj_id self, String creatureTemplate, String creature) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(self);
@@ -187,6 +202,7 @@ public class qadna extends script.base_script
         broadcast(self, "A " + creature + " DNA sample has been placed in your inventory.");
         removePlayer(self, "");
     }
+
     public void removePlayer(obj_id self, String err) throws InterruptedException
     {
         broadcast(self, err);

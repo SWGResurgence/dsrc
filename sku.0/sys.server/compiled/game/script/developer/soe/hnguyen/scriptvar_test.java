@@ -1,5 +1,11 @@
 package script.developer.soe.hnguyen;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.deltadictionary;
 import script.dictionary;
 import script.library.utils;
@@ -12,10 +18,12 @@ public class scriptvar_test extends script.base_script
     public scriptvar_test()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id objSpeaker, String strText) throws InterruptedException
     {
         if (objSpeaker != self)
@@ -37,12 +45,12 @@ public class scriptvar_test extends script.base_script
                         dictionary d = target.getScriptDictionary();
                         broadcast(self, "scriptDictionary for " + target + " are: " + d.toString());
                     }
-                    else 
+                    else
                     {
                         broadcast(self, "ahh " + target + " - no object");
                     }
                 }
-                else 
+                else
                 {
                     broadcast(self, "ahh " + target + " - bad id");
                 }
@@ -66,12 +74,12 @@ public class scriptvar_test extends script.base_script
                         d.put(var, val);
                         broadcast(self, "Setting scriptDictionary for " + target + " " + var + "=" + val);
                     }
-                    else 
+                    else
                     {
                         broadcast(self, "ohh " + target + " - no object");
                     }
                 }
-                else 
+                else
                 {
                     broadcast(self, "ohh " + target + " - bad id");
                 }
@@ -92,12 +100,12 @@ public class scriptvar_test extends script.base_script
                         deltadictionary dctScriptVars = target.getScriptVars();
                         broadcast(self, "Scriptvars for " + target + " are: " + dctScriptVars.toString());
                     }
-                    else 
+                    else
                     {
                         broadcast(self, "ah " + target + " - no object");
                     }
                 }
-                else 
+                else
                 {
                     broadcast(self, "ah " + target + " - bad id");
                 }
@@ -120,12 +128,12 @@ public class scriptvar_test extends script.base_script
                         utils.setScriptVar(target, var, val);
                         broadcast(self, "Setting scriptvar for " + target + " " + var + "=" + val);
                     }
-                    else 
+                    else
                     {
                         broadcast(self, "oh " + target + " - no object");
                     }
                 }
-                else 
+                else
                 {
                     broadcast(self, "oh " + target + " - bad id");
                 }

@@ -1,5 +1,11 @@
 package script.npc.skillteacher;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.utils;
@@ -11,6 +17,7 @@ public class theater_trainer_spawner extends script.base_script
     public theater_trainer_spawner()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         dictionary params = new dictionary();
@@ -18,6 +25,7 @@ public class theater_trainer_spawner extends script.base_script
         messageTo(self, "spawnThings", params, 20, true);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnEveryone(obj_id self) throws InterruptedException
     {
         spawnMusicMission(self);
@@ -29,6 +37,7 @@ public class theater_trainer_spawner extends script.base_script
         }
         setObjVar(self, "trainer", 1);
     }
+
     public void spawnStorytellerVendor(obj_id self) throws InterruptedException
     {
         obj_id entrance = getCellId(self, "entrance");
@@ -39,8 +48,8 @@ public class theater_trainer_spawner extends script.base_script
         setCreatureStatic(storytellerVendor, true);
         setInvulnerable(storytellerVendor, true);
         setYaw(storytellerVendor, -179);
-        return;
     }
+
     public void spawnDanceMission(obj_id self) throws InterruptedException
     {
         obj_id sideStage = getCellId(self, "backstage");
@@ -58,8 +67,8 @@ public class theater_trainer_spawner extends script.base_script
         setCreatureStatic(danceMission, true);
         setInvulnerable(danceMission, true);
         setYaw(danceMission, danceYaw);
-        return;
     }
+
     public void spawnMusicMission(obj_id self) throws InterruptedException
     {
         obj_id sideStage = getCellId(self, "side_backstage");
@@ -77,8 +86,8 @@ public class theater_trainer_spawner extends script.base_script
         setCreatureStatic(musicMission, true);
         setInvulnerable(musicMission, true);
         setYaw(musicMission, musicYaw);
-        return;
     }
+
     public void spawnEntertainer(obj_id self) throws InterruptedException
     {
         obj_id greenroom = getCellId(self, "backstage");
@@ -88,8 +97,8 @@ public class theater_trainer_spawner extends script.base_script
         create.addDestroyMessage(entertainer, "entertainerDied", 10.0f, self);
         setCreatureStatic(entertainer, true);
         setInvulnerable(entertainer, true);
-        return;
     }
+
     public void spawnDancer(obj_id self) throws InterruptedException
     {
         if (utils.checkConfigFlag("ScriptFlags", "noEliteTrainers"))
@@ -103,8 +112,8 @@ public class theater_trainer_spawner extends script.base_script
         String name = getName(dancer);
         setCreatureStatic(dancer, true);
         setInvulnerable(dancer, true);
-        return;
     }
+
     public void spawnMusician(obj_id self) throws InterruptedException
     {
         if (utils.checkConfigFlag("ScriptFlags", "noEliteTrainers"))
@@ -118,8 +127,8 @@ public class theater_trainer_spawner extends script.base_script
         String name = getName(musician);
         setCreatureStatic(musician, true);
         setInvulnerable(musician, true);
-        return;
     }
+
     public void spawnImageDesigner(obj_id self) throws InterruptedException
     {
         if (utils.checkConfigFlag("ScriptFlags", "noEliteTrainers"))
@@ -133,8 +142,8 @@ public class theater_trainer_spawner extends script.base_script
         String name = getName(imagedesigner);
         setCreatureStatic(imagedesigner, true);
         setInvulnerable(imagedesigner, true);
-        return;
     }
+
     public void spawnTheaterManager(obj_id self) throws InterruptedException
     {
         obj_id greenroom = getCellId(self, "backstage");
@@ -145,8 +154,8 @@ public class theater_trainer_spawner extends script.base_script
         setCreatureStatic(manager, true);
         setInvulnerable(manager, true);
         setYaw(manager, 4);
-        return;
     }
+
     public void spawnChoreographer(obj_id self) throws InterruptedException
     {
         if (utils.checkConfigFlag("ScriptFlags", "noEliteTrainers"))
@@ -163,44 +172,51 @@ public class theater_trainer_spawner extends script.base_script
         setCreatureStatic(manager, true);
         setInvulnerable(manager, true);
         setYaw(manager, -145);
-        return;
     }
+
     public int spawnThings(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id stuffs = params.getObjId("stuff");
         spawnEveryone(stuffs);
         return SCRIPT_CONTINUE;
     }
+
     public int entertainerDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnEntertainer(self);
         return SCRIPT_CONTINUE;
     }
+
     public int danceDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnDancer(self);
         return SCRIPT_CONTINUE;
     }
+
     public int musicianDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnMusician(self);
         return SCRIPT_CONTINUE;
     }
+
     public int imagedesignerDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnImageDesigner(self);
         return SCRIPT_CONTINUE;
     }
+
     public int managerDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnTheaterManager(self);
         return SCRIPT_CONTINUE;
     }
+
     public int choreographerDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnChoreographer(self);
         return SCRIPT_CONTINUE;
     }
+
     public int storytellerVendorDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnStorytellerVendor(self);

@@ -1,5 +1,11 @@
 package script.systems.crafting.clothing.skill;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.draft_schematic;
 import script.library.craftinglib;
 import script.obj_id;
@@ -40,6 +46,7 @@ public class crafting_clothing_tailor_novice extends script.systems.crafting.clo
                                     new resource_weight.weight(craftinglib.RESOURCE_TOUGHNESS, 1)
                             })
             };
+
     public crafting_clothing_tailor_novice()
     {
     }

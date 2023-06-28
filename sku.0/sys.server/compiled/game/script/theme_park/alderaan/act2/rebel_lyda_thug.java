@@ -1,5 +1,11 @@
 package script.theme_park.alderaan.act2;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class rebel_lyda_thug extends script.base_script
@@ -7,6 +13,7 @@ public class rebel_lyda_thug extends script.base_script
     public rebel_lyda_thug()
     {
     }
+
     public int OnIncapacitated(obj_id self, obj_id attacker) throws InterruptedException
     {
         obj_id lyda = getObjIdObjVar(self, "coa2.rebel.lyda");

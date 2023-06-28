@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 import java.util.Arrays;
@@ -123,6 +129,7 @@ public class pgc_quests extends script.base_script
     public static final int PGC_NUM_QUESTS_YOU_COMPLETED_HIGH_QUALITY_INDEX = 11;
     public static final float PGC_MIN_MID_QUALITY_QUEST_WEIGHT = 15.0f;
     public static final float PGC_MIN_HIGH_QUALITY_QUEST_WEIGHT = 30.0f;
+
     public pgc_quests()
     {
     }
@@ -839,7 +846,6 @@ public class pgc_quests extends script.base_script
             if (phaseNum > 0)
             {
                 handlePhaseActived(questHolocron, phaseNum);
-                return;
             }
         }
     }

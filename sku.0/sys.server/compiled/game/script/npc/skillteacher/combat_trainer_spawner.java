@@ -1,5 +1,11 @@
 package script.npc.skillteacher;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.location;
@@ -10,6 +16,7 @@ public class combat_trainer_spawner extends script.base_script
     public combat_trainer_spawner()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         debugServerConsoleMsg(self, "Attached Combat Guild Spawner in OnInitialize");
@@ -17,13 +24,14 @@ public class combat_trainer_spawner extends script.base_script
         messageTo(self, "spawnThings", null, 20, true);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnEveryone(obj_id self) throws InterruptedException
     {
         spawnJunkdealer(self);
         spawnDeliverMission(self);
         spawnDestroyMission(self);
-        return;
     }
+
     public void spawnMarksman(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "meetingd");
@@ -33,8 +41,8 @@ public class combat_trainer_spawner extends script.base_script
         setCreatureStatic(marksman, true);
         setInvulnerable(marksman, true);
         setYaw(marksman, 0);
-        return;
     }
+
     public void spawnScout(obj_id self) throws InterruptedException
     {
         debugServerConsoleMsg(self, "Spawning Scout");
@@ -45,8 +53,8 @@ public class combat_trainer_spawner extends script.base_script
         setCreatureStatic(scout, true);
         setInvulnerable(scout, true);
         setYaw(scout, 179);
-        return;
     }
+
     public void spawnJunkdealer(obj_id self) throws InterruptedException
     {
         debugServerConsoleMsg(self, "Spawning Junkdealer");
@@ -57,8 +65,8 @@ public class combat_trainer_spawner extends script.base_script
         setCreatureStatic(dealer, true);
         setInvulnerable(dealer, true);
         setYaw(dealer, 92);
-        return;
     }
+
     public void spawnBrawler(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "meetinge");
@@ -68,8 +76,8 @@ public class combat_trainer_spawner extends script.base_script
         setCreatureStatic(brawler, true);
         setInvulnerable(brawler, true);
         setYaw(brawler, 0);
-        return;
     }
+
     public void spawnDeliverMission(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "meetingd");
@@ -85,8 +93,8 @@ public class combat_trainer_spawner extends script.base_script
         setInvulnerable(deliverer, true);
         setYaw(deliverer, -132);
         attachScript(deliverer, "npc.converse.npc_convo");
-        return;
     }
+
     public void spawnDestroyMission(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "meetinge");
@@ -102,38 +110,44 @@ public class combat_trainer_spawner extends script.base_script
         setInvulnerable(destroyer, true);
         setYaw(destroyer, 120);
         attachScript(destroyer, "npc.converse.npc_convo");
-        return;
     }
+
     public int spawnThings(obj_id self, dictionary params) throws InterruptedException
     {
         spawnEveryone(self);
         return SCRIPT_CONTINUE;
     }
+
     public int scoutDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnScout(self);
         return SCRIPT_CONTINUE;
     }
+
     public int dealerDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnJunkdealer(self);
         return SCRIPT_CONTINUE;
     }
+
     public int marksmanDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnMarksman(self);
         return SCRIPT_CONTINUE;
     }
+
     public int brawlerDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnBrawler(self);
         return SCRIPT_CONTINUE;
     }
+
     public int delivererDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnDeliverMission(self);
         return SCRIPT_CONTINUE;
     }
+
     public int destroyerDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnDestroyMission(self);

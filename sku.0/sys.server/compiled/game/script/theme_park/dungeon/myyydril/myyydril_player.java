@@ -1,27 +1,37 @@
 package script.theme_park.dungeon.myyydril;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.utils;
 import script.obj_id;
 
 public class myyydril_player extends script.base_script
 {
+    public static final boolean LOGGING = false;
+
     public myyydril_player()
     {
     }
-    public static final boolean LOGGING = false;
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         doLogging("OnLogin", "OnLogin Fired, validating location");
         messageTo(self, "validateLocation", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTransferred(obj_id self, obj_id sourceContainer, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         doLogging("OnTransferred", "OnTransferred Fired, validating location");
         messageTo(self, "validateLocation", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int validateLocation(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id container = getContainedBy(self);
@@ -35,7 +45,7 @@ public class myyydril_player extends script.base_script
                 doLogging("validateLocation", "I am uncontained in POB Dungeons. Warping to Dead Forest");
                 warpPlayer(self, "kashyyyk_dead_forest", -205, 38, 301, null, 0, 0, 0);
             }
-            else 
+            else
             {
                 doLogging("validateLocation", "I was uncontained not on POB Dungeons. Removing script");
                 detachScript(self, "theme_park.dungeon.myyydril.myyydril_player");
@@ -43,11 +53,13 @@ public class myyydril_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnUnsticking(obj_id self) throws InterruptedException
     {
         warpPlayer(self, "kashyyyk_dead_forest", -205, 38, 301, null, 0, 0, 0);
         return SCRIPT_OVERRIDE;
     }
+
     public int cmdSetGrievousAuthorized(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (isGod(self))
@@ -57,6 +69,7 @@ public class myyydril_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING)

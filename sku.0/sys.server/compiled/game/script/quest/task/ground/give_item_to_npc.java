@@ -1,5 +1,11 @@
 package script.quest.task.ground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.groundquests;
@@ -9,11 +15,12 @@ import script.string_id;
 
 public class give_item_to_npc extends script.base_script
 {
+    public static final String dataTableItemToGive = "ITEM_TO_GIVE";
+    public static final string_id noGiveDuringCombat = new string_id("quest/ground/system_message", "no_give_during_combat");
     public give_item_to_npc()
     {
     }
-    public static final String dataTableItemToGive = "ITEM_TO_GIVE";
-    public static final string_id noGiveDuringCombat = new string_id("quest/ground/system_message", "no_give_during_combat");
+
     public int OnGiveItem(obj_id self, obj_id item, obj_id giver) throws InterruptedException
     {
         String questName = getStringObjVar(self, "quest_name");
@@ -25,8 +32,9 @@ public class give_item_to_npc extends script.base_script
         }
         int questCrc = groundquests.getQuestIdFromString(questName);
         int taskId = groundquests.getTaskId(questCrc, taskName);
-        if(taskId == -1){
-            LOG("groundquests","Task could not be found for this quest.");
+        if (taskId == -1)
+        {
+            LOG("groundquests", "Task could not be found for this quest.");
             return SCRIPT_CONTINUE;
         }
         if (!questIsTaskActive(questCrc, taskId, giver))
@@ -35,7 +43,7 @@ public class give_item_to_npc extends script.base_script
             {
                 questName = getStringObjVar(self, "alternate_quest_name");
             }
-            else 
+            else
             {
                 return SCRIPT_CONTINUE;
             }
@@ -53,12 +61,17 @@ public class give_item_to_npc extends script.base_script
         if (itemToGive != null && itemToGive.length() > 0)
         {
             String[] itemsNeeded = split(itemToGive, ',');
-            for (String s : itemsNeeded) {
-                if (s.equals(itemName)) {
-                    if (ai_lib.isInCombat(giver)) {
+            for (String s : itemsNeeded)
+            {
+                if (s.equals(itemName))
+                {
+                    if (ai_lib.isInCombat(giver))
+                    {
                         sendQuestSystemMessage(giver, noGiveDuringCombat);
                         return SCRIPT_CONTINUE;
-                    } else {
+                    }
+                    else
+                    {
                         dictionary webster = new dictionary();
                         webster.put("questName", questName);
                         webster.put("taskName", taskName);

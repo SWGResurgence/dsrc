@@ -1,5 +1,11 @@
 package script.systems.combat;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.combat_engine.*;
 import script.library.*;
@@ -258,7 +264,7 @@ public class combat_base extends script.base_script
                     atkRslt.weapon = weaponData.id;
                     atkRslt.actionName = getStringCrc(toLower(actionName));
                     atkRslt.useLocation = true;
-                    if (targetLoc != null && isValidLocation(targetLoc))
+                    if (isValidLocation(targetLoc))
                     {
                         atkRslt.targetLocation = new vector(targetLoc.x, targetLoc.y, targetLoc.z);
                         atkRslt.targetCell = targetLoc.cell;
@@ -537,7 +543,6 @@ public class combat_base extends script.base_script
         }
         doDelayedParticle(objEgg, strEffect, delay, false);
         doDelayedAttack(objEgg, attackName, target, delay, "", boolDestroy);
-        return;
     }
 
     public void doDelayedParticle(obj_id objEgg, String strEffect, float fltDelay, boolean boolCleanup) throws InterruptedException
@@ -547,7 +552,6 @@ public class combat_base extends script.base_script
         dctParams.put("boolCleanup", boolCleanup);
         utils.setScriptVar(objEgg, "handleDelayedParticle", dctParams);
         messageTo(objEgg, "handleDelayedParticle", dctParams, fltDelay, false);
-        return;
     }
 
     public void doDelayedAttack(obj_id objEgg, String strAttack, obj_id objTarget, float fltDelay, String strEffect, boolean boolCleanup) throws InterruptedException
@@ -827,7 +831,7 @@ public class combat_base extends script.base_script
 
     public obj_id getNextHatedTarget(obj_id self, obj_id[] tempDefenders, obj_id currentTarget) throws InterruptedException
     {
-        if (tempDefenders == null || tempDefenders.length == 0)
+        if (tempDefenders == null)
         {
             return null;
         }
@@ -1344,7 +1348,7 @@ public class combat_base extends script.base_script
                         hitData[i].success = true;
                         break;
                 }
-                if (hitData[i].success == true)
+                if (hitData[i].success)
                 {
                     switch (atkResult)
                     {
@@ -1421,7 +1425,7 @@ public class combat_base extends script.base_script
                 if (hitData[i].strikethrough)
                 {
                     hitData[i].strikethroughAmmount = combat.getStrikethroughValue(attackerData.id, defenderData[i].id);
-                    seriesStrikethrough |= true;
+                    seriesStrikethrough = true;
                 }
                 if (hitData[i].evadeResult)
                 {
@@ -2022,8 +2026,8 @@ public class combat_base extends script.base_script
             broadcast(attacker, "Hit " + hit);
             broadcast(attacker, "Evade " + evade);
             broadcast(attacker, "Strikethrough " + strikethrough);
-            broadcast(attacker, "" + getHitResultByName(defResult));
-            broadcast(attacker, "" + getHitResultByName(atkResult));
+            broadcast(attacker, getHitResultByName(defResult));
+            broadcast(attacker, getHitResultByName(atkResult));
             broadcast(attacker, "xx");
         }
         if (hasObjVar(defender, "viewHitTable"))
@@ -2040,8 +2044,8 @@ public class combat_base extends script.base_script
             broadcast(defender, "Hit " + hit);
             broadcast(defender, "Evade " + evade);
             broadcast(defender, "Strikethrough " + strikethrough);
-            broadcast(defender, "" + getHitResultByName(defResult));
-            broadcast(defender, "" + getHitResultByName(atkResult));
+            broadcast(defender, getHitResultByName(defResult));
+            broadcast(defender, getHitResultByName(atkResult));
             broadcast(defender, "xx");
         }
     }
@@ -2414,7 +2418,7 @@ public class combat_base extends script.base_script
             dotIntensity = (int) dotIntensityFloat;
             dotDuration += expertiseDotDurationBonus;
             int targetAttrib = dotType.equals("disease") ? ACTION : HEALTH;
-            boolean rslt = dot.applyDotEffect(defender, attacker, dotType, dotType + "" + attacker, targetAttrib, 100, dotIntensity, dotDuration);
+            boolean rslt = dot.applyDotEffect(defender, attacker, dotType, dotType + attacker, targetAttrib, 100, dotIntensity, dotDuration);
         }
         hitData.damage = (hitData.rawDamage);
         hitData.damageType = weaponData.damageType;
@@ -3090,7 +3094,6 @@ public class combat_base extends script.base_script
             }
             doCombatResults(attackAnim, attackerResults, defenderResults);
         }
-        return;
     }
 
     public boolean checkPosture(obj_id objAttacker, obj_id objDefender) throws InterruptedException
@@ -3107,7 +3110,7 @@ public class combat_base extends script.base_script
         int intI = 0;
         while (intI < cbtHitData.length)
         {
-            if (cbtHitData[intI].success == true)
+            if (cbtHitData[intI].success)
             {
                 return true;
             }
@@ -3234,7 +3237,6 @@ public class combat_base extends script.base_script
     {
         string_id strSpam = new string_id("cbt_spam", "fumble");
         int intFumbleDamage = rand(cbtWeaponData.minDamage, cbtWeaponData.maxDamage);
-        return;
     }
 
     public boolean isImmuneToStateChange(obj_id target) throws InterruptedException
@@ -3859,7 +3861,6 @@ public class combat_base extends script.base_script
                 }
             }
         }
-        return;
     }
 
     public combat_data modifyActionDataByExpertise(obj_id self, combat_data actionData) throws InterruptedException
@@ -4141,7 +4142,7 @@ public class combat_base extends script.base_script
             return actionData;
         }
         int[] allBuffs = buff.getAllBuffs(self);
-        if (allBuffs == null || allBuffs.length == 0)
+        if (allBuffs == null)
         {
             return actionData;
         }

@@ -1,5 +1,11 @@
 package script.systems.crafting.bio_engineer;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.draft_schematic;
 import script.library.craftinglib;
@@ -79,6 +85,7 @@ public class crafting_bio_food_component extends script.systems.crafting.craftin
                                     new resource_weight.weight(craftinglib.RESOURCE_POTENTIAL_ENERGY, 3)
                             })
             };
+
     public crafting_bio_food_component()
     {
     }

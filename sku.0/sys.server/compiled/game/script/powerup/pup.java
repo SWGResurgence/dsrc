@@ -1,26 +1,35 @@
 package script.powerup;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.powerup;
 import script.obj_id;
 
 public class pup extends script.base_script
 {
-    public pup()
-    {
-    }
     public static final int LATEST_CONVERTED_VERSION = 2;
     public static final String TEMPLATE_NAME_EXPLOSIVE = "object/tangible/powerup/weapon/thrown_explosive.iff";
     public static final String TEMPLATE_NAME_WIRING = "object/tangible/powerup/weapon/thrown_wiring.iff";
     public static final String TEMPLATE_NAME_DURABLE_LATHE = "object/tangible/powerup/weapon/fs_quest_sad/melee_speed_quest.iff";
+    public pup()
+    {
+    }
+
     public int OnApplyPowerup(obj_id self, obj_id player, obj_id target) throws InterruptedException
     {
         return SCRIPT_OVERRIDE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         powerup.getWeaponAttributes(player, self, names, attribs, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id container = getContainedBy(self);
@@ -28,7 +37,7 @@ public class pup extends script.base_script
         {
             destroyObject(self);
         }
-        else 
+        else
         {
             destroyObject(container);
             destroyObject(self);

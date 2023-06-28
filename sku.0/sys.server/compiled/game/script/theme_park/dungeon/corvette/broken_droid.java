@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.corvette;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -9,10 +15,12 @@ import script.string_id;
 
 public class broken_droid extends script.base_script
 {
+    public static final String MSGS = "dungeon/corvette";
+
     public broken_droid()
     {
     }
-    public static final String MSGS = "dungeon/corvette";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "showTrap", null, 1, false);
@@ -20,6 +28,7 @@ public class broken_droid extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnGiveItem(obj_id self, obj_id item, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(player))
@@ -34,13 +43,14 @@ public class broken_droid extends script.base_script
             messageTo(self, "fixProblem", null, 1, false);
             destroyObject(item);
         }
-        else 
+        else
         {
             string_id wrong = new string_id(MSGS, "wont_fit");
             sendSystemMessage(player, wrong);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String name) throws InterruptedException
     {
         if (name.equals("repair"))
@@ -50,6 +60,7 @@ public class broken_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id buddy = getObjIdObjVar(self, "pdroid");
@@ -66,6 +77,7 @@ public class broken_droid extends script.base_script
         destroyObject(trap5);
         return SCRIPT_CONTINUE;
     }
+
     public int showTrap(obj_id self, dictionary params) throws InterruptedException
     {
         location here = getLocation(self);
@@ -97,6 +109,7 @@ public class broken_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int clearTrap(obj_id self, dictionary params) throws InterruptedException
     {
         location here = getLocation(self);
@@ -117,6 +130,7 @@ public class broken_droid extends script.base_script
         setObjVar(c3p0, "fixed", 1);
         return SCRIPT_CONTINUE;
     }
+
     public int create3p0(obj_id self, dictionary params) throws InterruptedException
     {
         location here = getLocation(self);
@@ -132,6 +146,7 @@ public class broken_droid extends script.base_script
         setObjVar(pdroid, "r2", self);
         return SCRIPT_CONTINUE;
     }
+
     public int fixProblem(obj_id self, dictionary params) throws InterruptedException
     {
         location here = getLocation(self);

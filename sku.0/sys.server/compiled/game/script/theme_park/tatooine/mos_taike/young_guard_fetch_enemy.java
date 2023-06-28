@@ -1,5 +1,11 @@
 package script.theme_park.tatooine.mos_taike;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.utils;
 import script.obj_id;
 
@@ -8,6 +14,7 @@ public class young_guard_fetch_enemy extends script.base_script
     public young_guard_fetch_enemy()
     {
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         String datatable = "datatables/theme_park/mos_taike_young_guard.iff";
@@ -20,7 +27,7 @@ public class young_guard_fetch_enemy extends script.base_script
             messageTo(player, "finishQuest", null, 0, true);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             obj_id playerInv = utils.getInventoryContainer(player);
             createObject(reward, playerInv, "");

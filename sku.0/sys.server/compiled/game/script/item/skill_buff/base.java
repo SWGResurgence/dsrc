@@ -1,5 +1,11 @@
 package script.item.skill_buff;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.buff;
 import script.library.utils;
@@ -13,6 +19,7 @@ public class base extends script.base_script
     public static final String OBJVAR_SKILL_BUFF_SKILL2 = "skill_buff.skill2";
     public static final String OBJVAR_SKILL_BUFF_AMOUNT2 = "skill_buff.amount2";
     public static final String OBJVAR_SKILL_BUFF_LENGTH2 = "skill_buff.length2";
+
     public base()
     {
     }
@@ -197,7 +204,6 @@ public class base extends script.base_script
                 destroyObject(self);
             }
         }
-        return;
     }
 
     public int handleUseSkillBuff(obj_id self, dictionary params) throws InterruptedException

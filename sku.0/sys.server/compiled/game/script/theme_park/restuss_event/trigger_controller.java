@@ -1,15 +1,23 @@
 package script.theme_park.restuss_event;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
 
 public class trigger_controller extends script.base_script
 {
+    public static final boolean LOGGING = true;
+
     public trigger_controller()
     {
     }
-    public static final boolean LOGGING = true;
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id whoTriggeredMe) throws InterruptedException
     {
         if (!isDesiredTargetType(whoTriggeredMe))
@@ -23,6 +31,7 @@ public class trigger_controller extends script.base_script
         executeTrigger(self, whoTriggeredMe);
         return SCRIPT_CONTINUE;
     }
+
     public int triggerSetup(obj_id self, dictionary params) throws InterruptedException
     {
         createTriggerVolume(params.getString("name"), utils.stringToFloat(params.getString("size")), true);
@@ -34,6 +43,7 @@ public class trigger_controller extends script.base_script
         setObjVar(self, restuss_event.TRIGGER_TYPE, params.getString("triggerType"));
         return SCRIPT_CONTINUE;
     }
+
     public boolean isDesiredTargetType(obj_id target) throws InterruptedException
     {
         String targetType = getStringObjVar(getSelf(), restuss_event.TRIGGER_INTEREST);
@@ -86,15 +96,13 @@ public class trigger_controller extends script.base_script
                 String socialGroup = getStringObjVar(target, "socialGroup");
                 if (socialGroup != null && !socialGroup.equals(""))
                 {
-                    if (factionParse[2].equals(socialGroup))
-                    {
-                        return true;
-                    }
+                    return factionParse[2].equals(socialGroup);
                 }
             }
         }
         return false;
     }
+
     public boolean canTriggerFire(obj_id self) throws InterruptedException
     {
         int occurance = getIntObjVar(self, restuss_event.TRIGGER_OCCURANCE);
@@ -104,7 +112,7 @@ public class trigger_controller extends script.base_script
             {
                 return false;
             }
-            else 
+            else
             {
                 utils.setScriptVar(self, "trigger.lastFire", getGameTime());
                 return true;
@@ -127,6 +135,7 @@ public class trigger_controller extends script.base_script
         }
         return false;
     }
+
     public void executeTrigger(obj_id self, obj_id perp) throws InterruptedException
     {
         obj_id parent = trial.getParent(self);
@@ -155,6 +164,7 @@ public class trigger_controller extends script.base_script
             messageTo(trial.getParent(self), "waitForComplete", dict, 0.0f, false);
         }
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING)

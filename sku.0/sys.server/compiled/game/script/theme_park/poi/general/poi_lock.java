@@ -1,5 +1,11 @@
 package script.theme_park.poi.general;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 import script.string_id;
 
@@ -8,6 +14,7 @@ public class poi_lock extends script.base_script
     public poi_lock()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "lock"))
@@ -17,6 +24,7 @@ public class poi_lock extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToOpenContainer(obj_id self, obj_id opener) throws InterruptedException
     {
         int lockLevel = getIntObjVar(self, "lock");
@@ -31,7 +39,7 @@ public class poi_lock extends script.base_script
                 sendSystemMessage(opener, passFail);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 String dialog = "fail";
                 string_id passFail = new string_id("skill.slicing", dialog);
@@ -49,7 +57,7 @@ public class poi_lock extends script.base_script
                 sendSystemMessage(opener, passFail);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 String dialog = "fail";
                 string_id passFail = new string_id("skill.slicing", dialog);
@@ -67,7 +75,7 @@ public class poi_lock extends script.base_script
                 sendSystemMessage(self, passFail);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 String dialog = "fail";
                 string_id passFail = new string_id("skill.slicing", dialog);
@@ -85,7 +93,7 @@ public class poi_lock extends script.base_script
                 sendSystemMessage(opener, passFail);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 String dialog = "fail";
                 string_id passFail = new string_id("skill.slicing", dialog);
@@ -103,7 +111,7 @@ public class poi_lock extends script.base_script
                 sendSystemMessage(opener, passFail);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 String dialog = "fail";
                 string_id passFail = new string_id("skill.slicing", dialog);
@@ -111,7 +119,7 @@ public class poi_lock extends script.base_script
                 return SCRIPT_OVERRIDE;
             }
         }
-        else 
+        else
         {
             String dialog = "no_skill";
             string_id passFail = new string_id("skill.slicing", dialog);

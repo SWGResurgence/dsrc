@@ -1,5 +1,11 @@
 package script.systems.spawning;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.utils;
@@ -23,7 +29,7 @@ public class mob_spawner extends script.base_script
     public int OnPreloadComplete(obj_id self) throws InterruptedException
     {
         String strPlanet = getLocation(self).area;
-        dictionary dctSpawnInfo = dataTableGetRow("datatables/spawning/ground_spawning/static/" + strPlanet + ".iff", "" + self);
+        dictionary dctSpawnInfo = dataTableGetRow("datatables/spawning/ground_spawning/static/" + strPlanet + ".iff", String.valueOf(self));
         if (dctSpawnInfo == null)
         {
             obj_id objTest = createObject("object/tangible/gravestone/gravestone01.iff", getLocation(self));
@@ -111,7 +117,7 @@ public class mob_spawner extends script.base_script
             setName(objNPC, "");
             setName(objNPC, strName);
         }
-        if ((strScripts != null) && (strScripts.length > 0))
+        if (strScripts != null)
         {
             for (String strScript : strScripts)
             {

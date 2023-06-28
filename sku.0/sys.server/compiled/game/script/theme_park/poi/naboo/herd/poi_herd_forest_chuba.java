@@ -1,5 +1,11 @@
 package script.theme_park.poi.naboo.herd;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.location;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class poi_herd_forest_chuba extends script.theme_park.poi.base
     public poi_herd_forest_chuba()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         poiCreateObject("object/creature/monster/chuba/chuba_forest_large.iff", 8, 8);
@@ -18,6 +25,7 @@ public class poi_herd_forest_chuba extends script.theme_park.poi.base
         messageTo(self, "spawnCreatures", null, 4, true);
         return SCRIPT_CONTINUE;
     }
+
     public String getChuba(obj_id self) throws InterruptedException
     {
         String chubaSpawn = "object/creature/monster/chuba/chuba.iff";
@@ -25,14 +33,15 @@ public class poi_herd_forest_chuba extends script.theme_park.poi.base
         switch (chubaType)
         {
             case 1:
-            chubaSpawn = "object/creature/monster/chuba/chuba_forest_medium.iff";
-            break;
+                chubaSpawn = "object/creature/monster/chuba/chuba_forest_medium.iff";
+                break;
             case 2:
-            chubaSpawn = "object/creature/monster/chuba/chuba_forest_small.iff";
-            break;
+                chubaSpawn = "object/creature/monster/chuba/chuba_forest_small.iff";
+                break;
         }
         return chubaSpawn;
     }
+
     public int spawnCreatures(obj_id self, dictionary params) throws InterruptedException
     {
         location here = new location(getLocation(self));

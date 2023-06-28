@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,81 +14,100 @@ import script.*;
 
 public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
 {
+    public static String c_stringFile = "conversation/tatooine_24_azure_cabal_porgryn_01";
+
     public tatooine_24_azure_cabal_porgryn_01()
     {
     }
-    public static String c_stringFile = "conversation/tatooine_24_azure_cabal_porgryn_01";
+
     public boolean tatooine_24_azure_cabal_porgryn_01_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean tatooine_24_azure_cabal_porgryn_01_condition_hasActiveTaskEndorsementPorgryn(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "naboo_24_azure_cabal_01", "azure_cabal_loruna_endorsements_01_porgryn");
     }
+
     public boolean tatooine_24_azure_cabal_porgryn_01_condition_hasCompletedPorgrynEndorsementQuestHoleFiller(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "naboo_24_azure_cabal_01", "azure_cabal_loruna_endorsements_01_porgryn") && groundquests.hasCompletedQuest(player, "tatooine_24_azure_cabal_top_world_01"));
     }
+
     public boolean tatooine_24_azure_cabal_porgryn_01_condition_hasNotCompletedPorgrynEndorsementQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "tatooine_24_azure_cabal_top_world_01");
     }
+
     public boolean tatooine_24_azure_cabal_porgryn_01_condition_hasActiveTaskReturnToPorgryn(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "tatooine_24_azure_cabal_top_world_01", "tatooine_24_azure_cabal_top_world_01_waitforsignal2_north_tower");
     }
+
     public boolean tatooine_24_azure_cabal_porgryn_01_condition_hasActiveTaskMeetPorgryn(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "naboo_24_azure_cabal_01", "azure_cabal_loruna_endorsements_01_meet_porgryn");
     }
+
     public boolean tatooine_24_azure_cabal_porgryn_01_condition_hasActiveTaskWorkingForPorgryn(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "naboo_24_azure_cabal_01", "azure_cabal_loruna_endorsements_01_porgryn");
     }
+
     public boolean tatooine_24_azure_cabal_porgryn_01_condition_needsPorgrynEndorsementQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return !groundquests.isQuestActive(player, "tatooine_24_azure_cabal_top_world_01");
     }
+
     public boolean tatooine_24_azure_cabal_porgryn_01_condition_hasCompletedPorgrynEndorsementQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "tatooine_24_azure_cabal_top_world_01");
     }
+
     public boolean tatooine_24_azure_cabal_porgryn_01_condition_hasActiveTaskEndorsementPropti(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "naboo_24_azure_cabal_01", "azure_cabal_loruna_endorsements_01_propti");
     }
+
     public boolean tatooine_24_azure_cabal_porgryn_01_condition_hasActiveTaskEndorsementTweego(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "naboo_24_azure_cabal_01", "azure_cabal_loruna_endorsements_01_tweego");
     }
+
     public boolean tatooine_24_azure_cabal_porgryn_01_condition_hasActiveTaskEndorsementBroma(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "naboo_24_azure_cabal_01", "azure_cabal_loruna_endorsements_01_broma") || groundquests.isTaskActive(player, "naboo_24_azure_cabal_01", "azure_cabal_loruna_endorsements_01_broma_working"));
     }
+
     public void tatooine_24_azure_cabal_porgryn_01_action_signalPorgrynEndorsement(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         groundquests.sendSignal(player, "tatooine_24_azure_cabal_top_world_01_return_to_porgryn");
     }
+
     public void tatooine_24_azure_cabal_porgryn_01_action_grantTopOfWorld(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest/tatooine_24_azure_cabal_top_world_01");
         groundquests.sendSignal(player, "workingForProgryn");
     }
+
     public void tatooine_24_azure_cabal_porgryn_01_action_signalReturnedToPorgryn(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "tatooine_24_azure_cabal_top_world_01_return_to_porgryn");
     }
+
     public void tatooine_24_azure_cabal_porgryn_01_action_signalWorkingForPorgryn(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         groundquests.sendSignal(player, "workingForProgryn");
     }
+
     public void tatooine_24_azure_cabal_porgryn_01_action_facePlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
     }
+
     public int tatooine_24_azure_cabal_porgryn_01_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_107"))
@@ -130,7 +155,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -155,7 +180,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -208,7 +233,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -233,7 +258,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -286,7 +311,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -311,7 +336,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -364,7 +389,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -389,7 +414,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -409,6 +434,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_24_azure_cabal_porgryn_01_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_107"))
@@ -456,7 +482,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -481,7 +507,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -534,7 +560,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -559,7 +585,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -612,7 +638,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -637,7 +663,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -690,7 +716,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -715,7 +741,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -735,6 +761,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_24_azure_cabal_porgryn_01_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_107"))
@@ -782,7 +809,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -807,7 +834,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -860,7 +887,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -885,7 +912,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -938,7 +965,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -963,7 +990,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1016,7 +1043,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -1041,7 +1068,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1061,6 +1088,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_24_azure_cabal_porgryn_01_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_107"))
@@ -1108,7 +1136,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -1133,7 +1161,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1186,7 +1214,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -1211,7 +1239,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1264,7 +1292,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -1289,7 +1317,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1342,7 +1370,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -1367,7 +1395,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1387,6 +1415,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_24_azure_cabal_porgryn_01_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_107"))
@@ -1434,7 +1463,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -1459,7 +1488,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1512,7 +1541,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -1537,7 +1566,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1590,7 +1619,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -1615,7 +1644,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1668,7 +1697,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -1693,7 +1722,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1713,6 +1742,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_24_azure_cabal_porgryn_01_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_17"))
@@ -1727,6 +1757,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_24_azure_cabal_porgryn_01_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_88"))
@@ -1741,6 +1772,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_24_azure_cabal_porgryn_01_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_26"))
@@ -1774,7 +1806,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_59");
@@ -1791,7 +1823,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1811,6 +1843,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_24_azure_cabal_porgryn_01_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_94"))
@@ -1855,7 +1888,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_59");
@@ -1872,7 +1905,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1882,6 +1915,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_24_azure_cabal_porgryn_01_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_36"))
@@ -1919,7 +1953,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_42");
@@ -1932,7 +1966,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1942,6 +1976,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_24_azure_cabal_porgryn_01_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_42"))
@@ -1986,7 +2021,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48");
@@ -2003,7 +2038,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2013,6 +2048,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_24_azure_cabal_porgryn_01_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_48"))
@@ -2057,7 +2093,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_55");
@@ -2074,7 +2110,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2094,6 +2130,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_24_azure_cabal_porgryn_01_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_55"))
@@ -2127,7 +2164,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_59");
@@ -2144,7 +2181,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2176,7 +2213,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_113");
@@ -2189,7 +2226,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2209,6 +2246,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_24_azure_cabal_porgryn_01_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_59"))
@@ -2253,7 +2291,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_67");
@@ -2270,7 +2308,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2290,6 +2328,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_24_azure_cabal_porgryn_01_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_67"))
@@ -2334,7 +2373,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_73");
@@ -2351,7 +2390,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2371,6 +2410,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_24_azure_cabal_porgryn_01_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_73"))
@@ -2415,7 +2455,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_79");
@@ -2432,7 +2472,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2452,6 +2492,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_24_azure_cabal_porgryn_01_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_79"))
@@ -2489,7 +2530,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_85");
@@ -2502,7 +2543,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2522,6 +2563,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_24_azure_cabal_porgryn_01_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_85"))
@@ -2547,6 +2589,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_24_azure_cabal_porgryn_01_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_113"))
@@ -2580,7 +2623,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_59");
@@ -2597,7 +2640,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2622,7 +2665,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_124");
@@ -2631,7 +2674,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2641,6 +2684,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_24_azure_cabal_porgryn_01_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_124"))
@@ -2674,7 +2718,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_59");
@@ -2691,7 +2735,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2701,6 +2745,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -2710,11 +2755,13 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -2723,18 +2770,21 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.tatooine_24_azure_cabal_porgryn_01");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -2785,7 +2835,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -2809,7 +2859,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId", 1);
                 npcStartConversation(player, npc, "tatooine_24_azure_cabal_porgryn_01", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2831,7 +2881,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_17");
@@ -2839,7 +2889,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId", 7);
                 npcStartConversation(player, npc, "tatooine_24_azure_cabal_porgryn_01", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2861,7 +2911,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_88");
@@ -2869,7 +2919,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId", 9);
                 npcStartConversation(player, npc, "tatooine_24_azure_cabal_porgryn_01", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2897,7 +2947,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_26");
@@ -2909,7 +2959,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId", 11);
                 npcStartConversation(player, npc, "tatooine_24_azure_cabal_porgryn_01", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2937,7 +2987,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_94");
@@ -2949,7 +2999,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId", 13);
                 npcStartConversation(player, npc, "tatooine_24_azure_cabal_porgryn_01", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2977,7 +3027,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_36");
@@ -2989,7 +3039,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_24_azure_cabal_porgryn_01.branchId", 14);
                 npcStartConversation(player, npc, "tatooine_24_azure_cabal_porgryn_01", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3004,6 +3054,7 @@ public class tatooine_24_azure_cabal_porgryn_01 extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("tatooine_24_azure_cabal_porgryn_01"))

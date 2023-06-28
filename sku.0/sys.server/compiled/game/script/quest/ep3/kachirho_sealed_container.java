@@ -1,5 +1,11 @@
 package script.quest.ep3;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.groundquests;
 import script.library.money;
@@ -8,15 +14,16 @@ import script.library.weapons;
 
 public class kachirho_sealed_container extends script.base_script
 {
-    public kachirho_sealed_container()
-    {
-    }
     public static final String STF = "ep3/sidequests";
     public static final string_id ENTER_CODE = new string_id(STF, "enter_code");
     public static final string_id UNLOCKED = new string_id(STF, "unlocked");
     public static final string_id UNKNOWN_CODE = new string_id(STF, "unknown_code");
     public static final string_id INCORRECT_CODE = new string_id(STF, "incorrect_code");
     public static final string_id UNLOCK = new string_id(STF, "unlock");
+    public kachirho_sealed_container()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int menu = mi.addRootMenu(menu_info_types.ITEM_USE, ENTER_CODE);
@@ -28,6 +35,7 @@ public class kachirho_sealed_container extends script.base_script
         mid.setServerNotify(true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -40,7 +48,7 @@ public class kachirho_sealed_container extends script.base_script
                 }
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 sendSystemMessage(player, UNKNOWN_CODE);
                 return SCRIPT_CONTINUE;
@@ -48,6 +56,7 @@ public class kachirho_sealed_container extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void keypad(obj_id player) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -58,8 +67,8 @@ public class kachirho_sealed_container extends script.base_script
         setSUIProperty(pid, "buttonKeyCard", "enabled", "false");
         setSUIProperty(pid, "buttonSlice", "enabled", "false");
         showSUIPage(pid);
-        return;
     }
+
     public int KeypadCallback(obj_id self, dictionary params) throws InterruptedException
     {
         String result = params.getString("result.numberBox" + "." + "localtext");
@@ -94,7 +103,7 @@ public class kachirho_sealed_container extends script.base_script
                 utils.removeScriptVarTree(player, "lockbox");
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 utils.removeScriptVarTree(player, "lockbox");
                 sendSystemMessage(player, INCORRECT_CODE);
@@ -102,6 +111,7 @@ public class kachirho_sealed_container extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void grantReward(obj_id player) throws InterruptedException
     {
         obj_id playerInv = utils.getInventoryContainer(player);

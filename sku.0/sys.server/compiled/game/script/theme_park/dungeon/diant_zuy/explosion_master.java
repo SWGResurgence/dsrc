@@ -1,15 +1,22 @@
 package script.theme_park.dungeon.diant_zuy;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 import script.string_id;
 
 public class explosion_master extends script.base_script
 {
+    public static final String SCRIPT_EXPLOSION = "theme_park.dungeon.diant_zuy.explosion_player";
+    public static final string_id EXPLOSION_WARNING = new string_id("dungeon/diant_bunker", "explosion_warning");
     public explosion_master()
     {
     }
-    public static final String SCRIPT_EXPLOSION = "theme_park.dungeon.diant_zuy.explosion_player";
-    public static final string_id EXPLOSION_WARNING = new string_id("dungeon/diant_bunker", "explosion_warning");
+
     public int OnAboutToLoseItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))

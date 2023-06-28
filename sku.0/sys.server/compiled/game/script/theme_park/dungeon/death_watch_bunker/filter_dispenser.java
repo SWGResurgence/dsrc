@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.death_watch_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.player_structure;
 import script.library.utils;
 import script.menu_info;
@@ -9,12 +15,13 @@ import script.string_id;
 
 public class filter_dispenser extends script.base_script
 {
-    public filter_dispenser()
-    {
-    }
     public static final string_id MNU_ISSUE_FILTER = new string_id("dungeon/death_watch", "mnu_issue_filter");
     public static final string_id ISSUE_FILTER = new string_id("dungeon/death_watch", "issue_filter");
     public static final string_id ALREADY_HAS_FILTER = new string_id("dungeon/death_watch", "already_has_filter");
+    public filter_dispenser()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -26,7 +33,7 @@ public class filter_dispenser extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        if (checkForFilter(player) == true)
+        if (checkForFilter(player))
         {
             sendSystemMessage(player, ALREADY_HAS_FILTER);
             return SCRIPT_CONTINUE;
@@ -34,6 +41,7 @@ public class filter_dispenser extends script.base_script
         int mnuControl = mi.addRootMenu(menu_info_types.ITEM_USE, MNU_ISSUE_FILTER);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -56,20 +64,24 @@ public class filter_dispenser extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean checkForFilter(obj_id player) throws InterruptedException
     {
         obj_id[] objContents = utils.getContents(player, true);
         if (objContents != null)
         {
-            for (obj_id objContent : objContents) {
+            for (obj_id objContent : objContents)
+            {
                 String strItemTemplate = getTemplateName(objContent);
-                if (strItemTemplate.equals("object/tangible/dungeon/death_watch_bunker/filter.iff")) {
+                if (strItemTemplate.equals("object/tangible/dungeon/death_watch_bunker/filter.iff"))
+                {
                     return true;
                 }
             }
         }
         return false;
     }
+
     public void giveFilter(obj_id player) throws InterruptedException
     {
         obj_id playerInv = getObjectInSlot(player, "inventory");
@@ -82,6 +94,5 @@ public class filter_dispenser extends script.base_script
                 return;
             }
         }
-        return;
     }
 }

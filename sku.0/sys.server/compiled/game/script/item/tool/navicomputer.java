@@ -1,5 +1,11 @@
 package script.item.tool;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.menu_info;
 import script.menu_info_types;
@@ -136,7 +142,6 @@ public class navicomputer extends script.base_script
     public void initializeNavicomputer(obj_id player, obj_id navicomp) throws InterruptedException
     {
         createNavicomputerControlDevice(player, navicomp);
-        return;
     }
 
     public void createNavicomputerControlDevice(obj_id player, obj_id navicomp) throws InterruptedException
@@ -186,7 +191,6 @@ public class navicomputer extends script.base_script
             }
             destroyObject(navicomp);
         }
-        return;
     }
 
     public void initNavicompDatapad(obj_id itemControlDevice, obj_id navicomp, obj_id player) throws InterruptedException

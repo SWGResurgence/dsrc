@@ -1,5 +1,11 @@
 package script.theme_park.tatooine.bestine_south;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.create;
 import script.location;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class bestine_south_spawner extends script.base_script
     public bestine_south_spawner()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         debugServerConsoleMsg(self, "Bestine South Slums Spawner Script Attached");
@@ -17,11 +24,12 @@ public class bestine_south_spawner extends script.base_script
             spawnEveryone(self);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             return SCRIPT_CONTINUE;
         }
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         debugServerConsoleMsg(self, "Bestine South Slums Spawner Script Attached");
@@ -30,11 +38,12 @@ public class bestine_south_spawner extends script.base_script
             spawnEveryone(self);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             return SCRIPT_CONTINUE;
         }
     }
+
     public void spawnEveryone(obj_id self) throws InterruptedException
     {
         spawnEntertainer(self);
@@ -42,6 +51,7 @@ public class bestine_south_spawner extends script.base_script
         spawnMusician(self);
         setObjVar(self, "trainer", 1);
     }
+
     public void spawnEntertainer(obj_id self) throws InterruptedException
     {
         location entertainerloc = new location(-1041, 10, -3536, "tatooine");
@@ -50,8 +60,8 @@ public class bestine_south_spawner extends script.base_script
         String name = getName(entertainer);
         setName(entertainer, "Entertainer " + name);
         setInvulnerable(entertainer, true);
-        return;
     }
+
     public void spawnDancer(obj_id self) throws InterruptedException
     {
         location dancerloc = new location(-1031, 10, -3558, "tatooine");
@@ -60,8 +70,8 @@ public class bestine_south_spawner extends script.base_script
         String name = getName(dancer);
         setName(dancer, "Dance Teacher " + name);
         setInvulnerable(dancer, true);
-        return;
     }
+
     public void spawnMusician(obj_id self) throws InterruptedException
     {
         location musicianloc = new location(-1020, 10, -3535, "tatooine");
@@ -70,6 +80,5 @@ public class bestine_south_spawner extends script.base_script
         String name = getName(musician);
         setName(musician, "Music Teacher " + name);
         setInvulnerable(musician, true);
-        return;
     }
 }

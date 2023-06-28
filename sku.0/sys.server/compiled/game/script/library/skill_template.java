@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 import script.string_id;
@@ -13,6 +19,7 @@ public class skill_template extends script.base_script
     public static final String NO_TEMPLATE_STARTING = "new_character_no_skill";
     public static final String TEMPLATE_TABLE = "datatables/skill_template/skill_template.iff";
     public static final String ITEM_REWARD_TABLE = "datatables/roadmap/item_rewards.iff";
+
     public skill_template()
     {
     }

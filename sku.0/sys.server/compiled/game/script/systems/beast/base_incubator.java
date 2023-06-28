@@ -1,5 +1,11 @@
 package script.systems.beast;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -30,6 +36,7 @@ public class base_incubator extends script.base_script
     public static final string_id SID_ONLY_DNA_CAN_ADD = new string_id("incubator", "only_dna_can_add");
     public static final string_id SID_STATION_HAS_DNA_ALREADY = new string_id("incubator", "station_has_dna_already");
     public static final string_id SID_NO_TRIAL_ACCOUNTS = new string_id("incubator", "no_trial_accounts");
+
     public base_incubator()
     {
     }
@@ -279,7 +286,7 @@ public class base_incubator extends script.base_script
         {
             names[idx] = "stationmod";
             float attrib = utils.roundFloatByDecimal(getFloatObjVar(self, "crafting.stationMod"));
-            attribs[idx] = "" + attrib;
+            attribs[idx] = String.valueOf(attrib);
             idx++;
             if (idx >= names.length)
             {
@@ -290,7 +297,7 @@ public class base_incubator extends script.base_script
         {
             names[idx] = "stationmod_1";
             float attrib = utils.roundFloatByDecimal(getFloatObjVar(self, "crafting.stationMod_1"));
-            attribs[idx] = "" + attrib;
+            attribs[idx] = String.valueOf(attrib);
             idx++;
             if (idx >= names.length)
             {
@@ -301,7 +308,7 @@ public class base_incubator extends script.base_script
         {
             names[idx] = "active_user";
             String attrib = getPlayerName(incubator.getIncubatorActiveUser(self));
-            attribs[idx] = "" + attrib;
+            attribs[idx] = attrib;
             idx++;
             if (idx >= names.length)
             {
@@ -312,7 +319,7 @@ public class base_incubator extends script.base_script
         {
             String resourceName = incubator.getStationPowerName(self);
             names[idx] = "resourceName";
-            attribs[idx] = "" + resourceName;
+            attribs[idx] = resourceName;
             idx++;
             if (idx >= names.length)
             {
@@ -323,7 +330,7 @@ public class base_incubator extends script.base_script
         {
             int resourceAmount = incubator.getStationPowerAmount(self);
             names[idx] = "resourceAmount";
-            attribs[idx] = "" + resourceAmount;
+            attribs[idx] = String.valueOf(resourceAmount);
             idx++;
             if (idx >= names.length)
             {
@@ -334,7 +341,7 @@ public class base_incubator extends script.base_script
         {
             int resourceQuality = incubator.getStationPowerQuality(self);
             names[idx] = "resourceQuality";
-            attribs[idx] = "" + resourceQuality;
+            attribs[idx] = String.valueOf(resourceQuality);
             idx++;
             if (idx >= names.length)
             {
@@ -358,7 +365,7 @@ public class base_incubator extends script.base_script
                 }
             }
             attrib = localize(templateId);
-            attribs[idx] = "" + attrib;
+            attribs[idx] = attrib;
             idx++;
             if (idx >= names.length)
             {
@@ -378,7 +385,7 @@ public class base_incubator extends script.base_script
                 templateId = new string_id("mob/creature_names", template);
             }
             attrib = localize(templateId);
-            attribs[idx] = "" + attrib;
+            attribs[idx] = attrib;
             idx++;
             if (idx >= names.length)
             {
@@ -391,7 +398,7 @@ public class base_incubator extends script.base_script
             {
                 names[idx] = incubator.SKILL_DISPLAY_NAMES[i];
                 int attrib = getIntObjVar(self, incubator.ARRAY_SKILLS[i]);
-                attribs[idx] = "" + attrib;
+                attribs[idx] = String.valueOf(attrib);
                 idx++;
                 if (idx >= names.length)
                 {
@@ -410,7 +417,7 @@ public class base_incubator extends script.base_script
                     float bonusVal = getFloatObjVar(self, incubator.ARRAY_ATTRIBUTES[i]);
                     float attrib = bonusVal * incubator.ATTRIBUTE_DISPLAY_CONVERSION_RATES[i];
                     attrib = utils.roundFloatByDecimal(attrib);
-                    attribs[idx] = "" + attrib + "%";
+                    attribs[idx] = attrib + "%";
                     idx++;
                     if (idx >= names.length)
                     {
@@ -423,7 +430,7 @@ public class base_incubator extends script.base_script
                     float bonusVal = getFloatObjVar(self, incubator.ARRAY_ATTRIBUTES[i]);
                     float attrib = bonusVal * incubator.ATTRIBUTE_DISPLAY_CONVERSION_RATES[i];
                     attrib = utils.roundFloatByDecimal(attrib);
-                    attribs[idx] = "" + attrib;
+                    attribs[idx] = String.valueOf(attrib);
                     idx++;
                     if (idx >= names.length)
                     {

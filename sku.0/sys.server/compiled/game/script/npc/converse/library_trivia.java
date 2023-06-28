@@ -1,5 +1,11 @@
 package script.npc.converse;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.badge;
 import script.library.utils;
@@ -8,10 +14,12 @@ import script.string_id;
 
 public class library_trivia extends script.base_script
 {
+    public static final String CONVO = "celebrity/librarian";
+
     public library_trivia()
     {
     }
-    public static final String CONVO = "celebrity/librarian";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String name = getFirstName(self);
@@ -20,15 +28,17 @@ public class library_trivia extends script.base_script
         attachScript(self, "npc.converse.npc_converse_menu");
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         string_id message = new string_id(CONVO, "want_trivia");
-        string_id response[] = new string_id[2];
+        string_id[] response = new string_id[2];
         response[0] = new string_id(CONVO, "yes");
         response[1] = new string_id(CONVO, "no");
         npcStartConversation(speaker, self, "Convo", message, response);
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convo, obj_id speaker, string_id response) throws InterruptedException
     {
         int intQuestion = utils.getIntScriptVar(speaker, "libTrivQuestion");
@@ -234,6 +244,7 @@ public class library_trivia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnEndNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

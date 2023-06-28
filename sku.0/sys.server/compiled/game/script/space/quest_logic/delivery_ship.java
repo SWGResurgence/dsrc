@@ -1,5 +1,11 @@
 package script.space.quest_logic;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.space_utils;
 import script.obj_id;
@@ -9,11 +15,13 @@ public class delivery_ship extends script.base_script
     public delivery_ship()
     {
     }
+
     public int lightspeedJump(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObjectHyperspace(self);
         return SCRIPT_CONTINUE;
     }
+
     public int objectDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id quest = getObjIdObjVar(self, "quest");

@@ -1,30 +1,42 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class privateer_broker extends script.base_script
 {
+    public static String c_stringFile = "conversation/privateer_broker";
+
     public privateer_broker()
     {
     }
-    public static String c_stringFile = "conversation/privateer_broker";
+
     public boolean privateer_broker_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean privateer_broker_condition_isNeutralPilot(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_skill.hasPilotSkill(player);
     }
+
     public boolean privateer_broker_condition_isPilot(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_skill.hasSpaceSkills(player);
     }
+
     public boolean privateer_broker_condition_hasSpaceExp(obj_id player, obj_id npc) throws InterruptedException
     {
         return features.isSpaceEdition(player);
     }
+
     public void privateer_broker_action_addImperialBrokerWaypoint(obj_id player, obj_id npc) throws InterruptedException
     {
         location targetLoc = new location();
@@ -35,18 +47,22 @@ public class privateer_broker extends script.base_script
         obj_id wayp = createWaypointInDatapad(player, targetLoc);
         setWaypointName(wayp, waypName);
     }
+
     public void privateer_broker_action_addCorSecTrainerWaypoint(obj_id player, obj_id npc) throws InterruptedException
     {
         trainerlocs.getTrainerLocationWaypoint(player, "privateer", "corellia");
     }
+
     public void privateer_broker_action_addRSFTrainerWaypoint(obj_id player, obj_id npc) throws InterruptedException
     {
         trainerlocs.getTrainerLocationWaypoint(player, "privateer", "naboo");
     }
+
     public void privateer_broker_action_addSmugglerAllianceWaypoint(obj_id player, obj_id npc) throws InterruptedException
     {
         trainerlocs.getTrainerLocationWaypoint(player, "privateer", "tatooine");
     }
+
     public void privateer_broker_action_addRebelBrokerWaypoint(obj_id player, obj_id npc) throws InterruptedException
     {
         location targetLoc = new location();
@@ -57,10 +73,12 @@ public class privateer_broker extends script.base_script
         obj_id wayp = createWaypointInDatapad(player, targetLoc);
         setWaypointName(wayp, waypName);
     }
+
     public void privateer_broker_action_retireNeutral(obj_id player, obj_id npc) throws InterruptedException
     {
         space_skill.retire(player, space_skill.NEUTRAL);
     }
+
     public int privateer_broker_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a6f3f40b"))
@@ -88,7 +106,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_71bc4ac7");
@@ -101,7 +119,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -123,6 +141,7 @@ public class privateer_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int privateer_broker_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_71bc4ac7"))
@@ -150,7 +169,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f72f24be");
@@ -163,7 +182,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -185,6 +204,7 @@ public class privateer_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int privateer_broker_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f72f24be"))
@@ -213,6 +233,7 @@ public class privateer_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int privateer_broker_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_169df3bb"))
@@ -247,7 +268,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_562906b3");
@@ -256,7 +277,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -267,6 +288,7 @@ public class privateer_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int privateer_broker_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_562906b3"))
@@ -302,7 +324,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ce87b83e");
@@ -319,7 +341,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -330,6 +352,7 @@ public class privateer_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int privateer_broker_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ce87b83e"))
@@ -365,7 +388,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ce87b83e");
@@ -382,7 +405,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -424,7 +447,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ce87b83e");
@@ -441,7 +464,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -476,7 +499,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_22c8a818");
@@ -489,7 +512,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -500,6 +523,7 @@ public class privateer_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int privateer_broker_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ce87b83e"))
@@ -535,7 +559,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ce87b83e");
@@ -552,7 +576,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -594,7 +618,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ce87b83e");
@@ -611,7 +635,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -646,7 +670,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_22c8a818");
@@ -659,7 +683,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -670,6 +694,7 @@ public class privateer_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int privateer_broker_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ce87b83e"))
@@ -705,7 +730,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ce87b83e");
@@ -722,7 +747,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -764,7 +789,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ce87b83e");
@@ -781,7 +806,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -816,7 +841,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_22c8a818");
@@ -829,7 +854,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -840,6 +865,7 @@ public class privateer_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int privateer_broker_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_22c8a818"))
@@ -868,7 +894,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3269c6d");
@@ -881,7 +907,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -916,7 +942,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_da0b2f54");
@@ -929,7 +955,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -940,6 +966,7 @@ public class privateer_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int privateer_broker_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3269c6d"))
@@ -968,7 +995,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_da0b2f54");
@@ -981,7 +1008,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1023,7 +1050,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_56acd306");
@@ -1040,7 +1067,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1051,6 +1078,7 @@ public class privateer_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int privateer_broker_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_56acd306"))
@@ -1093,7 +1121,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cc9259e0");
@@ -1114,7 +1142,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1150,7 +1178,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e6101168");
@@ -1163,7 +1191,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1198,7 +1226,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_da0b2f54");
@@ -1211,7 +1239,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1222,6 +1250,7 @@ public class privateer_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int privateer_broker_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_cc9259e0"))
@@ -1250,7 +1279,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1fd99cce");
@@ -1263,7 +1292,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1298,7 +1327,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_da0b2f54");
@@ -1311,7 +1340,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1346,7 +1375,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_da0b2f54");
@@ -1359,7 +1388,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1395,7 +1424,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e6101168");
@@ -1408,7 +1437,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1419,6 +1448,7 @@ public class privateer_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int privateer_broker_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1fd99cce"))
@@ -1448,7 +1478,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e6101168");
@@ -1461,7 +1491,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1495,7 +1525,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_da0b2f54");
@@ -1508,7 +1538,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1519,6 +1549,7 @@ public class privateer_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int privateer_broker_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_e6101168"))
@@ -1547,7 +1578,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cf4d3521");
@@ -1560,7 +1591,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1583,6 +1614,7 @@ public class privateer_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int privateer_broker_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_cf4d3521"))
@@ -1624,7 +1656,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_44d6c7b2");
@@ -1637,7 +1669,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1648,6 +1680,7 @@ public class privateer_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int privateer_broker_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_44d6c7b2"))
@@ -1688,7 +1721,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1fd99cce");
@@ -1701,7 +1734,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1712,6 +1745,7 @@ public class privateer_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int privateer_broker_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_da0b2f54"))
@@ -1740,7 +1774,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_da0b2f54");
@@ -1753,7 +1787,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1801,7 +1835,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_fd3512f0");
@@ -1822,7 +1856,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1833,6 +1867,7 @@ public class privateer_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int privateer_broker_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_da0b2f54"))
@@ -1861,7 +1896,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_da0b2f54");
@@ -1874,7 +1909,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1922,7 +1957,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_fd3512f0");
@@ -1943,7 +1978,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1954,6 +1989,7 @@ public class privateer_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int privateer_broker_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_fd3512f0"))
@@ -1981,7 +2017,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159911f5");
@@ -1994,7 +2030,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -2028,7 +2064,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159911f5");
@@ -2041,7 +2077,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -2075,7 +2111,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159911f5");
@@ -2088,7 +2124,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -2122,7 +2158,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159911f5");
@@ -2135,7 +2171,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -2146,6 +2182,7 @@ public class privateer_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int privateer_broker_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_159911f5"))
@@ -2173,7 +2210,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e4c89252");
@@ -2186,7 +2223,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -2233,7 +2270,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_fd3512f0");
@@ -2254,7 +2291,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -2265,6 +2302,7 @@ public class privateer_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int privateer_broker_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_e4c89252"))
@@ -2317,7 +2355,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_fd3512f0");
@@ -2338,7 +2376,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -2349,6 +2387,7 @@ public class privateer_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int privateer_broker_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_fd3512f0"))
@@ -2376,7 +2415,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159911f5");
@@ -2389,7 +2428,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -2423,7 +2462,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159911f5");
@@ -2436,7 +2475,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -2470,7 +2509,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159911f5");
@@ -2483,7 +2522,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -2517,7 +2556,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159911f5");
@@ -2530,7 +2569,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -2541,6 +2580,7 @@ public class privateer_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int privateer_broker_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_159911f5"))
@@ -2569,7 +2609,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e4c89252");
@@ -2582,7 +2622,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -2630,7 +2670,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_fd3512f0");
@@ -2651,7 +2691,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -2662,6 +2702,7 @@ public class privateer_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int privateer_broker_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_e4c89252"))
@@ -2715,7 +2756,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_fd3512f0");
@@ -2736,7 +2777,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -2747,6 +2788,7 @@ public class privateer_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int privateer_broker_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_fd3512f0"))
@@ -2774,7 +2816,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159911f5");
@@ -2787,7 +2829,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -2821,7 +2863,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159911f5");
@@ -2834,7 +2876,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -2868,7 +2910,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159911f5");
@@ -2881,7 +2923,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -2915,7 +2957,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159911f5");
@@ -2928,7 +2970,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -2939,6 +2981,7 @@ public class privateer_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int privateer_broker_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_159911f5"))
@@ -2966,7 +3009,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e4c89252");
@@ -2979,7 +3022,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -3026,7 +3069,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_fd3512f0");
@@ -3047,7 +3090,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -3058,6 +3101,7 @@ public class privateer_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int privateer_broker_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_e4c89252"))
@@ -3110,7 +3154,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_fd3512f0");
@@ -3131,7 +3175,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -3142,6 +3186,7 @@ public class privateer_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int privateer_broker_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_fd3512f0"))
@@ -3169,7 +3214,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159911f5");
@@ -3182,7 +3227,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -3216,7 +3261,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159911f5");
@@ -3229,7 +3274,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -3263,7 +3308,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159911f5");
@@ -3276,7 +3321,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -3310,7 +3355,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159911f5");
@@ -3323,7 +3368,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -3334,6 +3379,7 @@ public class privateer_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int privateer_broker_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_159911f5"))
@@ -3361,7 +3407,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e4c89252");
@@ -3374,7 +3420,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -3421,7 +3467,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_fd3512f0");
@@ -3442,7 +3488,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -3453,6 +3499,7 @@ public class privateer_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int privateer_broker_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_e4c89252"))
@@ -3505,7 +3552,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_fd3512f0");
@@ -3526,7 +3573,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -3537,6 +3584,7 @@ public class privateer_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int privateer_broker_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_fd3512f0"))
@@ -3564,7 +3612,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159911f5");
@@ -3577,7 +3625,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -3611,7 +3659,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159911f5");
@@ -3624,7 +3672,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -3658,7 +3706,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159911f5");
@@ -3671,7 +3719,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -3705,7 +3753,7 @@ public class privateer_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159911f5");
@@ -3718,7 +3766,7 @@ public class privateer_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.privateer_broker.branchId");
                     chat.chat(npc, player, message);
@@ -3729,6 +3777,7 @@ public class privateer_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -3740,6 +3789,7 @@ public class privateer_broker extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -3747,6 +3797,7 @@ public class privateer_broker extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -3755,18 +3806,21 @@ public class privateer_broker extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.privateer_broker");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -3804,7 +3858,7 @@ public class privateer_broker extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_a6f3f40b");
@@ -3816,7 +3870,7 @@ public class privateer_broker extends script.base_script
                 setObjVar(player, "conversation.privateer_broker.branchId", 2);
                 npcStartConversation(player, npc, "privateer_broker", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3851,7 +3905,7 @@ public class privateer_broker extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_169df3bb");
@@ -3863,7 +3917,7 @@ public class privateer_broker extends script.base_script
                 setObjVar(player, "conversation.privateer_broker.branchId", 10);
                 npcStartConversation(player, npc, "privateer_broker", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3872,6 +3926,7 @@ public class privateer_broker extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("privateer_broker"))

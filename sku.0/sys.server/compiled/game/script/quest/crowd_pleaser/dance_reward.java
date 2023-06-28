@@ -1,13 +1,16 @@
 package script.quest.crowd_pleaser;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
 public class dance_reward extends script.base_script
 {
-    public dance_reward()
-    {
-    }
     public static final String DANCE_NAME = "theatrical";
     public static final String ADVANCED_DANCE_NAME = "theatrical2";
     public static final String ADVANCEMENT_OBJVAR = "dance_advancement";
@@ -19,6 +22,10 @@ public class dance_reward extends script.base_script
     public static final String ADVANCEMENT_SCRIPT = "systems.skills.performance.dance_advancement";
     public static final int PRACTICE_XP_COST = 100000;
     public static final int ADVANCEMENT_XP_COST = 400000;
+    public dance_reward()
+    {
+    }
+
     public int handleLearnSuccess(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");

@@ -1,5 +1,11 @@
 package script.space.ship;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.location;
 import script.obj_id;
 
@@ -8,12 +14,14 @@ public class ship_yt1300_chair extends script.base_script
     public ship_yt1300_chair()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         debugServerConsoleMsg(self, "Initialized YT-1300 pilot chair creation script");
         spawnChair(self);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnChair(obj_id self) throws InterruptedException
     {
         obj_id cockpit = getCellId(self, "cockpit");
@@ -26,7 +34,7 @@ public class ship_yt1300_chair extends script.base_script
                 debugSpeakMsg(self, "Could not create pilot_chair.");
             }
         }
-        else 
+        else
         {
             debugSpeakMsg(self, "Could not find cell 'cockpit'.");
         }

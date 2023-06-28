@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 import script.string_id;
@@ -18,6 +24,7 @@ public class movement extends script.base_script
     public static final int MT_ALL = 99;
     public static final String MOVEMENT_OBJVAR = "movement";
     public static final String MOVEMENT_TABLE = "datatables/movement/movement.iff";
+
     public movement()
     {
     }

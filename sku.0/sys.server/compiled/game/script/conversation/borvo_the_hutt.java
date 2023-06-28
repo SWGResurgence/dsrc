@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,140 +14,118 @@ import script.*;
 
 public class borvo_the_hutt extends script.base_script
 {
+    public static String c_stringFile = "conversation/borvo_the_hutt";
+
     public borvo_the_hutt()
     {
     }
-    public static String c_stringFile = "conversation/borvo_the_hutt";
+
     public boolean borvo_the_hutt_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean borvo_the_hutt_condition_isOnContentPath(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "quest/legacy_naboo_droid_module_2", "talkToBorvo"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isTaskActive(player, "quest/legacy_naboo_droid_module_2", "talkToBorvo");
     }
+
     public boolean borvo_the_hutt_condition_isOnDarklighterPath(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.hasCompletedQuest(player, "quest/borvos_guard_corellia") && !groundquests.isQuestActiveOrComplete(player, "quest/borvo_bounty_hunter"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.hasCompletedQuest(player, "quest/borvos_guard_corellia") && !groundquests.isQuestActiveOrComplete(player, "quest/borvo_bounty_hunter");
     }
+
     public boolean borvo_the_hutt_condition_canTalkToBorvo(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.hasCompletedQuest(player, "quest/borvos_guard_corellia") || groundquests.isQuestActive(player, "quest/legacy_naboo_droid_module_2"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.hasCompletedQuest(player, "quest/borvos_guard_corellia") || groundquests.isQuestActive(player, "quest/legacy_naboo_droid_module_2");
     }
+
     public boolean borvo_the_hutt_condition_killingBountyHunter(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isQuestActive(player, "quest/borvo_bounty_hunter"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isQuestActive(player, "quest/borvo_bounty_hunter");
     }
+
     public boolean borvo_the_hutt_condition_killingExPartner(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isQuestActive(player, "quest/borvo_ex_partner"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isQuestActive(player, "quest/borvo_ex_partner");
     }
+
     public boolean borvo_the_hutt_condition_deadBountyHunter(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "quest/borvo_bounty_hunter", "bountyHunterDead"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isTaskActive(player, "quest/borvo_bounty_hunter", "bountyHunterDead");
     }
+
     public boolean borvo_the_hutt_condition_deadExPartner(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "quest/borvo_ex_partner", "exPartnerDead"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isTaskActive(player, "quest/borvo_ex_partner", "exPartnerDead");
     }
+
     public boolean borvo_the_hutt_condition_acquiredDroidAI(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "quest/legacy_naboo_droid_module_2", "onMyWayToBorvo"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isTaskActive(player, "quest/legacy_naboo_droid_module_2", "onMyWayToBorvo");
     }
+
     public boolean borvo_the_hutt_condition_doneAll(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.hasCompletedTask(player, "quest/legacy_naboo_droid_module_2", "onMyWayToBorvo") && groundquests.hasCompletedQuest(player, "quest/borvo_ex_partner"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.hasCompletedTask(player, "quest/legacy_naboo_droid_module_2", "onMyWayToBorvo") && groundquests.hasCompletedQuest(player, "quest/borvo_ex_partner");
     }
+
     public boolean borvo_the_hutt_condition_onVaultQuest(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isQuestActive(player, "quest/legacy_naboo_droid_module_2") && groundquests.hasCompletedTask(player, "quest/legacy_naboo_droid_module_2", "talkToBorvo") && !groundquests.hasCompletedTask(player, "quest/legacy_naboo_droid_module_2", "onMyWayToBorvo"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isQuestActive(player, "quest/legacy_naboo_droid_module_2") && groundquests.hasCompletedTask(player, "quest/legacy_naboo_droid_module_2", "talkToBorvo") && !groundquests.hasCompletedTask(player, "quest/legacy_naboo_droid_module_2", "onMyWayToBorvo");
     }
+
     public boolean borvo_the_hutt_condition_OnBorvoQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "quest/legacy_naboo_droid_module_2") && groundquests.hasCompletedTask(player, "quest/legacy_naboo_droid_module_2", "talkToBorvo")) || groundquests.isQuestActive(player, "borvo_bounty_hunter") || groundquests.isQuestActive(player, "borvo_ex_partner");
     }
+
     public boolean borvo_the_hutt_condition_needsHuffsRifle(obj_id player, obj_id npc) throws InterruptedException
     {
         String rifle = "object/tangible/loot/quest/rifle_quest_tusken.iff";
         if (groundquests.isQuestActive(player, "huffs_guard_rifle") && groundquests.hasCompletedQuest(player, "quest/borvo_ex_partner"))
         {
-            if (!utils.playerHasItemByTemplateInInventoryOrEquipped(player, rifle) && !utils.playerHasItemByTemplateInBank(player, rifle))
-            {
-                return true;
-            }
+            return !utils.playerHasItemByTemplateInInventoryOrEquipped(player, rifle) && !utils.playerHasItemByTemplateInBank(player, rifle);
         }
         return false;
     }
+
     public void borvo_the_hutt_action_grantBorvoVaultQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "goToVault");
     }
+
     public void borvo_the_hutt_action_grantBorvoBountyQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "quest/borvo_bounty_hunter");
     }
+
     public void borvo_the_hutt_action_grantBorvoPartnerQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "quest/borvo_ex_partner");
     }
+
     public void borvo_the_hutt_action_sendBountySignal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "finishedBounty");
     }
+
     public void borvo_the_hutt_action_sendPartnerSignal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "finishedPartner");
     }
+
     public void borvo_the_hutt_action_sendGotAiSignal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "gotAI");
     }
+
     public void borvo_the_hutt_action_giveHuffsRifle(obj_id player, obj_id npc) throws InterruptedException
     {
         String rifle = "object/tangible/loot/quest/rifle_quest_tusken.iff";
         createObjectInInventoryAllowOverload(rifle, player);
-        return;
     }
+
     public int borvo_the_hutt_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_52"))
@@ -157,6 +141,7 @@ public class borvo_the_hutt extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int borvo_the_hutt_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_84"))
@@ -187,7 +172,7 @@ public class borvo_the_hutt extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_57");
@@ -196,7 +181,7 @@ public class borvo_the_hutt extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.borvo_the_hutt.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -247,7 +232,7 @@ public class borvo_the_hutt extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_101");
@@ -264,7 +249,7 @@ public class borvo_the_hutt extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.borvo_the_hutt.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -289,7 +274,7 @@ public class borvo_the_hutt extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_54");
@@ -298,7 +283,7 @@ public class borvo_the_hutt extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.borvo_the_hutt.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -319,6 +304,7 @@ public class borvo_the_hutt extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int borvo_the_hutt_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_101"))
@@ -366,7 +352,7 @@ public class borvo_the_hutt extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_113");
@@ -379,7 +365,7 @@ public class borvo_the_hutt extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.borvo_the_hutt.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -389,6 +375,7 @@ public class borvo_the_hutt extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int borvo_the_hutt_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_113"))
@@ -414,6 +401,7 @@ public class borvo_the_hutt extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int borvo_the_hutt_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_53"))
@@ -433,7 +421,7 @@ public class borvo_the_hutt extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_57");
@@ -442,7 +430,7 @@ public class borvo_the_hutt extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.borvo_the_hutt.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -467,7 +455,7 @@ public class borvo_the_hutt extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_54");
@@ -476,7 +464,7 @@ public class borvo_the_hutt extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.borvo_the_hutt.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -507,6 +495,7 @@ public class borvo_the_hutt extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int borvo_the_hutt_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_57"))
@@ -526,7 +515,7 @@ public class borvo_the_hutt extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -535,7 +524,7 @@ public class borvo_the_hutt extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.borvo_the_hutt.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -545,6 +534,7 @@ public class borvo_the_hutt extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int borvo_the_hutt_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_61"))
@@ -571,7 +561,7 @@ public class borvo_the_hutt extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_65");
@@ -584,7 +574,7 @@ public class borvo_the_hutt extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.borvo_the_hutt.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -594,6 +584,7 @@ public class borvo_the_hutt extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int borvo_the_hutt_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_65"))
@@ -614,7 +605,7 @@ public class borvo_the_hutt extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_77");
@@ -623,7 +614,7 @@ public class borvo_the_hutt extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.borvo_the_hutt.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -643,6 +634,7 @@ public class borvo_the_hutt extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int borvo_the_hutt_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_77"))
@@ -657,6 +649,7 @@ public class borvo_the_hutt extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int borvo_the_hutt_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_54"))
@@ -683,7 +676,7 @@ public class borvo_the_hutt extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_62");
@@ -696,7 +689,7 @@ public class borvo_the_hutt extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.borvo_the_hutt.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -706,6 +699,7 @@ public class borvo_the_hutt extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int borvo_the_hutt_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_62"))
@@ -731,6 +725,7 @@ public class borvo_the_hutt extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -742,6 +737,7 @@ public class borvo_the_hutt extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -749,6 +745,7 @@ public class borvo_the_hutt extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -757,18 +754,21 @@ public class borvo_the_hutt extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.borvo_the_hutt");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -791,7 +791,7 @@ public class borvo_the_hutt extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_52");
@@ -799,7 +799,7 @@ public class borvo_the_hutt extends script.base_script
                 utils.setScriptVar(player, "conversation.borvo_the_hutt.branchId", 1);
                 npcStartConversation(player, npc, "borvo_the_hutt", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -855,7 +855,7 @@ public class borvo_the_hutt extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_84");
@@ -883,7 +883,7 @@ public class borvo_the_hutt extends script.base_script
                 utils.setScriptVar(player, "conversation.borvo_the_hutt.branchId", 3);
                 npcStartConversation(player, npc, "borvo_the_hutt", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -925,7 +925,7 @@ public class borvo_the_hutt extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_53");
@@ -945,7 +945,7 @@ public class borvo_the_hutt extends script.base_script
                 utils.setScriptVar(player, "conversation.borvo_the_hutt.branchId", 11);
                 npcStartConversation(player, npc, "borvo_the_hutt", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -960,6 +960,7 @@ public class borvo_the_hutt extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("borvo_the_hutt"))

@@ -1,5 +1,11 @@
 package script.theme_park.poi.general;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.location;
@@ -10,16 +16,19 @@ public class herd_spawner extends script.theme_park.poi.base
     public herd_spawner()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         doSpawning(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         doSpawning(self);
         return SCRIPT_CONTINUE;
     }
+
     public void doSpawning(obj_id self) throws InterruptedException
     {
         String planet = getCurrentSceneName();
@@ -40,7 +49,7 @@ public class herd_spawner extends script.theme_park.poi.base
             thing = getStringObjVar(self, "creatureTemplate");
             thing = thing + "_large.iff";
         }
-        else 
+        else
         {
             thing = "object/creature/monster/" + herdToSpawn;
             setObjVar(self, "creatureTemplate", thing);
@@ -51,8 +60,8 @@ public class herd_spawner extends script.theme_park.poi.base
         setObjVar(self, "spawned", 1);
         dictionary herdString = new dictionary();
         messageTo(self, "spawnCreatures", herdString, 4, true);
-        return;
     }
+
     public String getCreature(obj_id self) throws InterruptedException
     {
         String creatureSpawn = getStringObjVar(self, "creatureTemplate");
@@ -60,14 +69,15 @@ public class herd_spawner extends script.theme_park.poi.base
         switch (creatureType)
         {
             case 1:
-            creatureSpawn = creatureSpawn + "_medium.iff";
-            break;
+                creatureSpawn = creatureSpawn + "_medium.iff";
+                break;
             case 2:
-            creatureSpawn = creatureSpawn + "_small.iff";
-            break;
+                creatureSpawn = creatureSpawn + "_small.iff";
+                break;
         }
         return creatureSpawn;
     }
+
     public int spawnCreatures(obj_id self, dictionary params) throws InterruptedException
     {
         dictionary herdString = new dictionary();

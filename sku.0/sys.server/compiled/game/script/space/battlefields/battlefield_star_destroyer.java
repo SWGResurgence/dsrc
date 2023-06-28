@@ -1,5 +1,11 @@
 package script.space.battlefields;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.space_battlefield;
 import script.library.utils;
@@ -10,28 +16,29 @@ public class battlefield_star_destroyer extends script.base_script
     public battlefield_star_destroyer()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        final String[] strPaths = 
-        {
-            "imperialTest1",
-            "imperialTest2",
-            "imperialTest3",
-            "imperialTest4",
-            "imperialTest5"
-        };
-        final int[] intPathCounts = 
-        {
-            7,
-            7,
-            7,
-            7,
-            7
-        };
+        final String[] strPaths =
+                {
+                        "imperialTest1",
+                        "imperialTest2",
+                        "imperialTest3",
+                        "imperialTest4",
+                        "imperialTest5"
+                };
+        final int[] intPathCounts =
+                {
+                        7,
+                        7,
+                        7,
+                        7,
+                        7
+                };
         String strObjVars = "fltMaxSpawnDistance|2|120.000000|fltMaxSpawnTime|2|600.000000|fltMinSpawnDistance|2|90.000000|fltMinSpawnTime|2|180.000000|intActivationPhase|0|2|intSpawnCount|0|20|strDefaultBehavior|4|specialty|strPatrolPoints_mangled.count|0|7|strPatrolPoints_mangled.segment.0|5|imperial_invasion_1_1:imperial_invasion_1_2:imperial_invasion_1_3:imperial_invasion_1_4:imperial_invasion_1_5:imperial_invasion_1_6:imperial_invasion_1_7:|strSpawnerName|4|imperial_invasion_1|strSpawnerType|4|generic|strSpawns_mangled.count|0|5|strSpawns_mangled.segment.0|5|squad_stardestroyer_1:squad_stardestroyer_2:squad_stardestroyer_3:squad_stardestroyer_4:squad_stardestroyer_5:|$|";
         setPackedObjvars(self, strObjVars);
         String strPilot = "capital_ship_tier5";
-        
+
         setObjVar(self, "ship.pilotType", strPilot);
         setObjVar(self, "strMyName", "star_destroyer");
         setObjVar(self, "strTargetName", "rebel_station");
@@ -58,10 +65,12 @@ public class battlefield_star_destroyer extends script.base_script
         messageTo(self, "startSpawning", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnCountReached(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id objManager = space_battlefield.getManagerObject();
@@ -70,7 +79,7 @@ public class battlefield_star_destroyer extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             space_battlefield.battlefieldCompleted(objManager, space_battlefield.STATE_REBEL);
             if (!utils.hasScriptVar(objManager, "intResetting"))
@@ -79,7 +88,7 @@ public class battlefield_star_destroyer extends script.base_script
                 messageTo(objManager, "resetBattlefield", null, space_battlefield.RESET_TIME, false);
                 CustomerServiceLog("battlefield", "STAR DESTROYER  destroyed in Battlefield Zone, flipping kessel to rebel");
             }
-            else 
+            else
             {
                 CustomerServiceLog("battlefield", "STAR DESTROYER  destroyed in Battlefield Zone, Not flipping because the imperials won first.");
             }

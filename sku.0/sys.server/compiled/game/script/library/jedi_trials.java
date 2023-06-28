@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.location;
 import script.obj_id;
@@ -105,6 +111,7 @@ public class jedi_trials extends script.base_script
     public static final String PADAWAN_ROBE_STRING = "item_jedi_robe_padawan_04_01";
     public static final String PADAWAN_TRIALS_LOG = "PADAWAN_TRIALS_LOG";
     public static final String KNIGHT_TRIALS_LOG = "KNIGHT_TRIALS_LOG";
+
     public jedi_trials()
     {
     }

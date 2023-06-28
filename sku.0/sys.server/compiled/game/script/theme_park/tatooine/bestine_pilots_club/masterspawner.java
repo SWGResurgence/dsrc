@@ -1,5 +1,11 @@
 package script.theme_park.tatooine.bestine_pilots_club;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.location;
@@ -7,10 +13,12 @@ import script.obj_id;
 
 public class masterspawner extends script.base_script
 {
+    public static final String VERSION = "v1.00.00";
+
     public masterspawner()
     {
     }
-    public static final String VERSION = "v1.00.00";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         debugServerConsoleMsg(self, "Attached Bestine Pilot's Club Spawn Script");
@@ -19,11 +27,12 @@ public class masterspawner extends script.base_script
             spawnEveryone(self);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             return SCRIPT_CONTINUE;
         }
     }
+
     public void spawnEveryone(obj_id self) throws InterruptedException
     {
         obj_id pilot1 = spawnPilot1(self);
@@ -38,8 +47,8 @@ public class masterspawner extends script.base_script
         spawnPilot5(self, pilot3);
         spawnPilot6(self, pilot3);
         setObjVar(self, "pilots", 1);
-        return;
     }
+
     public void despawnEveryone(obj_id self) throws InterruptedException
     {
         destroyObject(getObjIdObjVar(self, "ClubInhabitants.pilot1"));
@@ -53,8 +62,8 @@ public class masterspawner extends script.base_script
         destroyObject(getObjIdObjVar(self, "ClubInhabitants.pilot4"));
         destroyObject(getObjIdObjVar(self, "ClubInhabitants.pilot5"));
         destroyObject(getObjIdObjVar(self, "ClubInhabitants.pilot6"));
-        return;
     }
+
     public obj_id spawnPilot1(obj_id self) throws InterruptedException
     {
         obj_id mainhall = getCellId(self, "mainhall");
@@ -67,6 +76,7 @@ public class masterspawner extends script.base_script
         setObjVar(pilot1, "club", self);
         return pilot1;
     }
+
     public obj_id spawnWoman1(obj_id self, obj_id pilot1) throws InterruptedException
     {
         obj_id mainhall = getCellId(self, "mainhall");
@@ -80,6 +90,7 @@ public class masterspawner extends script.base_script
         setObjVar(woman1, "palace", self);
         return woman1;
     }
+
     public obj_id spawnAtPilot1(obj_id self, obj_id woman1) throws InterruptedException
     {
         obj_id mainhall = getCellId(self, "mainhall");
@@ -92,6 +103,7 @@ public class masterspawner extends script.base_script
         setObjVar(atPilot1, "palace", self);
         return atPilot1;
     }
+
     public obj_id spawnTrooperLeader1(obj_id self) throws InterruptedException
     {
         obj_id mainhall = getCellId(self, "mainhall");
@@ -103,6 +115,7 @@ public class masterspawner extends script.base_script
         setObjVar(trooperLeader1, "palace", self);
         return trooperLeader1;
     }
+
     public void spawnTrooper1(obj_id self, obj_id trooperLeader1) throws InterruptedException
     {
         obj_id mainhall = getCellId(self, "mainhall");
@@ -113,8 +126,8 @@ public class masterspawner extends script.base_script
         attachScript(trooper1, "theme_park.tatooine.bestine_pilots_club.trooper1");
         setObjVar(self, "ClubInhabitants.trooper1", trooper1);
         setObjVar(trooper1, "palace", self);
-        return;
     }
+
     public void spawnTrooper2(obj_id self, obj_id trooperLeader1) throws InterruptedException
     {
         obj_id mainhall = getCellId(self, "mainhall");
@@ -125,8 +138,8 @@ public class masterspawner extends script.base_script
         attachScript(trooper2, "theme_park.tatooine.bestine_pilots_club.trooper2");
         setObjVar(self, "ClubInhabitants.trooper2", trooper2);
         setObjVar(trooper2, "palace", self);
-        return;
     }
+
     public obj_id spawnPilot2(obj_id self) throws InterruptedException
     {
         obj_id mainhall = getCellId(self, "mainhall");
@@ -139,6 +152,7 @@ public class masterspawner extends script.base_script
         setObjVar(pilot2, "club", self);
         return pilot2;
     }
+
     public obj_id spawnPilot3(obj_id self, obj_id pilot2) throws InterruptedException
     {
         obj_id mainhall = getCellId(self, "mainhall");
@@ -152,6 +166,7 @@ public class masterspawner extends script.base_script
         setObjVar(pilot3, "palace", self);
         return pilot3;
     }
+
     public void spawnPilot4(obj_id self, obj_id pilot2) throws InterruptedException
     {
         obj_id mainhall = getCellId(self, "mainhall");
@@ -163,8 +178,8 @@ public class masterspawner extends script.base_script
         attachScript(pilot4, "theme_park.tatooine.bestine_pilots_club.pilot4");
         setObjVar(self, "ClubInhabitants.pilot4", pilot4);
         setObjVar(pilot4, "palace", self);
-        return;
     }
+
     public void spawnPilot5(obj_id self, obj_id pilot3) throws InterruptedException
     {
         obj_id mainhall = getCellId(self, "mainhall");
@@ -176,8 +191,8 @@ public class masterspawner extends script.base_script
         attachScript(pilot5, "theme_park.tatooine.bestine_pilots_club.pilot5");
         setObjVar(self, "ClubInhabitants.pilot5", pilot5);
         setObjVar(pilot5, "palace", self);
-        return;
     }
+
     public void spawnPilot6(obj_id self, obj_id pilot3) throws InterruptedException
     {
         obj_id mainhall = getCellId(self, "mainhall");
@@ -188,71 +203,82 @@ public class masterspawner extends script.base_script
         attachScript(pilot6, "theme_park.tatooine.bestine_pilots_club.pilot6");
         setObjVar(self, "ClubInhabitants.pilot6", pilot6);
         setObjVar(pilot6, "palace", self);
-        return;
     }
+
     public int pilot1Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnPilot1(self);
         return SCRIPT_CONTINUE;
     }
+
     public int woman1Died(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id pilot1 = getObjIdObjVar(self, "ClubInhabitants.pilot1");
         spawnWoman1(self, pilot1);
         return SCRIPT_CONTINUE;
     }
+
     public int atPilot1Died(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id woman1 = getObjIdObjVar(self, "ClubInhabitants.woman1");
         spawnAtPilot1(self, woman1);
         return SCRIPT_CONTINUE;
     }
+
     public int trooperLeader1Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnTrooperLeader1(self);
         return SCRIPT_CONTINUE;
     }
+
     public int trooper1Died(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id trooperLeader1 = getObjIdObjVar(self, "ClubInhabitants.trooperleader1");
         spawnTrooper1(self, trooperLeader1);
         return SCRIPT_CONTINUE;
     }
+
     public int trooper2Died(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id trooperLeader1 = getObjIdObjVar(self, "ClubInhabitants.trooperleader1");
         spawnTrooper2(self, trooperLeader1);
         return SCRIPT_CONTINUE;
     }
+
     public int pilot2Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnPilot2(self);
         return SCRIPT_CONTINUE;
     }
+
     public int pilot3Died(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id pilot2 = getObjIdObjVar(self, "ClubInhabitants.pilot2");
         spawnPilot3(self, pilot2);
         return SCRIPT_CONTINUE;
     }
+
     public int pilot4Died(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id pilot2 = getObjIdObjVar(self, "ClubInhabitants.pilot2");
         spawnPilot4(self, pilot2);
         return SCRIPT_CONTINUE;
     }
+
     public int pilot5Died(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id pilot3 = getObjIdObjVar(self, "ClubInhabitants.pilot3");
         spawnPilot5(self, pilot3);
         return SCRIPT_CONTINUE;
     }
+
     public int pilot6Died(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id pilot3 = getObjIdObjVar(self, "ClubInhabitants.pilot3");
         spawnPilot6(self, pilot3);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         debugServerConsoleMsg(self, "Detaching Bestine Pilot's Club Spawn Script");

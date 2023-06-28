@@ -1,133 +1,162 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class npe_station_han_solo2 extends script.base_script
 {
+    public static String c_stringFile = "conversation/npe_station_han_solo2";
+
     public npe_station_han_solo2()
     {
     }
-    public static String c_stringFile = "conversation/npe_station_han_solo2";
+
     public boolean npe_station_han_solo2_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean npe_station_han_solo2_condition_firstConversation(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "npe_solo_profession");
     }
+
     public boolean npe_station_han_solo2_condition_secondConversation(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "npe_solo_profession", "talktosolo2");
     }
+
     public boolean npe_station_han_solo2_condition_finishedClassQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "npe_smuggler_try");
     }
+
     public boolean npe_station_han_solo2_condition_ClassQuestActive(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedTask(player, "npe_smuggler_try", "talktojake");
     }
+
     public boolean npe_station_han_solo2_condition_isTraining(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "npe_smuggler_try");
     }
+
     public boolean npe_station_han_solo2_condition_onLastSmugglerStep(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "npe_smuggler_try_2", "talktohan");
     }
+
     public boolean npe_station_han_solo2_condition_isBH(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.isProfession(player, utils.BOUNTY_HUNTER);
     }
+
     public boolean npe_station_han_solo2_condition_choseProfessionTrainer(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "npe_solo_profession_2");
     }
+
     public boolean npe_station_han_solo2_condition_onMainQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "npe_new_main_quest");
     }
+
     public boolean npe_station_han_solo2_condition_onCantinaStep(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedTask(player, "npe_new_main_quest", "getparts");
     }
+
     public boolean npe_station_han_solo2_condition_onCollectStep(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedTask(player, "npe_new_main_quest", "bounty");
     }
+
     public boolean npe_station_han_solo2_condition_onlastHanstep(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "npe_new_main_quest", "return");
     }
+
     public boolean npe_station_han_solo2_condition_onInaldraQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "npe_inaldra_quest");
     }
+
     public boolean npe_station_han_solo2_condition_finishedInaldraQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "npe_inaldra_quest");
     }
+
     public boolean npe_station_han_solo2_condition_completedMainQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "npe_new_main_quest");
     }
+
     public boolean npe_station_han_solo2_condition_playerisSpy(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.isProfession(player, utils.SPY);
     }
+
     public boolean npe_station_han_solo2_condition_isSmugglerToTrain(obj_id player, obj_id npc) throws InterruptedException
     {
-        if ((utils.isProfession(player, utils.SMUGGLER)) && groundquests.isQuestActive(player, "npe_pointer_smuggler_template"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return (utils.isProfession(player, utils.SMUGGLER)) && groundquests.isQuestActive(player, "npe_pointer_smuggler_template");
     }
+
     public boolean npe_station_han_solo2_condition_playerisTrader(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.isProfession(player, utils.TRADER);
     }
+
     public boolean npe_station_han_solo2_condition_playerisForceSensitive(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.isProfession(player, utils.FORCE_SENSITIVE);
     }
+
     public boolean npe_station_han_solo2_condition_playerisEntertainer(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.isProfession(player, utils.ENTERTAINER);
     }
+
     public boolean npe_station_han_solo2_condition_playerisMedic(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.isProfession(player, utils.MEDIC);
     }
+
     public boolean npe_station_han_solo2_condition_playerisOfficer(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.isProfession(player, utils.OFFICER);
     }
+
     public boolean npe_station_han_solo2_condition_playerisSmuggler(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.isProfession(player, utils.SMUGGLER);
     }
+
     public boolean npe_station_han_solo2_condition_playerisCommando(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.isProfession(player, utils.COMMANDO);
     }
+
     public boolean npe_station_han_solo2_condition_playerisBountyHunter(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.isProfession(player, utils.BOUNTY_HUNTER);
     }
+
     public boolean npe_station_han_solo2_condition_finishedProfessionTrainer(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasObjVar(player, "npe.finishedTemplate");
     }
+
     public boolean npe_station_han_solo2_condition_finishedTraining(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "npe_smuggler_comm", "donedone") || groundquests.hasCompletedQuest(player, "npe_smuggler_comm"));
     }
+
     public boolean npe_station_han_solo2_condition_isAtLeastLevel5(obj_id player, obj_id npc) throws InterruptedException
     {
         int level = getLevel(player);
@@ -135,12 +164,9 @@ public class npe_station_han_solo2 extends script.base_script
         {
             return true;
         }
-        if (level >= 5)
-        {
-            return true;
-        }
-        return false;
+        return level >= 5;
     }
+
     public void npe_station_han_solo2_action_giveContactPointer(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "found_smuggler");
@@ -151,23 +177,27 @@ public class npe_station_han_solo2 extends script.base_script
         }
         play2dNonLoopingSound(player, "sound/vo_han_solo_28c.snd");
     }
+
     public void npe_station_han_solo2_action_signaSmugglerQuestComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "donedone");
         groundquests.sendSignal(player, "found_smuggler");
     }
+
     public void npe_station_han_solo2_action_giveSecretaryPointer(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "reward");
         groundquests.grantQuest(player, "npe_pointer_secretary");
         setObjVar(player, "npe.finishedTemplate", 1);
     }
+
     public void npe_station_han_solo2_action_giveSmugglerQuestSignal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "npe_smuggler_try_2_han");
         setObjVar(player, "npe.finishedTemplate", 1);
         play2dNonLoopingSound(player, "sound/vo_han_solo_33c.snd");
     }
+
     public void npe_station_han_solo2_action_giveFirstReward(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
@@ -178,44 +208,53 @@ public class npe_station_han_solo2 extends script.base_script
         }
         play2dNonLoopingSound(player, "sound/vo_han_solo_10c.snd");
     }
+
     public void npe_station_han_solo2_action_giveAnothersignal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "found_smuggler");
     }
+
     public void npe_station_han_solo2_action_sound1(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_11c.snd");
     }
+
     public void npe_station_han_solo2_action_sound2(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_12c.snd");
         faceTo(npc, player);
     }
+
     public void npe_station_han_solo2_action_signalMainQuestComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "npe_new_main_quest_han");
         groundquests.grantQuest(player, "npe_pointer_inaldra");
         play2dNonLoopingSound(player, "sound/vo_han_solo_52c.snd");
     }
+
     public void npe_station_han_solo2_action_giveMainQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "npe_new_main_quest");
         npe.giveMapPopUp(player, npc);
         play2dNonLoopingSound(player, "sound/vo_han_solo_39c.snd");
     }
+
     public void npe_station_han_solo2_action_faceplayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
     }
+
     public void npe_station_han_solo2_action_sound3(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_13c.snd");
     }
+
     public void npe_station_han_solo2_action_giveProfessionPointer(obj_id player, obj_id npc) throws InterruptedException
     {
         npe.giveTemplatePointer(player);
         play2dNonLoopingSound(player, "sound/vo_han_solo_14c.snd");
     }
+
     public void npe_station_han_solo2_action_leaveStation(obj_id player, obj_id npc) throws InterruptedException
     {
         string_id stfPrompt = new string_id("npe", "exit_station_prompt");
@@ -225,214 +264,263 @@ public class npe_station_han_solo2 extends script.base_script
         int pid = sui.msgbox(player, player, prompt, sui.OK_CANCEL, title, 0, "handTransfer");
         play2dNonLoopingSound(player, "sound/vo_han_solo_64c.snd");
     }
+
     public void npe_station_han_solo2_action_signalMQCompleteNoInaldra(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "npe_new_main_quest_han");
         groundquests.grantQuest(player, "npe_job_pointer_han");
         play2dNonLoopingSound(player, "sound/vo_han_solo_51c.snd");
     }
+
     public void npe_station_han_solo2_action_sound4(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_15c.snd");
     }
+
     public void npe_station_han_solo2_action_sound5(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_16c.snd");
     }
+
     public void npe_station_han_solo2_action_sound6(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_17c.snd");
     }
+
     public void npe_station_han_solo2_action_sound7(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_18c.snd");
     }
+
     public void npe_station_han_solo2_action_sound8(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_19c.snd");
     }
+
     public void npe_station_han_solo2_action_sound9(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_20c.snd");
     }
+
     public void npe_station_han_solo2_action_sound10(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_21c.snd");
     }
+
     public void npe_station_han_solo2_action_sound11(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_22c.snd");
         npe.giveTemplatePointer(player);
     }
+
     public void npe_station_han_solo2_action_sound12(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_25c.snd");
         faceTo(npc, player);
     }
+
     public void npe_station_han_solo2_action_sound13(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_26c.snd");
         faceTo(npc, player);
     }
+
     public void npe_station_han_solo2_action_sound14(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_27c.snd");
     }
+
     public void npe_station_han_solo2_action_sound15(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_29c.snd");
         faceTo(npc, player);
     }
+
     public void npe_station_han_solo2_action_sound16(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_30c.snd");
         faceTo(npc, player);
     }
+
     public void npe_station_han_solo2_action_sound17(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_31c.snd");
         faceTo(npc, player);
     }
+
     public void npe_station_han_solo2_action_sound18(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_32c.snd");
     }
+
     public void npe_station_han_solo2_action_sound19(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_35c.snd");
     }
+
     public void npe_station_han_solo2_action_sound20(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_36c.snd");
         faceTo(npc, player);
     }
+
     public void npe_station_han_solo2_action_sound21(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_37c.snd");
     }
+
     public void npe_station_han_solo2_action_sound22(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_38c.snd");
     }
+
     public void npe_station_han_solo2_action_sound23(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_40c.snd");
     }
+
     public void npe_station_han_solo2_action_sound24(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_41c.snd");
     }
+
     public void npe_station_han_solo2_action_sound25(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_34c.snd");
     }
+
     public void npe_station_han_solo2_action_sound26(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_43c.snd");
         faceTo(npc, player);
     }
+
     public void npe_station_han_solo2_action_sound27(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_44c.snd");
         faceTo(npc, player);
     }
+
     public void npe_station_han_solo2_action_sound28(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_45c.snd");
     }
+
     public void npe_station_han_solo2_action_sound29(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_46c.snd");
         faceTo(npc, player);
     }
+
     public void npe_station_han_solo2_action_sound30(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_47c.snd");
     }
+
     public void npe_station_han_solo2_action_sound31(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_48c.snd");
     }
+
     public void npe_station_han_solo2_action_sound32(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_49c.snd");
         faceTo(npc, player);
     }
+
     public void npe_station_han_solo2_action_sound33(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_50c.snd");
     }
+
     public void npe_station_han_solo2_action_sound34(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_53c.snd");
         faceTo(npc, player);
     }
+
     public void npe_station_han_solo2_action_sound35(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_54c.snd");
     }
+
     public void npe_station_han_solo2_action_sound36(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_55c.snd");
     }
+
     public void npe_station_han_solo2_action_sound37(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_56c.snd");
     }
+
     public void npe_station_han_solo2_action_sound38(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_57c.snd");
     }
+
     public void npe_station_han_solo2_action_sound39(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_58c.snd");
     }
+
     public void npe_station_han_solo2_action_sound40(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_59c.snd");
     }
+
     public void npe_station_han_solo2_action_sound41(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_60c.snd");
     }
+
     public void npe_station_han_solo2_action_sound42(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_61c.snd");
     }
+
     public void npe_station_han_solo2_action_sound43(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_62c.snd");
     }
+
     public void npe_station_han_solo2_action_sound44(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_63c.snd");
     }
+
     public void npe_station_han_solo2_action_sound45(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_65c.snd");
     }
+
     public void npe_station_han_solo2_action_sound46(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_66c.snd");
         faceTo(npc, player);
     }
+
     public void npe_station_han_solo2_action_sound2ca(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_12ca.snd");
     }
+
     public void npe_station_han_solo2_action_sound47(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_xtra3.snd");
     }
+
     public void npe_station_han_solo2_action_sound48(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, "sound/vo_han_solo_xtra4.snd");
         npe_station_han_solo2_action_giveSecretaryPointer(player, npc);
     }
+
     public void npe_station_han_solo2_action_sendMainSignal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "npe_new_main_quest_han");
     }
+
     public int npe_station_han_solo2_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_149"))
@@ -454,7 +542,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_153");
@@ -463,7 +551,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -496,7 +584,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_219");
@@ -509,7 +597,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -532,7 +620,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_136");
@@ -541,7 +629,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -551,6 +639,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_127"))
@@ -571,7 +660,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_129");
@@ -580,7 +669,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -607,7 +696,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_153");
@@ -616,7 +705,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -649,7 +738,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_219");
@@ -662,7 +751,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -685,7 +774,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_136");
@@ -694,7 +783,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -704,6 +793,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_129"))
@@ -720,6 +810,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_153"))
@@ -748,7 +839,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_155");
@@ -761,7 +852,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -771,6 +862,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_155"))
@@ -792,7 +884,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159");
@@ -801,7 +893,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -828,7 +920,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -837,7 +929,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -847,6 +939,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_159"))
@@ -868,7 +961,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -877,7 +970,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -887,6 +980,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_160"))
@@ -915,7 +1009,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -928,7 +1022,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -938,6 +1032,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_162"))
@@ -959,7 +1054,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_141");
@@ -968,7 +1063,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -995,7 +1090,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_143");
@@ -1004,7 +1099,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1014,6 +1109,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_141"))
@@ -1029,6 +1125,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_143"))
@@ -1044,6 +1141,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_219"))
@@ -1071,6 +1169,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_136"))
@@ -1086,6 +1185,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_119"))
@@ -1114,7 +1214,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -1127,7 +1227,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1137,6 +1237,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_121"))
@@ -1164,6 +1265,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_240"))
@@ -1185,7 +1287,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_247");
@@ -1194,7 +1296,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1204,6 +1306,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_247"))
@@ -1220,6 +1323,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_109"))
@@ -1235,6 +1339,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_95"))
@@ -1256,7 +1361,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_97");
@@ -1265,7 +1370,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1291,7 +1396,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_165");
@@ -1300,7 +1405,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1333,7 +1438,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_193");
@@ -1346,7 +1451,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1356,6 +1461,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_97"))
@@ -1376,7 +1482,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_102");
@@ -1385,7 +1491,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1395,6 +1501,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_102"))
@@ -1411,6 +1518,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_165"))
@@ -1432,7 +1540,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_215");
@@ -1441,7 +1549,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1451,6 +1559,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_215"))
@@ -1472,7 +1581,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_97");
@@ -1481,7 +1590,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1491,6 +1600,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_193"))
@@ -1512,7 +1622,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_97");
@@ -1521,7 +1631,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1542,6 +1652,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_105"))
@@ -1563,7 +1674,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_124");
@@ -1572,7 +1683,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1582,6 +1693,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_124"))
@@ -1603,7 +1715,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_132");
@@ -1612,7 +1724,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1622,6 +1734,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_132"))
@@ -1657,7 +1770,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_95");
@@ -1674,7 +1787,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1684,6 +1797,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_95"))
@@ -1705,7 +1819,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_97");
@@ -1714,7 +1828,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1740,7 +1854,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_165");
@@ -1749,7 +1863,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1782,7 +1896,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_193");
@@ -1795,7 +1909,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1805,6 +1919,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_226"))
@@ -1826,7 +1941,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_229");
@@ -1835,7 +1950,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1845,6 +1960,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_229"))
@@ -1860,6 +1976,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch45(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_197"))
@@ -1881,7 +1998,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_148");
@@ -1890,7 +2007,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1900,6 +2017,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_148"))
@@ -1921,7 +2039,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_139");
@@ -1930,7 +2048,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1940,6 +2058,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_139"))
@@ -1960,7 +2079,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_142");
@@ -1969,7 +2088,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1979,6 +2098,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch48(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_142"))
@@ -2000,7 +2120,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_146");
@@ -2009,7 +2129,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2033,7 +2153,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_146");
@@ -2042,7 +2162,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2066,7 +2186,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_146");
@@ -2075,7 +2195,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2099,7 +2219,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_146");
@@ -2108,7 +2228,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2132,7 +2252,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_146");
@@ -2141,7 +2261,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2165,7 +2285,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_146");
@@ -2174,7 +2294,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2198,7 +2318,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_146");
@@ -2207,7 +2327,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2231,7 +2351,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_146");
@@ -2240,7 +2360,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2264,7 +2384,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_207");
@@ -2273,7 +2393,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2283,6 +2403,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_146"))
@@ -2298,6 +2419,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_146"))
@@ -2313,6 +2435,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch52(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_146"))
@@ -2328,6 +2451,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch53(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_146"))
@@ -2343,6 +2467,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_146"))
@@ -2358,6 +2483,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch55(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_146"))
@@ -2373,6 +2499,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch56(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_146"))
@@ -2388,6 +2515,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch57(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_146"))
@@ -2403,6 +2531,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_station_han_solo2_handleBranch58(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_207"))
@@ -2423,7 +2552,7 @@ public class npe_station_han_solo2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_229");
@@ -2432,7 +2561,7 @@ public class npe_station_han_solo2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_station_han_solo2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2442,6 +2571,7 @@ public class npe_station_han_solo2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -2454,6 +2584,7 @@ public class npe_station_han_solo2 extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -2462,6 +2593,7 @@ public class npe_station_han_solo2 extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -2470,18 +2602,21 @@ public class npe_station_han_solo2 extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.npe_station_han_solo2");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -2513,7 +2648,7 @@ public class npe_station_han_solo2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_149");
@@ -2525,7 +2660,7 @@ public class npe_station_han_solo2 extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_station_han_solo2.branchId", 1);
                 npcStartConversation(player, npc, "npe_station_han_solo2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2561,7 +2696,7 @@ public class npe_station_han_solo2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_127");
@@ -2577,7 +2712,7 @@ public class npe_station_han_solo2 extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_station_han_solo2.branchId", 2);
                 npcStartConversation(player, npc, "npe_station_han_solo2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2599,7 +2734,7 @@ public class npe_station_han_solo2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_119");
@@ -2607,7 +2742,7 @@ public class npe_station_han_solo2 extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_station_han_solo2.branchId", 17);
                 npcStartConversation(player, npc, "npe_station_han_solo2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2630,7 +2765,7 @@ public class npe_station_han_solo2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_240");
@@ -2638,7 +2773,7 @@ public class npe_station_han_solo2 extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_station_han_solo2.branchId", 21);
                 npcStartConversation(player, npc, "npe_station_han_solo2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2660,7 +2795,7 @@ public class npe_station_han_solo2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_109");
@@ -2668,7 +2803,7 @@ public class npe_station_han_solo2 extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_station_han_solo2.branchId", 24);
                 npcStartConversation(player, npc, "npe_station_han_solo2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2713,7 +2848,7 @@ public class npe_station_han_solo2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_95");
@@ -2729,7 +2864,7 @@ public class npe_station_han_solo2 extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_station_han_solo2.branchId", 27);
                 npcStartConversation(player, npc, "npe_station_han_solo2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2752,7 +2887,7 @@ public class npe_station_han_solo2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_105");
@@ -2760,7 +2895,7 @@ public class npe_station_han_solo2 extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_station_han_solo2.branchId", 35);
                 npcStartConversation(player, npc, "npe_station_han_solo2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2797,7 +2932,7 @@ public class npe_station_han_solo2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_226");
@@ -2805,7 +2940,7 @@ public class npe_station_han_solo2 extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_station_han_solo2.branchId", 41);
                 npcStartConversation(player, npc, "npe_station_han_solo2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2835,7 +2970,7 @@ public class npe_station_han_solo2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_197");
@@ -2843,7 +2978,7 @@ public class npe_station_han_solo2 extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_station_han_solo2.branchId", 45);
                 npcStartConversation(player, npc, "npe_station_han_solo2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2852,6 +2987,7 @@ public class npe_station_han_solo2 extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("npe_station_han_solo2"))

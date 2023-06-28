@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.kashyyyk_the_arena;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.groundquests;
 import script.library.pclib;
@@ -10,12 +16,13 @@ import script.string_id;
 
 public class player extends script.base_script
 {
-    public player()
-    {
-    }
     public static final String STF = "dungeon/kash_the_arena";
     public static final String QUEST_MARK = "kash_arena.isQuestHolder";
     public static final string_id SID_DEATH_EJECT = new string_id(STF, "ejected_by_death");
+    public player()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         groundquests.sendSignal(self, "signalArenaChallengeAccepted");
@@ -25,6 +32,7 @@ public class player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         String fname = getName(self);
@@ -33,6 +41,7 @@ public class player extends script.base_script
         messageTo(self, "handleDeathFailure", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleDeathFailure(obj_id self, dictionary params) throws InterruptedException
     {
         pclib.resurrectPlayer(self, true);
@@ -45,6 +54,7 @@ public class player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         obj_id top = space_dungeon.getDungeonIdForPlayer(self);
@@ -55,6 +65,7 @@ public class player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgDungeonEjectConfirmed(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("space_dungeon", "theme_park.dungeon.avatar_platform.player.msgDungeonEjectConfirmed()");
@@ -66,6 +77,7 @@ public class player extends script.base_script
         space_dungeon.ejectPlayerFromDungeon(self);
         return SCRIPT_CONTINUE;
     }
+
     public int msgDungeonLaunchConfirmed(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("space_dungeon", "theme_park.dungeon.avatar_platform.player.msgDungeonLaunchConfirmed()");

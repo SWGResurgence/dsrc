@@ -1,70 +1,74 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class story_arc_chapter_two_computer extends script.base_script
 {
+    public static String c_stringFile = "conversation/story_arc_chapter_two_computer";
+
     public story_arc_chapter_two_computer()
     {
     }
-    public static String c_stringFile = "conversation/story_arc_chapter_two_computer";
+
     public boolean story_arc_chapter_two_computer_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean story_arc_chapter_two_computer_condition_isReadyForChapTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "som_story_arc_chapter_one_03", "mustafar_uplink_four");
     }
+
     public boolean story_arc_chapter_two_computer_condition_isFixingFactory(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "som_story_arc_chapter_two_01", "mustafar_factory_one") || groundquests.isTaskActive(player, "som_story_arc_chapter_two_01", "mustafar_factory_two"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.isTaskActive(player, "som_story_arc_chapter_two_01", "mustafar_factory_one") || groundquests.isTaskActive(player, "som_story_arc_chapter_two_01", "mustafar_factory_two");
     }
+
     public boolean story_arc_chapter_two_computer_condition_factoryIsRepaired(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "som_story_arc_chapter_two_01", "mustafar_factory_three");
     }
+
     public boolean story_arc_chapter_two_computer_condition_completedTransfer(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.hasCompletedTask(player, "som_story_arc_chapter_two_01", "mustafar_factory_three") || groundquests.hasCompletedQuest(player, "som_story_arc_chapter_two_01"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.hasCompletedTask(player, "som_story_arc_chapter_two_01", "mustafar_factory_three") || groundquests.hasCompletedQuest(player, "som_story_arc_chapter_two_01");
     }
+
     public boolean story_arc_chapter_two_computer_condition_hasCompleteChapterOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "som_story_arc_chapter_one_03");
     }
+
     public boolean story_arc_chapter_two_computer_condition_isNotFinalStep(obj_id player, obj_id npc) throws InterruptedException
     {
         return getIntObjVar(trial.getTop(npc), "status") < 11;
     }
+
     public void story_arc_chapter_two_computer_action_completeChapterOne(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "mustafar_uplink_finish");
         groundquests.grantQuest(player, "som_story_arc_chapter_two_01");
         badge.grantBadge(player, "bdg_must_victory_orf");
     }
+
     public void story_arc_chapter_two_computer_action_hkShowsUp(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "mustafar_factory_transfer");
     }
+
     public void story_arc_chapter_two_computer_action_grantMission(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "som_story_arc_chapter_two_01");
     }
+
     public int story_arc_chapter_two_computer_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_73"))
@@ -79,6 +83,7 @@ public class story_arc_chapter_two_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int story_arc_chapter_two_computer_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_17"))
@@ -93,6 +98,7 @@ public class story_arc_chapter_two_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int story_arc_chapter_two_computer_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_43"))
@@ -107,6 +113,7 @@ public class story_arc_chapter_two_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int story_arc_chapter_two_computer_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_53"))
@@ -126,7 +133,7 @@ public class story_arc_chapter_two_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_57");
@@ -135,7 +142,7 @@ public class story_arc_chapter_two_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.story_arc_chapter_two_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -145,6 +152,7 @@ public class story_arc_chapter_two_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int story_arc_chapter_two_computer_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_57"))
@@ -164,7 +172,7 @@ public class story_arc_chapter_two_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -173,7 +181,7 @@ public class story_arc_chapter_two_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.story_arc_chapter_two_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -183,6 +191,7 @@ public class story_arc_chapter_two_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int story_arc_chapter_two_computer_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_61"))
@@ -198,6 +207,7 @@ public class story_arc_chapter_two_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int story_arc_chapter_two_computer_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_27"))
@@ -217,7 +227,7 @@ public class story_arc_chapter_two_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_31");
@@ -226,7 +236,7 @@ public class story_arc_chapter_two_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.story_arc_chapter_two_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -236,6 +246,7 @@ public class story_arc_chapter_two_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int story_arc_chapter_two_computer_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_31"))
@@ -255,7 +266,7 @@ public class story_arc_chapter_two_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_35");
@@ -264,7 +275,7 @@ public class story_arc_chapter_two_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.story_arc_chapter_two_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -274,6 +285,7 @@ public class story_arc_chapter_two_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int story_arc_chapter_two_computer_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_35"))
@@ -293,7 +305,7 @@ public class story_arc_chapter_two_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_39");
@@ -302,7 +314,7 @@ public class story_arc_chapter_two_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.story_arc_chapter_two_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -312,6 +324,7 @@ public class story_arc_chapter_two_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int story_arc_chapter_two_computer_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_39"))
@@ -331,7 +344,7 @@ public class story_arc_chapter_two_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_45");
@@ -340,7 +353,7 @@ public class story_arc_chapter_two_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.story_arc_chapter_two_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -350,6 +363,7 @@ public class story_arc_chapter_two_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int story_arc_chapter_two_computer_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_45"))
@@ -369,7 +383,7 @@ public class story_arc_chapter_two_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_49");
@@ -378,7 +392,7 @@ public class story_arc_chapter_two_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.story_arc_chapter_two_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -388,6 +402,7 @@ public class story_arc_chapter_two_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int story_arc_chapter_two_computer_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_49"))
@@ -407,7 +422,7 @@ public class story_arc_chapter_two_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_56");
@@ -416,7 +431,7 @@ public class story_arc_chapter_two_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.story_arc_chapter_two_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -426,6 +441,7 @@ public class story_arc_chapter_two_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int story_arc_chapter_two_computer_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_56"))
@@ -445,7 +461,7 @@ public class story_arc_chapter_two_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_64");
@@ -454,7 +470,7 @@ public class story_arc_chapter_two_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.story_arc_chapter_two_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -464,6 +480,7 @@ public class story_arc_chapter_two_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int story_arc_chapter_two_computer_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_64"))
@@ -483,7 +500,7 @@ public class story_arc_chapter_two_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_68");
@@ -492,7 +509,7 @@ public class story_arc_chapter_two_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.story_arc_chapter_two_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -502,6 +519,7 @@ public class story_arc_chapter_two_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int story_arc_chapter_two_computer_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_68"))
@@ -517,6 +535,7 @@ public class story_arc_chapter_two_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int story_arc_chapter_two_computer_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_76"))
@@ -531,16 +550,19 @@ public class story_arc_chapter_two_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         obj_id building = getTopMostContainer(self);
@@ -553,7 +575,7 @@ public class story_arc_chapter_two_computer extends script.base_script
         {
             menuInfo.addRootMenu(menu_info_types.SERVER_MENU1, new string_id("mustafar/old_republic_facility", "computer_terminal_use"));
         }
-        else 
+        else
         {
             int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, new string_id("mustafar/old_republic_facility", "computer_terminal_use"));
             menu_info_data menuInfoData = menuInfo.getMenuItemById(menu);
@@ -562,6 +584,7 @@ public class story_arc_chapter_two_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU1)
@@ -573,18 +596,21 @@ public class story_arc_chapter_two_computer extends script.base_script
         sendDirtyObjectMenuNotification(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.story_arc_chapter_two_computer");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -613,7 +639,7 @@ public class story_arc_chapter_two_computer extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_73");
@@ -621,7 +647,7 @@ public class story_arc_chapter_two_computer extends script.base_script
                 utils.setScriptVar(player, "conversation.story_arc_chapter_two_computer.branchId", 2);
                 npcStartConversation(player, npc, "story_arc_chapter_two_computer", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -642,7 +668,7 @@ public class story_arc_chapter_two_computer extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_17");
@@ -650,7 +676,7 @@ public class story_arc_chapter_two_computer extends script.base_script
                 utils.setScriptVar(player, "conversation.story_arc_chapter_two_computer.branchId", 4);
                 npcStartConversation(player, npc, "story_arc_chapter_two_computer", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -671,7 +697,7 @@ public class story_arc_chapter_two_computer extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_43");
@@ -679,7 +705,7 @@ public class story_arc_chapter_two_computer extends script.base_script
                 utils.setScriptVar(player, "conversation.story_arc_chapter_two_computer.branchId", 6);
                 npcStartConversation(player, npc, "story_arc_chapter_two_computer", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -700,7 +726,7 @@ public class story_arc_chapter_two_computer extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_53");
@@ -708,7 +734,7 @@ public class story_arc_chapter_two_computer extends script.base_script
                 utils.setScriptVar(player, "conversation.story_arc_chapter_two_computer.branchId", 8);
                 npcStartConversation(player, npc, "story_arc_chapter_two_computer", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -729,7 +755,7 @@ public class story_arc_chapter_two_computer extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_27");
@@ -737,7 +763,7 @@ public class story_arc_chapter_two_computer extends script.base_script
                 utils.setScriptVar(player, "conversation.story_arc_chapter_two_computer.branchId", 12);
                 npcStartConversation(player, npc, "story_arc_chapter_two_computer", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -758,7 +784,7 @@ public class story_arc_chapter_two_computer extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -766,7 +792,7 @@ public class story_arc_chapter_two_computer extends script.base_script
                 utils.setScriptVar(player, "conversation.story_arc_chapter_two_computer.branchId", 22);
                 npcStartConversation(player, npc, "story_arc_chapter_two_computer", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -775,6 +801,7 @@ public class story_arc_chapter_two_computer extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("story_arc_chapter_two_computer"))

@@ -1,5 +1,11 @@
 package script.npe;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.space_dungeon;
 import script.library.space_dungeon_data;
@@ -12,13 +18,14 @@ import java.util.Vector;
 
 public class travel_player_space_dungeon_falcon extends script.base_script
 {
-    public travel_player_space_dungeon_falcon()
-    {
-    }
     public static final string_id SID_UNABLE_TO_FIND_DUNGEON = new string_id("dungeon/space_dungeon", "unable_to_find_dungeon");
     public static final string_id SID_NO_TICKET = new string_id("dungeon/space_dungeon", "no_ticket");
     public static final string_id SID_REQUEST_TRAVEL = new string_id("dungeon/space_dungeon", "request_travel");
     public static final string_id SID_REQUEST_TRAVEL_OUTSTANDING = new string_id("dungeon/space_dungeon", "request_travel_outstanding");
+    public travel_player_space_dungeon_falcon()
+    {
+    }
+
     public int OnClusterWideDataResponse(obj_id self, String manage_name, String dungeon_type, int request_id, String[] element_name_list, dictionary[] dungeon_data, int lock_key) throws InterruptedException
     {
         LOG("space_dungeon", "travel_player_space_dungeon_falcon.OnClusterWideDataResponse");
@@ -38,7 +45,7 @@ public class travel_player_space_dungeon_falcon extends script.base_script
         {
             ticket = getObjIdObjVar(player, space_dungeon.VAR_TICKET_USED);
         }
-        else 
+        else
         {
             ticket = player;
         }
@@ -85,7 +92,7 @@ public class travel_player_space_dungeon_falcon extends script.base_script
             return SCRIPT_CONTINUE;
         }
         String dungeon_name = dungeon_type.substring(0, dungeon_type.length() - 1);
-        if (false == space_dungeon_data.isValidDungeon(dungeon_name))
+        if (!space_dungeon_data.isValidDungeon(dungeon_name))
         {
             LOG("space_dungeon", "travel_player_space_dungeon_falcon.OnClusterWideDataResponse -- dungeon name of " + dungeon_name + " is not in the dungeon datatable.");
             space_dungeon.cleanupPlayerTicketObjvars(player);
@@ -103,12 +110,12 @@ public class travel_player_space_dungeon_falcon extends script.base_script
             }
             obj_id dungeon_id = dungeon.getObjId("dungeon_id");
             int session_id = dungeon.getInt("session_id");
-            float[] dungeon_position = 
-            {
-                dungeon.getFloat("position_x"),
-                dungeon.getFloat("position_y"),
-                dungeon.getFloat("position_z")
-            };
+            float[] dungeon_position =
+                    {
+                            dungeon.getFloat("position_x"),
+                            dungeon.getFloat("position_y"),
+                            dungeon.getFloat("position_z")
+                    };
             LOG("space_dungeon", "travel_player_space_dungeon_falcon.OnClusterWideDataResponse -- session_id ->" + session_id + " dungeon_instance ->" + element_name_list[i] + " " + dungeon_position[0] + " " + dungeon_position[1] + " " + dungeon_position[2]);
             if (!isIdValid(dungeon_id))
             {
@@ -156,21 +163,25 @@ public class travel_player_space_dungeon_falcon extends script.base_script
         sendSystemMessage(player, Objects.requireNonNullElse(success, SID_UNABLE_TO_FIND_DUNGEON));
         return SCRIPT_CONTINUE;
     }
+
     public int msgEjectedFromDungeon(obj_id self, dictionary params) throws InterruptedException
     {
         resetShipOwner(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         resetShipOwner(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogout(obj_id self) throws InterruptedException
     {
         resetShipOwner(self);
         return SCRIPT_CONTINUE;
     }
+
     public void resetShipOwner(obj_id self) throws InterruptedException
     {
         obj_id containing_dungeon = space_dungeon.getDungeonIdForPlayer(self);
@@ -180,6 +191,7 @@ public class travel_player_space_dungeon_falcon extends script.base_script
             setOwner(containing_dungeon, null);
         }
     }
+
     public int msgStartDungeonTravel(obj_id self, dictionary params) throws InterruptedException
     {
         int session_id = params.getInt("session_id");
@@ -216,6 +228,7 @@ public class travel_player_space_dungeon_falcon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgDungeonTravelComplete(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, space_dungeon.VAR_RESET_DUNGEON))

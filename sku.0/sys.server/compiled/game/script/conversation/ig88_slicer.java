@@ -1,54 +1,72 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class ig88_slicer extends script.base_script
 {
+    public static String c_stringFile = "conversation/ig88_slicer";
+
     public ig88_slicer()
     {
     }
-    public static String c_stringFile = "conversation/ig88_slicer";
+
     public boolean ig88_slicer_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean ig88_slicer_condition_isImp(obj_id player, obj_id npc) throws InterruptedException
     {
         return factions.isImperial(player);
     }
+
     public boolean ig88_slicer_condition_isReb(obj_id player, obj_id npc) throws InterruptedException
     {
         return factions.isRebel(player);
     }
+
     public boolean ig88_slicer_condition_isNeutral(obj_id player, obj_id npc) throws InterruptedException
     {
         return (!factions.isRebel(player) && !factions.isImperial(player));
     }
+
     public boolean ig88_slicer_condition_hasQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "feeder_ig88_01");
     }
+
     public boolean ig88_slicer_condition_onQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "feeder_ig88_01", "feeder_ig88_wait_01") || groundquests.isTaskActive(player, "feeder_ig88_01", "feeder_ig88_wait_02"));
     }
+
     public boolean ig88_slicer_condition_lastLeg(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "feeder_ig88_01", "feeder_ig88_signal_02") || groundquests.hasCompletedQuest(player, "feeder_ig88_01"));
     }
+
     public boolean ig88_slicer_condition_lostQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return (!groundquests.isQuestActiveOrComplete(player, "feeder_ig88_01") && (groundquests.isQuestActiveOrComplete(player, "feeder_ig88_02") || groundquests.isQuestActiveOrComplete(player, "feeder_ig88_03")));
     }
+
     public boolean ig88_slicer_condition_allDone(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActiveOrComplete(player, "found_ig88_encounter");
     }
+
     public void ig88_slicer_action_updateQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "feeder_signal_ig88_01_01");
     }
+
     public void ig88_slicer_action_grantLostQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "feeder_ig88_01");
@@ -62,15 +80,18 @@ public class ig88_slicer extends script.base_script
             groundquests.sendSignal(player, "feeder_signal_ig88_01_03");
         }
     }
+
     public void ig88_slicer_action_completeQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "feeder_signal_ig88_01_02");
     }
+
     public void ig88_slicer_action_grantGoToQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "found_ig88_encounter");
         instance.flagPlayerForInstance(player, "heroic_ig88");
     }
+
     public int ig88_slicer_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_23"))
@@ -91,7 +112,7 @@ public class ig88_slicer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_25");
@@ -100,7 +121,7 @@ public class ig88_slicer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ig88_slicer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -110,6 +131,7 @@ public class ig88_slicer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ig88_slicer_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_25"))
@@ -129,7 +151,7 @@ public class ig88_slicer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_29");
@@ -138,7 +160,7 @@ public class ig88_slicer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ig88_slicer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -148,6 +170,7 @@ public class ig88_slicer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ig88_slicer_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_29"))
@@ -163,6 +186,7 @@ public class ig88_slicer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ig88_slicer_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_21"))
@@ -178,6 +202,7 @@ public class ig88_slicer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ig88_slicer_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_27"))
@@ -198,7 +223,7 @@ public class ig88_slicer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_33");
@@ -207,7 +232,7 @@ public class ig88_slicer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ig88_slicer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -217,6 +242,7 @@ public class ig88_slicer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ig88_slicer_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_33"))
@@ -236,7 +262,7 @@ public class ig88_slicer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_37");
@@ -245,7 +271,7 @@ public class ig88_slicer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ig88_slicer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -267,7 +293,7 @@ public class ig88_slicer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_37");
@@ -276,7 +302,7 @@ public class ig88_slicer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ig88_slicer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -298,7 +324,7 @@ public class ig88_slicer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_37");
@@ -307,7 +333,7 @@ public class ig88_slicer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ig88_slicer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -317,6 +343,7 @@ public class ig88_slicer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ig88_slicer_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_37"))
@@ -336,7 +363,7 @@ public class ig88_slicer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_41");
@@ -345,7 +372,7 @@ public class ig88_slicer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ig88_slicer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -355,6 +382,7 @@ public class ig88_slicer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ig88_slicer_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_41"))
@@ -370,6 +398,7 @@ public class ig88_slicer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ig88_slicer_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_37"))
@@ -389,7 +418,7 @@ public class ig88_slicer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_41");
@@ -398,7 +427,7 @@ public class ig88_slicer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ig88_slicer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -408,6 +437,7 @@ public class ig88_slicer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ig88_slicer_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_37"))
@@ -427,7 +457,7 @@ public class ig88_slicer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_41");
@@ -436,7 +466,7 @@ public class ig88_slicer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ig88_slicer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -446,6 +476,7 @@ public class ig88_slicer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -455,11 +486,13 @@ public class ig88_slicer extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -468,18 +501,21 @@ public class ig88_slicer extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.ig88_slicer");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -508,7 +544,7 @@ public class ig88_slicer extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_23");
@@ -516,7 +552,7 @@ public class ig88_slicer extends script.base_script
                 utils.setScriptVar(player, "conversation.ig88_slicer.branchId", 2);
                 npcStartConversation(player, npc, "ig88_slicer", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -537,7 +573,7 @@ public class ig88_slicer extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_21");
@@ -545,7 +581,7 @@ public class ig88_slicer extends script.base_script
                 utils.setScriptVar(player, "conversation.ig88_slicer.branchId", 6);
                 npcStartConversation(player, npc, "ig88_slicer", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -572,7 +608,7 @@ public class ig88_slicer extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_27");
@@ -580,7 +616,7 @@ public class ig88_slicer extends script.base_script
                 utils.setScriptVar(player, "conversation.ig88_slicer.branchId", 9);
                 npcStartConversation(player, npc, "ig88_slicer", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -595,6 +631,7 @@ public class ig88_slicer extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("ig88_slicer"))

@@ -1,5 +1,11 @@
 package script.quest.force_sensitive;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.community_crafting;
 import script.library.fs_dyn_village;
@@ -9,12 +15,13 @@ import script.obj_id;
 
 public class fs_craft_village_defenses extends script.base_script
 {
-    public fs_craft_village_defenses()
-    {
-    }
     public static final String QUEST_MAIN = "fs_phase_2_craft_defenses_main";
     public static final String QUEST_STEP_01 = "fs_phase_2_craft_defenses_01";
     public static final String QUEST_STEP_02 = "fs_phase_2_craft_defenses_02";
+    public fs_craft_village_defenses()
+    {
+    }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         utils.removeScriptVar(self, fs_dyn_village.OBJVAR_MY_MASTER_OBJECT);
@@ -23,16 +30,19 @@ public class fs_craft_village_defenses extends script.base_script
         requestVillagePhase(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleRetryGetVillageManager(obj_id self, dictionary params) throws InterruptedException
     {
         requestVillageMaster(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleRetryGetVillagePhase(obj_id self, dictionary params) throws InterruptedException
     {
         requestVillagePhase(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleGetVillageManager(obj_id self, dictionary params) throws InterruptedException
     {
         boolean rslt = false;
@@ -62,6 +72,7 @@ public class fs_craft_village_defenses extends script.base_script
         messageTo(self, "handleRetryGetVillageManager", null, 30, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleGetVillagePhase(obj_id self, dictionary params) throws InterruptedException
     {
         boolean rslt = false;
@@ -90,6 +101,7 @@ public class fs_craft_village_defenses extends script.base_script
         messageTo(self, "handleRetryGetVillagePhase", null, 30, false);
         return SCRIPT_CONTINUE;
     }
+
     public void requestVillageMaster(obj_id self) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, fs_dyn_village.OBJVAR_MY_MASTER_OBJECT))
@@ -97,11 +109,12 @@ public class fs_craft_village_defenses extends script.base_script
             messageTo(self, "handleRetryGetVillageManager", null, 60.0f, false);
             fs_dyn_village.getRegisteredObjIdFromClusterWideData(fs_dyn_village.CLUSTER_OBJID_KEY_MASTER, "handleGetVillageManager", self);
         }
-        else 
+        else
         {
             checkVillagePhase(self);
         }
     }
+
     public void requestVillagePhase(obj_id self) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, fs_dyn_village.OBJVAR_CURRENT_PHASE))
@@ -109,11 +122,12 @@ public class fs_craft_village_defenses extends script.base_script
             messageTo(self, "handleRetryGetVillagePhase", null, 60.0f, false);
             fs_dyn_village.getRegisteredIntegerFromClusterWideData(fs_dyn_village.CLUSTER_INT_KEY_CUR_PHASE, "handleGetVillagePhase", self);
         }
-        else 
+        else
         {
             checkVillagePhase(self);
         }
     }
+
     public void checkVillagePhase(obj_id self) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, fs_dyn_village.OBJVAR_MY_MASTER_OBJECT) || !utils.hasScriptVar(self, fs_dyn_village.OBJVAR_CURRENT_PHASE))
@@ -125,7 +139,7 @@ public class fs_craft_village_defenses extends script.base_script
         {
             testAbortQuest(self);
         }
-        else 
+        else
         {
             int questIdMain = quests.getQuestId(QUEST_MAIN);
             int questId01 = quests.getQuestId(QUEST_STEP_01);
@@ -158,11 +172,13 @@ public class fs_craft_village_defenses extends script.base_script
             }
         }
     }
+
     public int msgQuestAbortPhaseChange(obj_id self, dictionary params) throws InterruptedException
     {
         testAbortQuest(self);
         return SCRIPT_CONTINUE;
     }
+
     public void testAbortQuest(obj_id self) throws InterruptedException
     {
         int questIdMain = quests.getQuestId(QUEST_MAIN);
@@ -200,6 +216,7 @@ public class fs_craft_village_defenses extends script.base_script
         }
         detachScript(self, "quest.force_sensitive.fs_craft_village_defenses");
     }
+
     public int handleVerifyQuestStatus(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id masterObject = null;

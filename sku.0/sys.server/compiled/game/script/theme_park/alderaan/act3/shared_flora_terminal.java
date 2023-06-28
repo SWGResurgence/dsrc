@@ -1,5 +1,11 @@
 package script.theme_park.alderaan.act3;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 public class shared_flora_terminal extends script.base_script
@@ -7,6 +13,7 @@ public class shared_flora_terminal extends script.base_script
     public shared_flora_terminal()
     {
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id warehouse = getObjIdObjVar(self, "coa3.shared.warehouse");
@@ -20,6 +27,7 @@ public class shared_flora_terminal extends script.base_script
         mi.addSubMenu(mnu, menu_info_types.FIFTEEN_SEC, new string_id("self_destruct", "fifteen"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.THIRTY_SEC)
@@ -48,6 +56,7 @@ public class shared_flora_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int blowUp(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id termUser = params.getObjId("termUser");
@@ -76,6 +85,7 @@ public class shared_flora_terminal extends script.base_script
         boolean blowUp = destroyObject(warehouse);
         return SCRIPT_CONTINUE;
     }
+
     public int firstPop(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id termUser = params.getObjId("termUser");

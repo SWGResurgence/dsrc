@@ -4,6 +4,12 @@ package script.structure.gating;/*
 @Purpose: Restricts entry if player is not of the correct level.
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class gating_level extends script.base_script

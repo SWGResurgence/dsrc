@@ -1,5 +1,11 @@
 package script.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.qa;
 import script.library.static_item;
@@ -11,23 +17,24 @@ import java.util.Arrays;
 
 public class qa_dynamic extends script.base_script
 {
-    public qa_dynamic()
-    {
-    }
     public static final String SCRIPTVAR = "qadynamic";
     public static final String DYNAMIC_DESCRIPTION = "This tool allows a tester to spawn armor, clothing and weapons based on a selected level.  The items spawned resemble what a player would find on a mob in-game as random loot.";
-    public static final String[] DATA_SOURCE_MENU_LIST = 
-    {
-        "spawn dynamic armor",
-        "spawn dynamic clothing",
-        "spawn dynamic weapons"
-    };
+    public static final String[] DATA_SOURCE_MENU_LIST =
+            {
+                    "spawn dynamic armor",
+                    "spawn dynamic clothing",
+                    "spawn dynamic weapons"
+            };
     public static final int DYNAMIC_ARMOR = 0;
     public static final int DYNAMIC_CLOTHING = 1;
     public static final int DYNAMIC_WEAPONS = 2;
     public static final String DYNAMIC_ARMOR_TABLE = "datatables/item/dynamic_item/types/armor.iff";
     public static final String DYNAMIC_CLOTHING_TABLE = "datatables/item/dynamic_item/types/clothing.iff";
     public static final String DYNAMIC_WEAPONS_TABLE = "datatables/item/dynamic_item/types/weapons.iff";
+    public qa_dynamic()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (isGod(self))
@@ -44,6 +51,7 @@ public class qa_dynamic extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (isGod(self))
@@ -56,6 +64,7 @@ public class qa_dynamic extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleMainOptions(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -82,25 +91,26 @@ public class qa_dynamic extends script.base_script
             switch (idx)
             {
                 case DYNAMIC_ARMOR:
-                utils.setScriptVar(player, SCRIPTVAR + ".dynamicChoice", DYNAMIC_ARMOR_TABLE);
-                sui.inputbox(player, player, "Enter the Armor Level.", "handleLevelSelect");
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".dynamicChoice", DYNAMIC_ARMOR_TABLE);
+                    sui.inputbox(player, player, "Enter the Armor Level.", "handleLevelSelect");
+                    break;
                 case DYNAMIC_CLOTHING:
-                utils.setScriptVar(player, SCRIPTVAR + ".dynamicChoice", DYNAMIC_CLOTHING_TABLE);
-                sui.inputbox(player, player, "Enter the Clothing Level.", "handleLevelSelect");
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".dynamicChoice", DYNAMIC_CLOTHING_TABLE);
+                    sui.inputbox(player, player, "Enter the Clothing Level.", "handleLevelSelect");
+                    break;
                 case DYNAMIC_WEAPONS:
-                utils.setScriptVar(player, SCRIPTVAR + ".dynamicChoice", DYNAMIC_WEAPONS_TABLE);
-                sui.inputbox(player, player, "Enter the Weapon Level.", "handleLevelSelect");
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".dynamicChoice", DYNAMIC_WEAPONS_TABLE);
+                    sui.inputbox(player, player, "Enter the Weapon Level.", "handleLevelSelect");
+                    break;
                 default:
-                qa.qaToolMainMenu(self);
-                qa.removePlayer(player, SCRIPTVAR, "This Armor is not currently available.");
-                return SCRIPT_CONTINUE;
+                    qa.qaToolMainMenu(self);
+                    qa.removePlayer(player, SCRIPTVAR, "This Armor is not currently available.");
+                    return SCRIPT_CONTINUE;
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleLevelSelect(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, SCRIPTVAR + ".dynamicChoice"))
@@ -112,19 +122,20 @@ public class qa_dynamic extends script.base_script
             {
                 broadcast(player, "Invalid level entered!");
             }
-            else 
+            else
             {
                 utils.setScriptVar(player, SCRIPTVAR + ".dynamicLevel", level);
                 getColumnToDisplay(player);
             }
         }
-        else 
+        else
         {
             broadcast(self, "There was an error with the previous selection - please try again");
             qa.removePlayer(self, SCRIPTVAR, "");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleDynamicSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -154,7 +165,7 @@ public class qa_dynamic extends script.base_script
                 String spawnNameChoice = dataTableNameColumn[idx];
                 createStatics(player, spawnNameChoice);
             }
-            else 
+            else
             {
                 broadcast(player, "There was an error with the previous selection - please try again");
                 qa.removePlayer(player, SCRIPTVAR, "");
@@ -162,14 +173,17 @@ public class qa_dynamic extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void columnNamesDisplay(obj_id player, String[] dataTableNames) throws InterruptedException
     {
         qa.refreshMenu(player, DYNAMIC_DESCRIPTION, "Dynamic Spawner", dataTableNames, "handleDynamicSpawn", SCRIPTVAR + ".pid", SCRIPTVAR + ".columnsMenu", sui.OK_CANCEL_REFRESH);
     }
+
     public void toolArmorMainMenu(obj_id player) throws InterruptedException
     {
         qa.refreshMenu(player, DYNAMIC_DESCRIPTION, "Dynamic Spawner", DATA_SOURCE_MENU_LIST, "handleMainOptions", SCRIPTVAR + ".pid", SCRIPTVAR + ".dynamicMainMenu", sui.OK_CANCEL_REFRESH);
     }
+
     public void getColumnToDisplay(obj_id player) throws InterruptedException
     {
         String[] dataTableNameColumn = dataTableGetStringColumn(utils.getStringScriptVar(player, SCRIPTVAR + ".dynamicChoice"), "strName");
@@ -179,12 +193,13 @@ public class qa_dynamic extends script.base_script
             utils.setScriptVar(player, SCRIPTVAR + ".listTracking", dataTableNameColumn);
             columnNamesDisplay(player, dataTableNameColumn);
         }
-        else 
+        else
         {
             broadcast(player, "An error has occurred, please contact the Tool Team.");
             qa.removePlayer(player, SCRIPTVAR, "");
         }
     }
+
     public void createStatics(obj_id player, String spawnNameChoice) throws InterruptedException
     {
         obj_id inventory = utils.getInventoryContainer(player);
@@ -200,7 +215,7 @@ public class qa_dynamic extends script.base_script
             broadcast(player, "Spawning of dynamic items is complete");
             qa.removePlayer(player, SCRIPTVAR, "");
         }
-        else 
+        else
         {
             broadcast(player, "There was an error with the previous selection - please try again");
             qa.removePlayer(player, SCRIPTVAR, "");

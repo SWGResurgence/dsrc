@@ -1,15 +1,23 @@
 package script.theme_park.dungeon.death_watch_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 import script.string_id;
 
 public class leaving extends script.base_script
 {
+    public static final String MSGS = "dungeon/death_watch";
+
     public leaving()
     {
     }
-    public static final String MSGS = "dungeon/death_watch";
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);
@@ -30,6 +38,7 @@ public class leaving extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToLoseItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))
@@ -50,6 +59,7 @@ public class leaving extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void reLockDoor(obj_id self, obj_id player) throws InterruptedException
     {
         String name = getFirstName(player);
@@ -59,23 +69,23 @@ public class leaving extends script.base_script
         obj_id mine = getCellId(structure, "medroom38");
         dictionary doorStuff = new dictionary();
         doorStuff.put("player", player);
-        if (permissionsIsAllowed(hall, player) == true)
+        if (permissionsIsAllowed(hall, player))
         {
             doorStuff.put("room", hall);
             messageTo(hall, "removeFromList", doorStuff, 3, false);
         }
-        if (permissionsIsAllowed(storage, player) == true)
+        if (permissionsIsAllowed(storage, player))
         {
             doorStuff.put("room", storage);
             messageTo(storage, "removeFromList", doorStuff, 3, false);
         }
-        if (permissionsIsAllowed(mine, player) == true)
+        if (permissionsIsAllowed(mine, player))
         {
             doorStuff.put("room", mine);
             messageTo(mine, "removeFromList", doorStuff, 3, false);
         }
-        return;
     }
+
     public void clearPlayer(obj_id player) throws InterruptedException
     {
         if (hasObjVar(player, "death_watch.hallPass"))
@@ -90,6 +100,5 @@ public class leaving extends script.base_script
         {
             removeObjVar(player, "death_watch.minePass");
         }
-        return;
     }
 }

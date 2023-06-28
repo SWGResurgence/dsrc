@@ -1,5 +1,11 @@
 package script.item.tool;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -32,6 +38,7 @@ public class droid_customizer extends script.base_script
             {
                     "droid_customization"
             };
+
     public droid_customizer()
     {
     }

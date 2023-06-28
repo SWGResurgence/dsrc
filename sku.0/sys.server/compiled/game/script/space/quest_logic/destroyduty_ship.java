@@ -1,5 +1,11 @@
 package script.space.quest_logic;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.prose;
 import script.library.space_quest;
@@ -13,17 +19,20 @@ public class destroyduty_ship extends script.base_script
     public destroyduty_ship()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "randomTaunt", null, rand(10, 20), false);
         return SCRIPT_CONTINUE;
     }
+
     public int randomTaunt(obj_id self, dictionary params) throws InterruptedException
     {
         float r = rand();
         if (r < 0.15f)
         {
-            if(!isIdValid(self) || !exists(self)){
+            if (!isIdValid(self) || !exists(self))
+            {
                 return SCRIPT_CONTINUE;
             }
             obj_id quest = getObjIdObjVar(self, "quest");
@@ -53,6 +62,7 @@ public class destroyduty_ship extends script.base_script
         messageTo(self, "randomTaunt", null, rand(30, 40), false);
         return SCRIPT_CONTINUE;
     }
+
     public int objectDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id quest = getObjIdObjVar(self, "quest");
@@ -61,11 +71,13 @@ public class destroyduty_ship extends script.base_script
         space_utils.notifyObject(quest, "targetDestroyed", outparams);
         return SCRIPT_CONTINUE;
     }
+
     public int missionAbort(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObjectHyperspace(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id quest = getObjIdObjVar(self, "quest");

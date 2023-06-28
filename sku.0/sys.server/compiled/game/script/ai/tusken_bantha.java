@@ -1,5 +1,11 @@
 package script.ai;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.factions;
@@ -8,11 +14,12 @@ import script.obj_id;
 
 public class tusken_bantha extends script.base_script
 {
+    public static final String SOCIAL_VOLUME = "npc_socialization";
+    public static final float SOCIAL_RANGE = 15.0f;
     public tusken_bantha()
     {
     }
-    public static final String SOCIAL_VOLUME = "npc_socialization";
-    public static final float SOCIAL_RANGE = 15.0f;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "ai.tusken"))
@@ -25,11 +32,13 @@ public class tusken_bantha extends script.base_script
         factions.setFaction(self, "tusken");
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         factions.setFaction(self, "bantha");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAddedToWorld(obj_id self) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "ai.tusken"))
@@ -41,6 +50,7 @@ public class tusken_bantha extends script.base_script
         followTusken(self, utils.getObjIdScriptVar(self, "ai.tusken"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnBehaviorChange(obj_id self, int newBehavior, int oldBehavior, int[] changeFlags) throws InterruptedException
     {
         if (isIncapacitated(self))
@@ -60,6 +70,7 @@ public class tusken_bantha extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void followTusken(obj_id bantha, obj_id target) throws InterruptedException
     {
         obj_id isFollowedBy = getObjIdObjVar(target, "ai.isFollowedBy");
@@ -71,11 +82,12 @@ public class tusken_bantha extends script.base_script
             utils.setScriptVar(bantha, "ai.tusken", target);
             setObjVar(bantha, "ai.isFollowing", target);
         }
-        else 
+        else
         {
             followTusken(bantha, isFollowedBy);
         }
     }
+
     public int resumeLoitering(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "ai.tusken"))
@@ -86,6 +98,7 @@ public class tusken_bantha extends script.base_script
         followTusken(self, utils.getObjIdScriptVar(self, "ai.tusken"));
         return SCRIPT_OVERRIDE;
     }
+
     public void cancelFollowing(obj_id npc) throws InterruptedException
     {
         utils.removeScriptVar(npc, "ai.tusken");
@@ -101,11 +114,13 @@ public class tusken_bantha extends script.base_script
             messageTo(isFollowedBy, "stopFollowing", null, 0, isObjectPersisted(isFollowedBy));
         }
     }
+
     public int stopBeingFollowed(obj_id self, dictionary params) throws InterruptedException
     {
         removeObjVar(self, "ai.isFollowedBy");
         return SCRIPT_CONTINUE;
     }
+
     public int stopFollowing(obj_id self, dictionary params) throws InterruptedException
     {
         removeObjVar(self, "ai.isFollowing");
@@ -113,18 +128,21 @@ public class tusken_bantha extends script.base_script
         messageTo(self, "resumeLoitering", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnFollowTargetLost(obj_id self, obj_id oldTarget) throws InterruptedException
     {
         cancelFollowing(self);
         messageTo(self, "resumeLoitering", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnFollowPathNotFound(obj_id self, obj_id target) throws InterruptedException
     {
         cancelFollowing(self);
         messageTo(self, "resumeLoitering", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (hasObjVar(breacher, "gm"))
@@ -140,6 +158,7 @@ public class tusken_bantha extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (volumeName.equals(ai_lib.ALERT_VOLUME_NAME))

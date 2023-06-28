@@ -1,75 +1,63 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class generic_art_broker_1 extends script.base_script
 {
+    public static String c_stringFile = "conversation/generic_art_broker_1";
+
     public generic_art_broker_1()
     {
     }
-    public static String c_stringFile = "conversation/generic_art_broker_1";
+
     public boolean generic_art_broker_1_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean generic_art_broker_1_condition_isNonSmuggler(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (utils.getPlayerProfession(player) != utils.SMUGGLER)
-        {
-            return true;
-        }
-        return false;
+        return utils.getPlayerProfession(player) != utils.SMUGGLER;
     }
+
     public boolean generic_art_broker_1_condition_isDoingMission(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isDoingSmugglerMission(player))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isDoingSmugglerMission(player);
     }
+
     public boolean generic_art_broker_1_condition_missionTierRequirement(obj_id player, obj_id npc) throws InterruptedException
     {
         float underworldFaction = factions.getFactionStanding(player, "underworld");
-        if (smuggler.getSmuggleTier(underworldFaction) == 1)
-        {
-            return true;
-        }
-        return false;
+        return smuggler.getSmuggleTier(underworldFaction) == 1;
     }
+
     public boolean generic_art_broker_1_condition_hasMissionFunds(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (money.hasFunds(player, money.MT_TOTAL, smuggler.TIER_4_GENERIC_FRONT_COST))
-        {
-            return true;
-        }
-        return false;
+        return money.hasFunds(player, money.MT_TOTAL, smuggler.TIER_4_GENERIC_FRONT_COST);
     }
+
     public boolean generic_art_broker_1_condition_hasSomeContraband(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (smuggler.hasIllicitContraband(player))
-        {
-            return true;
-        }
-        return false;
+        return smuggler.hasIllicitContraband(player);
     }
+
     public boolean generic_art_broker_1_condition_hasMissionContraband(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (smuggler.hasIllicitMissionContraband(player))
-        {
-            return true;
-        }
-        return false;
+        return smuggler.hasIllicitMissionContraband(player);
     }
+
     public boolean generic_art_broker_1_condition_hasPvpMissionFunds(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (money.hasFunds(player, money.MT_TOTAL, smuggler.TIER_4_GENERIC_PVP_FRONT_COST))
-        {
-            return true;
-        }
-        return false;
+        return money.hasFunds(player, money.MT_TOTAL, smuggler.TIER_4_GENERIC_PVP_FRONT_COST);
     }
+
     public void generic_art_broker_1_action_startGiveQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         money.requestPayment(player, npc, smuggler.TIER_4_GENERIC_FRONT_COST, "none", null, true);
@@ -77,6 +65,7 @@ public class generic_art_broker_1 extends script.base_script
         d.put("player", player);
         messageTo(npc, "showInventorySUI", d, 0, false);
     }
+
     public void generic_art_broker_1_action_startGivePvpQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (money.hasFunds(player, money.MT_TOTAL, smuggler.TIER_4_GENERIC_PVP_FRONT_COST))
@@ -97,14 +86,17 @@ public class generic_art_broker_1 extends script.base_script
             updateJediScriptData(player, "smuggler", 1);
         }
     }
+
     public int generic_art_broker_1_tokenDI_frontMoney(obj_id player, obj_id npc) throws InterruptedException
     {
         return (smuggler.TIER_4_GENERIC_FRONT_COST);
     }
+
     public int generic_art_broker_1_tokenDI_pvpFrontMoney(obj_id player, obj_id npc) throws InterruptedException
     {
         return (smuggler.TIER_4_GENERIC_PVP_FRONT_COST);
     }
+
     public int generic_art_broker_1_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_16"))
@@ -129,6 +121,7 @@ public class generic_art_broker_1 extends script.base_script
         }
         return SCRIPT_DEFAULT;
     }
+
     public int generic_art_broker_1_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_17"))
@@ -155,7 +148,7 @@ public class generic_art_broker_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_24");
@@ -210,7 +203,7 @@ public class generic_art_broker_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_51");
@@ -282,7 +275,7 @@ public class generic_art_broker_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48");
@@ -305,6 +298,7 @@ public class generic_art_broker_1 extends script.base_script
         }
         return SCRIPT_DEFAULT;
     }
+
     public int generic_art_broker_1_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_24"))
@@ -335,6 +329,7 @@ public class generic_art_broker_1 extends script.base_script
         }
         return SCRIPT_DEFAULT;
     }
+
     public int generic_art_broker_1_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_51"))
@@ -360,6 +355,7 @@ public class generic_art_broker_1 extends script.base_script
         }
         return SCRIPT_DEFAULT;
     }
+
     public int generic_art_broker_1_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_48"))
@@ -384,6 +380,7 @@ public class generic_art_broker_1 extends script.base_script
         }
         return SCRIPT_DEFAULT;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -393,12 +390,14 @@ public class generic_art_broker_1 extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setName(self, "Attevri'sh'via (an Art Broker)");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -407,18 +406,21 @@ public class generic_art_broker_1 extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.generic_art_broker_1");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -460,7 +462,7 @@ public class generic_art_broker_1 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_16");
@@ -514,7 +516,7 @@ public class generic_art_broker_1 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_17");
@@ -543,6 +545,7 @@ public class generic_art_broker_1 extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("generic_art_broker_1"))

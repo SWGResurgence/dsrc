@@ -1,5 +1,11 @@
 package script.theme_park.corellia.patrol;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class trooper3 extends script.base_script
@@ -7,6 +13,7 @@ public class trooper3 extends script.base_script
     public trooper3()
     {
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id hideout = getObjIdObjVar(self, "hideout");

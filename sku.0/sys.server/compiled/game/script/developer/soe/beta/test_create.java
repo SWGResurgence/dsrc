@@ -1,5 +1,11 @@
 package script.developer.soe.beta;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.create;
 import script.library.utils;
@@ -11,6 +17,7 @@ public class test_create extends script.base_script
     public test_create()
     {
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         int stringCheck = text.indexOf("create ");
@@ -53,7 +60,7 @@ public class test_create extends script.base_script
         stringCheck = text.indexOf("lookat ");
         if (stringCheck > -1)
         {
-            String toCreate = text.substring(text.indexOf(" ") + 1, text.length());
+            String toCreate = text.substring(text.indexOf(" ") + 1);
             location here = getLocation(self);
             here.x = here.x + 1.25f;
             obj_id guy = create.object(toCreate, here);
@@ -71,7 +78,7 @@ public class test_create extends script.base_script
         stringCheck = text.indexOf("baby ");
         if (stringCheck > -1)
         {
-            String toCreate = text.substring(text.indexOf(" ") + 1, text.length());
+            String toCreate = text.substring(text.indexOf(" ") + 1);
             location here = getLocation(self);
             here.x = here.x + 1.25f;
             obj_id guy = create.object(toCreate, here);
@@ -84,7 +91,7 @@ public class test_create extends script.base_script
         stringCheck = text.indexOf("persist ");
         if (stringCheck > -1)
         {
-            String toCreate = text.substring(text.indexOf(" ") + 1, text.length());
+            String toCreate = text.substring(text.indexOf(" ") + 1);
             location here = getLocation(self);
             here.x = here.x + 2;
             String[] createParms = split(toCreate, ' ');
@@ -98,13 +105,13 @@ public class test_create extends script.base_script
                     {
                         persistObject(newNpc);
                     }
-                    else 
+                    else
                     {
                         return SCRIPT_CONTINUE;
                     }
                 }
             }
-            else 
+            else
             {
                 obj_id newNpc = create.object(toCreate, here);
                 if (isIdValid(newNpc))

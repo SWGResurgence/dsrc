@@ -1,5 +1,11 @@
 package script.poi.deliverance;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -7,9 +13,6 @@ import java.util.Vector;
 
 public class antagonist extends script.theme_park.poi.base
 {
-    public antagonist()
-    {
-    }
     public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
     public static final String VAR_RESET_TIMER = scenario.VAR_SCENARIO_BASE + ".resetTimer";
     public static final String HANDLER_TIMER = "handleTimer";
@@ -19,14 +22,20 @@ public class antagonist extends script.theme_park.poi.base
     public static final String DICT_TARGET_ID = "target";
     public static final String DICT_FACTION_ID = "factionId";
     public static final int TIME_WAIT = 120;
+    public antagonist()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         obj_id poiMaster = poi.getBaseObject(self);
@@ -45,6 +54,7 @@ public class antagonist extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String locName) throws InterruptedException
     {
         LOG("poiDeliverance", "OnArrivedAtLocation: I arrived at location = " + locName);
@@ -62,7 +72,7 @@ public class antagonist extends script.theme_park.poi.base
             LOG("poiDeliverance", "OnArrivedAtLocation: unknown convo file!");
             return SCRIPT_CONTINUE;
         }
-        String desiredLocName = poiMaster.toString() + "_" + scenario.ANTAGONIST;
+        String desiredLocName = poiMaster + "_" + scenario.ANTAGONIST;
         if (desiredLocName.equals(locName))
         {
             obj_id target = poi.findObject(scenario.MEDIATOR);
@@ -70,7 +80,7 @@ public class antagonist extends script.theme_park.poi.base
             {
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 location myLoc = getLocation(self);
                 location tLoc = getLocation(target);
@@ -81,15 +91,15 @@ public class antagonist extends script.theme_park.poi.base
                     scenario.say(self, convo, "a_greet_m");
                     messageTo(target, "handleAGreetM", null, 2, false);
                 }
-                else 
+                else
                 {
                     LOG("poiDeliverance", "(" + target + ") mediator not at target location..");
                     LOG("poiDeliverance", "(" + target + ") pathing to mediator current location..");
-                    locName = poiMaster.toString() + "_" + scenario.ANTAGONIST;
+                    locName = poiMaster + "_" + scenario.ANTAGONIST;
                     scenario.requestAddTargetLocation(self, locName, tLoc, 7.5f);
                     setObjVar(self, scenario.VAR_TARGET_LOCATION_NAME, locName);
                     LOG("poiDeliverance", "(" + target + ") mediator loc = " + tLoc.toString());
-                    LOG("poiDeliverance", "(" + self + ") leader pathing to: " + tLoc.toString());
+                    LOG("poiDeliverance", "(" + self + ") leader pathing to: " + tLoc);
                     ai_lib.aiPathTo(self, tLoc);
                     return SCRIPT_CONTINUE;
                 }
@@ -100,7 +110,7 @@ public class antagonist extends script.theme_park.poi.base
         if ((ovl == null) || (ovl.getNumItems() == 0))
         {
         }
-        else 
+        else
         {
             for (int i = 0; i < ovl.getNumItems(); i++)
             {
@@ -114,7 +124,7 @@ public class antagonist extends script.theme_park.poi.base
                     {
                         LOG("poiDeliverance", "poi unable to locate object named: " + ovName);
                     }
-                    else 
+                    else
                     {
                         attachScript(ant, SCRIPT_CONVERSE);
                     }
@@ -123,6 +133,7 @@ public class antagonist extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         if (ai_lib.isInCombat(self))
@@ -148,7 +159,7 @@ public class antagonist extends script.theme_park.poi.base
         if ((leader == null) || (leader == obj_id.NULL_ID))
         {
         }
-        else 
+        else
         {
             if (leader == self)
             {
@@ -162,19 +173,19 @@ public class antagonist extends script.theme_park.poi.base
             if ((dead == null) || (dead.length == 0))
             {
             }
-            else 
+            else
             {
                 int idx = utils.getElementPositionInArray(dead, scenario.MEDIATOR);
                 if (idx < 0)
                 {
                 }
-                else 
+                else
                 {
                     if (poi.isGrantedCredit(poiMaster, speaker))
                     {
                         scenario.say(self, convo, "a_thank_combat");
                     }
-                    else 
+                    else
                     {
                         scenario.say(self, convo, "a_brushoff");
                     }
@@ -190,57 +201,57 @@ public class antagonist extends script.theme_park.poi.base
             switch (progress)
             {
                 case 0:
-                scenario.say(self, convo, "a_no_progress");
-                npcEndConversation(speaker);
-                return SCRIPT_CONTINUE;
+                    scenario.say(self, convo, "a_no_progress");
+                    npcEndConversation(speaker);
+                    return SCRIPT_CONTINUE;
                 case 1:
                 case 3:
-                LOG("poiDeliverance", "comparing factions...");
-                responses = utils.addElement(responses, new string_id(convo, "response_yes"));
-                responses = utils.addElement(responses, new string_id(convo, "response_no"));
-                responses = utils.addElement(responses, new string_id(convo, "response_maybe"));
-                break;
+                    LOG("poiDeliverance", "comparing factions...");
+                    responses = utils.addElement(responses, new string_id(convo, "response_yes"));
+                    responses = utils.addElement(responses, new string_id(convo, "response_no"));
+                    responses = utils.addElement(responses, new string_id(convo, "response_maybe"));
+                    break;
                 case 2:
-                scenario.say(self, convo, "a_greet_mad");
-                npcEndConversation(speaker);
-                groupAttack(self, speaker);
-                return SCRIPT_CONTINUE;
+                    scenario.say(self, convo, "a_greet_mad");
+                    npcEndConversation(speaker);
+                    groupAttack(self, speaker);
+                    return SCRIPT_CONTINUE;
                 case 4:
-                npcEndConversation(speaker);
-                groupAttack(self, speaker);
-                return SCRIPT_CONTINUE;
+                    npcEndConversation(speaker);
+                    groupAttack(self, speaker);
+                    return SCRIPT_CONTINUE;
                 case 5:
                 case 6:
-                scenario.say(self, convo, "a_waiting");
-                npcEndConversation(speaker);
-                return SCRIPT_CONTINUE;
+                    scenario.say(self, convo, "a_waiting");
+                    npcEndConversation(speaker);
+                    return SCRIPT_CONTINUE;
                 case 7:
-                scenario.say(self, convo, "a_negotiate_fail");
-                npcEndConversation(speaker);
-                groupAttack(self, speaker);
-                return SCRIPT_CONTINUE;
+                    scenario.say(self, convo, "a_negotiate_fail");
+                    npcEndConversation(speaker);
+                    groupAttack(self, speaker);
+                    return SCRIPT_CONTINUE;
                 case 8:
-                scenario.say(self, convo, "a_thank_negotiate");
-                npcEndConversation(speaker);
-                scenario.setPlayerProgress(speaker, 9);
-                scenario.complete(poi.getBaseObject(self));
-                messageTo(self, HANDLER_MEDIATOR_DEAD, null, 0, false);
-                return SCRIPT_CONTINUE;
+                    scenario.say(self, convo, "a_thank_negotiate");
+                    npcEndConversation(speaker);
+                    scenario.setPlayerProgress(speaker, 9);
+                    scenario.complete(poi.getBaseObject(self));
+                    messageTo(self, HANDLER_MEDIATOR_DEAD, null, 0, false);
+                    return SCRIPT_CONTINUE;
                 case 9:
-                scenario.say(self, convo, "a_thank_negotiate_again");
-                npcEndConversation(speaker);
-                return SCRIPT_CONTINUE;
+                    scenario.say(self, convo, "a_thank_negotiate_again");
+                    npcEndConversation(speaker);
+                    return SCRIPT_CONTINUE;
             }
             if ((responses == null) || (responses.size() == 0))
             {
                 LOG("poiDeliverance", "I got here but have no responses to give the player... hrmm");
             }
-            else 
+            else
             {
                 npcStartConversation(speaker, self, convo, msg, responses);
             }
         }
-        else 
+        else
         {
             LOG("poiDeliverance", "I am an antagonist minion...");
             int idx = rand(1, 5);
@@ -249,6 +260,7 @@ public class antagonist extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convoName, obj_id speaker, string_id response) throws InterruptedException
     {
         if (ai_lib.isInCombat(self))
@@ -279,7 +291,8 @@ public class antagonist extends script.theme_park.poi.base
             String aId = response.getAsciiId();
             LOG("poiDeliverance", "your response = " + aId);
             string_id msg = new string_id();
-            switch (aId) {
+            switch (aId)
+            {
                 case "response_yes":
                     scenario.say(self, convo, "a_yes");
                     npcEndConversation(speaker);
@@ -293,21 +306,24 @@ public class antagonist extends script.theme_park.poi.base
                     return SCRIPT_CONTINUE;
                 case "response_maybe":
                     int roll = rand(1, 3);
-                    switch (roll) {
-                        case 1:
-                            scenario.say(self, convo, "a_no_negotiate");
-                            npcEndConversation(speaker);
-                            obj_id target = poi.findObject(scenario.MEDIATOR);
-                            if ((target == null) || (target == obj_id.NULL_ID)) {
-                            } else {
-                                groupAttack(self, target);
-                            }
-                            break;
-                        default:
-                            scenario.say(self, convo, "a_maybe");
-                            npcEndConversation(speaker);
-                            setObjVar(self, VAR_RESET_TIMER, true);
-                            break;
+                    if (roll == 1)
+                    {
+                        scenario.say(self, convo, "a_no_negotiate");
+                        npcEndConversation(speaker);
+                        obj_id target = poi.findObject(scenario.MEDIATOR);
+                        if ((target == null) || (target == obj_id.NULL_ID))
+                        {
+                        }
+                        else
+                        {
+                            groupAttack(self, target);
+                        }
+                    }
+                    else
+                    {
+                        scenario.say(self, convo, "a_maybe");
+                        npcEndConversation(speaker);
+                        setObjVar(self, VAR_RESET_TIMER, true);
                     }
                     scenario.setPlayerProgress(speaker, 6);
                     return SCRIPT_CONTINUE;
@@ -315,32 +331,33 @@ public class antagonist extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public void groupAttack(obj_id self, obj_id target) throws InterruptedException
     {
         startCombat(self, target);
         obj_id m = poi.findObject(scenario.MEDIATOR);
         if ((m == null) || (m == obj_id.NULL_ID))
         {
-            return;
         }
-        else 
+        else
         {
             startCombat(m, self);
         }
     }
+
     public void groupFace(obj_id self, obj_id target) throws InterruptedException
     {
         obj_id poiMaster = poi.getBaseObject(self);
         if ((poiMaster == null) || (poiMaster == obj_id.NULL_ID))
         {
         }
-        else 
+        else
         {
             obj_var_list stringList = getObjVarList(poiMaster, POI_STRING_LIST);
             if ((stringList == null) || (stringList.getNumItems() < 1))
             {
             }
-            else 
+            else
             {
                 int numItems = stringList.getNumItems();
                 for (int i = 0; i < numItems; i++)
@@ -359,6 +376,7 @@ public class antagonist extends script.theme_park.poi.base
         }
         faceTo(self, target);
     }
+
     public int handleAddTargetLocation(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("poiDeliverance", "handleAddTargetLocation: entered...");
@@ -372,6 +390,7 @@ public class antagonist extends script.theme_park.poi.base
         addLocationTarget(locName, pathLoc, r);
         return SCRIPT_CONTINUE;
     }
+
     public int handleTimer(obj_id self, dictionary params) throws InterruptedException
     {
         if (ai_lib.isInCombat(self))
@@ -410,13 +429,13 @@ public class antagonist extends script.theme_park.poi.base
         if ((dead == null) || (dead.length == 0))
         {
         }
-        else 
+        else
         {
             int idx = utils.getElementPositionInArray(dead, scenario.MEDIATOR);
             if (idx < 0)
             {
             }
-            else 
+            else
             {
                 messageTo(poiMaster, HANDLER_MEDIATOR_DEAD, null, 30, false);
                 return SCRIPT_CONTINUE;
@@ -427,12 +446,13 @@ public class antagonist extends script.theme_park.poi.base
         if ((target == null) || (target == obj_id.NULL_ID))
         {
         }
-        else 
+        else
         {
             groupAttack(self, target);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleMyDeath(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("poiDeliverance", "handleMyDeath: entered...");
@@ -442,21 +462,32 @@ public class antagonist extends script.theme_park.poi.base
             LOG("poiDeliverance", "handleMyDeath: no credit to grant!");
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
-            for (obj_id tmp : killers) {
-                if ((tmp == null) || (tmp == obj_id.NULL_ID)) {
-                } else {
-                    if (group.isGroupObject(tmp)) {
+            for (obj_id tmp : killers)
+            {
+                if ((tmp == null) || (tmp == obj_id.NULL_ID))
+                {
+                }
+                else
+                {
+                    if (group.isGroupObject(tmp))
+                    {
                         obj_id[] members = getGroupMemberIds(tmp);
-                        if ((members == null) || (members.length == 0)) {
-                        } else {
-                            for (obj_id member : members) {
+                        if ((members == null) || (members.length == 0))
+                        {
+                        }
+                        else
+                        {
+                            for (obj_id member : members)
+                            {
                                 LOG("poiDeliverance", "granting poi credit to (" + member + ") " + getName(member));
                                 poiGrantCredit(member);
                             }
                         }
-                    } else {
+                    }
+                    else
+                    {
                         LOG("poiDeliverance", "granting poi credit to (" + tmp + ") " + getName(tmp));
                         poiGrantCredit(tmp);
                     }
@@ -466,6 +497,7 @@ public class antagonist extends script.theme_park.poi.base
         LOG("poiDeliverance", "handleMyDeath: exiting...");
         return SCRIPT_CONTINUE;
     }
+
     public int handleMediatorDead(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id poiMaster = poi.getBaseObject(self);
@@ -474,7 +506,7 @@ public class antagonist extends script.theme_park.poi.base
             LOG("poiDeliverance", "handleTimer: unknown poi base object!");
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             messageTo(poiMaster, scenario.HANDLER_CLEANUP_SCENARIO, null, TIME_WAIT, false);
         }
@@ -482,6 +514,7 @@ public class antagonist extends script.theme_park.poi.base
         pathTo(self, loc);
         return SCRIPT_CONTINUE;
     }
+
     public int handleMGreetA(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("poiDeliverance", "handleMGreetA: entered...");
@@ -502,7 +535,7 @@ public class antagonist extends script.theme_park.poi.base
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             scenario.say(self, convo, "a_respond_m_1");
             messageTo(target, "handleARespondM1", null, 2, false);
@@ -513,6 +546,7 @@ public class antagonist extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleFaceCall(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = params.getObjId(DICT_TARGET_ID);

@@ -1,5 +1,11 @@
 package script.theme_park.meatlump;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -7,9 +13,6 @@ import java.util.Random;
 
 public class disarm_bomb_puzzle extends script.base_script
 {
-    public disarm_bomb_puzzle()
-    {
-    }
     public static final boolean LOGGING_ON = false;
     public static final String VAR_PREFIX = "meatlump_target_map";
     public static final String PID_NAME = VAR_PREFIX + ".pid";
@@ -52,50 +55,55 @@ public class disarm_bomb_puzzle extends script.base_script
     public static final int BUTTON_PENALTY = 5;
     public static final int INITIAL_BUTTON_NUMBER = 0;
     public static final int DEFUSE_TIME_OUT_SECONDS = 120;
-    public static final String[] WIRE_LIST = 
+    public static final String[] WIRE_LIST =
+            {
+                    "Power Source \\#FF3300+\\#FFFFFF ",
+                    "Power Source \\#222222-\\#FFFFFF ",
+                    "Explosive \\#FF3300+\\#FFFFFF ",
+                    "Explosive \\#222222-\\#FFFFFF ",
+                    "Detonator \\#FF3300+\\#FFFFFF ",
+                    "Detonator \\#222222-\\#FFFFFF ",
+                    "Initiation System \\#FF3300+\\#FFFFFF ",
+                    "Initiation System \\#222222-\\#FFFFFF ",
+                    "Tamper System \\#FF3300+\\#FFFFFF ",
+                    "Tamper System \\#222222-\\#FFFFFF "
+            };
+    public static final String[] COLOR_LIST =
+            {
+                    "\\#FF3300Red\\#FFFFFF",
+                    "\\#222222Black\\#FFFFFF",
+                    "\\#996600Brown\\#FFFFFF",
+                    "\\#FFFF00Yellow\\#FFFFFF",
+                    "White",
+                    "\\#99FF33Green\\#FFFFFF",
+                    "\\#FF3300Red \\#222222Black\\#FFFFFF",
+                    "\\#FFFF00Yellow \\#99FF33Green\\#FFFFFF",
+                    "\\#FFFF00Yellow \\#996600Brown\\#FFFFFF",
+                    "\\#222222Black \\#FFFFFFWhite"
+            };
+    public static final String[] CUT_LIST =
+            {
+                    "cut_red",
+                    "cut_black",
+                    "cut_brown",
+                    "cut_yellow",
+                    "cut_white",
+                    "cut_green",
+                    "cut_red_black",
+                    "cut_yellow_green",
+                    "cut_yellow_brown",
+                    "cut_black_white"
+            };
+    public disarm_bomb_puzzle()
     {
-        "Power Source \\#FF3300+\\#FFFFFF ",
-        "Power Source \\#222222-\\#FFFFFF ",
-        "Explosive \\#FF3300+\\#FFFFFF ",
-        "Explosive \\#222222-\\#FFFFFF ",
-        "Detonator \\#FF3300+\\#FFFFFF ",
-        "Detonator \\#222222-\\#FFFFFF ",
-        "Initiation System \\#FF3300+\\#FFFFFF ",
-        "Initiation System \\#222222-\\#FFFFFF ",
-        "Tamper System \\#FF3300+\\#FFFFFF ",
-        "Tamper System \\#222222-\\#FFFFFF "
-    };
-    public static final String[] COLOR_LIST = 
-    {
-        "\\#FF3300Red\\#FFFFFF",
-        "\\#222222Black\\#FFFFFF",
-        "\\#996600Brown\\#FFFFFF",
-        "\\#FFFF00Yellow\\#FFFFFF",
-        "White",
-        "\\#99FF33Green\\#FFFFFF",
-        "\\#FF3300Red \\#222222Black\\#FFFFFF",
-        "\\#FFFF00Yellow \\#99FF33Green\\#FFFFFF",
-        "\\#FFFF00Yellow \\#996600Brown\\#FFFFFF",
-        "\\#222222Black \\#FFFFFFWhite"
-    };
-    public static final String[] CUT_LIST = 
-    {
-        "cut_red",
-        "cut_black",
-        "cut_brown",
-        "cut_yellow",
-        "cut_white",
-        "cut_green",
-        "cut_red_black",
-        "cut_yellow_green",
-        "cut_yellow_brown",
-        "cut_black_white"
-    };
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.ITEM_USE, SID_OPEN);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -131,6 +139,7 @@ public class disarm_bomb_puzzle extends script.base_script
         createBombUI(collectionItem, player);
         return SCRIPT_CONTINUE;
     }
+
     public boolean createBombUI(obj_id collectionItem, obj_id player) throws InterruptedException
     {
         if (!isValidId(collectionItem) || !isValidId(player))
@@ -152,7 +161,7 @@ public class disarm_bomb_puzzle extends script.base_script
             }
             utils.setScriptVar(player, CURRENTLY_DEFUSING, true);
         }
-        else 
+        else
         {
             closeOldWindow(player);
         }
@@ -213,17 +222,14 @@ public class disarm_bomb_puzzle extends script.base_script
         messageTo(collectionItem, "removeDefuseVar", params, DEFUSE_TIME_OUT_SECONDS, false);
         return true;
     }
+
     public boolean initializePlayer(obj_id collectionItem, obj_id player) throws InterruptedException
     {
         if (!isValidId(collectionItem) || !isValidId(player))
         {
             return false;
         }
-        boolean hasBuff = false;
-        if (buff.hasBuff(player, BOMB_PUZZLE_BUFF))
-        {
-            hasBuff = true;
-        }
+        boolean hasBuff = buff.hasBuff(player, BOMB_PUZZLE_BUFF);
         blog("HASBUFF: " + hasBuff);
         blog("initializePlayer - init");
         utils.setScriptVar(player, RED_WIRE, "true");
@@ -282,6 +288,7 @@ public class disarm_bomb_puzzle extends script.base_script
         utils.setScriptVar(player, PLAYER_BUFF, hasBuff);
         return true;
     }
+
     public String getBombData(obj_id collectionItem, obj_id player) throws InterruptedException
     {
         if (!isValidId(collectionItem) || !isValidId(player))
@@ -309,11 +316,11 @@ public class disarm_bomb_puzzle extends script.base_script
                 blowUpBomb(collectionItem, player);
             }
         }
-        else 
+        else
         {
             utils.setScriptVar(player, BOMB_TIMER, timer);
         }
-        questionnaireText += "" + timer;
+        questionnaireText += String.valueOf(timer);
         questionnaireText += sui.newLine(2);
         questionnaireText += localize(BOMB_INTRO_TEXT);
         questionnaireText += sui.newLine(2);
@@ -329,11 +336,12 @@ public class disarm_bomb_puzzle extends script.base_script
         }
         for (int i = 0; i < colors.length; i++)
         {
-            questionnaireText += "" + (i + 1) + ". " + wires[i] + " is " + colors[i] + sui.newLine();
+            questionnaireText += (i + 1) + ". " + wires[i] + " is " + colors[i] + sui.newLine();
         }
         blog("getBombData - returning to caller");
         return questionnaireText;
     }
+
     public boolean blowUpBomb(obj_id collectionItem, obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -346,7 +354,7 @@ public class disarm_bomb_puzzle extends script.base_script
         }
         if (buff.applyBuff(player, "bomb_defuse_puzzle_downer"))
         {
-            
+
         }
         sendSystemMessage(player, YOU_FAILED);
         dictionary params = new dictionary();
@@ -367,6 +375,7 @@ public class disarm_bomb_puzzle extends script.base_script
         destroyObject(collectionItem);
         return true;
     }
+
     public int handleDialogInput(obj_id self, dictionary params) throws InterruptedException
     {
         blog("handleDialogInput - init");
@@ -505,6 +514,7 @@ public class disarm_bomb_puzzle extends script.base_script
         blog("createBombUI - DONE Re-calling createBombUI");
         return SCRIPT_CONTINUE;
     }
+
     public boolean rewardPlayer(obj_id collectionItem, obj_id player) throws InterruptedException
     {
         blog("rewardPlayer - init");
@@ -530,6 +540,7 @@ public class disarm_bomb_puzzle extends script.base_script
         removePlayerVars(player);
         return true;
     }
+
     public int refreshSuiBombTimerData(obj_id self, dictionary params) throws InterruptedException
     {
         blog("refreshSuiBombTimerData - init");
@@ -557,6 +568,7 @@ public class disarm_bomb_puzzle extends script.base_script
         messageTo(self, "refreshSuiBombTimerData", params, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int removeDefuseVar(obj_id self, dictionary params) throws InterruptedException
     {
         blog("removeDefuseVar - init");
@@ -594,6 +606,7 @@ public class disarm_bomb_puzzle extends script.base_script
         utils.removeScriptVar(self, BEING_DEFUSED);
         return SCRIPT_CONTINUE;
     }
+
     public int closeSui(obj_id self, dictionary params) throws InterruptedException
     {
         blog("closeSui - init");
@@ -626,9 +639,9 @@ public class disarm_bomb_puzzle extends script.base_script
         }
         if (buff.applyBuff(player, "bomb_defuse_puzzle_downer"))
         {
-            
+
         }
-        
+
         {
             sendSystemMessage(player, YOU_CANCELED_EARLY);
         }
@@ -637,6 +650,7 @@ public class disarm_bomb_puzzle extends script.base_script
         removePlayerVars(player);
         return SCRIPT_CONTINUE;
     }
+
     public void closeOldWindow(obj_id player) throws InterruptedException
     {
         blog("closeOldWindow - init");
@@ -649,11 +663,13 @@ public class disarm_bomb_puzzle extends script.base_script
             sui.removePid(player, PID_NAME);
         }
     }
+
     public void removePlayerVars(obj_id player) throws InterruptedException
     {
         utils.removeScriptVarTree(player, VAR_PREFIX);
         utils.removeObjVar(player, VAR_PREFIX);
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON)

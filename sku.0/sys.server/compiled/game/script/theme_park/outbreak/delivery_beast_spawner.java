@@ -1,5 +1,11 @@
 package script.theme_park.outbreak;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.attrib;
 import script.library.create;
@@ -8,9 +14,6 @@ import script.obj_id;
 
 public class delivery_beast_spawner extends script.base_script
 {
-    public delivery_beast_spawner()
-    {
-    }
     public static final boolean LOGGING_ON = true;
     public static final String SCRIPT_LOG = "outbreak_delivery_trigger";
     public static final String CREATURE_NAME_OBJVAR = "creatureName";
@@ -37,6 +40,10 @@ public class delivery_beast_spawner extends script.base_script
     public static final int WAIT_DELAY = 5;
     public static final float TRIGGER_RADIUS = 5.0f;
     public static final int RADIUS = 2000;
+    public delivery_beast_spawner()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         CustomerServiceLog("outbreak_themepark", "delivery_beast_spawner.OnInitialize() initializing a spawner for camp defense.");
@@ -84,6 +91,7 @@ public class delivery_beast_spawner extends script.base_script
         messageTo(self, "spawnVolunteerNPC", null, 15, false);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnVolunteerNPC(obj_id self, dictionary params) throws InterruptedException
     {
         CustomerServiceLog("outbreak_themepark", "camp_survivor_spawning.spawnVolunteerNPC() Spawner: " + self + " is attempting to spawn a delivery volunteer.");
@@ -214,6 +222,7 @@ public class delivery_beast_spawner extends script.base_script
         setAttributeAttained(mob, attrib.OUTBREAK_SURVIVOR);
         return SCRIPT_CONTINUE;
     }
+
     public int getAllEscortPathNodes(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, WAYPOINT_LIST))
@@ -232,7 +241,8 @@ public class delivery_beast_spawner extends script.base_script
             return SCRIPT_CONTINUE;
         }
         String locationDataTable = "";
-        switch (questName) {
+        switch (questName)
+        {
             case QUEST_ALPHA:
                 locationDataTable = ALPHA_LOCATIONS;
                 break;

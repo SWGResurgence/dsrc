@@ -4,6 +4,12 @@ package script.developer.bubbajoe;/*
 @Purpose:
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.space_dungeon;
 import script.obj_id;
 import script.location;
@@ -35,7 +41,7 @@ public class avatar_mover extends script.base_script
         location avatarLoc = new location(here.x, 41.f, here.y, getCurrentSceneName());
         if (isInWorldCell(who) && here.y < 41)
         {
-            space_dungeon.sendGroupToDungeonWithoutTicketCollector(who, "avatar_platform","quest_type");
+            space_dungeon.sendGroupToDungeonWithoutTicketCollector(who, "avatar_platform", "quest_type");
         }
         return SCRIPT_CONTINUE;
     }

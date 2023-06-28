@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,38 +14,47 @@ import script.*;
 
 public class murmur_side_security_director extends script.base_script
 {
+    public static String c_stringFile = "conversation/murmur_side_security_director";
+
     public murmur_side_security_director()
     {
     }
-    public static String c_stringFile = "conversation/murmur_side_security_director";
+
     public boolean murmur_side_security_director_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean murmur_side_security_director_condition_onQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "coronet_murmurs_side_1") || groundquests.isQuestActive(player, "coronet_murmurs_side_2"));
     }
+
     public boolean murmur_side_security_director_condition_needs2ndQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "coronet_murmurs_side_1") && !groundquests.isQuestActiveOrComplete(player, "coronet_murmurs_side_2"));
     }
+
     public boolean murmur_side_security_director_condition_hasCompletedAll(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "coronet_murmurs_side_1") && groundquests.hasCompletedQuest(player, "coronet_murmurs_side_2"));
     }
+
     public void murmur_side_security_director_action_grantSideQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "coronet_murmurs_side_1");
     }
+
     public void murmur_side_security_director_action_regrant2ndQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "coronet_murmurs_side_2");
     }
+
     public void murmur_side_security_director_action_facePlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
     }
+
     public int murmur_side_security_director_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_10"))
@@ -55,6 +70,7 @@ public class murmur_side_security_director extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int murmur_side_security_director_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_16"))
@@ -74,7 +90,7 @@ public class murmur_side_security_director extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_20");
@@ -83,7 +99,7 @@ public class murmur_side_security_director extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.murmur_side_security_director.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -93,6 +109,7 @@ public class murmur_side_security_director extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int murmur_side_security_director_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_20"))
@@ -108,6 +125,7 @@ public class murmur_side_security_director extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -118,12 +136,14 @@ public class murmur_side_security_director extends script.base_script
         setCondition(self, CONDITION_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setCondition(self, CONDITION_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -132,18 +152,21 @@ public class murmur_side_security_director extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.murmur_side_security_director");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -174,7 +197,7 @@ public class murmur_side_security_director extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_10");
@@ -182,7 +205,7 @@ public class murmur_side_security_director extends script.base_script
                 utils.setScriptVar(player, "conversation.murmur_side_security_director.branchId", 2);
                 npcStartConversation(player, npc, "murmur_side_security_director", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -211,7 +234,7 @@ public class murmur_side_security_director extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_16");
@@ -219,7 +242,7 @@ public class murmur_side_security_director extends script.base_script
                 utils.setScriptVar(player, "conversation.murmur_side_security_director.branchId", 5);
                 npcStartConversation(player, npc, "murmur_side_security_director", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -228,6 +251,7 @@ public class murmur_side_security_director extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("murmur_side_security_director"))

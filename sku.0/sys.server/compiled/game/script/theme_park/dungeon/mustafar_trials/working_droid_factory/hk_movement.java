@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.working_droid_factory;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.trial;
 import script.library.utils;
@@ -10,11 +16,13 @@ public class hk_movement extends script.base_script
     public hk_movement()
     {
     }
+
     public int setRun(obj_id self, dictionary params) throws InterruptedException
     {
         setMovementRun(self);
         return SCRIPT_CONTINUE;
     }
+
     public int doTaunt(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] players = trial.getPlayersInDungeon(trial.getTop(self));
@@ -22,6 +30,7 @@ public class hk_movement extends script.base_script
         messageTo(self, "destroySelf", null, 20, false);
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         trial.cleanupNpc(self);

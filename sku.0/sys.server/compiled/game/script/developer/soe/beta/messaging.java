@@ -1,5 +1,11 @@
 package script.developer.soe.beta;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.deltadictionary;
 import script.location;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class messaging extends script.base_script
     public messaging()
     {
     }
+
     public int setLoginTitle(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         location locTest = getLocation(self);
@@ -17,6 +24,7 @@ public class messaging extends script.base_script
         broadcast(self, "Login Title set");
         return SCRIPT_CONTINUE;
     }
+
     public int setLoginMessage(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         location locTest = getLocation(self);
@@ -25,6 +33,7 @@ public class messaging extends script.base_script
         broadcast(self, "Login message set");
         return SCRIPT_CONTINUE;
     }
+
     public int resendLoginMessageToAll(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         location locTest = getLocation(self);
@@ -55,7 +64,7 @@ public class messaging extends script.base_script
                 intI = intI + 1;
             }
         }
-        else 
+        else
         {
             broadcast(self, "No title or message currently set, please set before sending ");
         }

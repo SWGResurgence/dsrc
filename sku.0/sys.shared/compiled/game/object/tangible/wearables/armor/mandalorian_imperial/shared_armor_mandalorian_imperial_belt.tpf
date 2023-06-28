@@ -9,4 +9,4 @@
 objectName = "wearables_name" "armor_mandalorian_imperial_belt_n"
 detailedDescription = "wearables_detail" "armor_mandalorian_imperial_belt_d"
 appearanceFilename = "appearance/armor_mandalorian_imperial_belt_f.sat"
-gameObjectType = GOT_armor_misc
+

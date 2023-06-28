@@ -1,5 +1,11 @@
 package script.theme_park.heroic.echo_base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -12,6 +18,7 @@ public class at_at extends script.base_script
     public at_at()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         detachScript(self, "ai.creature_combat");
@@ -36,6 +43,7 @@ public class at_at extends script.base_script
         messageTo(self, "findVehicleTarget", null, rand(5.0f, 10.0f), false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitateTarget(obj_id self, obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -56,7 +64,7 @@ public class at_at extends script.base_script
             {
                 beast_lib.killBeast(target, self);
             }
-            else 
+            else
             {
                 pclib.coupDeGrace(target, self);
             }
@@ -64,6 +72,7 @@ public class at_at extends script.base_script
         trial.bumpSession(self, "target");
         return SCRIPT_CONTINUE;
     }
+
     public int findTarget(obj_id self, dictionary params) throws InterruptedException
     {
         if (isInvulnerable(self))
@@ -78,11 +87,14 @@ public class at_at extends script.base_script
             messageTo(self, "findTarget", null, rand(2.0f, 4.0f), false);
             return SCRIPT_CONTINUE;
         }
-        for (obj_id obj_id : allTar) {
-            if (obj_id == self) {
+        for (obj_id obj_id : allTar)
+        {
+            if (obj_id == self)
+            {
                 continue;
             }
-            if (!pvpCanAttack(self, obj_id)) {
+            if (!pvpCanAttack(self, obj_id))
+            {
                 continue;
             }
             validTargets.add(obj_id);
@@ -92,10 +104,10 @@ public class at_at extends script.base_script
             messageTo(self, "findTarget", null, rand(2.0f, 4.0f), false);
             return SCRIPT_CONTINUE;
         }
-        obj_id target = ((obj_id)validTargets.get(rand(0, validTargets.size() - 1)));
+        obj_id target = ((obj_id) validTargets.get(rand(0, validTargets.size() - 1)));
         if (!isIdValid(target))
         {
-            target = ((obj_id)validTargets.get(rand(0, validTargets.size() - 1)));
+            target = ((obj_id) validTargets.get(rand(0, validTargets.size() - 1)));
         }
         if (!isIdValid(target) || !exists(target))
         {
@@ -107,13 +119,14 @@ public class at_at extends script.base_script
         {
             queueCommand(self, (71122711), target, "", COMMAND_PRIORITY_DEFAULT);
         }
-        else 
+        else
         {
             queueCommand(self, (-2138719921), target, "", COMMAND_PRIORITY_DEFAULT);
         }
         messageTo(self, "findTarget", null, rand(4.0f, 6.0f), false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id weapon, int[] damage) throws InterruptedException
     {
         int time = utils.getIntScriptVar(self, "last_mine");
@@ -125,6 +138,7 @@ public class at_at extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int atatGeneratorShoot(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] generator = trial.getObjectsInInstanceByObjVar(self, "hoth_generator");
@@ -143,7 +157,7 @@ public class at_at extends script.base_script
         {
             LOG("doLogging", "Mulitple Main Generators same instance shooting with ATAT(" + self + ") at Generator[0](" + generator[0] + ").");
         }
-        else 
+        else
         {
             if (!isIdValid(generator[0]))
             {
@@ -157,6 +171,7 @@ public class at_at extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int findVehicleTarget(obj_id self, dictionary params) throws InterruptedException
     {
         if (isInvulnerable(self))
@@ -171,13 +186,16 @@ public class at_at extends script.base_script
             messageTo(self, "findVehicleTarget", null, 1.0f, false);
             return SCRIPT_CONTINUE;
         }
-        for (obj_id obj_id : allTar) {
-            if (isPlayer(obj_id) && pvpCanAttack(self, obj_id) && getState(obj_id, STATE_RIDING_MOUNT) == 1) {
+        for (obj_id obj_id : allTar)
+        {
+            if (isPlayer(obj_id) && pvpCanAttack(self, obj_id) && getState(obj_id, STATE_RIDING_MOUNT) == 1)
+            {
                 LOG("maggie", "Player Found - Added and Exited");
                 validTargets.add(obj_id);
                 break;
             }
-            if (ai_lib.isVehicle(obj_id) && obj_id != self && pvpCanAttack(self, obj_id) && !isDead(obj_id)) {
+            if (ai_lib.isVehicle(obj_id) && obj_id != self && pvpCanAttack(self, obj_id) && !isDead(obj_id))
+            {
                 validTargets.add(obj_id);
             }
         }
@@ -186,7 +204,7 @@ public class at_at extends script.base_script
             messageTo(self, "findVehicleTarget", null, 1.0f, false);
             return SCRIPT_CONTINUE;
         }
-        obj_id target = ((obj_id)validTargets.get(rand(0, validTargets.size() - 1)));
+        obj_id target = ((obj_id) validTargets.get(rand(0, validTargets.size() - 1)));
         if (!isIdValid(target) || !exists(target))
         {
             messageTo(self, "findVehicleTarget", null, 1.0f, false);
@@ -212,6 +230,7 @@ public class at_at extends script.base_script
         messageTo(self, "findVehicleTarget", null, rand(2.0f, 4.0f), false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         int advanceObjvar;
@@ -221,7 +240,7 @@ public class at_at extends script.base_script
             trial.sendSequenceTrigger(getStringObjVar(self, "atatNumber") + "_spawnPoint_" + advanceObjvar);
             LOG("maggie", getStringObjVar(self, "atatNumber") + " has advanced to Point: " + advanceObjvar);
         }
-        else 
+        else
         {
             String atatNumber = getStringObjVar(self, "atatNumber");
             trial.sendSequenceTrigger(atatNumber + "_respawn");
@@ -229,6 +248,7 @@ public class at_at extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ATATforceCheck(obj_id self, dictionary params) throws InterruptedException
     {
         String atatNumber = "";
@@ -258,6 +278,7 @@ public class at_at extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ATATnumDeadIncrement(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "forceDead"))
@@ -266,7 +287,7 @@ public class at_at extends script.base_script
             numDead++;
             setObjVar(self, "forceDead", numDead);
         }
-        else 
+        else
         {
             setObjVar(self, "forceDead", 1);
         }

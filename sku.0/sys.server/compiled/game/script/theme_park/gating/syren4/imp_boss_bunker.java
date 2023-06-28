@@ -1,5 +1,11 @@
 package script.theme_park.gating.syren4;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.groundquests;
 import script.library.group;
 import script.obj_id;
@@ -10,6 +16,7 @@ public class imp_boss_bunker extends script.base_script
     public imp_boss_bunker()
     {
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item) || isIdValid(destinationCell))
@@ -24,9 +31,12 @@ public class imp_boss_bunker extends script.base_script
             {
                 obj_id[] groupMembers = getGroupMemberIds(groupObj);
                 int numGroupMembers = groupMembers.length;
-                for (obj_id groupie : groupMembers) {
-                    if (isIdValid(groupie)) {
-                        if (groundquests.isTaskActive(groupie, "c_story1_4b_rebel", "killboss") || groundquests.isTaskActive(groupie, "c_story1_4b_rebel", "retrieveinfo") || groundquests.isTaskActive(groupie, "c_story1_4b_rebel", "rebel_blackmail")) {
+                for (obj_id groupie : groupMembers)
+                {
+                    if (isIdValid(groupie))
+                    {
+                        if (groundquests.isTaskActive(groupie, "c_story1_4b_rebel", "killboss") || groundquests.isTaskActive(groupie, "c_story1_4b_rebel", "retrieveinfo") || groundquests.isTaskActive(groupie, "c_story1_4b_rebel", "rebel_blackmail"))
+                        {
                             return SCRIPT_CONTINUE;
                         }
                     }
@@ -39,7 +49,7 @@ public class imp_boss_bunker extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             sendSystemMessage(item, warning);
             return SCRIPT_OVERRIDE;

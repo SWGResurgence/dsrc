@@ -1,5 +1,11 @@
 package script.theme_park.newbie_tutorial;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.chat;
@@ -9,6 +15,7 @@ public class trooper3 extends script.theme_park.newbie_tutorial.tutorial_base
     public trooper3()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setMood(self, "npc_imperial");
@@ -18,11 +25,13 @@ public class trooper3 extends script.theme_park.newbie_tutorial.tutorial_base
         messageTo(self, "equipWeapon", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int equipWeapon(obj_id self, dictionary params) throws InterruptedException
     {
         aiEquipPrimaryWeapon(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         stop(self);
@@ -30,12 +39,14 @@ public class trooper3 extends script.theme_park.newbie_tutorial.tutorial_base
         messageTo(self, "handleWaveOn", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleWaveOn(obj_id self, dictionary params) throws InterruptedException
     {
         chat.chat(self, new string_id(NEWBIE_CONVO, "trooper_move_along"));
         doAnimationAction(self, "wave_on_directing");
         return SCRIPT_CONTINUE;
     }
+
     public void paceInRoom(obj_id trooper, int destination) throws InterruptedException
     {
         location destLoc = new location(getLocation(trooper));
@@ -43,7 +54,7 @@ public class trooper3 extends script.theme_park.newbie_tutorial.tutorial_base
         {
             destLoc = getHomeLocation(trooper);
         }
-        else 
+        else
         {
             obj_id bldg = getTopMostContainer(trooper);
             destLoc.x = 2.19f;
@@ -55,6 +66,7 @@ public class trooper3 extends script.theme_park.newbie_tutorial.tutorial_base
         setObjVar(trooper, "newbie.currentLoc", destination);
         messageTo(trooper, "handleNextPacingEvent", null, 45, false);
     }
+
     public int handleNextPacingEvent(obj_id self, dictionary params) throws InterruptedException
     {
         int currentLoc = getIntObjVar(self, "newbie.currentLoc");
@@ -62,7 +74,7 @@ public class trooper3 extends script.theme_park.newbie_tutorial.tutorial_base
         {
             currentLoc = 0;
         }
-        else 
+        else
         {
             currentLoc = 1;
         }

@@ -1,5 +1,11 @@
 package script.developer.soe.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -7,10 +13,12 @@ import script.obj_id;
 
 public class ttyson_test extends script.base.remote_object_requester
 {
+    public static final String STARTING_EQUIPMENT_FILE = "datatables/equipment/newbie_equipment.iff";
+
     public ttyson_test()
     {
     }
-    public static final String STARTING_EQUIPMENT_FILE = "datatables/equipment/newbie_equipment.iff";
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (true)
@@ -73,7 +81,7 @@ public class ttyson_test extends script.base.remote_object_requester
                             debugSpeakMsg(self, s);
                         }
                     }
-                    else 
+                    else
                     {
                         debugConsoleMsg(self, "Usage: tt_giveQuest <questname>. i.e. \"tt_giveQuest quest/loot_5_widgets\"");
                         debugSpeakMsg(self, "Usage: tt_giveQuest <questname>. i.e. \"tt_giveQuest quest/loot_5_widgets\"");
@@ -97,7 +105,7 @@ public class ttyson_test extends script.base.remote_object_requester
                         int questId = questGetQuestId(questName);
                         questClearQuest(questId, self);
                     }
-                    else 
+                    else
                     {
                         debugConsoleMsg(self, "Usage: tt_clearQuest <questname>. i.e. \"tt_giveQuest quest/loot_5_widgets\"");
                         debugSpeakMsg(self, "Usage: tt_clearQuest <questname>. i.e. \"tt_giveQuest quest/loot_5_widgets\"");
@@ -118,7 +126,7 @@ public class ttyson_test extends script.base.remote_object_requester
                         }
                         questCompleteTask(questId, taskId, self);
                     }
-                    else 
+                    else
                     {
                         debugConsoleMsg(self, "Usage: tt_completeTask <questname> <taskid>. i.e. \"tt_completeTask quest/loot_5_widgets 0\"");
                         debugSpeakMsg(self, "Usage: tt_completeTask <questname> <taskid>. i.e. \"tt_completeTask quest/loot_5_widgets 0\"");
@@ -140,7 +148,7 @@ public class ttyson_test extends script.base.remote_object_requester
                             }
                         }
                     }
-                    else 
+                    else
                     {
                         final String usageText = "Usage: tt_completeAllTasks <questname> i.e. \"tt_completeAllTasks quest/loot_5_widgets\"";
                         debugConsoleMsg(self, usageText);
@@ -162,7 +170,7 @@ public class ttyson_test extends script.base.remote_object_requester
                         }
                         questFailTask(questId, taskId, self);
                     }
-                    else 
+                    else
                     {
                         final String usage = "Usage: tt_failTask <questname> <taskid>. i.e. \"tt_failTask quest/loot_5_widgets 0\"";
                         debugConsoleMsg(self, usage);
@@ -178,7 +186,7 @@ public class ttyson_test extends script.base.remote_object_requester
                         int questId = questGetQuestId(questName);
                         questCompleteQuest(questId, self);
                     }
-                    else 
+                    else
                     {
                         debugConsoleMsg(self, "Usage: tt_completeQuest <questname>. i.e. \"tt_giveQuest quest/loot_5_widgets\"");
                         debugSpeakMsg(self, "Usage: tt_completeQuest <questname>. i.e. \"tt_giveQuest quest/loot_5_widgets\"");
@@ -192,7 +200,7 @@ public class ttyson_test extends script.base.remote_object_requester
                         String signalName = tok.nextToken();
                         groundquests.sendSignal(self, signalName);
                     }
-                    else 
+                    else
                     {
                         final String usage = "Usage: tt_sendSignal <signalName>. i.e. \"tt_sendSignal killed_the_rabbit\"";
                         debugConsoleMsg(self, usage);
@@ -215,7 +223,7 @@ public class ttyson_test extends script.base.remote_object_requester
                         groundquests.sendSignal(self, "testSignal");
                         debugConsoleMsg(self, "sending signal");
                     }
-                    else 
+                    else
                     {
                         debugConsoleMsg(self, "not sending signal");
                     }
@@ -238,13 +246,13 @@ public class ttyson_test extends script.base.remote_object_requester
                         {
                             debugConsoleMsg(self, "target busy");
                         }
-                        else 
+                        else
                         {
                             groundquests.setPendingStaticEscortTarget(self, target);
                             debugConsoleMsg(self, "target target set");
                         }
                     }
-                    else 
+                    else
                     {
                         debugSpeakMsg(self, "Usage: tt_setPendingEscortTarget <targetid>");
                     }
@@ -345,7 +353,7 @@ public class ttyson_test extends script.base.remote_object_requester
                         String missionName = tok.nextToken();
                         space_quest.grantQuest(self, missionType, missionName);
                     }
-                    else 
+                    else
                     {
                         String usage = "Usage: tt_giveSpace <missionType> <missionName>. i.e. \"tt_giveSpace assassinate npe_hard_main_3a\"";
                         debugConsoleMsg(self, usage);
@@ -362,7 +370,7 @@ public class ttyson_test extends script.base.remote_object_requester
                         obj_id quest = space_quest._getQuest(self, missionType, missionName);
                         space_quest.setQuestWon(self, quest);
                     }
-                    else 
+                    else
                     {
                         String usage = "Usage: tt_winSpace <missionType> <missionName>. i.e. \"tt_winSpace assassinate npe_hard_main_3a\"";
                         debugConsoleMsg(self, usage);
@@ -379,7 +387,7 @@ public class ttyson_test extends script.base.remote_object_requester
                         obj_id quest = space_quest._getQuest(self, missionType, missionName);
                         space_quest.setQuestFailed(self, quest);
                     }
-                    else 
+                    else
                     {
                         String usage = "Usage: tt_failSpace <missionType> <missionName>. i.e. \"tt_failSpace assassinate npe_hard_main_3a\"";
                         debugConsoleMsg(self, usage);
@@ -396,7 +404,7 @@ public class ttyson_test extends script.base.remote_object_requester
                         obj_id quest = space_quest._getQuest(self, missionType, missionName);
                         space_quest.setQuestAborted(self, quest);
                     }
-                    else 
+                    else
                     {
                         String usage = "Usage: tt_abortSpace <missionType> <missionName>. i.e. \"tt_abortSpace assassinate npe_hard_main_3a\"";
                         debugConsoleMsg(self, usage);
@@ -411,7 +419,7 @@ public class ttyson_test extends script.base.remote_object_requester
                     {
                         debugSpeakMsg(self, "enterClientTicketPurchaseMode 1 succeeded");
                     }
-                    else 
+                    else
                     {
                         debugSpeakMsg(self, "enterClientTicketPurchaseMode 1 failed");
                     }
@@ -424,7 +432,7 @@ public class ttyson_test extends script.base.remote_object_requester
                     {
                         debugSpeakMsg(self, "enterClientTicketPurchaseMode 2 succeeded");
                     }
-                    else 
+                    else
                     {
                         debugSpeakMsg(self, "enterClientTicketPurchaseMode 2 failed");
                     }
@@ -451,7 +459,7 @@ public class ttyson_test extends script.base.remote_object_requester
                         LOG("TTYSON_LOG", "removing travelBlock");
                         utils.removeScriptVar(self, "travelBlock");
                     }
-                    else 
+                    else
                     {
                         int value = 0;
                         if (tok.hasMoreTokens())
@@ -518,7 +526,7 @@ public class ttyson_test extends script.base.remote_object_requester
                             static_item.createNewItemFunction(staticItemName, container);
                         }
                     }
-                    else 
+                    else
                     {
                         String usage = "Usage: tt_createStaticIn <staticItemName> [container]";
                         debugConsoleMsg(self, usage);
@@ -607,6 +615,7 @@ public class ttyson_test extends script.base.remote_object_requester
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnPurchaseTicketInstantTravel(obj_id self, obj_id player, String departPlanetName, String departTravelPointName, String arrivePlanetName, String arriveTravelPointName, boolean roundTrip) throws InterruptedException
     {
         debugSpeakMsg(self, "OnPurchaseTicketInstantTravel: entered");
@@ -617,6 +626,7 @@ public class ttyson_test extends script.base.remote_object_requester
         debugSpeakMsg(self, roundTrip ? "roundtrip" : "not roundtrip");
         return SCRIPT_CONTINUE;
     }
+
     public int OnPurchaseTicket(obj_id self, obj_id player, String departPlanetName, String departTravelPointName, String arrivePlanetName, String arriveTravelPointName, boolean roundTrip) throws InterruptedException
     {
         debugSpeakMsg(self, "OnPurchaseTicket: entered");
@@ -627,26 +637,30 @@ public class ttyson_test extends script.base.remote_object_requester
         debugSpeakMsg(self, roundTrip ? "roundtrip" : "not roundtrip");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        if (!isGod(self) || getGodLevel(self) < 50 || !isPlayer(self)) {
+        if (!isGod(self) || getGodLevel(self) < 50 || !isPlayer(self))
+        {
             detachScript(self, "test.ttyson_test");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleFailedStructurePackup(obj_id self, dictionary params) throws InterruptedException
     {
         debugSpeakMsg(self, "handleFailedStructurePackup()");
         debugConsoleMsg(self, "handleFailedStructurePackup()");
         return SCRIPT_CONTINUE;
     }
+
     public int testMessage(obj_id self, dictionary params) throws InterruptedException
     {
         debugSpeakMsg(self, "TestMessage messageHandler hit");
         java.util.Enumeration keys = params.keys();
         while (keys.hasMoreElements())
         {
-            String key = (String)keys.nextElement();
+            String key = (String) keys.nextElement();
             String value = params.getString(key);
             debugConsoleMsg(self, key + " = " + value);
         }
@@ -664,14 +678,17 @@ public class ttyson_test extends script.base.remote_object_requester
         }
         return SCRIPT_CONTINUE;
     }
+
     public int startPerform(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int stopPerform(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int logLocationHeading(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("ttyson_test", "Location = " + (getLocation(self)).toString());
@@ -679,15 +696,18 @@ public class ttyson_test extends script.base.remote_object_requester
         enableLogLocationHeading(self);
         return SCRIPT_CONTINUE;
     }
+
     public void enableLogLocationHeading(obj_id target) throws InterruptedException
     {
         messageTo(target, "logLocationHeading", null, 5, false);
     }
+
     public int OnArrivedAtLocation(obj_id self, String locationName) throws InterruptedException
     {
         groundquests.questOutputDebugLog("ttyson_test", "OnArrivedAtLocation", "Arrived at " + locationName);
         return SCRIPT_CONTINUE;
     }
+
     public void giveNewbieEquipment(obj_id player) throws InterruptedException
     {
         String profession = "all_professions";
@@ -711,27 +731,38 @@ public class ttyson_test extends script.base.remote_object_requester
         {
             LOG("newbie", "no items");
         }
-        for (String item : items) {
+        for (String item : items)
+        {
             LOG("newbie", "NEWBIE STARTING EQUIP MAKING: " + item);
             obj_id newItem = null;
-            if (item.startsWith("object/weapon/")) {
+            if (item.startsWith("object/weapon/"))
+            {
                 newItem = weapons.createWeapon(item, bank, 0.75f);
-            } else if (item.startsWith("object/tangible/medicine")) {
+            }
+            else if (item.startsWith("object/tangible/medicine"))
+            {
                 newItem = createObject("object/tangible/medicine/instant_stimpack/stimpack_noob.iff", bank, "");
-                if (isIdValid(newItem)) {
+                if (isIdValid(newItem))
+                {
                     setCount(newItem, 5);
                     setObjVar(newItem, "healing.power", 250);
                 }
-            } else {
+            }
+            else
+            {
                 newItem = createObject(item, bank, "");
             }
-            if (!isIdValid(newItem)) {
+            if (!isIdValid(newItem))
+            {
                 LOG("newbie", "BAD: could not create newbie equipment item " + item);
-            } else {
+            }
+            else
+            {
                 pclib.autoInsureItem(newItem);
             }
         }
     }
+
     public void giveNewbieSkills(obj_id player) throws InterruptedException
     {
         skill.grantSkillToPlayer(player, "combat_marksman_novice");

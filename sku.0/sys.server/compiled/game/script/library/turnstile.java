@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 import script.prose_package;
@@ -25,6 +31,7 @@ public class turnstile extends script.base_script
     public static final String VAR_TURNSTILE_GREETING_LONG = "turnstile.greeting.long";
     public static final String SCRIPT_TURNSTILE_CLEANUP = "turnstile.turnstile_cleanup";
     public static final string_id SID_WAIT_TURNSTILE = new string_id("player_structure", "turnstile_wait");
+
     public turnstile()
     {
     }

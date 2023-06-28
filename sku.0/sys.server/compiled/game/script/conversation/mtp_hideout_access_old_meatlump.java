@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,26 +14,32 @@ import script.*;
 
 public class mtp_hideout_access_old_meatlump extends script.base_script
 {
+    public static String c_stringFile = "conversation/mtp_hideout_access_old_meatlump";
+
     public mtp_hideout_access_old_meatlump()
     {
     }
-    public static String c_stringFile = "conversation/mtp_hideout_access_old_meatlump";
+
     public boolean mtp_hideout_access_old_meatlump_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean mtp_hideout_access_old_meatlump_condition_mtpHideout05_01(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "mtp_hideout_access_05", "mtp_hideout_access_05_01");
     }
+
     public boolean mtp_hideout_access_old_meatlump_condition_mtpHideout05_01_done(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedTask(player, "mtp_hideout_access_05", "mtp_hideout_access_05_01");
     }
+
     public void mtp_hideout_access_old_meatlump_action_signal_mtpHideout05_01(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "mtp_hideout_access_05_01");
     }
+
     public int mtp_hideout_access_old_meatlump_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_23"))
@@ -47,7 +59,7 @@ public class mtp_hideout_access_old_meatlump extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9");
@@ -56,7 +68,7 @@ public class mtp_hideout_access_old_meatlump extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_hideout_access_old_meatlump.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -66,6 +78,7 @@ public class mtp_hideout_access_old_meatlump extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_hideout_access_old_meatlump_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9"))
@@ -85,7 +98,7 @@ public class mtp_hideout_access_old_meatlump extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_13");
@@ -94,7 +107,7 @@ public class mtp_hideout_access_old_meatlump extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_hideout_access_old_meatlump.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -104,6 +117,7 @@ public class mtp_hideout_access_old_meatlump extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_hideout_access_old_meatlump_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_13"))
@@ -119,6 +133,7 @@ public class mtp_hideout_access_old_meatlump extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -128,11 +143,13 @@ public class mtp_hideout_access_old_meatlump extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -141,18 +158,21 @@ public class mtp_hideout_access_old_meatlump extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.mtp_hideout_access_old_meatlump");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -181,7 +201,7 @@ public class mtp_hideout_access_old_meatlump extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_23");
@@ -189,7 +209,7 @@ public class mtp_hideout_access_old_meatlump extends script.base_script
                 utils.setScriptVar(player, "conversation.mtp_hideout_access_old_meatlump.branchId", 2);
                 npcStartConversation(player, npc, "mtp_hideout_access_old_meatlump", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -204,6 +224,7 @@ public class mtp_hideout_access_old_meatlump extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("mtp_hideout_access_old_meatlump"))

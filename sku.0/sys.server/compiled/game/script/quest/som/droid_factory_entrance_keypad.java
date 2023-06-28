@@ -1,19 +1,26 @@
 package script.quest.som;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.groundquests;
 
 public class droid_factory_entrance_keypad extends script.base_script
 {
-    public droid_factory_entrance_keypad()
-    {
-    }
     public static final String STF = "som/som_quest";
     public static final string_id ENTER_CODE = new string_id(STF, "df_keypad_code");
     public static final string_id UNLOCKED = new string_id(STF, "df_keypad_unlocked");
     public static final string_id UNKNOWN_CODE = new string_id(STF, "df_keypad_unknown");
     public static final string_id INCORRECT_CODE = new string_id(STF, "df_keypad_incorrect");
     public static final string_id ALREADY_UNLOCKED = new string_id(STF, "df_keypad_already");
+    public droid_factory_entrance_keypad()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "passcode"))
@@ -22,6 +29,7 @@ public class droid_factory_entrance_keypad extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "passcode"))
@@ -30,6 +38,7 @@ public class droid_factory_entrance_keypad extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int menu = mi.addRootMenu(menu_info_types.ITEM_USE, ENTER_CODE);
@@ -41,6 +50,7 @@ public class droid_factory_entrance_keypad extends script.base_script
         mid.setServerNotify(true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -60,7 +70,7 @@ public class droid_factory_entrance_keypad extends script.base_script
                 sendSystemMessage(player, ALREADY_UNLOCKED);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 sendSystemMessage(player, UNKNOWN_CODE);
                 return SCRIPT_CONTINUE;
@@ -68,6 +78,7 @@ public class droid_factory_entrance_keypad extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void keypad(obj_id player) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -75,8 +86,8 @@ public class droid_factory_entrance_keypad extends script.base_script
         subscribeToSUIProperty(pid, "result.numberBox", "localtext");
         subscribeToSUIProperty(pid, "buttonEnter", "ButtonPressed");
         showSUIPage(pid);
-        return;
     }
+
     public int KeypadCallback(obj_id self, dictionary params) throws InterruptedException
     {
         String result = params.getString("result.numberBox" + "." + "localtext");
@@ -107,7 +118,7 @@ public class droid_factory_entrance_keypad extends script.base_script
                 groundquests.sendSignal(player, "mustafar_droidfactory_final");
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 sendSystemMessage(player, INCORRECT_CODE);
             }

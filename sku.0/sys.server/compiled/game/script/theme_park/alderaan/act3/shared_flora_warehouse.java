@@ -1,5 +1,11 @@
 package script.theme_park.alderaan.act3;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -11,90 +17,91 @@ import java.util.Vector;
 
 public class shared_flora_warehouse extends script.base_script
 {
+    public static final String[] TEMPLATE_LIST =
+            {
+                    "object/building/poi/generic_flatten_medium.iff",
+                    "coa3_warehouse_captain",
+                    "coa3_warehouse_guard",
+                    "coa3_warehouse_guard",
+                    "coa3_warehouse_guard",
+                    "coa3_warehouse_thug",
+                    "coa3_warehouse_thug",
+                    "coa3_warehouse_thug"
+            };
+    public static final String[] CELL_LIST =
+            {
+                    "",
+                    "room3",
+                    "room3",
+                    "room2",
+                    "room1",
+                    "room1",
+                    "",
+                    ""
+            };
+    public static final float[][] LOCATION_LIST =
+            {
+
+                    {
+                            0.00f,
+                            0.00f,
+                            0.0f,
+                            0.0f
+                    },
+
+                    {
+                            -3.19f,
+                            0.13f,
+                            -4.60f,
+                            20.0f
+                    },
+
+                    {
+                            -4.22f,
+                            0.13f,
+                            -1.82f,
+                            160.0f
+                    },
+
+                    {
+                            3.28f,
+                            0.13f,
+                            -2.53f,
+                            -160.0f
+                    },
+
+                    {
+                            4.08f,
+                            0.13f,
+                            3.86f,
+                            0.0f
+                    },
+
+                    {
+                            4.09f,
+                            0.13f,
+                            0.75f,
+                            -40.0f
+                    },
+
+                    {
+                            -1.50f,
+                            0.13f,
+                            9.00f,
+                            0.0f
+                    },
+
+                    {
+                            1.50f,
+                            0.00f,
+                            9.00f,
+                            0.0f
+                    }
+            };
     public shared_flora_warehouse()
     {
     }
-    public static final String[] TEMPLATE_LIST = 
-    {
-        "object/building/poi/generic_flatten_medium.iff",
-        "coa3_warehouse_captain",
-        "coa3_warehouse_guard",
-        "coa3_warehouse_guard",
-        "coa3_warehouse_guard",
-        "coa3_warehouse_thug",
-        "coa3_warehouse_thug",
-        "coa3_warehouse_thug"
-    };
-    public static final String[] CELL_LIST = 
-    {
-        "",
-        "room3",
-        "room3",
-        "room2",
-        "room1",
-        "room1",
-        "",
-        ""
-    };
-    public static final float[][] LOCATION_LIST = 
-    {
-        
-        {
-            0.00f,
-            0.00f,
-            0.0f,
-            0.0f
-        },
-        
-        {
-            -3.19f,
-            0.13f,
-            -4.60f,
-            20.0f
-        },
-        
-        {
-            -4.22f,
-            0.13f,
-            -1.82f,
-            160.0f
-        },
-        
-        {
-            3.28f,
-            0.13f,
-            -2.53f,
-            -160.0f
-        },
-        
-        {
-            4.08f,
-            0.13f,
-            3.86f,
-            0.0f
-        },
-        
-        {
-            4.09f,
-            0.13f,
-            0.75f,
-            -40.0f
-        },
-        
-        {
-            -1.50f,
-            0.13f,
-            9.00f,
-            0.0f
-        },
-        
-        {
-            1.50f,
-            0.00f,
-            9.00f,
-            0.0f
-        }
-    };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         createTriggerVolume("guards", 20.0f, true);
@@ -103,6 +110,7 @@ public class shared_flora_warehouse extends script.base_script
         messageTo(self, "spawnNextObject", params, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnNextObject(obj_id self, dictionary params) throws InterruptedException
     {
         int objectNum = params.getInt("index");
@@ -113,7 +121,7 @@ public class shared_flora_warehouse extends script.base_script
             loc.y += LOCATION_LIST[objectNum][1];
             loc.z += LOCATION_LIST[objectNum][2];
         }
-        else 
+        else
         {
             obj_id spawnCell = getCellId(self, CELL_LIST[objectNum]);
             loc.x = LOCATION_LIST[objectNum][0];
@@ -156,12 +164,13 @@ public class shared_flora_warehouse extends script.base_script
             params.put("index", objectNum);
             messageTo(self, "spawnNextObject", params, 0, false);
         }
-        else 
+        else
         {
             initWarehouse();
         }
         return SCRIPT_CONTINUE;
     }
+
     public void initWarehouse() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -185,6 +194,7 @@ public class shared_flora_warehouse extends script.base_script
         setObjVar(terminal, "coa3.shared.warehouse", self);
         attachScript(terminal, "theme_park.alderaan.act3.shared_flora_terminal");
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (!isPlayer(breacher))
@@ -197,8 +207,10 @@ public class shared_flora_warehouse extends script.base_script
             if (breacher == player)
             {
                 Vector objectList = getResizeableObjIdArrayObjVar(self, "coa3.shared.obj_list");
-                for (Object o : objectList) {
-                    if (isIdValid(((obj_id) o)) && ai_lib.isNpc(((obj_id) o))) {
+                for (Object o : objectList)
+                {
+                    if (isIdValid(((obj_id) o)) && ai_lib.isNpc(((obj_id) o)))
+                    {
                         startCombat(((obj_id) o), breacher);
                     }
                 }
@@ -206,6 +218,7 @@ public class shared_flora_warehouse extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int guardKilled(obj_id self, dictionary params) throws InterruptedException
     {
         int numGuards = getIntObjVar(self, "coa3.shared.numGuards");
@@ -221,16 +234,20 @@ public class shared_flora_warehouse extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cleanup(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         Vector objectList = getResizeableObjIdArrayObjVar(self, "coa3.shared.obj_list");
-        for (Object o : objectList) {
-            if (isIdValid(((obj_id) o))) {
+        for (Object o : objectList)
+        {
+            if (isIdValid(((obj_id) o)))
+            {
                 destroyObject(((obj_id) o));
             }
         }

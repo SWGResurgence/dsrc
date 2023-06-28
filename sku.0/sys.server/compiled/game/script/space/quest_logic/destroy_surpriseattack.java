@@ -1,17 +1,24 @@
 package script.space.quest_logic;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class destroy_surpriseattack extends script.base_script
 {
-    public destroy_surpriseattack()
-    {
-    }
     public static final string_id SID_REMAINDER_UPDATE = new string_id("space/quest", "destroy_remainder_update");
     public static final string_id SID_ABANDONED_DESTROY = new string_id("space/quest", "destroy_surprise_abandoned");
     public static final string_id SID_SURPRISE_ATTACK = new string_id("space/quest", "destroy_surprise_attack");
     public static final string_id WARPOUT_FAILURE = new string_id("space/quest", "warpout_failure");
+    public destroy_surpriseattack()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String questName = getStringObjVar(self, space_quest.QUEST_NAME);
@@ -48,6 +55,7 @@ public class destroy_surpriseattack extends script.base_script
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int initializedQuestPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -144,13 +152,15 @@ public class destroy_surpriseattack extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int leaveEarly(obj_id self, dictionary params) throws InterruptedException
     {
         String questName = getStringObjVar(self, space_quest.QUEST_NAME);
         String questType = getStringObjVar(self, space_quest.QUEST_TYPE);
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
         obj_id[] targets = getObjIdArrayObjVar(self, "targets");
-        for (obj_id target : targets) {
+        for (obj_id target : targets)
+        {
             space_quest._removeMissionCriticalShip(player, self, target);
         }
         setObjVar(self, "leaveEarly", 1);
@@ -160,6 +170,7 @@ public class destroy_surpriseattack extends script.base_script
         questCompleted(self);
         return SCRIPT_CONTINUE;
     }
+
     public int shipDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -182,8 +193,10 @@ public class destroy_surpriseattack extends script.base_script
         obj_id[] targets = getObjIdArrayObjVar(self, "targets");
         int killcount = getIntObjVar(self, "killcount");
         int count = getIntObjVar(self, "count");
-        for (obj_id target : targets) {
-            if (ship == target) {
+        for (obj_id target : targets)
+        {
+            if (ship == target)
+            {
                 space_quest._removeMissionCriticalShip(player, self, ship);
                 killcount--;
                 setObjVar(self, "killcount", killcount);
@@ -201,18 +214,20 @@ public class destroy_surpriseattack extends script.base_script
             questCompleted(self);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             questSetQuestTaskCounter(player, "spacequest/" + questType + "/" + questName, 1, "quest/groundquests:destroy_counter", count - killcount, count);
         }
         space_quest.showQuestUpdate(self, SID_REMAINDER_UPDATE, killcount);
         return SCRIPT_CONTINUE;
     }
+
     public void questCompleted(obj_id self) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
         space_quest.setQuestWon(player, self);
     }
+
     public int abortMission(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "noAbort"))
@@ -223,6 +238,7 @@ public class destroy_surpriseattack extends script.base_script
         space_quest.setQuestAborted(player, self);
         return SCRIPT_CONTINUE;
     }
+
     public int removeQuest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -236,6 +252,7 @@ public class destroy_surpriseattack extends script.base_script
         space_quest._removeQuest(player, self);
         return SCRIPT_CONTINUE;
     }
+
     public int playerShipDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -251,6 +268,7 @@ public class destroy_surpriseattack extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int attackPlayerShip(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id playerShip = params.getObjId("player");
@@ -258,18 +276,22 @@ public class destroy_surpriseattack extends script.base_script
         ship_ai.spaceAttack(attackingShip, playerShip);
         return SCRIPT_CONTINUE;
     }
+
     public void cleanupShips(obj_id self) throws InterruptedException
     {
         obj_id[] targets = getObjIdArrayObjVar(self, "targets");
         if (targets != null)
         {
-            for (obj_id target : targets) {
-                if (isIdValid(target) && exists(target)) {
+            for (obj_id target : targets)
+            {
+                if (isIdValid(target) && exists(target))
+                {
                     destroyObjectHyperspace(target);
                 }
             }
         }
     }
+
     public boolean checkSpecialEvent(obj_id self, obj_id player, int killCount) throws InterruptedException
     {
         if (!hasObjVar(self, space_quest.QUEST_TRIGGER_EVENT))
@@ -297,6 +319,7 @@ public class destroy_surpriseattack extends script.base_script
         messageTo(player, "doSpecialEvent", params, triggerDelay, false);
         return false;
     }
+
     public int warpoutFailure(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "handling_warpout_failure"))

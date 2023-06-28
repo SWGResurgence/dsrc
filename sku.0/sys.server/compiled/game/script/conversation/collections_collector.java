@@ -1,18 +1,28 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class collections_collector extends script.base_script
 {
+    public static final String PID_NAME = "collection_npc";
+    public static String c_stringFile = "conversation/collections_collector";
+
     public collections_collector()
     {
     }
-    public static String c_stringFile = "conversation/collections_collector";
+
     public boolean collections_collector_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean collections_collector_condition_cantGetMore(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "collection.columnName"))
@@ -22,6 +32,7 @@ public class collections_collector extends script.base_script
         }
         return false;
     }
+
     public boolean collections_collector_condition_noMoreCollections(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "collection.columnName"))
@@ -31,6 +42,7 @@ public class collections_collector extends script.base_script
         }
         return false;
     }
+
     public boolean collections_collector_condition_hasCollectionsToRemove(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "collection.columnName"))
@@ -40,73 +52,54 @@ public class collections_collector extends script.base_script
         }
         return false;
     }
+
     public boolean collections_collector_condition_collectorHintEndor(obj_id player, obj_id npc) throws InterruptedException
     {
         String planetName = getCurrentSceneName();
-        if (planetName.equals("endor"))
-        {
-            return false;
-        }
-        return true;
+        return !planetName.equals("endor");
     }
+
     public boolean collections_collector_condition_collectorHintTatooine(obj_id player, obj_id npc) throws InterruptedException
     {
         String planetName = getCurrentSceneName();
-        if (planetName.equals("tatooine"))
-        {
-            return false;
-        }
-        return true;
+        return !planetName.equals("tatooine");
     }
+
     public boolean collections_collector_condition_collectorHintYavin4(obj_id player, obj_id npc) throws InterruptedException
     {
         String planetName = getCurrentSceneName();
-        if (planetName.equals("yavin4"))
-        {
-            return false;
-        }
-        return true;
+        return !planetName.equals("yavin4");
     }
+
     public boolean collections_collector_condition_collectorHintAurilia(obj_id player, obj_id npc) throws InterruptedException
     {
         String planetName = getCurrentSceneName();
         int playerLevel = getLevel(player);
-        if (planetName.equals("dathomir") || playerLevel < 70)
-        {
-            return false;
-        }
-        return true;
+        return !planetName.equals("dathomir") && playerLevel >= 70;
     }
+
     public boolean collections_collector_condition_durniPhotoConvoStart(obj_id player, obj_id npc) throws InterruptedException
     {
         return !hasCompletedCollectionSlot(player, "photo_durni_activation");
     }
+
     public boolean collections_collector_condition_durniPhotoActive(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (hasCompletedCollectionSlot(player, "photo_durni_activation") && !hasCompletedCollection(player, "col_photo_durni_01"))
-        {
-            return true;
-        }
-        return false;
+        return hasCompletedCollectionSlot(player, "photo_durni_activation") && !hasCompletedCollection(player, "col_photo_durni_01");
     }
+
     public boolean collections_collector_condition_completedSlots_hasCamera(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id camera = utils.getStaticItemInInventory(player, "col_photo_camera_02_01");
-        if (hasCompletedCollectionSlot(player, "photo_durni_vehement_warrior_01") && hasCompletedCollectionSlot(player, "photo_durni_01") && hasCompletedCollectionSlot(player, "photo_durni_fiendish_01") && hasCompletedCollectionSlot(player, "photo_crazed_durni_01") && isIdValid(camera))
-        {
-            return true;
-        }
-        return false;
+        return hasCompletedCollectionSlot(player, "photo_durni_vehement_warrior_01") && hasCompletedCollectionSlot(player, "photo_durni_01") && hasCompletedCollectionSlot(player, "photo_durni_fiendish_01") && hasCompletedCollectionSlot(player, "photo_crazed_durni_01") && isIdValid(camera);
     }
+
     public boolean collections_collector_condition_completedSlots_noCamera(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id camera = utils.getStaticItemInInventory(player, "col_photo_camera_02_01");
-        if (hasCompletedCollectionSlot(player, "photo_durni_vehement_warrior_01") && hasCompletedCollectionSlot(player, "photo_durni_01") && hasCompletedCollectionSlot(player, "photo_durni_fiendish_01") && hasCompletedCollectionSlot(player, "photo_crazed_durni_01") && !isIdValid(camera))
-        {
-            return true;
-        }
-        return false;
+        return hasCompletedCollectionSlot(player, "photo_durni_vehement_warrior_01") && hasCompletedCollectionSlot(player, "photo_durni_01") && hasCompletedCollectionSlot(player, "photo_durni_fiendish_01") && hasCompletedCollectionSlot(player, "photo_crazed_durni_01") && !isIdValid(camera);
     }
+
     public void collections_collector_action_showRemovalSui(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "collection.columnName"))
@@ -115,6 +108,7 @@ public class collections_collector extends script.base_script
             collection.showNpcCollectionsRemoval(player, npc, columnName);
         }
     }
+
     public void collections_collector_action_showCollectionSui(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "collection.columnName"))
@@ -123,6 +117,7 @@ public class collections_collector extends script.base_script
             collection.showNpcCollections(player, npc, columnName);
         }
     }
+
     public void collections_collector_action_grantDurniCamera(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasCompletedCollection(player, "col_photo_durni_01") && !hasCompletedCollectionSlot(player, "photo_durni_activation"))
@@ -135,6 +130,7 @@ public class collections_collector extends script.base_script
             }
         }
     }
+
     public void collections_collector_action_completeDurniCollection(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id camera = utils.getStaticItemInInventory(player, "col_photo_camera_02_01");
@@ -149,6 +145,7 @@ public class collections_collector extends script.base_script
             }
         }
     }
+
     public int collections_collector_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_20"))
@@ -189,7 +186,7 @@ public class collections_collector extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -202,7 +199,7 @@ public class collections_collector extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.collections_collector.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -234,7 +231,7 @@ public class collections_collector extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_25");
@@ -247,7 +244,7 @@ public class collections_collector extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.collections_collector.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -279,7 +276,7 @@ public class collections_collector extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_41");
@@ -288,7 +285,7 @@ public class collections_collector extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.collections_collector.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -327,7 +324,7 @@ public class collections_collector extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_71");
@@ -344,7 +341,7 @@ public class collections_collector extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.collections_collector.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -369,7 +366,7 @@ public class collections_collector extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_80");
@@ -378,7 +375,7 @@ public class collections_collector extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.collections_collector.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -398,6 +395,7 @@ public class collections_collector extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int collections_collector_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_28"))
@@ -423,6 +421,7 @@ public class collections_collector extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int collections_collector_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_25"))
@@ -448,6 +447,7 @@ public class collections_collector extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int collections_collector_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_41"))
@@ -488,7 +488,7 @@ public class collections_collector extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_44");
@@ -509,7 +509,7 @@ public class collections_collector extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.collections_collector.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -519,6 +519,7 @@ public class collections_collector extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int collections_collector_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_44"))
@@ -563,6 +564,7 @@ public class collections_collector extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int collections_collector_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_71"))
@@ -598,6 +600,7 @@ public class collections_collector extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int collections_collector_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_80"))
@@ -617,7 +620,7 @@ public class collections_collector extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_84");
@@ -626,7 +629,7 @@ public class collections_collector extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.collections_collector.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -636,6 +639,7 @@ public class collections_collector extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int collections_collector_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_84"))
@@ -651,7 +655,7 @@ public class collections_collector extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
-    public static final String PID_NAME = "collection_npc";
+
     public int handleCollectionNpc(obj_id self, dictionary params) throws InterruptedException
     {
         int btn = sui.getIntButtonPressed(params);
@@ -678,6 +682,7 @@ public class collections_collector extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleCollectionRemoval(obj_id self, dictionary params) throws InterruptedException
     {
         int btn = sui.getIntButtonPressed(params);
@@ -705,6 +710,7 @@ public class collections_collector extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayerConfirmedCollectionDelete(obj_id self, dictionary params) throws InterruptedException
     {
         int btn = sui.getIntButtonPressed(params);
@@ -729,6 +735,7 @@ public class collections_collector extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -738,11 +745,13 @@ public class collections_collector extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -751,18 +760,21 @@ public class collections_collector extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.collections_collector");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -821,7 +833,7 @@ public class collections_collector extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_20");
@@ -849,7 +861,7 @@ public class collections_collector extends script.base_script
                 utils.setScriptVar(player, "conversation.collections_collector.branchId", 1);
                 npcStartConversation(player, npc, "collections_collector", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -858,6 +870,7 @@ public class collections_collector extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("collections_collector"))

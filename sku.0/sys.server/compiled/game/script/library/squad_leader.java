@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.location;
 import script.obj_id;
@@ -16,6 +22,7 @@ public class squad_leader extends script.base_script
     public static final string_id SID_SYS_SL = new string_id("squad_leader", "squad_leader_command");
     public static final string_id SID_NOT_IN_A_GROUP = new string_id("squad_leader", "not_in_a_group");
     public static final string_id SID_MESSAGE_PARAMETERS = new string_id("squad_leader", "message_parameters");
+
     public squad_leader()
     {
     }

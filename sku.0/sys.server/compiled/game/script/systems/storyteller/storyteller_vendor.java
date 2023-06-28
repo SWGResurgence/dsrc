@@ -1,5 +1,11 @@
 package script.systems.storyteller;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.storyteller;
@@ -44,7 +50,6 @@ public class storyteller_vendor extends script.base_script
         {
             attachScript(vendor, "conversation.storyteller_vendor");
         }
-        return;
     }
 
     public int[] convertSecondsTime(int time) throws InterruptedException

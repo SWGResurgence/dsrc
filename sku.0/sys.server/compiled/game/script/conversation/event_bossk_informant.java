@@ -1,30 +1,42 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class event_bossk_informant extends script.base_script
 {
+    public static String c_stringFile = "conversation/event_bossk_informant";
+
     public event_bossk_informant()
     {
     }
-    public static String c_stringFile = "conversation/event_bossk_informant";
+
     public boolean event_bossk_informant_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean event_bossk_informant_condition_readyQ4(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "quest/event_cantina_bossk_4", "talkToInformant"));
     }
+
     public boolean event_bossk_informant_condition_readyQ3P1(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "quest/event_cantina_bossk_3", "talkToCourier"));
     }
+
     public boolean event_bossk_informant_condition_readyQ3P2(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "quest/event_cantina_bossk_3", "talkToCourierAgain"));
     }
+
     public boolean event_bossk_informant_condition_completedAll(obj_id player, obj_id npc) throws InterruptedException
     {
         int quest1 = questGetQuestId("quest/event_cantina_bossk_1");
@@ -33,30 +45,29 @@ public class event_bossk_informant extends script.base_script
         int quest4 = questGetQuestId("quest/event_cantina_bossk_4");
         return (questIsQuestComplete(quest1, player) && questIsQuestComplete(quest2, player) && questIsQuestComplete(quest3, player) && questIsQuestComplete(quest4, player));
     }
+
     public boolean event_bossk_informant_condition_neverGotCarbine(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.hasCompletedQuest(player, "quest/event_cantina_bossk_3") && !hasObjVar(player, "event.bossk.gotCarbine"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.hasCompletedQuest(player, "quest/event_cantina_bossk_3") && !hasObjVar(player, "event.bossk.gotCarbine");
     }
+
     public boolean event_bossk_informant_condition_hasBrokenGloves(obj_id player, obj_id npc) throws InterruptedException
     {
-        obj_id inv[] = utils.getAllItemsInBankAndInventory(player);
-        for (obj_id obj_id : inv) {
+        obj_id[] inv = utils.getAllItemsInBankAndInventory(player);
+        for (obj_id obj_id : inv)
+        {
             String thisItem = getTemplateName(obj_id);
-            if (thisItem.equals("object/tangible/wearables/gloves/gloves_bossk_reward.iff")) {
-                if (hasObjVar(obj_id, "skillmod.bonus.ranged_accuracy")) {
+            if (thisItem.equals("object/tangible/wearables/gloves/gloves_bossk_reward.iff"))
+            {
+                if (hasObjVar(obj_id, "skillmod.bonus.ranged_accuracy"))
+                {
                     return true;
                 }
             }
         }
         return false;
     }
+
     public void event_bossk_informant_action_signalQ3P2(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "talkToCourierAgain");
@@ -64,29 +75,36 @@ public class event_bossk_informant extends script.base_script
         obj_id reward = static_item.createNewItemFunction("weapon_event_hairtrigger_carbine_03_01", playerInv);
         setObjVar(player, "event.bossk.gotCarbine", 1);
     }
+
     public void event_bossk_informant_action_signalQ3P1(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "talkToCourier");
     }
+
     public void event_bossk_informant_action_signalQ4(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "talkToInformant");
         obj_id playerInv = utils.getInventoryContainer(player);
         obj_id reward = static_item.createNewItemFunction("item_event_microservo_gloves_03_01", playerInv);
     }
+
     public void event_bossk_informant_action_giveNewCarbine(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id playerInv = utils.getInventoryContainer(player);
         obj_id reward = static_item.createNewItemFunction("weapon_event_hairtrigger_carbine_03_01", playerInv);
         setObjVar(player, "event.bossk.gotCarbine", 1);
     }
+
     public void event_bossk_informant_action_fixGloves(obj_id player, obj_id npc) throws InterruptedException
     {
-        obj_id inv[] = utils.getAllItemsInBankAndInventory(player);
-        for (obj_id obj_id : inv) {
+        obj_id[] inv = utils.getAllItemsInBankAndInventory(player);
+        for (obj_id obj_id : inv)
+        {
             String thisItem = getTemplateName(obj_id);
-            if (thisItem.equals("object/tangible/wearables/gloves/gloves_bossk_reward.iff")) {
-                if (hasObjVar(obj_id, "skillmod.bonus.ranged_accuracy")) {
+            if (thisItem.equals("object/tangible/wearables/gloves/gloves_bossk_reward.iff"))
+            {
+                if (hasObjVar(obj_id, "skillmod.bonus.ranged_accuracy"))
+                {
                     destroyObject(obj_id);
                     obj_id playerInv = utils.getInventoryContainer(player);
                     obj_id reward = static_item.createNewItemFunction("item_event_microservo_gloves_03_01", playerInv);
@@ -94,6 +112,7 @@ public class event_bossk_informant extends script.base_script
             }
         }
     }
+
     public int event_bossk_informant_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_486"))
@@ -144,7 +163,7 @@ public class event_bossk_informant extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_30");
@@ -157,7 +176,7 @@ public class event_bossk_informant extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.event_bossk_informant.branchId");
                     chat.chat(npc, player, message);
@@ -168,6 +187,7 @@ public class event_bossk_informant extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int event_bossk_informant_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_30"))
@@ -198,6 +218,7 @@ public class event_bossk_informant extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int event_bossk_informant_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_492"))
@@ -214,6 +235,7 @@ public class event_bossk_informant extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int event_bossk_informant_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_498"))
@@ -234,7 +256,7 @@ public class event_bossk_informant extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_502");
@@ -243,7 +265,7 @@ public class event_bossk_informant extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.event_bossk_informant.branchId");
                     chat.chat(npc, player, message);
@@ -265,6 +287,7 @@ public class event_bossk_informant extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int event_bossk_informant_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_502"))
@@ -285,7 +308,7 @@ public class event_bossk_informant extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_506");
@@ -294,7 +317,7 @@ public class event_bossk_informant extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.event_bossk_informant.branchId");
                     chat.chat(npc, player, message);
@@ -305,6 +328,7 @@ public class event_bossk_informant extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int event_bossk_informant_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_506"))
@@ -322,6 +346,7 @@ public class event_bossk_informant extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int event_bossk_informant_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_516"))
@@ -342,7 +367,7 @@ public class event_bossk_informant extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_520");
@@ -351,7 +376,7 @@ public class event_bossk_informant extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.event_bossk_informant.branchId");
                     chat.chat(npc, player, message);
@@ -362,6 +387,7 @@ public class event_bossk_informant extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int event_bossk_informant_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_520"))
@@ -379,6 +405,7 @@ public class event_bossk_informant extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int event_bossk_informant_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_24"))
@@ -396,6 +423,7 @@ public class event_bossk_informant extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -405,11 +433,13 @@ public class event_bossk_informant extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -418,18 +448,21 @@ public class event_bossk_informant extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.event_bossk_informant");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -467,7 +500,7 @@ public class event_bossk_informant extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_486");
@@ -483,7 +516,7 @@ public class event_bossk_informant extends script.base_script
                 utils.setScriptVar(player, "conversation.event_bossk_informant.branchId", 1);
                 npcStartConversation(player, npc, "event_bossk_informant", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -505,7 +538,7 @@ public class event_bossk_informant extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_492");
@@ -513,7 +546,7 @@ public class event_bossk_informant extends script.base_script
                 utils.setScriptVar(player, "conversation.event_bossk_informant.branchId", 7);
                 npcStartConversation(player, npc, "event_bossk_informant", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -541,7 +574,7 @@ public class event_bossk_informant extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_498");
@@ -553,7 +586,7 @@ public class event_bossk_informant extends script.base_script
                 utils.setScriptVar(player, "conversation.event_bossk_informant.branchId", 9);
                 npcStartConversation(player, npc, "event_bossk_informant", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -574,7 +607,7 @@ public class event_bossk_informant extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_516");
@@ -582,7 +615,7 @@ public class event_bossk_informant extends script.base_script
                 utils.setScriptVar(player, "conversation.event_bossk_informant.branchId", 14);
                 npcStartConversation(player, npc, "event_bossk_informant", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -603,7 +636,7 @@ public class event_bossk_informant extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_24");
@@ -611,7 +644,7 @@ public class event_bossk_informant extends script.base_script
                 utils.setScriptVar(player, "conversation.event_bossk_informant.branchId", 17);
                 npcStartConversation(player, npc, "event_bossk_informant", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -626,6 +659,7 @@ public class event_bossk_informant extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("event_bossk_informant"))

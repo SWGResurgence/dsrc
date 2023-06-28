@@ -1,5 +1,11 @@
 package script.quest.crowd_pleaser;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.chat;
 import script.library.create;
@@ -8,9 +14,6 @@ import script.library.utils;
 
 public class control_audition extends script.base_script
 {
-    public control_audition()
-    {
-    }
     public static final String PERFORMANCE_DATATABLE = "datatables/performance/performance.iff";
     public static final String PLAYER_SCRIPT = "quest.crowd_pleaser.player_performance";
     public static final String STATUS_OBJVAR = "quest.crowd_pleaser.status";
@@ -27,40 +30,40 @@ public class control_audition extends script.base_script
     public static final String VOLUME_NAME = "performance_area";
     public static final String MUSIC_COMMAND = "startMusic+";
     public static final String DANCE_COMMAND = "startDance+";
-    public static final String[] MUSIC_NAMES = 
-    {
-        "starwars1",
-        "rock",
-        "starwars2",
-        "folk",
-        "starwars3",
-        "ceremonial",
-        "ballad",
-        "waltz",
-        "jazz",
-        "virtuoso"
-    };
-    public static final String[] DANCE_NAMES = 
-    {
-        "basic",
-        "rhythmic",
-        "basic2",
-        "rhythmic2",
-        "footloose",
-        "formal",
-        "footloose2",
-        "formal2",
-        "popular",
-        "poplock",
-        "popular2",
-        "poplock2",
-        "lyrical",
-        "exotic",
-        "exotic2",
-        "lyrical2",
-        "exotic3",
-        "exotic4"
-    };
+    public static final String[] MUSIC_NAMES =
+            {
+                    "starwars1",
+                    "rock",
+                    "starwars2",
+                    "folk",
+                    "starwars3",
+                    "ceremonial",
+                    "ballad",
+                    "waltz",
+                    "jazz",
+                    "virtuoso"
+            };
+    public static final String[] DANCE_NAMES =
+            {
+                    "basic",
+                    "rhythmic",
+                    "basic2",
+                    "rhythmic2",
+                    "footloose",
+                    "formal",
+                    "footloose2",
+                    "formal2",
+                    "popular",
+                    "poplock",
+                    "popular2",
+                    "poplock2",
+                    "lyrical",
+                    "exotic",
+                    "exotic2",
+                    "lyrical2",
+                    "exotic3",
+                    "exotic4"
+            };
     public static final string_id TIME_REMAINING = new string_id("quest/crowd_pleaser/system_messages", "audition_time_remaining");
     public static final string_id AUDITION_BEGIN = new string_id("quest/crowd_pleaser/system_messages", "audition_begin");
     public static final string_id AUDITION_STEP_1 = new string_id("quest/crowd_pleaser/system_messages", "audition_step_1");
@@ -74,6 +77,10 @@ public class control_audition extends script.base_script
     public static final string_id FAIL_AUDITION = new string_id("quest/crowd_pleaser/system_messages", "fail_audition");
     public static final string_id SUCCEED_AUDITION = new string_id("quest/crowd_pleaser/system_messages", "succeed_audition");
     public static final float HEARTBEAT = 15.0f;
+    public control_audition()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, PLAYER_OBJVAR);
@@ -89,6 +96,7 @@ public class control_audition extends script.base_script
         sendSystemMessage(player, TIME_REMAINING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, CONTROL_OBJVAR) || !utils.hasScriptVar(self, PLAYER_OBJVAR))
@@ -109,6 +117,7 @@ public class control_audition extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volumeName, obj_id who) throws InterruptedException
     {
         if (!volumeName.equals(VOLUME_NAME))
@@ -125,6 +134,7 @@ public class control_audition extends script.base_script
         messageTo(self, "handleCleanup", null, 20.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         cleanupJudges(self);
@@ -136,6 +146,7 @@ public class control_audition extends script.base_script
         utils.removeScriptVar(control, CONTROL_OBJVAR);
         return SCRIPT_CONTINUE;
     }
+
     public int handleBeginAudition(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, PLAYER_OBJVAR);
@@ -148,9 +159,12 @@ public class control_audition extends script.base_script
             return SCRIPT_CONTINUE;
         }
         boolean plyNotFound = true;
-        for (obj_id content : contents) {
-            if (content == player) {
+        for (obj_id content : contents)
+        {
+            if (content == player)
+            {
                 plyNotFound = false;
+                break;
             }
         }
         if (plyNotFound)
@@ -164,6 +178,7 @@ public class control_audition extends script.base_script
         messageTo(self, "handleAuditionStepOne", null, 5.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleObservedFlourish(obj_id self, dictionary params) throws InterruptedException
     {
         int index = params.getInt("flourishIndex");
@@ -178,6 +193,7 @@ public class control_audition extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleReceivePlayerFail(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, PLAYER_OBJVAR);
@@ -185,6 +201,7 @@ public class control_audition extends script.base_script
         messageTo(self, "handleCleanup", null, 20.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleAuditionStepOne(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, PLAYER_OBJVAR);
@@ -199,6 +216,7 @@ public class control_audition extends script.base_script
         messageTo(self, "handleAuditionStepTwo", null, HEARTBEAT, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleAuditionStepTwo(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, PLAYER_OBJVAR);
@@ -220,6 +238,7 @@ public class control_audition extends script.base_script
         messageTo(self, "handleAuditionStepThree", null, HEARTBEAT, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleAuditionStepThree(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, PLAYER_OBJVAR);
@@ -241,6 +260,7 @@ public class control_audition extends script.base_script
         messageTo(self, "handleAuditionStepFour", null, HEARTBEAT, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleAuditionStepFour(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, PLAYER_OBJVAR);
@@ -263,6 +283,7 @@ public class control_audition extends script.base_script
         messageTo(self, "handleAuditionStepFive", null, 25.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleAuditionStepFive(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, PLAYER_OBJVAR);
@@ -284,6 +305,7 @@ public class control_audition extends script.base_script
         messageTo(self, "handleAuditionStepSix", null, HEARTBEAT, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleAuditionStepSix(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, PLAYER_OBJVAR);
@@ -305,6 +327,7 @@ public class control_audition extends script.base_script
         messageTo(self, "handleAuditionFinish", null, HEARTBEAT, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleAuditionFinish(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, PLAYER_OBJVAR);
@@ -324,6 +347,7 @@ public class control_audition extends script.base_script
         messageTo(self, "handleCleanup", null, 20.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleCleanup(obj_id self, dictionary params) throws InterruptedException
     {
         cleanupJudges(self);
@@ -336,6 +360,7 @@ public class control_audition extends script.base_script
         utils.removeScriptVar(control, CONTROL_OBJVAR);
         return SCRIPT_CONTINUE;
     }
+
     public void succeedAudition(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id control = utils.getObjIdScriptVar(self, CONTROL_OBJVAR);
@@ -345,6 +370,7 @@ public class control_audition extends script.base_script
         utils.removeScriptVar(control, "quest.crowd_pleaser.performance.control");
         setObjVar(player, STATUS_OBJVAR, 3);
     }
+
     public void failAudition(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id control = utils.getObjIdScriptVar(self, CONTROL_OBJVAR);
@@ -355,6 +381,7 @@ public class control_audition extends script.base_script
         setObjVar(player, FAILED_OBJVAR, getGameTime());
         setObjVar(player, STATUS_OBJVAR, 1);
     }
+
     public String getRandomPerformanceName(obj_id player, String type) throws InterruptedException
     {
         String name = "";
@@ -379,7 +406,7 @@ public class control_audition extends script.base_script
                     return DANCE_NAMES[r];
                 }
             }
-            else 
+            else
             {
                 return DANCE_NAMES[0];
             }
@@ -387,6 +414,7 @@ public class control_audition extends script.base_script
         } while (c < 100);
         return DANCE_NAMES[0];
     }
+
     public String parseName(String name) throws InterruptedException
     {
         if (Character.isDigit(name.charAt(name.length() - 1)))
@@ -396,6 +424,7 @@ public class control_audition extends script.base_script
         name = (name.substring(0, 1)).toUpperCase() + (name.substring(1)).toLowerCase();
         return name;
     }
+
     public void spawnJudges(obj_id self) throws InterruptedException
     {
         obj_id building = getTopMostContainer(self);
@@ -417,13 +446,17 @@ public class control_audition extends script.base_script
         judges[0] = create.staticObject("quest_crowd_pleaser_judge", judge1_loc);
         judges[1] = create.staticObject("quest_crowd_pleaser_judge", judge2_loc);
         judges[2] = create.staticObject("quest_crowd_pleaser_judge", judge3_loc);
-        for (obj_id obj_id : furniture) {
-            if (isIdValid(obj_id)) {
+        for (obj_id obj_id : furniture)
+        {
+            if (isIdValid(obj_id))
+            {
                 setYaw(obj_id, 0);
             }
         }
-        for (obj_id judge : judges) {
-            if (isIdValid(judge)) {
+        for (obj_id judge : judges)
+        {
+            if (isIdValid(judge))
+            {
                 setYaw(judge, 0);
                 setInvulnerable(judge, true);
                 setCreatureStatic(judge, true);
@@ -433,22 +466,27 @@ public class control_audition extends script.base_script
         utils.setScriptVar(self, JUDGES_OBJVAR, judges);
         utils.setScriptVar(self, FURNITURE_OBJVAR, furniture);
     }
+
     public void cleanupJudges(obj_id self) throws InterruptedException
     {
         obj_id[] furniture = utils.getObjIdArrayScriptVar(self, FURNITURE_OBJVAR);
         obj_id[] judges = utils.getObjIdArrayScriptVar(self, JUDGES_OBJVAR);
-        if (judges != null && judges.length > 0)
+        if (judges != null)
         {
-            for (obj_id judge : judges) {
-                if (isIdValid(judge) && exists(judge)) {
+            for (obj_id judge : judges)
+            {
+                if (isIdValid(judge) && exists(judge))
+                {
                     destroyObject(judge);
                 }
             }
         }
-        if (furniture != null && furniture.length > 0)
+        if (furniture != null)
         {
-            for (obj_id obj_id : furniture) {
-                if (isIdValid(obj_id) && exists(obj_id)) {
+            for (obj_id obj_id : furniture)
+            {
+                if (isIdValid(obj_id) && exists(obj_id))
+                {
                     destroyObject(obj_id);
                 }
             }
@@ -456,6 +494,7 @@ public class control_audition extends script.base_script
         utils.removeScriptVar(self, FURNITURE_OBJVAR);
         utils.removeScriptVar(self, JUDGES_OBJVAR);
     }
+
     public boolean isPerformanceCorrect(obj_id player, String expected) throws InterruptedException
     {
         int type = getPerformanceType(player);
@@ -465,12 +504,9 @@ public class control_audition extends script.base_script
         }
         type--;
         String name = dataTableGetString(PERFORMANCE_DATATABLE, type, 0);
-        if (name.equals(expected))
-        {
-            return true;
-        }
-        return false;
+        return name.equals(expected);
     }
+
     public obj_id getRandomJudge(obj_id self) throws InterruptedException
     {
         obj_id[] judges = utils.getObjIdArrayScriptVar(self, JUDGES_OBJVAR);

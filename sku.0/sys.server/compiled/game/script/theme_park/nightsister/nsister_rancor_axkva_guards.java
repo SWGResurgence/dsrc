@@ -1,5 +1,11 @@
 package script.theme_park.nightsister;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -12,6 +18,7 @@ public class nsister_rancor_axkva_guards extends script.base_script
     public nsister_rancor_axkva_guards()
     {
     }
+
     public int spawnguards(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id axkva = params.getObjId("axkva");

@@ -1,17 +1,24 @@
 package script.quest.force_sensitive;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.utils;
 
 public class fs_crafting1_calibrator extends script.base_script
 {
-    public fs_crafting1_calibrator()
-    {
-    }
     public static final string_id SID_MENU_USE_CALIBRATOR = new string_id("quest/force_sensitive/fs_crafting", "menu_use_calibrator");
     public static final string_id SID_MSG_CANT_USE_YET = new string_id("quest/force_sensitive/fs_crafting", "msg_cant_use_yet");
     public static final String QUEST_OBJVAR = "quest.fs_crafting1";
     public static final String CALIBRATOR_OBJVAR = QUEST_OBJVAR + ".calibrator";
+    public fs_crafting1_calibrator()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -21,6 +28,7 @@ public class fs_crafting1_calibrator extends script.base_script
         mi.addRootMenu(menu_info_types.ITEM_USE, SID_MENU_USE_CALIBRATOR);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))

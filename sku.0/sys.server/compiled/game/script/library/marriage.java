@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 import java.util.Arrays;
@@ -65,6 +71,7 @@ public class marriage extends script.base_script
     public static final string_id SID_WED_OOR = new string_id(STF, "wed_oor");
     public static final string_id SID_YOU_EXCHANGE_RINGS = new string_id(STF, "you_exchange_rings");
     public static final string_id PROSE_END_UNITY = new string_id(STF, "prose_end_unity");
+
     public marriage()
     {
     }

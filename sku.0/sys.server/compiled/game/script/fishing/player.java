@@ -1,5 +1,11 @@
 package script.fishing;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.minigame;
 import script.library.prose;
@@ -8,42 +14,48 @@ import script.library.utils;
 
 public class player extends script.base_script
 {
+    private static final String STF_FISH = "fishing";
+
     public player()
     {
     }
-    private static final String STF_FISH = "fishing";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         minigame.stopFishing(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         minigame.cleanupFishing(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnter(obj_id self) throws InterruptedException
     {
         minigame.stopFishing(self, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnterSwimming(obj_id self) throws InterruptedException
     {
         minigame.stopFishing(self, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnChangedPosture(obj_id self, int before, int after) throws InterruptedException
     {
-        switch (after)
+        if (after == POSTURE_UPRIGHT)
         {
-            case POSTURE_UPRIGHT:
-                break;
-            default:
-                minigame.stopFishing(self, false);
-                break;
+        }
+        else
+        {
+            minigame.stopFishing(self, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToLoseItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (minigame.isFishing(self))
@@ -57,6 +69,7 @@ public class player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleFishingSui(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -86,6 +99,7 @@ public class player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleFishingTick(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("fishing", "** handleFishingTick: entered @ " + getGameTime() + " **");
@@ -97,11 +111,7 @@ public class player extends script.base_script
             minigame.stopFishing(self);
             return SCRIPT_CONTINUE;
         }
-        boolean hasBait = true;
-        if (minigame.getBaitStatus(self) == minigame.BS_NONE)
-        {
-            hasBait = false;
-        }
+        boolean hasBait = minigame.getBaitStatus(self) != minigame.BS_NONE;
         LOG("fishing", "handleFishingTick: hasBait = " + hasBait);
         obj_id marker = utils.getObjIdScriptVar(self, minigame.SCRIPTVAR_MARKER);
         if (!isIdValid(marker))
@@ -239,7 +249,7 @@ public class player extends script.base_script
                 location castLoc = params.getLocation("castLoc");
                 if (castLoc != null)
                 {
-                    LOG("fishing", "handleFishingTick: castLoc = " + castLoc.toString());
+                    LOG("fishing", "handleFishingTick: castLoc = " + castLoc);
                 }
                 else
                 {
@@ -266,12 +276,14 @@ public class player extends script.base_script
         messageTo(self, minigame.HANDLER_FISHING_TICK, params, minigame.FISHING_TICK, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayCastSplash(obj_id self, dictionary params) throws InterruptedException
     {
         minigame.playCastSplash(self, params);
         messageTo(self, minigame.HANDLER_FISHING_TICK, params, minigame.FISHING_TICK, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleReelIn(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("fishing", "** handleReelIn: entered @ " + getGameTime() + " **");
@@ -306,7 +318,7 @@ public class player extends script.base_script
             messageTo(self, minigame.HANDLER_CAUGHT_SOMETHING, params, delay, false);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             if (rand(0, 100) > 95)
             {
@@ -316,7 +328,7 @@ public class player extends script.base_script
                     minigame.loseCatch(self);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     debugSpeakMsg(self, "Bypassing -minigame.loseCatch- due to God Mode!");
                 }
@@ -342,7 +354,7 @@ public class player extends script.base_script
                     }
                     dTheta += 180.0f;
                 }
-                else 
+                else
                 {
                     doAnimationAction(self, "fishing_reel");
                 }
@@ -360,12 +372,12 @@ public class player extends script.base_script
                     uTheta -= 360.0f;
                 }
                 location updatedLoc = utils.rotatePointXZ(loc, moveDist, uTheta);
-                LOG("fishing", "handleReelIn: updatedLoc = " + updatedLoc.toString());
+                LOG("fishing", "handleReelIn: updatedLoc = " + updatedLoc);
                 if (!minigame.isLocationFishable(updatedLoc))
                 {
                     updatedLoc = loc;
                 }
-                location markerLoc = (location)updatedLoc.clone();
+                location markerLoc = (location) updatedLoc.clone();
                 markerLoc.y = getWaterTableHeight(markerLoc);
                 setLocation(marker, markerLoc);
                 faceTo(marker, self);
@@ -377,7 +389,7 @@ public class player extends script.base_script
                     minigame.spoolFishingLine(self);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     if (Math.abs(dTheta) > 90.0f)
                     {
@@ -389,12 +401,12 @@ public class player extends script.base_script
                         {
                             sendSystemMessage(self, minigame.SID_FISH_RUN);
                         }
-                        else 
+                        else
                         {
                             sendSystemMessage(self, minigame.SID_FISH_FIGHT_AWAY);
                         }
                     }
-                    else 
+                    else
                     {
                         if (moveDist < 0.25f)
                         {
@@ -404,7 +416,7 @@ public class player extends script.base_script
                         {
                             sendSystemMessage(self, minigame.SID_FISH_CHARGE);
                         }
-                        else 
+                        else
                         {
                             sendSystemMessage(self, minigame.SID_FISH_FIGHT_CLOSER);
                         }
@@ -436,6 +448,7 @@ public class player extends script.base_script
         messageTo(self, minigame.HANDLER_REEL_IN, params, delay, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleCaughtSomething(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("fishing", "** handleCaughtSomething: entered...");
@@ -465,7 +478,8 @@ public class player extends script.base_script
         {
             myCatch = minigame.spawnFishingFish(self, castLoc);
         }
-        else {
+        else
+        {
             obj_id[] loot = minigame.spawnFishingLoot(self, castLoc);
             if (loot != null && loot.length > 0)
             {
@@ -480,6 +494,7 @@ public class player extends script.base_script
         minigame.stopFishing(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleCleanupSplash(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id splash = params.getObjId("id");

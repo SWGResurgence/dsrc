@@ -1,5 +1,11 @@
 package script.theme_park.endor.marauder_base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.create;
 import script.location;
 import script.obj_id;
@@ -9,29 +15,31 @@ public class marauderbase_spawner extends script.base_script
     public marauderbase_spawner()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         spawnEveryone(self);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnEveryone(obj_id self) throws InterruptedException
     {
         spawnCelebs(self);
         spawnGuards(self);
-        return;
     }
+
     public void spawnCelebs(obj_id self) throws InterruptedException
     {
         spawnKingTerak(self);
         spawnCharal(self);
         spawnFightmasterJorak(self);
         spawnScholarSzingo(self);
-        return;
     }
+
     public void spawnGuards(obj_id self) throws InterruptedException
     {
-        return;
     }
+
     public void spawnKingTerak(obj_id self) throws InterruptedException
     {
         location terakLocation = new location(-4570.36f, 99.0f, -2272.94f, "endor", obj_id.NULL_ID);
@@ -41,8 +49,8 @@ public class marauderbase_spawner extends script.base_script
         setInvulnerable(terak, true);
         setObjVar(self, "MarauderBaseInhabitants.terak", terak);
         setObjVar(terak, "Retreat", self);
-        return;
     }
+
     public void spawnCharal(obj_id self) throws InterruptedException
     {
         location charalLocation = new location(-4563.97f, 99.0f, -2297.43f, "endor", obj_id.NULL_ID);
@@ -52,8 +60,8 @@ public class marauderbase_spawner extends script.base_script
         setInvulnerable(charal, true);
         setObjVar(self, "MarauderBaseInhabitants.charal", charal);
         setObjVar(charal, "Retreat", self);
-        return;
     }
+
     public void spawnFightmasterJorak(obj_id self) throws InterruptedException
     {
         location jorakLocation = new location(-4581.55f, 99.0f, -2243.14f, "endor", obj_id.NULL_ID);
@@ -63,8 +71,8 @@ public class marauderbase_spawner extends script.base_script
         setInvulnerable(jorak, true);
         setObjVar(self, "MarauderBaseInhabitants.jorak", jorak);
         setObjVar(jorak, "Retreat", self);
-        return;
     }
+
     public void spawnScholarSzingo(obj_id self) throws InterruptedException
     {
         location szingoLocation = new location(-4618.0f, 90.0f, -2295.16f, "endor", obj_id.NULL_ID);
@@ -74,8 +82,8 @@ public class marauderbase_spawner extends script.base_script
         setInvulnerable(szingo, true);
         setObjVar(self, "MarauderBaseInhabitants.szingo", szingo);
         setObjVar(szingo, "Retreat", self);
-        return;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (!hasObjVar(speaker, "gm"))
@@ -92,6 +100,7 @@ public class marauderbase_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void killCelebs(obj_id self) throws InterruptedException
     {
         destroyObject(getObjIdObjVar(self, "MarauderBaseInhabitants.terak"));
@@ -102,6 +111,5 @@ public class marauderbase_spawner extends script.base_script
         removeObjVar(self, "MarauderBaseInhabitants.jorak");
         destroyObject(getObjIdObjVar(self, "MarauderBaseInhabitants.szingo"));
         removeObjVar(self, "MarauderBaseInhabitants.szingo");
-        return;
     }
 }

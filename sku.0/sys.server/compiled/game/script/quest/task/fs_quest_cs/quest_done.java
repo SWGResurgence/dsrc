@@ -1,5 +1,11 @@
 package script.quest.task.fs_quest_cs;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.fs_counterstrike;
 import script.library.quests;
@@ -10,6 +16,7 @@ public class quest_done extends script.base_script
     public quest_done()
     {
     }
+
     public int OnQuestActivated(obj_id self, int questRow) throws InterruptedException
     {
         if (!quests.isMyQuest(questRow, "quest.task.fs_quest_cs.quest_done"))
@@ -54,6 +61,7 @@ public class quest_done extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (quests.isActive("fs_cs_quest_done", self))

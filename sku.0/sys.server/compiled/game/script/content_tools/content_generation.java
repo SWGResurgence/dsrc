@@ -1,5 +1,11 @@
 package script.content_tools;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -7,15 +13,18 @@ import java.util.Vector;
 
 public class content_generation extends script.base_script
 {
+    public static final float AUTOSAVE_DELAY = 300;
+
     public content_generation()
     {
     }
-    public static final float AUTOSAVE_DELAY = 300;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         broadcast(self, "Welcome to the content maker script. Please consult Development before dorking around with this script.  NOTE - to test pilot you need to attach the space content_generation script, not this one");
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
@@ -23,12 +32,14 @@ public class content_generation extends script.base_script
         messageTo(self, "delayedMessage", dctParams, 60, false);
         return SCRIPT_CONTINUE;
     }
+
     public int delayedMessage(obj_id self, dictionary params) throws InterruptedException
     {
         String strSpam = params.getString("strSpam");
         broadcast(self, strSpam);
         return SCRIPT_CONTINUE;
     }
+
     public int autoSave(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "intAutoSaveOff"))
@@ -43,11 +54,13 @@ public class content_generation extends script.base_script
         messageTo(self, "autoSave", null, AUTOSAVE_DELAY, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnPreloadComplete(obj_id self) throws InterruptedException
     {
         broadcast(self, "2");
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String strText) throws InterruptedException
     {
         String[] strCommands = split(strText, ' ');
@@ -71,7 +84,7 @@ public class content_generation extends script.base_script
                 {
                     objShip = space_create.createShip(strCommands[1], getTransform_o2p(objTest));
                 }
-                else 
+                else
                 {
                     objShip = space_create.createShip(strCommands[1], getTransform_o2p(self));
                 }
@@ -80,13 +93,13 @@ public class content_generation extends script.base_script
                     broadcast(self, "You passed in a bad shipType. Type is " + strCommands[1]);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     broadcast(self, "Made ship of type " + strCommands[1] + " object id is: " + objShip);
                     debugConsoleMsg(self, "Made ship of type " + strCommands[1] + " object id is: " + objShip);
                 }
             }
-            else 
+            else
             {
                 broadcast(self, "You need to pass in a ship type for me to spawn.");
                 return SCRIPT_CONTINUE;
@@ -104,13 +117,13 @@ public class content_generation extends script.base_script
                     broadcast(self, "You passed in a bad shipType. Type is " + strCommands[1]);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     broadcast(self, "Made ship of type " + strCommands[1] + " object id is: " + objShip);
                     debugConsoleMsg(self, "Made ship of type " + strCommands[1] + " object id is: " + objShip);
                 }
             }
-            else 
+            else
             {
                 broadcast(self, "You need to pass in a ship type for me to spawn.");
                 return SCRIPT_CONTINUE;
@@ -119,7 +132,8 @@ public class content_generation extends script.base_script
         if (strCommands[0].equals("cleanUpBuildout"))
         {
             obj_id[] objContents = getShipContents(getTopMostContainer(self));
-            for (obj_id objContent : objContents) {
+            for (obj_id objContent : objContents)
+            {
                 destroyObject(objContent);
             }
             broadcast(self, "Cleaned Up");
@@ -179,8 +193,10 @@ public class content_generation extends script.base_script
                 return SCRIPT_CONTINUE;
             }
             obj_id[] objTestObjects = getAllObjectsWithScript(getLocation(self), 320000, "space.combat.combat_ship");
-            for (obj_id objTestObject : objTestObjects) {
-                if (!space_utils.isPlayerControlledShip(objTestObject)) {
+            for (obj_id objTestObject : objTestObjects)
+            {
+                if (!space_utils.isPlayerControlledShip(objTestObject))
+                {
                     obj_id objShip = objTestObject;
                     ship_ai.unitSetPilotType(objShip, dctShipInfo.getString("strPilotType"));
                     setShipEngineAccelerationRate(objShip, dctShipInfo.getFloat("engine_accel"));
@@ -196,7 +212,8 @@ public class content_generation extends script.base_script
                     setShipEngineSpeedRotationFactorMinimum(objShip, dctShipInfo.getFloat("speed_rotation_factor_min"));
                     setShipEngineSpeedRotationFactorOptimal(objShip, dctShipInfo.getFloat("speed_rotation_factor_optimal"));
                     setShipSlideDampener(objShip, dctShipInfo.getFloat("slideDamp"));
-                    if (isShipSlotInstalled(objShip, space_crafting.BOOSTER)) {
+                    if (isShipSlotInstalled(objShip, space_crafting.BOOSTER))
+                    {
                         setShipBoosterEnergyCurrent(objShip, dctShipInfo.getFloat("booster_energy"));
                         setShipBoosterEnergyMaximum(objShip, dctShipInfo.getFloat("booster_energy"));
                         setShipBoosterEnergyRechargeRate(objShip, dctShipInfo.getFloat("booster_recharge"));
@@ -218,7 +235,7 @@ public class content_generation extends script.base_script
                 objStation = createObject("object/building/general/npe_space_station.iff", getLocation(self));
                 persistObject(objStation);
             }
-            else 
+            else
             {
                 objStation = objTestObjects[0];
                 persistObject(objStation);
@@ -244,7 +261,7 @@ public class content_generation extends script.base_script
                 objStation = createObject("object/building/general/npe_space_dungeon.iff", getLocation(self));
                 persistObject(objStation);
             }
-            else 
+            else
             {
                 objStation = objTestObjects[0];
                 persistObject(objStation);
@@ -271,7 +288,7 @@ public class content_generation extends script.base_script
                 objStation = createObject(strFileName, getLocation(self));
                 persistObject(objStation);
             }
-            else 
+            else
             {
                 objStation = objTestObjects[0];
                 persistObject(objStation);
@@ -300,7 +317,7 @@ public class content_generation extends script.base_script
             {
                 broadcast(self, "Set Chassis to " + strCommands[1]);
             }
-            else 
+            else
             {
                 broadcast(self, "Did not Set Chassis. Bad Type:" + strFoo);
             }
@@ -327,13 +344,13 @@ public class content_generation extends script.base_script
                     broadcast(self, "Auto Save is turned off");
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     broadcast(self, "Incorrect Syntax. Autosave commands are 'autoSave on' and 'autoSave off'");
                     return SCRIPT_CONTINUE;
                 }
             }
-            else 
+            else
             {
                 broadcast(self, "Incorrect Syntax. Autosave commands are 'autoSave on' and 'autoSave off'");
                 return SCRIPT_CONTINUE;
@@ -383,13 +400,13 @@ public class content_generation extends script.base_script
             {
                 strBuildoutName = strCommands[1];
             }
-            else 
+            else
             {
                 if (hasObjVar(objBuilding, "strBuildout"))
                 {
                     strBuildoutName = getStringObjVar(objBuilding, "strBuildout");
                 }
-                else 
+                else
                 {
                     broadcast(self, "Syntax is dumpBuildout <type> or set the strBuildout objvar");
                     return SCRIPT_CONTINUE;
@@ -400,42 +417,42 @@ public class content_generation extends script.base_script
             String strDataTable = "";
             strDataTable = "datatables/interior_buildouts/" + strBuildoutName + ".tab";
             LOG("space", "table name is " + strDataTable);
-            String[] strHeaderTypes = 
-            {
-                "s",
-                "f",
-                "f",
-                "f",
-                "f",
-                "f",
-                "f",
-                "f",
-                "f",
-                "f",
-                "p",
-                "s",
-                "s",
-                "i",
-                "s"
-            };
-            String[] strHeaders = 
-            {
-                "strTemplate",
-                "fltJX",
-                "fltJY",
-                "fltJZ",
-                "fltKX",
-                "fltKY",
-                "fltKZ",
-                "fltPX",
-                "fltPY",
-                "fltPZ",
-                "strObjVars",
-                "strScripts",
-                "strCellName",
-                "intNoCreate",
-                "strLocationList"
-            };
+            String[] strHeaderTypes =
+                    {
+                            "s",
+                            "f",
+                            "f",
+                            "f",
+                            "f",
+                            "f",
+                            "f",
+                            "f",
+                            "f",
+                            "f",
+                            "p",
+                            "s",
+                            "s",
+                            "i",
+                            "s"
+                    };
+            String[] strHeaders =
+                    {
+                            "strTemplate",
+                            "fltJX",
+                            "fltJY",
+                            "fltJZ",
+                            "fltKX",
+                            "fltKY",
+                            "fltKZ",
+                            "fltPX",
+                            "fltPY",
+                            "fltPZ",
+                            "strObjVars",
+                            "strScripts",
+                            "strCellName",
+                            "intNoCreate",
+                            "strLocationList"
+                    };
             boolean boolTest = datatable.createDataTable(strDataTable, strHeaders, strHeaderTypes);
             if (!boolTest)
             {
@@ -444,8 +461,10 @@ public class content_generation extends script.base_script
             }
             obj_id[] objObjects = getBuildingContents(objBuilding);
             broadcast(self, "dumping contents of " + objBuilding);
-            for (obj_id objObject : objObjects) {
-                if (isDumpable(objObject, true)) {
+            for (obj_id objObject : objObjects)
+            {
+                if (isDumpable(objObject, true))
+                {
                     dictionary dctRow = new dictionary();
                     int intNoCreate = 0;
                     locTest = getLocation(objObject);
@@ -454,11 +473,13 @@ public class content_generation extends script.base_script
                     float fltY = locTest.y;
                     float fltZ = locTest.z;
                     String strCellName = space_utils.getCellName(objBuilding, locTest.cell);
-                    if (hasObjVar(objObject, "intNoCreate")) {
+                    if (hasObjVar(objObject, "intNoCreate"))
+                    {
                         intNoCreate = 1;
                     }
                     String strLocationList = "";
-                    if (hasObjVar(objObject, "strLocationList")) {
+                    if (hasObjVar(objObject, "strLocationList"))
+                    {
                         strLocationList = getStringObjVar(objObject, "strLocationList");
                     }
                     dctRow.put("strLocationList", strLocationList);
@@ -496,7 +517,8 @@ public class content_generation extends script.base_script
         {
             obj_id objNPC = create.object("nym_guard", getLocation(self));
             String[] strScripts = utils.getUsableScriptList(objNPC);
-            for (String strScript : strScripts) {
+            for (String strScript : strScripts)
+            {
                 detachScript(objNPC, strScript);
             }
             setObjVar(objNPC, "strSequenceIdentifier", strCommands[1]);
@@ -605,7 +627,8 @@ public class content_generation extends script.base_script
         {
             obj_id[] objTestObjects = getObjectsInRange(getLocation(self), 320000);
             broadcast(self, "Notifying " + objTestObjects.length);
-            for (obj_id objTestObject : objTestObjects) {
+            for (obj_id objTestObject : objTestObjects)
+            {
                 Object[] newParams = new Object[1];
                 newParams[0] = objTestObject;
                 space_utils.callTrigger("OnPreloadComplete", newParams);
@@ -636,7 +659,7 @@ public class content_generation extends script.base_script
                 persistObject(objObject);
                 broadcast(self, "Made " + objObject + " " + strObject);
             }
-            else 
+            else
             {
                 broadcast(self, "Found " + objTestObjects[0] + " " + strObject);
             }
@@ -652,7 +675,7 @@ public class content_generation extends script.base_script
                 persistObject(objObject);
                 broadcast(self, "Made " + objObject + " " + strObject);
             }
-            else 
+            else
             {
                 broadcast(self, "Found " + objTestObjects[0] + " " + strObject);
             }
@@ -668,7 +691,7 @@ public class content_generation extends script.base_script
                 persistObject(objObject);
                 broadcast(self, "Made " + objObject + " " + strObject);
             }
-            else 
+            else
             {
                 broadcast(self, "Found " + objTestObjects[0] + " " + strObject);
             }
@@ -684,7 +707,7 @@ public class content_generation extends script.base_script
                 persistObject(objObject);
                 broadcast(self, "Made " + objObject + " " + strObject);
             }
-            else 
+            else
             {
                 broadcast(self, "Found " + objTestObjects[0] + " " + strObject);
             }
@@ -706,7 +729,7 @@ public class content_generation extends script.base_script
                 broadcast(self, "Made " + objObject);
                 persistObject(objObject);
             }
-            else 
+            else
             {
                 broadcast(self, "Found " + objTestObjects[0]);
             }
@@ -803,6 +826,7 @@ public class content_generation extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int createInteriorComponent(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -815,8 +839,10 @@ public class content_generation extends script.base_script
         String strData = "";
         String[] strTypes = dataTableGetStringColumnNoDefaults("datatables/space_crafting/interior_component_lookup.iff", "strManagerName");
         boolean boolValid = false;
-        for (String strType : strTypes) {
-            if (strType.equals(strTypeToCreate)) {
+        for (String strType : strTypes)
+        {
+            if (strType.equals(strTypeToCreate))
+            {
                 boolValid = true;
             }
             strData = strData + strType + "\n";
@@ -844,6 +870,7 @@ public class content_generation extends script.base_script
         broadcast(self, "Interior Manager Created, move into position, object id is " + objTest);
         return SCRIPT_CONTINUE;
     }
+
     public int specifyCellToLock(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -862,8 +889,10 @@ public class content_generation extends script.base_script
         }
         String[] strCells = getCellNames(objShip);
         boolean boolValid = false;
-        for (String strCell : strCells) {
-            if (strCell.equals(strCellToLock)) {
+        for (String strCell : strCells)
+        {
+            if (strCell.equals(strCellToLock))
+            {
                 boolValid = true;
             }
             strData = strData + strCell + "\n";
@@ -878,6 +907,7 @@ public class content_generation extends script.base_script
         broadcast(self, "Terminal Created, move into position, object id is " + objTest);
         return SCRIPT_CONTINUE;
     }
+
     public int specifyLootLookup(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -911,8 +941,7 @@ public class content_generation extends script.base_script
         try
         {
             objContainer = createObject(strChestTemplate, getLocation(self));
-        }
-        catch(Throwable err)
+        } catch (Throwable err)
         {
             broadcast(self, "BAD OBJECT at entry " + strChestType + " Object is " + strChestTemplate);
             return SCRIPT_CONTINUE;
@@ -944,6 +973,7 @@ public class content_generation extends script.base_script
         broadcast(self, "Loot Container created, object id is " + objContainer);
         return SCRIPT_CONTINUE;
     }
+
     public int makeSpaceStation(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -956,16 +986,20 @@ public class content_generation extends script.base_script
         String[] strStations = utils.getStringArrayScriptVar(self, "strStations");
         utils.removeScriptVar(self, "strStations");
         boolean boolTest = false;
-        for (String strTest : strStations) {
-            if (strTest.equals(strStationType)) {
+        for (String strTest : strStations)
+        {
+            if (strTest.equals(strStationType))
+            {
                 boolTest = true;
+                break;
             }
         }
         if (!boolTest)
         {
             String strStationString = "";
             utils.setScriptVar(self, "strStations", strStations);
-            for (String strStation : strStations) {
+            for (String strStation : strStations)
+            {
                 strStationString = strStationString + strStation + "\n";
             }
             sui.inputbox(self, self, "INVALID STATION TYPE! What type of spaceStation is this? valid names are " + strStationString, sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "makeSpaceStation", null);
@@ -1003,8 +1037,10 @@ public class content_generation extends script.base_script
         }
         if (strAdditionalScripts != null)
         {
-            for (String strAdditionalScript : strAdditionalScripts) {
-                if (!strAdditionalScript.equals("")) {
+            for (String strAdditionalScript : strAdditionalScripts)
+            {
+                if (!strAdditionalScript.equals(""))
+                {
                     attachScript(objStation, strAdditionalScript);
                 }
             }
@@ -1022,6 +1058,7 @@ public class content_generation extends script.base_script
         broadcast(self, "Station created! id is " + objStation);
         return SCRIPT_CONTINUE;
     }
+
     public int makeEntrySpaceStation(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -1034,16 +1071,20 @@ public class content_generation extends script.base_script
         String[] strStations = utils.getStringArrayScriptVar(self, "strStations");
         utils.removeScriptVar(self, "strStations");
         boolean boolTest = false;
-        for (String strTest : strStations) {
-            if (strTest.equals(strStationType)) {
+        for (String strTest : strStations)
+        {
+            if (strTest.equals(strStationType))
+            {
                 boolTest = true;
+                break;
             }
         }
         if (!boolTest)
         {
             String strStationString = "";
             utils.setScriptVar(self, "strStations", strStations);
-            for (String strStation : strStations) {
+            for (String strStation : strStations)
+            {
                 strStationString = strStationString + strStation + "\n";
             }
             sui.inputbox(self, self, "INVALID STATION TYPE! What type of entry station is this? valid names are " + strStationString, sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "makeEntrySpaceStation", null);
@@ -1077,6 +1118,7 @@ public class content_generation extends script.base_script
         broadcast(self, "Station created! id is " + objStation);
         return SCRIPT_CONTINUE;
     }
+
     public boolean isValidSpawnerType(String strText) throws InterruptedException
     {
         if (strText.equals("generic"))
@@ -1087,12 +1129,9 @@ public class content_generation extends script.base_script
         {
             return true;
         }
-        if (strText.equals("asteroid"))
-        {
-            return true;
-        }
-        return false;
+        return strText.equals("asteroid");
     }
+
     public int specifySpawnerType(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -1109,7 +1148,7 @@ public class content_generation extends script.base_script
             sui.inputbox(self, self, "INVALID SPAWN TYPE, PLEASE RE_ENTER. \nWhat type of spawner? Valid types are : generic", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifySpawnerType", null);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             if (strType.equals("asteroid"))
             {
@@ -1122,6 +1161,7 @@ public class content_generation extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int specifySpawnerName(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -1137,13 +1177,14 @@ public class content_generation extends script.base_script
             sui.inputbox(self, self, "INVALID NAME: Please enter a valid name \nWhat is this spawner's name?", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifySpawnerName", null);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
         }
         utils.setScriptVar(self, "strSpawnerName", strName);
         sui.inputbox(self, self, "SCALE: Meters \nWhat is this spawner's minimum spawn distance?", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifySpawnerMinSpawnDistance", null);
         return SCRIPT_CONTINUE;
     }
+
     public int specifyAsteroidSpawnerName(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -1159,13 +1200,14 @@ public class content_generation extends script.base_script
             sui.inputbox(self, self, "INVALID NAME: Please enter a valid name \nWhat is this spawner's name?", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifyAsteroidSpawnerName", null);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
         }
         utils.setScriptVar(self, "strSpawnerName", strName);
         sui.inputbox(self, self, "What type of asteroid should this spawn?  Valid types are: iron \n carbonaceous \n silicaceous \n ice \n obsidian \n diamond \n crystal \n petrochem \n acid \n cyanomethanic \n sulfuric \n methane \n organometallic .", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifyAsteroidType", null);
         return SCRIPT_CONTINUE;
     }
+
     public int specifyAsteroidType(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -1184,6 +1226,7 @@ public class content_generation extends script.base_script
         sui.inputbox(self, self, "Minimum asteroid resource pool?  Integers only please.", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifyMinAsteroidPool", null);
         return SCRIPT_CONTINUE;
     }
+
     public int specifyMinAsteroidPool(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -1199,6 +1242,7 @@ public class content_generation extends script.base_script
         sui.inputbox(self, self, "Maximum asteroid resource pool?  Integers only please.", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifyMaxAsteroidPool", null);
         return SCRIPT_CONTINUE;
     }
+
     public int specifyMaxAsteroidPool(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -1214,6 +1258,7 @@ public class content_generation extends script.base_script
         sui.inputbox(self, self, "Mining danger level? (How bad are the baddies that spawn.  Valid entries are int (0-5).", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifyMiningDangerLevel", null);
         return SCRIPT_CONTINUE;
     }
+
     public int specifyMiningDangerLevel(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -1229,6 +1274,7 @@ public class content_generation extends script.base_script
         sui.inputbox(self, self, "Frequency of spawn (percent).  Int 0-100.  This is the percentage of dynamic asteroids spawned that will generate asteroids.  Thus, 10 means that 1 in 10 dynamic chunks will bring baddies..", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifyMiningDangerFrequency", null);
         return SCRIPT_CONTINUE;
     }
+
     public int specifyMiningDangerFrequency(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -1244,6 +1290,7 @@ public class content_generation extends script.base_script
         writeAsteroidSpawner(self);
         return SCRIPT_CONTINUE;
     }
+
     public int specifySpawnerMinSpawnDistance(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -1263,6 +1310,7 @@ public class content_generation extends script.base_script
         sui.inputbox(self, self, "Min Spawn Distance : " + fltMinSpawnDistance + "\nSCALE: Meters \nWhat is this spawner's maximum spawn distance?", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifySpawnerMaxSpawnDistance", null);
         return SCRIPT_CONTINUE;
     }
+
     public int specifySpawnerMaxSpawnDistance(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -1291,12 +1339,13 @@ public class content_generation extends script.base_script
         {
             sui.inputbox(self, self, "SCALE: Seconds \nWhat is the minimum delay between waves?", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifySpawnerMinWaveSpawnTime", null);
         }
-        else 
+        else
         {
             sui.inputbox(self, self, "SCALE: Seconds \nWhat is this spawner's minimum spawn recycle time?", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifySpawnerMinSpawnTime", null);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int specifySpawnerMinWaveSpawnTime(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -1317,6 +1366,7 @@ public class content_generation extends script.base_script
         sui.inputbox(self, self, "Min Wave Spawn Time :" + fltMinWaveSpawnTime + "\n SCALE: Seconds \nWhat is this maximum delay between waves?", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifySpawnerMaxWaveSpawnTime", null);
         return SCRIPT_CONTINUE;
     }
+
     public int specifySpawnerMaxWaveSpawnTime(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -1343,6 +1393,7 @@ public class content_generation extends script.base_script
         utils.setScriptVar(self, "fltMaxWaveSpawnTime", fltMaxWaveSpawnTime);
         return SCRIPT_CONTINUE;
     }
+
     public int specifySpawnerMinResetTime(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -1363,6 +1414,7 @@ public class content_generation extends script.base_script
         sui.inputbox(self, self, "SCALE: seconds\nWhat is the maximum time between spawner resets? (All spawns destroyed, and starting at wave 1)", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifySpawnerMaxResetTime", null);
         return SCRIPT_CONTINUE;
     }
+
     public int specifySpawnerMaxResetTime(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -1389,6 +1441,7 @@ public class content_generation extends script.base_script
         sui.inputbox(self, self, "What wave would you like to add? Currently the list contains nothing", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifyWaves", null);
         return SCRIPT_CONTINUE;
     }
+
     public int specifySpawnerMinSpawnTime(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -1409,6 +1462,7 @@ public class content_generation extends script.base_script
         sui.inputbox(self, self, "Min Spawn Time :" + fltMinSpawnTime + "\n SCALE: Seconds \nWhat is this spawner's maximum spawn recycle time?", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifySpawnerMaxSpawnTime", null);
         return SCRIPT_CONTINUE;
     }
+
     public int specifySpawnerMaxSpawnTime(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -1435,6 +1489,7 @@ public class content_generation extends script.base_script
         utils.setScriptVar(self, "fltMaxSpawnTime", fltMaxSpawnTime);
         return SCRIPT_CONTINUE;
     }
+
     public int specifySpawnerSpawnCount(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -1455,6 +1510,7 @@ public class content_generation extends script.base_script
         sui.inputbox(self, self, "What mobs would you like to spawn? Currently the list is Empty", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifySpawns", null);
         return SCRIPT_CONTINUE;
     }
+
     public int specifyWaves(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -1478,8 +1534,9 @@ public class content_generation extends script.base_script
             strWaves = utils.getResizeableStringArrayScriptVar(self, "strWaves");
         }
         String strData = "";
-        for (Object strWave1 : strWaves) {
-            strData = strData + ((String) strWave1) + "\n";
+        for (Object strWave1 : strWaves)
+        {
+            strData = strData + strWave1 + "\n";
         }
         if (isValidWave(strWave))
         {
@@ -1489,12 +1546,13 @@ public class content_generation extends script.base_script
             sui.inputbox(self, self, "wave of type " + strWave + " Added. Please add another wave or type done to finish\n. Current wave list is \n" + strData, sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifyWaves", null);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             sui.inputbox(self, self, strWave + " IS NOT A VALID WAVE. Please try again\n What wave would you like to add? Currently the list contains \n" + strData, sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifyWaves", null);
             return SCRIPT_CONTINUE;
         }
     }
+
     public int specifySpawns(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -1518,8 +1576,9 @@ public class content_generation extends script.base_script
             strSpawns = utils.getResizeableStringArrayScriptVar(self, "strSpawns");
         }
         String strData = "";
-        for (Object strSpawn : strSpawns) {
-            strData = strData + ((String) strSpawn) + "\n";
+        for (Object strSpawn : strSpawns)
+        {
+            strData = strData + strSpawn + "\n";
         }
         if (isValidMobString(strSpawnToAdd))
         {
@@ -1529,12 +1588,13 @@ public class content_generation extends script.base_script
             sui.inputbox(self, self, "Spawn of type " + strSpawnToAdd + " Added. Please add another spawn or type done to finish\n. Current spawn list is \n" + strData, sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifySpawns", null);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             sui.inputbox(self, self, strSpawnToAdd + " IS NOT A VALID SPAWN. Please try again\n What mobs would you like to spawn? Currently the list contains \n" + strData, sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifySpawns", null);
             return SCRIPT_CONTINUE;
         }
     }
+
     public int specifyDefaultBehavior(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -1571,6 +1631,7 @@ public class content_generation extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int specifyMinCircleDistance(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -1591,6 +1652,7 @@ public class content_generation extends script.base_script
         utils.setScriptVar(self, "fltMinCircleDistance", fltMinCircleDistance);
         return SCRIPT_CONTINUE;
     }
+
     public int specifyMaxCircleDistance(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -1620,12 +1682,13 @@ public class content_generation extends script.base_script
             sui.inputbox(self, self, "What Phase do you want these spawners to be activated in? Valid options are ALL, IMPERIAL and REBEL.\nIMPERIAL means that the empire won the battlezone and REBEL treasure boats spawn here.", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "setActivationPhase", null);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             writeSpawner(self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int specifyMinLoiterDistance(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -1647,6 +1710,7 @@ public class content_generation extends script.base_script
         utils.setScriptVar(self, "fltMinLoiterDistance", fltMinLoiterDistance);
         return SCRIPT_CONTINUE;
     }
+
     public int specifyMaxLoiterDistance(obj_id self, dictionary params) throws InterruptedException
     {
         broadcast(self, "MAX CALLEd");
@@ -1677,12 +1741,13 @@ public class content_generation extends script.base_script
             sui.inputbox(self, self, "What Phase do you want these spawners to be activated in? Valid options are ALL, IMPERIAL and REBEL.\nIMPERIAL means that the empire won the battlezone and REBEL treasure boats spawn here.", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "setActivationPhase", null);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             writeSpawner(self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean isValidBehavior(String strBehavior) throws InterruptedException
     {
         if (strBehavior.equals("loiter"))
@@ -1701,15 +1766,13 @@ public class content_generation extends script.base_script
         {
             return true;
         }
-        if (strBehavior.equals("patrolFixedCircle"))
-        {
-            return true;
-        }
-        return false;
+        return strBehavior.equals("patrolFixedCircle");
     }
+
     public boolean isValidAsteroidType(String strAsteroidType) throws InterruptedException
     {
-        switch (strAsteroidType) {
+        switch (strAsteroidType)
+        {
             case "iron":
                 return true;
             case "silicaceous":
@@ -1739,6 +1802,7 @@ public class content_generation extends script.base_script
         }
         return false;
     }
+
     public boolean isValidMobString(String strShipType) throws InterruptedException
     {
         String strDataTable = "";
@@ -1750,21 +1814,15 @@ public class content_generation extends script.base_script
             strDataTable = "datatables/space_content/spawners/squads.iff";
             strColumn = dataTableGetStringColumn(strDataTable, "strSquadName");
         }
-        else 
+        else
         {
             strDataTable = "datatables/space_mobile/space_mobile.iff";
             strColumn = dataTableGetStringColumn(strDataTable, "strIndex");
         }
         intIndex = utils.getElementPositionInArray(strColumn, strShipType);
-        if (intIndex > -1)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return intIndex > -1;
     }
+
     public int setPatrolPointName(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -1782,13 +1840,14 @@ public class content_generation extends script.base_script
             {
                 String[] strNames = dctReturnInfo.getStringArray("strNames");
                 String strData = "";
-                for (String strName : strNames) {
+                for (String strName : strNames)
+                {
                     LOG("space", "strData is " + strData);
                     strData = strData + strName + "\n";
                 }
                 sui.inputbox(self, self, "What patrol point batches do you want to use? Valid points are: \n " + strData, sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "useExistingPatrolPoint", null);
             }
-            else 
+            else
             {
                 sui.inputbox(self, self, "NO PATROL POINTS IN ZONE, SO DON'T USE EXISTING!@!@\n What global name do you want to use for your patrol points\n Use existing to latch onto existing patrol points otherwise it must be unique, and should not contain numbers. ", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "setPatrolPointName", null);
             }
@@ -1799,6 +1858,7 @@ public class content_generation extends script.base_script
         sui.inputbox(self, self, "Patrol behavior requires you to create at least 2 patrol points. Go to where you wish to place the patrol point, face the proper direction, and enter 'add' into this box. When you are finished adding points, write 'done'", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "makePatrolPoint", null);
         return SCRIPT_CONTINUE;
     }
+
     public int useExistingPatrolPoint(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -1816,12 +1876,13 @@ public class content_generation extends script.base_script
         if (intIndex < 0)
         {
             String strData = "";
-            for (String strName : strNames) {
+            for (String strName : strNames)
+            {
                 strData = strData + strName + "\n";
             }
             sui.inputbox(self, self, "INVALID PATROL POINT NAME\n What patrol point batches do you want to use? Valid points are: \n " + strData, sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "useExistingPatrolPoint", null);
         }
-        else 
+        else
         {
             obj_id[] objPatrolPoints = getPatrolPointsFromName(strNames[intIndex], intCount[intIndex]);
             transform[] trPatrolPoints = new transform[intCount[intIndex]];
@@ -1838,6 +1899,7 @@ public class content_generation extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public obj_id[] getPatrolPointsFromName(String strName, int intCount) throws InterruptedException
     {
         Vector objPoints = new Vector();
@@ -1865,6 +1927,7 @@ public class content_generation extends script.base_script
         }
         return _objPoints;
     }
+
     public String getRawPatrolPointName(String strName) throws InterruptedException
     {
         String[] strArray = split(strName, '_');
@@ -1884,6 +1947,7 @@ public class content_generation extends script.base_script
         }
         return strRawName;
     }
+
     public dictionary getPatrolPointNamesInZone(obj_id self) throws InterruptedException
     {
         obj_id[] objObjects = getAllObjectsWithTemplate(getLocation(self), 32000, "object/tangible/space/content_infrastructure/basic_patrol_point.iff");
@@ -1891,15 +1955,20 @@ public class content_generation extends script.base_script
         strNames.setSize(0);
         Vector intCount = new Vector();
         intCount.setSize(0);
-        for (obj_id objObject : objObjects) {
+        for (obj_id objObject : objObjects)
+        {
             String strPatrolPointName = getStringObjVar(objObject, "strName");
-            if (strPatrolPointName != null) {
+            if (strPatrolPointName != null)
+            {
                 String strRawName = getRawPatrolPointName(strPatrolPointName);
                 int intIndex = utils.getElementPositionInArray(strNames, strRawName);
-                if (intIndex < 0) {
+                if (intIndex < 0)
+                {
                     strNames = utils.addElement(strNames, strRawName);
                     intCount = utils.addElement(intCount, 1);
-                } else {
+                }
+                else
+                {
                     intCount.set(intIndex, (Integer) intCount.get(intIndex) + 1);
                 }
                 LOG("space", "strNames length is " + strNames.size());
@@ -1914,6 +1983,7 @@ public class content_generation extends script.base_script
         }
         return null;
     }
+
     public int makePatrolPoint(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -1939,7 +2009,7 @@ public class content_generation extends script.base_script
                 sui.inputbox(self, self, "Patrol points placed. To finalize this spawner, go to the location for this object and enter 'done'. Use 'doneOrigin' to use the the start location", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "createSpawner", null);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 sui.inputbox(self, self, "YOU NEED AT LEAST 2 PATROL POINTS. \n Patrol behavior requires you to create at least 2 patrol points. Go to where you wish to place the patrol point, face the proper direction, and enter 'add' into this box. When you are finished adding points, write 'done'", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "makePatrolPoint", null);
                 return SCRIPT_CONTINUE;
@@ -1962,6 +2032,7 @@ public class content_generation extends script.base_script
         sui.inputbox(self, self, strString + " IS AN INVALID STRING\n VALID STRINGS ARE : add, done\n Patrol behavior requires you to create at least 2 patrol points. Go to where you wish to place the patrol point, face the proper direction, and enter 'add' into this box. When you are finished adding points, write 'done'", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "makePatrolPoint", null);
         return SCRIPT_CONTINUE;
     }
+
     public int createSpawner(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -1984,18 +2055,19 @@ public class content_generation extends script.base_script
                 sui.inputbox(self, self, "What Phase do you want these spawners to be activated in? Valid options are ALL, IMPERIAL and REBEL.\nIMPERIAL means that the empire won the battlezone and REBEL treasure boats spawn here.", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "setActivationPhase", null);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 writeSpawner(self);
             }
         }
-        else 
+        else
         {
             sui.inputbox(self, self, "INVALID STRING THE ONLY VALID ENTRY IS 'done'. To finalize this spawner, go to the location for this object and enter 'done' or 'doneOrigin'.");
             return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int setActivationPhase(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -2007,7 +2079,8 @@ public class content_generation extends script.base_script
         }
         String strString = sui.getInputBoxText(params);
         int intPhase = -1;
-        switch (strString) {
+        switch (strString)
+        {
             case "ALL":
                 intPhase = -1;
                 break;
@@ -2026,6 +2099,7 @@ public class content_generation extends script.base_script
         writeSpawner(self);
         return SCRIPT_CONTINUE;
     }
+
     public void clearSpawnerScriptVar(obj_id self, boolean boolDestroySpawners) throws InterruptedException
     {
         utils.removeScriptVar(self, "strPatrolPoints");
@@ -2064,13 +2138,14 @@ public class content_generation extends script.base_script
             obj_id[] objPatrolPoints = utils.getObjIdArrayScriptVar(self, "objPatrolPoints");
             if (objPatrolPoints != null)
             {
-                for (obj_id objPatrolPoint : objPatrolPoints) {
+                for (obj_id objPatrolPoint : objPatrolPoints)
+                {
                     destroyObject(objPatrolPoint);
                 }
             }
         }
-        return;
     }
+
     public void writeAsteroidSpawner(obj_id self) throws InterruptedException
     {
         broadcast(self, "Writing asteroid spawner");
@@ -2098,6 +2173,7 @@ public class content_generation extends script.base_script
         int intDangerPct = utils.getIntScriptVar(self, "intDangerPct");
         setObjVar(objSpawner, "intDangerPct", intDangerPct);
     }
+
     public void writeSpawner(obj_id self) throws InterruptedException
     {
         broadcast(self, "Writing spawner");
@@ -2169,7 +2245,7 @@ public class content_generation extends script.base_script
                 utils.setScriptVar(objSpawner, "objPatrolPoints", objPatrolPoints);
                 objvar_mangle.setMangledStringArrayObjVar(objSpawner, "strPatrolPoints", strPatrolPoints);
             }
-            else 
+            else
             {
                 LOG("space", "Patrol behavior");
                 String strPatrolPointName = utils.getStringScriptVar(self, "strPatrolPointName");
@@ -2191,7 +2267,7 @@ public class content_generation extends script.base_script
                     String[] strFixedPoints = new String[strPatrolPoints.size()];
                     for (int intI = 0; intI < strPatrolPoints.size(); intI++)
                     {
-                        String strFoo = ((String)strPatrolPoints.get(intI));
+                        String strFoo = ((String) strPatrolPoints.get(intI));
                         strFixedPoints[intI] = strFoo;
                     }
                     objvar_mangle.setMangledStringArrayObjVar(objSpawner, "strPatrolPoints", strFixedPoints);
@@ -2211,6 +2287,7 @@ public class content_generation extends script.base_script
         }
         clearSpawnerScriptVar(self, false);
     }
+
     public boolean isValidWave(String strWave) throws InterruptedException
     {
         String strFileName = "datatables/space_content/spawners/waves.iff";
@@ -2220,14 +2297,17 @@ public class content_generation extends script.base_script
             LOG("space", "Bad column name of " + strColumn);
             return false;
         }
-        for (String s : strColumn) {
-            if (!isValidMobString(s)) {
+        for (String s : strColumn)
+        {
+            if (!isValidMobString(s))
+            {
                 broadcast(getSelf(), "BAD DATA IN WAVE FILE, COLUMN " + strWave + " entry is " + s);
                 return false;
             }
         }
         return true;
     }
+
     public int handleColorize(obj_id self, dictionary params) throws InterruptedException
     {
         int bp = sui.getIntButtonPressed(params);
@@ -2256,6 +2336,7 @@ public class content_generation extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int specifyPlayerPatrolName(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -2275,6 +2356,7 @@ public class content_generation extends script.base_script
         broadcast(self, "Created player patrol point: " + name);
         return SCRIPT_CONTINUE;
     }
+
     public int specifyEscortPointName(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -2294,12 +2376,14 @@ public class content_generation extends script.base_script
         broadcast(self, "Created escort point: " + name);
         return SCRIPT_CONTINUE;
     }
+
     public int handleDebugOutput(obj_id self, dictionary params) throws InterruptedException
     {
         String strSpam = params.getString("strSpam");
         broadcast(self, "strSpam");
         return SCRIPT_CONTINUE;
     }
+
     public boolean isDumpable(obj_id objObject, boolean boolDumpCells) throws InterruptedException
     {
         if (isPlayer(objObject))
@@ -2332,12 +2416,9 @@ public class content_generation extends script.base_script
                 return false;
             }
         }
-        if (hasScript(objObject, "systems.spawning.spawned_tracker"))
-        {
-            return false;
-        }
-        return true;
+        return !hasScript(objObject, "systems.spawning.spawned_tracker");
     }
+
     public boolean isGroundDumpable(obj_id objObject, boolean boolDumpCells) throws InterruptedException
     {
         if (isPlayer(objObject))
@@ -2370,22 +2451,23 @@ public class content_generation extends script.base_script
         location locTest = getLocation(objObject);
         if (!boolDumpCells)
         {
-            if (isIdValid(locTest.cell))
-            {
-                return false;
-            }
+            return !isIdValid(locTest.cell);
         }
         return true;
     }
+
     public obj_id[] getBuildingContents(obj_id objObject) throws InterruptedException
     {
         Vector objContents = new Vector();
         objContents.setSize(0);
         obj_id[] objCells = getContents(objObject);
-        for (obj_id objCell : objCells) {
+        for (obj_id objCell : objCells)
+        {
             obj_id[] objTestContents = getContents(objCell);
-            if ((objTestContents != null) && (objTestContents.length > 0)) {
-                for (obj_id objTestContent : objTestContents) {
+            if (objTestContents != null)
+            {
+                for (obj_id objTestContent : objTestContents)
+                {
                     objContents = utils.addElement(objContents, objTestContent);
                 }
             }
@@ -2398,6 +2480,7 @@ public class content_generation extends script.base_script
         }
         return _objContents;
     }
+
     public void checkComponentValidity(obj_id objItem, String strTemplate, String strColumn, obj_id self) throws InterruptedException
     {
         if (isIdValid(objItem))
@@ -2419,7 +2502,7 @@ public class content_generation extends script.base_script
                         debugConsoleMsg(self, "NO ENTRY IN LOOT TABLE FOR TYPE " + strComponentType);
                     }
                 }
-                else 
+                else
                 {
                     broadcast(self, "Loot Type: " + strColumn);
                     broadcast(self, "Item Template: " + strTemplate);
@@ -2429,13 +2512,13 @@ public class content_generation extends script.base_script
                     debugConsoleMsg(self, "NO COMPONENT TYPE SETUP!@!@");
                 }
             }
-            else 
+            else
             {
                 destroyObject(objItem);
                 return;
             }
         }
-        else 
+        else
         {
             broadcast(self, "Loot Type: " + strColumn);
             broadcast(self, "Item Template: " + strTemplate);
@@ -2446,15 +2529,19 @@ public class content_generation extends script.base_script
         }
         destroyObject(objItem);
     }
+
     public obj_id[] getShipContents(obj_id objObject) throws InterruptedException
     {
         Vector objContents = new Vector();
         objContents.setSize(0);
         obj_id[] objCells = getContents(objObject);
-        for (obj_id objCell : objCells) {
+        for (obj_id objCell : objCells)
+        {
             obj_id[] objTestContents = getContents(objCell);
-            if ((objTestContents != null) && (objTestContents.length > 0)) {
-                for (obj_id objTestContent : objTestContents) {
+            if (objTestContents != null)
+            {
+                for (obj_id objTestContent : objTestContents)
+                {
                     objContents = utils.addElement(objContents, objTestContent);
                 }
             }
@@ -2467,6 +2554,7 @@ public class content_generation extends script.base_script
         }
         return _objContents;
     }
+
     public int makeDungeonObjects(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

@@ -1,5 +1,11 @@
 package script.systems.tcg;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -17,6 +23,7 @@ public class tcg_massif_creature extends script.base_script
     public static final string_id SID_PET_CANT_HEAR_YOU = new string_id(TCG_STR, "pet_cant_hear_you");
     public static final int CHECK_PULSE = 60;
     public static final int MAX_DISTANCE_FOR_COMMAND = 8;
+
     public tcg_massif_creature()
     {
     }

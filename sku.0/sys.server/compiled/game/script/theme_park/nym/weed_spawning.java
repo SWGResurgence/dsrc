@@ -1,34 +1,43 @@
 package script.theme_park.nym;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.obj_id;
 
 public class weed_spawning extends script.base_script
 {
+    public static final String[] WEEDS =
+            {
+                    "object/tangible/furniture/nym_themepark/nym_themepark_plant_01.iff",
+                    "object/tangible/furniture/nym_themepark/nym_themepark_plant_02.iff",
+                    "object/tangible/furniture/nym_themepark/nym_themepark_plant_03.iff",
+                    "object/tangible/furniture/nym_themepark/nym_themepark_plant_04.iff",
+                    "object/tangible/furniture/nym_themepark/nym_themepark_plant_05.iff",
+                    "object/tangible/furniture/nym_themepark/nym_themepark_plant_06.iff",
+                    "object/tangible/furniture/nym_themepark/nym_themepark_plant_07.iff",
+                    "object/tangible/furniture/nym_themepark/nym_themepark_plant_08.iff",
+                    "object/tangible/furniture/nym_themepark/nym_themepark_plant_09.iff",
+                    "object/tangible/furniture/nym_themepark/nym_themepark_plant_10.iff",
+                    "object/tangible/furniture/nym_themepark/nym_themepark_plant_11.iff"
+            };
+
     public weed_spawning()
     {
     }
-    public static final String[] WEEDS = 
-    {
-        "object/tangible/furniture/nym_themepark/nym_themepark_plant_01.iff",
-        "object/tangible/furniture/nym_themepark/nym_themepark_plant_02.iff",
-        "object/tangible/furniture/nym_themepark/nym_themepark_plant_03.iff",
-        "object/tangible/furniture/nym_themepark/nym_themepark_plant_04.iff",
-        "object/tangible/furniture/nym_themepark/nym_themepark_plant_05.iff",
-        "object/tangible/furniture/nym_themepark/nym_themepark_plant_06.iff",
-        "object/tangible/furniture/nym_themepark/nym_themepark_plant_07.iff",
-        "object/tangible/furniture/nym_themepark/nym_themepark_plant_08.iff",
-        "object/tangible/furniture/nym_themepark/nym_themepark_plant_09.iff",
-        "object/tangible/furniture/nym_themepark/nym_themepark_plant_10.iff",
-        "object/tangible/furniture/nym_themepark/nym_themepark_plant_11.iff"
-    };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         CustomerServiceLog("nyms_themepark", "weed_spawning.OnAttach() Initializing spawning functionality for spawner: " + self);
         messageTo(self, "spawnObject", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnObject(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "child"))
@@ -68,41 +77,41 @@ public class weed_spawning extends script.base_script
         switch (randomSpawnObject)
         {
             case 0:
-            object = create.object(WEEDS[randomSpawnObject], getLocation(self));
-            break;
+                object = create.object(WEEDS[randomSpawnObject], getLocation(self));
+                break;
             case 1:
-            object = create.object(WEEDS[randomSpawnObject], getLocation(self));
-            break;
+                object = create.object(WEEDS[randomSpawnObject], getLocation(self));
+                break;
             case 2:
-            object = create.object(WEEDS[randomSpawnObject], getLocation(self));
-            break;
+                object = create.object(WEEDS[randomSpawnObject], getLocation(self));
+                break;
             case 3:
-            object = create.object(WEEDS[randomSpawnObject], getLocation(self));
-            break;
+                object = create.object(WEEDS[randomSpawnObject], getLocation(self));
+                break;
             case 4:
-            object = create.object(WEEDS[randomSpawnObject], getLocation(self));
-            break;
+                object = create.object(WEEDS[randomSpawnObject], getLocation(self));
+                break;
             case 5:
-            object = create.object(WEEDS[randomSpawnObject], getLocation(self));
-            break;
+                object = create.object(WEEDS[randomSpawnObject], getLocation(self));
+                break;
             case 6:
-            object = create.object(WEEDS[randomSpawnObject], getLocation(self));
-            break;
+                object = create.object(WEEDS[randomSpawnObject], getLocation(self));
+                break;
             case 7:
-            object = create.object(WEEDS[randomSpawnObject], getLocation(self));
-            break;
+                object = create.object(WEEDS[randomSpawnObject], getLocation(self));
+                break;
             case 8:
-            object = create.object(WEEDS[randomSpawnObject], getLocation(self));
-            break;
+                object = create.object(WEEDS[randomSpawnObject], getLocation(self));
+                break;
             case 9:
-            object = create.object(WEEDS[randomSpawnObject], getLocation(self));
-            break;
+                object = create.object(WEEDS[randomSpawnObject], getLocation(self));
+                break;
             case 10:
-            object = create.object(WEEDS[randomSpawnObject], getLocation(self));
-            break;
+                object = create.object(WEEDS[randomSpawnObject], getLocation(self));
+                break;
             default:
-            object = create.object(WEEDS[0], getLocation(self));
-            break;
+                object = create.object(WEEDS[0], getLocation(self));
+                break;
         }
         if (!isValidId(object) || !exists(object))
         {
@@ -118,6 +127,7 @@ public class weed_spawning extends script.base_script
         setObjVar(self, "child", object);
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "child"))

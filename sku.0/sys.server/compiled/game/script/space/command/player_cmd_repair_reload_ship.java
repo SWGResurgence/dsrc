@@ -1,5 +1,11 @@
 package script.space.command;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -7,13 +13,14 @@ import script.string_id;
 
 public class player_cmd_repair_reload_ship extends script.base_script
 {
-    public player_cmd_repair_reload_ship()
-    {
-    }
     public static final int DROID_VOCALIZE_REACT_CHANCE = 2;
     public static final int SHIP_DAMAGED_SKILLMOD_PENALTY_TIME = 10;
     public static final string_id SID_REPAIRSHIP_STOP_MOVING = new string_id("space/space_pilot_command", "repairship_stop_moving");
     public static final string_id SID_NO_RESPONSE_RECEIVED_ASSIST = new string_id("space/space_pilot_command", "no_response_received_assist");
+    public player_cmd_repair_reload_ship()
+    {
+    }
+
     public int OnSpaceUnitDocked(obj_id self, obj_id dockTarget) throws InterruptedException
     {
         debugServerConsoleMsg(null, "PLAYER_CMD_REPAIR_RELOAD_SHIP.OnSpaceUnitDocked  ---- Just Entered");
@@ -33,7 +40,8 @@ public class player_cmd_repair_reload_ship extends script.base_script
         messageTo(self, "repairSFX", outparams, 2.0f, false);
         obj_id closestStation = getObjIdObjVar(self, "closestStation");
         String command_type = getStringObjVar(self, "command_type");
-        switch (command_type) {
+        switch (command_type)
+        {
             case "repair":
                 space_crafting.doStationToShipRepairs(objPilot, closestStation, space_pilot_command.IN_SPACE_REPAIR_STD_REPAIR_PERCENTAGE, space_pilot_command.IN_SPACE_REPAIR_DECAY);
                 break;
@@ -50,6 +58,7 @@ public class player_cmd_repair_reload_ship extends script.base_script
         space_pilot_command.repairCompleteDepart(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpaceUnitUnDocked(obj_id self, obj_id dockTarget, boolean dockSuccessful) throws InterruptedException
     {
         obj_id objPilot = getPilotId(dockTarget);
@@ -65,6 +74,7 @@ public class player_cmd_repair_reload_ship extends script.base_script
         playClientEffectObj(objPilot, "clienteffect/space_command/sys_comm_rebel.cef", dockTarget, "");
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpaceUnitStartUnDock(obj_id self, obj_id dockTarget) throws InterruptedException
     {
         obj_id objPilot = getPilotId(dockTarget);
@@ -80,6 +90,7 @@ public class player_cmd_repair_reload_ship extends script.base_script
         playClientEffectObj(objPilot, "clienteffect/space_command/sys_comm_rebel.cef", dockTarget, "");
         return SCRIPT_CONTINUE;
     }
+
     public int OnShipWasHit(obj_id self, obj_id objAttacker, int intWeaponIndex, boolean isMissile, int missileType, int intTargetedComponent, boolean fromPlayerAutoTurret, float hitLocationX_o, float hitLocationY_o, float hitLocationZ_o) throws InterruptedException
     {
         if (!utils.hasLocalVar(self, "cmd.repair"))
@@ -104,6 +115,7 @@ public class player_cmd_repair_reload_ship extends script.base_script
         space_pilot_command.repairEvac(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpaceUnitMoveToComplete(obj_id self) throws InterruptedException
     {
         obj_id commander = getObjIdObjVar(self, "cmd.repair.commander");
@@ -139,7 +151,8 @@ public class player_cmd_repair_reload_ship extends script.base_script
             sendSystemMessage(self, SID_REPAIRSHIP_STOP_MOVING);
             return SCRIPT_CONTINUE;
         }
-        switch (command_type) {
+        switch (command_type)
+        {
             case "repair":
                 space_pilot_command.inSpaceRepairComponentsEstimate(ship, commander, closestStation);
                 break;
@@ -152,6 +165,7 @@ public class player_cmd_repair_reload_ship extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int repairReplyTimeout(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id commander = getObjIdObjVar(self, "cmd.repair.commander");
@@ -164,6 +178,7 @@ public class player_cmd_repair_reload_ship extends script.base_script
         space_pilot_command.repairCompleteDepart(self);
         return SCRIPT_CONTINUE;
     }
+
     public int dockTargetMovementCheck(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasLocalVar(self, "cmd.repair.buggingOut"))
@@ -184,7 +199,7 @@ public class player_cmd_repair_reload_ship extends script.base_script
             sendSystemMessage(pilot, strSpam);
             space_pilot_command.repairEvac(self);
         }
-        else 
+        else
         {
             dictionary outparams = new dictionary();
             outparams.put("pilot", pilot);
@@ -193,6 +208,7 @@ public class player_cmd_repair_reload_ship extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int repairSFX(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id pilot = params.getObjId("pilot");

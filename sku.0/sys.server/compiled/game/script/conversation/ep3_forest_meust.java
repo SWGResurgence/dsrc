@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,111 +14,112 @@ import script.*;
 
 public class ep3_forest_meust extends script.base_script
 {
+    public static String c_stringFile = "conversation/ep3_forest_meust";
+
     public ep3_forest_meust()
     {
     }
-    public static String c_stringFile = "conversation/ep3_forest_meust";
+
     public boolean ep3_forest_meust_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean ep3_forest_meust_condition_isGoodGuy(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "ep3_forest_wirartu_epic_3", 0) || groundquests.hasCompletedQuest(player, "ep3_forest_wirartu_epic_3") || groundquests.hasCompletedQuest(player, "ep3_forest_kerritamba_epic_7"));
     }
+
     public boolean ep3_forest_meust_condition_isBadGuy(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "ep3_forest_wirartu_epic_2", 0) || groundquests.hasCompletedQuest(player, "ep3_forest_wirartu_epic_2"));
     }
+
     public boolean ep3_forest_meust_condition_isTaskOneActive(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "ep3_forest_meust_quest_1", 0) || groundquests.hasCompletedTask(player, "ep3_forest_meust_quest_1", 0))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.isTaskActive(player, "ep3_forest_meust_quest_1", 0) || groundquests.hasCompletedTask(player, "ep3_forest_meust_quest_1", 0);
     }
+
     public boolean ep3_forest_meust_condition_hasCompletedTaskOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedTask(player, "ep3_forest_meust_quest_1", 0) && !groundquests.hasCompletedQuest(player, "ep3_forest_meust_quest_1"));
     }
+
     public boolean ep3_forest_meust_condition_hasCompletedQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "ep3_forest_meust_quest_1");
     }
+
     public boolean ep3_forest_meust_condition_isTaskTwoActive(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "ep3_forest_meust_quest_2", 0) || groundquests.hasCompletedTask(player, "ep3_forest_meust_quest_2", 0))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.isTaskActive(player, "ep3_forest_meust_quest_2", 0) || groundquests.hasCompletedTask(player, "ep3_forest_meust_quest_2", 0);
     }
+
     public boolean ep3_forest_meust_condition_hasCompletedTaskTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedTask(player, "ep3_forest_meust_quest_2", 0) && !groundquests.hasCompletedQuest(player, "ep3_forest_meust_quest_2"));
     }
+
     public boolean ep3_forest_meust_condition_hasCompletedQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "ep3_forest_meust_quest_2");
     }
+
     public boolean ep3_forest_meust_condition_isTaskThreeActive(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "ep3_forest_meust_quest_3", 0) || groundquests.hasCompletedTask(player, "ep3_forest_meust_quest_3", 0))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.isTaskActive(player, "ep3_forest_meust_quest_3", 0) || groundquests.hasCompletedTask(player, "ep3_forest_meust_quest_3", 0);
     }
+
     public boolean ep3_forest_meust_condition_hasCompletedTaskThree(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedTask(player, "ep3_forest_meust_quest_3", 0) && !groundquests.hasCompletedQuest(player, "ep3_forest_meust_quest_3"));
     }
+
     public boolean ep3_forest_meust_condition_hasCompletedQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "ep3_forest_meust_quest_3");
     }
+
     public boolean ep3_forest_meust_condition_hasLanguage(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.canSpeakWookiee(player, npc);
     }
+
     public void ep3_forest_meust_action_giveQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_forest_meust_quest_1");
     }
+
     public void ep3_forest_meust_action_giveQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_forest_meust_quest_2");
     }
+
     public void ep3_forest_meust_action_giveSignalOne(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "mouf");
     }
+
     public void ep3_forest_meust_action_giveSignalTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "steelhoof");
     }
+
     public void ep3_forest_meust_action_giveSignalThree(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "sayormi");
     }
+
     public void ep3_forest_meust_action_giveQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_forest_meust_quest_3");
     }
+
     public void ep3_forest_meust_action_Language(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.emoteWookieeConfusion(player, npc);
     }
+
     public int ep3_forest_meust_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2032"))
@@ -127,6 +134,7 @@ public class ep3_forest_meust extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_meust_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2038"))
@@ -147,7 +155,7 @@ public class ep3_forest_meust extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2042");
@@ -156,7 +164,7 @@ public class ep3_forest_meust extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_meust.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -166,6 +174,7 @@ public class ep3_forest_meust extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_meust_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2042"))
@@ -180,6 +189,7 @@ public class ep3_forest_meust extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_meust_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2048"))
@@ -194,6 +204,7 @@ public class ep3_forest_meust extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_meust_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2054"))
@@ -220,7 +231,7 @@ public class ep3_forest_meust extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2058");
@@ -233,7 +244,7 @@ public class ep3_forest_meust extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_meust.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -243,6 +254,7 @@ public class ep3_forest_meust extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_meust_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2058"))
@@ -268,6 +280,7 @@ public class ep3_forest_meust extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_meust_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2068"))
@@ -288,7 +301,7 @@ public class ep3_forest_meust extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2072");
@@ -297,7 +310,7 @@ public class ep3_forest_meust extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_meust.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -307,6 +320,7 @@ public class ep3_forest_meust extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_meust_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2072"))
@@ -321,6 +335,7 @@ public class ep3_forest_meust extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_meust_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2080"))
@@ -346,6 +361,7 @@ public class ep3_forest_meust extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_meust_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2090"))
@@ -361,6 +377,7 @@ public class ep3_forest_meust extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_meust_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2096"))
@@ -380,7 +397,7 @@ public class ep3_forest_meust extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2100");
@@ -389,7 +406,7 @@ public class ep3_forest_meust extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_meust.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -399,6 +416,7 @@ public class ep3_forest_meust extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_meust_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2100"))
@@ -413,6 +431,7 @@ public class ep3_forest_meust extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_meust_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2106"))
@@ -439,7 +458,7 @@ public class ep3_forest_meust extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2110");
@@ -452,7 +471,7 @@ public class ep3_forest_meust extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_meust.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -462,6 +481,7 @@ public class ep3_forest_meust extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_meust_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2110"))
@@ -491,7 +511,7 @@ public class ep3_forest_meust extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2118");
@@ -500,7 +520,7 @@ public class ep3_forest_meust extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_meust.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -510,6 +530,7 @@ public class ep3_forest_meust extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_meust_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2118"))
@@ -536,7 +557,7 @@ public class ep3_forest_meust extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2122");
@@ -549,7 +570,7 @@ public class ep3_forest_meust extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_meust.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -559,6 +580,7 @@ public class ep3_forest_meust extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_meust_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2122"))
@@ -579,7 +601,7 @@ public class ep3_forest_meust extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2126");
@@ -588,7 +610,7 @@ public class ep3_forest_meust extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_meust.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -608,6 +630,7 @@ public class ep3_forest_meust extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_meust_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2126"))
@@ -622,6 +645,7 @@ public class ep3_forest_meust extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -633,6 +657,7 @@ public class ep3_forest_meust extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -640,6 +665,7 @@ public class ep3_forest_meust extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -649,18 +675,21 @@ public class ep3_forest_meust extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.ep3_forest_meust");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -690,7 +719,7 @@ public class ep3_forest_meust extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_2032");
@@ -698,7 +727,7 @@ public class ep3_forest_meust extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_meust.branchId", 2);
                 npcStartConversation(player, npc, "ep3_forest_meust", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -719,7 +748,7 @@ public class ep3_forest_meust extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_2038");
@@ -727,7 +756,7 @@ public class ep3_forest_meust extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_meust.branchId", 4);
                 npcStartConversation(player, npc, "ep3_forest_meust", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -748,7 +777,7 @@ public class ep3_forest_meust extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_2048");
@@ -756,7 +785,7 @@ public class ep3_forest_meust extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_meust.branchId", 7);
                 npcStartConversation(player, npc, "ep3_forest_meust", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -777,7 +806,7 @@ public class ep3_forest_meust extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_2054");
@@ -785,7 +814,7 @@ public class ep3_forest_meust extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_meust.branchId", 9);
                 npcStartConversation(player, npc, "ep3_forest_meust", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -806,7 +835,7 @@ public class ep3_forest_meust extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_2068");
@@ -814,7 +843,7 @@ public class ep3_forest_meust extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_meust.branchId", 13);
                 npcStartConversation(player, npc, "ep3_forest_meust", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -848,7 +877,7 @@ public class ep3_forest_meust extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_2080");
@@ -860,7 +889,7 @@ public class ep3_forest_meust extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_meust.branchId", 17);
                 npcStartConversation(player, npc, "ep3_forest_meust", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -881,7 +910,7 @@ public class ep3_forest_meust extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_2090");
@@ -889,7 +918,7 @@ public class ep3_forest_meust extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_meust.branchId", 20);
                 npcStartConversation(player, npc, "ep3_forest_meust", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -910,7 +939,7 @@ public class ep3_forest_meust extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_2096");
@@ -918,7 +947,7 @@ public class ep3_forest_meust extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_meust.branchId", 22);
                 npcStartConversation(player, npc, "ep3_forest_meust", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -939,7 +968,7 @@ public class ep3_forest_meust extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_2106");
@@ -947,7 +976,7 @@ public class ep3_forest_meust extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_meust.branchId", 25);
                 npcStartConversation(player, npc, "ep3_forest_meust", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -968,6 +997,7 @@ public class ep3_forest_meust extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("ep3_forest_meust"))

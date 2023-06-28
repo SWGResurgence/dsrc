@@ -1,5 +1,11 @@
 package script.npe;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.groundquests;
 import script.library.npe;
 import script.library.space_crafting;
@@ -8,15 +14,18 @@ import script.*;
 
 public class ord_mantell_terminal extends script.base_script
 {
+    public static final string_id LAUNCH = new string_id("npe", "launch");
+
     public ord_mantell_terminal()
     {
     }
-    public static final string_id LAUNCH = new string_id("npe", "launch");
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.ITEM_USE, LAUNCH);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -37,15 +46,19 @@ public class ord_mantell_terminal extends script.base_script
                 return SCRIPT_CONTINUE;
 
             location ordLoc = new location(200, 150, 600);
-            if (npe.movePlayerFromSharedStationToOrdMantellSpace(player, ordLoc)) {
+            if (npe.movePlayerFromSharedStationToOrdMantellSpace(player, ordLoc))
+            {
                 // Only update quests if the player has successfully moved into OM space
                 groundquests.sendSignal(player, "accessedSpace");
-            } else {
+            }
+            else
+            {
                 LOG("npe", "Could not move to OM space!");
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean checkGod(obj_id self) throws InterruptedException
     {
         if (isGod(self))

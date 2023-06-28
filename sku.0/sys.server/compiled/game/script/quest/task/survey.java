@@ -1,5 +1,11 @@
 package script.quest.task;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.quests;
 import script.library.utils;
@@ -10,6 +16,7 @@ public class survey extends script.base_script
     public survey()
     {
     }
+
     public int surveyComplete(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("newquests", "survey - surveyComplete()");
@@ -31,7 +38,7 @@ public class survey extends script.base_script
                 {
                     efficiencyParameter = getFloatObjVar(self, objvarname);
                 }
-                else 
+                else
                 {
                     String efficiencyParameterString = quests.getDataEntry(activeTasks[iter], "PARAMETER");
                     if (efficiencyParameterString != null && efficiencyParameterString.length() > 0)
@@ -48,7 +55,7 @@ public class survey extends script.base_script
                     {
                         resourceTarget = getStringObjVar(self, objvarname);
                     }
-                    else 
+                    else
                     {
                         resourceTarget = quests.getDataEntry(activeTasks[iter], "TARGET");
                         LOG("newquests", "survey - " + activeTasks[iter] + " efficiency qualifies, validating resource type " + getResourceName(resource) + " against target " + resourceTarget);
@@ -63,7 +70,7 @@ public class survey extends script.base_script
                             quests.complete(activeTasks[iter], self, true);
                             break;
                         }
-                        else 
+                        else
                         {
                             LOG("newquests", "survey - " + getResourceName(resource) + " does not match target " + resourceTarget);
                         }

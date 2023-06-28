@@ -1,5 +1,11 @@
 package script.theme_park.outbreak;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.attrib;
 import script.library.create;
@@ -8,10 +14,12 @@ import script.obj_id;
 
 public class dynamic_spawn_off_quest_item extends script.base_script
 {
+    public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
+
     public dynamic_spawn_off_quest_item()
     {
     }
-    public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
+
     public int handleQuestFlavorObject(obj_id self, dictionary params) throws InterruptedException
     {
         CustomerServiceLog("outbreak_themepark", "dynamic_spawn_off_quest_item.handleQuestFlavorObject() Initialized!");

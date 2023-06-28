@@ -1,5 +1,11 @@
 package script.developer.soe.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.location;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class shuttle_test extends script.base_script
     public shuttle_test()
     {
     }
+
     public int startLandingSequence(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id owner = params.getObjId("owner");
@@ -19,6 +26,7 @@ public class shuttle_test extends script.base_script
         messageTo(self, "takeOff", d, 22.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int takeOff(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id owner = params.getObjId("owner");
@@ -28,6 +36,7 @@ public class shuttle_test extends script.base_script
         messageTo(self, "startTakeOffSequence", d, 2.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int startTakeOffSequence(obj_id self, dictionary params) throws InterruptedException
     {
         queueCommand(self, (-1465754503), self, "", COMMAND_PRIORITY_FRONT);
@@ -35,6 +44,7 @@ public class shuttle_test extends script.base_script
         messageTo(self, "cleanUp", null, 20.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanUp(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);

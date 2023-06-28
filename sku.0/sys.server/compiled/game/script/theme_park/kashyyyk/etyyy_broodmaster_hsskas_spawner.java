@@ -1,5 +1,11 @@
 package script.theme_park.kashyyyk;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.groundquests;
@@ -9,9 +15,6 @@ import script.obj_id;
 
 public class etyyy_broodmaster_hsskas_spawner extends script.base_script
 {
-    public etyyy_broodmaster_hsskas_spawner()
-    {
-    }
     public static final String triggerName = "triggerVolumeSpawnHsskas";
     public static final String actionTrigger = "triggerVolumeActionTrigger";
     public static final float triggerRange = 100.0f;
@@ -21,16 +24,22 @@ public class etyyy_broodmaster_hsskas_spawner extends script.base_script
     public static final String hsskasOwner = "spawned.podOwner";
     public static final String hsskasParent = "spawned.podParent";
     public static final boolean doLogging = false;
+    public etyyy_broodmaster_hsskas_spawner()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         establishTriggerVolume(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         establishTriggerVolume(self);
         return SCRIPT_CONTINUE;
     }
+
     public void establishTriggerVolume(obj_id self) throws InterruptedException
     {
         if (!hasTriggerVolume(self, triggerName))
@@ -38,7 +47,7 @@ public class etyyy_broodmaster_hsskas_spawner extends script.base_script
             doLogging("establishTriggerVolume", "Trigger Volume(" + triggerName + "/" + triggerRange + ") set");
             createTriggerVolume(triggerName, triggerRange, true);
         }
-        else 
+        else
         {
             doLogging("establishTriggerVolume", "Trigger Volume(" + triggerName + "/" + triggerRange + ") already established");
         }
@@ -47,11 +56,12 @@ public class etyyy_broodmaster_hsskas_spawner extends script.base_script
             doLogging("establishTriggerVolume", "Trigger Volume(" + actionTrigger + "/" + actionRange + ") set");
             createTriggerVolume(actionTrigger, actionRange, true);
         }
-        else 
+        else
         {
             doLogging("establishTriggerVolume", "Trigger Volume(" + actionTrigger + "/" + actionRange + ") already established");
         }
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (volumeName.equals(triggerName))
@@ -76,6 +86,7 @@ public class etyyy_broodmaster_hsskas_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (volumeName.equals(triggerName))
@@ -87,10 +98,12 @@ public class etyyy_broodmaster_hsskas_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean canSpawnHsskas(obj_id player) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "ep3_gursan_slay_hsskas", "taskApproachHsskas");
     }
+
     public void generateEscapePod(obj_id self, obj_id player) throws InterruptedException
     {
         location spawnLoc = getLocation(self);
@@ -103,21 +116,24 @@ public class etyyy_broodmaster_hsskas_spawner extends script.base_script
         attachScript(pod, "theme_park.kashyyyk.etyyy_hsskas_pod");
         messageTo(self, "destroyEscapePod", null, 300, false);
     }
+
     public boolean ownsThisSpawn(obj_id self, obj_id player) throws InterruptedException
     {
         if (utils.hasScriptVar(self, hsskasOwner))
         {
             return (utils.getObjIdScriptVar(self, hsskasOwner) == player);
         }
-        else 
+        else
         {
             return false;
         }
     }
+
     public void triggerEvent(obj_id player) throws InterruptedException
     {
         groundquests.sendSignal(player, "signalApproachHsskas");
     }
+
     public void handlePlayerDepart(obj_id self) throws InterruptedException
     {
         destroyObject(utils.getObjIdScriptVar(self, hsskasId));
@@ -125,10 +141,12 @@ public class etyyy_broodmaster_hsskas_spawner extends script.base_script
         utils.removeScriptVar(self, hsskasId);
         utils.removeScriptVar(self, hsskasOwner);
     }
+
     public boolean isHsskasAvailable(obj_id self) throws InterruptedException
     {
         return (!utils.hasScriptVar(self, hsskasSpawned));
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (doLogging)
@@ -136,11 +154,13 @@ public class etyyy_broodmaster_hsskas_spawner extends script.base_script
             LOG("debug/etyyy_hsskas_spawner/" + section, message);
         }
     }
+
     public int destroyEscapePod(obj_id self, dictionary params) throws InterruptedException
     {
         handlePlayerDepart(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (doLogging)

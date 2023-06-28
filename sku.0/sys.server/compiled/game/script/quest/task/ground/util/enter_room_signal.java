@@ -1,22 +1,29 @@
 package script.quest.task.ground.util;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.groundquests;
 import script.obj_id;
 
 public class enter_room_signal extends script.base_script
 {
+    public static final String SIGNAL = "signal_name";
+    public static final String ENTERED = "entered_";
     public enter_room_signal()
     {
     }
-    public static final String SIGNAL = "signal_name";
-    public static final String ENTERED = "entered_";
+
     public int OnAboutToReceiveItem(obj_id self, obj_id roomComingFrom, obj_id roomGoingTo, obj_id player) throws InterruptedException
     {
         if (!isPlayer(player))
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             String signal = "";
             String signalObj = "";
@@ -30,7 +37,7 @@ public class enter_room_signal extends script.base_script
             {
                 signalObj = getStringObjVar(bldg, SIGNAL);
             }
-            else 
+            else
             {
                 groundquests.questOutputDebugInfo(player, "quest.task.ground.util.enter_room_signal", "OnAboutToReceiveItem", "No objvar defined on building or cell, but tried to call signal");
                 groundquests.questOutputDebugLog("quest.task.ground.util.enter_room_signal", "OnAboutToReceiveItem", "No objvar defined on building or cell, but tried to call signal");

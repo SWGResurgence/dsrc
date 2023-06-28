@@ -1,5 +1,11 @@
 package script.space.quest_logic;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.space_quest;
 import script.library.space_transition;
@@ -8,11 +14,12 @@ import script.string_id;
 
 public class space_mining_destroy extends script.base_script
 {
+    public static final string_id SID_REMAINDER_UPDATE = new string_id("space/quest", "mining_remainder_update");
+    public static final string_id SID_ABANDONED_DESTROY = new string_id("space/quest", "mining_abandoned");
     public space_mining_destroy()
     {
     }
-    public static final string_id SID_REMAINDER_UPDATE = new string_id("space/quest", "mining_remainder_update");
-    public static final string_id SID_ABANDONED_DESTROY = new string_id("space/quest", "mining_abandoned");
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String questName = getStringObjVar(self, space_quest.QUEST_NAME);
@@ -50,6 +57,7 @@ public class space_mining_destroy extends script.base_script
         setObjVar(self, "msgCount", 3);
         return SCRIPT_CONTINUE;
     }
+
     public int initializedQuestPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -94,6 +102,7 @@ public class space_mining_destroy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int asteroidMined(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -136,6 +145,7 @@ public class space_mining_destroy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void questCompleted(obj_id self) throws InterruptedException
     {
         String questName = getStringObjVar(self, space_quest.QUEST_NAME);
@@ -151,6 +161,7 @@ public class space_mining_destroy extends script.base_script
         }
         space_quest.setQuestWon(player, self);
     }
+
     public int playerShipDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -164,6 +175,7 @@ public class space_mining_destroy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int abortMission(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "noAbort"))
@@ -174,6 +186,7 @@ public class space_mining_destroy extends script.base_script
         space_quest.setQuestAborted(player, self);
         return SCRIPT_CONTINUE;
     }
+
     public int removeQuest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);

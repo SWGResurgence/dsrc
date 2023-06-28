@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,158 +14,122 @@ import script.*;
 
 public class legacy_naboo_typho extends script.base_script
 {
+    public static String c_stringFile = "conversation/legacy_naboo_typho";
+
     public legacy_naboo_typho()
     {
     }
-    public static String c_stringFile = "conversation/legacy_naboo_typho";
+
     public boolean legacy_naboo_typho_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean legacy_naboo_typho_condition_finishedSabe(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.hasCompletedQuest(player, "quest/legacy_naboo_helping_the_handmaidens"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.hasCompletedQuest(player, "quest/legacy_naboo_helping_the_handmaidens");
     }
+
     public boolean legacy_naboo_typho_condition_narglatchClawsActive(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "quest/legacy_naboo_the_keren_incident", "narglatchClaws"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isTaskActive(player, "quest/legacy_naboo_the_keren_incident", "narglatchClaws");
     }
+
     public boolean legacy_naboo_typho_condition_narglatchClawsFinished(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.hasCompletedTask(player, "quest/legacy_naboo_the_keren_incident", "narglatchClaws"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.hasCompletedTask(player, "quest/legacy_naboo_the_keren_incident", "narglatchClaws");
     }
+
     public boolean legacy_naboo_typho_condition_veermokClawsActive(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "quest/legacy_naboo_the_keren_incident", "veermokClaws"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isTaskActive(player, "quest/legacy_naboo_the_keren_incident", "veermokClaws");
     }
+
     public boolean legacy_naboo_typho_condition_veermokClawsFinished(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.hasCompletedTask(player, "quest/legacy_naboo_the_keren_incident", "veermokClaws"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.hasCompletedTask(player, "quest/legacy_naboo_the_keren_incident", "veermokClaws");
     }
+
     public boolean legacy_naboo_typho_condition_stolenGoodsFinished(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.hasCompletedTask(player, "quest/legacy_naboo_the_keren_incident", "stolenGoods"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.hasCompletedTask(player, "quest/legacy_naboo_the_keren_incident", "stolenGoods");
     }
+
     public boolean legacy_naboo_typho_condition_stolenGoodsActive(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "quest/legacy_naboo_the_keren_incident", "stolenGoods"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isTaskActive(player, "quest/legacy_naboo_the_keren_incident", "stolenGoods");
     }
+
     public boolean legacy_naboo_typho_condition_unusualWeaponsFinished(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.hasCompletedTask(player, "quest/legacy_naboo_the_keren_incident", "unusualWeapons"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.hasCompletedTask(player, "quest/legacy_naboo_the_keren_incident", "unusualWeapons");
     }
+
     public boolean legacy_naboo_typho_condition_unusualWeaponsActive(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "quest/legacy_naboo_the_keren_incident", "unusualWeapons"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isTaskActive(player, "quest/legacy_naboo_the_keren_incident", "unusualWeapons");
     }
+
     public boolean legacy_naboo_typho_condition_findBaseActive(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "quest/legacy_naboo_the_keren_incident", "findBase"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isTaskActive(player, "quest/legacy_naboo_the_keren_incident", "findBase");
     }
+
     public boolean legacy_naboo_typho_condition_goToBaseActive(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "quest/legacy_naboo_the_keren_incident", "goToBase"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isTaskActive(player, "quest/legacy_naboo_the_keren_incident", "goToBase");
     }
+
     public boolean legacy_naboo_typho_condition_killAssassinActive(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "quest/legacy_naboo_the_keren_incident", "killAssassin"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isTaskActive(player, "quest/legacy_naboo_the_keren_incident", "killAssassin");
     }
+
     public boolean legacy_naboo_typho_condition_recoverDataActive(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "quest/legacy_naboo_the_keren_incident", "recoverData"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isTaskActive(player, "quest/legacy_naboo_the_keren_incident", "recoverData");
     }
+
     public boolean legacy_naboo_typho_condition_recoverDataFinished(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.hasCompletedTask(player, "quest/legacy_naboo_the_keren_incident", "recoverData"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.hasCompletedTask(player, "quest/legacy_naboo_the_keren_incident", "recoverData");
     }
+
     public boolean legacy_naboo_typho_condition_completedQuest(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.hasCompletedQuest(player, "quest/legacy_naboo_the_keren_incident"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.hasCompletedQuest(player, "quest/legacy_naboo_the_keren_incident");
     }
+
     public void legacy_naboo_typho_action_grantTyphoQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest/legacy_naboo_the_keren_incident");
     }
+
     public void legacy_naboo_typho_action_signalNarglatchClaws(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "narglatchClaws");
     }
+
     public void legacy_naboo_typho_action_signalVeermokClaws(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "veermokClaws");
     }
+
     public void legacy_naboo_typho_action_signalStolenGoods(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "stolenGoods");
     }
+
     public void legacy_naboo_typho_action_signalUnusualWeapons(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "unusualWeapons");
     }
+
     public void legacy_naboo_typho_action_signalComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "encryptedData");
     }
+
     public int legacy_naboo_typho_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_63"))
@@ -176,6 +146,7 @@ public class legacy_naboo_typho extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_naboo_typho_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_57"))
@@ -195,7 +166,7 @@ public class legacy_naboo_typho extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_59");
@@ -204,7 +175,7 @@ public class legacy_naboo_typho extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_naboo_typho.branchId");
                     chat.chat(npc, player, message);
@@ -215,6 +186,7 @@ public class legacy_naboo_typho extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_naboo_typho_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_59"))
@@ -231,6 +203,7 @@ public class legacy_naboo_typho extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_naboo_typho_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_50"))
@@ -247,6 +220,7 @@ public class legacy_naboo_typho extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_naboo_typho_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_40"))
@@ -278,7 +252,7 @@ public class legacy_naboo_typho extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_44");
@@ -287,7 +261,7 @@ public class legacy_naboo_typho extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_naboo_typho.branchId");
                     chat.chat(npc, player, message);
@@ -298,6 +272,7 @@ public class legacy_naboo_typho extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_naboo_typho_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_44"))
@@ -314,6 +289,7 @@ public class legacy_naboo_typho extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_naboo_typho_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_33"))
@@ -340,7 +316,7 @@ public class legacy_naboo_typho extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_37");
@@ -353,7 +329,7 @@ public class legacy_naboo_typho extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_naboo_typho.branchId");
                     chat.chat(npc, player, message);
@@ -386,7 +362,7 @@ public class legacy_naboo_typho extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_78");
@@ -399,7 +375,7 @@ public class legacy_naboo_typho extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_naboo_typho.branchId");
                     chat.chat(npc, player, message);
@@ -410,6 +386,7 @@ public class legacy_naboo_typho extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_naboo_typho_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_37"))
@@ -436,7 +413,7 @@ public class legacy_naboo_typho extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_51");
@@ -449,7 +426,7 @@ public class legacy_naboo_typho extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_naboo_typho.branchId");
                     chat.chat(npc, player, message);
@@ -482,7 +459,7 @@ public class legacy_naboo_typho extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_78");
@@ -495,7 +472,7 @@ public class legacy_naboo_typho extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_naboo_typho.branchId");
                     chat.chat(npc, player, message);
@@ -506,6 +483,7 @@ public class legacy_naboo_typho extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_naboo_typho_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_51"))
@@ -532,7 +510,7 @@ public class legacy_naboo_typho extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_78");
@@ -545,7 +523,7 @@ public class legacy_naboo_typho extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_naboo_typho.branchId");
                     chat.chat(npc, player, message);
@@ -567,6 +545,7 @@ public class legacy_naboo_typho extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_naboo_typho_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_78"))
@@ -593,7 +572,7 @@ public class legacy_naboo_typho extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82");
@@ -606,7 +585,7 @@ public class legacy_naboo_typho extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_naboo_typho.branchId");
                     chat.chat(npc, player, message);
@@ -629,6 +608,7 @@ public class legacy_naboo_typho extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_naboo_typho_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_82"))
@@ -655,7 +635,7 @@ public class legacy_naboo_typho extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_86");
@@ -668,7 +648,7 @@ public class legacy_naboo_typho extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_naboo_typho.branchId");
                     chat.chat(npc, player, message);
@@ -691,6 +671,7 @@ public class legacy_naboo_typho extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_naboo_typho_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_86"))
@@ -729,7 +710,7 @@ public class legacy_naboo_typho extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_94");
@@ -742,7 +723,7 @@ public class legacy_naboo_typho extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_naboo_typho.branchId");
                     chat.chat(npc, player, message);
@@ -753,6 +734,7 @@ public class legacy_naboo_typho extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_naboo_typho_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_94"))
@@ -779,7 +761,7 @@ public class legacy_naboo_typho extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_98");
@@ -792,7 +774,7 @@ public class legacy_naboo_typho extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_naboo_typho.branchId");
                     chat.chat(npc, player, message);
@@ -815,6 +797,7 @@ public class legacy_naboo_typho extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_naboo_typho_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_98"))
@@ -842,6 +825,7 @@ public class legacy_naboo_typho extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -851,11 +835,13 @@ public class legacy_naboo_typho extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -864,18 +850,21 @@ public class legacy_naboo_typho extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.legacy_naboo_typho");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -935,7 +924,7 @@ public class legacy_naboo_typho extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_63");
@@ -943,7 +932,7 @@ public class legacy_naboo_typho extends script.base_script
                 utils.setScriptVar(player, "conversation.legacy_naboo_typho.branchId", 7);
                 npcStartConversation(player, npc, "legacy_naboo_typho", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -970,7 +959,7 @@ public class legacy_naboo_typho extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_57");
@@ -978,7 +967,7 @@ public class legacy_naboo_typho extends script.base_script
                 utils.setScriptVar(player, "conversation.legacy_naboo_typho.branchId", 10);
                 npcStartConversation(player, npc, "legacy_naboo_typho", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1005,7 +994,7 @@ public class legacy_naboo_typho extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_50");
@@ -1013,7 +1002,7 @@ public class legacy_naboo_typho extends script.base_script
                 utils.setScriptVar(player, "conversation.legacy_naboo_typho.branchId", 14);
                 npcStartConversation(player, npc, "legacy_naboo_typho", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1047,7 +1036,7 @@ public class legacy_naboo_typho extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_40");
@@ -1059,7 +1048,7 @@ public class legacy_naboo_typho extends script.base_script
                 utils.setScriptVar(player, "conversation.legacy_naboo_typho.branchId", 17);
                 npcStartConversation(player, npc, "legacy_naboo_typho", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1093,7 +1082,7 @@ public class legacy_naboo_typho extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_33");
@@ -1105,7 +1094,7 @@ public class legacy_naboo_typho extends script.base_script
                 utils.setScriptVar(player, "conversation.legacy_naboo_typho.branchId", 21);
                 npcStartConversation(player, npc, "legacy_naboo_typho", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1120,6 +1109,7 @@ public class legacy_naboo_typho extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("legacy_naboo_typho"))

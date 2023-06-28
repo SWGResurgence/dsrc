@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,87 +14,78 @@ import script.*;
 
 public class corsec_captain extends script.base_script
 {
+    public static String c_stringFile = "conversation/corsec_captain";
+
     public corsec_captain()
     {
     }
-    public static String c_stringFile = "conversation/corsec_captain";
+
     public boolean corsec_captain_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean corsec_captain_condition_hasFakeBadge(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isQuestActive(player, "quest/borvos_guard_corellia"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isQuestActive(player, "quest/borvos_guard_corellia");
     }
+
     public boolean corsec_captain_condition_gettingAldalad(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isQuestActive(player, "quest/corsec_captain_aldalad"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isQuestActive(player, "quest/corsec_captain_aldalad");
     }
+
     public boolean corsec_captain_condition_aldaladKilled(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "quest/corsec_captain_aldalad", "aldaladKilled") || groundquests.hasCompletedQuest(player, "quest/corsec_captain_aldalad"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isTaskActive(player, "quest/corsec_captain_aldalad", "aldaladKilled") || groundquests.hasCompletedQuest(player, "quest/corsec_captain_aldalad");
     }
+
     public boolean corsec_captain_condition_gettingEvidence(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isQuestActive(player, "quest/corsec_captain_evidence"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isQuestActive(player, "quest/corsec_captain_evidence");
     }
+
     public boolean corsec_captain_condition_evidenceReturned(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "quest/corsec_captain_evidence", "evidenceGathered"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isTaskActive(player, "quest/corsec_captain_evidence", "evidenceGathered");
     }
+
     public boolean corsec_captain_condition_finishedCaptain(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.hasCompletedQuest(player, "quest/corsec_captain_evidence"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.hasCompletedQuest(player, "quest/corsec_captain_evidence");
     }
+
     public void corsec_captain_action_grantQuestAldalad(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest/corsec_captain_aldalad");
     }
+
     public void corsec_captain_action_grantQuestEvidence(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest/corsec_captain_evidence");
     }
+
     public void corsec_captain_action_sendAldaladSignal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "aldaladDealtWith");
     }
+
     public void corsec_captain_action_doneWithCaptain(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "finishedCaptainsMissions");
     }
+
     public void corsec_captain_action_startedWithCaptain(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "bluffingCaptain");
     }
+
     public void corsec_captain_action_sendConvincedSignal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "evidenceDealtWith");
         groundquests.sendSignal(player, "finishedCaptainsMissions");
     }
+
     public int corsec_captain_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_41"))
@@ -108,7 +105,7 @@ public class corsec_captain extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_45");
@@ -117,7 +114,7 @@ public class corsec_captain extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corsec_captain.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -142,7 +139,7 @@ public class corsec_captain extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_51");
@@ -151,7 +148,7 @@ public class corsec_captain extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corsec_captain.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -171,6 +168,7 @@ public class corsec_captain extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corsec_captain_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_45"))
@@ -190,7 +188,7 @@ public class corsec_captain extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48");
@@ -199,7 +197,7 @@ public class corsec_captain extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corsec_captain.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -209,6 +207,7 @@ public class corsec_captain extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corsec_captain_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_48"))
@@ -224,6 +223,7 @@ public class corsec_captain extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corsec_captain_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_51"))
@@ -243,7 +243,7 @@ public class corsec_captain extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48");
@@ -252,7 +252,7 @@ public class corsec_captain extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corsec_captain.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -262,6 +262,7 @@ public class corsec_captain extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corsec_captain_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_27"))
@@ -288,7 +289,7 @@ public class corsec_captain extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_30");
@@ -301,7 +302,7 @@ public class corsec_captain extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corsec_captain.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -321,6 +322,7 @@ public class corsec_captain extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corsec_captain_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_30"))
@@ -340,7 +342,7 @@ public class corsec_captain extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_33");
@@ -349,7 +351,7 @@ public class corsec_captain extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corsec_captain.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -369,6 +371,7 @@ public class corsec_captain extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corsec_captain_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_33"))
@@ -395,7 +398,7 @@ public class corsec_captain extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_35");
@@ -408,7 +411,7 @@ public class corsec_captain extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corsec_captain.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -418,6 +421,7 @@ public class corsec_captain extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corsec_captain_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_35"))
@@ -443,6 +447,7 @@ public class corsec_captain extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corsec_captain_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_66"))
@@ -469,7 +474,7 @@ public class corsec_captain extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70");
@@ -482,7 +487,7 @@ public class corsec_captain extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corsec_captain.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -502,6 +507,7 @@ public class corsec_captain extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corsec_captain_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_70"))
@@ -535,7 +541,7 @@ public class corsec_captain extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_74");
@@ -552,7 +558,7 @@ public class corsec_captain extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corsec_captain.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -572,6 +578,7 @@ public class corsec_captain extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corsec_captain_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_74"))
@@ -598,7 +605,7 @@ public class corsec_captain extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_78");
@@ -611,7 +618,7 @@ public class corsec_captain extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corsec_captain.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -642,6 +649,7 @@ public class corsec_captain extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corsec_captain_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_78"))
@@ -668,7 +676,7 @@ public class corsec_captain extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82");
@@ -681,7 +689,7 @@ public class corsec_captain extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corsec_captain.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -701,6 +709,7 @@ public class corsec_captain extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corsec_captain_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_82"))
@@ -726,6 +735,7 @@ public class corsec_captain extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -737,6 +747,7 @@ public class corsec_captain extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -744,6 +755,7 @@ public class corsec_captain extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -752,18 +764,21 @@ public class corsec_captain extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.corsec_captain");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -807,7 +822,7 @@ public class corsec_captain extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_41");
@@ -823,7 +838,7 @@ public class corsec_captain extends script.base_script
                 utils.setScriptVar(player, "conversation.corsec_captain.branchId", 2);
                 npcStartConversation(player, npc, "corsec_captain", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -858,7 +873,7 @@ public class corsec_captain extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_27");
@@ -870,7 +885,7 @@ public class corsec_captain extends script.base_script
                 utils.setScriptVar(player, "conversation.corsec_captain.branchId", 9);
                 npcStartConversation(player, npc, "corsec_captain", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -905,7 +920,7 @@ public class corsec_captain extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_66");
@@ -917,7 +932,7 @@ public class corsec_captain extends script.base_script
                 utils.setScriptVar(player, "conversation.corsec_captain.branchId", 18);
                 npcStartConversation(player, npc, "corsec_captain", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -932,6 +947,7 @@ public class corsec_captain extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("corsec_captain"))

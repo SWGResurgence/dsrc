@@ -1,5 +1,11 @@
 package script.theme_park.outbreak;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.attrib;
@@ -10,9 +16,6 @@ import script.obj_id;
 
 public class survivor_pathing extends script.base_script
 {
-    public survivor_pathing()
-    {
-    }
     public static final boolean LOGGING_ON = true;
     public static final String SCRIPT_LOG = "outbreak_pathing";
     public static final String PATHING_NODE = "pathing_node";
@@ -23,6 +26,10 @@ public class survivor_pathing extends script.base_script
     public static final String WAYPOINT_LIST = "wayPointList";
     public static final String WAYPOINT_LOCS = "wayPtLocs";
     public static final int RADIUS = 300;
+    public survivor_pathing()
+    {
+    }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         if (hasObjVar(self, "rescue") || hasObjVar(self, "incap"))
@@ -33,6 +40,7 @@ public class survivor_pathing extends script.base_script
         playerFailedQuest(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, "myEscort");
@@ -47,18 +55,21 @@ public class survivor_pathing extends script.base_script
         playerFailedQuest(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         setMovementRun(self);
         setBaseRunSpeed(self, (getBaseRunSpeed(self) - 8));
         return SCRIPT_CONTINUE;
     }
+
     public int OnMoveMoving(obj_id self) throws InterruptedException
     {
         setMovementRun(self);
         setBaseRunSpeed(self, (getBaseRunSpeed(self) - 8));
         return SCRIPT_CONTINUE;
     }
+
     public int startSurvivorPathing(obj_id self, dictionary params) throws InterruptedException
     {
         String creatureType = getStringObjVar(self, "creature_type");
@@ -90,19 +101,21 @@ public class survivor_pathing extends script.base_script
         messageTo(self, "checkOwnerValidity", null, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int creditPlayerRescue(obj_id self, dictionary params) throws InterruptedException
     {
         if (!playerSuccessQuest(self))
         {
             CustomerServiceLog("outbreak_themepark", "survivor_pathing.creditPlayerRescue() ERROR - Player could not be properly credited for rescuing this NPC.");
         }
-        else 
+        else
         {
             CustomerServiceLog("outbreak_themepark", "survivor_pathing.creditPlayerRescue() Player was properly credited for rescuing this NPC.");
             destroyObject(self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cleanUpNpcTimer(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -117,6 +130,7 @@ public class survivor_pathing extends script.base_script
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public boolean playerFailedQuest(obj_id self) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, "myEscort");
@@ -134,6 +148,7 @@ public class survivor_pathing extends script.base_script
         groundquests.sendSignal(player, signalFail);
         return true;
     }
+
     public boolean playerSuccessQuest(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "incap"))
@@ -164,6 +179,7 @@ public class survivor_pathing extends script.base_script
         setObjVar(self, "rescue", true);
         return true;
     }
+
     public int checkOwnerValidity(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasScript(self, "conversation.survivor_02"))
@@ -197,7 +213,7 @@ public class survivor_pathing extends script.base_script
                 CustomerServiceLog("outbreak_themepark", "survivor_pathing.checkOwnerValidity() Mob: " + self + " is checking its very first location. Will check again later to see if stuck.");
                 setObjVar(self, "lastLocation", getLocation(self));
             }
-            else 
+            else
             {
                 location currentLocation = getLocation(self);
                 location lastLocation = getLocationObjVar(self, "lastLocation");
@@ -213,13 +229,13 @@ public class survivor_pathing extends script.base_script
                         CustomerServiceLog("outbreak_themepark", "survivor_pathing.checkOwnerValidity() Mob: " + self + " is STUCK and doesnt have waypoint location list. Blowing up this NPC!");
                         messageTo(self, "blowUp", null, 2, false);
                     }
-                    obj_id waypointList[] = getObjIdArrayObjVar(self, WAYPOINT_LIST);
+                    obj_id[] waypointList = getObjIdArrayObjVar(self, WAYPOINT_LIST);
                     if (waypointList == null || waypointList.length <= 0)
                     {
                         CustomerServiceLog("outbreak_themepark", "survivor_pathing.checkOwnerValidity() Mob: " + self + " is STUCK and doesnt have a valid waypoint object list. Blowing up this NPC!");
                         messageTo(self, "blowUp", null, 2, false);
                     }
-                    location waypointLocList[] = getLocationArrayObjVar(self, WAYPOINT_LOCS);
+                    location[] waypointLocList = getLocationArrayObjVar(self, WAYPOINT_LOCS);
                     if (waypointLocList == null || waypointLocList.length <= 0)
                     {
                         CustomerServiceLog("outbreak_themepark", "survivor_pathing.checkOwnerValidity() Mob: " + self + " is STUCK and doesnt have a valid waypoint location list. Blowing up this NPC!");
@@ -228,14 +244,19 @@ public class survivor_pathing extends script.base_script
                     float smallestDist = 300;
                     obj_id closestObj = obj_id.NULL_ID;
                     boolean modified = false;
-                    for (obj_id obj_id : waypointList) {
-                        if (!isValidId(obj_id) || !exists(obj_id)) {
+                    for (obj_id obj_id : waypointList)
+                    {
+                        if (!isValidId(obj_id) || !exists(obj_id))
+                        {
                             continue;
                         }
                         float npcAndWaypointDist = getDistance(self, obj_id);
-                        if (npcAndWaypointDist > smallestDist) {
+                        if (npcAndWaypointDist > smallestDist)
+                        {
                             continue;
-                        } else {
+                        }
+                        else
+                        {
                             CustomerServiceLog("outbreak_themepark", "survivor_pathing.checkOwnerValidity() Mob: " + self + " has found a node (" + obj_id + ") that is closer than any previously found node. Previous dist: " + smallestDist + ". New Dist: " + npcAndWaypointDist);
                             smallestDist = npcAndWaypointDist;
                             closestObj = obj_id;
@@ -261,7 +282,7 @@ public class survivor_pathing extends script.base_script
                             pathTo(self, waypointLocList[waypointLocList.length - 1]);
                             return SCRIPT_CONTINUE;
                         }
-                        else 
+                        else
                         {
                             location[] newPathLocs = new location[newArrayLength];
                             System.arraycopy(waypointLocList, (pathNodePriority - 1), newPathLocs, 0, newArrayLength);
@@ -269,13 +290,13 @@ public class survivor_pathing extends script.base_script
                         }
                     }
                 }
-                else 
+                else
                 {
                     setObjVar(self, "lastLocation", getLocation(self));
                 }
             }
         }
-        else 
+        else
         {
         }
         messageTo(self, "checkOwnerValidity", null, 10, false);

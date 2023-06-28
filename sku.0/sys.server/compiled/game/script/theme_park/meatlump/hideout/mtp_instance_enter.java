@@ -1,5 +1,11 @@
 package script.theme_park.meatlump.hideout;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.groundquests;
 import script.library.instance;
@@ -13,6 +19,7 @@ public class mtp_instance_enter extends script.base_script
     public mtp_instance_enter()
     {
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info item) throws InterruptedException
     {
         if (getDistance(player, self) > 6.0f)
@@ -22,6 +29,7 @@ public class mtp_instance_enter extends script.base_script
         item.addRootMenu(menu_info_types.ITEM_USE, new string_id("building_name", "mtp_hideout_instance_enter"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -31,11 +39,11 @@ public class mtp_instance_enter extends script.base_script
             {
                 if (startingTriggers.size() == 1)
                 {
-                    utils.setScriptVar(player, "mtp_currentInstanceTrigger", ((String)startingTriggers.get(0)));
+                    utils.setScriptVar(player, "mtp_currentInstanceTrigger", ((String) startingTriggers.get(0)));
                     utils.setScriptVar(player, "mtp_hideoutCell", getLocation(self).cell);
-                    instance.requestInstanceMovement(player, "mtp_hideout_instance", ((String)startingTriggers.get(0)));
+                    instance.requestInstanceMovement(player, "mtp_hideout_instance", ((String) startingTriggers.get(0)));
                 }
-                else 
+                else
                 {
                     utils.setScriptVar(player, "mtp_availableStartingTriggers", startingTriggers);
                     String title = utils.packStringId(new string_id("theme_park/corellia/quest", "mtp_choose_instance_title"));
@@ -43,7 +51,7 @@ public class mtp_instance_enter extends script.base_script
                     String[] availableInstances = new String[startingTriggers.size()];
                     for (int i = 0; i < startingTriggers.size(); i++)
                     {
-                        String instanceName = utils.packStringId(new string_id("theme_park/corellia/quest", ((String)startingTriggers.get(i))));
+                        String instanceName = utils.packStringId(new string_id("theme_park/corellia/quest", ((String) startingTriggers.get(i))));
                         availableInstances[i] = instanceName;
                     }
                     int pid = sui.listbox(self, player, prompt, sui.OK_CANCEL, title, availableInstances, "mtpInstanceSelected");
@@ -55,7 +63,7 @@ public class mtp_instance_enter extends script.base_script
                     }
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(player, new string_id("elevator_text", "mtp_unable_to_descend"));
             }
@@ -63,6 +71,7 @@ public class mtp_instance_enter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtpInstanceSelected(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -90,6 +99,7 @@ public class mtp_instance_enter extends script.base_script
         instance.requestInstanceMovement(player, "mtp_hideout_instance", startingTriggers[idx]);
         return SCRIPT_CONTINUE;
     }
+
     public Vector getStartingTrigger(obj_id player) throws InterruptedException
     {
         Vector startingTriggers = new Vector();

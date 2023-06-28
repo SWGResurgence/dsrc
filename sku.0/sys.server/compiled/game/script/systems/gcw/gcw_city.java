@@ -1,5 +1,11 @@
 package script.systems.gcw;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.gcw_score;
 import script.library.*;
@@ -26,6 +32,7 @@ public class gcw_city extends script.base_script
     public static final obj_id CITY_OBJECT_BESTINE = getObjIdWithNull(9835358);
     public static final obj_id CITY_OBJECT_DEARIC = getObjIdWithNull(9805353);
     public static final obj_id CITY_OBJECT_KEREN = getObjIdWithNull(9865353);
+
     public gcw_city()
     {
     }

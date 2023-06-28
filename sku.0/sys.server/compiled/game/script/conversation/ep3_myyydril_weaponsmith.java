@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,76 +14,76 @@ import script.*;
 
 public class ep3_myyydril_weaponsmith extends script.base_script
 {
+    public static String c_stringFile = "conversation/ep3_myyydril_weaponsmith";
+
     public ep3_myyydril_weaponsmith()
     {
     }
-    public static String c_stringFile = "conversation/ep3_myyydril_weaponsmith";
+
     public boolean ep3_myyydril_weaponsmith_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean ep3_myyydril_weaponsmith_condition_hasSkillWeapon(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasSkill(player, "class_munitions_phase1_novice");
     }
+
     public boolean ep3_myyydril_weaponsmith_condition_isTaskOneActive(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "ep3_myyydril_treesh_craft_1", 1) || groundquests.hasCompletedTask(player, "ep3_myyydril_treesh_craft_1", 1))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.isTaskActive(player, "ep3_myyydril_treesh_craft_1", 1) || groundquests.hasCompletedTask(player, "ep3_myyydril_treesh_craft_1", 1);
     }
+
     public boolean ep3_myyydril_weaponsmith_condition_isTaskCompleted(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedTask(player, "ep3_myyydril_treesh_craft_1", 1) && !groundquests.hasCompletedQuest(player, "ep3_myyydril_treesh_craft_1"));
     }
+
     public boolean ep3_myyydril_weaponsmith_condition_hasCompletedQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "ep3_myyydril_treesh_craft_1");
     }
+
     public boolean ep3_myyydril_weaponsmith_condition_isTaskActiveTwo(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "ep3_myyydril_treesh_gather_2", 0) || groundquests.hasCompletedTask(player, "ep3_myyydril_treesh_gather_2", 0))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.isTaskActive(player, "ep3_myyydril_treesh_gather_2", 0) || groundquests.hasCompletedTask(player, "ep3_myyydril_treesh_gather_2", 0);
     }
+
     public boolean ep3_myyydril_weaponsmith_condition_hasCompletedQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "ep3_myyydril_treesh_gather_2");
     }
+
     public boolean ep3_myyydril_weaponsmith_condition_questCompleteNoSchem(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "ep3_myyydril_treesh_craft_1") && !hasSchematic(player, "object/draft_schematic/weapon/appearance/weapon_appearance_knife_naktra_crystal.iff"));
     }
+
     public void ep3_myyydril_weaponsmith_action_giveQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_myyydril_treesh_craft_1");
         grantSchematic(player, "object/draft_schematic/weapon/knife_naktra_crystal_false.iff");
         sendSystemMessage(player, new string_id("dungeon/myyydril", "knife"));
     }
+
     public void ep3_myyydril_weaponsmith_action_grantSchemetic(obj_id player, obj_id npc) throws InterruptedException
     {
         revokeSchematic(player, "object/draft_schematic/weapon/knife_naktra_crystal_false.iff");
         grantSchematic(player, "object/draft_schematic/weapon/appearance/weapon_appearance_knife_naktra_crystal.iff");
         groundquests.sendSignal(player, "giveSwords");
     }
+
     public void ep3_myyydril_weaponsmith_action_giveSignal1(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "giveSwords");
     }
+
     public void ep3_myyydril_weaponsmith_action_giveQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_myyydril_treesh_gather_2");
     }
+
     public int ep3_myyydril_weaponsmith_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_762"))
@@ -105,7 +111,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_770");
@@ -118,7 +124,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_weaponsmith.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -128,6 +134,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_weaponsmith_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_770"))
@@ -153,6 +160,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_weaponsmith_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_782"))
@@ -172,7 +180,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_790");
@@ -181,7 +189,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_weaponsmith.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -191,6 +199,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_weaponsmith_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_790"))
@@ -206,6 +215,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_weaponsmith_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_802"))
@@ -225,7 +235,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_810");
@@ -234,7 +244,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_weaponsmith.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -244,6 +254,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_weaponsmith_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_810"))
@@ -258,6 +269,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_weaponsmith_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_822"))
@@ -278,7 +290,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_830");
@@ -287,7 +299,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_weaponsmith.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -297,6 +309,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_weaponsmith_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_830"))
@@ -316,7 +329,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_838");
@@ -325,7 +338,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_weaponsmith.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -335,6 +348,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_weaponsmith_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_838"))
@@ -354,7 +368,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_846");
@@ -363,7 +377,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_weaponsmith.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -373,6 +387,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_weaponsmith_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_846"))
@@ -399,7 +414,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_854");
@@ -412,7 +427,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_weaponsmith.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -422,6 +437,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_weaponsmith_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_854"))
@@ -448,7 +464,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_862");
@@ -461,7 +477,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_weaponsmith.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -481,6 +497,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_weaponsmith_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_862"))
@@ -506,6 +523,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -517,6 +535,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -524,6 +543,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -533,18 +553,21 @@ public class ep3_myyydril_weaponsmith extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.ep3_myyydril_weaponsmith");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -567,7 +590,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_762");
@@ -575,7 +598,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_myyydril_weaponsmith.branchId", 1);
                 npcStartConversation(player, npc, "ep3_myyydril_weaponsmith", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -596,7 +619,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_782");
@@ -604,7 +627,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_myyydril_weaponsmith.branchId", 5);
                 npcStartConversation(player, npc, "ep3_myyydril_weaponsmith", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -625,7 +648,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_802");
@@ -633,7 +656,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_myyydril_weaponsmith.branchId", 8);
                 npcStartConversation(player, npc, "ep3_myyydril_weaponsmith", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -654,7 +677,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_822");
@@ -662,7 +685,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_myyydril_weaponsmith.branchId", 11);
                 npcStartConversation(player, npc, "ep3_myyydril_weaponsmith", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -677,6 +700,7 @@ public class ep3_myyydril_weaponsmith extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("ep3_myyydril_weaponsmith"))

@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,14 +14,17 @@ import script.*;
 
 public class wod_azzenaj extends script.base_script
 {
+    public static String c_stringFile = "conversation/wod_azzenaj";
+
     public wod_azzenaj()
     {
     }
-    public static String c_stringFile = "conversation/wod_azzenaj";
+
     public boolean wod_azzenaj_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean wod_azzenaj_condition_IsNS(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "wod_prologue_quests"))
@@ -23,12 +32,9 @@ public class wod_azzenaj extends script.base_script
             return false;
         }
         int status = getIntObjVar(player, "wod_prologue_quests");
-        if (status > -1)
-        {
-            return true;
-        }
-        return false;
+        return status > -1;
     }
+
     public boolean wod_azzenaj_condition_IsIndifferent(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "wod_prologue_quests"))
@@ -36,89 +42,100 @@ public class wod_azzenaj extends script.base_script
             return false;
         }
         int status = getIntObjVar(player, "wod_prologue_quests");
-        if ((status < 0) && (status > -8))
-        {
-            return true;
-        }
-        return false;
+        return (status < 0) && (status > -8);
     }
+
     public boolean wod_azzenaj_condition_hasPreqComplete(obj_id player, obj_id npc) throws InterruptedException
     {
-        if ((hasObjVar(player, "wod_prologue_quests")) && (groundquests.hasCompletedQuest(player, "wod_rubina_goto_sm")) && (!groundquests.hasCompletedQuest(player, "wod_themepark_lost_e01")))
-        {
-            return true;
-        }
-        return false;
+        return (hasObjVar(player, "wod_prologue_quests")) && (groundquests.hasCompletedQuest(player, "wod_rubina_goto_sm")) && (!groundquests.hasCompletedQuest(player, "wod_themepark_lost_e01"));
     }
+
     public boolean wod_azzenaj_condition_onReturnLostISM(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "wod_themepark_lost_e01", "returnAzz");
     }
+
     public boolean wod_azzenaj_condition_onReturnLostIISM(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "wod_themepark_lost_e02", "returnAzz2");
     }
+
     public boolean wod_azzenaj_condition_hasQuestActiveI(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "wod_themepark_lost_e01");
     }
+
     public boolean wod_azzenaj_condition_hasQuestActiveII(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "wod_themepark_lost_e02");
     }
+
     public boolean wod_azzenaj_condition_hasQuestActiveIII(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "wod_themepark_ehs_1");
     }
+
     public boolean wod_azzenaj_condition_completedQuestLostISM(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "wod_themepark_lost_e01");
     }
+
     public boolean wod_azzenaj_condition_completedQuestLostIISM(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "wod_themepark_lost_e02");
     }
+
     public boolean wod_azzenaj_condition_hasQuestActiveIV(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "wod_queen_mother_boss_fight");
     }
+
     public boolean wod_azzenaj_condition_onReturnHateSistersSM(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "wod_themepark_ehs_1", "goBackAzz");
     }
+
     public boolean wod_azzenaj_condition_completedQuestHatesSistersSM(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "wod_themepark_ehs_1");
     }
+
     public void wod_azzenaj_action_sendReturnedSignalLostISM(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "hasReturnedAzz");
     }
+
     public void wod_azzenaj_action_sendReturnedSignalLostIISM(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "hasReturnedAzz2");
     }
+
     public void wod_azzenaj_action_grantTPLostISM(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest/wod_themepark_lost_e01");
     }
+
     public void wod_azzenaj_action_grantTPLostIISM(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest/wod_themepark_lost_e02");
     }
+
     public void wod_azzenaj_action_grantTPHateSistersSM(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest/wod_themepark_ehs_1");
     }
+
     public void wod_azzenaj_action_grantTPQueenBossFightSM(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "quest/wod_queen_mother_boss_fight");
         groundquests.grantQuest(player, "quest/wod_queen_mother_boss_fight");
     }
+
     public void wod_azzenaj_action_sendReturnedSignalHateSistersSM(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "hasComeBack");
     }
+
     public int wod_azzenaj_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_16"))
@@ -139,7 +156,7 @@ public class wod_azzenaj extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -148,7 +165,7 @@ public class wod_azzenaj extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_azzenaj.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -158,6 +175,7 @@ public class wod_azzenaj extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_azzenaj_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_47"))
@@ -177,7 +195,7 @@ public class wod_azzenaj extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_55");
@@ -186,7 +204,7 @@ public class wod_azzenaj extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_azzenaj.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -196,6 +214,7 @@ public class wod_azzenaj extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_azzenaj_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_42"))
@@ -216,7 +235,7 @@ public class wod_azzenaj extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_94");
@@ -225,7 +244,7 @@ public class wod_azzenaj extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_azzenaj.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -235,6 +254,7 @@ public class wod_azzenaj extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_azzenaj_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_94"))
@@ -254,7 +274,7 @@ public class wod_azzenaj extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_98");
@@ -263,7 +283,7 @@ public class wod_azzenaj extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_azzenaj.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -273,6 +293,7 @@ public class wod_azzenaj extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_azzenaj_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_65"))
@@ -293,7 +314,7 @@ public class wod_azzenaj extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_113");
@@ -302,7 +323,7 @@ public class wod_azzenaj extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_azzenaj.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -312,6 +333,7 @@ public class wod_azzenaj extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_azzenaj_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_113"))
@@ -331,7 +353,7 @@ public class wod_azzenaj extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_117");
@@ -340,7 +362,7 @@ public class wod_azzenaj extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_azzenaj.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -350,6 +372,7 @@ public class wod_azzenaj extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_azzenaj_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_113"))
@@ -369,7 +392,7 @@ public class wod_azzenaj extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_117");
@@ -378,7 +401,7 @@ public class wod_azzenaj extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_azzenaj.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -388,6 +411,7 @@ public class wod_azzenaj extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_azzenaj_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_117"))
@@ -414,7 +438,7 @@ public class wod_azzenaj extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -427,7 +451,7 @@ public class wod_azzenaj extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_azzenaj.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -437,6 +461,7 @@ public class wod_azzenaj extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_azzenaj_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_121"))
@@ -462,6 +487,7 @@ public class wod_azzenaj extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_azzenaj_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_94"))
@@ -481,7 +507,7 @@ public class wod_azzenaj extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_98");
@@ -490,7 +516,7 @@ public class wod_azzenaj extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_azzenaj.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -500,6 +526,7 @@ public class wod_azzenaj extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_azzenaj_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_98"))
@@ -519,7 +546,7 @@ public class wod_azzenaj extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_102");
@@ -528,7 +555,7 @@ public class wod_azzenaj extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_azzenaj.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -538,6 +565,7 @@ public class wod_azzenaj extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_azzenaj_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_102"))
@@ -557,7 +585,7 @@ public class wod_azzenaj extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -566,7 +594,7 @@ public class wod_azzenaj extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_azzenaj.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -576,6 +604,7 @@ public class wod_azzenaj extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_azzenaj_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_106"))
@@ -591,6 +620,7 @@ public class wod_azzenaj extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_azzenaj_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_47"))
@@ -610,7 +640,7 @@ public class wod_azzenaj extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_55");
@@ -619,7 +649,7 @@ public class wod_azzenaj extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_azzenaj.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -629,6 +659,7 @@ public class wod_azzenaj extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_azzenaj_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_55"))
@@ -644,6 +675,7 @@ public class wod_azzenaj extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_azzenaj_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_66"))
@@ -663,7 +695,7 @@ public class wod_azzenaj extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_74");
@@ -672,7 +704,7 @@ public class wod_azzenaj extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_azzenaj.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -682,6 +714,7 @@ public class wod_azzenaj extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_azzenaj_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_74"))
@@ -701,7 +734,7 @@ public class wod_azzenaj extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_80");
@@ -710,7 +743,7 @@ public class wod_azzenaj extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_azzenaj.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -720,6 +753,7 @@ public class wod_azzenaj extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_azzenaj_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_80"))
@@ -735,6 +769,7 @@ public class wod_azzenaj extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -744,11 +779,13 @@ public class wod_azzenaj extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -757,18 +794,21 @@ public class wod_azzenaj extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.wod_azzenaj");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -803,7 +843,7 @@ public class wod_azzenaj extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_16");
@@ -811,7 +851,7 @@ public class wod_azzenaj extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_azzenaj.branchId", 3);
                 npcStartConversation(player, npc, "wod_azzenaj", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -832,7 +872,7 @@ public class wod_azzenaj extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_42");
@@ -840,7 +880,7 @@ public class wod_azzenaj extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_azzenaj.branchId", 5);
                 npcStartConversation(player, npc, "wod_azzenaj", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -861,7 +901,7 @@ public class wod_azzenaj extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_65");
@@ -869,7 +909,7 @@ public class wod_azzenaj extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_azzenaj.branchId", 7);
                 npcStartConversation(player, npc, "wod_azzenaj", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -914,7 +954,7 @@ public class wod_azzenaj extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_113");
@@ -922,7 +962,7 @@ public class wod_azzenaj extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_azzenaj.branchId", 13);
                 npcStartConversation(player, npc, "wod_azzenaj", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -943,7 +983,7 @@ public class wod_azzenaj extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_94");
@@ -951,7 +991,7 @@ public class wod_azzenaj extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_azzenaj.branchId", 18);
                 npcStartConversation(player, npc, "wod_azzenaj", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -972,7 +1012,7 @@ public class wod_azzenaj extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -980,7 +1020,7 @@ public class wod_azzenaj extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_azzenaj.branchId", 23);
                 npcStartConversation(player, npc, "wod_azzenaj", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1001,7 +1041,7 @@ public class wod_azzenaj extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_66");
@@ -1009,7 +1049,7 @@ public class wod_azzenaj extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_azzenaj.branchId", 26);
                 npcStartConversation(player, npc, "wod_azzenaj", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1024,6 +1064,7 @@ public class wod_azzenaj extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("wod_azzenaj"))

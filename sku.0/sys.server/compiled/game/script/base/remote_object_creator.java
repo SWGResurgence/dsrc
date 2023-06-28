@@ -1,5 +1,11 @@
 package script.base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.create;
 import script.library.space_create;
@@ -11,6 +17,7 @@ public class remote_object_creator extends script.base.remote_object
     public remote_object_creator()
     {
     }
+
     public void registerForRemoteObjectCreation(obj_id self) throws InterruptedException
     {
         log("registerForRemoteObjectCreation: setting cluster wide data.");
@@ -19,6 +26,7 @@ public class remote_object_creator extends script.base.remote_object
         objectData.put(IN_SPACE, isSpaceScene());
         replaceClusterWideData(REMOTE_OBJECT_MANAGER, getCurrentSceneName(), objectData, false, 0);
     }
+
     public int createRemoteObject(obj_id self, dictionary params) throws InterruptedException
     {
         log("createRemoteObject: message received.");
@@ -33,7 +41,7 @@ public class remote_object_creator extends script.base.remote_object
             y = params.getFloat(Y);
             z = params.getFloat(Z);
         }
-        else 
+        else
         {
             x = y = z = 0;
         }
@@ -44,7 +52,7 @@ public class remote_object_creator extends script.base.remote_object
             {
                 created = space_create.createShip(objectName, transform.identity.setPosition_p(x, y, z));
             }
-            else 
+            else
             {
                 transform randomTransform = space_quest.getRandomPositionInSphere(transform.identity, 512, 2048);
                 vector pos = randomTransform.getPosition_p();
@@ -54,7 +62,7 @@ public class remote_object_creator extends script.base.remote_object
                 created = space_create.createShipHyperspace(objectName, randomTransform);
             }
         }
-        else 
+        else
         {
             created = create.object(objectName, new location(x, y, z));
         }
@@ -67,14 +75,16 @@ public class remote_object_creator extends script.base.remote_object
             if (params.containsKey(ATTACH_SCRIPTS))
             {
                 String[] scripts = split(params.getString(ATTACH_SCRIPTS), ':');
-                for (String script : scripts) {
-                    if (!hasScript(created, script)) {
+                for (String script : scripts)
+                {
+                    if (!hasScript(created, script))
+                    {
                         attachScript(created, script);
                     }
                 }
             }
         }
-        else 
+        else
         {
             logError("createRemoteObject: creation failed.");
         }
@@ -82,6 +92,7 @@ public class remote_object_creator extends script.base.remote_object
         messageTo(requester, CREATE_REMOTE_OBJECT_RESPONSE, params, 0.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         registerForRemoteObjectCreation(self);

@@ -1,5 +1,11 @@
 package script.systems.encoded_disk.base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.sui;
 import script.menu_info;
 import script.menu_info_types;
@@ -12,6 +18,7 @@ public class message_assembled extends script.base_script
     public static final string_id SID_USE = new string_id("treasure_map/treasure_map", "use");
     public static final String SID_CLOSE = "@treasure_map/treasure_map:close";
     public static final String MESSAGE_TABLE = "datatables/encoded_disk/message_fragment.iff";
+
     public message_assembled()
     {
     }

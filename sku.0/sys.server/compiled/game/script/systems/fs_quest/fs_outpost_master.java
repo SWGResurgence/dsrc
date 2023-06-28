@@ -1,5 +1,11 @@
 package script.systems.fs_quest;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.fs_counterstrike;
 import script.library.fs_dyn_village;
@@ -36,7 +42,6 @@ public class fs_outpost_master extends script.base_script
         }
         d.put("theatreName", name);
         messageTo(campMaster, "msgRequestTheatreRegistration", d, 0.0f, false);
-        return;
     }
 
     public int OnInitialize(obj_id self) throws InterruptedException

@@ -1,5 +1,11 @@
 package script.quest.task.ground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.groundquests;
 import script.library.utils;
@@ -8,9 +14,6 @@ import script.obj_id;
 
 public class static_escort_on_target extends script.base_script
 {
-    public static_escort_on_target()
-    {
-    }
     public static final String dataTableColumnPathToPointPre = "PATH_TO_POINT_POINT_";
     public static final String dataTableColumnLocationXPre = "LOCATION_X_POINT_";
     public static final String dataTableColumnLocationYPre = "LOCATION_Y_POINT_";
@@ -27,6 +30,10 @@ public class static_escort_on_target extends script.base_script
     public static final String objvarOnEscort = "quest.static_escort.onEscort";
     public static final String taskType = "static_escort_on_target";
     public static final String scriptNameEscortOnTarget = "quest.task.ground.static_escort_on_target";
+    public static_escort_on_target()
+    {
+    }
+
     public int messageStartStaticEscort(obj_id self, dictionary params) throws InterruptedException
     {
         location l = getLocation(self);
@@ -36,6 +43,7 @@ public class static_escort_on_target extends script.base_script
         setObjVar(self, objvarOnEscort, "true");
         return SCRIPT_CONTINUE;
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         if (hasObjVar(self, objvarOnCreatureOwner) && hasObjVar(self, objvarOnCreatureQuestCrc) && hasObjVar(self, objvarOnCreatureTaskId))
@@ -51,6 +59,7 @@ public class static_escort_on_target extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         String goingHome = getStringObjVar(self, objvarGoingHome);
@@ -59,7 +68,7 @@ public class static_escort_on_target extends script.base_script
             removeObjVar(self, objvarQuest);
             detachScript(self, scriptNameEscortOnTarget);
         }
-        else 
+        else
         {
             obj_id player = getObjIdObjVar(self, objvarOnCreatureOwner);
             int questCrc = getIntObjVar(self, objvarOnCreatureQuestCrc);
@@ -72,7 +81,7 @@ public class static_escort_on_target extends script.base_script
                 groundquests.questOutputDebugInfo(player, questCrc, taskId, taskType, "OnMovePathComplete", "The next escort point is flagged as unused, so completing the task");
                 questCompleteTask(questCrc, taskId, player);
             }
-            else 
+            else
             {
                 String xLoc = groundquests.getTaskStringDataEntry(questCrc, taskId, dataTableColumnLocationXPre + nextPathPoint);
                 String yLoc = groundquests.getTaskStringDataEntry(questCrc, taskId, dataTableColumnLocationYPre + nextPathPoint);
@@ -85,6 +94,7 @@ public class static_escort_on_target extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int messageResetStaticEscortTarget(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, objvarOnCreatureOwner);

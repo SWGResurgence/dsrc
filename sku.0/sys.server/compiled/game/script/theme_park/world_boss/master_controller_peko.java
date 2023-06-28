@@ -1,5 +1,11 @@
 package script.theme_park.world_boss;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.location;
 import script.obj_id;
@@ -47,26 +53,13 @@ public class master_controller_peko extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        if (pet_lib.isPet(killer))
-        {
-            sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Mutated Peko-Peko Empress has been reported to have been destroyed and the Czerka Corporation has paid out the bounty to " + getPlayerName(pet_lib.getMaster(killer)));
-        }
-        if (beast_lib.isBeast(killer))
-        {
-            sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Mutated Peko-Peko Empress has been reported to have been destroyed and the Czerka Corporation has paid out the bounty to " + getPlayerName(beast_lib.getMaster(killer)));
-        }
-        if (!isPlayer(killer))
-        {
-            sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Mutated Peko-Peko Empress has been reported to have been destroyed and the Czerka Corporation has paid out the bounty to " + getPlayerName(getMaster(killer)));
-        }
         obj_id tatooine = getPlanetByName("tatooine");
         if (hasObjVar(tatooine, "dungeon_finder.world_boss.peko"))
         {
             removeObjVar(tatooine, "dungeon_finder.world_boss.peko");
         }
         setObjVar(tatooine, "dungeon_finder.world_boss.peko", "Inactive");
-        resurgence.doWorldBossDeathMsg(self);
-        sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Mutated Peko-Peko Empress has been reported to have been destroyed and the Czerka Corporation has paid out the bounty to " + getName(killer));
+        resurgence.doWorldBossDeathMsg(self); //only thing that is needed.
         return SCRIPT_CONTINUE;
     }
 

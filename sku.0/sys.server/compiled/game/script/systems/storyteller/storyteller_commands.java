@@ -1,5 +1,11 @@
 package script.systems.storyteller;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -55,6 +61,7 @@ public class storyteller_commands extends script.base_script
     public static final String INCLUDE_ALL_STORYTELLERS = "all_storytellers";
     public static final string_id SID_PGC_RATING_TARGET_INVALID = new string_id("saga_system", "pgc_rating_target_invalid");
     public static final string_id SID_PGC_RATING_TARGET_NOT_A_PLAYER = new string_id("saga_system", "pgc_rating_target_not_a_player");
+
     public storyteller_commands()
     {
     }
@@ -369,7 +376,7 @@ public class storyteller_commands extends script.base_script
             else if (invitee.equals("area_invite") && isGod(self))
             {
                 obj_id[] playersInRange = getAllPlayers(getLocation(self), 120.0f);
-                if (playersInRange != null && playersInRange.length > 0)
+                if (playersInRange != null)
                 {
                     for (obj_id playerToInvite : playersInRange)
                     {
@@ -422,7 +429,7 @@ public class storyteller_commands extends script.base_script
                 if (guildId > 0)
                 {
                     obj_id[] guildMembers = guild.getMemberIds(guildId, false, true);
-                    if (guildMembers != null && guildMembers.length > 0)
+                    if (guildMembers != null)
                     {
                         for (obj_id guildMember : guildMembers)
                         {
@@ -891,7 +898,7 @@ public class storyteller_commands extends script.base_script
         Vector elligibleObjects = new Vector();
         elligibleObjects.setSize(0);
         obj_id[] storytellerObjects = getAllObjectsWithObjVar(getLocation(self), 250.0f, "storytellerid");
-        if (storytellerObjects != null && storytellerObjects.length > 0)
+        if (storytellerObjects != null)
         {
             for (obj_id storytellerObject : storytellerObjects)
             {
@@ -1020,9 +1027,9 @@ public class storyteller_commands extends script.base_script
             storedSilverTokens = pgcRatingData[pgc_quests.PGC_STORED_CHRONICLE_SILVER_TOKENS_INDEX];
             storedGoldTokens = pgcRatingData[pgc_quests.PGC_STORED_CHRONICLE_GOLD_TOKENS_INDEX];
         }
-        String storedXp_str = "" + storedXp;
-        String storedSilverTokens_str = "" + storedSilverTokens;
-        String storedGoldTokens_str = "" + storedGoldTokens;
+        String storedXp_str = String.valueOf(storedXp);
+        String storedSilverTokens_str = String.valueOf(storedSilverTokens);
+        String storedGoldTokens_str = String.valueOf(storedGoldTokens);
         String[] templateSkills = skill_template.getSkillTemplateSkillsByTemplateName(pgc_quests.PGC_CHRONICLES_XP_TYPE);
         if (templateSkills != null && templateSkills.length > 0)
         {

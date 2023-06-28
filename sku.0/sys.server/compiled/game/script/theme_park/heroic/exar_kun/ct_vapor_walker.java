@@ -1,5 +1,11 @@
 package script.theme_park.heroic.exar_kun;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.factions;
@@ -12,6 +18,7 @@ public class ct_vapor_walker extends script.base_script
     public ct_vapor_walker()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCreatureCoverVisibility(self, false);
@@ -21,6 +28,7 @@ public class ct_vapor_walker extends script.base_script
         factions.setIgnorePlayer(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePath(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] players = trial.getValidTargetsInCell(trial.getTop(self), "r4");
@@ -30,6 +38,7 @@ public class ct_vapor_walker extends script.base_script
         messageTo(self, "handlePath", null, 10.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int vapor_pulse(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id boss = getFirstObjectWithScript(getLocation(self), 200.0f, "theme_park.heroic.exar_kun.caretaker");
@@ -39,7 +48,7 @@ public class ct_vapor_walker extends script.base_script
             return SCRIPT_CONTINUE;
         }
         location selfLoc = getLocation(self);
-        String tarLoc = "" + selfLoc.x + " " + selfLoc.y + " " + selfLoc.z + " " + selfLoc.cell + " " + selfLoc.x + " " + selfLoc.y + " " + selfLoc.z;
+        String tarLoc = selfLoc.x + " " + selfLoc.y + " " + selfLoc.z + " " + selfLoc.cell + " " + selfLoc.x + " " + selfLoc.y + " " + selfLoc.z;
         queueCommand(boss, (-345389055), ai_lib.getFollowTarget(self), tarLoc, COMMAND_PRIORITY_DEFAULT);
         messageTo(self, "vapor_pulse", null, 2.0f, false);
         return SCRIPT_CONTINUE;

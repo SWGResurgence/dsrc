@@ -1,5 +1,11 @@
 package script.systems.skills.stealth;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.prose;
 import script.library.stealth;
@@ -60,7 +66,7 @@ public class trackingbeacon extends script.base_script
         if (hasObjVar(self, stealth.BIO_PROBE_TRAP_TARGET))
         {
             names[free] = "beacon_target";
-            attribs[free++] = "" + getStringObjVar(self, stealth.BIO_PROBE_TARGET_NAME);
+            attribs[free++] = getStringObjVar(self, stealth.BIO_PROBE_TARGET_NAME);
         }
         if (hasObjVar(self, stealth.BEACON_LAST_KNOWN_TARGET_NAME))
         {

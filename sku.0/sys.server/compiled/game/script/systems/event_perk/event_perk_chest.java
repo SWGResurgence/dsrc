@@ -1,5 +1,11 @@
 package script.systems.event_perk;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.utils;
 import script.obj_id;
 import script.string_id;
@@ -62,10 +68,7 @@ public class event_perk_chest extends script.base_script
             }
             obj_id[] newRewarded = new obj_id[rewarded.length + 1];
             newRewarded[rewarded.length] = transferer;
-            for (int i = 0; i < rewarded.length; i++)
-            {
-                newRewarded[i] = rewarded[i];
-            }
+            System.arraycopy(rewarded, 0, newRewarded, 0, rewarded.length);
             setObjVar(self, "event_perk.chest.rewarded", newRewarded);
             CustomerServiceLog("EventPerk", "(Treasure Chest - [" + self + "] had an item removed from it by player [" + transferer + "].");
         }

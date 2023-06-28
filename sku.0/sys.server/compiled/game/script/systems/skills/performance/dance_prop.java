@@ -1,5 +1,11 @@
 package script.systems.skills.performance;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.performance;
 import script.library.utils;
@@ -15,6 +21,7 @@ public class dance_prop extends script.base_script
     public static final String TEMPLATE_COLUMN = "template";
     public static final String COMMAND_COLUMN = "command";
     public static final String HAND_COLUMN = "hand";
+
     public dance_prop()
     {
     }

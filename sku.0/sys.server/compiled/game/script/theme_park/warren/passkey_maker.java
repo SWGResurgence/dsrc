@@ -1,5 +1,11 @@
 package script.theme_park.warren;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.utils;
 import script.obj_id;
@@ -7,11 +13,12 @@ import script.string_id;
 
 public class passkey_maker extends script.base_script
 {
+    public static final String PASSKEYCODE = "object/tangible/mission/quest_item/warren_passkey_s02.iff";
+    public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
     public passkey_maker()
     {
     }
-    public static final String PASSKEYCODE = "object/tangible/mission/quest_item/warren_passkey_s02.iff";
-    public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "warren.passkeyNumber"))
@@ -23,6 +30,7 @@ public class passkey_maker extends script.base_script
         messageTo(self, "respawnKey", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnKey(obj_id container) throws InterruptedException
     {
         obj_id[] contents = getContents(container);
@@ -46,12 +54,14 @@ public class passkey_maker extends script.base_script
         setName(passKey, "");
         setName(passKey, new string_id(SYSTEM_MESSAGES, "passkey" + passKeyNumber + "_name"));
     }
+
     public int respawnKey(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "messageSent");
         spawnKey(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnClosedContainer(obj_id self, obj_id player) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "messageSent"))
@@ -61,8 +71,10 @@ public class passkey_maker extends script.base_script
         obj_id[] contents = getContents(self);
         if (contents != null)
         {
-            for (obj_id content : contents) {
-                if (hasObjVar(content, "warren.passkeyNumber")) {
+            for (obj_id content : contents)
+            {
+                if (hasObjVar(content, "warren.passkeyNumber"))
+                {
                     return SCRIPT_CONTINUE;
                 }
             }
@@ -71,6 +83,7 @@ public class passkey_maker extends script.base_script
         utils.setScriptVar(self, "messageSent", true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnOpenedContainer(obj_id self, obj_id player) throws InterruptedException
     {
         if (!hasObjVar(self, "warren.passkeyNumber"))

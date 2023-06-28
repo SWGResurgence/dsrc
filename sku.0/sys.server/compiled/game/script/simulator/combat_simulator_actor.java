@@ -1,15 +1,23 @@
 package script.simulator;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.utils;
 import script.obj_id;
 
 public class combat_simulator_actor extends script.base_script
 {
+    public static boolean debug = false;
+
     public combat_simulator_actor()
     {
     }
-    public static boolean debug = false;
+
     public int prepareForCombat(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id enemy = getObjIdObjVar(self, "combat_simulator.enemy");
@@ -19,6 +27,7 @@ public class combat_simulator_actor extends script.base_script
         setTarget(self, enemy);
         return SCRIPT_CONTINUE;
     }
+
     public int startCombat(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id enemy = getObjIdObjVar(self, "combat_simulator.enemy");
@@ -30,20 +39,23 @@ public class combat_simulator_actor extends script.base_script
         {
             messageTo(self, "queueCommandLoop", null, 0, false);
         }
-        else 
+        else
         {
             addHate(self, enemy, 0.0f);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
-        switch (text) {
+        switch (text)
+        {
             case "actorsDumpInfo":
                 obj_id owner = getObjIdObjVar(self, "combat_simulator.owner");
                 obj_id enemy = getObjIdObjVar(self, "combat_simulator.enemy");
                 String[] queueCommands = getStringArrayObjVar(self, "combat_simulator.queue_commands");
-                if (queueCommands == null) {
+                if (queueCommands == null)
+                {
                     queueCommands = new String[0];
                 }
                 int queueCommandIndex = getIntObjVar(self, "combat_simulator.queue_command_index");
@@ -60,6 +72,7 @@ public class combat_simulator_actor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         if (debug)
@@ -68,6 +81,7 @@ public class combat_simulator_actor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         if (debug)
@@ -76,12 +90,14 @@ public class combat_simulator_actor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int queueCommandLoop(obj_id self, dictionary params) throws InterruptedException
     {
         queueNewCommand(self);
         messageTo(self, "queueCommandLoop", null, 1.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public void queueNewCommand(obj_id self) throws InterruptedException
     {
         if (checkForCombatActions(self))
@@ -95,7 +111,7 @@ public class combat_simulator_actor extends script.base_script
         {
             debugSpeakMsg(self, "Queuing command " + queueCommands[queueCommandIndex] + " against " + enemy);
         }
-        if (queueCommand(self, getStringCrc((toLower(queueCommands[queueCommandIndex])).toString()), enemy, "", COMMAND_PRIORITY_NORMAL))
+        if (queueCommand(self, getStringCrc((toLower(queueCommands[queueCommandIndex]))), enemy, "", COMMAND_PRIORITY_NORMAL))
         {
             ++queueCommandIndex;
             if (queueCommandIndex >= queueCommands.length)
@@ -104,8 +120,8 @@ public class combat_simulator_actor extends script.base_script
             }
         }
         setObjVar(self, "combat_simulator.queue_command_index", queueCommandIndex);
-        return;
     }
+
     public int OnDefenderCombatAction(obj_id self, obj_id attacker, obj_id weapon, int combatResult) throws InterruptedException
     {
         int numberOfAttacks = getIntObjVar(attacker, "combat_simulator.number_of_attacks");
@@ -117,6 +133,7 @@ public class combat_simulator_actor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnChangedPosture(obj_id self, int before, int after) throws InterruptedException
     {
         if (hasObjVar(self, "combat_simulator.is_creature"))
@@ -145,6 +162,7 @@ public class combat_simulator_actor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         if (debug)
@@ -157,6 +175,7 @@ public class combat_simulator_actor extends script.base_script
         messageTo(owner, "endCombat", params, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public boolean checkForCombatActions(obj_id objPlayer) throws InterruptedException
     {
         if (queueHasCommandFromGroup(objPlayer, (-1170591580)))
@@ -167,12 +186,9 @@ public class combat_simulator_actor extends script.base_script
         {
             return true;
         }
-        if (queueHasCommandFromGroup(objPlayer, (-506878646)))
-        {
-            return true;
-        }
-        return false;
+        return queueHasCommandFromGroup(objPlayer, (-506878646));
     }
+
     public int handleStandFromKnockedDown(obj_id self, dictionary params) throws InterruptedException
     {
         if (getPosture(self) == POSTURE_INCAPACITATED)

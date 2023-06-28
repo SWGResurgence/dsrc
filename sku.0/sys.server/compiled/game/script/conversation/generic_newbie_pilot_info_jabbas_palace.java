@@ -1,22 +1,32 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
 {
+    public static String c_stringFile = "conversation/generic_newbie_pilot_info_jabbas_palace";
+
     public generic_newbie_pilot_info_jabbas_palace()
     {
     }
-    public static String c_stringFile = "conversation/generic_newbie_pilot_info_jabbas_palace";
+
     public boolean generic_newbie_pilot_info_jabbas_palace_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean generic_newbie_pilot_info_jabbas_palace_condition_remembersPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         return (utils.hasScriptVar(player, "metNewbiePilot"));
     }
+
     public boolean generic_newbie_pilot_info_jabbas_palace_condition_hasAccessDocuments(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -29,15 +39,18 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
         {
             return false;
         }
-        for (obj_id item : items) {
+        for (obj_id item : items)
+        {
             String name = getTemplateName(item);
-            if (name.equals("object/tangible/space/mission_objects/palace_access_doc.iff")) {
+            if (name.equals("object/tangible/space/mission_objects/palace_access_doc.iff"))
+            {
                 utils.setScriptVar(player, "auth", item);
                 return true;
             }
         }
         return false;
     }
+
     public boolean generic_newbie_pilot_info_jabbas_palace_condition_hasIncorrectDocuments(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id auth = utils.getObjIdScriptVar(player, "auth");
@@ -47,23 +60,19 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
         }
         String sign = getStringObjVar(auth, "signature");
         String name = getName(player);
-        if (sign.equals(name))
-        {
-            return false;
-        }
-        else 
-        {
-            return true;
-        }
+        return !sign.equals(name);
     }
+
     public boolean generic_newbie_pilot_info_jabbas_palace_condition_isImperialPilot(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasSkill(player, "pilot_imperial_navy_novice"));
     }
+
     public boolean generic_newbie_pilot_info_jabbas_palace_condition_isRebelPilot(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasSkill(player, "pilot_rebel_navy_novice"));
     }
+
     public boolean generic_newbie_pilot_info_jabbas_palace_condition_hasUnsignedDocuments(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id auth = utils.getObjIdScriptVar(player, "auth");
@@ -72,42 +81,34 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
             return true;
         }
         String sign = getStringObjVar(auth, "signature");
-        if (sign == null)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return sign == null;
     }
+
     public boolean generic_newbie_pilot_info_jabbas_palace_condition_notCorrectPilot(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (!space_flags.isSpaceTrack(player, space_flags.PRIVATEER_TATOOINE))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return !space_flags.isSpaceTrack(player, space_flags.PRIVATEER_TATOOINE);
     }
+
     public boolean generic_newbie_pilot_info_jabbas_palace_condition_isPrivateerPilot(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasSkill(player, "pilot_neutral_novice");
     }
+
     public boolean generic_newbie_pilot_info_jabbas_palace_condition_hasSpaceExpansion(obj_id player, obj_id npc) throws InterruptedException
     {
         return (features.isSpaceEdition(player));
     }
+
     public boolean generic_newbie_pilot_info_jabbas_palace_condition_hasSpaceShip(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasShip(player));
     }
+
     public void generic_newbie_pilot_info_jabbas_palace_action_rememberPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "metNewbiePilot", true);
     }
+
     public void generic_newbie_pilot_info_jabbas_palace_action_removeAccessDocuments(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -120,22 +121,26 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
         {
             return;
         }
-        for (obj_id item : items) {
+        for (obj_id item : items)
+        {
             String name = getTemplateName(item);
-            if (name.equals("object/tangible/space/mission_objects/palace_access_doc.iff")) {
+            if (name.equals("object/tangible/space/mission_objects/palace_access_doc.iff"))
+            {
                 obj_id transferauth = item;
-                if (destroyObject(transferauth)) {
+                if (destroyObject(transferauth))
+                {
                     setObjVar(player, "space_access_jabba", 30);
                 }
             }
         }
-        return;
     }
+
     public void generic_newbie_pilot_info_jabbas_palace_action_grantQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "delivery", "tatooine_newbie_1");
         space_quest.grantNewbieShip(player, "rebel");
     }
+
     public int generic_newbie_pilot_info_jabbas_palace_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_daa8544b"))
@@ -163,7 +168,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5c484c74");
@@ -176,7 +181,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.generic_newbie_pilot_info_jabbas_palace.branchId");
                     chat.chat(npc, player, message);
@@ -203,7 +208,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d94b37db");
@@ -212,7 +217,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.generic_newbie_pilot_info_jabbas_palace.branchId");
                     chat.chat(npc, player, message);
@@ -235,6 +240,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int generic_newbie_pilot_info_jabbas_palace_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_5c484c74"))
@@ -255,7 +261,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a9e4fd02");
@@ -264,7 +270,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.generic_newbie_pilot_info_jabbas_palace.branchId");
                     chat.chat(npc, player, message);
@@ -323,7 +329,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d06b92dc");
@@ -332,7 +338,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.generic_newbie_pilot_info_jabbas_palace.branchId");
                     chat.chat(npc, player, message);
@@ -343,6 +349,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int generic_newbie_pilot_info_jabbas_palace_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a9e4fd02"))
@@ -377,7 +384,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cba77fff");
@@ -394,7 +401,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.generic_newbie_pilot_info_jabbas_palace.branchId");
                     chat.chat(npc, player, message);
@@ -405,6 +412,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int generic_newbie_pilot_info_jabbas_palace_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_cba77fff"))
@@ -425,7 +433,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d038a005");
@@ -434,7 +442,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.generic_newbie_pilot_info_jabbas_palace.branchId");
                     chat.chat(npc, player, message);
@@ -460,7 +468,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2c017871");
@@ -469,7 +477,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.generic_newbie_pilot_info_jabbas_palace.branchId");
                     chat.chat(npc, player, message);
@@ -492,6 +500,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int generic_newbie_pilot_info_jabbas_palace_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d038a005"))
@@ -511,7 +520,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2c017871");
@@ -520,7 +529,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.generic_newbie_pilot_info_jabbas_palace.branchId");
                     chat.chat(npc, player, message);
@@ -531,6 +540,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int generic_newbie_pilot_info_jabbas_palace_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2c017871"))
@@ -547,6 +557,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int generic_newbie_pilot_info_jabbas_palace_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2c017871"))
@@ -563,6 +574,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int generic_newbie_pilot_info_jabbas_palace_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d06b92dc"))
@@ -580,6 +592,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int generic_newbie_pilot_info_jabbas_palace_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d94b37db"))
@@ -600,7 +613,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_80f90f12");
@@ -609,7 +622,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.generic_newbie_pilot_info_jabbas_palace.branchId");
                     chat.chat(npc, player, message);
@@ -620,6 +633,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int generic_newbie_pilot_info_jabbas_palace_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_80f90f12"))
@@ -640,7 +654,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_daa8544b");
@@ -649,7 +663,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.generic_newbie_pilot_info_jabbas_palace.branchId");
                     chat.chat(npc, player, message);
@@ -660,6 +674,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int generic_newbie_pilot_info_jabbas_palace_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_daa8544b"))
@@ -680,7 +695,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5c484c74");
@@ -689,7 +704,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.generic_newbie_pilot_info_jabbas_palace.branchId");
                     chat.chat(npc, player, message);
@@ -700,6 +715,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int generic_newbie_pilot_info_jabbas_palace_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_5c484c74"))
@@ -720,7 +736,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a9e4fd02");
@@ -729,7 +745,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.generic_newbie_pilot_info_jabbas_palace.branchId");
                     chat.chat(npc, player, message);
@@ -740,6 +756,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int generic_newbie_pilot_info_jabbas_palace_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a9e4fd02"))
@@ -774,7 +791,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cba77fff");
@@ -791,7 +808,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.generic_newbie_pilot_info_jabbas_palace.branchId");
                     chat.chat(npc, player, message);
@@ -802,6 +819,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int generic_newbie_pilot_info_jabbas_palace_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_cba77fff"))
@@ -822,7 +840,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d038a005");
@@ -831,7 +849,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.generic_newbie_pilot_info_jabbas_palace.branchId");
                     chat.chat(npc, player, message);
@@ -857,7 +875,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2c017871");
@@ -866,7 +884,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.generic_newbie_pilot_info_jabbas_palace.branchId");
                     chat.chat(npc, player, message);
@@ -889,6 +907,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int generic_newbie_pilot_info_jabbas_palace_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d038a005"))
@@ -908,7 +927,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2c017871");
@@ -917,7 +936,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.generic_newbie_pilot_info_jabbas_palace.branchId");
                     chat.chat(npc, player, message);
@@ -928,6 +947,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int generic_newbie_pilot_info_jabbas_palace_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2c017871"))
@@ -944,6 +964,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int generic_newbie_pilot_info_jabbas_palace_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2c017871"))
@@ -960,6 +981,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -972,6 +994,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
         setName(self, "Smuggler Pilot");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -980,6 +1003,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
         setName(self, "Smuggler Pilot");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -988,18 +1012,21 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.generic_newbie_pilot_info_jabbas_palace");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1037,7 +1064,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_daa8544b");
@@ -1053,7 +1080,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                 utils.setScriptVar(player, "conversation.generic_newbie_pilot_info_jabbas_palace.branchId", 1);
                 npcStartConversation(player, npc, "generic_newbie_pilot_info_jabbas_palace", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1062,6 +1089,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("generic_newbie_pilot_info_jabbas_palace"))

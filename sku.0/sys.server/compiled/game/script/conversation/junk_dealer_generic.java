@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.chat;
@@ -8,18 +14,22 @@ import script.library.utils;
 
 public class junk_dealer_generic extends script.base_script
 {
+    public static String c_stringFile = "conversation/junk_dealer_generic";
+
     public junk_dealer_generic()
     {
     }
-    public static String c_stringFile = "conversation/junk_dealer_generic";
+
     public boolean junk_dealer_generic_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean junk_dealer_generic_condition_check_inv(obj_id player, obj_id npc) throws InterruptedException
     {
         return smuggler.checkInventory(player, npc);
     }
+
     public boolean junk_dealer_generic_condition_hasNoInv(obj_id player, obj_id npc) throws InterruptedException
     {
         boolean hasNoInvRoom = false;
@@ -34,14 +44,17 @@ public class junk_dealer_generic extends script.base_script
         }
         return hasNoInvRoom;
     }
+
     public boolean junk_dealer_generic_condition_checkForKit(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] objContents = utils.getContents(player, true);
         if (objContents != null)
         {
-            for (obj_id objContent : objContents) {
+            for (obj_id objContent : objContents)
+            {
                 String strItemTemplate = getTemplateName(objContent);
-                switch (strItemTemplate) {
+                switch (strItemTemplate)
+                {
                     case "object/tangible/loot/collectible/kits/orange_rug_kit.iff":
                         return false;
                     case "object/tangible/loot/collectible/kits/blue_rug_kit.iff":
@@ -57,14 +70,17 @@ public class junk_dealer_generic extends script.base_script
         }
         return true;
     }
+
     public boolean junk_dealer_generic_condition_checkForKitToo(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] objContents = utils.getContents(player, true);
         if (objContents != null)
         {
-            for (obj_id objContent : objContents) {
+            for (obj_id objContent : objContents)
+            {
                 String strItemTemplate = getTemplateName(objContent);
-                switch (strItemTemplate) {
+                switch (strItemTemplate)
+                {
                     case "object/tangible/loot/collectible/kits/orange_rug_kit.iff":
                         return true;
                     case "object/tangible/loot/collectible/kits/blue_rug_kit.iff":
@@ -80,11 +96,13 @@ public class junk_dealer_generic extends script.base_script
         }
         return false;
     }
+
     public boolean junk_dealer_generic_condition_hasBuyBackItems(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] listOfBuyBacks = smuggler.getBuyBackItemsInContainer(player);
         return listOfBuyBacks != null && listOfBuyBacks.length > 0;
     }
+
     public boolean junk_dealer_generic_condition_checkBuyBackContainer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
@@ -94,16 +112,19 @@ public class junk_dealer_generic extends script.base_script
         }
         return true;
     }
+
     public void junk_dealer_generic_action_start_dealing(obj_id player, obj_id npc) throws InterruptedException
     {
         dictionary params = new dictionary();
         params.put("player", player);
         messageTo(npc, "startDealing", params, 0.0f, false);
     }
+
     public void junk_dealer_generic_action_face_to(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
     }
+
     public void junk_dealer_generic_action_giveOrange(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id playerInv = getObjectInSlot(player, "inventory");
@@ -111,8 +132,8 @@ public class junk_dealer_generic extends script.base_script
         {
             obj_id item = createObject("object/tangible/loot/collectible/kits/orange_rug_kit.iff", playerInv, "");
         }
-        return;
     }
+
     public void junk_dealer_generic_action_giveBlue(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id playerInv = getObjectInSlot(player, "inventory");
@@ -120,8 +141,8 @@ public class junk_dealer_generic extends script.base_script
         {
             obj_id item = createObject("object/tangible/loot/collectible/kits/blue_rug_kit.iff", playerInv, "");
         }
-        return;
     }
+
     public void junk_dealer_generic_action_giveGong(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id playerInv = getObjectInSlot(player, "inventory");
@@ -129,8 +150,8 @@ public class junk_dealer_generic extends script.base_script
         {
             obj_id item = createObject("object/tangible/loot/collectible/kits/gong_kit.iff", playerInv, "");
         }
-        return;
     }
+
     public void junk_dealer_generic_action_giveSculpture(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id playerInv = getObjectInSlot(player, "inventory");
@@ -138,8 +159,8 @@ public class junk_dealer_generic extends script.base_script
         {
             obj_id item = createObject("object/tangible/loot/collectible/kits/sculpture_kit.iff", playerInv, "");
         }
-        return;
     }
+
     public void junk_dealer_generic_action_giveTable(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id playerInv = getObjectInSlot(player, "inventory");
@@ -147,14 +168,15 @@ public class junk_dealer_generic extends script.base_script
         {
             obj_id item = createObject("object/tangible/loot/collectible/kits/light_table_kit.iff", playerInv, "");
         }
-        return;
     }
+
     public void junk_dealer_generic_action_startBuyBack(obj_id player, obj_id npc) throws InterruptedException
     {
         dictionary params = new dictionary();
         params.put("player", player);
         messageTo(npc, "startBuyBack", params, 0.0f, false);
     }
+
     public void junk_dealer_generic_action_createBuyBackContainer(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!isValidId(smuggler.createBuyBackControlDeviceOnPlayer(player)))
@@ -162,12 +184,14 @@ public class junk_dealer_generic extends script.base_script
             CustomerServiceLog("Junk_Dealer: ", "junk_dealer_generic conversation - Player (OID: " + player + ") did not get his buy back container set up properly.");
         }
     }
+
     public void junk_dealer_generic_action_startFlagNoSale(obj_id player, obj_id npc) throws InterruptedException
     {
         dictionary params = new dictionary();
         params.put("player", player);
         messageTo(npc, "startFlaggingItemsNoSale", params, 0.0f, false);
     }
+
     public int junk_dealer_generic_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_43"))
@@ -237,7 +261,7 @@ public class junk_dealer_generic extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6d53d062");
@@ -246,7 +270,7 @@ public class junk_dealer_generic extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.junk_dealer_generic.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -256,6 +280,7 @@ public class junk_dealer_generic extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int junk_dealer_generic_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6d53d062"))
@@ -275,7 +300,7 @@ public class junk_dealer_generic extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_324b9b0f");
@@ -284,7 +309,7 @@ public class junk_dealer_generic extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.junk_dealer_generic.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -294,6 +319,7 @@ public class junk_dealer_generic extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int junk_dealer_generic_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_324b9b0f"))
@@ -313,7 +339,7 @@ public class junk_dealer_generic extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e1a103e5");
@@ -322,7 +348,7 @@ public class junk_dealer_generic extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.junk_dealer_generic.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -332,6 +358,7 @@ public class junk_dealer_generic extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int junk_dealer_generic_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_e1a103e5"))
@@ -358,7 +385,7 @@ public class junk_dealer_generic extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d347bee3");
@@ -371,7 +398,7 @@ public class junk_dealer_generic extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.junk_dealer_generic.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -381,6 +408,7 @@ public class junk_dealer_generic extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int junk_dealer_generic_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d347bee3"))
@@ -428,7 +456,7 @@ public class junk_dealer_generic extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ee977dee");
@@ -453,7 +481,7 @@ public class junk_dealer_generic extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.junk_dealer_generic.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -480,6 +508,7 @@ public class junk_dealer_generic extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int junk_dealer_generic_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ee977dee"))
@@ -574,6 +603,7 @@ public class junk_dealer_generic extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -583,11 +613,13 @@ public class junk_dealer_generic extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -596,18 +628,21 @@ public class junk_dealer_generic extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.junk_dealer_generic");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -659,7 +694,7 @@ public class junk_dealer_generic extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_43");
@@ -683,7 +718,7 @@ public class junk_dealer_generic extends script.base_script
                 utils.setScriptVar(player, "conversation.junk_dealer_generic.branchId", 1);
                 npcStartConversation(player, npc, "junk_dealer_generic", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -692,6 +727,7 @@ public class junk_dealer_generic extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("junk_dealer_generic"))

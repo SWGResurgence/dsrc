@@ -1,38 +1,60 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class fs_medic_puzzle_head_medic extends script.base_script
 {
+    public static final String MEDIC_QUEST_NAME_ONE = "fs_medic_puzzle_quest_01";
+    public static final String MEDIC_QUEST_NAME_TWO = "fs_medic_puzzle_quest_02";
+    public static final String MEDIC_QUEST_NAME_THREE = "fs_medic_puzzle_quest_03";
+    public static final String REWARD_PART_THREE = "object/tangible/loot/plant_grow/plant_stage_1.iff";
+    public static final String REWARD_PART_TWO = "object/tangible/wearables/necklace/necklace_ice_pendant.iff";
+    public static final int FIRST_SET = 5;
+    public static final int SECOND_SET = 10;
+    public static final int THIRD_SET = 15;
+    public static String c_stringFile = "conversation/fs_medic_puzzle_head_medic";
+
     public fs_medic_puzzle_head_medic()
     {
     }
-    public static String c_stringFile = "conversation/fs_medic_puzzle_head_medic";
+
     public boolean fs_medic_puzzle_head_medic_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean fs_medic_puzzle_head_medic_condition_ableToDoMedicQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return fs_quests.hasQuestAccepted(player);
     }
+
     public boolean fs_medic_puzzle_head_medic_condition_CanTalkToVillagers(obj_id player, obj_id npc) throws InterruptedException
     {
         return fs_quests.isVillageEligible(player);
     }
+
     public boolean fs_medic_puzzle_head_medic_condition_hasCompleted1(obj_id player, obj_id npc) throws InterruptedException
     {
         return quests.canActivate(MEDIC_QUEST_NAME_TWO, player) && quests.isComplete(MEDIC_QUEST_NAME_ONE, player);
     }
+
     public boolean fs_medic_puzzle_head_medic_condition_hasCompleted2(obj_id player, obj_id npc) throws InterruptedException
     {
         return quests.canActivate(MEDIC_QUEST_NAME_THREE, player) && quests.isComplete(MEDIC_QUEST_NAME_TWO, player);
     }
+
     public boolean fs_medic_puzzle_head_medic_condition_Finished(obj_id player, obj_id npc) throws InterruptedException
     {
         return quests.isComplete("fs_medic_puzzle_quest_finish", player);
     }
+
     public boolean fs_medic_puzzle_head_medic_condition_inProgress(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "fs.numberHealed"))
@@ -45,46 +67,38 @@ public class fs_medic_puzzle_head_medic extends script.base_script
             {
                 return true;
             }
-            if (utils.getIntObjVar(player, "fs.numberHealed") < THIRD_SET && !quests.isComplete(MEDIC_QUEST_NAME_THREE, player) && quests.isActive(MEDIC_QUEST_NAME_THREE, player))
-            {
-                return true;
-            }
+            return utils.getIntObjVar(player, "fs.numberHealed") < THIRD_SET && !quests.isComplete(MEDIC_QUEST_NAME_THREE, player) && quests.isActive(MEDIC_QUEST_NAME_THREE, player);
         }
         return false;
     }
+
     public boolean fs_medic_puzzle_head_medic_condition_healedFirstSet(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "fs.numberHealed"))
         {
-            if (utils.getIntObjVar(player, "fs.numberHealed") >= FIRST_SET && quests.isActive(MEDIC_QUEST_NAME_ONE, player))
-            {
-                return true;
-            }
+            return utils.getIntObjVar(player, "fs.numberHealed") >= FIRST_SET && quests.isActive(MEDIC_QUEST_NAME_ONE, player);
         }
         return false;
     }
+
     public boolean fs_medic_puzzle_head_medic_condition_healedSecondSet(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "fs.numberHealed"))
         {
-            if (utils.getIntObjVar(player, "fs.numberHealed") >= SECOND_SET && quests.isActive(MEDIC_QUEST_NAME_TWO, player))
-            {
-                return true;
-            }
+            return utils.getIntObjVar(player, "fs.numberHealed") >= SECOND_SET && quests.isActive(MEDIC_QUEST_NAME_TWO, player);
         }
         return false;
     }
+
     public boolean fs_medic_puzzle_head_medic_condition_healedThirdSet(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "fs.numberHealed"))
         {
-            if (utils.getIntObjVar(player, "fs.numberHealed") >= THIRD_SET && quests.isActive(MEDIC_QUEST_NAME_THREE, player))
-            {
-                return true;
-            }
+            return utils.getIntObjVar(player, "fs.numberHealed") >= THIRD_SET && quests.isActive(MEDIC_QUEST_NAME_THREE, player);
         }
         return false;
     }
+
     public boolean fs_medic_puzzle_head_medic_condition_InventoryCheck(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id inv = utils.getInventoryContainer(player);
@@ -101,18 +115,17 @@ public class fs_medic_puzzle_head_medic extends script.base_script
                 {
                     return true;
                 }
-                if (utils.getIntObjVar(player, "fs.numberHealed") >= THIRD_SET && !quests.isComplete(MEDIC_QUEST_NAME_THREE, player))
-                {
-                    return true;
-                }
+                return utils.getIntObjVar(player, "fs.numberHealed") >= THIRD_SET && !quests.isComplete(MEDIC_QUEST_NAME_THREE, player);
             }
         }
         return false;
     }
+
     public boolean fs_medic_puzzle_head_medic_condition_haveMedicSkill(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasSkill(player, "science_medic_master");
     }
+
     public void fs_medic_puzzle_head_medic_action_GiveQuest1(obj_id player, obj_id npc) throws InterruptedException
     {
         quests.activate(MEDIC_QUEST_NAME_ONE, player, npc);
@@ -120,21 +133,25 @@ public class fs_medic_puzzle_head_medic extends script.base_script
         attachScript(player, "systems.fs_quest.fs_medic_puzzle_cleanup");
         setObjVar(player, "fs.numberHealed", 0);
     }
+
     public void fs_medic_puzzle_head_medic_action_GiveDraftSchematic(obj_id player, obj_id npc) throws InterruptedException
     {
         grantSchematic(player, "object/draft_schematic/item/quest_item/fs_medic_puzzle_heal_pack.iff");
     }
+
     public void fs_medic_puzzle_head_medic_action_Complete1(obj_id player, obj_id npc) throws InterruptedException
     {
         fs_quests.unlockBranch(player, "force_sensitive_heightened_senses_persuasion");
         quests.complete(MEDIC_QUEST_NAME_ONE, player, true);
     }
+
     public void fs_medic_puzzle_head_medic_action_Complete2(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id playerInventory = utils.getInventoryContainer(player);
         obj_id createdObject = createObject(REWARD_PART_TWO, playerInventory, "");
         quests.complete(MEDIC_QUEST_NAME_TWO, player, true);
     }
+
     public void fs_medic_puzzle_head_medic_action_Complete3(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id playerInventory = utils.getInventoryContainer(player);
@@ -142,14 +159,17 @@ public class fs_medic_puzzle_head_medic extends script.base_script
         quests.complete(MEDIC_QUEST_NAME_THREE, player, true);
         detachScript(player, "systems.fs_quest.fs_medic_puzzle_cleanup");
     }
+
     public void fs_medic_puzzle_head_medic_action_GiveQuest2(obj_id player, obj_id npc) throws InterruptedException
     {
         quests.activate(MEDIC_QUEST_NAME_TWO, player, npc);
     }
+
     public void fs_medic_puzzle_head_medic_action_GiveQuest3(obj_id player, obj_id npc) throws InterruptedException
     {
         quests.activate(MEDIC_QUEST_NAME_THREE, player, npc);
     }
+
     public String fs_medic_puzzle_head_medic_tokenTO_NumberLeftToHeal(obj_id player, obj_id npc) throws InterruptedException
     {
         int peopleHealed = 0;
@@ -168,14 +188,7 @@ public class fs_medic_puzzle_head_medic extends script.base_script
         peopleHealed = 5 - peopleHealed;
         return Integer.toString(peopleHealed);
     }
-    public static final String MEDIC_QUEST_NAME_ONE = "fs_medic_puzzle_quest_01";
-    public static final String MEDIC_QUEST_NAME_TWO = "fs_medic_puzzle_quest_02";
-    public static final String MEDIC_QUEST_NAME_THREE = "fs_medic_puzzle_quest_03";
-    public static final String REWARD_PART_THREE = "object/tangible/loot/plant_grow/plant_stage_1.iff";
-    public static final String REWARD_PART_TWO = "object/tangible/wearables/necklace/necklace_ice_pendant.iff";
-    public static final int FIRST_SET = 5;
-    public static final int SECOND_SET = 10;
-    public static final int THIRD_SET = 15;
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -185,11 +198,13 @@ public class fs_medic_puzzle_head_medic extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -198,18 +213,21 @@ public class fs_medic_puzzle_head_medic extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "npc.conversation.fs_medic_puzzle_head_medic");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -270,7 +288,7 @@ public class fs_medic_puzzle_head_medic extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_3c93827f");
@@ -283,7 +301,7 @@ public class fs_medic_puzzle_head_medic extends script.base_script
                 pp.other.set(fs_medic_puzzle_head_medic_tokenTO_NumberLeftToHeal(player, self));
                 npcStartConversation(player, self, "fs_medic_puzzle_head_medic", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -316,7 +334,7 @@ public class fs_medic_puzzle_head_medic extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_86129116");
@@ -328,7 +346,7 @@ public class fs_medic_puzzle_head_medic extends script.base_script
                 setObjVar(player, "conversation.fs_medic_puzzle_head_medic.branchId", 9);
                 npcStartConversation(player, self, "fs_medic_puzzle_head_medic", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -356,7 +374,7 @@ public class fs_medic_puzzle_head_medic extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_86129116");
@@ -368,7 +386,7 @@ public class fs_medic_puzzle_head_medic extends script.base_script
                 setObjVar(player, "conversation.fs_medic_puzzle_head_medic.branchId", 12);
                 npcStartConversation(player, self, "fs_medic_puzzle_head_medic", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -408,7 +426,7 @@ public class fs_medic_puzzle_head_medic extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1024d197");
@@ -420,7 +438,7 @@ public class fs_medic_puzzle_head_medic extends script.base_script
                 setObjVar(player, "conversation.fs_medic_puzzle_head_medic.branchId", 17);
                 npcStartConversation(player, self, "fs_medic_puzzle_head_medic", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -429,6 +447,7 @@ public class fs_medic_puzzle_head_medic extends script.base_script
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("fs_medic_puzzle_head_medic"))
@@ -527,7 +546,7 @@ public class fs_medic_puzzle_head_medic extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cc64464a");
@@ -540,7 +559,7 @@ public class fs_medic_puzzle_head_medic extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.fs_medic_puzzle_head_medic.branchId");
                     npcSpeak(player, message);
@@ -583,7 +602,7 @@ public class fs_medic_puzzle_head_medic extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7857c2a9");
@@ -592,7 +611,7 @@ public class fs_medic_puzzle_head_medic extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.fs_medic_puzzle_head_medic.branchId");
                     npcSpeak(player, message);
@@ -640,7 +659,7 @@ public class fs_medic_puzzle_head_medic extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d17142db");
@@ -653,7 +672,7 @@ public class fs_medic_puzzle_head_medic extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.fs_medic_puzzle_head_medic.branchId");
                     npcSpeak(player, message);

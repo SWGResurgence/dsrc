@@ -1,18 +1,27 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class emp_day_data_officer extends script.base_script
 {
+    public static String c_stringFile = "conversation/emp_day_data_officer";
+
     public emp_day_data_officer()
     {
     }
-    public static String c_stringFile = "conversation/emp_day_data_officer";
+
     public boolean emp_day_data_officer_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean emp_day_data_officer_condition_isRebel(obj_id player, obj_id npc) throws InterruptedException
     {
         int factionHashCode = factions.pvpGetAlignedFaction(player);
@@ -21,12 +30,9 @@ public class emp_day_data_officer extends script.base_script
         {
             return false;
         }
-        if (whichFaction.equals("Rebel"))
-        {
-            return true;
-        }
-        return false;
+        return whichFaction.equals("Rebel");
     }
+
     public boolean emp_day_data_officer_condition_notReadyForYou(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/emp_day_imperial");
@@ -38,18 +44,21 @@ public class emp_day_data_officer extends script.base_script
         int task4 = groundquests.getTaskId(questId, "disksToHistorian");
         return (questIsTaskActive(questId, task1, player) || questIsTaskActive(questId, task2, player) || questIsTaskActive(questId, task3a, player) || questIsTaskActive(questId, task3b, player) || questIsTaskActive(questId, task3c, player) || questIsTaskActive(questId, task4, player) || !questIsQuestActive(questId, player));
     }
+
     public boolean emp_day_data_officer_condition_hasTask5(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/emp_day_imperial");
         int task5 = groundquests.getTaskId(questId, "toDataOfficer");
         return questIsTaskActive(questId, task5, player);
     }
+
     public boolean emp_day_data_officer_condition_hasTask6(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/emp_day_imperial");
         int task6 = groundquests.getTaskId(questId, "toCommander");
         return questIsTaskActive(questId, task6, player);
     }
+
     public void emp_day_data_officer_action_wpToCommander(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "empire_day.waypoint"))
@@ -64,10 +73,12 @@ public class emp_day_data_officer extends script.base_script
         setWaypointName(waypoint, "Commander");
         sendSystemMessage(player, new string_id("event/empire_day", "sys_msg_wp_added"));
     }
+
     public void emp_day_data_officer_action_signal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "to_data_officer");
     }
+
     public int emp_day_data_officer_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_304"))
@@ -84,6 +95,7 @@ public class emp_day_data_officer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_data_officer_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_310"))
@@ -110,7 +122,7 @@ public class emp_day_data_officer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_314");
@@ -123,7 +135,7 @@ public class emp_day_data_officer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_data_officer.branchId");
                     chat.chat(npc, player, message);
@@ -134,6 +146,7 @@ public class emp_day_data_officer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_data_officer_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_314"))
@@ -160,7 +173,7 @@ public class emp_day_data_officer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_318");
@@ -173,7 +186,7 @@ public class emp_day_data_officer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_data_officer.branchId");
                     chat.chat(npc, player, message);
@@ -206,7 +219,7 @@ public class emp_day_data_officer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_330");
@@ -219,7 +232,7 @@ public class emp_day_data_officer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_data_officer.branchId");
                     chat.chat(npc, player, message);
@@ -230,6 +243,7 @@ public class emp_day_data_officer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_data_officer_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_318"))
@@ -258,6 +272,7 @@ public class emp_day_data_officer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_data_officer_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_330"))
@@ -286,6 +301,7 @@ public class emp_day_data_officer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -295,11 +311,13 @@ public class emp_day_data_officer extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -308,18 +326,21 @@ public class emp_day_data_officer extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.emp_day_data_officer");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -354,7 +375,7 @@ public class emp_day_data_officer extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_304");
@@ -362,7 +383,7 @@ public class emp_day_data_officer extends script.base_script
                 utils.setScriptVar(player, "conversation.emp_day_data_officer.branchId", 3);
                 npcStartConversation(player, npc, "emp_day_data_officer", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -383,7 +404,7 @@ public class emp_day_data_officer extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_310");
@@ -391,7 +412,7 @@ public class emp_day_data_officer extends script.base_script
                 utils.setScriptVar(player, "conversation.emp_day_data_officer.branchId", 5);
                 npcStartConversation(player, npc, "emp_day_data_officer", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -400,6 +421,7 @@ public class emp_day_data_officer extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("emp_day_data_officer"))

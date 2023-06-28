@@ -1,20 +1,30 @@
 package script.developer.soe.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class rhanz_test extends script.base.remote_object_requester
 {
+    public static final String STARTING_EQUIPMENT_FILE = "datatables/equipment/newbie_equipment.iff";
+
     public rhanz_test()
     {
     }
-    public static final String STARTING_EQUIPMENT_FILE = "datatables/equipment/newbie_equipment.iff";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        if (!isGod(self) || getGodLevel(self) < 50 || !isPlayer(self)) {
+        if (!isGod(self) || getGodLevel(self) < 50 || !isPlayer(self))
+        {
             detachScript(self, "test.rhanz_test");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (isGod(self))
@@ -40,60 +50,60 @@ public class rhanz_test extends script.base.remote_object_requester
                 else if (command.equalsIgnoreCase("rh_commands1"))
                 {
                     debugSpeakMsg(self, "commands1");
-                    String commands[] = 
-                    {
-                        "bm_follow_1",
-                        "bm_stay_1",
-                        "bm_pet_attack",
-                        "invalid",
-                        "empty",
-                        ""
-                    };
+                    String[] commands =
+                            {
+                                    "bm_follow_1",
+                                    "bm_stay_1",
+                                    "bm_pet_attack",
+                                    "invalid",
+                                    "empty",
+                                    ""
+                            };
                     setBeastmasterPetCommands(self, commands);
                 }
                 else if (command.equalsIgnoreCase("rh_commands2"))
                 {
                     debugSpeakMsg(self, "commands2");
-                    String commands[] = 
-                    {
-                        "",
-                        "invalid",
-                        "empty",
-                        "bm_pet_attack",
-                        "bm_stay_1",
-                        "bm_follow_1"
-                    };
+                    String[] commands =
+                            {
+                                    "",
+                                    "invalid",
+                                    "empty",
+                                    "bm_pet_attack",
+                                    "bm_stay_1",
+                                    "bm_follow_1"
+                            };
                     setBeastmasterPetCommands(self, commands);
                 }
                 else if (command.equalsIgnoreCase("rh_clearcommands"))
                 {
                     debugSpeakMsg(self, "clear commands");
-                    String commands[] = 
-                    {
-                    };
+                    String[] commands =
+                            {
+                            };
                     setBeastmasterPetCommands(self, commands);
                 }
                 else if (command.equalsIgnoreCase("rh_toggle1"))
                 {
-                    String commands[] = 
-                    {
-                        "bm_bite_1"
-                    };
+                    String[] commands =
+                            {
+                                    "bm_bite_1"
+                            };
                     setBeastmasterToggledPetCommands(self, commands);
                 }
                 else if (command.equalsIgnoreCase("rh_toggle2"))
                 {
-                    String commands[] = 
-                    {
-                        "toggleBeastDefensive"
-                    };
+                    String[] commands =
+                            {
+                                    "toggleBeastDefensive"
+                            };
                     setBeastmasterToggledPetCommands(self, commands);
                 }
                 else if (command.equalsIgnoreCase("rh_cleartoggles"))
                 {
-                    String commands[] = 
-                    {
-                    };
+                    String[] commands =
+                            {
+                            };
                     setBeastmasterToggledPetCommands(self, commands);
                 }
             }

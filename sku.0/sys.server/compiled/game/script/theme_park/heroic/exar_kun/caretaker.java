@@ -1,5 +1,11 @@
 package script.theme_park.heroic.exar_kun;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.buff;
 import script.library.trial;
@@ -11,6 +17,7 @@ public class caretaker extends script.base_script
     public caretaker()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setMovementPercent(self, 0.0f);
@@ -18,6 +25,7 @@ public class caretaker extends script.base_script
         setObjVar(self, "isImmobile", true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         obj_id[] players = trial.getValidTargetsInCell(trial.getTop(self), "r4");
@@ -29,7 +37,8 @@ public class caretaker extends script.base_script
             messageTo(trial.getTop(self), "triggerFired", dict, 1.0f, false);
             return SCRIPT_CONTINUE;
         }
-        for (obj_id player : players) {
+        for (obj_id player : players)
+        {
             startCombat(self, player);
         }
         buff.applyBuff(self, "caretaker_shield_reflect", 7200.0f);
@@ -38,6 +47,7 @@ public class caretaker extends script.base_script
         messageTo(self, "execute", trial.getSessionDict(self, "execute"), 65.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int lightning(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params, "lightning"))
@@ -62,13 +72,14 @@ public class caretaker extends script.base_script
         {
             setLocation(getHateTarget(self), getLocation(self));
         }
-        else 
+        else
         {
             queueCommand(self, (-1651783164), getHateTarget(self), "", COMMAND_PRIORITY_DEFAULT);
         }
         messageTo(self, "lightning", trial.getSessionDict(self, "lightning"), recast, false);
         return SCRIPT_CONTINUE;
     }
+
     public int start_phase_2(obj_id self, dictionary params) throws InterruptedException
     {
         trial.bumpSession(self, "lightning");
@@ -81,6 +92,7 @@ public class caretaker extends script.base_script
         messageTo(self, "vapor", null, 10.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int drain(obj_id self, dictionary params) throws InterruptedException
     {
         if (isDead(self))
@@ -91,13 +103,14 @@ public class caretaker extends script.base_script
         {
             setLocation(getHateTarget(self), getLocation(self));
         }
-        else 
+        else
         {
             queueCommand(self, (-1207690240), getHateTarget(self), "", COMMAND_PRIORITY_DEFAULT);
         }
         messageTo(self, "drain", null, 35.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int vapor(obj_id self, dictionary params) throws InterruptedException
     {
         if (isDead(self))
@@ -113,21 +126,22 @@ public class caretaker extends script.base_script
         switch (vapors)
         {
             case 0:
-            break;
+                break;
             case 1:
-            nextVapor = 15.0f;
-            break;
+                nextVapor = 15.0f;
+                break;
             case 2:
-            nextVapor = 10.0f;
-            break;
+                nextVapor = 10.0f;
+                break;
             default:
-            nextVapor = 20.0f;
+                nextVapor = 20.0f;
         }
         vapors++;
         utils.setScriptVar(self, "num_vapor", vapors);
         messageTo(self, "vapor", null, nextVapor, false);
         return SCRIPT_CONTINUE;
     }
+
     public int summonAdd(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params, "adds"))
@@ -141,6 +155,7 @@ public class caretaker extends script.base_script
         messageTo(self, "summonAdd", trial.getSessionDict(self, "adds"), 80.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int execute(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params, "execute"))
@@ -152,17 +167,22 @@ public class caretaker extends script.base_script
         obj_id guard2 = null;
         obj_id guard3 = null;
         obj_id guard4 = null;
-        for (obj_id obj_id : allNpc) {
-            if ((getStringObjVar(obj_id, "spawn_id")).equals("ct_guard_2")) {
+        for (obj_id obj_id : allNpc)
+        {
+            if ((getStringObjVar(obj_id, "spawn_id")).equals("ct_guard_2"))
+            {
                 guard1 = obj_id;
             }
-            if ((getStringObjVar(obj_id, "spawn_id")).equals("ct_guard_1")) {
+            if ((getStringObjVar(obj_id, "spawn_id")).equals("ct_guard_1"))
+            {
                 guard2 = obj_id;
             }
-            if ((getStringObjVar(obj_id, "spawn_id")).equals("ct_guard_3")) {
+            if ((getStringObjVar(obj_id, "spawn_id")).equals("ct_guard_3"))
+            {
                 guard3 = obj_id;
             }
-            if ((getStringObjVar(obj_id, "spawn_id")).equals("ct_guard_4")) {
+            if ((getStringObjVar(obj_id, "spawn_id")).equals("ct_guard_4"))
+            {
                 guard4 = obj_id;
             }
         }

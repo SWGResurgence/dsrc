@@ -1,5 +1,11 @@
 package script.theme_park.heroic.exar_kun;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.trial;
@@ -10,12 +16,14 @@ public class exar_kun extends script.base_script
     public exar_kun()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCreatureCoverVisibility(self, false);
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int kill_command(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] players = trial.getValidTargetsInCell(trial.getTop(self), "r7");
@@ -24,12 +32,12 @@ public class exar_kun extends script.base_script
         startCombat(self, closest);
         obj_id swordsman = getFirstObjectWithScript(getLocation(self), 100.0f, "theme_park.heroic.exar_kun.exar_swordsman");
         obj_id observer = getFirstObjectWithScript(getLocation(self), 100.0f, "theme_park.heroic.exar_kun.exar_observer");
-        obj_id[] team = 
-        {
-            self,
-            swordsman,
-            observer
-        };
+        obj_id[] team =
+                {
+                        self,
+                        swordsman,
+                        observer
+                };
         ai_lib.establishAgroLink(self, team);
         return SCRIPT_CONTINUE;
     }

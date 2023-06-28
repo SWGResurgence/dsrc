@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.nova_orion_station;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.create;
 import script.library.utils;
@@ -9,6 +15,7 @@ public class nova_orion_gravestone_node extends script.base_script
     public nova_orion_gravestone_node()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "graveEventInProgress"))
@@ -25,6 +32,7 @@ public class nova_orion_gravestone_node extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "graveEventInProgress"))
@@ -41,6 +49,7 @@ public class nova_orion_gravestone_node extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         if (isGod(player))
@@ -49,6 +58,7 @@ public class nova_orion_gravestone_node extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU1)
@@ -64,6 +74,7 @@ public class nova_orion_gravestone_node extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int startNoFinaleEvent(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -96,6 +107,7 @@ public class nova_orion_gravestone_node extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int safeResetNoFinaleEvent(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id cleanupPlayer = params.getObjId("player");
@@ -125,6 +137,7 @@ public class nova_orion_gravestone_node extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cleanupNoFinaleEvent(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "graveEventInProgress"))

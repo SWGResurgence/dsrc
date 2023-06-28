@@ -1,20 +1,27 @@
 package script.theme_park.outbreak;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.groundquests;
 
 public class hidden_content_object extends script.base_script
 {
-    public hidden_content_object()
-    {
-    }
     public static final String MENU_STRING_FILE = "theme_park/outbreak/outbreak";
     public static final String MENU_OBJ_VAR = "menu_string";
     public static final String QUEST_OBJ_VAR = "questName";
     public static final String SPAWNER_OBJ_VAR = "mySpawner";
     public static final string_id SID_YOU_FIND_NOTHING = new string_id(MENU_STRING_FILE, "you_find_nothing");
     public static final string_id SID_THIS_NOT_FOR_YOU = new string_id(MENU_STRING_FILE, "this_isnt_for_you");
+    public hidden_content_object()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!isMob(self))
@@ -24,6 +31,7 @@ public class hidden_content_object extends script.base_script
         messageTo(self, "knockDown", null, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!isMob(self))
@@ -33,6 +41,7 @@ public class hidden_content_object extends script.base_script
         messageTo(self, "knockDown", null, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -63,6 +72,7 @@ public class hidden_content_object extends script.base_script
         mi.addRootMenu(menu_info_types.SERVER_MENU2, new string_id(MENU_STRING_FILE, menuObjVar));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -104,11 +114,13 @@ public class hidden_content_object extends script.base_script
         messageTo(self, "destroySelf", null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int knockDown(obj_id self, dictionary params) throws InterruptedException
     {
         ai_lib.aiSetPosture(self, POSTURE_KNOCKED_DOWN);
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "mySpawner"))

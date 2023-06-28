@@ -1,5 +1,11 @@
 package script.planet_map;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.planetary_map;
 import script.location;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class map_loc extends script.planet_map.map_loc_base
     public map_loc()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         String template = getTemplateName(self);
@@ -28,7 +35,7 @@ public class map_loc extends script.planet_map.map_loc_base
             LOG("planetaryMapLocation", "trigger OnInitialize()");
             LOG("planetaryMapLocation", "WARNING: unable to add self (" + self + ") as planetary map location!");
             LOG("planetaryMapLocation", "template = " + template);
-            LOG("planetaryMapLocation", "here = " + here.toString());
+            LOG("planetaryMapLocation", "here = " + here);
         }
         return SCRIPT_CONTINUE;
     }

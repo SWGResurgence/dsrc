@@ -1,5 +1,11 @@
 package script.event.aprilfools;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -12,23 +18,26 @@ import java.util.Vector;
 
 public class starport_april_fools extends script.base_script
 {
-    public starport_april_fools()
-    {
-    }
     public static final String CITY_OBJVAR = "aprilFools.city";
     public static final String LAST_SPAWN = "aprilFools.lastSpawn";
     public static final String CREATURE_LIST = "aprilFools.creatures";
     public static final String SPAWN_DATATABLE = "datatables/event/aprilfools/aprilfools09.iff";
+    public starport_april_fools()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setObjVar(self, LAST_SPAWN, 0);
         messageTo(self, "heartbeat", null, 60.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int heartbeat(obj_id self, dictionary params) throws InterruptedException
     {
         String foolsDayRunning = getConfigSetting("GameServer", "foolsDay");
-        if(foolsDayRunning == null || foolsDayRunning.equals("false") || foolsDayRunning.equals("0")){
+        if (foolsDayRunning == null || foolsDayRunning.equals("false") || foolsDayRunning.equals("0"))
+        {
             return SCRIPT_CONTINUE;
         }
         if (foolsDayRunning.length() <= 0)
@@ -94,10 +103,12 @@ public class starport_april_fools extends script.base_script
             if (hasObjVar(self, CREATURE_LIST))
             {
                 currentCreatures = getObjIdArrayObjVar(self, CREATURE_LIST);
-                if (currentCreatures != null && currentCreatures.length > 0)
+                if (currentCreatures != null)
                 {
-                    for (obj_id currentCreature : currentCreatures) {
-                        if (isIdValid(currentCreature) && exists(currentCreature) && !isDead(currentCreature)) {
+                    for (obj_id currentCreature : currentCreatures)
+                    {
+                        if (isIdValid(currentCreature) && exists(currentCreature) && !isDead(currentCreature))
+                        {
                             ++totalCreatures;
                             utils.addElement(creatureList, currentCreature);
                         }
@@ -130,17 +141,22 @@ public class starport_april_fools extends script.base_script
         messageTo(self, "heartbeat", null, 60.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanupCreatures(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, CREATURE_LIST))
         {
             obj_id[] currentCreatures = getObjIdArrayObjVar(self, CREATURE_LIST);
-            if (currentCreatures != null && currentCreatures.length > 0)
+            if (currentCreatures != null)
             {
-                for (obj_id currentCreature : currentCreatures) {
-                    if (isIdValid(currentCreature) && exists(currentCreature) && !isDead(currentCreature)) {
-                        if (ai_lib.isInCombat(currentCreature)) {
-                            if (!utils.hasScriptVar(self, "destroyDelay")) {
+                for (obj_id currentCreature : currentCreatures)
+                {
+                    if (isIdValid(currentCreature) && exists(currentCreature) && !isDead(currentCreature))
+                    {
+                        if (ai_lib.isInCombat(currentCreature))
+                        {
+                            if (!utils.hasScriptVar(self, "destroyDelay"))
+                            {
                                 utils.setScriptVar(self, "destroyDelay", 1);
                                 return SCRIPT_CONTINUE;
                             }

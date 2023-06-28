@@ -1,5 +1,11 @@
 package script.theme_park.dathomir.aurilia;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -10,17 +16,19 @@ import java.util.Vector;
 
 public class citizen extends script.base_script
 {
-    public citizen()
-    {
-    }
     public static final String SOCIAL_VOLUME = "npc_socialization";
     public static final float SOCIAL_RANGE = 8.0f;
     public static final int NUM_UTTERANCE_OPTIONS = 15;
+    public citizen()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "initializeSocialVolume", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int initializeSocialVolume(obj_id self, dictionary params) throws InterruptedException
     {
         if (isInvulnerable(self))
@@ -41,6 +49,7 @@ public class citizen extends script.base_script
         createTriggerVolume(SOCIAL_VOLUME, SOCIAL_RANGE, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (!isMob(breacher) || breacher == self)
@@ -56,6 +65,7 @@ public class citizen extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void npcUtterance(obj_id npc, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(npc))
@@ -91,12 +101,12 @@ public class citizen extends script.base_script
         {
             return;
         }
-        String[] utteranceTypes = 
-        {
-            "normal",
-            "normal",
-            "normal"
-        };
+        String[] utteranceTypes =
+                {
+                        "normal",
+                        "normal",
+                        "normal"
+                };
         if (badge.hasBadge(player, "bdg_jedi_elder"))
         {
             if (rand(1, 2) == 1)
@@ -123,8 +133,8 @@ public class citizen extends script.base_script
         {
             doAnimationAction(npc, animationType);
         }
-        return;
     }
+
     public String chooseHeroicString(obj_id player) throws InterruptedException
     {
         String heroicChoice = "";
@@ -145,10 +155,11 @@ public class citizen extends script.base_script
         if (heroicChoices != null && heroicChoices.size() > 0)
         {
             int pickOne = rand(0, (heroicChoices.size() - 1));
-            heroicChoice = ((String)heroicChoices.get(pickOne));
+            heroicChoice = ((String) heroicChoices.get(pickOne));
         }
         return heroicChoice;
     }
+
     public String getGenderString(obj_id player) throws InterruptedException
     {
         String genderString = "it";
@@ -156,12 +167,12 @@ public class citizen extends script.base_script
         switch (gender)
         {
             case FEMALE:
-            genderString = "she";
-            break;
+                genderString = "she";
+                break;
             case MALE:
             default:
-            genderString = "he";
-            break;
+                genderString = "he";
+                break;
         }
         return genderString;
     }

@@ -1,5 +1,11 @@
 package script.space.crafting;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.space_crafting;
 import script.library.utils;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class component_loot extends script.base_script
     public component_loot()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "ship_comp.armor_hitpoints_current"))
@@ -20,9 +27,11 @@ public class component_loot extends script.base_script
         obj_id player = utils.getContainingPlayer(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
-        if(self == null || self == obj_id.NULL_ID || !isIdValid(self)){
+        if (self == null || self == obj_id.NULL_ID || !isIdValid(self))
+        {
             return SCRIPT_CONTINUE;
         }
         int flags = getIntObjVar(self, "ship_comp.flags");
@@ -37,7 +46,7 @@ public class component_loot extends script.base_script
             names[idx] = "reverseEngineered";
             attribs[idx] = "";
         }
-        else 
+        else
         {
             int level = space_crafting.getReverseEngineeringLevel(self);
             int idx = utils.getValidAttributeIndex(names);

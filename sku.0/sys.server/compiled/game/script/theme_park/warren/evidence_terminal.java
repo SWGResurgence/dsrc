@@ -1,16 +1,23 @@
 package script.theme_park.warren;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.sui;
 import script.library.utils;
 import script.*;
 
 public class evidence_terminal extends script.base_script
 {
+    public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
+    public static final String PASSKEYCODE = "object/intangible/data_item/warren_evidence_0";
     public evidence_terminal()
     {
     }
-    public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
-    public static final String PASSKEYCODE = "object/intangible/data_item/warren_evidence_0";
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (hasEncryptionKey(self, player))
@@ -21,6 +28,7 @@ public class evidence_terminal extends script.base_script
         mi.addRootMenu(menu_info_types.ITEM_USE, new string_id(SYSTEM_MESSAGES, "get_evidence"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item != menu_info_types.ITEM_USE)
@@ -56,6 +64,7 @@ public class evidence_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean hasEncryptionKey(obj_id terminal, obj_id player) throws InterruptedException
     {
         int evidencePiece = getIntObjVar(terminal, "warren.evidence");
@@ -74,9 +83,12 @@ public class evidence_terminal extends script.base_script
         {
             return false;
         }
-        for (obj_id content : contents) {
-            if (hasObjVar(content, "warren.evidence")) {
-                if (getIntObjVar(content, "warren.evidence") == evidencePiece) {
+        for (obj_id content : contents)
+        {
+            if (hasObjVar(content, "warren.evidence"))
+            {
+                if (getIntObjVar(content, "warren.evidence") == evidencePiece)
+                {
                     return true;
                 }
             }

@@ -1,95 +1,120 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class rek_thelcar extends script.base_script
 {
+    public static String c_stringFile = "conversation/rek_thelcar";
+
     public rek_thelcar()
     {
     }
-    public static String c_stringFile = "conversation/rek_thelcar";
+
     public boolean rek_thelcar_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean rek_thelcar_condition_isEligibleSurveillance(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return !groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_pirate_surveillance_collection") && groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_pirate_hideout");
     }
+
     public boolean rek_thelcar_condition_isElligibleMinerDna(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return !groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_miner_dna_collection") && groundquests.hasCompletedQuest(player, "u16_nym_themepark_pirate_surveillance_collection") && groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_mine");
     }
+
     public boolean rek_thelcar_condition_isElligibleQuestion(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return !groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_question_scientist_collection") && groundquests.hasCompletedQuest(player, "u16_nym_themepark_miner_dna_collection") && groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_research_facility");
     }
+
     public boolean rek_thelcar_condition_hasReturnedMinerDna(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isTaskActive(player, "u16_nym_themepark_miner_dna_collection", "returnExtractMinerDnaComplete");
     }
+
     public boolean rek_thelcar_condition_hasReturnedQuestion(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isTaskActive(player, "u16_nym_themepark_question_scientist_collection", "returnQuestionComplete");
     }
+
     public boolean rek_thelcar_condition_hasSurveillanceNotComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isQuestActive(player, "u16_nym_themepark_pirate_surveillance_collection");
     }
+
     public boolean rek_thelcar_condition_hasMinerDnaNotComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isQuestActive(player, "u16_nym_themepark_miner_dna_collection");
     }
+
     public boolean rek_thelcar_condition_hasQuestionNotComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isQuestActive(player, "u16_nym_themepark_question_scientist_collection");
     }
+
     public boolean rek_thelcar_condition_hasReturnedSurveillance(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isTaskActive(player, "u16_nym_themepark_pirate_surveillance_collection", "returnSurveillanceComplete");
     }
+
     public boolean rek_thelcar_condition_hasntDoneSurveillance(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return !groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_pirate_hideout");
     }
+
     public boolean rek_thelcar_condition_hasntDoneMinerDNA(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return !groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_mine") && groundquests.hasCompletedQuest(player, "u16_nym_themepark_pirate_hideout") && groundquests.hasCompletedQuest(player, "u16_nym_themepark_pirate_surveillance_collection");
     }
+
     public boolean rek_thelcar_condition_hasntDoneQuestion(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return !groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_research_facility") && groundquests.hasCompletedQuest(player, "u16_nym_themepark_mine") && groundquests.hasCompletedQuest(player, "u16_nym_themepark_miner_dna_collection");
     }
+
     public boolean rek_thelcar_condition_hasCompletedScientistCollection(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasCompletedCollection(player, "nyms_question_scientist") && groundquests.isQuestActive(player, "u16_nym_themepark_question_scientist_collection");
     }
+
     public boolean rek_thelcar_condition_hasCompletedDNACollection(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasCompletedCollection(player, "nyms_miner_dna") && groundquests.isQuestActive(player, "u16_nym_themepark_miner_dna_collection");
     }
+
     public boolean rek_thelcar_condition_hasCompletedDeviceCollection(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasCompletedCollection(player, "nyms_surveillance_device") && groundquests.isQuestActive(player, "u16_nym_themepark_pirate_surveillance_collection");
     }
+
     public boolean rek_thelcar_condition_hasCompletedAll(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.hasCompletedQuest(player, "u16_nym_themepark_question_scientist_collection");
     }
+
     public void rek_thelcar_action_grantSurveillanceQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "u16_nym_themepark_pirate_surveillance_collection");
@@ -98,6 +123,7 @@ public class rek_thelcar extends script.base_script
             modifyCollectionSlotValue(player, "nym_surveillance_activation", 1);
         }
     }
+
     public void rek_thelcar_action_grantMinerDnaQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id playerInv = utils.getInventoryContainer(player);
@@ -108,6 +134,7 @@ public class rek_thelcar extends script.base_script
             modifyCollectionSlotValue(player, "nym_miner_dna_activation", 1);
         }
     }
+
     public void rek_thelcar_action_grantQuestionScientistQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "u16_nym_themepark_question_scientist_collection");
@@ -116,6 +143,7 @@ public class rek_thelcar extends script.base_script
             modifyCollectionSlotValue(player, "nym_question_scientist_activation", 1);
         }
     }
+
     public void rek_thelcar_action_completeSurveillanceQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isTaskActive(player, "u16_nym_themepark_pirate_surveillance_collection", "returnSurveillanceComplete"))
@@ -127,6 +155,7 @@ public class rek_thelcar extends script.base_script
             modifyCollectionSlotValue(player, "icon_nyms_master_collection_1_surveillance", 1);
         }
     }
+
     public void rek_thelcar_action_completeMinerDnaQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isTaskActive(player, "u16_nym_themepark_miner_dna_collection", "returnExtractMinerDnaComplete"))
@@ -137,11 +166,13 @@ public class rek_thelcar extends script.base_script
         {
             modifyCollectionSlotValue(player, "icon_nyms_master_collection_1_dna", 1);
         }
-        if(utils.playerHasStaticItemInBankOrInventory(player, "item_nym_themepark_dna_extractor")) {
+        if (utils.playerHasStaticItemInBankOrInventory(player, "item_nym_themepark_dna_extractor"))
+        {
             obj_id dna_extractor = utils.getStaticItemInBankOrInventory(player, "item_nym_themepark_dna_extractor");
-            if(isValidId(dna_extractor)) utils.destroyObject(dna_extractor);
+            if (isValidId(dna_extractor)) utils.destroyObject(dna_extractor);
         }
     }
+
     public void rek_thelcar_action_completeQuestionQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isTaskActive(player, "u16_nym_themepark_question_scientist_collection", "returnQuestionComplete"))
@@ -153,6 +184,7 @@ public class rek_thelcar extends script.base_script
             modifyCollectionSlotValue(player, "icon_nyms_master_collection_1_scientist", 1);
         }
     }
+
     public void rek_thelcar_action_BruteForceCompleteScientist(obj_id player, obj_id npc) throws InterruptedException
     {
         if (rek_thelcar_condition_hasCompletedScientistCollection(player, npc))
@@ -169,6 +201,7 @@ public class rek_thelcar extends script.base_script
             }
         }
     }
+
     public void rek_thelcar_action_BruteForceCompleteDNA(obj_id player, obj_id npc) throws InterruptedException
     {
         if (rek_thelcar_condition_hasCompletedDNACollection(player, npc))
@@ -185,6 +218,7 @@ public class rek_thelcar extends script.base_script
             }
         }
     }
+
     public void rek_thelcar_action_BruteForceCompleteDevice(obj_id player, obj_id npc) throws InterruptedException
     {
         if (rek_thelcar_condition_hasCompletedDeviceCollection(player, npc))
@@ -201,12 +235,14 @@ public class rek_thelcar extends script.base_script
             }
         }
     }
+
     public void rek_thelcar_action_correctAnyPlayerErrors(obj_id player, obj_id npc) throws InterruptedException
     {
         rek_thelcar_action_completeSurveillanceQuest(player, npc);
         rek_thelcar_action_completeMinerDnaQuest(player, npc);
         rek_thelcar_action_completeQuestionQuest(player, npc);
     }
+
     public int rek_thelcar_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_114"))
@@ -227,7 +263,7 @@ public class rek_thelcar extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_116");
@@ -236,7 +272,7 @@ public class rek_thelcar extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rek_thelcar.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -246,6 +282,7 @@ public class rek_thelcar extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rek_thelcar_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_116"))
@@ -263,6 +300,7 @@ public class rek_thelcar extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rek_thelcar_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_105"))
@@ -278,6 +316,7 @@ public class rek_thelcar extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rek_thelcar_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_44"))
@@ -298,7 +337,7 @@ public class rek_thelcar extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -307,7 +346,7 @@ public class rek_thelcar extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rek_thelcar.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -329,6 +368,7 @@ public class rek_thelcar extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rek_thelcar_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_46"))
@@ -349,7 +389,7 @@ public class rek_thelcar extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48");
@@ -358,7 +398,7 @@ public class rek_thelcar extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rek_thelcar.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -368,6 +408,7 @@ public class rek_thelcar extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rek_thelcar_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_48"))
@@ -395,7 +436,7 @@ public class rek_thelcar extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_50");
@@ -408,7 +449,7 @@ public class rek_thelcar extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rek_thelcar.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -418,6 +459,7 @@ public class rek_thelcar extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rek_thelcar_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_50"))
@@ -447,6 +489,7 @@ public class rek_thelcar extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rek_thelcar_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_109"))
@@ -467,7 +510,7 @@ public class rek_thelcar extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_111");
@@ -476,7 +519,7 @@ public class rek_thelcar extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rek_thelcar.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -486,6 +529,7 @@ public class rek_thelcar extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rek_thelcar_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_111"))
@@ -502,6 +546,7 @@ public class rek_thelcar extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rek_thelcar_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_102"))
@@ -517,6 +562,7 @@ public class rek_thelcar extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rek_thelcar_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_41"))
@@ -538,7 +584,7 @@ public class rek_thelcar extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_60");
@@ -547,7 +593,7 @@ public class rek_thelcar extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rek_thelcar.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -574,7 +620,7 @@ public class rek_thelcar extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_60");
@@ -583,7 +629,7 @@ public class rek_thelcar extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rek_thelcar.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -605,6 +651,7 @@ public class rek_thelcar extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rek_thelcar_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_60"))
@@ -625,7 +672,7 @@ public class rek_thelcar extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_64");
@@ -634,7 +681,7 @@ public class rek_thelcar extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rek_thelcar.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -644,6 +691,7 @@ public class rek_thelcar extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rek_thelcar_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_60"))
@@ -664,7 +712,7 @@ public class rek_thelcar extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_64");
@@ -673,7 +721,7 @@ public class rek_thelcar extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rek_thelcar.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -683,6 +731,7 @@ public class rek_thelcar extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rek_thelcar_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_64"))
@@ -710,7 +759,7 @@ public class rek_thelcar extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_68");
@@ -723,7 +772,7 @@ public class rek_thelcar extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rek_thelcar.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -733,6 +782,7 @@ public class rek_thelcar extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rek_thelcar_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_68"))
@@ -761,6 +811,7 @@ public class rek_thelcar extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rek_thelcar_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_87"))
@@ -781,7 +832,7 @@ public class rek_thelcar extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_89");
@@ -790,7 +841,7 @@ public class rek_thelcar extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rek_thelcar.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -800,6 +851,7 @@ public class rek_thelcar extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rek_thelcar_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_89"))
@@ -817,6 +869,7 @@ public class rek_thelcar extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rek_thelcar_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_96"))
@@ -832,6 +885,7 @@ public class rek_thelcar extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rek_thelcar_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_118"))
@@ -854,7 +908,7 @@ public class rek_thelcar extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_122");
@@ -863,7 +917,7 @@ public class rek_thelcar extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rek_thelcar.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -885,6 +939,7 @@ public class rek_thelcar extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rek_thelcar_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_122"))
@@ -905,7 +960,7 @@ public class rek_thelcar extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_126");
@@ -914,7 +969,7 @@ public class rek_thelcar extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rek_thelcar.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -924,6 +979,7 @@ public class rek_thelcar extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rek_thelcar_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_126"))
@@ -951,7 +1007,7 @@ public class rek_thelcar extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_130");
@@ -964,7 +1020,7 @@ public class rek_thelcar extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rek_thelcar.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -974,6 +1030,7 @@ public class rek_thelcar extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rek_thelcar_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_130"))
@@ -1002,6 +1059,7 @@ public class rek_thelcar extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -1012,12 +1070,14 @@ public class rek_thelcar extends script.base_script
         setCondition(self, CONDITION_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setCondition(self, CONDITION_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -1026,18 +1086,21 @@ public class rek_thelcar extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.rek_thelcar");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1072,7 +1135,7 @@ public class rek_thelcar extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_114");
@@ -1084,7 +1147,7 @@ public class rek_thelcar extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "rek_thelcar", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1117,7 +1180,7 @@ public class rek_thelcar extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_105");
@@ -1129,7 +1192,7 @@ public class rek_thelcar extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "rek_thelcar", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1162,7 +1225,7 @@ public class rek_thelcar extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_44");
@@ -1178,7 +1241,7 @@ public class rek_thelcar extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "rek_thelcar", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1210,7 +1273,7 @@ public class rek_thelcar extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_109");
@@ -1222,7 +1285,7 @@ public class rek_thelcar extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "rek_thelcar", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1255,7 +1318,7 @@ public class rek_thelcar extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_102");
@@ -1267,7 +1330,7 @@ public class rek_thelcar extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "rek_thelcar", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1307,7 +1370,7 @@ public class rek_thelcar extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_41");
@@ -1327,7 +1390,7 @@ public class rek_thelcar extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "rek_thelcar", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1359,7 +1422,7 @@ public class rek_thelcar extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_87");
@@ -1371,7 +1434,7 @@ public class rek_thelcar extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "rek_thelcar", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1404,7 +1467,7 @@ public class rek_thelcar extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_96");
@@ -1416,7 +1479,7 @@ public class rek_thelcar extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "rek_thelcar", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1449,7 +1512,7 @@ public class rek_thelcar extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_118");
@@ -1465,7 +1528,7 @@ public class rek_thelcar extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "rek_thelcar", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1491,6 +1554,7 @@ public class rek_thelcar extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("rek_thelcar"))

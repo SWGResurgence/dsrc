@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 import java.util.Vector;
@@ -97,6 +103,7 @@ public class smuggler extends script.base_script
     public static final String JUNK_DEALKER_NO_SALE_FLAG = "doNotSellFlag";
     public static final boolean LOGGING_ON = true;
     public static final String LOGNAME = "junk_log";
+
     public smuggler()
     {
     }

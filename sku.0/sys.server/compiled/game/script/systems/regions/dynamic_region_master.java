@@ -1,5 +1,11 @@
 package script.systems.regions;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -18,6 +24,7 @@ public class dynamic_region_master extends script.base_script
     public static final String DURATION = "dynamic_region.duration";
     public static final String MAX_DURATION = "dynamic_region.maxDuration";
     public static final String CREATURE_LIST = "dynamic_region.creatureList";
+
     public dynamic_region_master()
     {
     }
@@ -43,7 +50,7 @@ public class dynamic_region_master extends script.base_script
         int birth = getIntObjVar(self, BIRTH);
         int maxDuration = getIntObjVar(self, MAX_DURATION);
         obj_id[] myCreatures = getObjIdArrayObjVar(self, CREATURE_LIST);
-        if (currentEpoch < (birth + maxDuration * 60) && myCreatures != null && myCreatures.length > 0)
+        if (currentEpoch < birth + maxDuration * 60 && myCreatures != null)
         {
             for (obj_id myCreature : myCreatures)
             {
@@ -54,7 +61,7 @@ public class dynamic_region_master extends script.base_script
                 }
             }
         }
-        if (myCreatures != null && myCreatures.length > 0)
+        if (myCreatures != null)
         {
             for (obj_id myCreature : myCreatures)
             {

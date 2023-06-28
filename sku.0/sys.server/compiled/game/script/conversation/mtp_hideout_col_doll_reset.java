@@ -1,105 +1,90 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class mtp_hideout_col_doll_reset extends script.base_script
 {
+    public static String c_stringFile = "conversation/mtp_hideout_col_doll_reset";
+
     public mtp_hideout_col_doll_reset()
     {
     }
-    public static String c_stringFile = "conversation/mtp_hideout_col_doll_reset";
+
     public boolean mtp_hideout_col_doll_reset_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean mtp_hideout_col_doll_reset_condition_hasAllHenchPieces(obj_id player, obj_id npc) throws InterruptedException
     {
         String[] completedSlots = getCompletedCollectionSlotsInCollection(player, "col_meatlump_hench_doll_01");
-        if (completedSlots != null && completedSlots.length == 6 && !hasCompletedCollectionSlot(player, "received_hench_doll_tracker"))
-        {
-            return true;
-        }
-        return false;
+        return completedSlots != null && completedSlots.length == 6 && !hasCompletedCollectionSlot(player, "received_hench_doll_tracker");
     }
+
     public boolean mtp_hideout_col_doll_reset_condition_hasAllKingPieces(obj_id player, obj_id npc) throws InterruptedException
     {
         String[] completedSlots = getCompletedCollectionSlotsInCollection(player, "col_meatlump_king_doll_01");
-        if (completedSlots != null && completedSlots.length == 6 && !hasCompletedCollectionSlot(player, "received_king_doll_tracker"))
-        {
-            return true;
-        }
-        return false;
+        return completedSlots != null && completedSlots.length == 6 && !hasCompletedCollectionSlot(player, "received_king_doll_tracker");
     }
+
     public boolean mtp_hideout_col_doll_reset_condition_hasAllOfficerPieces(obj_id player, obj_id npc) throws InterruptedException
     {
         String[] completedSlots = getCompletedCollectionSlotsInCollection(player, "col_meatlump_officer_doll_01");
-        if (completedSlots != null && completedSlots.length == 6 && !hasCompletedCollectionSlot(player, "received_officer_doll_tracker"))
-        {
-            return true;
-        }
-        return false;
+        return completedSlots != null && completedSlots.length == 6 && !hasCompletedCollectionSlot(player, "received_officer_doll_tracker");
     }
+
     public boolean mtp_hideout_col_doll_reset_condition_henchColComplete(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (hasCompletedCollection(player, "col_meatlump_hench_doll_01"))
-        {
-            return true;
-        }
-        return false;
+        return hasCompletedCollection(player, "col_meatlump_hench_doll_01");
     }
+
     public boolean mtp_hideout_col_doll_reset_condition_officerColComplete(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (hasCompletedCollection(player, "col_meatlump_officer_doll_01"))
-        {
-            return true;
-        }
-        return false;
+        return hasCompletedCollection(player, "col_meatlump_officer_doll_01");
     }
+
     public boolean mtp_hideout_col_doll_reset_condition_kingColComplete(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (hasCompletedCollection(player, "col_meatlump_king_doll_01"))
-        {
-            return true;
-        }
-        return false;
+        return hasCompletedCollection(player, "col_meatlump_king_doll_01");
     }
+
     public boolean mtp_hideout_col_doll_reset_condition_noDollHench(obj_id player, obj_id npc) throws InterruptedException
     {
         String[] completedSlots = getCompletedCollectionSlotsInCollection(player, "col_meatlump_hench_doll_01");
         if (completedSlots != null && completedSlots.length == 6)
         {
-            if (hasCompletedCollectionSlot(player, "received_hench_doll_tracker"))
-            {
-                return true;
-            }
+            return hasCompletedCollectionSlot(player, "received_hench_doll_tracker");
         }
         return false;
     }
+
     public boolean mtp_hideout_col_doll_reset_condition_noDollOfficer(obj_id player, obj_id npc) throws InterruptedException
     {
         String[] completedSlots = getCompletedCollectionSlotsInCollection(player, "col_meatlump_officer_doll_01");
         if (completedSlots != null && completedSlots.length == 6)
         {
-            if (hasCompletedCollectionSlot(player, "received_officer_doll_tracker"))
-            {
-                return true;
-            }
+            return hasCompletedCollectionSlot(player, "received_officer_doll_tracker");
         }
         return false;
     }
+
     public boolean mtp_hideout_col_doll_reset_condition_noDollKing(obj_id player, obj_id npc) throws InterruptedException
     {
         String[] completedSlots = getCompletedCollectionSlotsInCollection(player, "col_meatlump_king_doll_01");
         if (completedSlots != null && completedSlots.length == 6)
         {
-            if (hasCompletedCollectionSlot(player, "received_king_doll_tracker"))
-            {
-                return true;
-            }
+            return hasCompletedCollectionSlot(player, "received_king_doll_tracker");
         }
         return false;
     }
+
     public void mtp_hideout_col_doll_reset_action_grantHenchReward(obj_id player, obj_id npc) throws InterruptedException
     {
         modifyCollectionSlotValue(player, "received_hench_doll", 1);
@@ -109,7 +94,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
             obj_id lumps = static_item.createNewItemFunction("item_meatlump_lump_01_01", pInv);
             setCount(lumps, 10);
         }
-        else 
+        else
         {
             obj_id doll = static_item.createNewItemFunction("col_reward_meatlump_doll_hench_02_01", pInv);
             if (!hasCompletedCollectionSlot(player, "received_hench_doll_tracker"))
@@ -118,6 +103,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
             }
         }
     }
+
     public void mtp_hideout_col_doll_reset_action_grantOfficerReward(obj_id player, obj_id npc) throws InterruptedException
     {
         modifyCollectionSlotValue(player, "received_officer_doll", 1);
@@ -127,7 +113,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
             obj_id lumps = static_item.createNewItemFunction("item_meatlump_lump_01_01", pInv);
             setCount(lumps, 10);
         }
-        else 
+        else
         {
             obj_id doll = static_item.createNewItemFunction("col_reward_meatlump_doll_officer_02_01", pInv);
             if (!hasCompletedCollectionSlot(player, "received_officer_doll_tracker"))
@@ -136,6 +122,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
             }
         }
     }
+
     public void mtp_hideout_col_doll_reset_action_grantKingReward(obj_id player, obj_id npc) throws InterruptedException
     {
         modifyCollectionSlotValue(player, "received_king_doll", 1);
@@ -145,7 +132,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
             obj_id lumps = static_item.createNewItemFunction("item_meatlump_lump_01_01", pInv);
             setCount(lumps, 10);
         }
-        else 
+        else
         {
             obj_id doll = static_item.createNewItemFunction("col_reward_meatlump_doll_king_02_01", pInv);
             if (!hasCompletedCollectionSlot(player, "received_king_doll_tracker"))
@@ -154,6 +141,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
             }
         }
     }
+
     public void mtp_hideout_col_doll_reset_action_resetHenchCollection(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasCompletedCollection(player, "col_meatlump_hench_doll_01"))
@@ -161,6 +149,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
             collection.removeCollectionForRealsies(player, "col_meatlump_hench_doll_01");
         }
     }
+
     public void mtp_hideout_col_doll_reset_action_resetOfficerCollection(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasCompletedCollection(player, "col_meatlump_officer_doll_01"))
@@ -168,6 +157,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
             collection.removeCollectionForRealsies(player, "col_meatlump_officer_doll_01");
         }
     }
+
     public void mtp_hideout_col_doll_reset_action_resetKingCollection(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasCompletedCollection(player, "col_meatlump_king_doll_01"))
@@ -175,6 +165,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
             collection.removeCollectionForRealsies(player, "col_meatlump_king_doll_01");
         }
     }
+
     public int mtp_hideout_col_doll_reset_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6"))
@@ -201,7 +192,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_10");
@@ -214,7 +205,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_hideout_col_doll_reset.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -246,7 +237,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_19");
@@ -259,7 +250,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_hideout_col_doll_reset.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -291,7 +282,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_29");
@@ -304,7 +295,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_hideout_col_doll_reset.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -336,7 +327,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_42");
@@ -349,7 +340,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_hideout_col_doll_reset.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -374,7 +365,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_74");
@@ -383,7 +374,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_hideout_col_doll_reset.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -408,7 +399,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_90");
@@ -417,7 +408,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_hideout_col_doll_reset.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -475,7 +466,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_122");
@@ -484,7 +475,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_hideout_col_doll_reset.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -494,6 +485,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_hideout_col_doll_reset_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_10"))
@@ -519,6 +511,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_hideout_col_doll_reset_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_19"))
@@ -544,6 +537,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_hideout_col_doll_reset_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_29"))
@@ -570,7 +564,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_51");
@@ -583,7 +577,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_hideout_col_doll_reset.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -603,6 +597,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_hideout_col_doll_reset_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_51"))
@@ -628,6 +623,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_hideout_col_doll_reset_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_42"))
@@ -654,7 +650,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_58");
@@ -667,7 +663,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_hideout_col_doll_reset.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -687,6 +683,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_hideout_col_doll_reset_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_58"))
@@ -712,6 +709,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_hideout_col_doll_reset_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_74"))
@@ -738,7 +736,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_78");
@@ -751,7 +749,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_hideout_col_doll_reset.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -761,6 +759,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_hideout_col_doll_reset_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_78"))
@@ -786,6 +785,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_hideout_col_doll_reset_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_90"))
@@ -805,7 +805,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_94");
@@ -814,7 +814,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_hideout_col_doll_reset.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -824,6 +824,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_hideout_col_doll_reset_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_94"))
@@ -850,7 +851,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_98");
@@ -863,7 +864,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_hideout_col_doll_reset.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -873,6 +874,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_hideout_col_doll_reset_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_98"))
@@ -898,6 +900,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_hideout_col_doll_reset_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_122"))
@@ -917,7 +920,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_126");
@@ -926,7 +929,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_hideout_col_doll_reset.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -936,6 +939,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_hideout_col_doll_reset_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_126"))
@@ -950,6 +954,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -959,11 +964,13 @@ public class mtp_hideout_col_doll_reset extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -972,18 +979,21 @@ public class mtp_hideout_col_doll_reset extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.mtp_hideout_col_doll_reset");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1069,7 +1079,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_6");
@@ -1113,7 +1123,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                 utils.setScriptVar(player, "conversation.mtp_hideout_col_doll_reset.branchId", 1);
                 npcStartConversation(player, npc, "mtp_hideout_col_doll_reset", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1122,6 +1132,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("mtp_hideout_col_doll_reset"))

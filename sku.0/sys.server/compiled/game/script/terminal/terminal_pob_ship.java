@@ -1,13 +1,16 @@
 package script.terminal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class terminal_pob_ship extends script.base_script
 {
-    public terminal_pob_ship()
-    {
-    }
     public static final string_id SID_TERMINAL_PERMISSIONS = new string_id("player_structure", "permissions");
     public static final string_id SID_MOVE_FIRST_ITEM = new string_id("player_structure", "move_first_item");
     public static final string_id SID_MOVED_FIRST_ITEM = new string_id("player_structure", "moved_first_item_pob");
@@ -19,6 +22,10 @@ public class terminal_pob_ship extends script.base_script
     public static final string_id SID_TERMINAL_REDEED_STORAGE = new string_id("player_structure", "redeed_storage");
     public static final string_id SID_STORAGE_INCREASE_REDEED_TITLE = new string_id("player_structure", "sui_storage_redeed_title");
     public static final string_id SID_STORAGE_INCREASE_REDEED_PROMPT = new string_id("player_structure", "sui_storage_redeed_prompt");
+    public terminal_pob_ship()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id ship = space_transition.getContainingShip(self);
@@ -37,6 +44,7 @@ public class terminal_pob_ship extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         obj_id ship = space_transition.getContainingShip(self);
@@ -75,7 +83,7 @@ public class terminal_pob_ship extends script.base_script
                     player_structure.initializeFindAllItemsInHouse(self, player);
                     setObjVar(self, "findItems.lockout", currentTime + player_structure.HOUSE_ITEMS_SEARCH_LOCKOUT);
                 }
-                else 
+                else
                 {
                     string_id message = new string_id("player_structure", "find_items_locked_out");
                     prose_package pp = prose.getPackage(message, player, player);
@@ -96,7 +104,7 @@ public class terminal_pob_ship extends script.base_script
                     player_structure.initializeItemSearchInHouse(self, player);
                     setObjVar(self, "findItems.lockout", currentTime + player_structure.HOUSE_ITEMS_SEARCH_LOCKOUT);
                 }
-                else 
+                else
                 {
                     string_id message = new string_id("player_structure", "find_items_locked_out");
                     prose_package pp = prose.getPackage(message, player, player);
@@ -107,6 +115,7 @@ public class terminal_pob_ship extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleStorageRedeedChoice(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -139,6 +148,7 @@ public class terminal_pob_ship extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleMoveFirstItem(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -153,6 +163,7 @@ public class terminal_pob_ship extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleDeleteSecondConfirm(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -162,6 +173,7 @@ public class terminal_pob_ship extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleDeleteItems(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -178,21 +190,25 @@ public class terminal_pob_ship extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayerStructureFindItemsListResponse(obj_id self, dictionary params) throws InterruptedException
     {
         player_structure.handleFindItemsListResponse(self, params);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayerStructureFindItemsPageResponse(obj_id self, dictionary params) throws InterruptedException
     {
         player_structure.handleFindItemsChangePageResponse(self, params);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayerStructureSearchItemsGetKeyword(obj_id self, dictionary params) throws InterruptedException
     {
         player_structure.handleSearchItemsGetKeyword(self, params);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayerStructureSearchItemsSelectedResponse(obj_id self, dictionary params) throws InterruptedException
     {
         player_structure.handleSearchItemsSelectedResponse(self, params);

@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -9,8 +15,8 @@ import script.string_id;
 
 public class aurilia_quharek extends script.conversation.base.conversation_base
 {
-    public String conversation = "conversation.aurilia_quharek";
     public static String c_stringFile = "conversation/aurilia_quharek";
+    public String conversation = "conversation.aurilia_quharek";
 
     public aurilia_quharek()
     {
@@ -18,14 +24,17 @@ public class aurilia_quharek extends script.conversation.base.conversation_base
         super.conversation = conversation;
         super.c_stringFile = c_stringFile;
     }
+
     private boolean aurilia_quharek_condition__defaultCondition() throws InterruptedException
     {
         return true;
     }
+
     private boolean aurilia_quharek_condition_axkva_min_intro_01(obj_id player) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "axkva_min_intro", "axkva_min_intro_01");
     }
+
     private int aurilia_quharek_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6"))
@@ -40,6 +49,7 @@ public class aurilia_quharek extends script.conversation.base.conversation_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -51,12 +61,12 @@ public class aurilia_quharek extends script.conversation.base.conversation_base
             string_id message = new string_id(c_stringFile, "s_4");
             if (aurilia_quharek_condition_axkva_min_intro_01(player))
             {
-                string_id responses[] = new string_id[1];
+                string_id[] responses = new string_id[1];
                 responses[0] = new string_id(c_stringFile, "s_6");
                 utils.setScriptVar(player, conversation + ".branchId", 1);
                 npcStartConversation(player, self, "aurilia_quharek", new string_id(c_stringFile, "s_4"), responses);
             }
-            else 
+            else
             {
                 chat.chat(self, player, message);
             }
@@ -65,6 +75,7 @@ public class aurilia_quharek extends script.conversation.base.conversation_base
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("aurilia_quharek"))

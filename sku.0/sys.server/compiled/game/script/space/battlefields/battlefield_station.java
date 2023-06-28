@@ -1,5 +1,11 @@
 package script.space.battlefields;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -8,6 +14,7 @@ public class battlefield_station extends script.base_script
     public battlefield_station()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setShipFaction(self, "generic");
@@ -15,22 +22,22 @@ public class battlefield_station extends script.base_script
         setObjVar(self, "strMyName", "rebel_station");
         setObjVar(self, "intDockable", 1);
         setObjVar(self, "strTargetName", "star_destroyer");
-        String[] strPaths = 
-        {
-            "rebelTest1",
-            "rebelTest2",
-            "rebelTest3",
-            "rebelTest4",
-            "rebelTest5"
-        };
-        int[] intPathCounts = 
-        {
-            7,
-            7,
-            7,
-            7,
-            7
-        };
+        String[] strPaths =
+                {
+                        "rebelTest1",
+                        "rebelTest2",
+                        "rebelTest3",
+                        "rebelTest4",
+                        "rebelTest5"
+                };
+        int[] intPathCounts =
+                {
+                        7,
+                        7,
+                        7,
+                        7,
+                        7
+                };
         setObjVar(self, "strCapitalShipType", "capital_ship_spacestation");
         setObjVar(self, "strPaths", strPaths);
         String strShipType = "spacestation_rebel";
@@ -60,23 +67,25 @@ public class battlefield_station extends script.base_script
         messageTo(self, "setupFaction", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int setupFaction(obj_id self, dictionary params) throws InterruptedException
     {
         int intFaction = (370444368);
-        int[] intAlliedFactions = 
-        {
-            (370444368)
-        };
-        int[] intEnemyFactions = 
-        {
-            (-615855020)
-        };
+        int[] intAlliedFactions =
+                {
+                        (370444368)
+                };
+        int[] intEnemyFactions =
+                {
+                        (-615855020)
+                };
         LOG("space", "setting faction ");
         shipSetSpaceFaction(self, intFaction);
         shipSetSpaceFactionAllies(self, intAlliedFactions);
         shipSetSpaceFactionEnemies(self, intEnemyFactions);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         LOG("space", "KABOOM SpACE STACEION");
@@ -91,7 +100,7 @@ public class battlefield_station extends script.base_script
                 LOG("space", "I exploded");
                 CustomerServiceLog("battlefield", "Space Station destroyed in Battlefield Zone, flipping kessel to Imperial");
             }
-            else 
+            else
             {
                 CustomerServiceLog("battlefield", "Space Station destroyed in Battlefield Zone, but no flip because the Empire already won");
             }
@@ -110,6 +119,7 @@ public class battlefield_station extends script.base_script
         LOG("space", "objEgg is " + objEgg);
         return SCRIPT_CONTINUE;
     }
+
     public int objectDocked(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("space", "DOCKING");
@@ -122,7 +132,7 @@ public class battlefield_station extends script.base_script
         {
             strObjVarName = "intRebelEscortsCompleted";
         }
-        else 
+        else
         {
             strObjVarName = "intImperialEscortsCompleted";
         }
@@ -134,6 +144,7 @@ public class battlefield_station extends script.base_script
         messageTo(self, "undockAndLeave", params, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int undockAndLeave(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objShip = params.getObjId("objShip");

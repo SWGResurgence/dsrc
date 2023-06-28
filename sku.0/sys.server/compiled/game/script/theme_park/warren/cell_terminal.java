@@ -1,5 +1,11 @@
 package script.theme_park.warren;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.colors;
 import script.library.sui;
@@ -7,13 +13,14 @@ import script.library.utils;
 
 public class cell_terminal extends script.base_script
 {
-    public cell_terminal()
-    {
-    }
     public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
     public static final String ACTIVE = "cell_locked";
     public static final String INACTIVE = "cell_open";
     public static final String DEACTIVATE = "cell_unlocked";
+    public cell_terminal()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         String stringName = ACTIVE;
@@ -33,11 +40,13 @@ public class cell_terminal extends script.base_script
         sui.msgbox(player, new string_id(SYSTEM_MESSAGES, stringName));
         return SCRIPT_OVERRIDE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "lockDoor", null, 1800, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (!isPlayer(speaker))
@@ -71,6 +80,7 @@ public class cell_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lockDoor(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id bldg = getTopMostContainer(self);

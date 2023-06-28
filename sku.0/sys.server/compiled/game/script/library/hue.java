@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 public class hue extends script.base_script
@@ -7,6 +13,7 @@ public class hue extends script.base_script
     public static final String INDEX_BASE = "/private/index_color_";
     public static final String INDEX_1 = "/private/index_color_1";
     public static final String INDEX_2 = "/private/index_color_2";
+
     public hue()
     {
     }

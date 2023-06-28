@@ -1,5 +1,11 @@
 package script.event.gcwraids;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.utils;
@@ -8,16 +14,19 @@ import script.obj_id;
 
 public class invader extends script.base_script
 {
+    public static final String DATATABLE = "datatables/event/invasion/ewok_bonus_loot.iff";
+
     public invader()
     {
     }
-    public static final String DATATABLE = "datatables/event/invasion/ewok_bonus_loot.iff";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "startAttack", null, 1, false);
         messageTo(self, "goDie", null, 3600, false);
         return SCRIPT_CONTINUE;
     }
+
     public int startAttack(obj_id self, dictionary params) throws InterruptedException
     {
         float destinationOffset = getFloatObjVar(self, "auto_invasion.dest_offset");
@@ -26,6 +35,7 @@ public class invader extends script.base_script
         setMovementRun(self);
         return SCRIPT_CONTINUE;
     }
+
     public int goDie(obj_id self, dictionary params) throws InterruptedException
     {
         if (!ai_lib.isAiDead(self))
@@ -34,6 +44,7 @@ public class invader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         int myNumber = getIntObjVar(self, "auto_invasion.my_number");

@@ -1,5 +1,11 @@
 package script.theme_park.dathomir.aurilia;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -8,6 +14,7 @@ public class aurilia_buff_vendor extends script.base_script
     public aurilia_buff_vendor()
     {
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int selection) throws InterruptedException
     {
         if (selection == menu_info_types.ITEM_PUBLIC_CONTAINER_USE1)
@@ -38,13 +45,14 @@ public class aurilia_buff_vendor extends script.base_script
             {
                 processItemPurchase(self, player);
             }
-            else 
+            else
             {
                 sendSystemMessage(player, new string_id("spam", "buildabuff_nsf_buffee"));
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         if (names == null || attribs == null || names.length != attribs.length)
@@ -59,6 +67,7 @@ public class aurilia_buff_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public String createPureConcatenatedJoy(obj_id self) throws InterruptedException
     {
         String pureConcatenatedJoy = getString(new string_id("set_bonus", "vendor_sale_object_justify_line"));
@@ -87,6 +96,7 @@ public class aurilia_buff_vendor extends script.base_script
         }
         return pureConcatenatedJoy;
     }
+
     public boolean confirmFunds(obj_id self, obj_id player) throws InterruptedException
     {
         boolean canPay = false;
@@ -103,7 +113,8 @@ public class aurilia_buff_vendor extends script.base_script
         }
         int owedTokenCount = 0;
         boolean owesTokens = false;
-        for (int i1 : tokenCostInThisFunction) {
+        for (int i1 : tokenCostInThisFunction)
+        {
             owedTokenCount += i1;
         }
         if (owedTokenCount > 0)
@@ -112,31 +123,46 @@ public class aurilia_buff_vendor extends script.base_script
         }
         if (owesTokens)
         {
-            for (obj_id inventoryContent : inventoryContents) {
+            for (obj_id inventoryContent : inventoryContents)
+            {
                 String itemName = getStaticItemName(inventoryContent);
-                if (itemName != null && !itemName.equals("")) {
-                    for (int j = 0; j < trial.HEROIC_TOKENS.length; j++) {
-                        if (itemName.equals(trial.HEROIC_TOKENS[j]) && tokenCostInThisFunction[j] > 0) {
-                            if (getCount(inventoryContent) > 1) {
-                                for (int m = 0; m < getCount(inventoryContent); m++) {
-                                    if (tokenCostInThisFunction[j] > 0) {
+                if (itemName != null && !itemName.equals(""))
+                {
+                    for (int j = 0; j < trial.HEROIC_TOKENS.length; j++)
+                    {
+                        if (itemName.equals(trial.HEROIC_TOKENS[j]) && tokenCostInThisFunction[j] > 0)
+                        {
+                            if (getCount(inventoryContent) > 1)
+                            {
+                                for (int m = 0; m < getCount(inventoryContent); m++)
+                                {
+                                    if (tokenCostInThisFunction[j] > 0)
+                                    {
                                         tokenCostInThisFunction[j]--;
                                     }
                                 }
-                            } else {
+                            }
+                            else
+                            {
                                 tokenCostInThisFunction[j]--;
                             }
                         }
                     }
-                    if (!foundTokenHolderBox && itemName.equals("item_heroic_token_box_01_01")) {
+                    if (!foundTokenHolderBox && itemName.equals("item_heroic_token_box_01_01"))
+                    {
                         foundTokenHolderBox = true;
-                        if (hasObjVar(inventoryContent, "item.set.tokens_held")) {
+                        if (hasObjVar(inventoryContent, "item.set.tokens_held"))
+                        {
                             int[] virtualTokens = getIntArrayObjVar(inventoryContent, "item.set.tokens_held");
-                            for (int k = 0; k < trial.HEROIC_TOKENS.length; k++) {
-                                if (tokenCostInThisFunction[k] > 0 && virtualTokens[k] > 0) {
+                            for (int k = 0; k < trial.HEROIC_TOKENS.length; k++)
+                            {
+                                if (tokenCostInThisFunction[k] > 0 && virtualTokens[k] > 0)
+                                {
                                     int paymentIterations = tokenCostInThisFunction[k];
-                                    for (int l = 0; l < paymentIterations; l++) {
-                                        if (virtualTokens[k] > 0) {
+                                    for (int l = 0; l < paymentIterations; l++)
+                                    {
+                                        if (virtualTokens[k] > 0)
+                                        {
                                             virtualTokens[k]--;
                                             tokenCostInThisFunction[k]--;
                                         }
@@ -149,7 +175,8 @@ public class aurilia_buff_vendor extends script.base_script
             }
         }
         int outstandingTokensOwed = 0;
-        for (int i : tokenCostInThisFunction) {
+        for (int i : tokenCostInThisFunction)
+        {
             outstandingTokensOwed += i;
         }
         if (outstandingTokensOwed == 0)
@@ -158,6 +185,7 @@ public class aurilia_buff_vendor extends script.base_script
         }
         return hasTheCredits && hasTheTokens;
     }
+
     public void processItemPurchase(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id inventory = utils.getInventoryContainer(player);
@@ -178,35 +206,49 @@ public class aurilia_buff_vendor extends script.base_script
         pp = prose.setTT(pp, readableName);
         sendSystemMessageProse(player, pp);
         boolean foundTokenHolderBox = false;
-        for (obj_id inventoryContent : inventoryContents) {
+        for (obj_id inventoryContent : inventoryContents)
+        {
             String itemName = getStaticItemName(inventoryContent);
-            if (itemName != null && !itemName.equals("")) {
-                for (int j = 0; j < trial.HEROIC_TOKENS.length; j++) {
-                    if (itemName.equals(trial.HEROIC_TOKENS[j]) && tokenCostForReals[j] > 0) {
-                        if (getCount(inventoryContent) > 1) {
+            if (itemName != null && !itemName.equals(""))
+            {
+                for (int j = 0; j < trial.HEROIC_TOKENS.length; j++)
+                {
+                    if (itemName.equals(trial.HEROIC_TOKENS[j]) && tokenCostForReals[j] > 0)
+                    {
+                        if (getCount(inventoryContent) > 1)
+                        {
                             int numInStack = getCount(inventoryContent);
-                            for (int m = 0; m < numInStack - 1; m++) {
-                                if (tokenCostForReals[j] > 0) {
+                            for (int m = 0; m < numInStack - 1; m++)
+                            {
+                                if (tokenCostForReals[j] > 0)
+                                {
                                     tokenCostForReals[j]--;
                                     setCount(inventoryContent, getCount(inventoryContent) - 1);
                                 }
                             }
                         }
-                        if (getCount(inventoryContent) <= 1 && tokenCostForReals[j] > 0) {
+                        if (getCount(inventoryContent) <= 1 && tokenCostForReals[j] > 0)
+                        {
                             destroyObject(inventoryContent);
                             tokenCostForReals[j]--;
                         }
                     }
                 }
-                if (!foundTokenHolderBox && itemName.equals("item_heroic_token_box_01_01")) {
+                if (!foundTokenHolderBox && itemName.equals("item_heroic_token_box_01_01"))
+                {
                     foundTokenHolderBox = true;
-                    if (hasObjVar(inventoryContent, "item.set.tokens_held")) {
+                    if (hasObjVar(inventoryContent, "item.set.tokens_held"))
+                    {
                         int[] virtualTokens = getIntArrayObjVar(inventoryContent, "item.set.tokens_held");
-                        for (int k = 0; k < trial.HEROIC_TOKENS.length; k++) {
-                            if (tokenCostForReals[k] > 0 && virtualTokens[k] > 0) {
+                        for (int k = 0; k < trial.HEROIC_TOKENS.length; k++)
+                        {
+                            if (tokenCostForReals[k] > 0 && virtualTokens[k] > 0)
+                            {
                                 int paymentCounter = tokenCostForReals[k];
-                                for (int l = 0; l < paymentCounter; l++) {
-                                    if (virtualTokens[k] > 0) {
+                                for (int l = 0; l < paymentCounter; l++)
+                                {
+                                    if (virtualTokens[k] > 0)
+                                    {
                                         virtualTokens[k]--;
                                         tokenCostForReals[k]--;
                                     }
@@ -218,8 +260,8 @@ public class aurilia_buff_vendor extends script.base_script
                 }
             }
         }
-        return;
     }
+
     public string_id parseNameToStringId(String itemName) throws InterruptedException
     {
         String[] parsedString = split(itemName, ':');
@@ -230,7 +272,7 @@ public class aurilia_buff_vendor extends script.base_script
             String reference = parsedString[1];
             itemNameSID = new string_id(stfFile, reference);
         }
-        else 
+        else
         {
             String stfFile = parsedString[0];
             itemNameSID = new string_id(stfFile, " ");

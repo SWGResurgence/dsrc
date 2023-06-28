@@ -1,5 +1,11 @@
 package script.theme_park.dxun;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.color;
 import script.library.colors;
 import script.library.hue;

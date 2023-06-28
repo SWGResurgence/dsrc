@@ -1,5 +1,11 @@
 package script.player;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.sui;
 import script.library.utils;
@@ -7,11 +13,12 @@ import script.obj_id;
 
 public class player_sui extends script.base_script
 {
+    public static final String TERMINAL_LOGGING = "special_sign";
+    public static final boolean LOGGING_ON = true;
     public player_sui()
     {
     }
-    public static final String TERMINAL_LOGGING = "special_sign";
-    public static final boolean LOGGING_ON = true;
+
     public int handleCloseSui(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -25,6 +32,7 @@ public class player_sui extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetSuiAssociate(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -50,6 +58,7 @@ public class player_sui extends script.base_script
         setSUIMaxRangeToObject(pid, range);
         return SCRIPT_CONTINUE;
     }
+
     public int handleDecorTypeSelect(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -121,6 +130,7 @@ public class player_sui extends script.base_script
         removeDecorVars(player);
         return SCRIPT_CONTINUE;
     }
+
     public int handleDecorSlotRemovalSelect(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -167,14 +177,12 @@ public class player_sui extends script.base_script
         blog("handleDecorSlotRemovalSelect: menuSelection: " + menuSelection);
         return SCRIPT_CONTINUE;
     }
+
     public boolean removeDecorVars(obj_id player) throws InterruptedException
     {
-        if (!isValidId(player) || !exists(player))
-        {
-            return false;
-        }
-        return true;
+        return isValidId(player) && exists(player);
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (msg == null || msg.equals(""))

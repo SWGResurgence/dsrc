@@ -1,49 +1,61 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class fs_phase4_chief_engineer extends script.base_script
 {
+    public static String c_stringFile = "conversation/fs_phase4_chief_engineer";
+
     public fs_phase4_chief_engineer()
     {
     }
-    public static String c_stringFile = "conversation/fs_phase4_chief_engineer";
+
     public boolean fs_phase4_chief_engineer_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean fs_phase4_chief_engineer_condition_onQuestStep01(obj_id player, obj_id npc) throws InterruptedException
     {
         return quests.isActive("fs_crafting4_quest_01", player);
     }
+
     public boolean fs_phase4_chief_engineer_condition_onQuestStep02(obj_id player, obj_id npc) throws InterruptedException
     {
         return quests.isActive("fs_crafting4_quest_02", player);
     }
+
     public boolean fs_phase4_chief_engineer_condition_onQuestStep03(obj_id player, obj_id npc) throws InterruptedException
     {
         return quests.isActive("fs_crafting4_quest_03", player);
     }
+
     public boolean fs_phase4_chief_engineer_condition_onQuestStep04(obj_id player, obj_id npc) throws InterruptedException
     {
         return quests.isActive("fs_crafting4_quest_04", player);
     }
+
     public boolean fs_phase4_chief_engineer_condition_onQuestStep05(obj_id player, obj_id npc) throws InterruptedException
     {
         return quests.isActive("fs_crafting4_quest_05", player);
     }
+
     public boolean fs_phase4_chief_engineer_condition_onQuestStep06(obj_id player, obj_id npc) throws InterruptedException
     {
         if (fs_quests.hasQuestAccepted(player))
         {
-            if (quests.isActive("fs_crafting4_quest_06", player))
-            {
-                return true;
-            }
+            return quests.isActive("fs_crafting4_quest_06", player);
         }
         return false;
     }
+
     public boolean fs_phase4_chief_engineer_condition_noInventorySpace(obj_id player, obj_id npc) throws InterruptedException
     {
         boolean hasNoInvRoom = false;
@@ -58,53 +70,50 @@ public class fs_phase4_chief_engineer extends script.base_script
         }
         return hasNoInvRoom;
     }
+
     public boolean fs_phase4_chief_engineer_condition_hasAlreadyUnlockedBranch(obj_id player, obj_id npc) throws InterruptedException
     {
         return fs_quests.hasUnlockedBranch(player, "force_sensitive_crafting_mastery_repair");
     }
+
     public boolean fs_phase4_chief_engineer_condition_alreadyHasOtherQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (fs_quests.hasQuestAccepted(player))
         {
-            if (fs_phase4_chief_engineer_condition_isNotOnCrafting4Quest(player, npc))
-            {
-                return true;
-            }
+            return fs_phase4_chief_engineer_condition_isNotOnCrafting4Quest(player, npc);
         }
         return false;
     }
+
     public boolean fs_phase4_chief_engineer_condition_onQuestStep07(obj_id player, obj_id npc) throws InterruptedException
     {
         return quests.isActive("fs_crafting4_quest_07", player);
     }
+
     public boolean fs_phase4_chief_engineer_condition_isNotOnCrafting4Quest(obj_id player, obj_id npc) throws InterruptedException
     {
         fs_phase4_chief_engineer_action_getCrafting4ActiveQuestNum(player, npc);
         int questNum = utils.getIntScriptVar(player, "crafting4.activeQuest");
         utils.removeScriptVar(player, "crafting4.activeQuest");
-        if (questNum > -1)
-        {
-            return false;
-        }
-        return true;
+        return questNum <= -1;
     }
+
     public boolean fs_phase4_chief_engineer_condition_isBeginQuestEligible(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (fs_phase4_chief_engineer_condition_isNotOnCrafting4Quest(player, npc))
-        {
-            return true;
-        }
-        return false;
+        return fs_phase4_chief_engineer_condition_isNotOnCrafting4Quest(player, npc);
     }
+
     public boolean fs_phase4_chief_engineer_condition_hasCoreObject(obj_id player, obj_id npc) throws InterruptedException
     {
         String coreTemplate = "object/tangible/item/quest/force_sensitive/fs_crafting4_computer_core.iff";
         return utils.playerHasItemByTemplateInBankOrInventory(player, coreTemplate);
     }
+
     public boolean fs_phase4_chief_engineer_condition_isNotVillageEligible(obj_id player, obj_id npc) throws InterruptedException
     {
         return !fs_quests.isVillageEligible(player);
     }
+
     public boolean fs_phase4_chief_engineer_condition_isOnQuest01to05(obj_id player, obj_id npc) throws InterruptedException
     {
         if (fs_quests.hasQuestAccepted(player))
@@ -112,13 +121,11 @@ public class fs_phase4_chief_engineer extends script.base_script
             fs_phase4_chief_engineer_action_getCrafting4ActiveQuestNum(player, npc);
             int questNum = utils.getIntScriptVar(player, "crafting4.activeQuest");
             utils.removeScriptVar(player, "crafting4.activeQuest");
-            if (questNum > 0 && questNum <= 5)
-            {
-                return true;
-            }
+            return questNum > 0 && questNum <= 5;
         }
         return false;
     }
+
     public boolean fs_phase4_chief_engineer_condition_isContinuingQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!fs_quests.hasQuestAccepted(player))
@@ -126,13 +133,11 @@ public class fs_phase4_chief_engineer extends script.base_script
             fs_phase4_chief_engineer_action_getCrafting4ActiveQuestNum(player, npc);
             int questNum = utils.getIntScriptVar(player, "crafting4.activeQuest");
             utils.removeScriptVar(player, "crafting4.activeQuest");
-            if (questNum > -1 && questNum <= 5)
-            {
-                return true;
-            }
+            return questNum > -1 && questNum <= 5;
         }
         return false;
     }
+
     public void fs_phase4_chief_engineer_action_giveStatueSection(obj_id player, obj_id npc) throws InterruptedException
     {
         String rewardTemplate = "object/tangible/item/quest/force_sensitive/fs_sculpture_2.iff";
@@ -160,8 +165,8 @@ public class fs_phase4_chief_engineer extends script.base_script
         quests.complete("fs_crafting4_quest_finish", player, true);
         String custLogMsg = "FS Phase 4 Crafting Quest: Player %TU has completed the phase 4 crafting quest.";
         CustomerServiceLog("FS_Phase4_Crafting", custLogMsg, player);
-        return;
     }
+
     public void fs_phase4_chief_engineer_action_setQuestStep07(obj_id player, obj_id npc) throws InterruptedException
     {
         if (quests.isActive("fs_crafting4_quest_06", player))
@@ -169,32 +174,32 @@ public class fs_phase4_chief_engineer extends script.base_script
             quests.complete("fs_crafting4_quest_06", player, true);
         }
         quests.activate("fs_crafting4_quest_07", player, null);
-        return;
     }
+
     public void fs_phase4_chief_engineer_action_giveKerenWaypoint(obj_id player, obj_id npc) throws InterruptedException
     {
         location targetLoc = new location(1215, 0, 2740, "naboo", null);
         obj_id newWaypoint = createWaypointInDatapad(player, targetLoc);
         setWaypointName(newWaypoint, "Keren - Gadget Specialist");
         fs_phase4_chief_engineer_action_activateQuest(player, npc);
-        return;
     }
+
     public void fs_phase4_chief_engineer_action_giveCoronetWaypoint(obj_id player, obj_id npc) throws InterruptedException
     {
         location targetLoc = new location(19, 0, -4775, "corellia", null);
         obj_id newWaypoint = createWaypointInDatapad(player, targetLoc);
         setWaypointName(newWaypoint, "Coronet - Gadget Specialist");
         fs_phase4_chief_engineer_action_activateQuest(player, npc);
-        return;
     }
+
     public void fs_phase4_chief_engineer_action_giveMosEnthaWaypoint(obj_id player, obj_id npc) throws InterruptedException
     {
         location targetLoc = new location(1209, 0, 2923, "tatooine", null);
         obj_id newWaypoint = createWaypointInDatapad(player, targetLoc);
         setWaypointName(newWaypoint, "Mos Entha - Gadget Specialist");
         fs_phase4_chief_engineer_action_activateQuest(player, npc);
-        return;
     }
+
     public void fs_phase4_chief_engineer_action_activateQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         fs_phase4_chief_engineer_action_getCrafting4LastCompleteQuest(player, npc);
@@ -206,7 +211,7 @@ public class fs_phase4_chief_engineer extends script.base_script
             String questName = "fs_crafting4_quest_0" + nextQuest;
             quests.activate("fs_crafting4_quest_00", player, null);
         }
-        else 
+        else
         {
             quests.activate("fs_crafting4_quest_00", player, null);
         }
@@ -217,8 +222,8 @@ public class fs_phase4_chief_engineer extends script.base_script
         }
         String custLogMsg = "FS Phase 4 Crafting Quest: Player %TU has begun the phase 4 crafting quest.";
         CustomerServiceLog("FS_Phase4_Crafting", custLogMsg, player);
-        return;
     }
+
     public void fs_phase4_chief_engineer_action_openSkillBranch(obj_id player, obj_id npc) throws InterruptedException
     {
         String coreTemplate = "object/tangible/item/quest/force_sensitive/fs_crafting4_computer_core.iff";
@@ -234,8 +239,8 @@ public class fs_phase4_chief_engineer extends script.base_script
         }
         String custLogMsg = "FS Phase 4 Crafting Quest: Player %TU has unlocked branch name: force_sensitive_crafting_mastery_repair.";
         CustomerServiceLog("FS_Phase4_Crafting", custLogMsg, player);
-        return;
     }
+
     public void fs_phase4_chief_engineer_action_getCrafting4ActiveQuestNum(obj_id player, obj_id npc) throws InterruptedException
     {
         int questNum = -1;
@@ -268,13 +273,13 @@ public class fs_phase4_chief_engineer extends script.base_script
             questNum = 6;
         }
         utils.setScriptVar(player, "crafting4.activeQuest", questNum);
-        return;
     }
+
     public void fs_phase4_chief_engineer_action_setFSQuestAccepted(obj_id player, obj_id npc) throws InterruptedException
     {
         fs_quests.setQuestAccepted(player);
-        return;
     }
+
     public void fs_phase4_chief_engineer_action_getCrafting4LastCompleteQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         int questNum = -1;
@@ -303,8 +308,8 @@ public class fs_phase4_chief_engineer extends script.base_script
             questNum = 6;
         }
         utils.setScriptVar(player, "crafting4.lastCompleteQuest", questNum);
-        return;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -314,11 +319,13 @@ public class fs_phase4_chief_engineer extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -327,18 +334,21 @@ public class fs_phase4_chief_engineer extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "npc.conversation.fs_phase4_chief_engineer");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -367,7 +377,7 @@ public class fs_phase4_chief_engineer extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_6516bd5a");
@@ -375,7 +385,7 @@ public class fs_phase4_chief_engineer extends script.base_script
                 setObjVar(player, "conversation.fs_phase4_chief_engineer.branchId", 2);
                 npcStartConversation(player, self, "fs_phase4_chief_engineer", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -410,7 +420,7 @@ public class fs_phase4_chief_engineer extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_121666b3");
@@ -422,7 +432,7 @@ public class fs_phase4_chief_engineer extends script.base_script
                 setObjVar(player, "conversation.fs_phase4_chief_engineer.branchId", 4);
                 npcStartConversation(player, self, "fs_phase4_chief_engineer", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -479,7 +489,7 @@ public class fs_phase4_chief_engineer extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_a2e520b8");
@@ -507,7 +517,7 @@ public class fs_phase4_chief_engineer extends script.base_script
                 setObjVar(player, "conversation.fs_phase4_chief_engineer.branchId", 10);
                 npcStartConversation(player, self, "fs_phase4_chief_engineer", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -536,7 +546,7 @@ public class fs_phase4_chief_engineer extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_59f5cee6");
@@ -548,7 +558,7 @@ public class fs_phase4_chief_engineer extends script.base_script
                 setObjVar(player, "conversation.fs_phase4_chief_engineer.branchId", 17);
                 npcStartConversation(player, self, "fs_phase4_chief_engineer", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -576,7 +586,7 @@ public class fs_phase4_chief_engineer extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_ff872480");
@@ -588,7 +598,7 @@ public class fs_phase4_chief_engineer extends script.base_script
                 setObjVar(player, "conversation.fs_phase4_chief_engineer.branchId", 31);
                 npcStartConversation(player, self, "fs_phase4_chief_engineer", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -603,6 +613,7 @@ public class fs_phase4_chief_engineer extends script.base_script
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("fs_phase4_chief_engineer"))
@@ -653,7 +664,7 @@ public class fs_phase4_chief_engineer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4136c2df");
@@ -662,7 +673,7 @@ public class fs_phase4_chief_engineer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.fs_phase4_chief_engineer.branchId");
                     npcSpeak(player, message);
@@ -764,7 +775,7 @@ public class fs_phase4_chief_engineer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f75c2f80");
@@ -789,7 +800,7 @@ public class fs_phase4_chief_engineer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.fs_phase4_chief_engineer.branchId");
                     npcSpeak(player, message);
@@ -961,7 +972,7 @@ public class fs_phase4_chief_engineer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61fa9d29");
@@ -970,7 +981,7 @@ public class fs_phase4_chief_engineer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.fs_phase4_chief_engineer.branchId");
                     npcSpeak(player, message);
@@ -1020,7 +1031,7 @@ public class fs_phase4_chief_engineer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8e1d9e8a");
@@ -1033,7 +1044,7 @@ public class fs_phase4_chief_engineer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.fs_phase4_chief_engineer.branchId");
                     npcSpeak(player, message);
@@ -1069,7 +1080,7 @@ public class fs_phase4_chief_engineer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7f1492c");
@@ -1082,7 +1093,7 @@ public class fs_phase4_chief_engineer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.fs_phase4_chief_engineer.branchId");
                     npcSpeak(player, message);
@@ -1152,7 +1163,7 @@ public class fs_phase4_chief_engineer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f75c2f80");
@@ -1177,7 +1188,7 @@ public class fs_phase4_chief_engineer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.fs_phase4_chief_engineer.branchId");
                     npcSpeak(player, message);

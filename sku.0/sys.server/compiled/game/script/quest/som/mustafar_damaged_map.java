@@ -1,16 +1,23 @@
 package script.quest.som;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.groundquests;
 import script.*;
 
 public class mustafar_damaged_map extends script.base_script
 {
-    public mustafar_damaged_map()
-    {
-    }
     public static final String STF = "som/som_quest";
     public static final string_id EXAMINE = new string_id(STF, "mustafar_damaged_map_examine");
     public static final string_id COMPLETED = new string_id(STF, "mustafar_damaged_map_already");
+    public mustafar_damaged_map()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int menu = mi.addRootMenu(menu_info_types.ITEM_USE, EXAMINE);
@@ -22,6 +29,7 @@ public class mustafar_damaged_map extends script.base_script
         mid.setServerNotify(true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -31,7 +39,7 @@ public class mustafar_damaged_map extends script.base_script
                 groundquests.grantQuest(player, "som_mustafar_exploration");
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 sendSystemMessage(player, COMPLETED);
                 return SCRIPT_CONTINUE;

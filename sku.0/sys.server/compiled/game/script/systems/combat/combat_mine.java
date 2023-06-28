@@ -1,5 +1,11 @@
 package script.systems.combat;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.attrib;
 import script.library.colors;
@@ -22,6 +28,7 @@ public class combat_mine extends script.base_script
     public static final string_id deactivated = new string_id(STF, "deactivated");
     public static final string_id reversed = new string_id(STF, "reversed");
     public static final boolean loggingOn = false;
+
     public combat_mine()
     {
     }
@@ -159,7 +166,6 @@ public class combat_mine extends script.base_script
         {
             doLogging("verifyMine", "Mine destroyed itself due to invalid entry(" + mineType + ") in datatable(" + mineDataTable + ")");
             destroyObject(landMine);
-            return;
         }
     }
 

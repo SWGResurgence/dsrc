@@ -6,6 +6,12 @@
 
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
@@ -18,10 +24,11 @@ public class convert_no_trade extends script.base_script
     {
 
     }
+
     public boolean convert_no_trade_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
-	}
+    }
 
     int convert_no_trade_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {

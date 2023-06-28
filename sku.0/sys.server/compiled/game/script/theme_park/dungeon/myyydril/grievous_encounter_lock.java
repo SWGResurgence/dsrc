@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.myyydril;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.groundquests;
 import script.library.pclib;
@@ -11,18 +17,15 @@ import java.util.Vector;
 
 public class grievous_encounter_lock extends script.base_script
 {
-    public grievous_encounter_lock()
-    {
-    }
     public static final String start_cell = "hall55";
     public static final String entry_cell = "hall56";
     public static final String exit_cell = "hall59";
-    public static final String[] encounter_cells = 
-    {
-        "hall56",
-        "hall57",
-        "hall58"
-    };
+    public static final String[] encounter_cells =
+            {
+                    "hall56",
+                    "hall57",
+                    "hall58"
+            };
     public static final String encounter_active = "grievous_lock.isActive";
     public static final String encounter_player = "grievous_lock.isPlayer";
     public static final String encounter_session_current = "grievous_lock.encounter_session_current";
@@ -44,18 +47,27 @@ public class grievous_encounter_lock extends script.base_script
     public static final string_id encounter_ending = new string_id(STF, "encounter_end_soon");
     public static final string_id encounter_ended = new string_id(STF, "encounter_ended");
     public static final boolean doLogging = false;
+    public grievous_encounter_lock()
+    {
+    }
+
     public void clearEncounterCells(obj_id dungeon) throws InterruptedException
     {
         obj_id[] cellIds = getEncounterCellIds(dungeon);
-        for (obj_id cellId : cellIds) {
+        for (obj_id cellId : cellIds)
+        {
             obj_id[] cellContents = getContents(cellId);
-            if (cellContents != null && cellContents.length > 0) {
-                for (obj_id cellContent : cellContents) {
-                    if (isPlayer(cellContent)) {
+            if (cellContents != null)
+            {
+                for (obj_id cellContent : cellContents)
+                {
+                    if (isPlayer(cellContent))
+                    {
                         ejectPlayersFromEncounter(cellContent, dungeon);
                         //System.out.println("ejecting player " + getFirstName(cellContent) + " from encounter");
                     }
-                    if ((getTemplateName(cellContent)).equals(encounter_manager)) {
+                    if ((getTemplateName(cellContent)).equals(encounter_manager))
+                    {
                         messageTo(cellContent, "handleEndEncounter", null, 0, false);
                         //System.out.println("ending encounter");
                     }
@@ -63,16 +75,21 @@ public class grievous_encounter_lock extends script.base_script
             }
         }
     }
+
     public obj_id[] getPlayersInEncounterArea(obj_id dungeon) throws InterruptedException
     {
         obj_id[] cellIds = getEncounterCellIds(dungeon);
         Vector players = new Vector();
         players.setSize(0);
-        for (obj_id cellId : cellIds) {
+        for (obj_id cellId : cellIds)
+        {
             obj_id[] cellContents = getContents(cellId);
-            if (cellContents != null && cellContents.length > 0) {
-                for (obj_id cellContent : cellContents) {
-                    if (isPlayer(cellContent)) {
+            if (cellContents != null)
+            {
+                for (obj_id cellContent : cellContents)
+                {
+                    if (isPlayer(cellContent))
+                    {
                         players = utils.addElement(players, cellContent);
                     }
                 }
@@ -92,22 +109,28 @@ public class grievous_encounter_lock extends script.base_script
         {
             return convertedArray;
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public obj_id[] getEventPlayersInDungeon(obj_id dungeon) throws InterruptedException
     {
         obj_id[] cellIds = getCellIds(dungeon);
         Vector eventPlayers = new Vector();
         eventPlayers.setSize(0);
-        for (obj_id cellId : cellIds) {
+        for (obj_id cellId : cellIds)
+        {
             obj_id[] contents = getContents(cellId);
-            if (contents != null && contents.length > 0) {
-                for (obj_id content : contents) {
-                    if (isPlayer(content) && hasScript(content, "theme_park.dungeon.myyydril.grievous_player")) {
-                        if (validatePlayerSessionId(content, dungeon)) {
+            if (contents != null)
+            {
+                for (obj_id content : contents)
+                {
+                    if (isPlayer(content) && hasScript(content, "theme_park.dungeon.myyydril.grievous_player"))
+                    {
+                        if (validatePlayerSessionId(content, dungeon))
+                        {
                             eventPlayers = utils.addElement(eventPlayers, content);
                         }
                     }
@@ -128,11 +151,12 @@ public class grievous_encounter_lock extends script.base_script
         {
             return convertedArray;
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public obj_id[] getEncounterCellIds(obj_id dungeon) throws InterruptedException
     {
         obj_id[] cells = new obj_id[encounter_cells.length];
@@ -142,6 +166,7 @@ public class grievous_encounter_lock extends script.base_script
         }
         return cells;
     }
+
     public void ejectPlayersFromEncounter(obj_id player, obj_id dungeon) throws InterruptedException
     {
         pclib.resurrectPlayer(player, false);
@@ -155,6 +180,7 @@ public class grievous_encounter_lock extends script.base_script
         doLogging("ejectPlayersFromEncounter", "Removing player(" + getName(player) + "/" + player + ") from encounter area");
         warpPlayer(player, "kashyyyk_pob_dungeons", x, y, z, dungeon, exit_cell, x, y, z, "nullCallBack", false);
     }
+
     public void moveSinglePlayerIntoEncounter(obj_id player, obj_id dungeon, int sessionId) throws InterruptedException
     {
         int x = -280;
@@ -174,6 +200,7 @@ public class grievous_encounter_lock extends script.base_script
         //System.out.println("warping player " + getFirstName(player) + " to encounter");
         warpPlayer(player, "kashyyyk_pob_dungeons", x, y, z, dungeon, entry_cell, x, y, z, "nullCallBack", false);
     }
+
     public void moveGroupIntoEncounter(obj_id player, obj_id dungeon, int sessionId) throws InterruptedException
     {
         obj_id cell = getCellId(dungeon, start_cell);
@@ -186,16 +213,19 @@ public class grievous_encounter_lock extends script.base_script
                 moveSinglePlayerIntoEncounter(player, dungeon, sessionId);
             }
         }
-        else 
+        else
         {
             obj_id[] groupMembers = getGroupMemberIds(groupObject);
-            for (obj_id groupMember : groupMembers) {
-                if (isIdValid(groupMember) && getContainedBy(groupMember) == cell) {
+            for (obj_id groupMember : groupMembers)
+            {
+                if (isIdValid(groupMember) && getContainedBy(groupMember) == cell)
+                {
                     moveSinglePlayerIntoEncounter(groupMember, dungeon, sessionId);
                 }
             }
         }
     }
+
     public boolean isSessionAvailable(obj_id dungeon, boolean godOverride) throws InterruptedException
     {
         if (godOverride)
@@ -230,6 +260,7 @@ public class grievous_encounter_lock extends script.base_script
         messageTo(dungeon, "resetEncounterLocks", null, 0, false);
         return true;
     }
+
     public boolean validateEncounterSession(obj_id dungeon) throws InterruptedException
     {
         obj_id[] players = getPlayersInEncounterArea(dungeon);
@@ -242,10 +273,12 @@ public class grievous_encounter_lock extends script.base_script
                 return false;
             }
         }
-        if (players != null && players.length > 0)
+        if (players != null)
         {
-            for (obj_id player : players) {
-                if (!validatePlayerSessionId(player, dungeon)) {
+            for (obj_id player : players)
+            {
+                if (!validatePlayerSessionId(player, dungeon))
+                {
                     ejectPlayersFromEncounter(player, dungeon);
                 }
             }
@@ -260,17 +293,19 @@ public class grievous_encounter_lock extends script.base_script
         }
         return false;
     }
+
     public int getSessionId(obj_id target) throws InterruptedException
     {
         if (utils.hasScriptVar(target, encounter_session_current))
         {
             return utils.getIntScriptVar(target, encounter_session_current);
         }
-        else 
+        else
         {
             return -1;
         }
     }
+
     public boolean validatePlayerSessionId(obj_id player, obj_id dungeon) throws InterruptedException
     {
         if (utils.hasScriptVar(player, god_authorized))
@@ -285,13 +320,14 @@ public class grievous_encounter_lock extends script.base_script
             {
                 return (getSessionId(player) == getSessionId(dungeon));
             }
-            else 
+            else
             {
                 return false;
             }
         }
         return false;
     }
+
     public int setSessionIds(obj_id dungeon) throws InterruptedException
     {
         int sessionId = 0;
@@ -306,6 +342,7 @@ public class grievous_encounter_lock extends script.base_script
         // dont remove, System.out.println interrupts cout//System.out.println("Session Id set to: " + sessionId);
         return sessionId;
     }
+
     public void startEventTimer(obj_id dungeon, int sessionId) throws InterruptedException
     {
         int currentTime = getGameTime();
@@ -318,6 +355,7 @@ public class grievous_encounter_lock extends script.base_script
         dict.put("sessionId", sessionId);
         messageTo(dungeon, "handleSessionTimerUpdate", dict, 0, false);
     }
+
     public String getDungeonRemainingTimeString(obj_id dungeon) throws InterruptedException
     {
         int currentTime = getGameTime();
@@ -332,6 +370,7 @@ public class grievous_encounter_lock extends script.base_script
         }
         return utils.formatTimeVerbose(sessionTimeRemaining);
     }
+
     public int calculateNextMessage(obj_id dungeon) throws InterruptedException
     {
         int currentTime = getGameTime();
@@ -357,6 +396,7 @@ public class grievous_encounter_lock extends script.base_script
         }
         return sessionEnd - currentTime;
     }
+
     public void devalidateEventPlayersInDungeon(obj_id dungeon) throws InterruptedException
     {
         obj_id[] players = getEventPlayersInDungeon(dungeon);
@@ -365,6 +405,7 @@ public class grievous_encounter_lock extends script.base_script
             utils.messageTo(players, "cleanupEjectedPlayers", null, 0, false);
         }
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (doLogging)
@@ -372,12 +413,14 @@ public class grievous_encounter_lock extends script.base_script
             LOG("debug/grievous_encounter_lock/" + section, message);
         }
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         ////System.out.println("Grievous Encounter Lock Initialized");// dont remove, System.out.println interrupts cout
         messageTo(self, "resetEncounterLocks", null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnReceivedItem(obj_id self, obj_id container, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))
@@ -385,10 +428,12 @@ public class grievous_encounter_lock extends script.base_script
             return SCRIPT_CONTINUE;
         }
         obj_id[] players = getPlayersInEncounterArea(self);
-        if (players != null && players.length > 0)
+        if (players != null)
         {
-            for (obj_id player : players) {
-                if (player == item) {
+            for (obj_id player : players)
+            {
+                if (player == item)
+                {
                     doLogging("OnRecievedItem", "Player(" + getName(item) + "/" + item + ") has entered encounter area, validating");
                     ////System.out.println("Player(" + getName(item) + "/" + item + ") has entered encounter area, validating");// dont remove, System.out.println interrupts cout
                     //messageTo(self, "validatePlayersInEvent", null, 0, false);
@@ -397,6 +442,7 @@ public class grievous_encounter_lock extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int resetEncounterLocks(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, encounter_active, 0);
@@ -406,6 +452,7 @@ public class grievous_encounter_lock extends script.base_script
         ////System.out.println("Encounter Locks Reset"); // dont remove, System.out.println interrupts cout
         return SCRIPT_CONTINUE;
     }
+
     public int beginEncounter(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -424,6 +471,7 @@ public class grievous_encounter_lock extends script.base_script
         // dont remove, System.out.println interrupts cout //System.out.println("Encounter Timer Started");
         return SCRIPT_CONTINUE;
     }
+
     public int handleSessionTimerUpdate(obj_id self, dictionary params) throws InterruptedException
     {
         int sessionId = getSessionId(self);
@@ -449,7 +497,7 @@ public class grievous_encounter_lock extends script.base_script
                 doLogging("handleSessionTimerUpdate", "Sending next message in (" + nextMessage + ") seconds");
                 messageTo(self, "handleSessionTimerUpdate", dict, nextMessage, false);
             }
-            else 
+            else
             {
                 doLogging("handleSessionTimerUpdate", "Next message was less than 1, ending encounter");
                 // dont remove, System.out.println interrupts cout//System.out.println("Next message was less than 1, ending encounter");
@@ -458,13 +506,16 @@ public class grievous_encounter_lock extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int validatePlayersInEvent(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] players = getPlayersInEncounterArea(self);
-        if (players != null && players.length > 0)
+        if (players != null)
         {
-            for (obj_id player : players) {
-                if (!validatePlayerSessionId(player, self)) {
+            for (obj_id player : players)
+            {
+                if (!validatePlayerSessionId(player, self))
+                {
                     ejectPlayersFromEncounter(player, self);
                 }
             }

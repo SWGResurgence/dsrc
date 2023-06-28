@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.establish_the_link;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -7,10 +13,12 @@ import script.obj_id;
 
 public class foreman_drone_spawner_tracker extends script.base_script
 {
+    public static final boolean LOGGING = false;
+
     public foreman_drone_spawner_tracker()
     {
     }
-    public static final boolean LOGGING = false;
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (trial.isUplinkActive(self))
@@ -20,34 +28,40 @@ public class foreman_drone_spawner_tracker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         messageTo(self, "selfDestruct", null, 5, false);
         playClientEffectObj(self, trial.PRT_KUBAZA_WARNING, self, "");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);
         messageTo(self, "chargeForeman", null, 4, false);
         return SCRIPT_CONTINUE;
     }
+
     public obj_id getForeman(obj_id self) throws InterruptedException
     {
-        obj_id contents[] = utils.getSharedContainerObjects(self);
+        obj_id[] contents = utils.getSharedContainerObjects(self);
         if (contents == null || contents.length == 0)
         {
             doLogging("locateForeman", "Contents list was empty, exiting");
             return obj_id.NULL_ID;
         }
-        for (obj_id content : contents) {
-            if (hasScript(content, "theme_park.dungeon.mustafar_trials.establish_the_link.foreman")) {
+        for (obj_id content : contents)
+        {
+            if (hasScript(content, "theme_park.dungeon.mustafar_trials.establish_the_link.foreman"))
+            {
                 return content;
             }
         }
         doLogging("getForeman", "Unable to locate foreman");
         return obj_id.NULL_ID;
     }
+
     public int chargeForeman(obj_id self, dictionary params) throws InterruptedException
     {
         setInvulnerable(self, false);
@@ -62,6 +76,7 @@ public class foreman_drone_spawner_tracker extends script.base_script
         setMovementRun(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         obj_id foreman = getForeman(self);
@@ -76,12 +91,13 @@ public class foreman_drone_spawner_tracker extends script.base_script
             healForeman(self, foreman);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             messageTo(self, "chargeForeman", null, 0, false);
             return SCRIPT_CONTINUE;
         }
     }
+
     public void healForeman(obj_id self, obj_id foreman) throws InterruptedException
     {
         messageTo(self, "selfDestruct", null, 0, false);
@@ -91,6 +107,7 @@ public class foreman_drone_spawner_tracker extends script.base_script
             buff.applyBuff(foreman, "uplink_enrage");
         }
     }
+
     public int selfDestruct(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] targets = trial.getValidTargetsInRadius(self, 7.0f);
@@ -101,11 +118,13 @@ public class foreman_drone_spawner_tracker extends script.base_script
             doLogging("nukeSelf", "No valid targets in blast radius");
             return SCRIPT_CONTINUE;
         }
-        for (obj_id target : targets) {
+        for (obj_id target : targets)
+        {
             damage(target, DAMAGE_ELEMENTAL_HEAT, HIT_LOCATION_BODY, 2500);
         }
         return SCRIPT_CONTINUE;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING || trial.UPLINK_LOGGING)

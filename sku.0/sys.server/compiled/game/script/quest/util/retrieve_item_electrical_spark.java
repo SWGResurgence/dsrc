@@ -1,5 +1,11 @@
 package script.quest.util;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.groundquests;
 import script.location;
@@ -11,6 +17,7 @@ public class retrieve_item_electrical_spark extends script.base_script
     public retrieve_item_electrical_spark()
     {
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         location here = getLocation(player);
@@ -34,12 +41,12 @@ public class retrieve_item_electrical_spark extends script.base_script
                             webster.put("player", player);
                             messageTo(self, "handleSetIncapped", webster, 1, false);
                         }
-                        else 
+                        else
                         {
                             return SCRIPT_CONTINUE;
                         }
                     }
-                    else 
+                    else
                     {
                         playClientEffectLoc(player, "clienteffect/quest_item_electrical_spark.cef", getLocation(self), 1.0f);
                     }
@@ -48,6 +55,7 @@ public class retrieve_item_electrical_spark extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetIncapped(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");

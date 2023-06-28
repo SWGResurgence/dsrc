@@ -1,5 +1,11 @@
 package script.systems.combat;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.combat_engine.weapon_data;
 import script.*;
 import script.library.*;
@@ -10,6 +16,7 @@ public class combat_weapon extends script.base_script
     public static final java.text.NumberFormat noDecimalFormat = new java.text.DecimalFormat("###");
     public static final java.text.NumberFormat percentFormat = new java.text.DecimalFormat("###.#%");
     public static final String PID_NAME = "wpConversion";
+
     public combat_weapon()
     {
     }
@@ -269,9 +276,9 @@ public class combat_weapon extends script.base_script
         int minDamage = weaponMinDamage + (playerLevel * intMultiplier);
         int maxDamage = intBaseDamage + weaponMaxDamage + (playerLevel * intMultiplier);
         int oldMin = getSkillStatisticModifier(player, "minDamage");
-        applySkillStatisticModifier(player, "minDamage", 0 - oldMin);
+        applySkillStatisticModifier(player, "minDamage", -oldMin);
         int oldMax = getSkillStatisticModifier(player, "maxDamage");
-        applySkillStatisticModifier(player, "maxDamage", 0 - oldMax);
+        applySkillStatisticModifier(player, "maxDamage", -oldMax);
         applySkillStatisticModifier(player, "minDamage", minDamage);
         applySkillStatisticModifier(player, "maxDamage", maxDamage);
     }
@@ -311,9 +318,9 @@ public class combat_weapon extends script.base_script
                 }
             }
             names[free] = "healing_combat_level_required";
-            attribs[free++] = "" + levelRequired;
+            attribs[free++] = String.valueOf(levelRequired);
             names[free] = "tooltip.healing_combat_level_required";
-            attribs[free++] = "" + levelRequired;
+            attribs[free++] = String.valueOf(levelRequired);
             String skillRequired = dataTableGetString(combat.WEAPON_LEVEL_TABLE, template, "secondary_restriction");
             if (staticItem)
             {
@@ -348,9 +355,9 @@ public class combat_weapon extends script.base_script
             {
                 int tier = itemData.getInt("tier");
                 names[free] = "tier";
-                attribs[free++] = "" + tier;
+                attribs[free++] = String.valueOf(tier);
                 names[free] = "tooltip.tier";
-                attribs[free++] = "" + tier;
+                attribs[free++] = String.valueOf(tier);
             }
         }
         weapon_data weaponData = getWeaponData(self);
@@ -400,7 +407,7 @@ public class combat_weapon extends script.base_script
                 names[free] = "cat_wpn_damage.weapon_dps";
                 float avg = (weaponData.minDamage + weaponData.maxDamage) / 2;
                 avg += (elementalValue * 2);
-                attribs[free++] = "" + (int) (avg / weaponData.attackSpeed);
+                attribs[free++] = String.valueOf((int) (avg / weaponData.attackSpeed));
             }
 
             {

@@ -1,5 +1,11 @@
 package script.player;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -12,11 +18,13 @@ public class player_jedi_conversion extends script.base_script
     public player_jedi_conversion()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         convertOldJedi(self);
         return SCRIPT_CONTINUE;
     }
+
     public void convertOldJedi(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "jedi.converted"))
@@ -26,8 +34,8 @@ public class player_jedi_conversion extends script.base_script
         }
         setObjVar(self, "combatLevel", 80);
         detachScript(self, "player.player_jedi_conversion");
-        return;
     }
+
     public int forceSensitiveSui(obj_id self, obj_id player, int test) throws InterruptedException
     {
         String datatable = "datatables/jedi/force_sensitive_skills.iff";
@@ -68,11 +76,11 @@ public class player_jedi_conversion extends script.base_script
                 String fourth = dataTableGetString(datatable, i, "skill_four");
                 if (!hasSkill(player, first) && !hasSkill(player, second) && !hasSkill(player, third) && !hasSkill(player, fourth))
                 {
-                    addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, "" + i);
+                    addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, String.valueOf(i));
                     setSUIProperty(pid, sui.LISTBOX_DATASOURCE + "." + i, sui.PROP_TEXT, "@skl_n:" + nameList[i]);
                     skillList = utils.addElement(skillList, skill);
                 }
-                else 
+                else
                 {
                 }
             }
@@ -84,6 +92,7 @@ public class player_jedi_conversion extends script.base_script
         setObjVar(self, "jedi.conversionSui", pid);
         return pid;
     }
+
     public int forceSensitiveSkillSelection(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -97,17 +106,18 @@ public class player_jedi_conversion extends script.base_script
         switch (bp)
         {
             case sui.BP_REVERT:
-            revokeForceSkill(player);
-            return SCRIPT_CONTINUE;
+                revokeForceSkill(player);
+                return SCRIPT_CONTINUE;
             case sui.BP_OK:
-            addSkillBox(self, player, idx);
-            return SCRIPT_CONTINUE;
+                addSkillBox(self, player, idx);
+                return SCRIPT_CONTINUE;
             case sui.BP_CANCEL:
-            forceSensitiveSui(self, self, 1);
-            return SCRIPT_CONTINUE;
+                forceSensitiveSui(self, self, 1);
+                return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public void addSkillBox(obj_id self, obj_id player, int idx) throws InterruptedException
     {
         String datatable = "datatables/jedi/force_sensitive_skills.iff";
@@ -116,7 +126,7 @@ public class player_jedi_conversion extends script.base_script
             forceSensitiveSui(player, player, 1);
             return;
         }
-        else 
+        else
         {
             String[] skillNames = utils.getStringArrayScriptVar(self, "skill_list");
             String thisSkill = skillNames[idx];
@@ -185,7 +195,7 @@ public class player_jedi_conversion extends script.base_script
             {
                 forceSensitiveSui(player, player, 1);
             }
-            else 
+            else
             {
                 setJediState(self, JEDI_STATE_JEDI);
                 setMaxForcePower(self, 10);
@@ -201,8 +211,8 @@ public class player_jedi_conversion extends script.base_script
                 jediSui(player, player, 1);
             }
         }
-        return;
     }
+
     public void checkForMasterBox(obj_id player) throws InterruptedException
     {
         obj_id self = player;
@@ -234,8 +244,8 @@ public class player_jedi_conversion extends script.base_script
             removeObjVar(self, "jedi.grantingSkill");
             CustomerServiceLog("JediConversion", "%TU was granted force_sensitive_heightened_senses_master", self);
         }
-        return;
     }
+
     public int jediSui(obj_id self, obj_id player, int test) throws InterruptedException
     {
         String datatable = "datatables/jedi/jedi_conversion.iff";
@@ -266,11 +276,7 @@ public class player_jedi_conversion extends script.base_script
                 string_id skillName = new string_id("skl_n", skill);
                 String skillDisplay = getString(skillName);
                 int cost = 0;
-                boolean affordable = true;
-                if (cost > points)
-                {
-                    affordable = false;
-                }
+                boolean affordable = cost <= points;
                 if (!hasSkill(player, skill))
                 {
                     String requiredSkills = dataTableGetString("datatables/skill/skills.iff", skill, "SKILLS_REQUIRED");
@@ -282,16 +288,18 @@ public class player_jedi_conversion extends script.base_script
                         int hadIt = 0;
                         if (requiredLength > 0)
                         {
-                            for (String checkSkill : skills) {
-                                if (hasSkill(player, checkSkill)) {
+                            for (String checkSkill : skills)
+                            {
+                                if (hasSkill(player, checkSkill))
+                                {
                                     hadIt = hadIt + 1;
                                 }
                             }
                             if (hadIt == requiredLength)
                             {
-                                if (affordable == true)
+                                if (affordable)
                                 {
-                                    addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, "" + i);
+                                    addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, String.valueOf(i));
                                     setSUIProperty(pid, sui.LISTBOX_DATASOURCE + "." + i, sui.PROP_TEXT, "@skl_n:" + nameList[i]);
                                     skillList = utils.addElement(skillList, skill);
                                 }
@@ -300,18 +308,18 @@ public class player_jedi_conversion extends script.base_script
                     }
                     else if (hasSkill(player, requiredSkills) || requiredSkills.equals("") || requiredSkills.equals("force_title_jedi_rank_02"))
                     {
-                        if (affordable == true)
+                        if (affordable)
                         {
-                            addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, "" + i);
+                            addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, String.valueOf(i));
                             setSUIProperty(pid, sui.LISTBOX_DATASOURCE + "." + i, sui.PROP_TEXT, "@skl_n:" + nameList[i]);
                             skillList = utils.addElement(skillList, skill);
                         }
                     }
-                    else 
+                    else
                     {
                     }
                 }
-                else 
+                else
                 {
                 }
             }
@@ -329,7 +337,7 @@ public class player_jedi_conversion extends script.base_script
             {
                 regularSkillSui(player, player, 1);
             }
-            else 
+            else
             {
                 completeTraining(player);
             }
@@ -339,6 +347,7 @@ public class player_jedi_conversion extends script.base_script
         setObjVar(self, "jedi.conversionSui", pid);
         return pid;
     }
+
     public int jediSkillSelection(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -352,17 +361,18 @@ public class player_jedi_conversion extends script.base_script
         switch (bp)
         {
             case sui.BP_REVERT:
-            revokeJediSkill(player);
-            return SCRIPT_CONTINUE;
+                revokeJediSkill(player);
+                return SCRIPT_CONTINUE;
             case sui.BP_OK:
-            addJediSkillBox(self, player, idx);
-            return SCRIPT_CONTINUE;
+                addJediSkillBox(self, player, idx);
+                return SCRIPT_CONTINUE;
             case sui.BP_CANCEL:
-            jediSui(self, self, 1);
-            return SCRIPT_CONTINUE;
+                jediSui(self, self, 1);
+                return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public void addJediSkillBox(obj_id self, obj_id player, int idx) throws InterruptedException
     {
         String datatable = "datatables/jedi/jedi_conversion.iff";
@@ -371,7 +381,7 @@ public class player_jedi_conversion extends script.base_script
             jediSui(player, player, 1);
             return;
         }
-        else 
+        else
         {
             String[] skillNames = utils.getStringArrayScriptVar(self, "skill_list");
             String thisSkill = skillNames[idx];
@@ -400,12 +410,12 @@ public class player_jedi_conversion extends script.base_script
                     utils.setScriptVar(player, "last_jedi_skill_picked", thisSkill);
                     CustomerServiceLog("JediConversion", "%TU selected " + thisSkill + " skill.", self);
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, "You don't have the proper prerequisites for this skill.", null);
                 }
             }
-            if (points > 0 && granted == true)
+            if (points > 0 && granted)
             {
                 points = points - cost;
                 setObjVar(player, "jedi.currentPoints", points);
@@ -414,7 +424,7 @@ public class player_jedi_conversion extends script.base_script
             {
                 jediSui(player, player, 1);
             }
-            else 
+            else
             {
                 int nonJedi = getIntObjVar(player, "jedi.nonJediPoints");
                 nonJedi += points;
@@ -424,14 +434,14 @@ public class player_jedi_conversion extends script.base_script
                 {
                     regularSkillSui(player, player, 1);
                 }
-                else 
+                else
                 {
                     completeTraining(player);
                 }
             }
         }
-        return;
     }
+
     public int regularSkillSui(obj_id self, obj_id player, int test) throws InterruptedException
     {
         if (hasObjVar(self, "cancel"))
@@ -468,7 +478,7 @@ public class player_jedi_conversion extends script.base_script
             for (int i = 0; i < nameList.length; i++)
             {
                 String skill = nameList[i];
-                addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, "" + i);
+                addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, String.valueOf(i));
                 setSUIProperty(pid, sui.LISTBOX_DATASOURCE + "." + i, sui.PROP_TEXT, "@skl_n:" + nameList[i]);
                 skillList = utils.addElement(skillList, skill);
             }
@@ -485,6 +495,7 @@ public class player_jedi_conversion extends script.base_script
         setObjVar(self, "jedi.conversionSui", pid);
         return pid;
     }
+
     public String[] getMasterSkillList(obj_id player) throws InterruptedException
     {
         String tblSkillList = "social_entertainer_master,outdoors_scout_master,science_medic_master,crafting_artisan_master,combat_brawler_master,combat_marksman_master,combat_rifleman_master,combat_pistol_master,combat_carbine_master,combat_unarmed_master,combat_1hsword_master,combat_2hsword_master,combat_polearm_master,social_dancer_master,social_musician_master,science_doctor_master,outdoors_ranger_master,outdoors_creaturehandler_master,outdoors_bio_engineer_master,crafting_armorsmith_master,crafting_weaponsmith_master,crafting_chef_master,crafting_tailor_master,crafting_architect_master,crafting_droidengineer_master,crafting_merchant_master,combat_smuggler_master,combat_bountyhunter_master,combat_commando_master,science_combatmedic_master,social_imagedesigner_master,outdoors_squadleader_master,social_politician_master";
@@ -511,6 +522,7 @@ public class player_jedi_conversion extends script.base_script
         }
         return _masterSkillList;
     }
+
     public String[] getTotalSkillList(obj_id player) throws InterruptedException
     {
         String[] masterSkillList = getMasterSkillList(player);
@@ -520,14 +532,20 @@ public class player_jedi_conversion extends script.base_script
         }
         Vector skillList = new Vector();
         skillList.setSize(0);
-        for (String s1 : masterSkillList) {
+        for (String s1 : masterSkillList)
+        {
             skillList = utils.addElement(skillList, s1);
             String[] tmp = skill.getAllRequiredSkills(s1);
-            if ((tmp == null) || (tmp.length == 0)) {
-            } else {
-                for (String s : tmp) {
+            if ((tmp == null) || (tmp.length == 0))
+            {
+            }
+            else
+            {
+                for (String s : tmp)
+                {
                     int pos = utils.getElementPositionInArray(skillList, s);
-                    if (pos == -1) {
+                    if (pos == -1)
+                    {
                         skillList = utils.addElement(skillList, s);
                     }
                 }
@@ -541,6 +559,7 @@ public class player_jedi_conversion extends script.base_script
         }
         return _skillList;
     }
+
     public String[] getLearnableSkillList(obj_id player) throws InterruptedException
     {
         String[] learnableSkillList = getTotalSkillList(player);
@@ -550,14 +569,18 @@ public class player_jedi_conversion extends script.base_script
         }
         Vector skillList = new Vector();
         skillList.setSize(0);
-        for (String s : learnableSkillList) {
-            if (hasSkill(player, s)) {
+        for (String s : learnableSkillList)
+        {
+            if (hasSkill(player, s))
+            {
                 continue;
             }
-            if (skill.hasRequiredSkillsForSkillPurchase(player, s)) {
+            if (skill.hasRequiredSkillsForSkillPurchase(player, s))
+            {
                 int cost = 0;
                 int pointsToSpend = getIntObjVar(player, "jedi.nonJediPoints");
-                if (cost <= pointsToSpend) {
+                if (cost <= pointsToSpend)
+                {
                     skillList = utils.addElement(skillList, s);
                 }
             }
@@ -570,6 +593,7 @@ public class player_jedi_conversion extends script.base_script
         }
         return _skillList;
     }
+
     public int regularSkillSelection(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -583,17 +607,18 @@ public class player_jedi_conversion extends script.base_script
         switch (bp)
         {
             case sui.BP_REVERT:
-            revokeRegularSkill(player);
-            return SCRIPT_CONTINUE;
+                revokeRegularSkill(player);
+                return SCRIPT_CONTINUE;
             case sui.BP_OK:
-            addRegularSkillBox(self, player, idx);
-            return SCRIPT_CONTINUE;
+                addRegularSkillBox(self, player, idx);
+                return SCRIPT_CONTINUE;
             case sui.BP_CANCEL:
-            regularSkillSui(self, self, 1);
-            return SCRIPT_CONTINUE;
+                regularSkillSui(self, self, 1);
+                return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public void addRegularSkillBox(obj_id self, obj_id player, int idx) throws InterruptedException
     {
         String datatable = "datatables/skill/skills.iff";
@@ -602,7 +627,7 @@ public class player_jedi_conversion extends script.base_script
             regularSkillSui(player, player, 1);
             return;
         }
-        else 
+        else
         {
             String[] skillNames = utils.getStringArrayScriptVar(self, "skill_list");
             String thisSkill = skillNames[idx];
@@ -632,12 +657,12 @@ public class player_jedi_conversion extends script.base_script
                     utils.setScriptVar(player, "last_regular_skill_picked", thisSkill);
                     CustomerServiceLog("JediConversion", "%TU selected " + thisSkill + " skill.", self);
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, "You don't have the proper prerequisites for this skill.", null);
                 }
             }
-            if (points != 0 && granted == true)
+            if (points != 0 && granted)
             {
                 points = points - cost;
                 setObjVar(player, "jedi.nonJediPoints", points);
@@ -646,25 +671,27 @@ public class player_jedi_conversion extends script.base_script
             {
                 regularSkillSui(player, player, 1);
             }
-            else 
+            else
             {
                 completeTraining(player);
             }
         }
-        return;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         setSkillTemplate(self, "a");
         detachScript(self, "player.player_jedi_conversion");
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setSkillTemplate(self, "a");
         detachScript(self, "player.player_jedi_conversion");
         return SCRIPT_CONTINUE;
     }
+
     public void restartConversionSUI() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -689,12 +716,12 @@ public class player_jedi_conversion extends script.base_script
             regularSkillSui(self, self, 1);
             return;
         }
-        else 
+        else
         {
             completeTraining(self);
         }
-        return;
     }
+
     public void revokeSkills(obj_id objPlayer) throws InterruptedException
     {
         String[] skillList = getSkillListingForPlayer(objPlayer);
@@ -702,9 +729,10 @@ public class player_jedi_conversion extends script.base_script
         while (skillList != null && count < 15)
         {
             skillList = player_version.orderSkillListForRevoke(skillList);
-            if ((skillList != null) && (skillList.length > 0))
+            if (skillList != null)
             {
-                for (String s : skillList) {
+                for (String s : skillList)
+                {
                     revokeSkill(objPlayer, s);
                 }
             }
@@ -717,6 +745,7 @@ public class player_jedi_conversion extends script.base_script
             attachScript(objPlayer, "player.species_innate");
         }
     }
+
     public void revokeForceSkill(obj_id player) throws InterruptedException
     {
         obj_id self = player;
@@ -731,12 +760,14 @@ public class player_jedi_conversion extends script.base_script
         String second = dataTableGetString(datatable, thisSkill, "skill_two");
         String third = dataTableGetString(datatable, thisSkill, "skill_three");
         String fourth = dataTableGetString(datatable, thisSkill, "skill_four");
-        switch (fourth) {
+        switch (fourth)
+        {
             case "force_sensitive_combat_prowess_ranged_accuracy_04":
             case "force_sensitive_combat_prowess_ranged_speed_04":
             case "force_sensitive_combat_prowess_melee_accuracy_04":
             case "force_sensitive_combat_prowess_melee_speed_04":
-                if (hasSkill(player, "force_sensitive_combat_prowess_master")) {
+                if (hasSkill(player, "force_sensitive_combat_prowess_master"))
+                {
                     setObjVar(player, "jedi.revokeAllowed", 1);
                 }
                 revokeSkill(player, "force_sensitive_combat_prowess_master");
@@ -747,7 +778,8 @@ public class player_jedi_conversion extends script.base_script
             case "force_sensitive_enhanced_reflexes_melee_defense_04":
             case "force_sensitive_enhanced_reflexes_vehicle_control_04":
             case "force_sensitive_enhanced_reflexes_survival_04":
-                if (hasSkill(player, "force_sensitive_enhanced_reflexes_master")) {
+                if (hasSkill(player, "force_sensitive_enhanced_reflexes_master"))
+                {
                     setObjVar(player, "jedi.revokeAllowed", 1);
                 }
                 revokeSkill(player, "force_sensitive_enhanced_reflexes_master");
@@ -758,7 +790,8 @@ public class player_jedi_conversion extends script.base_script
             case "force_sensitive_crafting_mastery_assembly_04":
             case "force_sensitive_crafting_mastery_repair_04":
             case "force_sensitive_crafting_mastery_technique_04":
-                if (hasSkill(player, "force_sensitive_crafting_mastery_master")) {
+                if (hasSkill(player, "force_sensitive_crafting_mastery_master"))
+                {
                     setObjVar(player, "jedi.revokeAllowed", 1);
                 }
                 revokeSkill(player, "force_sensitive_crafting_mastery_master");
@@ -769,7 +802,8 @@ public class player_jedi_conversion extends script.base_script
             case "force_sensitive_heightened_senses_surveying_04":
             case "force_sensitive_heightened_senses_persuasion_04":
             case "force_sensitive_heightened_senses_luck_04":
-                if (hasSkill(player, "force_sensitive_heightened_senses_master")) {
+                if (hasSkill(player, "force_sensitive_heightened_senses_master"))
+                {
                     setObjVar(player, "jedi.revokeAllowed", 1);
                 }
                 revokeSkill(player, "force_sensitive_heightened_senses_master");
@@ -817,8 +851,8 @@ public class player_jedi_conversion extends script.base_script
         setObjVar(player, "jedi.forceSensitivePoints", needs);
         utils.removeScriptVar(player, "last_force_skill_picked");
         forceSensitiveSui(player, player, 1);
-        return;
     }
+
     public void revokeJediSkill(obj_id player) throws InterruptedException
     {
         String thisSkill = utils.getStringScriptVar(player, "last_jedi_skill_picked");
@@ -838,8 +872,8 @@ public class player_jedi_conversion extends script.base_script
         setObjVar(player, "jedi.currentPoints", points);
         utils.removeScriptVar(player, "last_jedi_skill_picked");
         jediSui(player, player, 1);
-        return;
     }
+
     public void revokeRegularSkill(obj_id player) throws InterruptedException
     {
         String thisSkill = utils.getStringScriptVar(player, "last_regular_skill_picked");
@@ -859,8 +893,8 @@ public class player_jedi_conversion extends script.base_script
         setObjVar(player, "jedi.nonJediPoints", points);
         utils.removeScriptVar(player, "last_regular_skill_picked");
         regularSkillSui(player, player, 1);
-        return;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "jedi.usingSui"))
@@ -888,6 +922,7 @@ public class player_jedi_conversion extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void completeTraining(obj_id self) throws InterruptedException
     {
         setObjVar(self, "jedi.converted", 1);
@@ -906,6 +941,5 @@ public class player_jedi_conversion extends script.base_script
         jedi.createColorCrystal(inv, rand(0, 11));
         detachScript(self, "player.player_jedi_conversion");
         CustomerServiceLog("JediConversion", "%TU Completed Jedi Conversion.", self);
-        return;
     }
 }

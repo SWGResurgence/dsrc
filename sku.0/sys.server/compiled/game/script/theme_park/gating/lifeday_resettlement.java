@@ -4,6 +4,12 @@ package script.theme_park.gating;/*
 @Purpose:
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.groundquests;
 import script.obj_id;
 
@@ -21,10 +27,10 @@ public class lifeday_resettlement extends script.base_script
         {
             if (!groundquests.hasCompletedQuest(item, "lifeday22_resettlement_prologue"))
             {
-                broadcast(item,"You must assist Krronch before you can enter his home.");
+                broadcast(item, "You must assist Krronch before you can enter his home.");
                 return SCRIPT_OVERRIDE;
             }
-            return  SCRIPT_CONTINUE;
+            return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
     }

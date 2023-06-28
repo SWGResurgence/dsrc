@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.corvette;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.utils;
 import script.obj_id;
@@ -11,6 +17,7 @@ public class locked extends script.base_script
     public locked()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         permissionsMakePrivate(self);
@@ -20,9 +27,11 @@ public class locked extends script.base_script
             return SCRIPT_CONTINUE;
         }
         int numInList = permList.size();
-        for (Object o : permList) {
+        for (Object o : permList)
+        {
             obj_id thisPlayer = ((obj_id) o);
-            if (isIdValid(thisPlayer)) {
+            if (isIdValid(thisPlayer))
+            {
                 String fname = getFirstName(thisPlayer);
                 permissionsAddAllowed(self, fname);
                 sendDirtyCellPermissionsUpdate(self, thisPlayer, true);
@@ -30,6 +39,7 @@ public class locked extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         permissionsMakePrivate(self);
@@ -39,9 +49,11 @@ public class locked extends script.base_script
             return SCRIPT_CONTINUE;
         }
         int numInList = permList.size();
-        for (Object o : permList) {
+        for (Object o : permList)
+        {
             obj_id thisPlayer = ((obj_id) o);
-            if (isIdValid(thisPlayer)) {
+            if (isIdValid(thisPlayer))
+            {
                 String fname = getFirstName(thisPlayer);
                 permissionsAddAllowed(self, fname);
                 sendDirtyCellPermissionsUpdate(self, thisPlayer, true);
@@ -49,6 +61,7 @@ public class locked extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))
@@ -62,6 +75,7 @@ public class locked extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int addToList(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -89,6 +103,7 @@ public class locked extends script.base_script
         sendDirtyCellPermissionsUpdate(room, player, true);
         return SCRIPT_CONTINUE;
     }
+
     public int removeFromList(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -113,6 +128,7 @@ public class locked extends script.base_script
         sendDirtyCellPermissionsUpdate(room, player, false);
         return SCRIPT_CONTINUE;
     }
+
     public int unlock(obj_id self, dictionary params) throws InterruptedException
     {
         permissionsMakePublic(self);

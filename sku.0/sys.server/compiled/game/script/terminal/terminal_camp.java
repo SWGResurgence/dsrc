@@ -1,5 +1,11 @@
 package script.terminal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.camping;
 import script.library.utils;
@@ -9,11 +15,13 @@ public class terminal_camp extends script.base_script
     public terminal_camp()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleTimeSensitiveData", null, 4, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -34,6 +42,7 @@ public class terminal_camp extends script.base_script
         idx++;
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data data = mi.getMenuItemByType(menu_info_types.ITEM_USE);
@@ -44,6 +53,7 @@ public class terminal_camp extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -52,6 +62,7 @@ public class terminal_camp extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void requestCampDismantle(obj_id self, obj_id player) throws InterruptedException
     {
         if (!hasObjVar(self, "camp"))
@@ -70,14 +81,14 @@ public class terminal_camp extends script.base_script
             {
                 destroyObject(camp);
             }
-            else 
+            else
             {
                 sendSystemMessage(player, new string_id("camp", "owner_dismantle"));
                 return;
             }
         }
-        return;
     }
+
     public int handleTimeSensitiveData(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id camp = getObjIdObjVar(self, "camp");
@@ -85,7 +96,7 @@ public class terminal_camp extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        int lifeTime = (int)getFloatObjVar(camp, camping.VAR_LIFETIME);
+        int lifeTime = (int) getFloatObjVar(camp, camping.VAR_LIFETIME);
         if (lifeTime <= 0)
         {
             return SCRIPT_CONTINUE;

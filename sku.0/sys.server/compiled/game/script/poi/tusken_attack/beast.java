@@ -1,5 +1,11 @@
 package script.poi.tusken_attack;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.pclib;
@@ -9,16 +15,18 @@ import script.obj_id;
 
 public class beast extends script.poi.base.scenario_actor
 {
+    public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
+    public static final String LOG_NAME = "poiTuskenAttack Antagonist";
     public beast()
     {
     }
-    public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
-    public static final String LOG_NAME = "poiTuskenAttack Antagonist";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         detachScript(self, SCRIPT_CONVERSE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         obj_id poiMaster = poi.getBaseObject(self);
@@ -29,10 +37,12 @@ public class beast extends script.poi.base.scenario_actor
         messageTo(poiMaster, scenario.HANDLER_ACTOR_DEATH, null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         return SCRIPT_OVERRIDE;
     }
+
     public int vocalizeEndCombat(obj_id self, dictionary params) throws InterruptedException
     {
         if (ai_lib.isDead(self) || ai_lib.isInCombat(self))
@@ -40,8 +50,10 @@ public class beast extends script.poi.base.scenario_actor
             return SCRIPT_OVERRIDE;
         }
         obj_id[] players = getPlayerCreaturesInRange(self, 80.0f);
-        for (obj_id player : players) {
-            if (isIncapacitated(player) && getPosture(player) != POSTURE_DEAD) {
+        for (obj_id player : players)
+        {
+            if (isIncapacitated(player) && getPosture(player) != POSTURE_DEAD)
+            {
                 pclib.coupDeGrace(player, self);
                 return SCRIPT_OVERRIDE;
             }
@@ -52,8 +64,10 @@ public class beast extends script.poi.base.scenario_actor
             return SCRIPT_CONTINUE;
         }
         obj_id[] mediators = scenario.getTeamMembers(poiMaster, "mediator");
-        for (obj_id mediator : mediators) {
-            if (isIncapacitated(mediator) || ai_lib.isDead(mediator)) {
+        for (obj_id mediator : mediators)
+        {
+            if (isIncapacitated(mediator) || ai_lib.isDead(mediator))
+            {
                 continue;
             }
             startCombat(self, mediator);
@@ -66,7 +80,7 @@ public class beast extends script.poi.base.scenario_actor
             {
                 doAnimationAction(self, "celebrate");
             }
-            else 
+            else
             {
                 doAnimationAction(self, "vocalize");
             }
@@ -75,6 +89,7 @@ public class beast extends script.poi.base.scenario_actor
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_OVERRIDE;
     }
+
     public int OnTargeted(obj_id self, obj_id attacker) throws InterruptedException
     {
         if (hasObjVar(self, "attackedByElse"))
@@ -88,8 +103,10 @@ public class beast extends script.poi.base.scenario_actor
             return SCRIPT_CONTINUE;
         }
         obj_id[] mediators = scenario.getTeamMembers(poiMaster, "mediator");
-        for (obj_id mediator : mediators) {
-            if (mediator == attacker) {
+        for (obj_id mediator : mediators)
+        {
+            if (mediator == attacker)
+            {
                 return SCRIPT_CONTINUE;
             }
         }

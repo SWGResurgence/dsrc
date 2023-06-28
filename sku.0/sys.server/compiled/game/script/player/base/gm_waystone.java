@@ -4,6 +4,12 @@ package script.player.base;/*
 @Purpose:
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 public class gm_waystone extends script.base_script
@@ -17,11 +23,13 @@ public class gm_waystone extends script.base_script
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi)
     {
         mi.addRootMenu(menu_info_types.SERVER_MENU1, new string_id("Return to the Galaxy"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item)
     {
         if (item == menu_info_types.SERVER_MENU1)

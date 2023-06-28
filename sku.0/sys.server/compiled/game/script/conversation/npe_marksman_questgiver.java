@@ -1,94 +1,122 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class npe_marksman_questgiver extends script.base_script
 {
+    public static String c_stringFile = "conversation/npe_marksman_questgiver";
+
     public npe_marksman_questgiver()
     {
     }
-    public static String c_stringFile = "conversation/npe_marksman_questgiver";
+
     public boolean npe_marksman_questgiver_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean npe_marksman_questgiver_condition_hasCompletedCarbine(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActiveOrComplete(player, "npe_marksman_carbine");
     }
+
     public boolean npe_marksman_questgiver_condition_isTaskCompeteMain(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "npe_marksman", "npe_marksman_wait");
     }
+
     public boolean npe_marksman_questgiver_condition_hasCompletedPistol(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActiveOrComplete(player, "npe_marksman_pistol");
     }
+
     public boolean npe_marksman_questgiver_condition_hasCompletedRifle(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActiveOrComplete(player, "npe_marksman_rifle");
     }
+
     public boolean npe_marksman_questgiver_condition_isTaskActiveAny(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "npe_marksman_pistol", "npe_marksman_pistol_droid") || groundquests.isTaskActive(player, "npe_marksman_carbine", "npe_marksman_carbine_droid") || groundquests.isTaskActive(player, "npe_marksman_rifle", "npe_marksman_rifle_droid") || groundquests.isTaskActive(player, "npe_marksman", 0) || groundquests.isTaskActive(player, "npe_marksman", "npe_marksman_main_droid") || groundquests.isTaskActive(player, "npe_side_hutt_slicers", 0) || groundquests.isTaskActive(player, "npe_side_hutt_slicers", "npe_side_hutt_hackers_takeout") || groundquests.isTaskActive(player, "npe_side_hutt_slicers", "npe_side_hutt_slicer_boss"));
     }
+
     public boolean npe_marksman_questgiver_condition_hasCompletedAll(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "npe_marksman_pistol") && groundquests.hasCompletedQuest(player, "npe_marksman_carbine") && groundquests.hasCompletedQuest(player, "npe_marksman_rifle"));
     }
+
     public boolean npe_marksman_questgiver_condition_hasCompletedAnyTraining(obj_id player, obj_id npc) throws InterruptedException
     {
         return ((groundquests.hasCompletedQuest(player, "npe_marksman_pistol") || groundquests.hasCompletedQuest(player, "npe_marksman_carbine") || groundquests.hasCompletedQuest(player, "npe_marksman_rifle")) && (!groundquests.isQuestActiveOrComplete(player, "npe_marksman")));
     }
+
     public boolean npe_marksman_questgiver_condition_isTaskCompletePistol(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "npe_marksman_pistol", "npe_marksman_pistol_wait");
     }
+
     public boolean npe_marksman_questgiver_condition_hasCompletedMyDroid(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "npe_marksman") && !groundquests.hasCompletedQuest(player, "npe_side3"));
     }
+
     public boolean npe_marksman_questgiver_condition_isTaskCompleteRifle(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "npe_marksman_rifle", "npe_marksman_rifle_wait");
     }
+
     public boolean npe_marksman_questgiver_condition_isTaskCompleteCarbine(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "npe_marksman_carbine", "npe_marksman_carbine_wait");
     }
+
     public boolean npe_marksman_questgiver_condition_hasTakenAnyQuests(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActiveOrComplete(player, "npe_marksman_pistol") || groundquests.isQuestActiveOrComplete(player, "npe_marksman_carbine") || groundquests.isQuestActiveOrComplete(player, "npe_marksman_rifle") || groundquests.isQuestActiveOrComplete(player, "npe_side_hutt_slicers") || groundquests.isQuestActiveOrComplete(player, "npe_marksman"));
     }
+
     public boolean npe_marksman_questgiver_condition_hasCompletedTemplate(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasObjVar(player, "npe.finishedTemplate");
     }
+
     public boolean npe_marksman_questgiver_condition_canStillTrain(obj_id player, obj_id npc) throws InterruptedException
     {
         return !npe_marksman_questgiver_condition_hasCompletedAll(player, npc);
     }
+
     public boolean npe_marksman_questgiver_condition_hasCompletedDroidEng(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "npe_side3") && !groundquests.isQuestActiveOrComplete(player, "npe_side_hutt_slicers");
     }
+
     public boolean npe_marksman_questgiver_condition_isTaskCompleteSlice(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "npe_side_hutt_slicers", "npe_side_hutt_slicer_return");
     }
+
     public boolean npe_marksman_questgiver_condition_cantHelp(obj_id player, obj_id npc) throws InterruptedException
     {
         return !npe_marksman_questgiver_condition_pointedToHere(player, npc) && !npe_marksman_questgiver_condition_hasCompletedTemplate(player, npc);
     }
+
     public boolean npe_marksman_questgiver_condition_pointedToHere(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "npe_pointer_marksman");
     }
+
     public boolean npe_marksman_questgiver_condition_hasFinishedAllQuests(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "npe_side_hutt_slicers");
     }
+
     public void npe_marksman_questgiver_action_giveRifleQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "npe_marksman_rifle");
@@ -98,27 +126,32 @@ public class npe_marksman_questgiver extends script.base_script
         boolean hasItem = false;
         obj_id[] weapons = new obj_id[1];
         obj_id[] playerStuff = getInventoryAndEquipment(player);
-        for (obj_id obj_id : playerStuff) {
+        for (obj_id obj_id : playerStuff)
+        {
             String templateName = static_item.getStaticItemName(obj_id);
-            if (templateName != null) {
-                if (templateName.equals("weapon_rifle_02_02")) {
+            if (templateName != null)
+            {
+                if (templateName.equals("weapon_rifle_02_02"))
+                {
                     hasItem = true;
                 }
             }
         }
-        if (hasItem == false)
+        if (!hasItem)
         {
             obj_id rifle = static_item.createNewItemFunction("weapon_rifle_02_02", player);
             weapons[0] = rifle;
             showLootBox(player, weapons);
         }
     }
+
     public void npe_marksman_questgiver_action_giveSignalDroidPistol(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "npe_marksman_main_pistol");
         obj_id pInv = utils.getInventoryContainer(player);
         npe.sendDelayed3poPopup(player, 3, 11, "sound/c3po_29.snd", "npe", "pop_credits", "npe.credits");
     }
+
     public void npe_marksman_questgiver_action_giveCarbineQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "npe_marksman_carbine");
@@ -128,66 +161,79 @@ public class npe_marksman_questgiver extends script.base_script
         boolean hasItem = false;
         obj_id[] weapons = new obj_id[1];
         obj_id[] playerStuff = getInventoryAndEquipment(player);
-        for (obj_id obj_id : playerStuff) {
+        for (obj_id obj_id : playerStuff)
+        {
             String templateName = static_item.getStaticItemName(obj_id);
-            if (templateName != null) {
-                if (templateName.equals("weapon_carbine_02_02")) {
+            if (templateName != null)
+            {
+                if (templateName.equals("weapon_carbine_02_02"))
+                {
                     hasItem = true;
                 }
             }
         }
-        if (hasItem == false)
+        if (!hasItem)
         {
             obj_id carbine = static_item.createNewItemFunction("weapon_carbine_02_02", player);
             weapons[0] = carbine;
             showLootBox(player, weapons);
         }
     }
+
     public void npe_marksman_questgiver_action_givePistolQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "npe_marksman_pistol");
         groundquests.sendSignal(player, "talked_to_loche");
         npe.giveAutoPopUp(player, npc);
     }
+
     public void npe_marksman_questgiver_action_giveDroidQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "npe_marksman");
     }
+
     public void npe_marksman_questgiver_action_giveSingalPistol(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "npe_marksman_pistol");
         groundquests.sendSignal(player, "finished_loche");
         npe.sendDelayed3poPopup(player, 3, 11, "sound/c3po_29.snd", "npe", "pop_credits", "npe.credits");
     }
+
     public void npe_marksman_questgiver_action_giveSignalRifle(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "npe_marksman_rifle");
         groundquests.sendSignal(player, "finished_loche");
         npe.sendDelayed3poPopup(player, 3, 11, "sound/c3po_29.snd", "npe", "pop_credits", "npe.credits");
     }
+
     public void npe_marksman_questgiver_action_giveSignalCarbine(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "npe_marksman_carbine");
         npe.sendDelayed3poPopup(player, 3, 11, "sound/c3po_29.snd", "npe", "pop_credits", "npe.credits");
         groundquests.sendSignal(player, "finished_loche");
     }
+
     public void npe_marksman_questgiver_action_pointDroidEng(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "npe_job_pointer_droid_engineer");
     }
+
     public void npe_marksman_questgiver_action_giveSlicerQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "npe_side_hutt_slicers");
     }
+
     public void npe_marksman_questgiver_action_giveSignalSliceComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "npe_side_hutt_slicer_return");
         npe.sendDelayed3poPopup(player, 3, 11, "sound/c3po_29.snd", "npe", "pop_credits", "npe.credits");
     }
+
     public void npe_marksman_questgiver_action_facePlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
     }
+
     public int npe_marksman_questgiver_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_255"))
@@ -202,6 +248,7 @@ public class npe_marksman_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_marksman_questgiver_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_89"))
@@ -218,6 +265,7 @@ public class npe_marksman_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_marksman_questgiver_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_231"))
@@ -238,7 +286,7 @@ public class npe_marksman_questgiver extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_442");
@@ -251,7 +299,7 @@ public class npe_marksman_questgiver extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_marksman_questgiver.branchId");
                     prose_package pp = new prose_package();
@@ -265,6 +313,7 @@ public class npe_marksman_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_marksman_questgiver_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_442"))
@@ -279,6 +328,7 @@ public class npe_marksman_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_marksman_questgiver_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_191"))
@@ -305,7 +355,7 @@ public class npe_marksman_questgiver extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_438");
@@ -318,7 +368,7 @@ public class npe_marksman_questgiver extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_marksman_questgiver.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -328,6 +378,7 @@ public class npe_marksman_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_marksman_questgiver_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_438"))
@@ -348,7 +399,7 @@ public class npe_marksman_questgiver extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_221");
@@ -357,7 +408,7 @@ public class npe_marksman_questgiver extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_marksman_questgiver.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -382,7 +433,7 @@ public class npe_marksman_questgiver extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_207");
@@ -395,7 +446,7 @@ public class npe_marksman_questgiver extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_marksman_questgiver.branchId");
                     prose_package pp = new prose_package();
@@ -409,6 +460,7 @@ public class npe_marksman_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_marksman_questgiver_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_207"))
@@ -435,7 +487,7 @@ public class npe_marksman_questgiver extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_217");
@@ -448,7 +500,7 @@ public class npe_marksman_questgiver extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_marksman_questgiver.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -458,6 +510,7 @@ public class npe_marksman_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_marksman_questgiver_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_217"))
@@ -478,7 +531,7 @@ public class npe_marksman_questgiver extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_221");
@@ -487,7 +540,7 @@ public class npe_marksman_questgiver extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_marksman_questgiver.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -511,6 +564,7 @@ public class npe_marksman_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_marksman_questgiver_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_221"))
@@ -525,6 +579,7 @@ public class npe_marksman_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_marksman_questgiver_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_247"))
@@ -540,6 +595,7 @@ public class npe_marksman_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_marksman_questgiver_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_127"))
@@ -560,7 +616,7 @@ public class npe_marksman_questgiver extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_135");
@@ -569,7 +625,7 @@ public class npe_marksman_questgiver extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_marksman_questgiver.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -579,6 +635,7 @@ public class npe_marksman_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_marksman_questgiver_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_135"))
@@ -595,6 +652,7 @@ public class npe_marksman_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_marksman_questgiver_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_156"))
@@ -611,6 +669,7 @@ public class npe_marksman_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_marksman_questgiver_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_164"))
@@ -626,6 +685,7 @@ public class npe_marksman_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_marksman_questgiver_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_160"))
@@ -641,6 +701,7 @@ public class npe_marksman_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_marksman_questgiver_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_190"))
@@ -667,7 +728,7 @@ public class npe_marksman_questgiver extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_194");
@@ -680,7 +741,7 @@ public class npe_marksman_questgiver extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_marksman_questgiver.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -719,7 +780,7 @@ public class npe_marksman_questgiver extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_85");
@@ -736,7 +797,7 @@ public class npe_marksman_questgiver extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_marksman_questgiver.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -746,6 +807,7 @@ public class npe_marksman_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_marksman_questgiver_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_194"))
@@ -783,7 +845,7 @@ public class npe_marksman_questgiver extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_194");
@@ -796,7 +858,7 @@ public class npe_marksman_questgiver extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_marksman_questgiver.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -806,6 +868,7 @@ public class npe_marksman_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_marksman_questgiver_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_194"))
@@ -843,7 +906,7 @@ public class npe_marksman_questgiver extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_194");
@@ -856,7 +919,7 @@ public class npe_marksman_questgiver extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_marksman_questgiver.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -866,6 +929,7 @@ public class npe_marksman_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_marksman_questgiver_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_85"))
@@ -885,7 +949,7 @@ public class npe_marksman_questgiver extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -894,7 +958,7 @@ public class npe_marksman_questgiver extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_marksman_questgiver.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -919,7 +983,7 @@ public class npe_marksman_questgiver extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_113");
@@ -928,7 +992,7 @@ public class npe_marksman_questgiver extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_marksman_questgiver.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -953,7 +1017,7 @@ public class npe_marksman_questgiver extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -962,7 +1026,7 @@ public class npe_marksman_questgiver extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_marksman_questgiver.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -972,6 +1036,7 @@ public class npe_marksman_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_marksman_questgiver_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_107"))
@@ -987,6 +1052,7 @@ public class npe_marksman_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_marksman_questgiver_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_113"))
@@ -1002,6 +1068,7 @@ public class npe_marksman_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_marksman_questgiver_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_121"))
@@ -1017,6 +1084,7 @@ public class npe_marksman_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_marksman_questgiver_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_181"))
@@ -1031,6 +1099,7 @@ public class npe_marksman_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -1043,6 +1112,7 @@ public class npe_marksman_questgiver extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -1051,6 +1121,7 @@ public class npe_marksman_questgiver extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -1059,18 +1130,21 @@ public class npe_marksman_questgiver extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.npe_marksman_questgiver");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1094,7 +1168,7 @@ public class npe_marksman_questgiver extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_255");
@@ -1106,7 +1180,7 @@ public class npe_marksman_questgiver extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "npe_marksman_questgiver", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1133,7 +1207,7 @@ public class npe_marksman_questgiver extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_89");
@@ -1141,7 +1215,7 @@ public class npe_marksman_questgiver extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_marksman_questgiver.branchId", 3);
                 npcStartConversation(player, npc, "npe_marksman_questgiver", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1163,7 +1237,7 @@ public class npe_marksman_questgiver extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_231");
@@ -1171,7 +1245,7 @@ public class npe_marksman_questgiver extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_marksman_questgiver.branchId", 5);
                 npcStartConversation(player, npc, "npe_marksman_questgiver", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1193,7 +1267,7 @@ public class npe_marksman_questgiver extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_191");
@@ -1201,7 +1275,7 @@ public class npe_marksman_questgiver extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_marksman_questgiver.branchId", 8);
                 npcStartConversation(player, npc, "npe_marksman_questgiver", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1223,7 +1297,7 @@ public class npe_marksman_questgiver extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_247");
@@ -1235,7 +1309,7 @@ public class npe_marksman_questgiver extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "npe_marksman_questgiver", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1261,7 +1335,7 @@ public class npe_marksman_questgiver extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_127");
@@ -1273,7 +1347,7 @@ public class npe_marksman_questgiver extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "npe_marksman_questgiver", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1299,7 +1373,7 @@ public class npe_marksman_questgiver extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_156");
@@ -1307,7 +1381,7 @@ public class npe_marksman_questgiver extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_marksman_questgiver.branchId", 20);
                 npcStartConversation(player, npc, "npe_marksman_questgiver", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1329,7 +1403,7 @@ public class npe_marksman_questgiver extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -1337,7 +1411,7 @@ public class npe_marksman_questgiver extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_marksman_questgiver.branchId", 22);
                 npcStartConversation(player, npc, "npe_marksman_questgiver", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1360,7 +1434,7 @@ public class npe_marksman_questgiver extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -1368,7 +1442,7 @@ public class npe_marksman_questgiver extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_marksman_questgiver.branchId", 24);
                 npcStartConversation(player, npc, "npe_marksman_questgiver", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1397,7 +1471,7 @@ public class npe_marksman_questgiver extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_190");
@@ -1413,7 +1487,7 @@ public class npe_marksman_questgiver extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "npe_marksman_questgiver", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1440,7 +1514,7 @@ public class npe_marksman_questgiver extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_181");
@@ -1448,7 +1522,7 @@ public class npe_marksman_questgiver extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_marksman_questgiver.branchId", 37);
                 npcStartConversation(player, npc, "npe_marksman_questgiver", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1469,6 +1543,7 @@ public class npe_marksman_questgiver extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("npe_marksman_questgiver"))

@@ -5,6 +5,12 @@ package script.systems.tcg;/*
 @   This item will randomly give you one of four specialty drinks.
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.buff;
 import script.library.utils;
@@ -15,6 +21,7 @@ public class drink_dispenser extends script.base_script
     public float DURATION = 3600.0f;
     public float BASE = 1.0f;
     public float BONUS = 0.25f;
+
     public int OnAttach(obj_id self)
     {
         return SCRIPT_CONTINUE;
@@ -28,7 +35,7 @@ public class drink_dispenser extends script.base_script
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id[] pInvContents = utils.getContents(player, false);
-        if (pInvContents == null || pInvContents.length == 0)
+        if (pInvContents == null)
         {
             return SCRIPT_CONTINUE;
         }
@@ -49,7 +56,7 @@ public class drink_dispenser extends script.base_script
         if (menu == menu_info_types.ITEM_USE)
         {
             obj_id[] pInvContents = utils.getContents(player, false);
-            if (pInvContents == null || pInvContents.length == 0)
+            if (pInvContents == null)
             {
                 return SCRIPT_CONTINUE;
             }
@@ -104,6 +111,7 @@ public class drink_dispenser extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void refreshDrink(obj_id drink, String buffName, int buffDuration) throws InterruptedException
     {
         if (isIdValid(drink))

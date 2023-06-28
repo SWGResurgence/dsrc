@@ -1,5 +1,11 @@
 package script.quest.ep3;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.create;
 import script.library.pet_lib;
 import script.library.utils;
@@ -10,17 +16,19 @@ import script.string_id;
 
 public class kachirho_varactyl_egg extends script.base_script
 {
-    public kachirho_varactyl_egg()
-    {
-    }
     public static final String STF = "ep3/sidequests";
     public static final string_id HATCH_EGG = new string_id(STF, "hatch_egg");
     public static final string_id EGG_HATCHED = new string_id(STF, "egg_hatched");
+    public kachirho_varactyl_egg()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int menu = mi.addRootMenu(menu_info_types.ITEM_USE, HATCH_EGG);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)

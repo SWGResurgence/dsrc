@@ -1,5 +1,11 @@
 package script.systems.crafting.weapon;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.base_class;
 import script.dictionary;
 import script.draft_schematic;
@@ -12,6 +18,7 @@ public class crafting_base_lightsaber extends script.systems.crafting.crafting_b
 {
     public static final String VERSION = "v1.00.00";
     public static final String SABER_BLADE_INDEX = "private/index_color_blade";
+
     public crafting_base_lightsaber()
     {
     }

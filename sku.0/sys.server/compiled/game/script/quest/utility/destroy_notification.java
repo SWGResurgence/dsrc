@@ -1,5 +1,11 @@
 package script.quest.utility;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -10,6 +16,7 @@ public class destroy_notification extends script.base_script
     public destroy_notification()
     {
     }
+
     public int addNotification(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("newquests", "destroy_notification - addNotification()");
@@ -24,7 +31,7 @@ public class destroy_notification extends script.base_script
                 {
                     notificationTargets = getResizeableObjIdArrayObjVar(self, "destroy_notification_targets");
                 }
-                else 
+                else
                 {
                     notificationTargets = new Vector();
                 }
@@ -46,6 +53,7 @@ public class destroy_notification extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void sendNotifications(obj_id self) throws InterruptedException
     {
         LOG("newquests", "destroy_notification - sendNotifications()");
@@ -58,34 +66,37 @@ public class destroy_notification extends script.base_script
                 dictionary destroyNotificationParameters = new dictionary();
                 destroyNotificationParameters.put("source", self);
                 LOG("newquests", "destroy_notification - addNotification() - putting " + self + " into dictionary");
-                String objvarname = ((obj_id)notificationTargets.get(iter)).toString();
+                String objvarname = ((obj_id) notificationTargets.get(iter)).toString();
                 if (hasObjVar(self, objvarname))
                 {
                     String parameter = getStringObjVar(self, objvarname);
                     destroyNotificationParameters.put("parameter", parameter);
                     LOG("newquests", "destroy_notification - addNotification() - putting " + parameter + " into dictionary");
                 }
-                else 
+                else
                 {
                     LOG("newquests", "destroy_notification - addNotification() - could not retrieve parameter from objvar " + self);
                 }
-                LOG("newquests", "destroy_notification - addNotification() - sending notification to " + ((obj_id)notificationTargets.get(iter)));
-                messageTo(((obj_id)notificationTargets.get(iter)), "destroyNotification", destroyNotificationParameters, 0.0f, false);
+                LOG("newquests", "destroy_notification - addNotification() - sending notification to " + notificationTargets.get(iter));
+                messageTo(((obj_id) notificationTargets.get(iter)), "destroyNotification", destroyNotificationParameters, 0.0f, false);
             }
         }
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         LOG("newquests", "destroy_notification - OnIncapacitated()");
         sendNotifications(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         LOG("newquests", "destroy_notification - OnDestroy()");
         sendNotifications(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDisabled(obj_id self, obj_id killer) throws InterruptedException
     {
         LOG("newquests", "destroy_notification: OnObjectDisabled()");

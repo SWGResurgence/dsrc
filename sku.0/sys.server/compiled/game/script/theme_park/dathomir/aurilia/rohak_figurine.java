@@ -1,15 +1,23 @@
 package script.theme_park.dathomir.aurilia;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.groundquests;
 import script.library.utils;
 
 public class rohak_figurine extends script.base_script
 {
+    public static final String FIGURINE_QUEST_NAME = "rohak_token_box";
+
     public rohak_figurine()
     {
     }
-    public static final String FIGURINE_QUEST_NAME = "rohak_token_box";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (isMob(self))
@@ -18,6 +26,7 @@ public class rohak_figurine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (isMob(self))
@@ -26,6 +35,7 @@ public class rohak_figurine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -37,7 +47,7 @@ public class rohak_figurine extends script.base_script
         {
             menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
         }
-        else 
+        else
         {
             menu = menuInfo.addRootMenu(menu_info_types.ITEM_USE, new string_id("ui_radial", "item_use"));
         }
@@ -56,7 +66,7 @@ public class rohak_figurine extends script.base_script
                 {
                     menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, menuStringId);
                 }
-                else 
+                else
                 {
                     menu = menuInfo.addRootMenu(menu_info_types.ITEM_USE, menuStringId);
                 }
@@ -69,6 +79,7 @@ public class rohak_figurine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -85,7 +96,7 @@ public class rohak_figurine extends script.base_script
                     sendRetrieveObjectFoundMessage(self, player);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     if (groundquests.hasCompletedTask(player, FIGURINE_QUEST_NAME, figurineTask))
                     {
@@ -101,6 +112,7 @@ public class rohak_figurine extends script.base_script
         sendSystemMessage(player, msg);
         return SCRIPT_CONTINUE;
     }
+
     public void sendRetrieveObjectFoundMessage(obj_id self, obj_id player) throws InterruptedException
     {
         dictionary webster = new dictionary();
@@ -121,8 +133,8 @@ public class rohak_figurine extends script.base_script
         {
             messageTo(self, "handleQuestFlavorObject", null, 0, false);
         }
-        return;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "spawner"))

@@ -1,5 +1,11 @@
 package script.systems.tcg;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.player_structure;
 import script.library.utils;
@@ -17,6 +23,7 @@ public class tcg_pet_extras extends script.base_script
     public static final String NUNA_FLOWER_03 = "object/tangible/item/nuna_egg_flower_stage_03.iff";
     public static final String NUNA_FLOWER_DEAD = "object/tangible/item/nuna_egg_flower_dead.iff";
     public static final String THIS_SCRIPT = "systems.tcg.tcg_pet_extras";
+
     public tcg_pet_extras()
     {
     }

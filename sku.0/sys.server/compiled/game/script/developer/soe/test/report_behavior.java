@@ -1,5 +1,11 @@
 package script.developer.soe.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class report_behavior extends script.base_script
@@ -7,6 +13,7 @@ public class report_behavior extends script.base_script
     public report_behavior()
     {
     }
+
     public void dumpState(obj_id self, String label, int behavior) throws InterruptedException
     {
         if (behavior < 0)
@@ -21,34 +28,35 @@ public class report_behavior extends script.base_script
             targetlist += targets[i].toString() + "(";
             float fear = getMentalStateToward(self, targets[i], FEAR);
             float anger = getMentalStateToward(self, targets[i], ANGER);
-            targetlist += Float.toString(fear) + "/" + Float.toString(anger) + ") ";
+            targetlist += fear + "/" + anger + ") ";
         }
         switch (behavior)
         {
             case BEHAVIOR_CALM:
-            debugServerConsoleMsg(self, label + "CALM: " + targetlist);
-            break;
+                debugServerConsoleMsg(self, label + "CALM: " + targetlist);
+                break;
             case BEHAVIOR_ALERT:
-            debugServerConsoleMsg(self, label + "ALERT: " + targetlist);
-            break;
+                debugServerConsoleMsg(self, label + "ALERT: " + targetlist);
+                break;
             case BEHAVIOR_THREATEN:
-            debugServerConsoleMsg(self, label + "THREATEN: " + targetlist);
-            break;
+                debugServerConsoleMsg(self, label + "THREATEN: " + targetlist);
+                break;
             case BEHAVIOR_FLEE:
-            debugServerConsoleMsg(self, label + "FLEE: " + targetlist);
-            break;
+                debugServerConsoleMsg(self, label + "FLEE: " + targetlist);
+                break;
             case BEHAVIOR_PANIC:
-            debugServerConsoleMsg(self, label + "PANIC: " + targetlist);
-            break;
+                debugServerConsoleMsg(self, label + "PANIC: " + targetlist);
+                break;
             case BEHAVIOR_ATTACK:
-            debugServerConsoleMsg(self, label + "ATTACK: " + targetlist);
-            break;
+                debugServerConsoleMsg(self, label + "ATTACK: " + targetlist);
+                break;
             case BEHAVIOR_FRENZY:
-            debugServerConsoleMsg(self, label + "FRENZY: " + targetlist);
-            break;
+                debugServerConsoleMsg(self, label + "FRENZY: " + targetlist);
+                break;
         }
-        
+
     }
+
     public int OnBehaviorChange(obj_id self, int newBehavior, int oldBehavior, int[] changeFlags) throws InterruptedException
     {
         String targetlist = "";
@@ -70,6 +78,7 @@ public class report_behavior extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnBehaviorTargetChange(obj_id self, int b, int[] changeFlags) throws InterruptedException
     {
         int i;

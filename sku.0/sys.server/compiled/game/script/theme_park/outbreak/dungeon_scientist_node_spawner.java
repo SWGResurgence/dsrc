@@ -1,5 +1,11 @@
 package script.theme_park.outbreak;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.attrib;
@@ -10,9 +16,6 @@ import script.obj_id;
 
 public class dungeon_scientist_node_spawner extends script.base_script
 {
-    public dungeon_scientist_node_spawner()
-    {
-    }
     public static final boolean LOGGING_ON = true;
     public static final String SCRIPT_LOG = "outbreak_trigger";
     public static final String NODE_SPAWN_STRING = "scientist_spawn_point";
@@ -21,6 +24,10 @@ public class dungeon_scientist_node_spawner extends script.base_script
     public static final String NODE_STORMTROOPER_PATH = "stormtrooper_guard";
     public static final String STORMTROOPER_GUARD_CREATURE = "outbreak_facility_stormtrooper_survivor";
     public static final float SEARCH_RADIUS = 100.0f;
+    public dungeon_scientist_node_spawner()
+    {
+    }
+
     public int spawnRescuedActor(obj_id self, dictionary params) throws InterruptedException
     {
         CustomerServiceLog("outbreak_themepark", "dungeon_scientist_node_spawners.spawnRescuedActor() Initialized Message Handler for node: " + self);
@@ -69,9 +76,11 @@ public class dungeon_scientist_node_spawner extends script.base_script
         }
         CustomerServiceLog("outbreak_themepark", "survivor_pathing.startSurvivorPathing() wayPointList received");
         location[] wayPtLocs = new location[wayPointList.length];
-        for (obj_id obj_id : wayPointList) {
+        for (obj_id obj_id : wayPointList)
+        {
             int orderNumber = getIntObjVar(obj_id, objVarSearch) - 1;
-            if (orderNumber < 0) {
+            if (orderNumber < 0)
+            {
                 CustomerServiceLog("outbreak_themepark", "dungeon_scientist_node_spawners.spawnRescuedActor() the NPC waypoint location was invalid for waypoint: " + obj_id);
                 continue;
             }
@@ -108,6 +117,7 @@ public class dungeon_scientist_node_spawner extends script.base_script
         messageTo(mob, "cleanUpNpcTimer", parms, 300, false);
         return SCRIPT_CONTINUE;
     }
+
     public int startMovingAfterDelay(obj_id self, dictionary params) throws InterruptedException
     {
         CustomerServiceLog("outbreak_themepark", "dungeon_scientist_node_spawners.startMovingAfterDelay() Initalized Message Handler.");
@@ -145,6 +155,7 @@ public class dungeon_scientist_node_spawner extends script.base_script
         setObjVar(mob, "givenPath", 1);
         return SCRIPT_CONTINUE;
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON)

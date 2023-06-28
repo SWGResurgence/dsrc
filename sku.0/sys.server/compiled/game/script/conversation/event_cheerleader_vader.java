@@ -1,18 +1,27 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class event_cheerleader_vader extends script.base_script
 {
+    public static String c_stringFile = "conversation/event_cheerleader_vader";
+
     public event_cheerleader_vader()
     {
     }
-    public static String c_stringFile = "conversation/event_cheerleader_vader";
+
     public boolean event_cheerleader_vader_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean event_cheerleader_vader_condition_isRebel(obj_id player, obj_id npc) throws InterruptedException
     {
         int factionHashCode = factions.pvpGetAlignedFaction(player);
@@ -21,22 +30,16 @@ public class event_cheerleader_vader extends script.base_script
         {
             return false;
         }
-        if (whichFaction.equals("Rebel"))
-        {
-            return true;
-        }
-        return false;
+        return whichFaction.equals("Rebel");
     }
+
     public boolean event_cheerleader_vader_condition_isNeutral(obj_id player, obj_id npc) throws InterruptedException
     {
         int factionHashCode = factions.pvpGetAlignedFaction(player);
         String whichFaction = factions.getFactionNameByHashCode(factionHashCode);
-        if (whichFaction == null)
-        {
-            return true;
-        }
-        return false;
+        return whichFaction == null;
     }
+
     public boolean event_cheerleader_vader_condition_hasMaxQuests(obj_id player, obj_id npc) throws InterruptedException
     {
         int killReb5 = questGetQuestId("quest/event_gcwcheerleader_sfreb5");
@@ -49,6 +52,7 @@ public class event_cheerleader_vader extends script.base_script
         int cmImp4 = questGetQuestId("quest/event_gcwcheerleader_cmimp4");
         return (((questIsQuestActive(killReb5, player) || questIsQuestActive(killReb10, player) || questIsQuestActive(killReb20, player) || questIsQuestActive(killReb50, player)) && (questIsQuestActive(cmImp1, player) || questIsQuestActive(cmImp2, player) || questIsQuestActive(cmImp3, player) || questIsQuestActive(cmImp4, player))) || (questIsQuestComplete(killReb50, player) && (questIsQuestActive(cmImp1, player) || questIsQuestActive(cmImp2, player) || questIsQuestActive(cmImp3, player) || questIsQuestActive(cmImp4, player))) || (questIsQuestComplete(cmImp4, player) && (questIsQuestActive(killReb5, player) || questIsQuestActive(killReb10, player) || questIsQuestActive(killReb20, player) || questIsQuestActive(killReb50, player))));
     }
+
     public boolean event_cheerleader_vader_condition_completedAll(obj_id player, obj_id npc) throws InterruptedException
     {
         int killReb5 = questGetQuestId("quest/event_gcwcheerleader_sfreb5");
@@ -61,12 +65,14 @@ public class event_cheerleader_vader extends script.base_script
         int cmImp4 = questGetQuestId("quest/event_gcwcheerleader_cmimp4");
         return (questIsQuestComplete(killReb5, player) && questIsQuestComplete(killReb10, player) && questIsQuestComplete(killReb20, player) && questIsQuestComplete(killReb50, player) && questIsQuestComplete(cmImp1, player) && questIsQuestComplete(cmImp2, player) && questIsQuestComplete(cmImp3, player) && questIsQuestComplete(cmImp4, player));
     }
+
     public boolean event_cheerleader_vader_condition_noMissionsComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         int killReb5 = questGetQuestId("quest/event_gcwcheerleader_sfreb5");
         int cmImp1 = questGetQuestId("quest/event_gcwcheerleader_cmimp1");
         return (!questIsQuestComplete(killReb5, player) && !questIsQuestComplete(cmImp1, player) && !questIsQuestActive(killReb5, player) && !questIsQuestActive(cmImp1, player));
     }
+
     public boolean event_cheerleader_vader_condition_pvp1Ready(obj_id player, obj_id npc) throws InterruptedException
     {
         int killReb20 = questGetQuestId("quest/event_gcwcheerleader_sfreb20");
@@ -74,6 +80,7 @@ public class event_cheerleader_vader extends script.base_script
         int killReb5 = questGetQuestId("quest/event_gcwcheerleader_sfreb5");
         return (!questIsQuestComplete(killReb20, player) && !questIsQuestComplete(killReb10, player) && !questIsQuestComplete(killReb5, player) && !questIsQuestActive(killReb20, player) && !questIsQuestActive(killReb10, player) && !questIsQuestActive(killReb5, player));
     }
+
     public boolean event_cheerleader_vader_condition_pve1Ready(obj_id player, obj_id npc) throws InterruptedException
     {
         int cmImp3 = questGetQuestId("quest/event_gcwcheerleader_cmimp3");
@@ -81,6 +88,7 @@ public class event_cheerleader_vader extends script.base_script
         int cmImp1 = questGetQuestId("quest/event_gcwcheerleader_cmimp1");
         return (!questIsQuestComplete(cmImp3, player) && !questIsQuestComplete(cmImp2, player) && !questIsQuestActive(cmImp3, player) && !questIsQuestActive(cmImp2, player) && !questIsQuestActive(cmImp1, player) && !questIsQuestComplete(cmImp1, player));
     }
+
     public boolean event_cheerleader_vader_condition_pve2Ready(obj_id player, obj_id npc) throws InterruptedException
     {
         int cmImp3 = questGetQuestId("quest/event_gcwcheerleader_cmimp3");
@@ -88,6 +96,7 @@ public class event_cheerleader_vader extends script.base_script
         int cmImp1 = questGetQuestId("quest/event_gcwcheerleader_cmimp1");
         return (!questIsQuestComplete(cmImp3, player) && !questIsQuestComplete(cmImp2, player) && !questIsQuestActive(cmImp2, player) && !questIsQuestActive(cmImp3, player) && questIsQuestComplete(cmImp1, player));
     }
+
     public boolean event_cheerleader_vader_condition_pvp2Ready(obj_id player, obj_id npc) throws InterruptedException
     {
         int killReb20 = questGetQuestId("quest/event_gcwcheerleader_sfreb20");
@@ -95,6 +104,7 @@ public class event_cheerleader_vader extends script.base_script
         int killReb5 = questGetQuestId("quest/event_gcwcheerleader_sfreb5");
         return (!questIsQuestComplete(killReb20, player) && !questIsQuestComplete(killReb10, player) && !questIsQuestActive(killReb20, player) && !questIsQuestActive(killReb10, player) && questIsQuestComplete(killReb5, player));
     }
+
     public boolean event_cheerleader_vader_condition_pve3Ready(obj_id player, obj_id npc) throws InterruptedException
     {
         int cmImp3 = questGetQuestId("quest/event_gcwcheerleader_cmimp3");
@@ -102,6 +112,7 @@ public class event_cheerleader_vader extends script.base_script
         int cmImp1 = questGetQuestId("quest/event_gcwcheerleader_cmimp1");
         return (!questIsQuestComplete(cmImp3, player) && !questIsQuestActive(cmImp3, player) && questIsQuestComplete(cmImp2, player) && questIsQuestComplete(cmImp1, player));
     }
+
     public boolean event_cheerleader_vader_condition_pvp3Ready(obj_id player, obj_id npc) throws InterruptedException
     {
         int killReb20 = questGetQuestId("quest/event_gcwcheerleader_sfreb20");
@@ -109,6 +120,7 @@ public class event_cheerleader_vader extends script.base_script
         int killReb5 = questGetQuestId("quest/event_gcwcheerleader_sfreb5");
         return (!questIsQuestComplete(killReb20, player) && !questIsQuestActive(killReb20, player) && questIsQuestComplete(killReb10, player) && questIsQuestComplete(killReb5, player));
     }
+
     public boolean event_cheerleader_vader_condition_pvp4Ready(obj_id player, obj_id npc) throws InterruptedException
     {
         int killReb50 = questGetQuestId("quest/event_gcwcheerleader_sfreb50");
@@ -117,6 +129,7 @@ public class event_cheerleader_vader extends script.base_script
         int killReb5 = questGetQuestId("quest/event_gcwcheerleader_sfreb5");
         return (!questIsQuestActive(killReb50, player) && !questIsQuestComplete(killReb50, player) && questIsQuestComplete(killReb20, player) && questIsQuestComplete(killReb10, player) && questIsQuestComplete(killReb5, player));
     }
+
     public boolean event_cheerleader_vader_condition_pve4Ready(obj_id player, obj_id npc) throws InterruptedException
     {
         int cmImp4 = questGetQuestId("quest/event_gcwcheerleader_cmimp4");
@@ -125,57 +138,67 @@ public class event_cheerleader_vader extends script.base_script
         int cmImp1 = questGetQuestId("quest/event_gcwcheerleader_cmimp1");
         return (!questIsQuestComplete(cmImp4, player) && !questIsQuestActive(cmImp4, player) && questIsQuestComplete(cmImp3, player) && questIsQuestComplete(cmImp2, player) && questIsQuestComplete(cmImp1, player));
     }
+
     public boolean event_cheerleader_vader_condition_hasMinOne(obj_id player, obj_id npc) throws InterruptedException
     {
         int killReb5 = questGetQuestId("quest/event_gcwcheerleader_sfreb5");
         int cmImp1 = questGetQuestId("quest/event_gcwcheerleader_cmimp1");
         return (questIsQuestComplete(killReb5, player) || questIsQuestComplete(cmImp1, player) || questIsQuestActive(killReb5, player) || questIsQuestActive(cmImp1, player));
     }
+
     public void event_cheerleader_vader_action_pvp1mission(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/event_gcwcheerleader_sfreb5");
         groundquests.grantQuest(questId, player, npc, true);
         attachScript(player, "event.gcwraids.spec_force_killer");
     }
+
     public void event_cheerleader_vader_action_pve1mission(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/event_gcwcheerleader_cmimp1");
         groundquests.grantQuest(questId, player, npc, true);
     }
+
     public void event_cheerleader_vader_action_pvp2mission(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/event_gcwcheerleader_sfreb10");
         groundquests.grantQuest(questId, player, npc, true);
         attachScript(player, "event.gcwraids.spec_force_killer");
     }
+
     public void event_cheerleader_vader_action_pve2mission(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/event_gcwcheerleader_cmimp2");
         groundquests.grantQuest(questId, player, npc, true);
     }
+
     public void event_cheerleader_vader_action_pvp3mission(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/event_gcwcheerleader_sfreb20");
         groundquests.grantQuest(questId, player, npc, true);
         attachScript(player, "event.gcwraids.spec_force_killer");
     }
+
     public void event_cheerleader_vader_action_pve3mission(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/event_gcwcheerleader_cmimp3");
         groundquests.grantQuest(questId, player, npc, true);
     }
+
     public void event_cheerleader_vader_action_pvp4mission(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/event_gcwcheerleader_sfreb50");
         groundquests.grantQuest(questId, player, npc, true);
         attachScript(player, "event.gcwraids.spec_force_killer");
     }
+
     public void event_cheerleader_vader_action_pve4mission(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/event_gcwcheerleader_cmimp4");
         groundquests.grantQuest(questId, player, npc, true);
         attachScript(player, "event.gcwraids.pve_badge");
     }
+
     public int event_cheerleader_vader_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_34"))
@@ -195,7 +218,7 @@ public class event_cheerleader_vader extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_38");
@@ -204,7 +227,7 @@ public class event_cheerleader_vader extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.event_cheerleader_vader.branchId");
                     chat.chat(npc, player, message);
@@ -215,6 +238,7 @@ public class event_cheerleader_vader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int event_cheerleader_vader_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_38"))
@@ -241,7 +265,7 @@ public class event_cheerleader_vader extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_42");
@@ -254,7 +278,7 @@ public class event_cheerleader_vader extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.event_cheerleader_vader.branchId");
                     chat.chat(npc, player, message);
@@ -265,6 +289,7 @@ public class event_cheerleader_vader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int event_cheerleader_vader_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_42"))
@@ -293,6 +318,7 @@ public class event_cheerleader_vader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int event_cheerleader_vader_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_52"))
@@ -312,7 +338,7 @@ public class event_cheerleader_vader extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_56");
@@ -321,7 +347,7 @@ public class event_cheerleader_vader extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.event_cheerleader_vader.branchId");
                     chat.chat(npc, player, message);
@@ -347,7 +373,7 @@ public class event_cheerleader_vader extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_68");
@@ -356,7 +382,7 @@ public class event_cheerleader_vader extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.event_cheerleader_vader.branchId");
                     chat.chat(npc, player, message);
@@ -382,7 +408,7 @@ public class event_cheerleader_vader extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_80");
@@ -391,7 +417,7 @@ public class event_cheerleader_vader extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.event_cheerleader_vader.branchId");
                     chat.chat(npc, player, message);
@@ -429,7 +455,7 @@ public class event_cheerleader_vader extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_92");
@@ -438,7 +464,7 @@ public class event_cheerleader_vader extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.event_cheerleader_vader.branchId");
                     chat.chat(npc, player, message);
@@ -464,7 +490,7 @@ public class event_cheerleader_vader extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_100");
@@ -473,7 +499,7 @@ public class event_cheerleader_vader extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.event_cheerleader_vader.branchId");
                     chat.chat(npc, player, message);
@@ -499,7 +525,7 @@ public class event_cheerleader_vader extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_108");
@@ -508,7 +534,7 @@ public class event_cheerleader_vader extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.event_cheerleader_vader.branchId");
                     chat.chat(npc, player, message);
@@ -531,6 +557,7 @@ public class event_cheerleader_vader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int event_cheerleader_vader_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_56"))
@@ -550,7 +577,7 @@ public class event_cheerleader_vader extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_60");
@@ -559,7 +586,7 @@ public class event_cheerleader_vader extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.event_cheerleader_vader.branchId");
                     chat.chat(npc, player, message);
@@ -570,6 +597,7 @@ public class event_cheerleader_vader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int event_cheerleader_vader_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_60"))
@@ -586,6 +614,7 @@ public class event_cheerleader_vader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int event_cheerleader_vader_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_68"))
@@ -605,7 +634,7 @@ public class event_cheerleader_vader extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_72");
@@ -614,7 +643,7 @@ public class event_cheerleader_vader extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.event_cheerleader_vader.branchId");
                     chat.chat(npc, player, message);
@@ -625,6 +654,7 @@ public class event_cheerleader_vader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int event_cheerleader_vader_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_72"))
@@ -641,6 +671,7 @@ public class event_cheerleader_vader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int event_cheerleader_vader_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_80"))
@@ -657,6 +688,7 @@ public class event_cheerleader_vader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int event_cheerleader_vader_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_92"))
@@ -673,6 +705,7 @@ public class event_cheerleader_vader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int event_cheerleader_vader_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_100"))
@@ -689,6 +722,7 @@ public class event_cheerleader_vader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int event_cheerleader_vader_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_108"))
@@ -708,7 +742,7 @@ public class event_cheerleader_vader extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_112");
@@ -717,7 +751,7 @@ public class event_cheerleader_vader extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.event_cheerleader_vader.branchId");
                     chat.chat(npc, player, message);
@@ -728,6 +762,7 @@ public class event_cheerleader_vader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int event_cheerleader_vader_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_112"))
@@ -744,6 +779,7 @@ public class event_cheerleader_vader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -753,11 +789,13 @@ public class event_cheerleader_vader extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -766,18 +804,21 @@ public class event_cheerleader_vader extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.event_cheerleader_vader");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -824,7 +865,7 @@ public class event_cheerleader_vader extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_34");
@@ -832,7 +873,7 @@ public class event_cheerleader_vader extends script.base_script
                 utils.setScriptVar(player, "conversation.event_cheerleader_vader.branchId", 5);
                 npcStartConversation(player, npc, "event_cheerleader_vader", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -902,7 +943,7 @@ public class event_cheerleader_vader extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_52");
@@ -938,7 +979,7 @@ public class event_cheerleader_vader extends script.base_script
                 utils.setScriptVar(player, "conversation.event_cheerleader_vader.branchId", 10);
                 npcStartConversation(player, npc, "event_cheerleader_vader", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -947,6 +988,7 @@ public class event_cheerleader_vader extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("event_cheerleader_vader"))

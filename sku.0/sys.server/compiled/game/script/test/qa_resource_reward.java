@@ -1,5 +1,11 @@
 package script.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.qa;
 import script.library.sui;
@@ -13,9 +19,6 @@ import java.util.Vector;
 
 public class qa_resource_reward extends script.base_script
 {
-    public qa_resource_reward()
-    {
-    }
     public static final int RESOURCE_AMOUNT = 100000;
     public static final String ROOT_RESOURCE_CLASS = "resource";
     public static final String ROOT_ORGANIC_CLASS = "organic";
@@ -29,6 +32,10 @@ public class qa_resource_reward extends script.base_script
     public static final string_id SID_CHOOSE_SUB_CLASS = new string_id(veteran_deprecated.VETERAN_STRING_TABLE, "choose_sub_class");
     public static final string_id SID_CHOOSE_TYPE = new string_id(veteran_deprecated.VETERAN_STRING_TABLE, "choose_type");
     public static final string_id SID_RESOURCE_NAME = new string_id(veteran_deprecated.VETERAN_STRING_TABLE, "resource_name");
+    public qa_resource_reward()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!isGod(self))
@@ -45,6 +52,7 @@ public class qa_resource_reward extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (isGod(self))
@@ -57,6 +65,7 @@ public class qa_resource_reward extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleQATool(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -75,7 +84,7 @@ public class qa_resource_reward extends script.base_script
                 utils.removeScriptVarTree(player, "qarewardresource");
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 chooseResourceClass(self, ROOT_RESOURCE_CLASS, true);
                 return SCRIPT_CONTINUE;
@@ -83,13 +92,14 @@ public class qa_resource_reward extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleChooseResourceClass(obj_id self, dictionary params) throws InterruptedException
     {
         int bp = sui.getIntButtonPressed(params);
         switch (bp)
         {
             case sui.BP_OK:
-            
+
             {
                 String[] resourceClasses = (self.getScriptVars()).getStringArray(SCRIPTVAR_SUB_CLASSES);
                 int rowSelected = sui.getListboxSelectedRow(params);
@@ -97,7 +107,7 @@ public class qa_resource_reward extends script.base_script
                 {
                     chooseResourceClass(sui.getPlayerId(params), resourceClasses[rowSelected]);
                 }
-                else 
+                else
                 {
                     String resourceClass = (self.getScriptVars()).getString(SCRIPTVAR_BASE_CLASS);
                     chooseResourceClass(sui.getPlayerId(params), resourceClass);
@@ -105,7 +115,7 @@ public class qa_resource_reward extends script.base_script
             }
             break;
             case sui.BP_CANCEL:
-            
+
             {
                 String resourceClass = (self.getScriptVars()).getString(SCRIPTVAR_BASE_CLASS);
                 if (!resourceClass.equals(ROOT_ORGANIC_CLASS) && !resourceClass.equals(ROOT_INORGANIC_CLASS))
@@ -113,26 +123,27 @@ public class qa_resource_reward extends script.base_script
                     chooseResourceClass(sui.getPlayerId(params), getResourceParentClass(resourceClass));
                     qa.qaToolMainMenu(self);
                 }
-                else 
+                else
                 {
                     chooseResourceClass(sui.getPlayerId(params), getResourceParentClass(resourceClass), true);
                 }
             }
             break;
             default:
-            cleanup();
-            removePlayer(self, "");
-            break;
+                cleanup();
+                removePlayer(self, "");
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleChooseResourceType(obj_id self, dictionary params) throws InterruptedException
     {
         int bp = sui.getIntButtonPressed(params);
         switch (bp)
         {
             case sui.BP_OK:
-            
+
             {
                 obj_id[] resourceTypes = (self.getScriptVars()).getObjIdArray(SCRIPTVAR_TYPES);
                 int rowSelected = sui.getListboxSelectedRow(params);
@@ -140,7 +151,7 @@ public class qa_resource_reward extends script.base_script
                 {
                     showResourceStats(sui.getPlayerId(params), resourceTypes[rowSelected]);
                 }
-                else 
+                else
                 {
                     String resourceClass = (self.getScriptVars()).getString(SCRIPTVAR_BASE_CLASS);
                     chooseResourceClass(sui.getPlayerId(params), resourceClass);
@@ -148,7 +159,7 @@ public class qa_resource_reward extends script.base_script
             }
             break;
             case sui.BP_CANCEL:
-            
+
             {
                 String resourceClass = (self.getScriptVars()).getString(SCRIPTVAR_BASE_CLASS);
                 if (!resourceClass.equals(ROOT_RESOURCE_CLASS))
@@ -158,19 +169,20 @@ public class qa_resource_reward extends script.base_script
                 }
             }
             default:
-            cleanup();
-            removePlayer(self, "");
-            break;
+                cleanup();
+                removePlayer(self, "");
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleChooseResourceTypeStats(obj_id self, dictionary params) throws InterruptedException
     {
         int bp = sui.getIntButtonPressed(params);
         switch (bp)
         {
             case sui.BP_OK:
-            
+
             {
                 obj_id resourceChosen = (self.getScriptVars()).getObjId(SCRIPTVAR_RESOURCECHOSEN);
                 if (isIdValid(resourceChosen))
@@ -184,7 +196,7 @@ public class qa_resource_reward extends script.base_script
                     cleanup();
                     removePlayer(self, "");
                 }
-                else 
+                else
                 {
                     String resourceClass = (self.getScriptVars()).getString(SCRIPTVAR_BASE_CLASS);
                     chooseResourceClass(sui.getPlayerId(params), resourceClass);
@@ -192,7 +204,7 @@ public class qa_resource_reward extends script.base_script
             }
             break;
             case sui.BP_CANCEL:
-            
+
             {
                 String resourceClass = (self.getScriptVars()).getString(SCRIPTVAR_BASE_CLASS);
                 if (!resourceClass.equals(ROOT_RESOURCE_CLASS))
@@ -202,12 +214,13 @@ public class qa_resource_reward extends script.base_script
                 }
             }
             default:
-            cleanup();
-            removePlayer(self, "");
-            break;
+                cleanup();
+                removePlayer(self, "");
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public void showResourceStats(obj_id player, obj_id resource) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -233,7 +246,8 @@ public class qa_resource_reward extends script.base_script
             return;
         }
         attribStrings = utils.addElement(attribStrings, "@" + SID_RESOURCE_NAME + " = " + getResourceName(resource));
-        for (resource_attribute resourceAttrib : resourceAttribs) {
+        for (resource_attribute resourceAttrib : resourceAttribs)
+        {
             string_id temp = new string_id("obj_attr_n", resourceAttrib.getName());
             attribStrings = utils.addElement(attribStrings, "@" + temp + " = " + resourceAttrib.getValue());
         }
@@ -244,16 +258,18 @@ public class qa_resource_reward extends script.base_script
             sui.showSUIPage(pid);
             ((getSelf()).getScriptVars()).put(SCRIPTVAR_RESOURCECHOSEN, resource);
         }
-        else 
+        else
         {
             cleanup();
             removePlayer(player, "");
         }
     }
+
     public void chooseResourceClass(obj_id player, String parentClass) throws InterruptedException
     {
         chooseResourceClass(player, parentClass, false);
     }
+
     public void chooseResourceClass(obj_id player, String parentClass, boolean topLevel) throws InterruptedException
     {
         String[] resourceClasses = null;
@@ -261,7 +277,7 @@ public class qa_resource_reward extends script.base_script
         {
             resourceClasses = filterTopLevelResourceList(parentClass);
         }
-        else 
+        else
         {
             resourceClasses = getImmediateResourceChildClasses(parentClass);
         }
@@ -283,15 +299,17 @@ public class qa_resource_reward extends script.base_script
             {
                 resourceClasses[i] = null;
             }
-            else 
+            else
             {
                 ++goodResources;
             }
         }
         String[] temp = new String[goodResources];
         goodResources = 0;
-        for (String resourceClass : resourceClasses) {
-            if (resourceClass != null) {
+        for (String resourceClass : resourceClasses)
+        {
+            if (resourceClass != null)
+            {
                 temp[goodResources++] = resourceClass;
             }
         }
@@ -309,7 +327,7 @@ public class qa_resource_reward extends script.base_script
         {
             prompt = "@" + SID_CHOOSE_CLASS;
         }
-        else 
+        else
         {
             prompt = "@" + SID_CHOOSE_SUB_CLASS + " " + getResourceClassName(parentClass);
         }
@@ -324,12 +342,13 @@ public class qa_resource_reward extends script.base_script
             ((getSelf()).getScriptVars()).put(SCRIPTVAR_BASE_CLASS, parentClass);
             ((getSelf()).getScriptVars()).put(SCRIPTVAR_SUB_CLASSES, resourceClasses);
         }
-        else 
+        else
         {
             cleanup();
         }
         removePlayer(player, "");
     }
+
     public void chooseResourceType(obj_id player, String parentClass) throws InterruptedException
     {
         obj_id[] resourceTypes = getResourceTypes(parentClass);
@@ -354,12 +373,13 @@ public class qa_resource_reward extends script.base_script
             ((getSelf()).getScriptVars()).put(SCRIPTVAR_BASE_CLASS, parentClass);
             ((getSelf()).getScriptVars()).put(SCRIPTVAR_TYPES, resourceTypes);
         }
-        else 
+        else
         {
             cleanup();
             removePlayer(player, "");
         }
     }
+
     public void cleanup() throws InterruptedException
     {
         ((getSelf()).getScriptVars()).remove(SCRIPTVAR_BASE_CLASS);
@@ -367,18 +387,22 @@ public class qa_resource_reward extends script.base_script
         ((getSelf()).getScriptVars()).remove(SCRIPTVAR_TYPES);
         ((getSelf()).getScriptVars()).remove(SCRIPTVAR_RESOURCECHOSEN);
     }
+
     public void removePlayer(obj_id player, String err) throws InterruptedException
     {
         broadcast(player, err);
         qa.removeScriptVars(player, "qarewardresource");
     }
+
     public String[] filterTopLevelResourceList(String parentClass) throws InterruptedException
     {
         String[] resourceClasses = null;
         String[] tempResourceClass = getImmediateResourceChildClasses(parentClass);
         Vector tempResourceClassTwo = null;
-        for (String tempResourceClass1 : tempResourceClass) {
-            if (!tempResourceClass1.equals("energy") && !tempResourceClass1.equals("space_resource")) {
+        for (String tempResourceClass1 : tempResourceClass)
+        {
+            if (!tempResourceClass1.equals("energy") && !tempResourceClass1.equals("space_resource"))
+            {
                 tempResourceClassTwo = utils.addElement(tempResourceClassTwo, tempResourceClass1);
             }
         }

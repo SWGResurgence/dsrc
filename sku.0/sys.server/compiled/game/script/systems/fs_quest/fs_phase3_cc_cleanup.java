@@ -1,5 +1,11 @@
 package script.systems.fs_quest;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.community_crafting;
 import script.library.fs_dyn_village;
@@ -14,6 +20,7 @@ public class fs_phase3_cc_cleanup extends script.base_script
     public static final String OBJVAR_LAST_PHASE = community_crafting.OBJVAR_COMMUNITY_CRAFTING_BASE + ".lastPhase";
     public static final String SCRIPTVAR_CRAFTING_TRACKER = fs_dyn_village.OBJVAR_MY_MASTER_OBJECT;
     public static final String SCRIPTVAR_VILLAGE_PHASE = "community_crafting.village_phase";
+
     public fs_phase3_cc_cleanup()
     {
     }

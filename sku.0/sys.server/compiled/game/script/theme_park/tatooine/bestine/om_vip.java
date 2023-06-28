@@ -1,5 +1,11 @@
 package script.theme_park.tatooine.bestine;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.chat;
@@ -12,12 +18,14 @@ public class om_vip extends script.base_script
     public om_vip()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         attachScript(self, "npc.converse.npc_converse_menu");
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         String datatable = "datatables/theme_park/bestine_om.iff";
@@ -41,26 +49,28 @@ public class om_vip extends script.base_script
                 messageTo(speaker, "finishQuest", null, 0, true);
                 return SCRIPT_OVERRIDE;
             }
-            else 
+            else
             {
                 string_id work = new string_id(CONVO, "otherescort");
                 chat.chat(self, work);
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             string_id blah = new string_id(CONVO, "dontknowyou");
             chat.chat(self, blah);
             return SCRIPT_CONTINUE;
         }
     }
+
     public int followPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
         ai_lib.aiFollow(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int stopFollowing(obj_id self, dictionary params) throws InterruptedException
     {
         debugSpeakMsg(self, "I'm not following you anymore.");
@@ -78,7 +88,7 @@ public class om_vip extends script.base_script
             setObjVar(player, "bestine_progress.om_quest", questNum);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             obj_id playerInv = utils.getInventoryContainer(player);
             createObject(reward, playerInv, "");

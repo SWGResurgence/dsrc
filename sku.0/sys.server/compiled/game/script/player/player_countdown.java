@@ -1,5 +1,11 @@
 package script.player;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.buff;
 import script.library.sui;
@@ -11,11 +17,13 @@ public class player_countdown extends script.base_script
     public player_countdown()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         detachScript(self, sui.COUNTDOWNTIMER_PLAYER_SCRIPT);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         removeObjVar(self, sui.COUNTDOWNTIMER_SUI_VAR);
@@ -27,6 +35,7 @@ public class player_countdown extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         if (sui.hasEventFlag(self, sui.CD_EVENT_COMBAT))
@@ -35,6 +44,7 @@ public class player_countdown extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnLocomotionChanged(obj_id self, int newLocomotion, int oldLocomotion) throws InterruptedException
     {
         if (newLocomotion != LOCOMOTION_STANDING && newLocomotion != LOCOMOTION_KNEELING && newLocomotion != LOCOMOTION_PRONE)
@@ -46,6 +56,7 @@ public class player_countdown extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnChangedPosture(obj_id self, int before, int after) throws InterruptedException
     {
         if (sui.hasEventFlag(self, sui.CD_EVENT_POSTURE))
@@ -54,6 +65,7 @@ public class player_countdown extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         if (sui.hasEventFlag(self, sui.CD_EVENT_INCAPACITATE))
@@ -62,6 +74,7 @@ public class player_countdown extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id weapon, int[] damage) throws InterruptedException
     {
         if (sui.hasEventFlag(self, sui.CD_EVENT_DAMAGED))
@@ -70,6 +83,7 @@ public class player_countdown extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleCountdownTimerCleanup(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, sui.COUNTDOWNTIMER_SUI_VAR))

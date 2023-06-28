@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,44 +14,54 @@ import script.*;
 
 public class delivery_sickle extends script.base_script
 {
+    public static String c_stringFile = "conversation/delivery_sickle";
+
     public delivery_sickle()
     {
     }
-    public static String c_stringFile = "conversation/delivery_sickle";
+
     public boolean delivery_sickle_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean delivery_sickle_condition_noAntivirus(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (!groundquests.hasCompletedQuest(player, "outbreak_quest_01_imperial") && !groundquests.hasCompletedQuest(player, "outbreak_quest_01_rebel") && !groundquests.hasCompletedQuest(player, "outbreak_quest_01_neutral"));
     }
+
     public boolean delivery_sickle_condition_hasNotFoundBeta(obj_id player, obj_id npc) throws InterruptedException
     {
         return !hasCompletedCollectionSlot(player, "exp_icon_deathtroopers_camp_delta");
     }
+
     public boolean delivery_sickle_condition_neverDelivered(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (!groundquests.isQuestActiveOrComplete(player, "camp_gamma_delivery_01"));
     }
+
     public boolean delivery_sickle_condition_hasMeetingTask(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "camp_gamma_delivery_01", "getBeastGamma");
     }
+
     public boolean delivery_sickle_condition_hasEscortTask(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "camp_gamma_delivery_01", "escortTaskGamma");
     }
+
     public boolean delivery_sickle_condition_hasDeliveredBefore(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActiveOrComplete(player, "camp_gamma_delivery_01");
     }
+
     public boolean delivery_sickle_condition_tooLowLevel(obj_id player, obj_id npc) throws InterruptedException
     {
         return getLevel(player) < 40;
     }
+
     public void delivery_sickle_action_giveQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
@@ -55,10 +71,12 @@ public class delivery_sickle extends script.base_script
         }
         groundquests.grantQuest(player, "camp_gamma_delivery_01");
     }
+
     public void delivery_sickle_action_clearDeliveryQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "camp_gamma_delivery_01");
     }
+
     public int delivery_sickle_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_96"))
@@ -79,7 +97,7 @@ public class delivery_sickle extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_13");
@@ -88,7 +106,7 @@ public class delivery_sickle extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.delivery_sickle.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -98,6 +116,7 @@ public class delivery_sickle extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int delivery_sickle_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_13"))
@@ -117,7 +136,7 @@ public class delivery_sickle extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_19");
@@ -126,7 +145,7 @@ public class delivery_sickle extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.delivery_sickle.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -136,6 +155,7 @@ public class delivery_sickle extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int delivery_sickle_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_19"))
@@ -155,7 +175,7 @@ public class delivery_sickle extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_23");
@@ -164,7 +184,7 @@ public class delivery_sickle extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.delivery_sickle.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -174,6 +194,7 @@ public class delivery_sickle extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int delivery_sickle_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_23"))
@@ -193,7 +214,7 @@ public class delivery_sickle extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_27");
@@ -202,7 +223,7 @@ public class delivery_sickle extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.delivery_sickle.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -212,6 +233,7 @@ public class delivery_sickle extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int delivery_sickle_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_27"))
@@ -227,6 +249,7 @@ public class delivery_sickle extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int delivery_sickle_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_33"))
@@ -241,6 +264,7 @@ public class delivery_sickle extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -251,12 +275,14 @@ public class delivery_sickle extends script.base_script
         setCondition(self, CONDITION_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setCondition(self, CONDITION_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -265,18 +291,21 @@ public class delivery_sickle extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.delivery_sickle");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -331,7 +360,7 @@ public class delivery_sickle extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_96");
@@ -339,7 +368,7 @@ public class delivery_sickle extends script.base_script
                 utils.setScriptVar(player, "conversation.delivery_sickle.branchId", 6);
                 npcStartConversation(player, npc, "delivery_sickle", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -360,7 +389,7 @@ public class delivery_sickle extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_33");
@@ -368,7 +397,7 @@ public class delivery_sickle extends script.base_script
                 utils.setScriptVar(player, "conversation.delivery_sickle.branchId", 12);
                 npcStartConversation(player, npc, "delivery_sickle", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -383,6 +412,7 @@ public class delivery_sickle extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("delivery_sickle"))

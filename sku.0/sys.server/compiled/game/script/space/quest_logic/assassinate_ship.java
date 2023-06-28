@@ -1,5 +1,11 @@
 package script.space.quest_logic;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.space_utils;
 import script.obj_id;
@@ -9,11 +15,13 @@ public class assassinate_ship extends script.base_script
     public assassinate_ship()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "warpOut", null, 1200.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int warpOut(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, "nowin", 1);
@@ -27,6 +35,7 @@ public class assassinate_ship extends script.base_script
         destroyObjectHyperspace(self);
         return SCRIPT_CONTINUE;
     }
+
     public int objectDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "nowin"))
@@ -43,6 +52,7 @@ public class assassinate_ship extends script.base_script
         space_utils.notifyObject(quest, "handleShipDestroyed", outparams);
         return SCRIPT_CONTINUE;
     }
+
     public int missionAbort(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObjectHyperspace(self);

@@ -1,5 +1,11 @@
 package script;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
@@ -10,7 +16,7 @@ public class base_script extends script.base_class
     public base_script()
     {
     }
-    
+
     public int OnLocateObject(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id requestor = params.getObjId("requestor");
@@ -25,6 +31,7 @@ public class base_script extends script.base_class
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSetWaypointActive(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id waypoint = params.getObjId("waypoint");
@@ -34,6 +41,7 @@ public class base_script extends script.base_class
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSetWaypointLocation(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id waypoint = params.getObjId("waypoint");
@@ -47,6 +55,7 @@ public class base_script extends script.base_class
         }
         return SCRIPT_CONTINUE;
     }
+
     public int getFirstFreeIndex(String[] array) throws InterruptedException
     {
         if (array != null)
@@ -61,6 +70,7 @@ public class base_script extends script.base_class
         }
         return -1;
     }
+
     public void dumpObjvars(obj_id s, obj_var_list objvars, String[] names, String[] attribs) throws InterruptedException
     {
         if (s == null || objvars == null || names == null || attribs == null || names.length != attribs.length)
@@ -75,10 +85,10 @@ public class base_script extends script.base_class
             {
                 if (o instanceof obj_var_list)
                 {
-                    dumpObjvars(s, (obj_var_list)o, names, attribs);
+                    dumpObjvars(s, (obj_var_list) o, names, attribs);
                     elem = getFirstFreeIndex(names);
                 }
-                else 
+                else
                 {
                     String name = "\"" + o.getName();
                     Object v = o.getData();
@@ -93,6 +103,7 @@ public class base_script extends script.base_class
             }
         }
     }
+
     public void dumpScriptvars(String[] names, String[] attribs) throws InterruptedException
     {
         if ((names == null) || (attribs == null) || (names.length != attribs.length))
@@ -120,12 +131,13 @@ public class base_script extends script.base_class
             Iterator keysSet = (sortedValues.keySet()).iterator();
             while (keysSet.hasNext() && i < names.length)
             {
-                names[i] = (String)keysSet.next();
-                attribs[i] = (String)sortedValues.get(names[i]);
+                names[i] = (String) keysSet.next();
+                attribs[i] = (String) sortedValues.get(names[i]);
                 ++i;
             }
         }
     }
+
     public int OnGetScriptvars(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         if (player != null)
@@ -135,7 +147,7 @@ public class base_script extends script.base_class
             {
                 return SCRIPT_CONTINUE;
             }
-            String lastScript = (String)(scripts.get(scripts.size() - 1));
+            String lastScript = (String) (scripts.get(scripts.size() - 1));
             if (lastScript == null)
             {
                 return SCRIPT_CONTINUE;
@@ -151,6 +163,7 @@ public class base_script extends script.base_class
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         if ((names == null) || (attribs == null) || (names.length != attribs.length))
@@ -164,7 +177,7 @@ public class base_script extends script.base_class
             {
                 return SCRIPT_CONTINUE;
             }
-            String lastScript = (String)(scripts.get(scripts.size() - 1));
+            String lastScript = (String) (scripts.get(scripts.size() - 1));
             if (lastScript == null)
             {
                 return SCRIPT_CONTINUE;
@@ -191,6 +204,7 @@ public class base_script extends script.base_class
         }
         return SCRIPT_CONTINUE;
     }
+
     public String UploadCharacter(obj_id player) throws InterruptedException
     {
         dictionary params = new dictionary();
@@ -205,13 +219,13 @@ public class base_script extends script.base_class
                 byte[] packedData = params.pack();
                 return new String(packedData);
             }
-        }
-        catch(Throwable t)
+        } catch (Throwable t)
         {
             return null;
         }
         return null;
     }
+
     public String DownloadCharacter(obj_id player, String packedData) throws InterruptedException
     {
         byte[] data = packedData.getBytes();
@@ -222,8 +236,7 @@ public class base_script extends script.base_class
         try
         {
             script_entry.runScripts("OnDownloadCharacter", triggerParams);
-        }
-        catch(Throwable t)
+        } catch (Throwable t)
         {
             return null;
         }

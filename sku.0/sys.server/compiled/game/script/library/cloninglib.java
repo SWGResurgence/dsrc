@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 import java.util.Vector;
@@ -54,6 +60,7 @@ public class cloninglib extends script.base_script
     public static final int CLONE_DAMAGE_LOW = 2;
     public static final int CLONE_DAMAGE_HIGH = 10;
     public static final float DEFAULT_REPAIR_RATIO = 10.0f;
+
     public cloninglib()
     {
     }

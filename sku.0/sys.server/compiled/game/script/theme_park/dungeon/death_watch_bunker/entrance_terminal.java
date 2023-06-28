@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.death_watch_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.group;
 import script.library.player_structure;
@@ -8,12 +14,13 @@ import java.util.Vector;
 
 public class entrance_terminal extends script.base_script
 {
-    public entrance_terminal()
-    {
-    }
     public static final string_id MNU_OPEN_DOOR = new string_id("dungeon/death_watch", "mnu_open_door");
     public static final string_id ACCESS_GRANTED = new string_id("dungeon/death_watch", "access_granted");
     public static final string_id ENTRANCE_DENIED = new string_id("dungeon/death_watch", "entrance_denied");
+    public entrance_terminal()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -28,6 +35,7 @@ public class entrance_terminal extends script.base_script
         int mnuControl = mi.addRootMenu(menu_info_types.ITEM_USE, MNU_OPEN_DOOR);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -50,6 +58,7 @@ public class entrance_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void checkAuthorization(obj_id structure, obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(structure))
@@ -64,12 +73,12 @@ public class entrance_terminal extends script.base_script
             sendSystemMessage(player, ACCESS_GRANTED);
             unlockDoors(structure, player);
         }
-        else 
+        else
         {
             sendSystemMessage(player, ENTRANCE_DENIED);
         }
-        return;
     }
+
     public void unlockDoors(obj_id structure, obj_id player) throws InterruptedException
     {
         if (!group.isGrouped(player))
@@ -92,7 +101,8 @@ public class entrance_terminal extends script.base_script
                 {
                     return;
                 }
-                for (Object member : members) {
+                for (Object member : members)
+                {
                     obj_id thisMember = ((obj_id) member);
                     setObjVar(thisMember, "death_watch.entrancePass", 1);
                     obj_id openRoom = getCellId(structure, "smallroom2");
@@ -103,6 +113,5 @@ public class entrance_terminal extends script.base_script
                 }
             }
         }
-        return;
     }
 }

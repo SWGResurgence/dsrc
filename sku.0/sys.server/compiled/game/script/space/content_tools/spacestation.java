@@ -1,5 +1,11 @@
 package script.space.content_tools;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.space_quest;
 import script.library.utils;
@@ -13,17 +19,20 @@ public class spacestation extends script.base_script
     public spacestation()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         requestPreloadCompleteTrigger(self);
         setObjVar(self, "intInvincible", 1);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         requestPreloadCompleteTrigger(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnPreloadComplete(obj_id self) throws InterruptedException
     {
         messageTo(self, "registerStation", null, 2, false);
@@ -35,6 +44,7 @@ public class spacestation extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int registerStation(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("space", "Registering space station");
@@ -47,6 +57,7 @@ public class spacestation extends script.base_script
         registerStationWithManager(objQuestManager, self);
         return SCRIPT_CONTINUE;
     }
+
     public void registerStationWithManager(obj_id objManager, obj_id objStation) throws InterruptedException
     {
         LOG("space", "Registering with " + objManager);
@@ -55,7 +66,7 @@ public class spacestation extends script.base_script
         {
             objSpaceStations = utils.addElement(objSpaceStations, objStation);
         }
-        else 
+        else
         {
             int intIndex = utils.getElementPositionInArray(objSpaceStations, objStation);
             if (intIndex < 0)

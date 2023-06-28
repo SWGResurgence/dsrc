@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.valley_battleground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.colors;
 import script.library.trial;
@@ -12,34 +18,39 @@ import java.util.Vector;
 
 public class demolition_pack extends script.base_script
 {
-    public demolition_pack()
-    {
-    }
     public static final String DATA_TABLE = "datatables/combat/npc_landmines.iff";
     public static final String STF = "npc_landmines";
     public static final string_id SHOW_PAGE_TEXT = new string_id(STF, "charge_page_text");
     public static final boolean LOGGING = false;
+    public demolition_pack()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         verifyMine(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         verifyMine(self);
         trial.markAsTempObject(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int detonateCharge(obj_id self, dictionary params) throws InterruptedException
     {
         applyChargeEffects();
         return SCRIPT_CONTINUE;
     }
+
     public int pageCharge(obj_id self, dictionary params) throws InterruptedException
     {
         showFlyText(getSelf(), SHOW_PAGE_TEXT, 1.0f, colors.GREEN);
         return SCRIPT_CONTINUE;
     }
+
     public void verifyMine(obj_id landMine) throws InterruptedException
     {
         if (!utils.hasScriptVar(landMine, "mineType"))
@@ -54,9 +65,9 @@ public class demolition_pack extends script.base_script
         {
             doLogging("verifyMine", "charge destroyed itself due to invalid entry(" + chargeType + ") in datatable(" + DATA_TABLE + ")");
             destroyObject(landMine);
-            return;
         }
     }
+
     public obj_id[] getTargetsInBlastRadius() throws InterruptedException
     {
         obj_id landMine = getSelf();
@@ -71,9 +82,12 @@ public class demolition_pack extends script.base_script
         obj_id[] objects = getObjectsInRange(loc, blastRadius);
         Vector targetsInRadius = new Vector();
         targetsInRadius.setSize(0);
-        for (obj_id object : objects) {
-            if (isPlayer(object) || isMob(object)) {
-                if (!isIncapacitated(object) && !isDead(object)) {
+        for (obj_id object : objects)
+        {
+            if (isPlayer(object) || isMob(object))
+            {
+                if (!isIncapacitated(object) && !isDead(object))
+                {
                     targetsInRadius = utils.addElement(targetsInRadius, object);
                 }
             }
@@ -83,7 +97,7 @@ public class demolition_pack extends script.base_script
             doLogging("getTargetsInBlastRadius", "targetsInRadius is less than 1, returning null");
             return null;
         }
-        else 
+        else
         {
             obj_id[] _targetsInRadius = new obj_id[0];
             if (targetsInRadius != null)
@@ -94,6 +108,7 @@ public class demolition_pack extends script.base_script
             return _targetsInRadius;
         }
     }
+
     public void applyChargeEffects() throws InterruptedException
     {
         obj_id detonationCharge = getSelf();
@@ -118,12 +133,14 @@ public class demolition_pack extends script.base_script
             return;
         }
         playClientEffectLoc(detonationCharge, mineDetonationEffect, getLocation(detonationCharge), 0.4f);
-        for (obj_id target : targets) {
+        for (obj_id target : targets)
+        {
             int damageToApply = rand(minDamage, maxDamage);
             damage(target, damageType, HIT_LOCATION_BODY, damageToApply);
         }
         destroyObject(detonationCharge);
     }
+
     public int getDamageTypeFromString(String damageType) throws InterruptedException
     {
         if (damageType.equals("blast"))
@@ -160,6 +177,7 @@ public class demolition_pack extends script.base_script
         }
         return -1;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING || trial.VALLEY_LOGGING)

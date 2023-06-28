@@ -1,5 +1,11 @@
 package script.developer.talisa;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -367,7 +373,7 @@ public class talisa_test extends script.base_script
                 else if (priCommand.equalsIgnoreCase("get_tat") && secCommand.equals(""))
                 {
                     obj_id planetId = getPlanetByName("tatooine");
-                    broadcast(self, "" + planetId);
+                    broadcast(self, String.valueOf(planetId));
                 }
                 else if (priCommand.equalsIgnoreCase("force_init") && secCommand.equals(""))
                 {
@@ -929,7 +935,7 @@ public class talisa_test extends script.base_script
                         }
                         else if (lot > 0)
                         {
-                            lotStr = "" + lot;
+                            lotStr = String.valueOf(lot);
                         }
                         else if (lot == 0)
                         {
@@ -968,7 +974,7 @@ public class talisa_test extends script.base_script
                         }
                         else if (lot > 0)
                         {
-                            lotStr = "" + lot;
+                            lotStr = String.valueOf(lot);
                         }
                         else if (lot == 0)
                         {
@@ -1037,12 +1043,9 @@ public class talisa_test extends script.base_script
                     obj_id target = utils.stringToObjId(secCommand);
                     String[] scripts = getScriptList(target);
                     obj_id cloned_item = utils.cloneObject(target, utils.getInventoryContainer(target));
-                    if (scripts.length > 0)
+                    for (String script : scripts)
                     {
-                        for (String script : scripts)
-                        {
-                            attachScript(cloned_item, script);
-                        }
+                        attachScript(cloned_item, script);
                     }
                     setCrafter(cloned_item, self);
                     return SCRIPT_CONTINUE;
@@ -2435,7 +2438,7 @@ public class talisa_test extends script.base_script
     public obj_id getCurrentAdvancedCamp(obj_id player) throws InterruptedException
     {
         obj_id[] objects = getNonCreaturesInRange(player, 25.0f);
-        if (objects == null || objects.length == 0)
+        if (objects == null)
         {
             return null;
         }

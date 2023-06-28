@@ -1,5 +1,11 @@
 package script.terminal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.guild;
 import script.library.sui;
@@ -7,15 +13,16 @@ import script.library.utils;
 
 public class terminal_guild_registry extends script.base_script
 {
-    public terminal_guild_registry()
-    {
-    }
     public static final string_id SID_GUILD_CREATE = new string_id("guild", "menu_create");
     public static final String STR_GUILD_CREATE_NAME_PROMPT = "@guild:create_name_prompt";
     public static final String STR_GUILD_CREATE_NAME_TITLE = "@guild:create_name_title";
     public static final String STR_GUILD_CREATE_ABBREV_PROMPT = "@guild:create_abbrev_prompt";
     public static final String STR_GUILD_CREATE_ABBREV_TITLE = "@guild:create_abbrev_title";
     public static final string_id STR_GUILD_OPEN_REGISTRY = new string_id("guild", "open_registry");
+    public terminal_guild_registry()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int playerGuildId = getGuildId(player);
@@ -25,6 +32,7 @@ public class terminal_guild_registry extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         sendDirtyObjectMenuNotification(self);
@@ -35,6 +43,7 @@ public class terminal_guild_registry extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int onGuildCreateNameResponse(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -46,6 +55,7 @@ public class terminal_guild_registry extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int onGuildCreateAbbrevResponse(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -75,16 +85,19 @@ public class terminal_guild_registry extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public String getMenuContextString(obj_id self, obj_id player, String varName) throws InterruptedException
     {
         deltadictionary dd = self.getScriptVars();
         return dd.getString("guildMenu." + player + "." + varName);
     }
+
     public void setMenuContextString(obj_id self, obj_id player, String varName, String value) throws InterruptedException
     {
         deltadictionary dd = self.getScriptVars();
         dd.put("guildMenu." + player + "." + varName, value);
     }
+
     public void removeMenuContextVar(obj_id self, obj_id player, String varName) throws InterruptedException
     {
         deltadictionary dd = self.getScriptVars();

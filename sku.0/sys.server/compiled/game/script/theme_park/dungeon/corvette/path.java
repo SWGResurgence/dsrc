@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.corvette;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.location;
@@ -10,23 +16,28 @@ public class path extends script.base_script
     public path()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "larkAbout", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public String getRoomName(obj_id building, obj_id cell) throws InterruptedException
     {
         String[] allCells = getCellNames(building);
         int numberOfCells = allCells.length;
-        for (String cellName : allCells) {
+        for (String cellName : allCells)
+        {
             obj_id thisCell = getCellId(building, cellName);
-            if (thisCell == cell) {
+            if (thisCell == cell)
+            {
                 return cellName;
             }
         }
         return "no_match";
     }
+
     public int larkAbout(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);
@@ -42,6 +53,7 @@ public class path extends script.base_script
         addLocationTarget("target", randomLoc, 1);
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String name) throws InterruptedException
     {
         if (name.equals("target"))

@@ -1,106 +1,132 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class fs_quests_sad2_conv extends script.base_script
 {
+    public static String c_stringFile = "conversation/fs_quests_sad2_conv";
+
     public fs_quests_sad2_conv()
     {
     }
-    public static String c_stringFile = "conversation/fs_quests_sad2_conv";
+
     public boolean fs_quests_sad2_conv_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean fs_quests_sad2_conv_condition_hasCompletedAllTasksCond(obj_id player, obj_id npc) throws InterruptedException
     {
         return fs_quests_sad.hasCompletedAllTasks2(player);
     }
+
     public boolean fs_quests_sad2_conv_condition_hasExceededTaskLimitCond(obj_id player, obj_id npc) throws InterruptedException
     {
         return fs_quests_sad.hasExceededTaskLimit(player);
     }
+
     public boolean fs_quests_sad2_conv_condition_hasTaskCond(obj_id player, obj_id npc) throws InterruptedException
     {
         return fs_quests_sad.hasTask2(player);
     }
+
     public boolean fs_quests_sad2_conv_condition_isVillageEligibleCond(obj_id player, obj_id npc) throws InterruptedException
     {
         return fs_quests.isVillageEligible(player);
     }
+
     public boolean fs_quests_sad2_conv_condition_readyForTaskCond(obj_id player, obj_id npc) throws InterruptedException
     {
         return !fs_quests_sad.hasTask(player) && !fs_quests_sad.hasExceededTaskLimit(player) && !fs_quests_sad.hasCompletedAllTasks2(player) && fs_quests.isVillageEligible(player);
     }
+
     public boolean fs_quests_sad2_conv_condition_hasTheaterAssignedCond(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasTheaterAssigned(player);
     }
+
     public boolean fs_quests_sad2_conv_condition_hasNotCompletedAnyTasksCond(obj_id player, obj_id npc) throws InterruptedException
     {
         return !quests.isComplete("fs_quests_sad2_task1", player);
     }
+
     public boolean fs_quests_sad2_conv_condition_tooLowLevelCond(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean fs_quests_sad2_conv_condition_hasFullInventoryCond(obj_id player, obj_id npc) throws InterruptedException
     {
         if (fs_quests_sad2_conv_condition_readyForRewardCond(player, npc))
         {
             obj_id objInventory = utils.getInventoryContainer(player);
-            if (getVolumeFree(objInventory) <= 0)
-            {
-                return true;
-            }
+            return getVolumeFree(objInventory) <= 0;
         }
         return false;
     }
+
     public boolean fs_quests_sad2_conv_condition_readyForRewardCond(obj_id player, obj_id npc) throws InterruptedException
     {
         return quests.isActive("fs_quests_sad2_return8", player) && !fs_quests_sad2_conv_condition_hasCompletedAllTasksCond(player, npc);
     }
+
     public boolean fs_quests_sad2_conv_condition_completed1TaskCond(obj_id player, obj_id npc) throws InterruptedException
     {
         return fs_quests_sad2_conv_condition_readyForTaskCond(player, npc) && fs_quests_sad.getNumberTasksCompleted2(player) == 0;
     }
+
     public boolean fs_quests_sad2_conv_condition_completed2TaskCond(obj_id player, obj_id npc) throws InterruptedException
     {
         return fs_quests_sad2_conv_condition_readyForTaskCond(player, npc) && fs_quests_sad.getNumberTasksCompleted2(player) == 1;
     }
+
     public boolean fs_quests_sad2_conv_condition_completed3TaskCond(obj_id player, obj_id npc) throws InterruptedException
     {
         return fs_quests_sad2_conv_condition_readyForTaskCond(player, npc) && fs_quests_sad.getNumberTasksCompleted2(player) == 2;
     }
+
     public boolean fs_quests_sad2_conv_condition_completed4TaskCond(obj_id player, obj_id npc) throws InterruptedException
     {
         return fs_quests_sad2_conv_condition_readyForTaskCond(player, npc) && fs_quests_sad.getNumberTasksCompleted2(player) == 3;
     }
+
     public boolean fs_quests_sad2_conv_condition_completed5TaskCond(obj_id player, obj_id npc) throws InterruptedException
     {
         return fs_quests_sad2_conv_condition_readyForTaskCond(player, npc) && fs_quests_sad.getNumberTasksCompleted2(player) == 4;
     }
+
     public boolean fs_quests_sad2_conv_condition_completed6TaskCond(obj_id player, obj_id npc) throws InterruptedException
     {
         return fs_quests_sad2_conv_condition_readyForTaskCond(player, npc) && fs_quests_sad.getNumberTasksCompleted2(player) == 5;
     }
+
     public boolean fs_quests_sad2_conv_condition_completed7TaskCond(obj_id player, obj_id npc) throws InterruptedException
     {
         return fs_quests_sad2_conv_condition_readyForTaskCond(player, npc) && fs_quests_sad.getNumberTasksCompleted2(player) == 6;
     }
+
     public boolean fs_quests_sad2_conv_condition_needsAnotherGeigerCond(obj_id player, obj_id npc) throws InterruptedException
     {
         return !hasObjVar(player, geiger.OBJVAR_GEIGER_OBJECT) && fs_quests_sad2_conv_condition_hasTaskCond(player, npc);
     }
+
     public boolean fs_quests_sad2_conv_condition_hasOtherPhaseQuestCond(obj_id player, obj_id npc) throws InterruptedException
     {
         return !quests.isActive("fs_quests_sad2_task1", player) && !quests.isComplete("fs_quests_sad2_task1", player) && fs_quests.hasQuestAccepted(player);
     }
+
     public boolean fs_quests_sad2_conv_condition_completedOtherPhaseQuestCond(obj_id player, obj_id npc) throws InterruptedException
     {
         return fs_quests.hasQuestCompleted(player);
     }
+
     public void fs_quests_sad2_conv_action_grantTask(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "quest.fs_quests_sad2_return8.waypoint"))
@@ -116,7 +142,7 @@ public class fs_quests_sad2_conv extends script.base_script
             quests.activate("fs_quests_sad2_tasks", player, npc);
             attachScript(player, "systems.fs_quest.fs_quests_sad.cleanup2");
         }
-        else 
+        else
         {
             for (int i = 1; i <= 8; i++)
             {
@@ -133,12 +159,13 @@ public class fs_quests_sad2_conv extends script.base_script
                 }
             }
         }
-        return;
     }
+
     public void fs_quests_sad2_conv_action_giveGeiger(obj_id player, obj_id npc) throws InterruptedException
     {
         geiger.resetGeiger(player);
     }
+
     public void fs_quests_sad2_conv_action_clearWaypoint(obj_id player, obj_id npc) throws InterruptedException
     {
         String questName = "fs_quests_sad2_return1";
@@ -156,16 +183,18 @@ public class fs_quests_sad2_conv extends script.base_script
             destroyWaypointInDatapad(point, player);
             removeObjVar(player, waypointObjVar);
         }
-        return;
     }
+
     public String fs_quests_sad2_conv_tokenTO_greetString(obj_id player, obj_id npc) throws InterruptedException
     {
         return getFirstName(player);
     }
+
     public float fs_quests_sad2_conv_tokenDF_tokenDF0001(obj_id player, obj_id npc) throws InterruptedException
     {
         return 0.0f;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -175,11 +204,13 @@ public class fs_quests_sad2_conv extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -188,18 +219,21 @@ public class fs_quests_sad2_conv extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "npc.conversation.fs_quests_sad2_conv");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -299,7 +333,7 @@ public class fs_quests_sad2_conv extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_b84b366c");
@@ -311,7 +345,7 @@ public class fs_quests_sad2_conv extends script.base_script
                 setObjVar(player, "conversation.fs_quests_sad2_conv.branchId", 11);
                 npcStartConversation(player, self, "fs_quests_sad2_conv", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -340,7 +374,7 @@ public class fs_quests_sad2_conv extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1adbadc4");
@@ -352,7 +386,7 @@ public class fs_quests_sad2_conv extends script.base_script
                 setObjVar(player, "conversation.fs_quests_sad2_conv.branchId", 17);
                 npcStartConversation(player, self, "fs_quests_sad2_conv", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -381,7 +415,7 @@ public class fs_quests_sad2_conv extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1adbadc4");
@@ -393,7 +427,7 @@ public class fs_quests_sad2_conv extends script.base_script
                 setObjVar(player, "conversation.fs_quests_sad2_conv.branchId", 17);
                 npcStartConversation(player, self, "fs_quests_sad2_conv", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -422,7 +456,7 @@ public class fs_quests_sad2_conv extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1adbadc4");
@@ -434,7 +468,7 @@ public class fs_quests_sad2_conv extends script.base_script
                 setObjVar(player, "conversation.fs_quests_sad2_conv.branchId", 17);
                 npcStartConversation(player, self, "fs_quests_sad2_conv", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -463,7 +497,7 @@ public class fs_quests_sad2_conv extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1adbadc4");
@@ -475,7 +509,7 @@ public class fs_quests_sad2_conv extends script.base_script
                 setObjVar(player, "conversation.fs_quests_sad2_conv.branchId", 17);
                 npcStartConversation(player, self, "fs_quests_sad2_conv", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -504,7 +538,7 @@ public class fs_quests_sad2_conv extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1adbadc4");
@@ -516,7 +550,7 @@ public class fs_quests_sad2_conv extends script.base_script
                 setObjVar(player, "conversation.fs_quests_sad2_conv.branchId", 17);
                 npcStartConversation(player, self, "fs_quests_sad2_conv", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -545,7 +579,7 @@ public class fs_quests_sad2_conv extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1adbadc4");
@@ -557,7 +591,7 @@ public class fs_quests_sad2_conv extends script.base_script
                 setObjVar(player, "conversation.fs_quests_sad2_conv.branchId", 17);
                 npcStartConversation(player, self, "fs_quests_sad2_conv", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -586,7 +620,7 @@ public class fs_quests_sad2_conv extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1adbadc4");
@@ -598,7 +632,7 @@ public class fs_quests_sad2_conv extends script.base_script
                 setObjVar(player, "conversation.fs_quests_sad2_conv.branchId", 17);
                 npcStartConversation(player, self, "fs_quests_sad2_conv", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -607,6 +641,7 @@ public class fs_quests_sad2_conv extends script.base_script
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("fs_quests_sad2_conv"))
@@ -631,7 +666,7 @@ public class fs_quests_sad2_conv extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4ae25b38");
@@ -640,7 +675,7 @@ public class fs_quests_sad2_conv extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.fs_quests_sad2_conv.branchId");
                     npcSpeak(player, message);
@@ -688,7 +723,7 @@ public class fs_quests_sad2_conv extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_faedbf19");
@@ -701,7 +736,7 @@ public class fs_quests_sad2_conv extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.fs_quests_sad2_conv.branchId");
                     npcSpeak(player, message);

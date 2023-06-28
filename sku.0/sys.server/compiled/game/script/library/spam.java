@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 import script.prose_package;
 import script.string_id;
@@ -9,6 +15,7 @@ public class spam extends script.base_script
     public static final String STF_SPAM = "spam";
     public static final string_id PROSE_LOOT_ITEM_SELF = new string_id(STF_SPAM, "loot_item_self");
     public static final string_id PROSE_LOOT_ITEM_OTHER = new string_id(STF_SPAM, "loot_item_other");
+
     public spam()
     {
     }

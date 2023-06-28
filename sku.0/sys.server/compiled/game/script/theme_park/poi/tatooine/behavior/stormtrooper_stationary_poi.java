@@ -1,5 +1,11 @@
 package script.theme_park.poi.tatooine.behavior;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class stormtrooper_stationary_poi extends script.base_script
     public stormtrooper_stationary_poi()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         stop(self);
@@ -16,6 +23,7 @@ public class stormtrooper_stationary_poi extends script.base_script
         messageTo(self, "faceCenter", null, 5, true);
         return SCRIPT_CONTINUE;
     }
+
     public int faceCenter(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id master = getObjIdObjVar(self, "poi.baseObject");
@@ -24,13 +32,14 @@ public class stormtrooper_stationary_poi extends script.base_script
         {
             faceTo(self, master);
         }
-        else 
+        else
         {
             faceTo(self, center);
         }
         messageTo(self, "playAnimation", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int playAnimation(obj_id self, dictionary params) throws InterruptedException
     {
         if (!ai_lib.isInCombat(self))
@@ -40,41 +49,41 @@ public class stormtrooper_stationary_poi extends script.base_script
             switch (move)
             {
                 case 1:
-                action = "check_wrist_device";
-                break;
+                    action = "check_wrist_device";
+                    break;
                 case 2:
-                action = "nod_head_multiple";
-                break;
+                    action = "nod_head_multiple";
+                    break;
                 case 3:
-                action = "nod_head_once";
-                break;
+                    action = "nod_head_once";
+                    break;
                 case 4:
-                action = "wave1";
-                break;
+                    action = "wave1";
+                    break;
                 case 5:
-                action = "point_left";
-                break;
+                    action = "point_left";
+                    break;
                 case 6:
-                action = "point_right";
-                break;
+                    action = "point_right";
+                    break;
                 case 7:
-                action = "point_forward";
-                break;
+                    action = "point_forward";
+                    break;
                 case 8:
-                action = "point_up";
-                break;
+                    action = "point_up";
+                    break;
                 case 9:
-                action = "pat_abdomen";
-                break;
+                    action = "pat_abdomen";
+                    break;
                 case 10:
-                action = "shrug_hands";
-                break;
+                    action = "shrug_hands";
+                    break;
                 case 11:
-                action = "scratch_head";
-                break;
+                    action = "scratch_head";
+                    break;
                 case 12:
-                action = "cough_polite";
-                break;
+                    action = "cough_polite";
+                    break;
             }
             doAnimationAction(self, action);
             int speed = rand(4, 8);
@@ -82,6 +91,7 @@ public class stormtrooper_stationary_poi extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         detachScript(self, "theme_park.poi.tatooine.behavior.stormtrooper_stationary_poi");

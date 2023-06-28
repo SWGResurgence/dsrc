@@ -1,5 +1,11 @@
 package script.theme_park.corellia;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.advanced_turret;
 import script.library.ai_lib;
@@ -12,18 +18,20 @@ public class corellia_battle_script_1 extends script.base_script
     public corellia_battle_script_1()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         spawnEveryone(self);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnEveryone(obj_id self) throws InterruptedException
     {
         debugSpeakMsg(self, "Spawning Everyone");
         spawnCelebs(self);
         setObjVar(self, "people", 1);
-        return;
     }
+
     public void spawnCelebs(obj_id self) throws InterruptedException
     {
         spawnImperial01(self);
@@ -59,6 +67,7 @@ public class corellia_battle_script_1 extends script.base_script
         spawnTurret2(self);
         spawnTurret3(self);
     }
+
     public void spawnImperial01(obj_id self) throws InterruptedException
     {
         location imp01 = new location(3953.0f, 26.0f, -1165, "corellia", null);
@@ -70,8 +79,8 @@ public class corellia_battle_script_1 extends script.base_script
         location elseWhere = new location(4088, 24, -1269, "corellia", null);
         ai_lib.aiPathTo(stormtrooper01, elseWhere);
         setHomeLocation(stormtrooper01, elseWhere);
-        return;
     }
+
     public void spawnImperial02(obj_id self) throws InterruptedException
     {
         location imp02 = new location(3956.0f, 26.0f, -1165, "corellia", null);
@@ -83,8 +92,8 @@ public class corellia_battle_script_1 extends script.base_script
         location elseWhere = new location(4088, 24, -1269, "corellia", null);
         ai_lib.aiPathTo(stormtrooper02, elseWhere);
         setHomeLocation(stormtrooper02, elseWhere);
-        return;
     }
+
     public void spawnImperial03(obj_id self) throws InterruptedException
     {
         location imp03 = new location(3950.0f, 26.0f, -1165, "corellia", null);
@@ -96,8 +105,8 @@ public class corellia_battle_script_1 extends script.base_script
         location elseWhere = new location(4090, 24, -1272, "corellia", null);
         ai_lib.aiPathTo(stormtrooper03, elseWhere);
         setHomeLocation(stormtrooper03, elseWhere);
-        return;
     }
+
     public void spawnImperial04(obj_id self) throws InterruptedException
     {
         location imp04 = new location(3953.0f, 26.0f, -1162, "corellia", null);
@@ -109,8 +118,8 @@ public class corellia_battle_script_1 extends script.base_script
         location elseWhere = new location(4090, 24, -1272, "corellia", null);
         ai_lib.aiPathTo(stormtrooper04, elseWhere);
         setHomeLocation(stormtrooper04, elseWhere);
-        return;
     }
+
     public void spawnImperial05(obj_id self) throws InterruptedException
     {
         location imp05 = new location(4100.0f, 22.0f, -1440, "corellia", null);
@@ -122,8 +131,8 @@ public class corellia_battle_script_1 extends script.base_script
         location elseWhere = new location(4093, 24, -1277, "corellia", null);
         ai_lib.aiPathTo(stormtrooper05, elseWhere);
         setHomeLocation(stormtrooper05, elseWhere);
-        return;
     }
+
     public void spawnImperial06(obj_id self) throws InterruptedException
     {
         location imp06 = new location(4102.0f, 22.0f, -1440, "corellia", null);
@@ -135,8 +144,8 @@ public class corellia_battle_script_1 extends script.base_script
         location elseWhere = new location(4093, 24, -1277, "corellia", null);
         ai_lib.aiPathTo(stormtrooper06, elseWhere);
         setHomeLocation(stormtrooper06, elseWhere);
-        return;
     }
+
     public void spawnImperial07(obj_id self) throws InterruptedException
     {
         location imp07 = new location(4104.0f, 22.0f, -1440, "corellia", null);
@@ -148,8 +157,8 @@ public class corellia_battle_script_1 extends script.base_script
         location elseWhere = new location(4096, 24, -1279, "corellia", null);
         ai_lib.aiPathTo(stormtrooper07, elseWhere);
         setHomeLocation(stormtrooper07, elseWhere);
-        return;
     }
+
     public void spawnImperial08(obj_id self) throws InterruptedException
     {
         location imp08 = new location(4106.0f, 22.0f, -1440, "corellia", null);
@@ -161,8 +170,8 @@ public class corellia_battle_script_1 extends script.base_script
         location elseWhere = new location(4096, 24, -1279, "corellia", null);
         ai_lib.aiPathTo(stormtrooper08, elseWhere);
         setHomeLocation(stormtrooper08, elseWhere);
-        return;
     }
+
     public void spawnImperial09(obj_id self) throws InterruptedException
     {
         location imp09 = new location(4294.0f, 26.0f, -1332, "corellia", null);
@@ -174,8 +183,8 @@ public class corellia_battle_script_1 extends script.base_script
         location elseWhere = new location(4101, 24, -1283, "corellia", null);
         ai_lib.aiPathTo(stormtrooper09, elseWhere);
         setHomeLocation(stormtrooper09, elseWhere);
-        return;
     }
+
     public void spawnImperial10(obj_id self) throws InterruptedException
     {
         location imp10 = new location(4288.0f, 26.0f, -1332, "corellia", null);
@@ -187,8 +196,8 @@ public class corellia_battle_script_1 extends script.base_script
         location elseWhere = new location(4101, 24, -1283, "corellia", null);
         ai_lib.aiPathTo(stormtrooper10, elseWhere);
         setHomeLocation(stormtrooper10, elseWhere);
-        return;
     }
+
     public void spawnImperial11(obj_id self) throws InterruptedException
     {
         location imp11 = new location(4291.0f, 26.0f, -1332, "corellia", null);
@@ -200,8 +209,8 @@ public class corellia_battle_script_1 extends script.base_script
         location elseWhere = new location(4105, 24, -1284, "corellia", null);
         ai_lib.aiPathTo(stormtrooper11, elseWhere);
         setHomeLocation(stormtrooper11, elseWhere);
-        return;
     }
+
     public void spawnImperial12(obj_id self) throws InterruptedException
     {
         location imp12 = new location(4291.0f, 26.0f, -1335, "corellia", null);
@@ -213,8 +222,8 @@ public class corellia_battle_script_1 extends script.base_script
         location elseWhere = new location(4105, 24, -1284, "corellia", null);
         ai_lib.aiPathTo(stormtrooper12, elseWhere);
         setHomeLocation(stormtrooper12, elseWhere);
-        return;
     }
+
     public void spawnImperial_atst(obj_id self) throws InterruptedException
     {
         location imp13 = new location(4103.0f, 22.0f, -1450, "corellia", null);
@@ -226,8 +235,8 @@ public class corellia_battle_script_1 extends script.base_script
         location elseWhere = new location(4093, 24, -1280, "corellia", null);
         ai_lib.aiPathTo(atst, elseWhere);
         setHomeLocation(atst, elseWhere);
-        return;
     }
+
     public void spawnRebel_01(obj_id self) throws InterruptedException
     {
         location reb_01 = new location(4082.0f, 26.0f, -1253, "corellia", null);
@@ -236,8 +245,8 @@ public class corellia_battle_script_1 extends script.base_script
         attachScript(rebel_01, "theme_park.corellia.patrol.turret");
         setObjVar(self, "BattlePatron.rebel_01", rebel_01);
         setObjVar(rebel_01, "hideout", self);
-        return;
     }
+
     public void spawnRebel_02(obj_id self) throws InterruptedException
     {
         location reb_02 = new location(4088.0f, 26.0f, -1253, "corellia", null);
@@ -246,8 +255,8 @@ public class corellia_battle_script_1 extends script.base_script
         attachScript(rebel_02, "theme_park.corellia.patrol.turret");
         setObjVar(self, "BattlePatron.rebel_02", rebel_02);
         setObjVar(rebel_02, "hideout", self);
-        return;
     }
+
     public void spawnRebel_03(obj_id self) throws InterruptedException
     {
         location reb_03 = new location(4085.0f, 26.0f, -1250, "corellia", null);
@@ -256,8 +265,8 @@ public class corellia_battle_script_1 extends script.base_script
         attachScript(rebel_03, "theme_park.corellia.patrol.turret");
         setObjVar(self, "BattlePatron.rebel_03", rebel_03);
         setObjVar(rebel_03, "hideout", self);
-        return;
     }
+
     public void spawnRebel_04(obj_id self) throws InterruptedException
     {
         location reb_04 = new location(4085.0f, 26.0f, -1256, "corellia", null);
@@ -266,8 +275,8 @@ public class corellia_battle_script_1 extends script.base_script
         attachScript(rebel_04, "theme_park.corellia.patrol.turret");
         setObjVar(self, "BattlePatron.rebel_04", rebel_04);
         setObjVar(rebel_04, "hideout", self);
-        return;
     }
+
     public void spawnRebel_05(obj_id self) throws InterruptedException
     {
         location reb_05 = new location(4122.0f, 26.0f, -1254, "corellia", null);
@@ -276,8 +285,8 @@ public class corellia_battle_script_1 extends script.base_script
         attachScript(rebel_05, "theme_park.corellia.patrol.turret");
         setObjVar(self, "BattlePatron.rebel_05", rebel_05);
         setObjVar(rebel_05, "hideout", self);
-        return;
     }
+
     public void spawnRebel_06(obj_id self) throws InterruptedException
     {
         location reb_06 = new location(4128.0f, 26.0f, -1254, "corellia", null);
@@ -286,8 +295,8 @@ public class corellia_battle_script_1 extends script.base_script
         attachScript(rebel_06, "theme_park.corellia.patrol.turret");
         setObjVar(self, "BattlePatron.rebel_06", rebel_06);
         setObjVar(rebel_06, "hideout", self);
-        return;
     }
+
     public void spawnRebel_07(obj_id self) throws InterruptedException
     {
         location reb_07 = new location(4125.0f, 26.0f, -1251, "corellia", null);
@@ -296,8 +305,8 @@ public class corellia_battle_script_1 extends script.base_script
         attachScript(rebel_07, "theme_park.corellia.patrol.turret");
         setObjVar(self, "BattlePatron.rebel_07", rebel_07);
         setObjVar(rebel_07, "hideout", self);
-        return;
     }
+
     public void spawnRebel_08(obj_id self) throws InterruptedException
     {
         location reb_08 = new location(4125.0f, 26.0f, -1257, "corellia", null);
@@ -306,8 +315,8 @@ public class corellia_battle_script_1 extends script.base_script
         attachScript(rebel_08, "theme_park.corellia.patrol.turret");
         setObjVar(self, "BattlePatron.rebel_08", rebel_08);
         setObjVar(rebel_08, "hideout", self);
-        return;
     }
+
     public void spawnRebel_09(obj_id self) throws InterruptedException
     {
         location reb_09 = new location(4113.0f, 26.0f, -1282, "corellia", null);
@@ -316,8 +325,8 @@ public class corellia_battle_script_1 extends script.base_script
         attachScript(rebel_09, "theme_park.corellia.patrol.turret");
         setObjVar(self, "BattlePatron.rebel_09", rebel_09);
         setObjVar(rebel_09, "hideout", self);
-        return;
     }
+
     public void spawnRebel_10(obj_id self) throws InterruptedException
     {
         location reb_10 = new location(4107.0f, 26.0f, -1282, "corellia", null);
@@ -326,8 +335,8 @@ public class corellia_battle_script_1 extends script.base_script
         attachScript(rebel_10, "theme_park.corellia.patrol.turret");
         setObjVar(self, "BattlePatron.rebel_10", rebel_10);
         setObjVar(rebel_10, "hideout", self);
-        return;
     }
+
     public void spawnRebel_11(obj_id self) throws InterruptedException
     {
         location reb_11 = new location(4110.0f, 26.0f, -1279, "corellia", null);
@@ -336,8 +345,8 @@ public class corellia_battle_script_1 extends script.base_script
         attachScript(rebel_11, "theme_park.corellia.patrol.turret");
         setObjVar(self, "BattlePatron.rebel_11", rebel_11);
         setObjVar(rebel_11, "hideout", self);
-        return;
     }
+
     public void spawnRebel_12(obj_id self) throws InterruptedException
     {
         location reb_12 = new location(4110.0f, 26.0f, -1285, "corellia", null);
@@ -346,8 +355,8 @@ public class corellia_battle_script_1 extends script.base_script
         attachScript(rebel_12, "theme_park.corellia.patrol.turret");
         setObjVar(self, "BattlePatron.rebel_12", rebel_12);
         setObjVar(rebel_12, "hideout", self);
-        return;
     }
+
     public void spawnRebel_13(obj_id self) throws InterruptedException
     {
         location reb_13 = new location(4113.0f, 26.0f, -1264, "corellia", null);
@@ -356,8 +365,8 @@ public class corellia_battle_script_1 extends script.base_script
         attachScript(rebel_13, "theme_park.corellia.patrol.turret");
         setObjVar(self, "BattlePatron.rebel_13", rebel_13);
         setObjVar(rebel_13, "hideout", self);
-        return;
     }
+
     public void spawnRebel_14(obj_id self) throws InterruptedException
     {
         location reb_14 = new location(4117.0f, 26.0f, -1264, "corellia", null);
@@ -366,8 +375,8 @@ public class corellia_battle_script_1 extends script.base_script
         attachScript(rebel_14, "theme_park.corellia.patrol.turret");
         setObjVar(self, "BattlePatron.rebel_14", rebel_14);
         setObjVar(rebel_14, "hideout", self);
-        return;
     }
+
     public void spawnRebel_15(obj_id self) throws InterruptedException
     {
         location reb_15 = new location(4115.0f, 26.0f, -1262, "corellia", null);
@@ -376,8 +385,8 @@ public class corellia_battle_script_1 extends script.base_script
         attachScript(rebel_15, "theme_park.corellia.patrol.turret");
         setObjVar(self, "BattlePatron.rebel_15", rebel_15);
         setObjVar(rebel_15, "hideout", self);
-        return;
     }
+
     public void spawnRebel_16(obj_id self) throws InterruptedException
     {
         location reb_16 = new location(4115.0f, 26.0f, -1266, "corellia", null);
@@ -386,8 +395,8 @@ public class corellia_battle_script_1 extends script.base_script
         attachScript(rebel_16, "theme_park.corellia.patrol.turret");
         setObjVar(self, "BattlePatron.rebel_16", rebel_16);
         setObjVar(rebel_16, "hideout", self);
-        return;
     }
+
     public void spawnTurret01(obj_id self) throws InterruptedException
     {
         location loc = new location(4085.0f, 26.0f, -1253, "corellia", null);
@@ -396,8 +405,8 @@ public class corellia_battle_script_1 extends script.base_script
         attachScript(turret01, "theme_park.corellia.patrol.turret");
         setObjVar(self, "BattlePatron.turret01", turret01);
         setObjVar(turret01, "hideout", self);
-        return;
     }
+
     public void spawnTurret2(obj_id self) throws InterruptedException
     {
         location loc = new location(4125.0f, 24.0f, -1254.0f, "corellia", null);
@@ -406,8 +415,8 @@ public class corellia_battle_script_1 extends script.base_script
         attachScript(turret2, "theme_park.corellia.patrol.turret");
         setObjVar(self, "BattlePatron.turret2", turret2);
         setObjVar(turret2, "hideout", self);
-        return;
     }
+
     public void spawnTurret3(obj_id self) throws InterruptedException
     {
         location loc = new location(4110.0f, 24.0f, -1282.0f, "corellia", null);
@@ -416,8 +425,8 @@ public class corellia_battle_script_1 extends script.base_script
         attachScript(turret3, "theme_park.corellia.patrol.turret");
         setObjVar(self, "BattlePatron.turret3", turret3);
         setObjVar(turret3, "hideout", self);
-        return;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (!hasObjVar(speaker, "gm"))
@@ -434,6 +443,7 @@ public class corellia_battle_script_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int turretDied(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id existing = getObjIdObjVar(self, "BattlePatron.turret01");
@@ -630,6 +640,7 @@ public class corellia_battle_script_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void killCelebs(obj_id self) throws InterruptedException
     {
         destroyObject(getObjIdObjVar(self, "BattlePatron.turret01"));
@@ -696,6 +707,5 @@ public class corellia_battle_script_1 extends script.base_script
         removeObjVar(self, "BattlePatron.stormtrooper11");
         destroyObject(getObjIdObjVar(self, "BattlePatron.stormtrooper12"));
         removeObjVar(self, "BattlePatron.stormtrooper12");
-        return;
     }
 }

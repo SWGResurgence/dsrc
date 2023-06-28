@@ -1,5 +1,11 @@
 package script.developer.bubbajoe;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.sui;
 import script.library.utils;
@@ -50,8 +56,8 @@ public class teleporter_coord extends script.base_script
             String ycoord = getStringObjVar(self, "teleport.y");
             String zcoord = getStringObjVar(self, "teleport.z");
             broadcast(player, "How to: Use radial submenus to set Scene and XZY Coordinates and the Skill to check in order to teleport.");
-            setName(self, "[" + planet + "] X: " + xcoord + " | Z: " + zcoord + " | Y:" + ycoord );
-                    broadcast(player, "Debug name set. Use /setname to customize it.");
+            setName(self, "[" + planet + "] X: " + xcoord + " | Z: " + zcoord + " | Y:" + ycoord);
+            broadcast(player, "Debug name set. Use /setname to customize it.");
         }
         if (item == menu_info_types.SERVER_MENU2)
         {

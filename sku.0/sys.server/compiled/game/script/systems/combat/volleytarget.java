@@ -1,5 +1,11 @@
 package script.systems.combat;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.combat;
 import script.library.utils;
@@ -86,7 +92,7 @@ public class volleytarget extends script.base_script
         {
             groups = utils.getResizeableObjIdBatchScriptVar(self, combat.VAR_VOLLEY_GROUPS);
         }
-        if (groups.indexOf(group) > -1)
+        if (groups.contains(group))
         {
             return SCRIPT_CONTINUE;
         }
@@ -107,7 +113,7 @@ public class volleytarget extends script.base_script
         {
             groups = utils.getResizeableObjIdBatchScriptVar(self, combat.VAR_VOLLEY_GROUPS);
         }
-        if (groups.indexOf(group) < 0)
+        if (!groups.contains(group))
         {
             return SCRIPT_CONTINUE;
         }

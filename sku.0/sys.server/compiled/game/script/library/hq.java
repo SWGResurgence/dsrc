@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 import java.util.StringTokenizer;
@@ -68,6 +74,7 @@ public class hq extends script.base_script
     public static final String SCRIPT_SPAWN_CHILD = "faction_perk.hq.spawn_child";
     public static final float FACTION_BASE_REFUND_AMOUNT = 60000.0f;
     public static final int MAX_MINE_TYPES = 3;
+
     public hq()
     {
     }

@@ -1,112 +1,140 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class faction_recruiter_general extends script.base_script
 {
+    public static String c_stringFile = "conversation/faction_recruiter_general";
+
     public faction_recruiter_general()
     {
     }
-    public static String c_stringFile = "conversation/faction_recruiter_general";
+
     public boolean faction_recruiter_general_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean faction_recruiter_general_condition_isInFaction(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (factions.isInFriendlyFaction(player, npc) && (!factions.isOnLeaveFromFriendlyFaction(player, npc))) && (!factions.isPVPStatusChanging(player));
     }
+
     public boolean faction_recruiter_general_condition_isEnemyFaction(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (factions.isInEnemyFaction(player, npc) && (!factions.isPVPStatusChanging(player)));
     }
+
     public boolean faction_recruiter_general_condition_playerQualifiesForPromotion(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (factions.qualifiesForPromotion(player, pvpGetAlignedFaction(npc)) && (!factions.isPVPStatusChanging(player)));
     }
+
     public boolean faction_recruiter_general_condition_isChangingFaction(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return factions.isPVPStatusChanging(player);
     }
+
     public boolean faction_recruiter_general_condition_onLeaveFromFriendlyFaction(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (factions.isOnLeaveFromFriendlyFaction(player, npc) && (!factions.isPVPStatusChanging(player)));
     }
+
     public boolean faction_recruiter_general_condition_onLeaveFromEnemyFaction(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (factions.isOnLeaveFromEnemyFaction(player, npc) && (!factions.isPVPStatusChanging(player)));
     }
+
     public boolean faction_recruiter_general_condition_isCovert(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (pvpGetType(player) == PVPTYPE_COVERT) && (!factions.isPVPStatusChanging(player));
     }
+
     public boolean faction_recruiter_general_condition_isOvert(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return ((pvpGetType(player) == PVPTYPE_DECLARED) && (!factions.isPVPStatusChanging(player)));
     }
+
     public boolean faction_recruiter_general_condition_playerCanBuyFaction(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (factions.isSmuggler(player) && (factions.canBuyFaction(player, npc)) && (!factions.isPVPStatusChanging(player)));
     }
+
     public boolean faction_recruiter_general_condition_isAllowedToJoinFaction(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return factions.canJoinFaction(player, pvpGetAlignedFaction(npc));
     }
+
     public void faction_recruiter_general_action_enablePVPTimer(obj_id player, obj_id npc) throws InterruptedException
     {
         factions.goOvertWithDelay(player, 30);
     }
+
     public void faction_recruiter_general_action_playerJoinFaction(obj_id player, obj_id npc) throws InterruptedException
     {
         factions.joinFaction(player, pvpGetAlignedFaction(npc));
     }
+
     public void faction_recruiter_general_action_playerGoOnLeaveTimer(obj_id player, obj_id npc) throws InterruptedException
     {
         factions.goOnLeaveWithDelay(player, 300);
     }
+
     public void faction_recruiter_general_action_playerGoCovertTimer(obj_id player, obj_id npc) throws InterruptedException
     {
         factions.goCovertWithDelay(player, 300);
     }
+
     public void faction_recruiter_general_action_grantPromotion(obj_id player, obj_id npc) throws InterruptedException
     {
         factions.applyPromotion(player, pvpGetAlignedFaction(npc));
     }
+
     public void faction_recruiter_general_action_buy1250FactionPoints(obj_id player, obj_id npc) throws InterruptedException
     {
         factions.buyFaction(player, npc, 100000);
     }
+
     public void faction_recruiter_general_action_buy250FactionPoints(obj_id player, obj_id npc) throws InterruptedException
     {
         factions.buyFaction(player, npc, 20000);
     }
+
     public void faction_recruiter_general_action_completelyResign(obj_id player, obj_id npc) throws InterruptedException
     {
         factions.leaveFaction(player, pvpGetAlignedFaction(npc));
     }
+
     public void faction_recruiter_general_action_goCovertShortTimer(obj_id player, obj_id npc) throws InterruptedException
     {
         factions.goCovertWithDelay(player, 30);
     }
+
     public void faction_recruiter_general_action_showGcwRewardsList(obj_id player, obj_id npc) throws InterruptedException
     {
         int playerGcwRank = pvpGetCurrentGcwRank(player);
         int faction_id = pvpGetAlignedFaction(player);
         String playerGcwFaction = factions.getFactionNameByHashCode(faction_id);
         faction_perk.displayAvailableFactionItemRanks(player, npc, playerGcwRank, playerGcwFaction);
-        return;
     }
+
     public String faction_recruiter_general_tokenTO_getFactionRankName(obj_id player, obj_id npc) throws InterruptedException
     {
         int current_rank = pvpGetCurrentGcwRank(player);
@@ -117,14 +145,17 @@ public class faction_recruiter_general extends script.base_script
         }
         return "@faction_recruiter:" + factions.getRankName(current_rank, faction);
     }
+
     public int faction_recruiter_general_tokenDI_getImperialScore(obj_id player, obj_id npc) throws InterruptedException
     {
         return getIntObjVar(npc, "Imperial.controlScore");
     }
+
     public float faction_recruiter_general_tokenDF_getRebelScore(obj_id player, obj_id npc) throws InterruptedException
     {
         return getIntObjVar(npc, "Rebel.controlScore");
     }
+
     public int faction_recruiter_general_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1577"))
@@ -151,7 +182,7 @@ public class faction_recruiter_general extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1579");
@@ -164,7 +195,7 @@ public class faction_recruiter_general extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.faction_recruiter_general.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -174,6 +205,7 @@ public class faction_recruiter_general extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int faction_recruiter_general_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1579"))
@@ -199,6 +231,7 @@ public class faction_recruiter_general extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int faction_recruiter_general_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_29"))
@@ -236,7 +269,7 @@ public class faction_recruiter_general extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_59");
@@ -249,7 +282,7 @@ public class faction_recruiter_general extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.faction_recruiter_general.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -278,7 +311,7 @@ public class faction_recruiter_general extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_68");
@@ -291,7 +324,7 @@ public class faction_recruiter_general extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.faction_recruiter_general.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -323,7 +356,7 @@ public class faction_recruiter_general extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_88");
@@ -336,7 +369,7 @@ public class faction_recruiter_general extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.faction_recruiter_general.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -389,7 +422,7 @@ public class faction_recruiter_general extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_29");
@@ -420,7 +453,7 @@ public class faction_recruiter_general extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.faction_recruiter_general.branchId");
                     prose_package pp = new prose_package();
@@ -458,7 +491,7 @@ public class faction_recruiter_general extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_100");
@@ -471,7 +504,7 @@ public class faction_recruiter_general extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.faction_recruiter_general.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -481,6 +514,7 @@ public class faction_recruiter_general extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int faction_recruiter_general_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_59"))
@@ -539,7 +573,7 @@ public class faction_recruiter_general extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_29");
@@ -564,7 +598,7 @@ public class faction_recruiter_general extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.faction_recruiter_general.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -574,6 +608,7 @@ public class faction_recruiter_general extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int faction_recruiter_general_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_29"))
@@ -611,7 +646,7 @@ public class faction_recruiter_general extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_59");
@@ -624,7 +659,7 @@ public class faction_recruiter_general extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.faction_recruiter_general.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -653,7 +688,7 @@ public class faction_recruiter_general extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_68");
@@ -666,7 +701,7 @@ public class faction_recruiter_general extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.faction_recruiter_general.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -698,7 +733,7 @@ public class faction_recruiter_general extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_88");
@@ -711,7 +746,7 @@ public class faction_recruiter_general extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.faction_recruiter_general.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -764,7 +799,7 @@ public class faction_recruiter_general extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_29");
@@ -795,7 +830,7 @@ public class faction_recruiter_general extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.faction_recruiter_general.branchId");
                     prose_package pp = new prose_package();
@@ -833,7 +868,7 @@ public class faction_recruiter_general extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_100");
@@ -846,7 +881,7 @@ public class faction_recruiter_general extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.faction_recruiter_general.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -856,6 +891,7 @@ public class faction_recruiter_general extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int faction_recruiter_general_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_68"))
@@ -914,7 +950,7 @@ public class faction_recruiter_general extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_29");
@@ -939,7 +975,7 @@ public class faction_recruiter_general extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.faction_recruiter_general.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -949,6 +985,7 @@ public class faction_recruiter_general extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int faction_recruiter_general_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_29"))
@@ -986,7 +1023,7 @@ public class faction_recruiter_general extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_59");
@@ -999,7 +1036,7 @@ public class faction_recruiter_general extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.faction_recruiter_general.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1028,7 +1065,7 @@ public class faction_recruiter_general extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_68");
@@ -1041,7 +1078,7 @@ public class faction_recruiter_general extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.faction_recruiter_general.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1073,7 +1110,7 @@ public class faction_recruiter_general extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_88");
@@ -1086,7 +1123,7 @@ public class faction_recruiter_general extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.faction_recruiter_general.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1139,7 +1176,7 @@ public class faction_recruiter_general extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_29");
@@ -1170,7 +1207,7 @@ public class faction_recruiter_general extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.faction_recruiter_general.branchId");
                     prose_package pp = new prose_package();
@@ -1208,7 +1245,7 @@ public class faction_recruiter_general extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_100");
@@ -1221,7 +1258,7 @@ public class faction_recruiter_general extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.faction_recruiter_general.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1231,6 +1268,7 @@ public class faction_recruiter_general extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int faction_recruiter_general_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_88"))
@@ -1290,7 +1328,7 @@ public class faction_recruiter_general extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_29");
@@ -1315,7 +1353,7 @@ public class faction_recruiter_general extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.faction_recruiter_general.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1325,6 +1363,7 @@ public class faction_recruiter_general extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int faction_recruiter_general_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_29"))
@@ -1362,7 +1401,7 @@ public class faction_recruiter_general extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_59");
@@ -1375,7 +1414,7 @@ public class faction_recruiter_general extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.faction_recruiter_general.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1404,7 +1443,7 @@ public class faction_recruiter_general extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_68");
@@ -1417,7 +1456,7 @@ public class faction_recruiter_general extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.faction_recruiter_general.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1449,7 +1488,7 @@ public class faction_recruiter_general extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_88");
@@ -1462,7 +1501,7 @@ public class faction_recruiter_general extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.faction_recruiter_general.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1515,7 +1554,7 @@ public class faction_recruiter_general extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_29");
@@ -1546,7 +1585,7 @@ public class faction_recruiter_general extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.faction_recruiter_general.branchId");
                     prose_package pp = new prose_package();
@@ -1584,7 +1623,7 @@ public class faction_recruiter_general extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_100");
@@ -1597,7 +1636,7 @@ public class faction_recruiter_general extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.faction_recruiter_general.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1607,6 +1646,7 @@ public class faction_recruiter_general extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int faction_recruiter_general_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_29"))
@@ -1644,7 +1684,7 @@ public class faction_recruiter_general extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_59");
@@ -1657,7 +1697,7 @@ public class faction_recruiter_general extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.faction_recruiter_general.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1686,7 +1726,7 @@ public class faction_recruiter_general extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_68");
@@ -1699,7 +1739,7 @@ public class faction_recruiter_general extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.faction_recruiter_general.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1731,7 +1771,7 @@ public class faction_recruiter_general extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_88");
@@ -1744,7 +1784,7 @@ public class faction_recruiter_general extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.faction_recruiter_general.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1797,7 +1837,7 @@ public class faction_recruiter_general extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_29");
@@ -1828,7 +1868,7 @@ public class faction_recruiter_general extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.faction_recruiter_general.branchId");
                     prose_package pp = new prose_package();
@@ -1866,7 +1906,7 @@ public class faction_recruiter_general extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_100");
@@ -1879,7 +1919,7 @@ public class faction_recruiter_general extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.faction_recruiter_general.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1889,6 +1929,7 @@ public class faction_recruiter_general extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int faction_recruiter_general_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_100"))
@@ -1914,6 +1955,7 @@ public class faction_recruiter_general extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int faction_recruiter_general_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_135"))
@@ -1947,7 +1989,7 @@ public class faction_recruiter_general extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_140");
@@ -1960,7 +2002,7 @@ public class faction_recruiter_general extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.faction_recruiter_general.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1970,6 +2012,7 @@ public class faction_recruiter_general extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int faction_recruiter_general_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_140"))
@@ -1990,7 +2033,7 @@ public class faction_recruiter_general extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_144");
@@ -1999,7 +2042,7 @@ public class faction_recruiter_general extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.faction_recruiter_general.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2019,6 +2062,7 @@ public class faction_recruiter_general extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int faction_recruiter_general_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_144"))
@@ -2038,7 +2082,7 @@ public class faction_recruiter_general extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1577");
@@ -2047,7 +2091,7 @@ public class faction_recruiter_general extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.faction_recruiter_general.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2111,7 +2155,7 @@ public class faction_recruiter_general extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_29");
@@ -2136,7 +2180,7 @@ public class faction_recruiter_general extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.faction_recruiter_general.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2158,7 +2202,7 @@ public class faction_recruiter_general extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_135");
@@ -2167,7 +2211,7 @@ public class faction_recruiter_general extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.faction_recruiter_general.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2184,6 +2228,7 @@ public class faction_recruiter_general extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -2193,11 +2238,13 @@ public class faction_recruiter_general extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -2206,18 +2253,21 @@ public class faction_recruiter_general extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.faction_recruiter_general");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -2240,7 +2290,7 @@ public class faction_recruiter_general extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1577");
@@ -2248,7 +2298,7 @@ public class faction_recruiter_general extends script.base_script
                 utils.setScriptVar(player, "conversation.faction_recruiter_general.branchId", 1);
                 npcStartConversation(player, npc, "faction_recruiter_general", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2309,7 +2359,7 @@ public class faction_recruiter_general extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_29");
@@ -2333,7 +2383,7 @@ public class faction_recruiter_general extends script.base_script
                 utils.setScriptVar(player, "conversation.faction_recruiter_general.branchId", 7);
                 npcStartConversation(player, npc, "faction_recruiter_general", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2354,7 +2404,7 @@ public class faction_recruiter_general extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_135");
@@ -2362,7 +2412,7 @@ public class faction_recruiter_general extends script.base_script
                 utils.setScriptVar(player, "conversation.faction_recruiter_general.branchId", 22);
                 npcStartConversation(player, npc, "faction_recruiter_general", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2377,6 +2427,7 @@ public class faction_recruiter_general extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("faction_recruiter_general"))

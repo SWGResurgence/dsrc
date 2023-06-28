@@ -1,5 +1,11 @@
 package script.event.lost_squadron;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.utils;
 import script.location;
@@ -7,15 +13,16 @@ import script.obj_id;
 
 public class spawner extends script.base_script
 {
+    public static final float FIFTEEN_MINUTES = 60 * 15;
+    public static final String[] FIGHTER =
+            {
+                    "object/tangible/quest/lost_squadron_xwing.iff",
+                    "object/tangible/quest/lost_squadron_tie_bomber.iff"
+            };
     public spawner()
     {
     }
-    public static final float FIFTEEN_MINUTES = 60 * 15;
-    public static final String[] FIGHTER = 
-    {
-        "object/tangible/quest/lost_squadron_xwing.iff",
-        "object/tangible/quest/lost_squadron_tie_bomber.iff"
-    };
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         String setting = getConfigSetting("EventTeam", "lostSquadron");
@@ -38,6 +45,7 @@ public class spawner extends script.base_script
         messageTo(self, "startupValidateFighter", null, FIFTEEN_MINUTES, false);
         return SCRIPT_CONTINUE;
     }
+
     public int startupValidateFighter(obj_id self, dictionary params) throws InterruptedException
     {
         int startupValidateTries = utils.getIntScriptVar(self, "startupValidateTries");
@@ -56,12 +64,14 @@ public class spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int fighterRequestsDeletion(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id fighter = params.getObjId("fighter");
         messageTo(fighter, "goDie", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int fighterDeletedTimeOut(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id fighter = params.getObjId("fighter");
@@ -70,12 +80,13 @@ public class spawner extends script.base_script
             CustomerServiceLog("EventPerk", "[Lost Squadron Event] WARNING: Fighter said it deleted but it still exists. Spawner = " + self + ". Fighter = " + fighter);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             messageTo(self, "spawnNextFighter", null, 1, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int fighterStillAlive(obj_id self, dictionary params) throws InterruptedException
     {
         float rightNow = getGameTime();
@@ -83,6 +94,7 @@ public class spawner extends script.base_script
         setObjVar(self, "event.lost_squadron.last_checkin", rightNow);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnNextFighter(obj_id self, dictionary params) throws InterruptedException
     {
         location here = getLocation(self);
@@ -109,6 +121,7 @@ public class spawner extends script.base_script
         CustomerServiceLog("EventPerk", "[Lost Squadron Event] A new fighter was spawned by " + self + " of type " + type + " at location " + fighterLocation + " fighter ID is " + fighter);
         return SCRIPT_CONTINUE;
     }
+
     public void setCurrentSpawnRect(obj_id self) throws InterruptedException
     {
         location here = getLocation(self);
@@ -172,6 +185,5 @@ public class spawner extends script.base_script
         searchRectUR.z = spawnRectURz;
         setObjVar(self, "event.lost_squadron.searchRectLL", searchRectLL);
         setObjVar(self, "event.lost_squadron.searchRectUR", searchRectUR);
-        return;
     }
 }

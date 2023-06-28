@@ -1,5 +1,11 @@
 package script.event;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -194,7 +200,7 @@ public class event_tool extends script.base_script
                     }
                     int badgeCount = 0;
                     obj_id[] objPlayers = getPlayerCreaturesInRange(self, range);
-                    if (objPlayers != null && objPlayers.length > 0)
+                    if (objPlayers != null)
                     {
                         for (obj_id objPlayer : objPlayers)
                         {
@@ -420,7 +426,7 @@ public class event_tool extends script.base_script
         if (commandType.equals("player"))
         {
             obj_id[] thingsInRange = getPlayerCreaturesInRange(self, range);
-            if (thingsInRange != null && thingsInRange.length > 0)
+            if (thingsInRange != null)
             {
                 for (obj_id aThingsInRange : thingsInRange)
                 {
@@ -445,7 +451,7 @@ public class event_tool extends script.base_script
         if (commandType.equals("npc"))
         {
             obj_id[] thingsInRange = getNPCsInRange(self, range);
-            if (thingsInRange != null && thingsInRange.length > 0)
+            if (thingsInRange != null)
             {
                 for (obj_id aThingsInRange : thingsInRange)
                 {
@@ -470,7 +476,7 @@ public class event_tool extends script.base_script
         if (commandType.equals("all"))
         {
             obj_id[] thingsInRange = getCreaturesInRange(self, range);
-            if (thingsInRange != null && thingsInRange.length > 0)
+            if (thingsInRange != null)
             {
                 for (obj_id aThingsInRange : thingsInRange)
                 {
@@ -520,7 +526,7 @@ public class event_tool extends script.base_script
             return SCRIPT_CONTINUE;
         }
         obj_id[] objPlayers = getPlayerCreaturesInRange(self, range);
-        if (objPlayers != null && objPlayers.length > 0)
+        if (objPlayers != null)
         {
             for (obj_id objPlayer : objPlayers)
             {
@@ -598,7 +604,7 @@ public class event_tool extends script.base_script
         }
         int badgeCount = 0;
         obj_id[] objPlayers = getPlayerCreaturesInRange(self, range);
-        if (objPlayers != null && objPlayers.length > 0)
+        if (objPlayers != null)
         {
             for (obj_id objPlayer : objPlayers)
             {

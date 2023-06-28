@@ -1,5 +1,11 @@
 package script.terminal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -7,9 +13,6 @@ import java.util.Vector;
 
 public class greeter extends script.terminal.base.base_terminal
 {
-    public greeter()
-    {
-    }
     public static final boolean LOGGING_ON = true;
     public static final String LOGGING_CATEGORY = "greeter";
     public static final string_id SID_GREETER_STATUS = new string_id("player_structure", "greeter_status");
@@ -217,85 +220,89 @@ public class greeter extends script.terminal.base.base_terminal
     public static final String GREETER_SAVED_GREET_NAMES = "controller.saved_names";
     public static final String FOUND_OTHER_GREETERS = "controller.other_greeter_found";
     public static final String FOUND_OTHER_GREETER_TIMER = "controller.other_greeter_search_timer";
-    public static final String[] PLAYER_GREETING_MAINT_MENU = 
+    public static final String[] PLAYER_GREETING_MAINT_MENU =
+            {
+                    "Load",
+                    "Delete"
+            };
+    public static final String[] HUMANOID_ANIMATIONS =
+            {
+                    "cough_polite",
+                    "point_to_self",
+                    "nod_head_once",
+                    "clap_rousing",
+                    "laugh_cackle",
+                    "nod_head_multiple",
+                    "rub_chin_thoughtful",
+                    "shake_head_no",
+                    "check_wrist_device",
+                    "hair_flip",
+                    "taunt1",
+                    "taunt2",
+                    "shake_head_disgust",
+                    "wave_finger_warning",
+                    "wave_on_dismissing",
+                    "embarrassed",
+                    "point_away",
+                    "point_down",
+                    "point_forward",
+                    "point_left",
+                    "point_right",
+                    "point_up",
+                    "shrug_hands",
+                    "shrug_shoulders",
+                    "scratch_head",
+                    "conversation_1",
+                    "conversation_2",
+                    "conversation_1",
+                    "conversation_2",
+                    "conversation_1",
+                    "conversation_2",
+                    "conversation_1",
+                    "conversation_2"
+            };
+    public static final String[] JAWA_ANIMATIONS =
+            {
+                    "cough_polite",
+                    "alert",
+                    "angry",
+                    "conversation_1",
+                    "conversation_2",
+                    "laugh_cackle",
+                    "nervous",
+                    "point_forward",
+                    "shake_head_no",
+                    "shrug_hands",
+                    "sp_01",
+                    "sp_02",
+                    "threaten",
+                    "yes"
+            };
+    public static final String[] EWOK_ANIMATIONS =
+            {
+                    "cough_polite",
+                    "alert",
+                    "angry",
+                    "conversation_1",
+                    "explain",
+                    "greet",
+                    "laugh_cackle",
+                    "nervous",
+                    "point_forward",
+                    "ewok_pound_fist_chest",
+                    "shake_head_no",
+                    "shrug_shoulders",
+                    "smell_air",
+                    "ewok_sp_01",
+                    "threaten",
+                    "threaten_combat",
+                    "vocalize",
+                    "yes"
+            };
+    public greeter()
     {
-        "Load",
-        "Delete"
-    };
-    public static final String[] HUMANOID_ANIMATIONS = 
-    {
-        "cough_polite",
-        "point_to_self",
-        "nod_head_once",
-        "clap_rousing",
-        "laugh_cackle",
-        "nod_head_multiple",
-        "rub_chin_thoughtful",
-        "shake_head_no",
-        "check_wrist_device",
-        "hair_flip",
-        "taunt1",
-        "taunt2",
-        "shake_head_disgust",
-        "wave_finger_warning",
-        "wave_on_dismissing",
-        "embarrassed",
-        "point_away",
-        "point_down",
-        "point_forward",
-        "point_left",
-        "point_right",
-        "point_up",
-        "shrug_hands",
-        "shrug_shoulders",
-        "scratch_head",
-        "conversation_1",
-        "conversation_2",
-        "conversation_1",
-        "conversation_2",
-        "conversation_1",
-        "conversation_2",
-        "conversation_1",
-        "conversation_2"
-    };
-    public static final String[] JAWA_ANIMATIONS = 
-    {
-        "cough_polite",
-        "alert",
-        "angry",
-        "conversation_1",
-        "conversation_2",
-        "laugh_cackle",
-        "nervous",
-        "point_forward",
-        "shake_head_no",
-        "shrug_hands",
-        "sp_01",
-        "sp_02",
-        "threaten",
-        "yes"
-    };
-    public static final String[] EWOK_ANIMATIONS = 
-    {
-        "cough_polite",
-        "alert",
-        "angry",
-        "conversation_1",
-        "explain",
-        "greet",
-        "laugh_cackle",
-        "nervous",
-        "point_forward",
-        "ewok_pound_fist_chest",
-        "shake_head_no",
-        "shrug_shoulders",
-        "smell_air",
-        "ewok_sp_01",
-        "threaten",
-        "threaten_combat",
-        "vocalize",
-        "yes"
-    };
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         blog("vendor.greeter.OnAttach init");
@@ -310,7 +317,7 @@ public class greeter extends script.terminal.base.base_terminal
         {
             return SCRIPT_CONTINUE;
         }
-        if (hasObjVar(controller, vendor_lib.GREETER_COLOR_OBJVAR) && getBooleanObjVar(controller, vendor_lib.GREETER_COLOR_OBJVAR) == true)
+        if (hasObjVar(controller, vendor_lib.GREETER_COLOR_OBJVAR) && getBooleanObjVar(controller, vendor_lib.GREETER_COLOR_OBJVAR))
         {
             messageTo(self, "colorGreeter", null, 0, false);
         }
@@ -321,16 +328,17 @@ public class greeter extends script.terminal.base.base_terminal
             messageTo(self, "handleCallVolumeToggleOnInitialized", null, GREETER_DELAY_AT_ONINITIALIZE, false);
         }
         conversableGreeterInRange(self);
-        if (!hasObjVar(controller, FOUND_OTHER_GREETERS) || getBooleanObjVar(controller, FOUND_OTHER_GREETERS) != true)
+        if (!hasObjVar(controller, FOUND_OTHER_GREETERS) || !getBooleanObjVar(controller, FOUND_OTHER_GREETERS))
         {
             return SCRIPT_CONTINUE;
         }
-        if (hasObjVar(controller, vendor_lib.GREETER_CONVERSE) && getBooleanObjVar(controller, vendor_lib.GREETER_CONVERSE) == true)
+        if (hasObjVar(controller, vendor_lib.GREETER_CONVERSE) && getBooleanObjVar(controller, vendor_lib.GREETER_CONVERSE))
         {
             messageTo(self, "handleConverseWithOtherGreeter", null, GREETER_CONVERSATION_LOOP_TIME, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         blog("vendor.greeter.OnInitialize init");
@@ -352,7 +360,7 @@ public class greeter extends script.terminal.base.base_terminal
         {
             return SCRIPT_CONTINUE;
         }
-        if (hasObjVar(controller, vendor_lib.GREETER_COLOR_OBJVAR) && getBooleanObjVar(controller, vendor_lib.GREETER_COLOR_OBJVAR) == true)
+        if (hasObjVar(controller, vendor_lib.GREETER_COLOR_OBJVAR) && getBooleanObjVar(controller, vendor_lib.GREETER_COLOR_OBJVAR))
         {
             messageTo(self, "colorGreeter", null, 0, false);
         }
@@ -366,20 +374,22 @@ public class greeter extends script.terminal.base.base_terminal
         }
         blog("vendor.greeter.OnInitialize Trigger Done checking controller");
         conversableGreeterInRange(self);
-        if (!hasObjVar(controller, FOUND_OTHER_GREETERS) || getBooleanObjVar(controller, FOUND_OTHER_GREETERS) != true)
+        if (!hasObjVar(controller, FOUND_OTHER_GREETERS) || !getBooleanObjVar(controller, FOUND_OTHER_GREETERS))
         {
             return SCRIPT_CONTINUE;
         }
-        if (hasObjVar(controller, vendor_lib.GREETER_CONVERSE) && getBooleanObjVar(controller, vendor_lib.GREETER_CONVERSE) == true)
+        if (hasObjVar(controller, vendor_lib.GREETER_CONVERSE) && getBooleanObjVar(controller, vendor_lib.GREETER_CONVERSE))
         {
             messageTo(self, "handleConverseWithOtherGreeter", null, GREETER_CONVERSATION_LOOP_TIME, false);
         }
         return super.OnInitialize(self);
     }
+
     public int OnGiveItem(obj_id self, obj_id item, obj_id player) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         blog("vendor.greeter.OnObjectMenuRequest init");
@@ -421,7 +431,7 @@ public class greeter extends script.terminal.base.base_terminal
             mi.addSubMenu(menu, menu_info_types.SERVER_MENU3, SID_GREETER_ACTIVE_ON);
             mi.addSubMenu(menu, menu_info_types.SERVER_MENU4, SID_CUSTOMIZE_GREETER);
         }
-        else 
+        else
         {
             mi.addSubMenu(menu, menu_info_types.SERVER_MENU3, SID_GREETER_ACTIVE_OFF);
         }
@@ -429,6 +439,7 @@ public class greeter extends script.terminal.base.base_terminal
         blog("vendor.greeter.OnObjectMenuRequest Menu created");
         return super.OnObjectMenuRequest(self, player, mi);
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         blog("vendor.greeter.OnObjectMenuSelect init");
@@ -487,7 +498,7 @@ public class greeter extends script.terminal.base.base_terminal
                 toggleTriggerVolume(self);
                 sendSystemMessage(player, SID_ACTIVATION_DISABLED);
             }
-            else 
+            else
             {
                 setObjVar(controller, vendor_lib.GREETER_IS_ACTIVATED_OBJVAR, true);
                 toggleTriggerVolume(self);
@@ -501,6 +512,7 @@ public class greeter extends script.terminal.base.base_terminal
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id dest, obj_id transferer) throws InterruptedException
     {
         blog("vendor.greeter.OnAboutToBeTransferred init");
@@ -549,6 +561,7 @@ public class greeter extends script.terminal.base.base_terminal
         sui.msgbox(ownerId, ownerId, msg, sui.OK_ONLY, title, "noHandler");
         return SCRIPT_OVERRIDE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         blog("vendor.greeter.OnTriggerVolumeEntered init");
@@ -563,13 +576,13 @@ public class greeter extends script.terminal.base.base_terminal
             return SCRIPT_CONTINUE;
         }
         blog("vendor.greeter.OnTriggerVolumeEntered controller valid");
-        if (hasObjVar(controller, vendor_lib.GREETER_CONVERSE) && getBooleanObjVar(controller, vendor_lib.GREETER_CONVERSE) == true)
+        if (hasObjVar(controller, vendor_lib.GREETER_CONVERSE) && getBooleanObjVar(controller, vendor_lib.GREETER_CONVERSE))
         {
             blog("vendor.greeter.OnTriggerVolumeEntered: GREETER_CONVERSE");
             removeObjVar(controller, vendor_lib.GREETER_CONVERSE);
             blog("vendor.greeter.OnTriggerVolumeEntered: GREETER_CONVERSE removed");
             conversableGreeterInRange(self);
-            if (!hasObjVar(controller, FOUND_OTHER_GREETERS) || getBooleanObjVar(controller, FOUND_OTHER_GREETERS) != true)
+            if (!hasObjVar(controller, FOUND_OTHER_GREETERS) || !getBooleanObjVar(controller, FOUND_OTHER_GREETERS))
             {
                 blog("vendor.greeter.OnTriggerVolumeEntered: no greeters in area");
                 return SCRIPT_CONTINUE;
@@ -615,11 +628,11 @@ public class greeter extends script.terminal.base.base_terminal
         {
             blog("vendor.greeter.OnTriggerVolumeEntered: bringGreeterToLife failed somehow.");
         }
-        else 
+        else
         {
             blog("vendor.greeter.OnTriggerVolumeEntered: bringGreeterToLife shows success.");
         }
-        if (hasObjVar(controller, vendor_lib.GREETER_CURRENTLY_RANDOMIZED_GREET) && getBooleanObjVar(controller, vendor_lib.GREETER_CURRENTLY_RANDOMIZED_GREET) == true)
+        if (hasObjVar(controller, vendor_lib.GREETER_CURRENTLY_RANDOMIZED_GREET) && getBooleanObjVar(controller, vendor_lib.GREETER_CURRENTLY_RANDOMIZED_GREET))
         {
             blog("terminal.greeter:handlePlayerProgramSelect: I AM A RANDOMIZED GREETER!!!!!!!!!!!!!!!!!!!!!!!!!!!!.");
             if (!getRandomGreeting(self, controller))
@@ -630,6 +643,7 @@ public class greeter extends script.terminal.base.base_terminal
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleDelayedMainControlMenu(obj_id self, dictionary params) throws InterruptedException
     {
         blog("terminal.greeter:handleDelayedMainControlMenu: init");
@@ -641,6 +655,7 @@ public class greeter extends script.terminal.base.base_terminal
         buildMainControlMenu(self, ownerId);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayerProgramSelect(obj_id self, dictionary params) throws InterruptedException
     {
         blog("terminal.greeter:handlePlayerProgramSelect: init");
@@ -979,6 +994,7 @@ public class greeter extends script.terminal.base.base_terminal
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleCallGreeterUpdate(obj_id self, dictionary params) throws InterruptedException
     {
         blog("terminal.greeter:handleCallGreeterUpdate: init.");
@@ -987,22 +1003,25 @@ public class greeter extends script.terminal.base.base_terminal
             blog("terminal.greeter:handleCallGreeterUpdate: Greeter FAILED UPDATE");
             CustomerServiceLog("vendor", "terminal.greeter:OnInitialize: GREETER UPDATE FAILED: " + getName(self) + " " + self + " " + getLocation(self));
         }
-        else 
+        else
         {
             blog("terminal.greeter:handleCallGreeterUpdate: Greeter Updated!!!");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleCallVolumeToggleOnInitialized(obj_id self, dictionary params) throws InterruptedException
     {
         toggleTriggerVolume(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleCallVolumeToggleNoLife(obj_id self, dictionary params) throws InterruptedException
     {
         toggleTriggerVolume(self, false);
         return SCRIPT_CONTINUE;
     }
+
     public int colorGreeter(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id controller = getObjIdObjVar(self, vendor_lib.CNTRLR_GREETER_NONVENDOR_ID_OBJVAR);
@@ -1013,6 +1032,7 @@ public class greeter extends script.terminal.base.base_terminal
         vendor_lib.colorizeGreeterFromController(controller, self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleConverseWithOtherGreeterAfterGreetDelay(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id controller = getObjIdObjVar(self, vendor_lib.CNTRLR_GREETER_NONVENDOR_ID_OBJVAR);
@@ -1024,6 +1044,7 @@ public class greeter extends script.terminal.base.base_terminal
         messageTo(self, "handleConverseWithOtherGreeter", null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleConverseWithOtherGreeter(obj_id self, dictionary params) throws InterruptedException
     {
         blog("terminal.greeter:handleConverseWithOtherGreeter: init.");
@@ -1040,7 +1061,7 @@ public class greeter extends script.terminal.base.base_terminal
         {
             return SCRIPT_CONTINUE;
         }
-        if (!hasObjVar(controller, vendor_lib.GREETER_CONVERSE) || getBooleanObjVar(controller, vendor_lib.GREETER_CONVERSE) != true)
+        if (!hasObjVar(controller, vendor_lib.GREETER_CONVERSE) || !getBooleanObjVar(controller, vendor_lib.GREETER_CONVERSE))
         {
             return SCRIPT_CONTINUE;
         }
@@ -1102,6 +1123,7 @@ public class greeter extends script.terminal.base.base_terminal
         messageTo(self, "handleConverseWithOtherGreeter", null, GREETER_CONVERSATION_LOOP_TIME, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetSaveName(obj_id self, dictionary params) throws InterruptedException
     {
         blog("terminal.greeter:handleSetSaveName: init");
@@ -1152,6 +1174,7 @@ public class greeter extends script.terminal.base.base_terminal
         buildMainControlMenu(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayerGreetingSelect(obj_id self, dictionary params) throws InterruptedException
     {
         blog("terminal.greeter:handlePlayerGreetingSelect: init");
@@ -1206,6 +1229,7 @@ public class greeter extends script.terminal.base.base_terminal
         sui.setPid(player, pid, GREETER_GET_SAVED_GREETING_LIST_PID);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayerGreetingMaintenanceSelect(obj_id self, dictionary params) throws InterruptedException
     {
         blog("terminal.greeter:handlePlayerGreetingMaintenanceSelect: init");
@@ -1239,40 +1263,41 @@ public class greeter extends script.terminal.base.base_terminal
         switch (idx)
         {
             case 0:
-            blog("terminal.greeter:handlePlayerGreetingMaintenanceSelect: CASE 0");
-            messageTo(self, "handlePlayerLoadGreetingSelect", params, 0, false);
-            break;
+                blog("terminal.greeter:handlePlayerGreetingMaintenanceSelect: CASE 0");
+                messageTo(self, "handlePlayerLoadGreetingSelect", params, 0, false);
+                break;
             case 1:
-            blog("terminal.greeter:handlePlayerGreetingMaintenanceSelect: CASE 1");
-            String selection = utils.getStringScriptVar(player, PLAYER_SEL_GREETER_SAVE_ELEMENT);
-            blog("terminal.greeter:handlePlayerGreetingMaintenanceSelect: -----------SELECTION: " + selection);
-            if (selection == null || selection.equals(""))
-            {
-                blog("terminal.greeter:handlePlayerGreetingMaintenanceSelect: selection name failed: " + selection);
-                buildMainControlMenu(self, player);
-                return SCRIPT_CONTINUE;
-            }
-            String[] saveData = split(selection, '-');
-            if (saveData == null)
-            {
-                blog("terminal.greeter:handlePlayerGreetingMaintenanceSelect: saveData failed: " + saveData.length);
-                buildMainControlMenu(self, player);
-                return SCRIPT_CONTINUE;
-            }
-            if (!deleteGreeting(self, player, controller, saveData[0]))
-            {
-                blog("terminal.greeter:handlePlayerGreetingMaintenanceSelect: deleteGreeting failed");
-                buildMainControlMenu(self, player);
-                return SCRIPT_CONTINUE;
-            }
-            break;
+                blog("terminal.greeter:handlePlayerGreetingMaintenanceSelect: CASE 1");
+                String selection = utils.getStringScriptVar(player, PLAYER_SEL_GREETER_SAVE_ELEMENT);
+                blog("terminal.greeter:handlePlayerGreetingMaintenanceSelect: -----------SELECTION: " + selection);
+                if (selection == null || selection.equals(""))
+                {
+                    blog("terminal.greeter:handlePlayerGreetingMaintenanceSelect: selection name failed: " + selection);
+                    buildMainControlMenu(self, player);
+                    return SCRIPT_CONTINUE;
+                }
+                String[] saveData = split(selection, '-');
+                if (saveData == null)
+                {
+                    blog("terminal.greeter:handlePlayerGreetingMaintenanceSelect: saveData failed: " + saveData.length);
+                    buildMainControlMenu(self, player);
+                    return SCRIPT_CONTINUE;
+                }
+                if (!deleteGreeting(self, player, controller, saveData[0]))
+                {
+                    blog("terminal.greeter:handlePlayerGreetingMaintenanceSelect: deleteGreeting failed");
+                    buildMainControlMenu(self, player);
+                    return SCRIPT_CONTINUE;
+                }
+                break;
             default:
-            messageTo(self, "handlePlayerLoadGreetingSelect", params, 0, false);
-            break;
+                messageTo(self, "handlePlayerLoadGreetingSelect", params, 0, false);
+                break;
         }
         buildMainControlMenu(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayerLoadGreetingSelect(obj_id self, dictionary params) throws InterruptedException
     {
         blog("terminal.greeter:handlePlayerLoadGreetingSelect: init");
@@ -1320,6 +1345,7 @@ public class greeter extends script.terminal.base.base_terminal
         buildMainControlMenu(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int changeTriggerRadius(obj_id self, dictionary params) throws InterruptedException
     {
         blog("terminal.greeter:changeTriggerRadius: init");
@@ -1360,6 +1386,7 @@ public class greeter extends script.terminal.base.base_terminal
         buildMainControlMenu(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int changeGreeterDelay(obj_id self, dictionary params) throws InterruptedException
     {
         blog("terminal.greeter:changeGreeterDelay: init");
@@ -1400,6 +1427,7 @@ public class greeter extends script.terminal.base.base_terminal
         buildMainControlMenu(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int handleDestroyGreeter(obj_id self, dictionary params) throws InterruptedException
     {
         blog("terminal.greeter:handleDestroyGreeter: init");
@@ -1419,6 +1447,7 @@ public class greeter extends script.terminal.base.base_terminal
         vendor_lib.removeObjectFromController(controller, self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleGreeterInitialize(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, vendor_lib.CNTRLR_GREETER_NONVENDOR_ID_OBJVAR))
@@ -1444,6 +1473,7 @@ public class greeter extends script.terminal.base.base_terminal
         CustomerServiceLog("vendor", "terminal.greeter:handleGreeterInitialize: GREETER INITIALIZED BY OWNER: " + getName(ownerId) + " " + ownerId + " Greeter: " + self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetVendorName(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -1473,6 +1503,7 @@ public class greeter extends script.terminal.base.base_terminal
         buildMainControlMenu(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayerGreeterAnimCategorySelect(obj_id self, dictionary params) throws InterruptedException
     {
         blog("terminal.greeter:handlePlayerGreeterAnimCategorySelect: init.");
@@ -1541,6 +1572,7 @@ public class greeter extends script.terminal.base.base_terminal
         sui.setPid(player, pid, GREETER_ANIM_CATEGORY_PID);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayerGreeterAnimSelect(obj_id self, dictionary params) throws InterruptedException
     {
         blog("terminal.greeter:handlePlayerGreeterAnimSelect: init.");
@@ -1601,6 +1633,7 @@ public class greeter extends script.terminal.base.base_terminal
         buildMainControlMenu(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayerGreeterMoodCategorySelect(obj_id self, dictionary params) throws InterruptedException
     {
         blog("terminal.greeter:handlePlayerGreeterMoodCategorySelect: init.");
@@ -1664,6 +1697,7 @@ public class greeter extends script.terminal.base.base_terminal
         sui.setPid(player, pid, GREETER_MOOD_CATEGORY_PID);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayerGreeterMoodSelect(obj_id self, dictionary params) throws InterruptedException
     {
         blog("terminal.greeter:handlePlayerGreeterMoodSelect: init.");
@@ -1724,6 +1758,7 @@ public class greeter extends script.terminal.base.base_terminal
         buildMainControlMenu(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayerEffectSelection(obj_id self, dictionary params) throws InterruptedException
     {
         blog("terminal.greeter:handlePlayerEffectSelection: init.");
@@ -1816,6 +1851,7 @@ public class greeter extends script.terminal.base.base_terminal
         blog("terminal.greeter:handlePlayerEffectSelection: FAILED TO RECEIVE EFFECT.");
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayerStatementSelection(obj_id self, dictionary params) throws InterruptedException
     {
         blog("terminal.greeter:handlePlayerStatementSelection: init.");
@@ -1878,11 +1914,13 @@ public class greeter extends script.terminal.base.base_terminal
         buildMainControlMenu(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int resetBarkTimer(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, vendor_lib.GREETER_ALREADY_BARKED_SCRVAR);
         return SCRIPT_CONTINUE;
     }
+
     public boolean getGreeterAnimCategorySelect(obj_id self, obj_id controller, obj_id player) throws InterruptedException
     {
         blog("terminal.greeter:getGreeterAnimCategorySelect: init.");
@@ -1945,8 +1983,10 @@ public class greeter extends script.terminal.base.base_terminal
             greeterAnimCategoriesRaw.setSize(0);
             Vector greeterAnimCategoriesStrings = new Vector();
             greeterAnimCategoriesStrings.setSize(0);
-            for (String greeterAnimCategory : greeterAnimCategories) {
-                if (greeterAnimCategory.startsWith("greeter_")) {
+            for (String greeterAnimCategory : greeterAnimCategories)
+            {
+                if (greeterAnimCategory.startsWith("greeter_"))
+                {
                     utils.addElement(greeterAnimCategoriesRaw, greeterAnimCategory);
                     utils.addElement(greeterAnimCategoriesStrings, "@player_structure:" + greeterAnimCategory);
                 }
@@ -1994,6 +2034,7 @@ public class greeter extends script.terminal.base.base_terminal
         sui.setPid(player, pid, GREETER_ANIM_PID);
         return true;
     }
+
     public boolean getGreeterMoodCategorySelect(obj_id self, obj_id controller, obj_id player) throws InterruptedException
     {
         blog("terminal.greeter:getGreeterMoodCategorySelect: init.");
@@ -2050,6 +2091,7 @@ public class greeter extends script.terminal.base.base_terminal
         sui.setPid(player, pid, GREETER_MOOD_PID);
         return true;
     }
+
     public boolean getGreeterSoundVoiceList(obj_id self, obj_id controller, obj_id player, String effectType) throws InterruptedException
     {
         blog("terminal.greeter:getGreeterSoundVoiceList: init.");
@@ -2147,6 +2189,7 @@ public class greeter extends script.terminal.base.base_terminal
         sui.setPid(player, pid, GREETER_EFFECT_PID);
         return true;
     }
+
     public boolean getGreeterStatementSelection(obj_id self, obj_id controller, obj_id player) throws InterruptedException
     {
         blog("terminal.greeter:getGreeterStatementSelection: init.");
@@ -2206,6 +2249,7 @@ public class greeter extends script.terminal.base.base_terminal
         sui.setPid(player, pid, GREETER_STATEMENT_PID);
         return true;
     }
+
     public boolean destroyGreeter(obj_id self) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -2247,10 +2291,12 @@ public class greeter extends script.terminal.base.base_terminal
         destroyObject(self);
         return true;
     }
+
     public boolean toggleTriggerVolume(obj_id self) throws InterruptedException
     {
         return toggleTriggerVolume(self, true);
     }
+
     public boolean toggleTriggerVolume(obj_id self, boolean giveLife) throws InterruptedException
     {
         blog("terminal.greeter:toggleTriggerVolume init: GIVE LIFE = " + giveLife);
@@ -2316,6 +2362,7 @@ public class greeter extends script.terminal.base.base_terminal
         }
         return true;
     }
+
     public boolean validateAllImperativeGreeterVars(obj_id self, obj_id player) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -2368,6 +2415,7 @@ public class greeter extends script.terminal.base.base_terminal
         }
         return true;
     }
+
     public boolean bringGreeterToLife(obj_id self) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -2411,6 +2459,7 @@ public class greeter extends script.terminal.base.base_terminal
         bringGreeterToLife(self, controller, playerToGreet);
         return true;
     }
+
     public boolean bringGreeterToLife(obj_id self, obj_id controller, obj_id player) throws InterruptedException
     {
         blog("vendor.greeter.bringGreeterToLife: init.");
@@ -2452,7 +2501,7 @@ public class greeter extends script.terminal.base.base_terminal
             mood = getStringObjVar(controller, vendor_lib.GREETER_ACTUAL_MOOD);
             blog("vendor.greeter.bringGreeterToLife: has mood: " + mood);
         }
-        else 
+        else
         {
             mood = ai_lib.MOOD_CALM;
             blog("vendor.greeter.bringGreeterToLife: has anim: " + mood);
@@ -2501,6 +2550,7 @@ public class greeter extends script.terminal.base.base_terminal
         messageTo(self, "resetBarkTimer", null, delay, false);
         return true;
     }
+
     public boolean deleteGreeting(obj_id self, obj_id player, obj_id controller, String saveName) throws InterruptedException
     {
         blog("vendor.greeter.deleteGreeting: init.");
@@ -2568,6 +2618,7 @@ public class greeter extends script.terminal.base.base_terminal
         setObjVar(controller, GREETER_SAVE_DATA, newSaveList);
         return true;
     }
+
     public boolean getSavedGreetings(obj_id self, obj_id player, obj_id controller) throws InterruptedException
     {
         blog("vendor.greeter.getSavedGreetings: init.");
@@ -2595,17 +2646,21 @@ public class greeter extends script.terminal.base.base_terminal
         Vector allNamesVector = new Vector();
         Vector allDataVector = new Vector();
         Vector combinedDataVector = new Vector();
-        for (String allSave : allSaves) {
+        for (String allSave : allSaves)
+        {
             blog("vendor.greeter.getSavedGreetings: Loop found: " + allSave);
-            if (allSave == null || allSave.length() == 0) {
+            if (allSave == null || allSave.length() == 0)
+            {
                 continue;
             }
             blog("vendor.greeter.getSavedGreetings: allSaves[i].length(): " + allSave.length());
             String[] data = split(allSave, '-');
-            if (data == null) {
+            if (data == null)
+            {
                 break;
             }
-            if (data[0] == null || data[1] == null) {
+            if (data[0] == null || data[1] == null)
+            {
                 continue;
             }
             blog("vendor.greeter.getSavedGreetings: Split [0] found: " + data[0]);
@@ -2639,6 +2694,7 @@ public class greeter extends script.terminal.base.base_terminal
         utils.setScriptVar(player, GREETER_SAVED_GREET_DATA, allDataArray);
         return true;
     }
+
     public boolean saveGreeting(obj_id self, obj_id player, obj_id controller, String saveName) throws InterruptedException
     {
         blog("vendor.greeter.saveGreeting: init.");
@@ -2688,7 +2744,7 @@ public class greeter extends script.terminal.base.base_terminal
             }
             allSaves = tempList;
         }
-        else 
+        else
         {
             sendSystemMessage(player, SID_GREETER_SAVE_MAX);
             return false;
@@ -2765,6 +2821,7 @@ public class greeter extends script.terminal.base.base_terminal
         setObjVar(controller, GREETER_SAVE_DATA, allSaves);
         return true;
     }
+
     public boolean getMainProgramUIListOptions(obj_id self, obj_id player, obj_id controller) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -2788,7 +2845,7 @@ public class greeter extends script.terminal.base.base_terminal
             dynMenuStrings.add(MENU_RANDOMIZED_GREETINGS_OFF);
             dynMenuData.add(GREETER_RANDOMIZED_GREETINGS_OFF);
         }
-        else 
+        else
         {
             dynMenuStrings.add(MENU_RANDOMIZED_GREETINGS_ON);
             dynMenuData.add(GREETER_RANDOMIZED_GREETINGS_ON);
@@ -2802,7 +2859,7 @@ public class greeter extends script.terminal.base.base_terminal
                 dynMenuStrings.add(MENU_GREETER_ANIMATING_EDIT + " " + getStringObjVar(controller, vendor_lib.GREETER_ACTUAL_ANIMATION_STRING));
                 dynMenuData.add(GREETER_ANIMATING_EDIT);
             }
-            else 
+            else
             {
                 dynMenuStrings.add(MENU_GREETER_ANIMATING_OFF);
                 dynMenuData.add(GREETER_ANIMATING_DISABLED);
@@ -2817,7 +2874,7 @@ public class greeter extends script.terminal.base.base_terminal
                 dynMenuStrings.add(MENU_GREETER_VOICE_EDIT + " " + getStringObjVar(controller, vendor_lib.GREETER_SOUNDS_VO_MENU_OBJVAR));
                 dynMenuData.add(GREETER_VOICING_EDIT);
             }
-            else 
+            else
             {
                 dynMenuStrings.add(MENU_GREETER_VOICE_OFF);
                 dynMenuData.add(GREETER_VOICING_DISABLED);
@@ -2832,7 +2889,7 @@ public class greeter extends script.terminal.base.base_terminal
                 dynMenuStrings.add(MENU_GREETER_SOUND_EDIT + " " + getStringObjVar(controller, vendor_lib.GREETER_SOUNDS_VO_MENU_OBJVAR));
                 dynMenuData.add(GREETER_SOUNDS_EDIT);
             }
-            else 
+            else
             {
                 dynMenuStrings.add(MENU_GREETER_SOUND_OFF);
                 dynMenuData.add(GREETER_SOUNDS_DISABLED);
@@ -2847,7 +2904,7 @@ public class greeter extends script.terminal.base.base_terminal
                 dynMenuStrings.add(MENU_GREETER_MOOD_EDIT + " " + getStringObjVar(controller, vendor_lib.GREETER_ACTUAL_MOOD_STRING));
                 dynMenuData.add(GREETER_MOOD_EDIT);
             }
-            else 
+            else
             {
                 dynMenuStrings.add(MENU_GREETER_MOOD_OFF);
                 dynMenuData.add(GREETER_MOOD_DISABLED);
@@ -2862,13 +2919,13 @@ public class greeter extends script.terminal.base.base_terminal
                 dynMenuStrings.add(MENU_GREETER_STATEMENT_EDIT + " " + getStringObjVar(controller, vendor_lib.GREETER_ACTUAL_STATEMENT));
                 dynMenuData.add(GREETER_STATEMENT_EDIT);
             }
-            else 
+            else
             {
                 dynMenuStrings.add(MENU_GREETER_STATEMENT_OFF);
                 dynMenuData.add(GREETER_STATEMENT_DISABLED);
             }
         }
-        if (hasObjVar(controller, vendor_lib.GREETER_COLOR_OBJVAR) && getBooleanObjVar(controller, vendor_lib.GREETER_COLOR_OBJVAR) == true)
+        if (hasObjVar(controller, vendor_lib.GREETER_COLOR_OBJVAR) && getBooleanObjVar(controller, vendor_lib.GREETER_COLOR_OBJVAR))
         {
             dynMenuStrings.add(MENU_COLOR);
             dynMenuData.add(GREETER_COLOR_CHANGE);
@@ -2887,13 +2944,13 @@ public class greeter extends script.terminal.base.base_terminal
         if (hasObjVar(controller, FOUND_OTHER_GREETERS))
         {
             blog("terminal.greeter.getMainProgramUIListOptions: FOUND_OTHER_GREETERS");
-            if (getBooleanObjVar(controller, FOUND_OTHER_GREETERS) == true && getBooleanObjVar(controller, vendor_lib.GREETER_CONVERSE) == true)
+            if (getBooleanObjVar(controller, FOUND_OTHER_GREETERS) && getBooleanObjVar(controller, vendor_lib.GREETER_CONVERSE))
             {
                 blog("terminal.greeter.getMainProgramUIListOptions: FOUND_OTHER_GREETERS && GREETER_CONVERSE");
                 dynMenuStrings.add(MENU_GREETER_STOP_CONVERSE_OTHER_GREETER);
                 dynMenuData.add(GREETER_STOP_ITERACTION);
             }
-            else 
+            else
             {
                 blog("terminal.greeter.getMainProgramUIListOptions: FOUND_OTHER_GREETERS BUT NOT GREETER_CONVERSE");
                 dynMenuStrings.add(MENU_GREETER_CONVERSE_OTHER_GREETER);
@@ -2922,6 +2979,7 @@ public class greeter extends script.terminal.base.base_terminal
         utils.setScriptVar(player, GREETER_MAIN_MENU_DATA, availableDataOptions);
         return true;
     }
+
     public boolean buildMainControlMenu(obj_id self, obj_id player) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -2956,6 +3014,7 @@ public class greeter extends script.terminal.base.base_terminal
         sui.setPid(player, pid, GREETER_PROGRAM_MAIN_PID);
         return true;
     }
+
     public boolean loadSavedData(obj_id self, obj_id player, obj_id controller, String selection) throws InterruptedException
     {
         blog("terminal.greeter.loadSavedData: init");
@@ -3003,14 +3062,18 @@ public class greeter extends script.terminal.base.base_terminal
         removeObjVar(controller, vendor_lib.GREETER_SOUNDS_OBJVAR);
         removeObjVar(controller, vendor_lib.GREETER_ANIMATING_OBJVAR);
         removeObjVar(controller, vendor_lib.GREETER_CURRENTLY_RANDOMIZED_GREET);
-        for (String datum : data) {
-            if (datum == null || datum.length() == 0) {
+        for (String datum : data)
+        {
+            if (datum == null || datum.length() == 0)
+            {
                 continue;
             }
-            if (datum.startsWith(SAVE_SAY_CHAT)) {
+            if (datum.startsWith(SAVE_SAY_CHAT))
+            {
                 blog("terminal.greeter.loadSavedData: SAVE_SAY_CHAT");
                 String[] sayChatData = split(datum, '=');
-                if (sayChatData == null || sayChatData.length <= 0) {
+                if (sayChatData == null || sayChatData.length <= 0)
+                {
                     continue;
                 }
                 blog("terminal.greeter.loadSavedData: sayChatData: " + sayChatData[1]);
@@ -3018,15 +3081,18 @@ public class greeter extends script.terminal.base.base_terminal
                 setObjVar(controller, vendor_lib.GREETER_HAS_STATEMENT_OBJVAR, true);
                 continue;
             }
-            if (datum.startsWith(SAVE_VOICE)) {
+            if (datum.startsWith(SAVE_VOICE))
+            {
                 blog("terminal.greeter.loadSavedData: SAVE_VOICE");
                 String[] voiceData = split(datum, '=');
-                if (voiceData == null || voiceData.length <= 0) {
+                if (voiceData == null || voiceData.length <= 0)
+                {
                     continue;
                 }
                 blog("terminal.greeter.loadSavedData: voiceData: " + voiceData[1]);
                 String[] voiceAndStringData = split(voiceData[1], '|');
-                if (voiceAndStringData == null || voiceAndStringData.length <= 0) {
+                if (voiceAndStringData == null || voiceAndStringData.length <= 0)
+                {
                     continue;
                 }
                 setObjVar(controller, vendor_lib.GREETER_VOICES_OBJVAR, voiceAndStringData[0]);
@@ -3034,10 +3100,12 @@ public class greeter extends script.terminal.base.base_terminal
                 setObjVar(controller, vendor_lib.GREETER_VOICING_OBJVAR, true);
                 continue;
             }
-            if (datum.startsWith(SAVE_MOOD)) {
+            if (datum.startsWith(SAVE_MOOD))
+            {
                 blog("terminal.greeter.loadSavedData: SAVE_MOOD");
                 String[] moodData = split(datum, '=');
-                if (moodData == null || moodData.length <= 0) {
+                if (moodData == null || moodData.length <= 0)
+                {
                     continue;
                 }
                 blog("terminal.greeter.loadSavedData: moodData: " + moodData[1]);
@@ -3046,15 +3114,18 @@ public class greeter extends script.terminal.base.base_terminal
                 setObjVar(controller, vendor_lib.GREETER_HAS_MOOD_OBJVAR, true);
                 continue;
             }
-            if (datum.startsWith(SAVE_SOUND)) {
+            if (datum.startsWith(SAVE_SOUND))
+            {
                 blog("terminal.greeter.loadSavedData: SAVE_SOUND");
                 String[] soundData = split(datum, '=');
-                if (soundData == null || soundData.length <= 0) {
+                if (soundData == null || soundData.length <= 0)
+                {
                     continue;
                 }
                 blog("terminal.greeter.loadSavedData: soundData: " + soundData[1]);
                 String[] soundAndStringData = split(soundData[1], '|');
-                if (soundAndStringData == null || soundAndStringData.length <= 0) {
+                if (soundAndStringData == null || soundAndStringData.length <= 0)
+                {
                     continue;
                 }
                 blog("terminal.greeter.loadSavedData: soundData: " + soundAndStringData[0]);
@@ -3063,10 +3134,12 @@ public class greeter extends script.terminal.base.base_terminal
                 setObjVar(controller, vendor_lib.GREETER_SOUNDING_OBJVAR, true);
                 continue;
             }
-            if (datum.startsWith(SAVE_ANIM)) {
+            if (datum.startsWith(SAVE_ANIM))
+            {
                 blog("terminal.greeter.loadSavedData: SAVE_ANIM");
                 String[] animData = split(datum, '=');
-                if (animData == null || animData.length <= 0) {
+                if (animData == null || animData.length <= 0)
+                {
                     continue;
                 }
                 blog("terminal.greeter.loadSavedData: animData: " + animData[1]);
@@ -3078,6 +3151,7 @@ public class greeter extends script.terminal.base.base_terminal
         }
         return true;
     }
+
     public boolean getRandomGreeting(obj_id self, obj_id controller) throws InterruptedException
     {
         blog("terminal.greeter.getRandomGreeting: init");
@@ -3090,9 +3164,9 @@ public class greeter extends script.terminal.base.base_terminal
             return false;
         }
         blog("terminal.greeter.getRandomGreeting: initial validation completed");
-        if (!hasObjVar(controller, vendor_lib.GREETER_CURRENTLY_RANDOMIZED_GREET) || getBooleanObjVar(controller, vendor_lib.GREETER_CURRENTLY_RANDOMIZED_GREET) == false)
+        if (!hasObjVar(controller, vendor_lib.GREETER_CURRENTLY_RANDOMIZED_GREET) || !getBooleanObjVar(controller, vendor_lib.GREETER_CURRENTLY_RANDOMIZED_GREET))
         {
-            if (!hasObjVar(controller, vendor_lib.GREETER_RANDOM_TEST_FIRE) || getBooleanObjVar(controller, vendor_lib.GREETER_RANDOM_TEST_FIRE) == false)
+            if (!hasObjVar(controller, vendor_lib.GREETER_RANDOM_TEST_FIRE) || !getBooleanObjVar(controller, vendor_lib.GREETER_RANDOM_TEST_FIRE))
             {
                 blog("terminal.greeter.getRandomGreeting: I AM NOT LABELED AS A RANDOMIZED GREETER");
                 return false;
@@ -3128,7 +3202,7 @@ public class greeter extends script.terminal.base.base_terminal
                 blog("terminal.greeter.getRandomGreeting: randAnim: " + jawaOrEwokEmoteList[randomAnimInt]);
                 setObjVar(controller, vendor_lib.GREETER_ANIMATING_OBJVAR, true);
             }
-            else 
+            else
             {
                 blog("terminal.greeter.getRandomGreeting: not an ewok or jawa");
                 String[] greeterAnimCategories = vendor_lib.getAllGreeterDatatableColumnNames(self, vendor_lib.TBL_GREETER_ANIMS);
@@ -3171,7 +3245,7 @@ public class greeter extends script.terminal.base.base_terminal
                 greeterSoundVoColName = greeterType + "_" + SOUND_OPTION;
                 greeterSoundVoColNameString = greeterType + "_" + SOUND_STRING;
             }
-            else 
+            else
             {
                 blog("greeter.getRandomGreeting: GREETER_HAS_VO_OBJVAR");
                 greeterSoundVoColName = greeterType + "_" + VOICE_OPTION;
@@ -3208,7 +3282,7 @@ public class greeter extends script.terminal.base.base_terminal
                 setObjVar(controller, vendor_lib.GREETER_SOUNDS_VO_MENU_OBJVAR, "@player_vendor:" + stringList[randNumber]);
                 setObjVar(controller, vendor_lib.GREETER_SOUNDING_OBJVAR, true);
             }
-            else 
+            else
             {
                 blog("greeter.getRandomGreeting: got a VO: " + effectList[randNumber]);
                 setObjVar(controller, vendor_lib.GREETER_VOICES_OBJVAR, effectList[randNumber]);
@@ -3269,6 +3343,7 @@ public class greeter extends script.terminal.base.base_terminal
         blog("terminal.greeter.getRandomGreeting: RETURNING TRUE");
         return true;
     }
+
     public boolean conversableGreeterInRange(obj_id self) throws InterruptedException
     {
         blog("terminal.greeter.conversableGreeterInRange: init");
@@ -3313,6 +3388,7 @@ public class greeter extends script.terminal.base.base_terminal
         setObjVar(controller, FOUND_OTHER_GREETER_TIMER, getGameTime());
         return true;
     }
+
     public obj_id getConversableGreeter(obj_id self, obj_id player, obj_id controller) throws InterruptedException
     {
         blog("terminal.greeter.getConversableGreeter: Init");
@@ -3349,8 +3425,10 @@ public class greeter extends script.terminal.base.base_terminal
         }
         blog("terminal.greeter.getConversableGreeter: At least one other greeters found! #: " + allGreeters.length);
         Vector greeterList = new Vector();
-        for (obj_id allGreeter : allGreeters) {
-            if (allGreeter != self && isValidId(allGreeter) && exists(allGreeter)) {
+        for (obj_id allGreeter : allGreeters)
+        {
+            if (allGreeter != self && isValidId(allGreeter) && exists(allGreeter))
+            {
                 greeterList.add(allGreeter);
             }
         }
@@ -3367,6 +3445,7 @@ public class greeter extends script.terminal.base.base_terminal
         blog("terminal.greeter.getConversableGreeter: New list of greeters is more than 1 in size");
         return newGreeterList[rand(0, newGreeterList.length - 1)];
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON && msg != null && !msg.equals(""))

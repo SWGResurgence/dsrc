@@ -1,5 +1,11 @@
 package script.space.ship;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.space_transition;
 import script.menu_info;
 import script.menu_info_types;
@@ -8,13 +14,14 @@ import script.string_id;
 
 public class turret_y8_lower extends script.base_script
 {
-    public turret_y8_lower()
-    {
-    }
     public static final string_id SID_PILOT = new string_id("space/space_interaction", "pilot_ship");
     public static final string_id SID_TURRET_LOWER = new string_id("space/space_interaction", "turret_lower");
     public static final string_id SID_TURRET_LOWER_2 = new string_id("space/space_interaction", "turret_lower_2");
     public static final string_id SID_TURRET_LOWER_3 = new string_id("space/space_interaction", "turret_lower_3");
+    public turret_y8_lower()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.SERVER_MENU1, SID_TURRET_LOWER);
@@ -22,6 +29,7 @@ public class turret_y8_lower extends script.base_script
         mi.addRootMenu(menu_info_types.SERVER_MENU3, SID_TURRET_LOWER_3);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU1)
@@ -59,6 +67,7 @@ public class turret_y8_lower extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean hasTurretWeapon(obj_id objShip, int intSlot, obj_id objPlayer) throws InterruptedException
     {
         if (!isShipSlotInstalled(objShip, intSlot))

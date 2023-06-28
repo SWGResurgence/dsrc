@@ -1,5 +1,11 @@
 package script.poi.prisonbreak;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -8,20 +14,21 @@ import script.obj_id;
 
 public class prisoner extends script.base_script
 {
+    public static final String LOG_NAME = "poiPrisonBreak Prisoner";
+    public static final String[] frustrationEmotes =
+            {
+                    "scratch",
+                    "yawn",
+                    "tantrum",
+                    "cough",
+                    "curse",
+                    "steam"
+            };
+    public static final int BOMB_ARM_TIME = 20;
     public prisoner()
     {
     }
-    public static final String LOG_NAME = "poiPrisonBreak Prisoner";
-    public static final String frustrationEmotes[] = 
-    {
-        "scratch",
-        "yawn",
-        "tantrum",
-        "cough",
-        "curse",
-        "steam"
-    };
-    public static final int BOMB_ARM_TIME = 20;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         LOG(LOG_NAME, "Prisoner script attached");
@@ -30,12 +37,14 @@ public class prisoner extends script.base_script
         factions.setFaction(self, "Unattackable");
         return SCRIPT_CONTINUE;
     }
+
     public int OnLoiterWaiting(obj_id self, modifiable_float time) throws InterruptedException
     {
         stop(self);
         messageTo(self, "emoteFrustration", null, 4, false);
         return SCRIPT_CONTINUE;
     }
+
     public int emoteFrustration(obj_id self, dictionary params) throws InterruptedException
     {
         int dosocial = rand(1, 4);
@@ -47,6 +56,7 @@ public class prisoner extends script.base_script
         messageTo(self, "resumeDefaultCalmBehavior", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         LOG(LOG_NAME, "Prisoner reached path destination");
@@ -70,6 +80,7 @@ public class prisoner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int squatDown(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id poiMaster = poi.getBaseObject(self);
@@ -85,6 +96,7 @@ public class prisoner extends script.base_script
         messageTo(self, "bombSet", null, BOMB_ARM_TIME, false);
         return SCRIPT_CONTINUE;
     }
+
     public int bombSet(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "dropbomb"))
@@ -97,6 +109,7 @@ public class prisoner extends script.base_script
         messageTo(self, "moveBack", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int moveBack(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id a = poi.findObject("antagonist_0");
@@ -110,12 +123,14 @@ public class prisoner extends script.base_script
         ai_lib.aiPathTo(self, bossloc);
         return SCRIPT_CONTINUE;
     }
+
     public int reportBombSet1(obj_id self, dictionary params) throws InterruptedException
     {
         queueCommand(self, (1780871594), null, "salute", COMMAND_PRIORITY_DEFAULT);
         messageTo(self, "reportBombSet2", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int reportBombSet2(obj_id self, dictionary params) throws InterruptedException
     {
         poi.quickSay(self, "a_minion_reportbomb");
@@ -128,6 +143,7 @@ public class prisoner extends script.base_script
         messageTo(poiMaster, "blowBomb", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int wallDamaged(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id poiMaster = poi.getBaseObject(self);
@@ -155,6 +171,7 @@ public class prisoner extends script.base_script
         messageTo(self, "dropBomb", params, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int restoreFaction(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id poiMaster = poi.getBaseObject(self);
@@ -162,9 +179,11 @@ public class prisoner extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        obj_id antagonists[] = scenario.getTeamMembers(poiMaster, "antagonist");
-        for (obj_id found : antagonists) {
-            if ((found == null) || (found == obj_id.NULL_ID)) {
+        obj_id[] antagonists = scenario.getTeamMembers(poiMaster, "antagonist");
+        for (obj_id found : antagonists)
+        {
+            if ((found == null) || (found == obj_id.NULL_ID))
+            {
                 continue;
             }
             String oldFaction = getStringObjVar(found, "oldFaction");
@@ -172,6 +191,7 @@ public class prisoner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dropBomb(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id poiMaster = poi.getBaseObject(self);
@@ -194,12 +214,12 @@ public class prisoner extends script.base_script
             if ((members == null) || (members.length == 0))
             {
             }
-            else 
+            else
             {
                 scenario.grantKillCredit(poiMaster, "antagonist", members);
             }
         }
-        else 
+        else
         {
             obj_id[] attackers = new obj_id[1];
             attackers[0] = attacker;
@@ -209,9 +229,11 @@ public class prisoner extends script.base_script
         queueCommand(self, (-1114832209), self, "No params.", COMMAND_PRIORITY_FRONT);
         setPosture(self, POSTURE_PRONE);
         messageTo(poiMaster, "blowDroppedBomb", null, 5, false);
-        obj_id antagonists[] = scenario.getTeamMembers(poiMaster, "antagonist");
-        for (obj_id found : antagonists) {
-            if ((found == null) || (found == obj_id.NULL_ID)) {
+        obj_id[] antagonists = scenario.getTeamMembers(poiMaster, "antagonist");
+        for (obj_id found : antagonists)
+        {
+            if ((found == null) || (found == obj_id.NULL_ID))
+            {
                 continue;
             }
             String oldFaction = getStringObjVar(found, "oldFaction");

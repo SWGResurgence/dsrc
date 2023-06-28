@@ -1,5 +1,11 @@
 package script.item.publish_gift;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.player_structure;
 import script.library.static_item;
 import script.library.utils;
@@ -20,6 +26,7 @@ public class snow_machine extends script.base_script
     public static final String SNOW_PARTICLE_01 = "object/static/particle/particle_snow_machine_light.iff";
     public static final String SNOW_PARTICLE_02 = "object/static/particle/particle_snow_machine_medium.iff";
     public static final String SNOW_PARTICLE_03 = "object/static/particle/particle_snow_machine_heavy.iff";
+
     public snow_machine()
     {
     }

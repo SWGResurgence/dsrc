@@ -1,5 +1,11 @@
 package script.systems.fs_quest.fs_quests_sad;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.utils;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class notify_killable extends script.base_script
     public static final String VAR_SPAWNED_BY = "quest_spawner.spawned_by";
     public static final String VAR_SPAWNER_PARENT = "quest_spawner.parent";
     public static final String VAR_NOTIFY_KILLABLE_OID = "quest_spawner.notify_killable_oid";
+
     public notify_killable()
     {
     }

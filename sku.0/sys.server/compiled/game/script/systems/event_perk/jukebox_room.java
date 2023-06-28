@@ -1,5 +1,11 @@
 package script.systems.event_perk;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.utils;
 import script.obj_id;
@@ -8,6 +14,7 @@ public class jukebox_room extends script.base_script
 {
     public static final String JUKBOX_SONG_OBJVAR = "storyteller.jukebox_song";
     public static final String ROOMS_JUKEBOX_OBJVAR = "storyteller.room.myJukebox";
+
     public jukebox_room()
     {
     }

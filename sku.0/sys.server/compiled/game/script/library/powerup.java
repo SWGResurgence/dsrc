@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 import script.obj_var;
 import script.obj_var_list;
@@ -32,6 +38,7 @@ public class powerup extends script.base_script
     public static final string_id PROSE_POWERUP_EXPIRE = new string_id(STF, "prose_pup_expire");
     public static final string_id PROSE_ALREADY_POWERED = new string_id(STF, "prose_already_powered");
     public static final string_id PROSE_APPLY_RESTRICTED = new string_id(STF, "prose_apply_restricted");
+
     public powerup()
     {
     }

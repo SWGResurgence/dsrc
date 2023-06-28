@@ -1,129 +1,109 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class poi_tatooine_general_2 extends script.base_script
 {
+    public static String c_stringFile = "conversation/poi_tatooine_general_2";
+
     public poi_tatooine_general_2()
     {
     }
-    public static String c_stringFile = "conversation/poi_tatooine_general_2";
+
     public boolean poi_tatooine_general_2_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean poi_tatooine_general_2_condition_failedQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuestRecursive(player, "escort", "poi_tatooine_general2_1") || space_quest.hasAbortedQuestRecursive(player, "escort", "poi_tatooine_general2_1"))
-        {
-            return true;
-        }
-        return false;
+        return space_quest.hasFailedQuestRecursive(player, "escort", "poi_tatooine_general2_1") || space_quest.hasAbortedQuestRecursive(player, "escort", "poi_tatooine_general2_1");
     }
+
     public boolean poi_tatooine_general_2_condition_failedQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuestRecursive(player, "destroy", "poi_tatooine_general2_2") || space_quest.hasAbortedQuestRecursive(player, "destroy", "poi_tatooine_general2_2"))
-        {
-            return true;
-        }
-        return false;
+        return space_quest.hasFailedQuestRecursive(player, "destroy", "poi_tatooine_general2_2") || space_quest.hasAbortedQuestRecursive(player, "destroy", "poi_tatooine_general2_2");
     }
+
     public boolean poi_tatooine_general_2_condition_failedQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuestRecursive(player, "recovery", "poi_tatooine_general2_3") || space_quest.hasAbortedQuestRecursive(player, "recovery", "poi_tatooine_general2_3"))
-        {
-            return true;
-        }
-        return false;
+        return space_quest.hasFailedQuestRecursive(player, "recovery", "poi_tatooine_general2_3") || space_quest.hasAbortedQuestRecursive(player, "recovery", "poi_tatooine_general2_3");
     }
+
     public boolean poi_tatooine_general_2_condition_hasCompletedQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasCompletedQuestRecursive(player, "escort", "poi_tatooine_general2_1"))
-        {
-            return true;
-        }
-        return false;
+        return space_quest.hasCompletedQuestRecursive(player, "escort", "poi_tatooine_general2_1");
     }
+
     public boolean poi_tatooine_general_2_condition_hasCompletedQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasCompletedQuestRecursive(player, "destroy", "poi_tatooine_general2_2"))
-        {
-            return true;
-        }
-        return false;
+        return space_quest.hasCompletedQuestRecursive(player, "destroy", "poi_tatooine_general2_2");
     }
+
     public boolean poi_tatooine_general_2_condition_hasCompletedQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasCompletedQuestRecursive(player, "recovery", "poi_tatooine_general2_3"))
-        {
-            return true;
-        }
-        return false;
+        return space_quest.hasCompletedQuestRecursive(player, "recovery", "poi_tatooine_general2_3");
     }
+
     public boolean poi_tatooine_general_2_condition_collectingQuestOneReward(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasCompletedQuestRecursive(player, "escort", "poi_tatooine_general2_1") && !space_quest.hasReceivedReward(player, "escort", "poi_tatooine_general2_1"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasCompletedQuestRecursive(player, "escort", "poi_tatooine_general2_1") && !space_quest.hasReceivedReward(player, "escort", "poi_tatooine_general2_1");
     }
+
     public boolean poi_tatooine_general_2_condition_collectingQuestTwoReward(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasCompletedQuestRecursive(player, "destroy", "poi_tatooine_general2_2") && !space_quest.hasReceivedReward(player, "destroy", "poi_tatooine_general2_2"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasCompletedQuestRecursive(player, "destroy", "poi_tatooine_general2_2") && !space_quest.hasReceivedReward(player, "destroy", "poi_tatooine_general2_2");
     }
+
     public boolean poi_tatooine_general_2_condition_collectingQuestThreeReward(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasCompletedQuestRecursive(player, "recovery", "poi_tatooine_general2_3") && !space_quest.hasReceivedReward(player, "recovery", "poi_tatooine_general2_3"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasCompletedQuestRecursive(player, "recovery", "poi_tatooine_general2_3") && !space_quest.hasReceivedReward(player, "recovery", "poi_tatooine_general2_3");
     }
+
     public boolean poi_tatooine_general_2_condition_isCorrectFaction(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasSkill(player, "pilot_neutral_novice"));
     }
+
     public boolean poi_tatooine_general_2_condition_isNegativeFaction(obj_id player, obj_id npc) throws InterruptedException
     {
         return (factions.getFactionStanding(player, "jabba") < 0.0f);
     }
+
     public boolean poi_tatooine_general_2_condition_hasAnyQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasQuest(player);
     }
+
     public boolean poi_tatooine_general_2_condition_isTooFar(obj_id player, obj_id npc) throws InterruptedException
     {
         space_combat.playCombatTauntSound(player);
         obj_id containingShip = space_transition.getContainingShip(player);
         return (getDistance(npc, containingShip) > space_transition.STATION_COMM_MAX_DISTANCE);
     }
+
     public void poi_tatooine_general_2_action_grantQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "escort", "poi_tatooine_general2_1");
     }
+
     public void poi_tatooine_general_2_action_grantQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy", "poi_tatooine_general2_2");
     }
+
     public void poi_tatooine_general_2_action_grantQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "recovery", "poi_tatooine_general2_3");
     }
+
     public void poi_tatooine_general_2_action_rewardForQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_quest.hasReceivedReward(player, "escort", "poi_tatooine_general2_1"))
@@ -131,6 +111,7 @@ public class poi_tatooine_general_2 extends script.base_script
             space_quest.giveReward(player, "escort", "poi_tatooine_general2_1", 7000);
         }
     }
+
     public void poi_tatooine_general_2_action_rewardForQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_quest.hasReceivedReward(player, "destroy", "poi_tatooine_general2_2"))
@@ -138,6 +119,7 @@ public class poi_tatooine_general_2 extends script.base_script
             space_quest.giveReward(player, "destroy", "poi_tatooine_general2_2", 15000);
         }
     }
+
     public void poi_tatooine_general_2_action_rewardForQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_quest.hasReceivedReward(player, "recovery", "poi_tatooine_general2_3"))
@@ -145,6 +127,7 @@ public class poi_tatooine_general_2 extends script.base_script
             space_quest.giveReward(player, "recovery", "poi_tatooine_general2_3", 25000);
         }
     }
+
     public int poi_tatooine_general_2_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_14b13184"))
@@ -161,6 +144,7 @@ public class poi_tatooine_general_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int poi_tatooine_general_2_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d215c307"))
@@ -177,6 +161,7 @@ public class poi_tatooine_general_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int poi_tatooine_general_2_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_5517628d"))
@@ -193,6 +178,7 @@ public class poi_tatooine_general_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int poi_tatooine_general_2_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6613e8a2"))
@@ -209,6 +195,7 @@ public class poi_tatooine_general_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int poi_tatooine_general_2_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6fc5551a"))
@@ -225,6 +212,7 @@ public class poi_tatooine_general_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int poi_tatooine_general_2_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_e9aeb150"))
@@ -241,6 +229,7 @@ public class poi_tatooine_general_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int poi_tatooine_general_2_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_44e3e0d3"))
@@ -256,6 +245,7 @@ public class poi_tatooine_general_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int poi_tatooine_general_2_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_5680cda2"))
@@ -282,7 +272,7 @@ public class poi_tatooine_general_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b034d9ae");
@@ -295,7 +285,7 @@ public class poi_tatooine_general_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.poi_tatooine_general_2.branchId");
                     chat.chat(npc, player, message);
@@ -306,6 +296,7 @@ public class poi_tatooine_general_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int poi_tatooine_general_2_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b034d9ae"))
@@ -333,6 +324,7 @@ public class poi_tatooine_general_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int poi_tatooine_general_2_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3988ce81"))
@@ -359,7 +351,7 @@ public class poi_tatooine_general_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_87d3a522");
@@ -372,7 +364,7 @@ public class poi_tatooine_general_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.poi_tatooine_general_2.branchId");
                     chat.chat(npc, player, message);
@@ -383,6 +375,7 @@ public class poi_tatooine_general_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int poi_tatooine_general_2_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_87d3a522"))
@@ -409,7 +402,7 @@ public class poi_tatooine_general_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ec4258cd");
@@ -422,7 +415,7 @@ public class poi_tatooine_general_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.poi_tatooine_general_2.branchId");
                     chat.chat(npc, player, message);
@@ -444,6 +437,7 @@ public class poi_tatooine_general_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int poi_tatooine_general_2_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ec4258cd"))
@@ -471,6 +465,7 @@ public class poi_tatooine_general_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int poi_tatooine_general_2_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2613d24b"))
@@ -490,7 +485,7 @@ public class poi_tatooine_general_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a401c759");
@@ -499,7 +494,7 @@ public class poi_tatooine_general_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.poi_tatooine_general_2.branchId");
                     chat.chat(npc, player, message);
@@ -510,6 +505,7 @@ public class poi_tatooine_general_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int poi_tatooine_general_2_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a401c759"))
@@ -529,7 +525,7 @@ public class poi_tatooine_general_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c27d920f");
@@ -538,7 +534,7 @@ public class poi_tatooine_general_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.poi_tatooine_general_2.branchId");
                     chat.chat(npc, player, message);
@@ -549,6 +545,7 @@ public class poi_tatooine_general_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int poi_tatooine_general_2_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c27d920f"))
@@ -575,7 +572,7 @@ public class poi_tatooine_general_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a99397a");
@@ -588,7 +585,7 @@ public class poi_tatooine_general_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.poi_tatooine_general_2.branchId");
                     chat.chat(npc, player, message);
@@ -599,6 +596,7 @@ public class poi_tatooine_general_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int poi_tatooine_general_2_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a99397a"))
@@ -626,6 +624,7 @@ public class poi_tatooine_general_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -635,11 +634,13 @@ public class poi_tatooine_general_2 extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -648,18 +649,21 @@ public class poi_tatooine_general_2 extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.poi_tatooine_general_2");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -694,7 +698,7 @@ public class poi_tatooine_general_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_14b13184");
@@ -702,7 +706,7 @@ public class poi_tatooine_general_2 extends script.base_script
                 utils.setScriptVar(player, "conversation.poi_tatooine_general_2.branchId", 3);
                 npcStartConversation(player, npc, "poi_tatooine_general_2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -723,7 +727,7 @@ public class poi_tatooine_general_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_d215c307");
@@ -731,7 +735,7 @@ public class poi_tatooine_general_2 extends script.base_script
                 utils.setScriptVar(player, "conversation.poi_tatooine_general_2.branchId", 5);
                 npcStartConversation(player, npc, "poi_tatooine_general_2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -752,7 +756,7 @@ public class poi_tatooine_general_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_5517628d");
@@ -760,7 +764,7 @@ public class poi_tatooine_general_2 extends script.base_script
                 utils.setScriptVar(player, "conversation.poi_tatooine_general_2.branchId", 7);
                 npcStartConversation(player, npc, "poi_tatooine_general_2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -781,7 +785,7 @@ public class poi_tatooine_general_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_6613e8a2");
@@ -789,7 +793,7 @@ public class poi_tatooine_general_2 extends script.base_script
                 utils.setScriptVar(player, "conversation.poi_tatooine_general_2.branchId", 9);
                 npcStartConversation(player, npc, "poi_tatooine_general_2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -810,7 +814,7 @@ public class poi_tatooine_general_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_6fc5551a");
@@ -818,7 +822,7 @@ public class poi_tatooine_general_2 extends script.base_script
                 utils.setScriptVar(player, "conversation.poi_tatooine_general_2.branchId", 11);
                 npcStartConversation(player, npc, "poi_tatooine_general_2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -839,7 +843,7 @@ public class poi_tatooine_general_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_e9aeb150");
@@ -847,7 +851,7 @@ public class poi_tatooine_general_2 extends script.base_script
                 utils.setScriptVar(player, "conversation.poi_tatooine_general_2.branchId", 13);
                 npcStartConversation(player, npc, "poi_tatooine_general_2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -868,7 +872,7 @@ public class poi_tatooine_general_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_44e3e0d3");
@@ -876,7 +880,7 @@ public class poi_tatooine_general_2 extends script.base_script
                 utils.setScriptVar(player, "conversation.poi_tatooine_general_2.branchId", 15);
                 npcStartConversation(player, npc, "poi_tatooine_general_2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -897,7 +901,7 @@ public class poi_tatooine_general_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_5680cda2");
@@ -905,7 +909,7 @@ public class poi_tatooine_general_2 extends script.base_script
                 utils.setScriptVar(player, "conversation.poi_tatooine_general_2.branchId", 17);
                 npcStartConversation(player, npc, "poi_tatooine_general_2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -926,7 +930,7 @@ public class poi_tatooine_general_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_3988ce81");
@@ -934,7 +938,7 @@ public class poi_tatooine_general_2 extends script.base_script
                 utils.setScriptVar(player, "conversation.poi_tatooine_general_2.branchId", 21);
                 npcStartConversation(player, npc, "poi_tatooine_general_2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -955,7 +959,7 @@ public class poi_tatooine_general_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_2613d24b");
@@ -963,7 +967,7 @@ public class poi_tatooine_general_2 extends script.base_script
                 utils.setScriptVar(player, "conversation.poi_tatooine_general_2.branchId", 27);
                 npcStartConversation(player, npc, "poi_tatooine_general_2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -972,6 +976,7 @@ public class poi_tatooine_general_2 extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("poi_tatooine_general_2"))

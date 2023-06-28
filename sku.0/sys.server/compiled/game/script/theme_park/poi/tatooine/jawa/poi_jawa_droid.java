@@ -1,5 +1,11 @@
 package script.theme_park.poi.tatooine.jawa;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.location;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class poi_jawa_droid extends script.theme_park.poi.base
     public poi_jawa_droid()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String objective = poiGetObjective(self);
@@ -32,6 +39,7 @@ public class poi_jawa_droid extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int moveDroid(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id droid = params.getObjId("droid");
@@ -41,7 +49,7 @@ public class poi_jawa_droid extends script.theme_park.poi.base
         {
             here.x = here.x + (rand(-10, 10));
         }
-        else 
+        else
         {
             here.z = here.z + (rand(-10, 10));
         }
@@ -49,6 +57,7 @@ public class poi_jawa_droid extends script.theme_park.poi.base
         messageTo(self, "moveJawas", params, 5, true);
         return SCRIPT_CONTINUE;
     }
+
     public int moveJawas(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id jawa1 = params.getObjId("jawa1");

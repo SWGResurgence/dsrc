@@ -3,6 +3,12 @@
 
 package script;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 public class color
 {
     public static final color BLACK = new color(0, 0, 0, 255);

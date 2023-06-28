@@ -1,5 +1,11 @@
 package script.quest.task;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.quests;
@@ -11,6 +17,7 @@ public class escort extends script.base_script
     public escort()
     {
     }
+
     public int OnQuestActivated(obj_id self, int questRow) throws InterruptedException
     {
         if (quests.isMyQuest(questRow, "quest.task.escort"))
@@ -24,7 +31,7 @@ public class escort extends script.base_script
             {
                 target = getObjIdObjVar(self, objvarname);
             }
-            else 
+            else
             {
                 String targetName = quests.getDataEntry(questRow, "TARGET");
                 target = quests.getTargetForQuest(self, targetName);
@@ -40,7 +47,7 @@ public class escort extends script.base_script
                     addLocationTarget(questName, npcDestination, radius);
                     locationName = questName;
                 }
-                else 
+                else
                 {
                     String parameter = quests.getDataEntry(questRow, "PARAMETER");
                     if (parameter != null && parameter.length() > 0)
@@ -56,7 +63,7 @@ public class escort extends script.base_script
                             radius = getFloatObjVar(self, objvarname);
                         }
                     }
-                    else 
+                    else
                     {
                         LOG("newquests", "escort - OnQuestActivated() -  could not determine escort target location!");
                     }
@@ -86,6 +93,7 @@ public class escort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public obj_id getEscortTarget(obj_id self, String questName) throws InterruptedException
     {
         obj_id result = null;
@@ -98,6 +106,7 @@ public class escort extends script.base_script
         }
         return result;
     }
+
     public boolean isEscortNearby(obj_id self, String questName) throws InterruptedException
     {
         boolean result = false;
@@ -113,18 +122,19 @@ public class escort extends script.base_script
                 result = true;
                 LOG("newquests", "escort - isEscortNearby - the escort target is in range");
             }
-            else 
+            else
             {
                 LOG("newquests", "escort - isEscortNearby - the escort target is not in range");
             }
         }
-        else 
+        else
         {
             LOG("newquests", "escort - isEscortNearby - escortTarget(" + escortTarget + ") is invalid");
         }
         LOG("newquests", "escort - isEscortNearby - returning " + result);
         return result;
     }
+
     public int OnArrivedAtLocation(obj_id self, String locationName) throws InterruptedException
     {
         LOG("newquests", "escort - OnArrivedAtLocation(" + locationName + ")");
@@ -151,6 +161,7 @@ public class escort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int destroyNotification(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("newquests", "escort - destroyNotification()");
@@ -171,17 +182,17 @@ public class escort extends script.base_script
                             quests.complete(parameter, self, false);
                             LOG("newquests", "escort - destroyNotification() - failing task");
                         }
-                        else 
+                        else
                         {
                             LOG("newquests", "escort - destroyNotification() - quest no longer active");
                         }
                     }
-                    else 
+                    else
                     {
                         LOG("newquests", "escort - destroyNotification() - notification isn't for me");
                     }
                 }
-                else 
+                else
                 {
                     LOG("newquests", "escort - destroyNotification() - parameter unavailable");
                 }

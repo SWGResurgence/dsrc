@@ -1,5 +1,11 @@
 package script.npc.bartender;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -7,9 +13,6 @@ import java.util.Vector;
 
 public class base extends script.base_script
 {
-    public base()
-    {
-    }
     public static final int TICK_TIME = 900;
     public static final String VAR_BARTENDER_BASE = "bartender";
     public static final String VAR_RUMOR_BASE = "bartender.rumor";
@@ -21,60 +24,64 @@ public class base extends script.base_script
     public static final String TBL_MENU_PATH = "datatables/npc/bartender/menu/";
     public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
     public static final String SCRIPT_LISTEN = "npc.bartender.listen";
-    public static final String[] ANIMS_TOWARD = 
-    {
-        "applause_excited",
-        "applause_polite",
-        "check_wrist_device",
-        "clap_rousing",
-        "entertained",
-        "face_bored",
-        "face_close_eyes",
-        "fidget",
-        "hold_object",
-        "look_casual",
-        "look_right",
-        "look_left",
-        "manipulate_low",
-        "manipulate_medium",
-        "pick_up",
-        "put_down",
-        "stretch",
-        "tap_foot"
-    };
-    public static final String[] ANIMS_AWAY = 
-    {
-        "check_wrist_device",
-        "hold_object",
-        "look_casual",
-        "look_right",
-        "look_left",
-        "manipulate_high",
-        "manipulate_low",
-        "manipulate_medium",
-        "pick_up",
-        "put_down"
-    };
+    public static final String[] ANIMS_TOWARD =
+            {
+                    "applause_excited",
+                    "applause_polite",
+                    "check_wrist_device",
+                    "clap_rousing",
+                    "entertained",
+                    "face_bored",
+                    "face_close_eyes",
+                    "fidget",
+                    "hold_object",
+                    "look_casual",
+                    "look_right",
+                    "look_left",
+                    "manipulate_low",
+                    "manipulate_medium",
+                    "pick_up",
+                    "put_down",
+                    "stretch",
+                    "tap_foot"
+            };
+    public static final String[] ANIMS_AWAY =
+            {
+                    "check_wrist_device",
+                    "hold_object",
+                    "look_casual",
+                    "look_right",
+                    "look_left",
+                    "manipulate_high",
+                    "manipulate_low",
+                    "manipulate_medium",
+                    "pick_up",
+                    "put_down"
+            };
     public static final String CONVONAME = "bartender";
     public static final String STF = "bartender";
     public static final string_id[] OPT_DEFAULT =
-    {
-        new string_id(STF, "opt_buy"),
-        new string_id(STF, "talk_to_me")
-    };
-    public static final string_id[] OPT_RUMOR = 
-    {
-        new string_id(STF, "opt_buy"),
-        new string_id(STF, "opt_rumor")
-    };
-    public static final string_id[] OPT_BUY = 
-    {
-        new string_id(STF, "opt_yes"),
-        new string_id(STF, "opt_no")
-    };
+            {
+                    new string_id(STF, "opt_buy"),
+                    new string_id(STF, "talk_to_me")
+            };
+    public static final string_id[] OPT_RUMOR =
+            {
+                    new string_id(STF, "opt_buy"),
+                    new string_id(STF, "opt_rumor")
+            };
+    public static final string_id[] OPT_BUY =
+            {
+                    new string_id(STF, "opt_yes"),
+                    new string_id(STF, "opt_no")
+            };
     public static final string_id PROSE_BUY_PASS = new string_id(STF, "prose_buy_pass");
     public static final string_id PROSE_BUY_FAIL = new string_id(STF, "prose_buy_fail");
     public static final string_id SID_INV_FULL = new string_id(STF, "inv_full");
+    public base()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasScript(self, SCRIPT_CONVERSE))
@@ -90,6 +97,7 @@ public class base extends script.base_script
         messageTo(self, "handleTick", null, 15, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         if (hasScript(self, SCRIPT_CONVERSE))
@@ -98,6 +106,7 @@ public class base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         int cnt = 0;
@@ -112,12 +121,13 @@ public class base extends script.base_script
         {
             npcStartConversation(speaker, self, CONVONAME, msg, OPT_RUMOR);
         }
-        else 
+        else
         {
             npcStartConversation(speaker, self, CONVONAME, msg, OPT_DEFAULT);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnEndNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         int cnt = utils.getIntScriptVar(self, "bartender.speaking");
@@ -132,6 +142,7 @@ public class base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convo, obj_id speaker, string_id sid_response) throws InterruptedException
     {
         if (!convo.equals(CONVONAME))
@@ -143,7 +154,8 @@ public class base extends script.base_script
         if (tbl.equals(STF))
         {
             string_id msg = new string_id(STF, "greet");
-            switch (response) {
+            switch (response)
+            {
                 case "opt_buy":
                     msg = new string_id(STF, "msg_buy");
                     npcSpeak(speaker, msg);
@@ -151,7 +163,8 @@ public class base extends script.base_script
                     showBuySui(speaker);
                     break;
                 case "opt_rumor":
-                    if (hasObjVar(self, VAR_RUMOR_BASE)) {
+                    if (hasObjVar(self, VAR_RUMOR_BASE))
+                    {
                         String rumorSource = getStringObjVar(self, VAR_RUMOR_SPEAKER);
                         String rumorText = getStringObjVar(self, VAR_RUMOR_TEXT);
                         string_id PROSE_RUMOR = new string_id(STF, "prose_rumor" + rand(1, 4));
@@ -160,7 +173,9 @@ public class base extends script.base_script
                         msg = new string_id(STF, "query_buy");
                         npcSpeak(speaker, msg);
                         npcSetConversationResponses(speaker, OPT_BUY);
-                    } else {
+                    }
+                    else
+                    {
                         msg = new string_id(STF, "no_rumor");
                         npcSpeak(speaker, msg);
                         npcSetConversationResponses(speaker, OPT_DEFAULT);
@@ -180,13 +195,17 @@ public class base extends script.base_script
                 case "talk_to_me":
                     location here = getLocation(self);
                     obj_id container = getTopMostContainer(self);
-                    if (isIdValid(container)) {
+                    if (isIdValid(container))
+                    {
                         here = getLocation(container);
                     }
                     String buildoutAreaName = getBuildoutAreaName(here.x, here.z);
-                    if (buildoutAreaName != null && buildoutAreaName.equals("nova_orion_station")) {
+                    if (buildoutAreaName != null && buildoutAreaName.equals("nova_orion_station"))
+                    {
                         msg = township.getNovaOrionRumor(speaker);
-                    } else {
+                    }
+                    else
+                    {
                         int fiction_rumor = rand(1, 9);
                         msg = new string_id(STF, "monthly_fiction_" + fiction_rumor);
                     }
@@ -198,6 +217,7 @@ public class base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String locationName) throws InterruptedException
     {
         dictionary d = new dictionary();
@@ -205,11 +225,13 @@ public class base extends script.base_script
         messageTo(self, "handlePlayAnimation", d, 2.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathNotFound(obj_id self) throws InterruptedException
     {
         updateDestination(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleTick(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "bartender.speaking") && !hasObjVar(self, "bartender.doNotMove"))
@@ -219,13 +241,15 @@ public class base extends script.base_script
                 bartenderMove(self);
                 playBarAnimation(self);
             }
-            else {
+            else
+            {
                 playBarAnimation(self);
             }
         }
         messageTo(self, "handleTick", null, rand(15.0f, 30.0f), false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleListen(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasScript(self, SCRIPT_LISTEN))
@@ -234,6 +258,7 @@ public class base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleNewRumor(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -248,13 +273,14 @@ public class base extends script.base_script
         setObjVar(self, VAR_RUMOR_STAMP, getGameTime());
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayAnimation(obj_id self, dictionary params) throws InterruptedException
     {
         String locationName = params.getString("locationName");
         if (locationName == null || locationName.equals(""))
         {
         }
-        else 
+        else
         {
             if (hasObjVar(self, VAR_LOC_BASE + "." + locationName + ".heading"))
             {
@@ -271,9 +297,9 @@ public class base extends script.base_script
                         float yawAway = yaw - 180.0f + rand(-10.0f, 10.0f);
                         setYaw(self, yawAway);
                         faceBar = false;
-                    break;
+                        break;
                 }
-                setObjVar(self,"facingBar",faceBar);
+                setObjVar(self, "facingBar", faceBar);
                 playBarAnimation(self);
             }
             removeLocationTarget(locationName);
@@ -281,6 +307,7 @@ public class base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void playBarAnimation(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -288,18 +315,19 @@ public class base extends script.base_script
             return;
         }
         String anim = "check_wrist_device";
-        if (getBooleanObjVar(self,"facingBar"))
+        if (getBooleanObjVar(self, "facingBar"))
         {
             int tidx = rand(0, ANIMS_TOWARD.length - 1);
             anim = ANIMS_TOWARD[tidx];
         }
-        else 
+        else
         {
             int aidx = rand(0, ANIMS_AWAY.length - 1);
             anim = ANIMS_AWAY[aidx];
         }
         ai_lib.doAction(self, anim);
     }
+
     public boolean bartenderMove(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -347,7 +375,7 @@ public class base extends script.base_script
                     LOG("bartender", "bartenderMove(): datatable move locations created as null");
                     return false;
                 }
-                else 
+                else
                 {
                 }
                 location there = null;
@@ -373,7 +401,7 @@ public class base extends script.base_script
                     }
                     there = new location(nx, y1, nz, planet, cid1);
                 }
-                else 
+                else
                 {
                     there = new location(x1, y1, z1, planet, cid1);
                 }
@@ -383,31 +411,33 @@ public class base extends script.base_script
                     float heading = (heading1 + heading2) / 2.0f;
                     setObjVar(self, VAR_LOC_BASE + "." + now + ".location", there);
                     setObjVar(self, VAR_LOC_BASE + "." + now + ".heading", heading);
-                    addLocationTarget("" + now, there, 0.25f);
+                    addLocationTarget(String.valueOf(now), there, 0.25f);
                     ai_lib.aiPathTo(self, there);
                     return true;
                 }
-                else 
+                else
                 {
                     LOG("bartender", "bartenderMove(): target location = null");
                 }
             }
-            else 
+            else
             {
                 LOG("bartender", "bartenderMove(): one of the selected rows was empty or null");
             }
         }
-        else 
+        else
         {
             LOG("bartender", "bartenderMove(): col X = null or length = 0");
         }
         return false;
     }
+
     public void updateDestination(obj_id self) throws InterruptedException
     {
         cleanDestinations(self);
         bartenderMove(self);
     }
+
     public void cleanDestinations(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, VAR_LOC_BASE))
@@ -432,6 +462,7 @@ public class base extends script.base_script
             removeObjVar(self, VAR_LOC_BASE);
         }
     }
+
     public int showBuySui(obj_id target) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -497,6 +528,7 @@ public class base extends script.base_script
         }
         return -1;
     }
+
     public int handleBuySui(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -535,6 +567,7 @@ public class base extends script.base_script
         money.requestPayment(player, self, price, "handlePayReturn", row, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePayReturn(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -561,7 +594,7 @@ public class base extends script.base_script
         if (retCode == money.RET_FAIL)
         {
             prose_package ppBuyFail = prose.getPackage(PROSE_BUY_FAIL, getNameFromTemplate(template));
-            
+
             if (sid_name != null)
             {
                 ppBuyFail = prose.getPackage(PROSE_BUY_FAIL, sid_name);
@@ -572,7 +605,7 @@ public class base extends script.base_script
             }
             sendSystemMessageProse(player, ppBuyFail);
         }
-        else 
+        else
         {
             obj_id myInv = utils.getInventoryContainer(self);
             obj_id pInv = utils.getInventoryContainer(player);
@@ -597,7 +630,7 @@ public class base extends script.base_script
                 sendSystemMessageProse(player, ppBuyPass);
                 money.bankTo(self, money.ACCT_CANTINA_DRINK, price);
             }
-            else 
+            else
             {
                 money.pay(self, player, price, "whoCares", null);
                 dictionary d = new dictionary();
@@ -617,6 +650,7 @@ public class base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleDestroyObject(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id item = params.getObjId("id");

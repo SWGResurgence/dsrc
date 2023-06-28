@@ -1,5 +1,11 @@
 package script.systems.fs_quest;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.deltadictionary;
 import script.dictionary;
 import script.library.fs_dyn_village;
@@ -29,7 +35,6 @@ public class fs_datahandler extends script.base_script
             }
         }
         detachScript(selph, fs_dyn_village.SCRIPT_FS_DATAHANDLER);
-        return;
     }
 
     public int OnLogin(obj_id self) throws InterruptedException

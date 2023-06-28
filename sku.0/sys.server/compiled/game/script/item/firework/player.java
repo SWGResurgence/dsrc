@@ -1,5 +1,11 @@
 package script.item.firework;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.firework;
 import script.library.utils;

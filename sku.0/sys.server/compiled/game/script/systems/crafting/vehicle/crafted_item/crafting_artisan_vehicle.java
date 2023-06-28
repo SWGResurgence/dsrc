@@ -1,5 +1,11 @@
 package script.systems.crafting.vehicle.crafted_item;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.craftinglib;
 import script.resource_weight;
 
@@ -32,6 +38,7 @@ public class crafting_artisan_vehicle extends script.systems.crafting.vehicle.cr
                                     new resource_weight.weight(craftinglib.RESOURCE_SHOCK_RESIST, 1)
                             })
             };
+
     public crafting_artisan_vehicle()
     {
     }

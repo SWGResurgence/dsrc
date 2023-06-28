@@ -1,5 +1,11 @@
 package script.harvesting;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.minigame;
 import script.library.resource;
@@ -7,9 +13,6 @@ import script.library.utils;
 
 public class shellfish_harvesting extends script.base_script
 {
-    public shellfish_harvesting()
-    {
-    }
     public static final string_id SID_USE = new string_id("sui", "use");
     public static final string_id SID_FOUND_NOTHING = new string_id("harvesting", "found_nothing");
     public static final string_id SID_FOUND_MOLLUSKS = new string_id("harvesting", "found_mollusks");
@@ -22,6 +25,10 @@ public class shellfish_harvesting extends script.base_script
     public static final string_id SID_BUSY = new string_id("harvesting", "busy");
     public static final string_id SID_INV_FULL = new string_id("harvesting", "inv_full");
     public static final int SAMPLE_ACTION_COST = 50;
+    public shellfish_harvesting()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -35,6 +42,7 @@ public class shellfish_harvesting extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -44,6 +52,7 @@ public class shellfish_harvesting extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void use(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id inventory = utils.getInventoryContainer(player);
@@ -101,6 +110,7 @@ public class shellfish_harvesting extends script.base_script
         harvester.put("player", player);
         messageTo(self, "harvest", harvester, 5.0f, false);
     }
+
     public int harvest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -120,7 +130,7 @@ public class shellfish_harvesting extends script.base_script
             int amt = rand(8, 14);
             resource.createRandom("seafood_mollusk", amt, getLocation(self), pInv, player, 2);
         }
-        else 
+        else
         {
             sendSystemMessage(player, SID_FOUND_CRUSTACEANS);
             int amt = rand(8, 14);

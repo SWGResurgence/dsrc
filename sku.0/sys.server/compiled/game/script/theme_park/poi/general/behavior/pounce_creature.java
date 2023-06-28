@@ -1,5 +1,11 @@
 package script.theme_park.poi.general.behavior;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class pounce_creature extends script.base_script
@@ -7,6 +13,7 @@ public class pounce_creature extends script.base_script
     public pounce_creature()
     {
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         debugSpeakMsg(self, "INCAPACITATED WENT OFF DAMMIT");

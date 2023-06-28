@@ -1,13 +1,16 @@
 package script.creature;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class serving_droid extends script.base_script
 {
-    public serving_droid()
-    {
-    }
     public static final int MAX_WAYPOINTS = 20;
     public static final String OBJVAR_DROID_PATROL_POINTS = "droid.patrolPoints";
     public static final String OBJVAR_DROID_PATROL_LOOP = "droid.patrol_loop";
@@ -39,6 +42,10 @@ public class serving_droid extends script.base_script
     public static final String INFO_UI_TEXT = localize(new string_id("sui", "serving_droid_sui_text"));
     public static final String TEST_PATROL = localize(new string_id("sui", "serving_droid_sui_test_button"));
     public static final String CLOSE = localize(new string_id("sui", "close"));
+    public serving_droid()
+    {
+    }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (!isValidId(self))
@@ -59,6 +66,7 @@ public class serving_droid extends script.base_script
         removeObjVar(terminal, TERMINAL_DROID_ID);
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         if (!isValidId(self))
@@ -68,6 +76,7 @@ public class serving_droid extends script.base_script
         utils.removeScriptVar(self, DROID_MOVING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnMoveMoving(obj_id self) throws InterruptedException
     {
         if (!isValidId(self))
@@ -77,6 +86,7 @@ public class serving_droid extends script.base_script
         utils.setScriptVar(self, DROID_MOVING, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!isValidId(self))
@@ -86,6 +96,7 @@ public class serving_droid extends script.base_script
         messageTo(self, "initializeDroidVariables", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -115,6 +126,7 @@ public class serving_droid extends script.base_script
         mi.addSubMenu(mnuProgram, menu_info_types.SERVER_MENU9, LOOP);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isValidId(self))
@@ -176,13 +188,14 @@ public class serving_droid extends script.base_script
                 stop(self);
                 utils.removeScriptVar(self, DROID_MOVING);
             }
-            else 
+            else
             {
                 doPatrol(self, player);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePrimaryColorize(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self))
@@ -206,6 +219,7 @@ public class serving_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSecondaryColorize(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self))
@@ -229,6 +243,7 @@ public class serving_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int getUserOidSetFirstPoint(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self))
@@ -243,6 +258,7 @@ public class serving_droid extends script.base_script
         doSetPatrolPoint(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int pathDirectlyToStart(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self))
@@ -262,6 +278,7 @@ public class serving_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int fromLastPointGoBackToStart(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self))
@@ -286,6 +303,7 @@ public class serving_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleActivateDroid(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self))
@@ -295,6 +313,7 @@ public class serving_droid extends script.base_script
         doPatrol(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleDeactivateDroid(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self))
@@ -308,6 +327,7 @@ public class serving_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int reColorDroid(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self))
@@ -334,6 +354,7 @@ public class serving_droid extends script.base_script
         hue.setColor(self, "/private/index_color_2", secondary);
         return SCRIPT_CONTINUE;
     }
+
     public int initializeDroidVariables(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id house = getTopMostContainer(self);
@@ -372,6 +393,7 @@ public class serving_droid extends script.base_script
         listenToMessage(house, "handleDeactivateDroid");
         return SCRIPT_CONTINUE;
     }
+
     public int handleDialogInput(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self))
@@ -402,18 +424,21 @@ public class serving_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean colorPrimary(obj_id droid, obj_id terminal, int idx) throws InterruptedException
     {
         setObjVar(terminal, "color.primary", idx);
         hue.setColor(droid, "/private/index_color_1", idx);
         return true;
     }
+
     public boolean colorSecondary(obj_id droid, obj_id terminal, int idx) throws InterruptedException
     {
         setObjVar(terminal, "color.secondary", idx);
         hue.setColor(droid, "/private/index_color_2", idx);
         return true;
     }
+
     public boolean doPatrol(obj_id droid) throws InterruptedException
     {
         if (!isValidId(droid))
@@ -435,13 +460,14 @@ public class serving_droid extends script.base_script
             ai_lib.setPatrolPath(droid, patrolLoc);
             return true;
         }
-        else 
+        else
         {
             patrolOnce(droid, patrolLoc);
             messageTo(droid, "fromLastPointGoBackToStart", null, 120, false);
             return true;
         }
     }
+
     public boolean doPatrol(obj_id droid, obj_id player) throws InterruptedException
     {
         if (!isValidId(droid) || !isValidId(player))
@@ -476,13 +502,14 @@ public class serving_droid extends script.base_script
             ai_lib.setPatrolPath(droid, patrolLoc);
             return true;
         }
-        else 
+        else
         {
             patrolOnce(droid, patrolLoc);
             messageTo(droid, "fromLastPointGoBackToStart", null, 120, false);
             return true;
         }
     }
+
     public void doSetPatrolPoint(obj_id droid, obj_id player) throws InterruptedException
     {
         if (!isValidId(droid) || !isValidId(player))
@@ -507,7 +534,7 @@ public class serving_droid extends script.base_script
         {
             patrolLoc = new location[1];
         }
-        else 
+        else
         {
             sendSystemMessage(player, ASTROMECH_MAX_WAYPOINTS);
             return;
@@ -524,6 +551,7 @@ public class serving_droid extends script.base_script
         sendConsoleMessage(player, "Patrol points left: " + (MAX_WAYPOINTS - patrolLoc.length));
         pathTo(droid, playerLoc);
     }
+
     public void doClearPatrolPoints(obj_id droid, obj_id player) throws InterruptedException
     {
         if (!isValidId(droid) || !isValidId(player))
@@ -543,11 +571,12 @@ public class serving_droid extends script.base_script
             stop(droid);
             messageTo(droid, "resumeDefaultCalmBehavior", null, 1, false);
         }
-        else 
+        else
         {
             sendSystemMessage(player, ASTROMECH_WAYPOINTS_NOT_CLEAR);
         }
     }
+
     public void removeLastPatrolPoint(obj_id droid, obj_id player) throws InterruptedException
     {
         if (!isValidId(droid) || !isValidId(player))
@@ -579,6 +608,7 @@ public class serving_droid extends script.base_script
             }
         }
     }
+
     public boolean setPatrolLoop(obj_id droid, obj_id player, obj_id terminal) throws InterruptedException
     {
         if (!isValidId(droid) || !isValidId(player))
@@ -606,6 +636,7 @@ public class serving_droid extends script.base_script
         }
         return false;
     }
+
     public boolean setPatrolOnce(obj_id droid, obj_id player, obj_id terminal) throws InterruptedException
     {
         if (!hasObjVar(terminal, OBJVAR_DROID_PATROL_ONCE))
@@ -625,6 +656,7 @@ public class serving_droid extends script.base_script
         }
         return false;
     }
+
     public int createHelpDialog(obj_id droid, obj_id player) throws InterruptedException
     {
         if (utils.hasScriptVar(droid, SCRIPTVAR_DROID_HELP_MENU))
@@ -649,6 +681,7 @@ public class serving_droid extends script.base_script
         utils.setScriptVar(droid, SCRIPTVAR_DROID_HELP_MENU, true);
         return pid;
     }
+
     public int OnPack(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self))

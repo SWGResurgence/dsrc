@@ -1,19 +1,26 @@
 package script.terminal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.sui;
 import script.*;
 
 public class instrument_dispenser extends script.base_script
 {
-    public instrument_dispenser()
-    {
-    }
     public static final String DATATABLE_INVENTORY = "datatables/dispenser/instrument.iff";
     public static final String SCRIPT_DISPENSER_SELECT = "player.player_dispenser";
     public static final string_id SID_PURCHASE_INSTRUMENT = new string_id("dispenser", "purchase_instrument");
     public static final string_id SID_NOTHING_TO_BUY = new string_id("dispenser", "nothing_to_buy");
     public static final String VAR_DISPENSER = "dispenser.dispenser";
     public static final String VAR_DATATABLE = "dispenser.datatable";
+    public instrument_dispenser()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data data = mi.getMenuItemByType(menu_info_types.ITEM_USE);
@@ -21,12 +28,13 @@ public class instrument_dispenser extends script.base_script
         {
             data.setServerNotify(true);
         }
-        else 
+        else
         {
             mi.addRootMenu(menu_info_types.ITEM_USE, SID_PURCHASE_INSTRUMENT);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -36,7 +44,7 @@ public class instrument_dispenser extends script.base_script
             {
                 sendSystemMessage(player, SID_NOTHING_TO_BUY);
             }
-            else 
+            else
             {
                 sui.listbox(player, player, "@dispenser:select_purchase", sui.OK_CANCEL, "@dispenser:instrument_dispenser", inventory, "msgDispenserPurchaseSelected");
                 setObjVar(player, VAR_DISPENSER, self);
@@ -49,6 +57,7 @@ public class instrument_dispenser extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public String[] getDispenserInventory(obj_id dispenser) throws InterruptedException
     {
         if (dispenser == null || dispenser == obj_id.NULL_ID)
@@ -65,7 +74,7 @@ public class instrument_dispenser extends script.base_script
         {
             return null;
         }
-        else 
+        else
         {
             return inventory;
         }

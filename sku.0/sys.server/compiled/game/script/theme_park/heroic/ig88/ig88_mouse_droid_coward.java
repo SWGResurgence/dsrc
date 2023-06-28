@@ -1,5 +1,11 @@
 package script.theme_park.heroic.ig88;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.chat;
 import script.library.trial;
@@ -10,6 +16,7 @@ public class ig88_mouse_droid_coward extends script.base_script
     public ig88_mouse_droid_coward()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id dungeon = getTopMostContainer(self);
@@ -21,6 +28,7 @@ public class ig88_mouse_droid_coward extends script.base_script
         messageTo(self, "blink", sessionDict, 0.25f, true);
         return SCRIPT_CONTINUE;
     }
+
     public int blink(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -37,6 +45,7 @@ public class ig88_mouse_droid_coward extends script.base_script
         messageTo(self, "blink", sessionDict, 1, true);
         return SCRIPT_CONTINUE;
     }
+
     public int shoutDefeat(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -46,6 +55,7 @@ public class ig88_mouse_droid_coward extends script.base_script
         chat.chat(self, chat.CHAT_SHOUT, new string_id("spam", "ig88_defeat"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isDead(player))
@@ -58,6 +68,7 @@ public class ig88_mouse_droid_coward extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isDead(player))

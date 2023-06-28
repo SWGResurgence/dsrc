@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.location;
 import script.obj_id;
@@ -64,6 +70,7 @@ public class travel extends script.base_script
     public static final string_id SID_MUSTAFAR_UNAUTHORIZED = new string_id("travel", "mustafar_unauthorized");
     public static final string_id SID_KASHYYYK_UNAUTHORIZED = new string_id("travel", "kashyyyk_unauthorized");
     public static final int TRAVEL_BLOCK_ALLOW_LAUNCH = 1;
+
     public travel()
     {
     }

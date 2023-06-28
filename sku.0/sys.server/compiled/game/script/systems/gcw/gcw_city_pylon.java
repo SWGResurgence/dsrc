@@ -1,5 +1,11 @@
 package script.systems.gcw;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -14,6 +20,7 @@ public class gcw_city_pylon extends script.base_script
     public static final string_id SID_PYLON_MOVED = new string_id("gcw", "pylon_construction_moved");
     public static final string_id SID_PYLON_INCAPACITATED = new string_id("gcw", "pylon_construction_incapacitated");
     public static final string_id SID_TOO_FATIGUED = new string_id("gcw", "too_fatigued_to_construct");
+
     public gcw_city_pylon()
     {
     }
@@ -138,7 +145,7 @@ public class gcw_city_pylon extends script.base_script
         if (questsCompleted > 0)
         {
             names[idx] = "construction_completed";
-            attribs[idx] = "" + questsCompleted + " (" + questsMaximum + " Maximum)";
+            attribs[idx] = questsCompleted + " (" + questsMaximum + " Maximum)";
             idx++;
         }
         else

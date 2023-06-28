@@ -1,51 +1,68 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class zahara_cody extends script.base_script
 {
+    public static String c_stringFile = "conversation/zahara_cody";
+
     public zahara_cody()
     {
     }
-    public static String c_stringFile = "conversation/zahara_cody";
+
     public boolean zahara_cody_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean zahara_cody_condition_isImperialNotImmunized(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (groundquests.isQuestActive(player, "outbreak_quest_01_imperial") || groundquests.isQuestActive(player, "outbreak_quest_01_rebel") || groundquests.isQuestActive(player, "outbreak_quest_01_neutral"));
     }
+
     public boolean zahara_cody_condition_hasTrigTask(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "outbreak_quest_01_b_imperial", "talkToTrig") || groundquests.isTaskActive(player, "outbreak_quest_01_b_rebel", "talkToTrig") || groundquests.isTaskActive(player, "outbreak_quest_01_b_neutral", "talkToTrig"));
     }
+
     public boolean zahara_cody_condition_hasFoundEpsilon(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "outbreak_quest_02_imperial") || groundquests.hasCompletedQuest(player, "outbreak_quest_02_rebel") || groundquests.hasCompletedQuest(player, "outbreak_quest_02_neutral");
     }
+
     public boolean zahara_cody_condition_hasDeliveredRadioEpsilon(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "outbreak_radio_delivery_03");
     }
+
     public boolean zahara_cody_condition_hasCompletedQuest01(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "outbreak_quest_01_imperial") || groundquests.hasCompletedQuest(player, "outbreak_quest_01_rebel") || groundquests.hasCompletedQuest(player, "outbreak_quest_01_neutral");
     }
+
     public boolean zahara_cody_condition_hasCompletedQuestLine(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "outbreak_quest_final_imperial") || groundquests.hasCompletedQuest(player, "outbreak_quest_final_neutral") || groundquests.hasCompletedQuest(player, "outbreak_quest_final_rebel");
     }
+
     public boolean zahara_cody_condition_hasDeletedQuest01b(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "outbreak_quest_01_imperial") && !groundquests.isQuestActiveOrComplete(player, "outbreak_quest_01_b_imperial")) || (groundquests.hasCompletedQuest(player, "outbreak_quest_01_rebel") && !groundquests.isQuestActiveOrComplete(player, "outbreak_quest_01_b_rebel")) || (groundquests.hasCompletedQuest(player, "outbreak_quest_01_neutral") && !groundquests.isQuestActiveOrComplete(player, "outbreak_quest_01_b_neutral"));
     }
+
     public boolean zahara_cody_condition_doesNotHaveAntiVirus(obj_id player, obj_id npc) throws InterruptedException
     {
         return !buff.hasBuff(player, "death_troopers_inoculation");
     }
+
     public void zahara_cody_action_giveAntiVirus(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
@@ -53,6 +70,7 @@ public class zahara_cody extends script.base_script
         utils.setScriptVar(player, "outbreak.innoculated", 1);
         buff.applyBuff(player, "death_troopers_inoculation");
     }
+
     public void zahara_cody_action_makeTrigWave(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(npc, "myTrig"))
@@ -69,6 +87,7 @@ public class zahara_cody extends script.base_script
         faceTo(myTrig, player);
         doAnimationAction(myTrig, "wave1");
     }
+
     public void zahara_cody_action_giveQuest1b(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.hasCompletedQuest(player, "outbreak_quest_01_imperial") && !groundquests.isQuestActiveOrComplete(player, "outbreak_quest_01_b_imperial"))
@@ -84,9 +103,9 @@ public class zahara_cody extends script.base_script
         if (groundquests.hasCompletedQuest(player, "outbreak_quest_01_neutral") && !groundquests.isQuestActiveOrComplete(player, "outbreak_quest_01_b_neutral"))
         {
             groundquests.grantQuest(player, "outbreak_quest_01_b_neutral");
-            return;
         }
     }
+
     public int zahara_cody_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_51"))
@@ -102,6 +121,7 @@ public class zahara_cody extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int zahara_cody_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_50"))
@@ -117,6 +137,7 @@ public class zahara_cody extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int zahara_cody_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_49"))
@@ -132,6 +153,7 @@ public class zahara_cody extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int zahara_cody_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_48"))
@@ -147,6 +169,7 @@ public class zahara_cody extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int zahara_cody_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_47"))
@@ -162,6 +185,7 @@ public class zahara_cody extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int zahara_cody_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_45"))
@@ -177,6 +201,7 @@ public class zahara_cody extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int zahara_cody_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_19"))
@@ -197,7 +222,7 @@ public class zahara_cody extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_124");
@@ -206,7 +231,7 @@ public class zahara_cody extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.zahara_cody.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -216,6 +241,7 @@ public class zahara_cody extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int zahara_cody_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_124"))
@@ -235,7 +261,7 @@ public class zahara_cody extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_64");
@@ -244,7 +270,7 @@ public class zahara_cody extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.zahara_cody.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -254,6 +280,7 @@ public class zahara_cody extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int zahara_cody_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_64"))
@@ -273,7 +300,7 @@ public class zahara_cody extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_68");
@@ -282,7 +309,7 @@ public class zahara_cody extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.zahara_cody.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -292,6 +319,7 @@ public class zahara_cody extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int zahara_cody_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_68"))
@@ -311,7 +339,7 @@ public class zahara_cody extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_72");
@@ -320,7 +348,7 @@ public class zahara_cody extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.zahara_cody.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -330,6 +358,7 @@ public class zahara_cody extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int zahara_cody_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_72"))
@@ -377,7 +406,7 @@ public class zahara_cody extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_77");
@@ -402,7 +431,7 @@ public class zahara_cody extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.zahara_cody.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -412,6 +441,7 @@ public class zahara_cody extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int zahara_cody_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_77"))
@@ -431,7 +461,7 @@ public class zahara_cody extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_81");
@@ -440,7 +470,7 @@ public class zahara_cody extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.zahara_cody.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -465,7 +495,7 @@ public class zahara_cody extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_101");
@@ -474,7 +504,7 @@ public class zahara_cody extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.zahara_cody.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -499,7 +529,7 @@ public class zahara_cody extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_109");
@@ -508,7 +538,7 @@ public class zahara_cody extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.zahara_cody.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -533,7 +563,7 @@ public class zahara_cody extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_177");
@@ -542,7 +572,7 @@ public class zahara_cody extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.zahara_cody.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -564,6 +594,7 @@ public class zahara_cody extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int zahara_cody_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_81"))
@@ -583,7 +614,7 @@ public class zahara_cody extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_168");
@@ -592,7 +623,7 @@ public class zahara_cody extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.zahara_cody.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -602,6 +633,7 @@ public class zahara_cody extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int zahara_cody_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_168"))
@@ -649,7 +681,7 @@ public class zahara_cody extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_77");
@@ -674,7 +706,7 @@ public class zahara_cody extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.zahara_cody.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -684,6 +716,7 @@ public class zahara_cody extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int zahara_cody_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_77"))
@@ -703,7 +736,7 @@ public class zahara_cody extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_81");
@@ -712,7 +745,7 @@ public class zahara_cody extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.zahara_cody.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -737,7 +770,7 @@ public class zahara_cody extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_101");
@@ -746,7 +779,7 @@ public class zahara_cody extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.zahara_cody.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -771,7 +804,7 @@ public class zahara_cody extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_109");
@@ -780,7 +813,7 @@ public class zahara_cody extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.zahara_cody.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -805,7 +838,7 @@ public class zahara_cody extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_177");
@@ -814,7 +847,7 @@ public class zahara_cody extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.zahara_cody.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -836,6 +869,7 @@ public class zahara_cody extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int zahara_cody_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_101"))
@@ -883,7 +917,7 @@ public class zahara_cody extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_77");
@@ -908,7 +942,7 @@ public class zahara_cody extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.zahara_cody.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -918,6 +952,7 @@ public class zahara_cody extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int zahara_cody_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_77"))
@@ -937,7 +972,7 @@ public class zahara_cody extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_81");
@@ -946,7 +981,7 @@ public class zahara_cody extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.zahara_cody.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -971,7 +1006,7 @@ public class zahara_cody extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_101");
@@ -980,7 +1015,7 @@ public class zahara_cody extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.zahara_cody.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1005,7 +1040,7 @@ public class zahara_cody extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_109");
@@ -1014,7 +1049,7 @@ public class zahara_cody extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.zahara_cody.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1039,7 +1074,7 @@ public class zahara_cody extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_177");
@@ -1048,7 +1083,7 @@ public class zahara_cody extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.zahara_cody.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1070,6 +1105,7 @@ public class zahara_cody extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int zahara_cody_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_109"))
@@ -1089,7 +1125,7 @@ public class zahara_cody extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_113");
@@ -1098,7 +1134,7 @@ public class zahara_cody extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.zahara_cody.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1108,6 +1144,7 @@ public class zahara_cody extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int zahara_cody_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_113"))
@@ -1155,7 +1192,7 @@ public class zahara_cody extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_77");
@@ -1180,7 +1217,7 @@ public class zahara_cody extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.zahara_cody.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1190,6 +1227,7 @@ public class zahara_cody extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int zahara_cody_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_77"))
@@ -1209,7 +1247,7 @@ public class zahara_cody extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_81");
@@ -1218,7 +1256,7 @@ public class zahara_cody extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.zahara_cody.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1243,7 +1281,7 @@ public class zahara_cody extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_101");
@@ -1252,7 +1290,7 @@ public class zahara_cody extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.zahara_cody.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1277,7 +1315,7 @@ public class zahara_cody extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_109");
@@ -1286,7 +1324,7 @@ public class zahara_cody extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.zahara_cody.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1311,7 +1349,7 @@ public class zahara_cody extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_177");
@@ -1320,7 +1358,7 @@ public class zahara_cody extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.zahara_cody.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1342,6 +1380,7 @@ public class zahara_cody extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int zahara_cody_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_177"))
@@ -1389,7 +1428,7 @@ public class zahara_cody extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_77");
@@ -1414,7 +1453,7 @@ public class zahara_cody extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.zahara_cody.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1424,6 +1463,7 @@ public class zahara_cody extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int zahara_cody_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_77"))
@@ -1443,7 +1483,7 @@ public class zahara_cody extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_81");
@@ -1452,7 +1492,7 @@ public class zahara_cody extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.zahara_cody.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1477,7 +1517,7 @@ public class zahara_cody extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_101");
@@ -1486,7 +1526,7 @@ public class zahara_cody extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.zahara_cody.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1511,7 +1551,7 @@ public class zahara_cody extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_109");
@@ -1520,7 +1560,7 @@ public class zahara_cody extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.zahara_cody.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1545,7 +1585,7 @@ public class zahara_cody extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_177");
@@ -1554,7 +1594,7 @@ public class zahara_cody extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.zahara_cody.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1576,6 +1616,7 @@ public class zahara_cody extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -1587,6 +1628,7 @@ public class zahara_cody extends script.base_script
         CustomerServiceLog("outbreak_themepark", "outbreak_zahara_cody conversation: Cody is looking for Trig. Self: " + self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -1594,6 +1636,7 @@ public class zahara_cody extends script.base_script
         CustomerServiceLog("outbreak_themepark", "outbreak_zahara_cody conversation: Cody is looking for Trig. Self: " + self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -1602,12 +1645,14 @@ public class zahara_cody extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.zahara_cody");
         return SCRIPT_CONTINUE;
     }
+
     public int findNpc(obj_id self, dictionary params) throws InterruptedException
     {
         CustomerServiceLog("outbreak_themepark", "outbreak_zahara_cody findNpc(): Initialized");
@@ -1622,12 +1667,14 @@ public class zahara_cody extends script.base_script
         setObjVar(self, "myTrig", npcList[0]);
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1650,7 +1697,7 @@ public class zahara_cody extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_51");
@@ -1658,7 +1705,7 @@ public class zahara_cody extends script.base_script
                 utils.setScriptVar(player, "conversation.zahara_cody.branchId", 1);
                 npcStartConversation(player, npc, "zahara_cody", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1679,7 +1726,7 @@ public class zahara_cody extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_50");
@@ -1691,7 +1738,7 @@ public class zahara_cody extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "zahara_cody", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1716,7 +1763,7 @@ public class zahara_cody extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_49");
@@ -1724,7 +1771,7 @@ public class zahara_cody extends script.base_script
                 utils.setScriptVar(player, "conversation.zahara_cody.branchId", 3);
                 npcStartConversation(player, npc, "zahara_cody", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1746,7 +1793,7 @@ public class zahara_cody extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_48");
@@ -1754,7 +1801,7 @@ public class zahara_cody extends script.base_script
                 utils.setScriptVar(player, "conversation.zahara_cody.branchId", 4);
                 npcStartConversation(player, npc, "zahara_cody", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1775,7 +1822,7 @@ public class zahara_cody extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -1783,7 +1830,7 @@ public class zahara_cody extends script.base_script
                 utils.setScriptVar(player, "conversation.zahara_cody.branchId", 5);
                 npcStartConversation(player, npc, "zahara_cody", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1804,7 +1851,7 @@ public class zahara_cody extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_45");
@@ -1812,7 +1859,7 @@ public class zahara_cody extends script.base_script
                 utils.setScriptVar(player, "conversation.zahara_cody.branchId", 6);
                 npcStartConversation(player, npc, "zahara_cody", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1834,7 +1881,7 @@ public class zahara_cody extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_19");
@@ -1842,7 +1889,7 @@ public class zahara_cody extends script.base_script
                 utils.setScriptVar(player, "conversation.zahara_cody.branchId", 8);
                 npcStartConversation(player, npc, "zahara_cody", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1857,6 +1904,7 @@ public class zahara_cody extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("zahara_cody"))

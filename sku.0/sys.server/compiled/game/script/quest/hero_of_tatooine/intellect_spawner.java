@@ -1,5 +1,11 @@
 package script.quest.hero_of_tatooine;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -12,9 +18,6 @@ import java.util.Vector;
 
 public class intellect_spawner extends script.base_script
 {
-    public intellect_spawner()
-    {
-    }
     public static final String SPAWNER_DATATABLE = "datatables/quest/hero_of_tatooine/intellect_spawner.iff";
     public static final String SPAWNER_OBJVAR = "quest.hero_of_tatooine.intellect.spawner";
     public static final String SPAWNER_CONTROLLER = SPAWNER_OBJVAR + ".controller";
@@ -24,6 +27,10 @@ public class intellect_spawner extends script.base_script
     public static final String SPAWNER_LIARS = SPAWNER_ACTIVE + ".liars";
     public static final String SPAWNER_BH = SPAWNER_ACTIVE + ".bh";
     public static final string_id CAPTAIN_NAME = new string_id("quest/hero_of_tatooine/npc_names", "himfan");
+    public intellect_spawner()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, SPAWNER_ACTIVE))
@@ -44,6 +51,7 @@ public class intellect_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleValidate(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id controller = params.getObjId("controller");
@@ -56,14 +64,14 @@ public class intellect_spawner extends script.base_script
             {
                 d.put("spawn", 1);
             }
-            else 
+            else
             {
                 destroySpawnedObjects(self);
                 removeObjVar(self, SPAWNER_OBJVAR);
                 d.put("spawn", 0);
             }
         }
-        else 
+        else
         {
             cleanupStaleObjects(self);
             if (hasObjVar(self, SPAWNER_OBJVAR))
@@ -75,6 +83,7 @@ public class intellect_spawner extends script.base_script
         messageTo(controller, "handleValidation", d, 0.0f, true);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id controller = params.getObjId("controller");
@@ -87,7 +96,7 @@ public class intellect_spawner extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 destroySpawnedObjects(self);
                 removeObjVar(self, SPAWNER_OBJVAR);
@@ -97,7 +106,7 @@ public class intellect_spawner extends script.base_script
         {
             d.put("spawn", 1);
         }
-        else 
+        else
         {
             destroySpawnedObjects(self);
             d.put("spawn", 0);
@@ -105,6 +114,7 @@ public class intellect_spawner extends script.base_script
         messageTo(controller, "handleValidation", d, 0.0f, true);
         return SCRIPT_CONTINUE;
     }
+
     public int handleComplete(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, SPAWNER_NUMBER) || !hasObjVar(self, SPAWNER_CONTROLLER))
@@ -124,11 +134,13 @@ public class intellect_spawner extends script.base_script
         messageTo(controller, "handleCompletion", d, 15.0f, true);
         return SCRIPT_CONTINUE;
     }
+
     public int handleCleanup(obj_id self, dictionary params) throws InterruptedException
     {
         destroySpawnedObjects(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleLocationRequest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id control = params.getObjId("controller");
@@ -137,6 +149,7 @@ public class intellect_spawner extends script.base_script
         messageTo(control, "handleLocationResponse", params, 0.0f, true);
         return SCRIPT_CONTINUE;
     }
+
     public boolean spawnObjects(obj_id self, obj_id controller, int number) throws InterruptedException
     {
         location center = getLocation(self);
@@ -169,7 +182,8 @@ public class intellect_spawner extends script.base_script
             return false;
         }
         boolean success = true;
-        for (Object liar : liars) {
+        for (Object liar : liars)
+        {
             success &= isIdValid(((obj_id) liar));
         }
         success &= isIdValid(bh);
@@ -188,18 +202,18 @@ public class intellect_spawner extends script.base_script
             {
                 d.put("loc", center1);
             }
-            else 
+            else
             {
                 d.put("loc", center2);
             }
-            setObjVar(((obj_id)liars.get(i)), SPAWNER_NPC, i);
-            setObjVar(((obj_id)liars.get(i)), SPAWNER_CONTROLLER, self);
-            ai_lib.setDefaultCalmBehavior(((obj_id)liars.get(i)), ai_lib.BEHAVIOR_SENTINEL);
-            setInvulnerable(((obj_id)liars.get(i)), true);
-            attachScript(((obj_id)liars.get(i)), "quest.hero_of_tatooine.intellect_liar");
-            messageTo(((obj_id)liars.get(i)), "handleSetYaw", d, 3.0f, true);
+            setObjVar(((obj_id) liars.get(i)), SPAWNER_NPC, i);
+            setObjVar(((obj_id) liars.get(i)), SPAWNER_CONTROLLER, self);
+            ai_lib.setDefaultCalmBehavior(((obj_id) liars.get(i)), ai_lib.BEHAVIOR_SENTINEL);
+            setInvulnerable(((obj_id) liars.get(i)), true);
+            attachScript(((obj_id) liars.get(i)), "quest.hero_of_tatooine.intellect_liar");
+            messageTo(((obj_id) liars.get(i)), "handleSetYaw", d, 3.0f, true);
         }
-        setName(((obj_id)liars.get(0)), CAPTAIN_NAME);
+        setName(((obj_id) liars.get(0)), CAPTAIN_NAME);
         setObjVar(bh, SPAWNER_NPC, -1);
         setObjVar(bh, SPAWNER_CONTROLLER, self);
         ai_lib.setDefaultCalmBehavior(bh, ai_lib.BEHAVIOR_SENTINEL);
@@ -207,23 +221,27 @@ public class intellect_spawner extends script.base_script
         attachScript(bh, "conversation.quest_hero_of_tatooine_bounty_hunter");
         return success;
     }
+
     public boolean validateActiveSpawn(obj_id self) throws InterruptedException
     {
         obj_id[] liars = getObjIdArrayObjVar(self, SPAWNER_LIARS);
         obj_id bh = getObjIdObjVar(self, SPAWNER_BH);
         boolean validSuccess = true;
         boolean existSuccess = true;
-        for (obj_id liar1 : liars) {
+        for (obj_id liar1 : liars)
+        {
             validSuccess &= isIdValid(liar1);
         }
         validSuccess &= isIdValid(bh);
-        for (obj_id liar : liars) {
+        for (obj_id liar : liars)
+        {
             existSuccess &= exists(liar);
         }
         existSuccess &= exists(bh);
         validSuccess &= existSuccess;
         return validSuccess;
     }
+
     public void destroySpawnedObjects(obj_id self) throws InterruptedException
     {
         obj_id[] liars = getObjIdArrayObjVar(self, SPAWNER_LIARS);
@@ -232,8 +250,10 @@ public class intellect_spawner extends script.base_script
         {
             cleanupStaleObjects(self);
         }
-        for (obj_id liar : liars) {
-            if (isIdValid(liar) && exists(liar)) {
+        for (obj_id liar : liars)
+        {
+            if (isIdValid(liar) && exists(liar))
+            {
                 destroyObject(liar);
             }
         }
@@ -242,17 +262,20 @@ public class intellect_spawner extends script.base_script
             destroyObject(bh);
         }
     }
+
     public void cleanupStaleObjects(obj_id self) throws InterruptedException
     {
         obj_id[] npcs = getAllObjectsWithObjVar(getLocation(self), 50.0f, SPAWNER_NPC);
-        if (npcs == null || npcs.length == 0)
+        if (npcs == null)
         {
             return;
         }
-        for (obj_id npc : npcs) {
+        for (obj_id npc : npcs)
+        {
             destroyObject(npc);
         }
     }
+
     public Vector shuffleList(Vector list) throws InterruptedException
     {
         Vector newList = new Vector();
@@ -270,17 +293,18 @@ public class intellect_spawner extends script.base_script
         }
         return newList;
     }
+
     public void namePirates(Vector pirates) throws InterruptedException
     {
-        string_id[] names = 
-        {
-            new string_id("quest/hero_of_tatooine/npc_names", "pirate_0"),
-            new string_id("quest/hero_of_tatooine/npc_names", "pirate_1"),
-            new string_id("quest/hero_of_tatooine/npc_names", "pirate_2"),
-            new string_id("quest/hero_of_tatooine/npc_names", "pirate_3"),
-            new string_id("quest/hero_of_tatooine/npc_names", "pirate_4"),
-            new string_id("quest/hero_of_tatooine/npc_names", "pirate_5")
-        };
+        string_id[] names =
+                {
+                        new string_id("quest/hero_of_tatooine/npc_names", "pirate_0"),
+                        new string_id("quest/hero_of_tatooine/npc_names", "pirate_1"),
+                        new string_id("quest/hero_of_tatooine/npc_names", "pirate_2"),
+                        new string_id("quest/hero_of_tatooine/npc_names", "pirate_3"),
+                        new string_id("quest/hero_of_tatooine/npc_names", "pirate_4"),
+                        new string_id("quest/hero_of_tatooine/npc_names", "pirate_5")
+                };
         obj_id[] pirateObjs = new obj_id[names.length];
         pirates.toArray(pirateObjs);
         for (int i = 0; i < names.length; ++i)

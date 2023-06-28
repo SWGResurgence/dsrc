@@ -1,5 +1,11 @@
 package script.quest.force_sensitive;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.fs_dyn_village;
 import script.library.utils;
@@ -10,20 +16,24 @@ public class shadow_loot extends script.base_script
     public shadow_loot()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         fs_dyn_village.getRegisteredIntegerFromClusterWideData(fs_dyn_village.CLUSTER_INT_KEY_PHASE_UID, "findCurrentPhase", self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         fs_dyn_village.getRegisteredIntegerFromClusterWideData(fs_dyn_village.CLUSTER_INT_KEY_PHASE_UID, "findCurrentPhase", self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id attacker) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int findCurrentPhase(obj_id self, dictionary params) throws InterruptedException
     {
         if (!params.containsKey(fs_dyn_village.CLUSTER_INT_KEY_PHASE_UID))
@@ -36,6 +46,7 @@ public class shadow_loot extends script.base_script
         setObjVar(self, "current_phase", curPhase);
         return SCRIPT_CONTINUE;
     }
+
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id corpseInventory = utils.getInventoryContainer(self);
@@ -65,6 +76,7 @@ public class shadow_loot extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public String pickLootItem() throws InterruptedException
     {
         String treasure = "object/tangible/loot/quest/endrine.iff";
@@ -72,23 +84,24 @@ public class shadow_loot extends script.base_script
         switch (which)
         {
             case 1:
-            treasure = "object/tangible/loot/quest/ardanium_ii.iff";
-            break;
+                treasure = "object/tangible/loot/quest/ardanium_ii.iff";
+                break;
             case 2:
-            treasure = "object/tangible/loot/quest/endrine.iff";
-            break;
+                treasure = "object/tangible/loot/quest/endrine.iff";
+                break;
             case 3:
-            treasure = "object/tangible/loot/quest/ostrine.iff";
-            break;
+                treasure = "object/tangible/loot/quest/ostrine.iff";
+                break;
             case 4:
-            treasure = "object/tangible/loot/quest/wind_crystal.iff";
-            break;
+                treasure = "object/tangible/loot/quest/wind_crystal.iff";
+                break;
             case 5:
-            treasure = "object/tangible/loot/quest/rudic.iff";
-            break;
+                treasure = "object/tangible/loot/quest/rudic.iff";
+                break;
         }
         return treasure;
     }
+
     public void setSpecialResourceObjVars(String special, obj_id resource) throws InterruptedException
     {
         if (!isIdValid(resource) || special == null || special.equals(""))
@@ -96,7 +109,8 @@ public class shadow_loot extends script.base_script
             return;
         }
         final int average = 500;
-        switch (special) {
+        switch (special)
+        {
             case "object/tangible/loot/quest/ardanium_ii.iff":
                 setObjVar(resource, "crafting_components.res_potential_energy", getResourceValue(average));
                 setObjVar(resource, "crafting_components.res_quality", getResourceValue(average));
@@ -121,6 +135,7 @@ public class shadow_loot extends script.base_script
                 break;
         }
     }
+
     public int getResourceValue(int average) throws InterruptedException
     {
         float value = gaussRand(average, 50.0f);
@@ -132,6 +147,6 @@ public class shadow_loot extends script.base_script
         {
             value = 150.0f;
         }
-        return (int)(value);
+        return (int) (value);
     }
 }

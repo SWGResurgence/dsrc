@@ -1,5 +1,11 @@
 package script.space.quest_logic;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.prose;
 import script.library.space_quest;
@@ -10,16 +16,19 @@ public class convoy_ship extends script.base_script
     public convoy_ship()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -28,6 +37,7 @@ public class convoy_ship extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -52,6 +62,7 @@ public class convoy_ship extends script.base_script
         npcStartConversation(player, npc, "convoy_ship", greeting, responses);
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         obj_id quest = getObjIdObjVar(self, "quest");
@@ -76,7 +87,7 @@ public class convoy_ship extends script.base_script
                 space_utils.notifyObject(quest, "startConvoyPathing", null);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 prose_package pp = prose.getPackage(new string_id("spacequest/" + questType + "/" + questName, "were_moving"), 0);
                 dogfightTauntPlayer(self, player, pp);
@@ -85,6 +96,7 @@ public class convoy_ship extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int registerDestination(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -96,6 +108,7 @@ public class convoy_ship extends script.base_script
         addLocationTarget3d("dest", loc, 1000);
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String name) throws InterruptedException
     {
         obj_id quest = getObjIdObjVar(self, "quest");
@@ -107,6 +120,7 @@ public class convoy_ship extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int objectDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id quest = getObjIdObjVar(self, "quest");
@@ -115,6 +129,7 @@ public class convoy_ship extends script.base_script
         space_utils.notifyObject(quest, "convoyShipDestroyed", outparams);
         return SCRIPT_CONTINUE;
     }
+
     public int OnShieldsDepleted(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "shieldsComplain"))
@@ -131,6 +146,7 @@ public class convoy_ship extends script.base_script
         space_quest.groupTaunt(self, player, pp);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHullNearlyDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "hullComplain"))

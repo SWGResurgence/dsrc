@@ -1,5 +1,11 @@
 package script.quest.task.ground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.groundquests;
@@ -8,9 +14,6 @@ import script.library.utils;
 
 public class defend extends script.quest.task.ground.base_task
 {
-    public defend()
-    {
-    }
     public static final String OBJVAR_DEFENSE_TARGET = "defend_target";
     public static final String DEFEND_TARGET = "defendTarget";
     public static final String QUEST_CRC = "questCrc";
@@ -24,6 +27,10 @@ public class defend extends script.quest.task.ground.base_task
     public static final float CLEANUP_TIME = 120;
     public static final boolean LOGGING_ON = false;
     public static final String LOG_CAT = "defense_ground_task";
+    public defend()
+    {
+    }
+
     public int OnTaskActivated(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         blog("OnTaskActivated init");
@@ -52,6 +59,7 @@ public class defend extends script.quest.task.ground.base_task
         messageTo(self, "messageDefendCheckDistance", distanceCheckParams, DEFEND_DISTANCE_TIME_CHECK, false);
         return super.OnTaskActivated(self, questCrc, taskId);
     }
+
     public int destroyNotification(obj_id self, dictionary params) throws InterruptedException
     {
         blog("destroyNotification init");
@@ -117,6 +125,7 @@ public class defend extends script.quest.task.ground.base_task
         }
         return SCRIPT_CONTINUE;
     }
+
     public int messageDefendCheckDistance(obj_id self, dictionary params) throws InterruptedException
     {
         blog("messageDefendCheckDistance init");
@@ -158,7 +167,7 @@ public class defend extends script.quest.task.ground.base_task
                     removeObjVar(player, baseObjVar + OBJVAR_BEEN_WARNED_DISTANCE);
                 }
             }
-            else 
+            else
             {
                 blog("messageDefendCheckDistance isDefenseObjectNearby == FALSE");
                 if (hasObjVar(self, baseObjVar + DOT + OBJVAR_DEFENSE_TARGET))
@@ -178,6 +187,7 @@ public class defend extends script.quest.task.ground.base_task
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean isDefenseObjectNearby(int questCrc, int taskId, obj_id player, obj_id defendTarget) throws InterruptedException
     {
         blog("isDefenseObjectNearby init");
@@ -196,6 +206,7 @@ public class defend extends script.quest.task.ground.base_task
         blog("isDefenseObjectNearby result: " + result);
         return result;
     }
+
     public void failDefenseDistanceCheck(obj_id player, int questCrc, int taskId, obj_id defenseTarget) throws InterruptedException
     {
         blog("failDefenseDistanceCheck init");
@@ -208,7 +219,7 @@ public class defend extends script.quest.task.ground.base_task
             prose.setDF(pp, DEFEND_DISTANCE_TIME_CHECK);
             sendSystemMessageProse(player, pp);
         }
-        else 
+        else
         {
             string_id message = new string_id("quest/groundquests", "static_defense_failed_due_to_distance");
             prose_package pp = prose.getPackage(message, player, player, 0);
@@ -216,6 +227,7 @@ public class defend extends script.quest.task.ground.base_task
             questFailTask(questCrc, taskId, player);
         }
     }
+
     public int OnTaskCompleted(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         blog("OnTaskCompleted init");
@@ -232,6 +244,7 @@ public class defend extends script.quest.task.ground.base_task
         cleanup(self, questCrc, taskId);
         return super.OnTaskCompleted(self, questCrc, taskId);
     }
+
     public int OnTaskFailed(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         blog("OnTaskFailed init");
@@ -248,6 +261,7 @@ public class defend extends script.quest.task.ground.base_task
         cleanup(self, questCrc, taskId);
         return super.OnTaskFailed(self, questCrc, taskId);
     }
+
     public int OnTaskCleared(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         blog("OnTaskCleared init");
@@ -264,6 +278,7 @@ public class defend extends script.quest.task.ground.base_task
         cleanup(self, questCrc, taskId);
         return super.OnTaskCleared(self, questCrc, taskId);
     }
+
     public void cleanup(obj_id player, int questCrc, int taskId) throws InterruptedException
     {
         blog("cleanup init");
@@ -282,24 +297,28 @@ public class defend extends script.quest.task.ground.base_task
         }
         groundquests.clearBaseObjVar(player, TASK_TYPE, questGetQuestName(questCrc), taskId);
     }
+
     public int OnLogout(obj_id self) throws InterruptedException
     {
         blog("OnLogout init");
         groundquests.failAllActiveTasksOfType(self, TASK_TYPE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         blog("OnInitialize init");
         groundquests.failAllActiveTasksOfType(self, TASK_TYPE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         blog("OnDetach init");
         removeObjVar(self, groundquests.getTaskTypeObjVar(self, TASK_TYPE));
         return SCRIPT_CONTINUE;
     }
+
     public void blog(String text) throws InterruptedException
     {
         if (LOGGING_ON)
