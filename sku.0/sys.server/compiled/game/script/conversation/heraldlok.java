@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.utils;
@@ -7,52 +13,62 @@ import script.*;
 
 public class heraldlok extends script.base_script
 {
+    public static String c_stringFile = "conversation/heraldlok";
+
     public heraldlok()
     {
     }
-    public static String c_stringFile = "conversation/heraldlok";
+
     public boolean heraldlok_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean heraldlok_condition_hasKimogilaTownWaypoint(obj_id player, obj_id npc) throws InterruptedException
     {
         location kimogilaLoc = new location(-70, 0, 2600);
         String kimogilaName = "Kimogila Town";
         obj_id[] playerWaypoints = getWaypointsInDatapad(player);
-        if (playerWaypoints != null && playerWaypoints.length > 0)
+        if (playerWaypoints != null)
         {
-            for (obj_id playerWaypoint : playerWaypoints) {
+            for (obj_id playerWaypoint : playerWaypoints)
+            {
                 String waypointName = getWaypointName(playerWaypoint);
                 location waypointLoc = getWaypointLocation(playerWaypoint);
-                if (waypointName.equals(kimogilaName) || waypointLoc.equals(kimogilaLoc)) {
+                if (waypointName.equals(kimogilaName) || waypointLoc.equals(kimogilaLoc))
+                {
                     return true;
                 }
             }
         }
         return false;
     }
+
     public boolean heraldlok_condition_hasCanyonCorsairWaypoint(obj_id player, obj_id npc) throws InterruptedException
     {
         location corsairLoc = new location(-3692, 0, -3800);
         String corsairName = "Canyon Corsair Stronghold";
         obj_id[] playerWaypoints = getWaypointsInDatapad(player);
-        if (playerWaypoints != null && playerWaypoints.length > 0)
+        if (playerWaypoints != null)
         {
-            for (obj_id playerWaypoint : playerWaypoints) {
+            for (obj_id playerWaypoint : playerWaypoints)
+            {
                 String waypointName = getWaypointName(playerWaypoint);
                 location waypointLoc = getWaypointLocation(playerWaypoint);
-                if (waypointName.equals(corsairName) || waypointLoc.equals(corsairLoc)) {
+                if (waypointName.equals(corsairName) || waypointLoc.equals(corsairLoc))
+                {
                     return true;
                 }
             }
         }
         return false;
     }
+
     public boolean heraldlok_condition_hasBothWaypoints(obj_id player, obj_id npc) throws InterruptedException
     {
         return (heraldlok_condition_hasKimogilaTownWaypoint(player, npc) && heraldlok_condition_hasCanyonCorsairWaypoint(player, npc));
     }
+
     public void heraldlok_action_waypoint1(obj_id player, obj_id npc) throws InterruptedException
     {
         location kimogila = new location(-70, 0, 2600);
@@ -63,6 +79,7 @@ public class heraldlok extends script.base_script
         setWaypointActive(waypoint, true);
         doAnimationAction(npc, "shrug_shoulders");
     }
+
     public void heraldlok_action_waypoint2(obj_id player, obj_id npc) throws InterruptedException
     {
         location corsair = new location(-3692, 0, -3800);
@@ -72,6 +89,7 @@ public class heraldlok extends script.base_script
         setWaypointVisible(waypoint, true);
         setWaypointActive(waypoint, true);
     }
+
     public void heraldlok_action_waypoint3(obj_id player, obj_id npc) throws InterruptedException
     {
         location bloodrazor = new location(3508, 0, 2084);
@@ -81,6 +99,7 @@ public class heraldlok extends script.base_script
         setWaypointVisible(waypoint, true);
         setWaypointActive(waypoint, true);
     }
+
     public void heraldlok_action_waypoint4(obj_id player, obj_id npc) throws InterruptedException
     {
         location droid = new location(3172, 0, -4772);
@@ -90,6 +109,7 @@ public class heraldlok extends script.base_script
         setWaypointVisible(waypoint, true);
         setWaypointActive(waypoint, true);
     }
+
     public int heraldlok_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_36a4e374"))
@@ -123,7 +143,7 @@ public class heraldlok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_95bfd0f3");
@@ -140,7 +160,7 @@ public class heraldlok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.heraldlok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -160,6 +180,7 @@ public class heraldlok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int heraldlok_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_95bfd0f3"))
@@ -208,7 +229,7 @@ public class heraldlok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a8387526");
@@ -221,7 +242,7 @@ public class heraldlok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.heraldlok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -231,6 +252,7 @@ public class heraldlok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int heraldlok_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a8387526"))
@@ -267,7 +289,7 @@ public class heraldlok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_16");
@@ -280,7 +302,7 @@ public class heraldlok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.heraldlok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -290,6 +312,7 @@ public class heraldlok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int heraldlok_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_16"))
@@ -316,6 +339,7 @@ public class heraldlok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -325,11 +349,13 @@ public class heraldlok extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -338,18 +364,21 @@ public class heraldlok extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.heraldlok");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -379,7 +408,7 @@ public class heraldlok extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_36a4e374");
@@ -391,7 +420,7 @@ public class heraldlok extends script.base_script
                 utils.setScriptVar(player, "conversation.heraldlok.branchId", 1);
                 npcStartConversation(player, npc, "heraldlok", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -400,6 +429,7 @@ public class heraldlok extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("heraldlok"))

@@ -1,5 +1,11 @@
 package script.systems.crafting.droid.crafted_items;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.resource_weight;
 
 public class crafting_navicomputer extends script.systems.crafting.droid.crafting_base_navicomputer
@@ -27,6 +33,7 @@ public class crafting_navicomputer extends script.systems.crafting.droid.craftin
     public static final resource_weight[] OBJ_MAX_ATTRIBUTE_RESOURCES =
             {
             };
+
     public crafting_navicomputer()
     {
     }

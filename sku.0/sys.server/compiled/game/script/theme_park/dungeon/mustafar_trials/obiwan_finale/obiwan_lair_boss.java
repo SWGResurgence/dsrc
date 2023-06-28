@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.obiwan_finale;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.combat_engine.hit_result;
 import script.dictionary;
 import script.library.*;
@@ -9,31 +15,32 @@ import script.string_id;
 
 public class obiwan_lair_boss extends script.base_script
 {
+    public static final String[] FORCE_ATTACK_ANIMS =
+            {
+                    "force_push",
+                    "force_strength",
+                    "force_choke"
+            };
+    public static final String[] FORCE_ATTACK_CEFS =
+            {
+                    "clienteffect/pl_force_tangle.cef",
+                    "clienteffect/pl_force_lightning_begin.cef",
+                    "clienteffect/pl_force_weaken.cef",
+                    "clienteffect/pl_force_blast.cef"
+            };
+    public static final String[] FORCE_ATTACK_NAMES =
+            {
+                    "singleStoneThrow",
+                    "doubleStoneThrow",
+                    "tripleStoneThrow",
+                    "multiStoneThrow"
+            };
+    public static final int FORCE_ATTACK_ABORT_DAMAGE_REQUIRED = 2000;
+    public static final boolean CONST_FLAG_DO_LOGGING = false;
     public obiwan_lair_boss()
     {
     }
-    public static final String[] FORCE_ATTACK_ANIMS = 
-    {
-        "force_push",
-        "force_strength",
-        "force_choke"
-    };
-    public static final String[] FORCE_ATTACK_CEFS = 
-    {
-        "clienteffect/pl_force_tangle.cef",
-        "clienteffect/pl_force_lightning_begin.cef",
-        "clienteffect/pl_force_weaken.cef",
-        "clienteffect/pl_force_blast.cef"
-    };
-    public static final String[] FORCE_ATTACK_NAMES = 
-    {
-        "singleStoneThrow",
-        "doubleStoneThrow",
-        "tripleStoneThrow",
-        "multiStoneThrow"
-    };
-    public static final int FORCE_ATTACK_ABORT_DAMAGE_REQUIRED = 2000;
-    public static final boolean CONST_FLAG_DO_LOGGING = false;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         debugLogging("//***// OnAttach: ", "////>>>> calling mustafar.spawnContents for 'boss'.");
@@ -51,6 +58,7 @@ public class obiwan_lair_boss extends script.base_script
         messageTo(dungeon, "lightsCameraAction", null, 16, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "inCombat"))
@@ -77,7 +85,7 @@ public class obiwan_lair_boss extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             stopFighting(self, dungeon);
             utils.setScriptVar(self, "incappedOnce", 1);
@@ -85,6 +93,7 @@ public class obiwan_lair_boss extends script.base_script
             return SCRIPT_OVERRIDE;
         }
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         obj_id dungeon = getTopMostContainer(self);
@@ -98,6 +107,7 @@ public class obiwan_lair_boss extends script.base_script
         utils.removeScriptVar(dungeon, "darkJedi");
         return SCRIPT_CONTINUE;
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id weapon, int[] damage) throws InterruptedException
     {
         if (!isIdValid(attacker))
@@ -138,6 +148,7 @@ public class obiwan_lair_boss extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         obj_id dungeon = getTopMostContainer(self);
@@ -154,6 +165,7 @@ public class obiwan_lair_boss extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttackerCombatAction(obj_id self, obj_id weapon, obj_id defender) throws InterruptedException
     {
         if (buff.hasBuff(defender, "avoidIncapacitation"))
@@ -182,6 +194,7 @@ public class obiwan_lair_boss extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void debugLogging(String section, String message) throws InterruptedException
     {
         if (CONST_FLAG_DO_LOGGING)
@@ -189,6 +202,7 @@ public class obiwan_lair_boss extends script.base_script
             LOG("debug/obiwan_lair_boss/" + section, message);
         }
     }
+
     public void stopFighting(obj_id self, obj_id dungeon) throws InterruptedException
     {
         utils.removeScriptVar(self, "inCombat");
@@ -203,8 +217,8 @@ public class obiwan_lair_boss extends script.base_script
         playClientEffectObj(self, effect, self, "");
         addToHealth(self, 150000);
         setInvulnerable(self, true);
-        return;
     }
+
     public int startFighting(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id dungeon = getTopMostContainer(self);
@@ -233,6 +247,7 @@ public class obiwan_lair_boss extends script.base_script
         messageTo(self, "specialForcePowerAttackWindup", null, rand(10, 20), false);
         return SCRIPT_CONTINUE;
     }
+
     public int randomTaunter(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "inCombat"))
@@ -266,7 +281,7 @@ public class obiwan_lair_boss extends script.base_script
                     chat.chat(self, player, pp);
                     messageTo(self, "randomTaunter", null, rand(10, 30), false);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(self, "ignoreTaunt");
                 }
@@ -274,6 +289,7 @@ public class obiwan_lair_boss extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int randomPraiser(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "inCombat"))
@@ -308,6 +324,7 @@ public class obiwan_lair_boss extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int specialForcePowerAttackWindup(obj_id self, dictionary params) throws InterruptedException
     {
         debugLogging("//***// specialForcePowerAttackWindup: ", "////>>>> ENTERED");
@@ -353,6 +370,7 @@ public class obiwan_lair_boss extends script.base_script
         messageTo(dungeon, "obiwanWarnsOfSpecialAttack", null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int specialForcePowerAttackExecute(obj_id self, dictionary params) throws InterruptedException
     {
         debugLogging("//***// specialForcePowerAttackExecute: ", "////>>>> ENTERED");

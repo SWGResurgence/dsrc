@@ -1,58 +1,77 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class corellia_coronet_demmi_wot extends script.base_script
 {
+    public static String c_stringFile = "conversation/corellia_coronet_demmi_wot";
+
     public corellia_coronet_demmi_wot()
     {
     }
-    public static String c_stringFile = "conversation/corellia_coronet_demmi_wot";
+
     public boolean corellia_coronet_demmi_wot_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean corellia_coronet_demmi_wot_condition_starportVandalsBegin(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "corellia_coronet_capitol_problems_starport_vandals_2", "starport_vandals_5");
     }
+
     public boolean corellia_coronet_demmi_wot_condition_alreadyHasSpaceMission(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasQuest(player);
     }
+
     public boolean corellia_coronet_demmi_wot_condition_onFirstRagtagSquad(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasQuest(player, "assassinate", "corellia_coronet_starport_vandals_a");
     }
+
     public boolean corellia_coronet_demmi_wot_condition_playerHasShip(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_utils.hasShip(player);
     }
+
     public boolean corellia_coronet_demmi_wot_condition_wonSecondRagtagSquad(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "corellia_coronet_capitol_problems_starport_vandals_2", "starport_vandals_6");
     }
+
     public boolean corellia_coronet_demmi_wot_condition_onSecondRagtagSquad(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasQuest(player, "assassinate", "corellia_coronet_starport_vandals_b");
     }
+
     public boolean corellia_coronet_demmi_wot_condition_starportVandalsCompleted(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "corellia_coronet_capitol_problems_starport_vandals_2") || groundquests.hasCompletedTask(player, "corellia_coronet_capitol_problems_starport_vandals_2", "starport_vandals_6");
     }
+
     public void corellia_coronet_demmi_wot_action_giveFirstRagtagSquad(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "starport_vandals_5");
     }
+
     public void corellia_coronet_demmi_wot_action_giveShip(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantNewbieShip(player, "neutral");
     }
+
     public void corellia_coronet_demmi_wot_action_starportVandalsEnded(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "starport_vandals_6");
     }
+
     public int corellia_coronet_demmi_wot_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_30"))
@@ -79,7 +98,7 @@ public class corellia_coronet_demmi_wot extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_34");
@@ -92,7 +111,7 @@ public class corellia_coronet_demmi_wot extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corellia_coronet_demmi_wot.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -102,6 +121,7 @@ public class corellia_coronet_demmi_wot extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corellia_coronet_demmi_wot_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_34"))
@@ -129,7 +149,7 @@ public class corellia_coronet_demmi_wot extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_17");
@@ -138,7 +158,7 @@ public class corellia_coronet_demmi_wot extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corellia_coronet_demmi_wot.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -166,6 +186,7 @@ public class corellia_coronet_demmi_wot extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corellia_coronet_demmi_wot_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_17"))
@@ -193,7 +214,7 @@ public class corellia_coronet_demmi_wot extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_17");
@@ -202,7 +223,7 @@ public class corellia_coronet_demmi_wot extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corellia_coronet_demmi_wot.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -220,6 +241,7 @@ public class corellia_coronet_demmi_wot extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -229,11 +251,13 @@ public class corellia_coronet_demmi_wot extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -242,18 +266,21 @@ public class corellia_coronet_demmi_wot extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.corellia_coronet_demmi_wot");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -301,7 +328,7 @@ public class corellia_coronet_demmi_wot extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_30");
@@ -309,7 +336,7 @@ public class corellia_coronet_demmi_wot extends script.base_script
                 utils.setScriptVar(player, "conversation.corellia_coronet_demmi_wot.branchId", 5);
                 npcStartConversation(player, npc, "corellia_coronet_demmi_wot", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -324,6 +351,7 @@ public class corellia_coronet_demmi_wot extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("corellia_coronet_demmi_wot"))

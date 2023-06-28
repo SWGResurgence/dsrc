@@ -1,97 +1,82 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class restuss_rebel_ground_destroy_3 extends script.base_script
 {
+    public static String c_stringFile = "conversation/restuss_rebel_ground_destroy_3";
+
     public restuss_rebel_ground_destroy_3()
     {
     }
-    public static String c_stringFile = "conversation/restuss_rebel_ground_destroy_3";
+
     public boolean restuss_rebel_ground_destroy_3_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean restuss_rebel_ground_destroy_3_condition_stage3ready(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (factions.isRebel(player) && restuss_event.isRestussInStageThree(npc))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return factions.isRebel(player) && restuss_event.isRestussInStageThree(npc);
     }
+
     public boolean restuss_rebel_ground_destroy_3_condition_mission1Active(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isQuestActive(player, "restuss_rebel_st3_destroy_installation_1") || groundquests.isQuestActive(player, "restuss_rebel_st3_destroy_installation_1_commando"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.isQuestActive(player, "restuss_rebel_st3_destroy_installation_1") || groundquests.isQuestActive(player, "restuss_rebel_st3_destroy_installation_1_commando");
     }
+
     public boolean restuss_rebel_ground_destroy_3_condition_mission1Success(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "restuss_rebel_st3_destroy_installation_1", "returnVoldez1") || groundquests.isTaskActive(player, "restuss_rebel_st3_destroy_installation_1_commando", "returnVoldez1"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.isTaskActive(player, "restuss_rebel_st3_destroy_installation_1", "returnVoldez1") || groundquests.isTaskActive(player, "restuss_rebel_st3_destroy_installation_1_commando", "returnVoldez1");
     }
+
     public boolean restuss_rebel_ground_destroy_3_condition_completedMission1(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.hasCompletedQuest(player, "restuss_rebel_st3_destroy_installation_1") || groundquests.hasCompletedQuest(player, "restuss_rebel_st3_destroy_installation_1_commando"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.hasCompletedQuest(player, "restuss_rebel_st3_destroy_installation_1") || groundquests.hasCompletedQuest(player, "restuss_rebel_st3_destroy_installation_1_commando");
     }
+
     public boolean restuss_rebel_ground_destroy_3_condition_mission2Active(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "restuss_rebel_st3_destroy_boss");
     }
+
     public boolean restuss_rebel_ground_destroy_3_condition_mission2Success(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "restuss_rebel_st3_destroy_boss", "returnVoldez2");
     }
+
     public boolean restuss_rebel_ground_destroy_3_condition_notCommando(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean restuss_rebel_ground_destroy_3_condition_commando(obj_id player, obj_id npc) throws InterruptedException
     {
         return false;
     }
+
     public boolean restuss_rebel_ground_destroy_3_condition_completedMission2(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "restuss_rebel_st3_destroy_boss");
     }
+
     public boolean restuss_rebel_ground_destroy_3_condition_playerRebel(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (factions.isRebel(player))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return factions.isRebel(player);
     }
+
     public boolean restuss_rebel_ground_destroy_3_condition_isPlayerImperial(obj_id player, obj_id npc) throws InterruptedException
     {
         return factions.isImperial(player);
     }
+
     public void restuss_rebel_ground_destroy_3_action_giveAntenna(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!groundquests.isQuestActive(player, "restuss_rebel_st3_destroy_boss"))
@@ -99,10 +84,12 @@ public class restuss_rebel_ground_destroy_3 extends script.base_script
             groundquests.grantQuest(player, "restuss_rebel_st3_destroy_installation_1");
         }
     }
+
     public void restuss_rebel_ground_destroy_3_action_reward1(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "returnedVoldez1");
     }
+
     public void restuss_rebel_ground_destroy_3_action_giveKillBoss(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!groundquests.isQuestActive(player, "restuss_rebel_st3_destroy_installation_1") || !groundquests.isQuestActive(player, "restuss_rebel_st3_destroy_installation_1_commando"))
@@ -110,10 +97,12 @@ public class restuss_rebel_ground_destroy_3 extends script.base_script
             groundquests.grantQuest(player, "restuss_rebel_st3_destroy_boss");
         }
     }
+
     public void restuss_rebel_ground_destroy_3_action_reward2(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "returnedVoldez2");
     }
+
     public void restuss_rebel_ground_destroy_3_action_giveAntennaCommando(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!groundquests.isQuestActive(player, "restuss_rebel_st3_destroy_boss"))
@@ -121,10 +110,12 @@ public class restuss_rebel_ground_destroy_3 extends script.base_script
             groundquests.grantQuest(player, "restuss_rebel_st3_destroy_installation_1_commando");
         }
     }
+
     public void restuss_rebel_ground_destroy_3_action_eject(obj_id player, obj_id npc) throws InterruptedException
     {
         expelFromBuilding(player);
     }
+
     public int restuss_rebel_ground_destroy_3_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_74"))
@@ -172,7 +163,7 @@ public class restuss_rebel_ground_destroy_3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82");
@@ -189,7 +180,7 @@ public class restuss_rebel_ground_destroy_3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.restuss_rebel_ground_destroy_3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -211,6 +202,7 @@ public class restuss_rebel_ground_destroy_3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int restuss_rebel_ground_destroy_3_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_82"))
@@ -253,6 +245,7 @@ public class restuss_rebel_ground_destroy_3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int restuss_rebel_ground_destroy_3_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_27"))
@@ -300,7 +293,7 @@ public class restuss_rebel_ground_destroy_3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_65");
@@ -317,7 +310,7 @@ public class restuss_rebel_ground_destroy_3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.restuss_rebel_ground_destroy_3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -339,6 +332,7 @@ public class restuss_rebel_ground_destroy_3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int restuss_rebel_ground_destroy_3_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_65"))
@@ -381,6 +375,7 @@ public class restuss_rebel_ground_destroy_3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int restuss_rebel_ground_destroy_3_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_52"))
@@ -423,6 +418,7 @@ public class restuss_rebel_ground_destroy_3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -432,11 +428,13 @@ public class restuss_rebel_ground_destroy_3 extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -445,18 +443,21 @@ public class restuss_rebel_ground_destroy_3 extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.restuss_rebel_ground_destroy_3");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -536,7 +537,7 @@ public class restuss_rebel_ground_destroy_3 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_74");
@@ -552,7 +553,7 @@ public class restuss_rebel_ground_destroy_3 extends script.base_script
                 utils.setScriptVar(player, "conversation.restuss_rebel_ground_destroy_3.branchId", 6);
                 npcStartConversation(player, npc, "restuss_rebel_ground_destroy_3", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -589,7 +590,7 @@ public class restuss_rebel_ground_destroy_3 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_27");
@@ -605,7 +606,7 @@ public class restuss_rebel_ground_destroy_3 extends script.base_script
                 utils.setScriptVar(player, "conversation.restuss_rebel_ground_destroy_3.branchId", 13);
                 npcStartConversation(player, npc, "restuss_rebel_ground_destroy_3", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -642,7 +643,7 @@ public class restuss_rebel_ground_destroy_3 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_52");
@@ -658,7 +659,7 @@ public class restuss_rebel_ground_destroy_3 extends script.base_script
                 utils.setScriptVar(player, "conversation.restuss_rebel_ground_destroy_3.branchId", 20);
                 npcStartConversation(player, npc, "restuss_rebel_ground_destroy_3", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -682,6 +683,7 @@ public class restuss_rebel_ground_destroy_3 extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("restuss_rebel_ground_destroy_3"))

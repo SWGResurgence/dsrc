@@ -1,5 +1,11 @@
 package script.theme_park.alderaan.act2;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -11,103 +17,104 @@ import java.util.Vector;
 
 public class imperial_relay_station extends script.base_script
 {
+    public static final String[] TEMPLATE_LIST =
+            {
+                    "object/building/poi/generic_flatten_medium.iff",
+                    "object/static/structure/corellia/corl_power_transformer_s02.iff",
+                    "object/static/structure/corellia/corl_power_connector.iff",
+                    "object/static/structure/tatooine/antenna_tatt_style_1.iff",
+                    "coa2_relay_captain",
+                    "coa2_relay_guard",
+                    "coa2_relay_guard",
+                    "coa2_relay_guard",
+                    "coa2_relay_guard",
+                    "coa2_relay_guard",
+                    "coa2_relay_guard"
+            };
+    public static final float[][] LOCATION_LIST =
+            {
+
+                    {
+                            0.00f,
+                            0.0f,
+                            0.0f,
+                            0.0f
+                    },
+
+                    {
+                            9.87f,
+                            0.0f,
+                            0.0f,
+                            0.0f
+                    },
+
+                    {
+                            5.90f,
+                            0.0f,
+                            0.0f,
+                            0.0f
+                    },
+
+                    {
+                            9.86f,
+                            0.0f,
+                            0.0f,
+                            0.0f
+                    },
+
+                    {
+                            1.77f,
+                            0.0f,
+                            -3.70f,
+                            180.0f
+                    },
+
+                    {
+                            -2.00f,
+                            0.0f,
+                            -3.57f,
+                            180.0f
+                    },
+
+                    {
+                            9.29f,
+                            0.0f,
+                            -3.46f,
+                            180.0f
+                    },
+
+                    {
+                            -14.60f,
+                            0.0f,
+                            -8.96f,
+                            180.0f
+                    },
+
+                    {
+                            -14.57f,
+                            0.0f,
+                            6.27f,
+                            180.0f
+                    },
+
+                    {
+                            -5.04f,
+                            0.0f,
+                            -12.26f,
+                            180.0f
+                    },
+
+                    {
+                            2.26f,
+                            0.0f,
+                            7.65f,
+                            180.0f
+                    }
+            };
     public imperial_relay_station()
     {
     }
-    public static final String[] TEMPLATE_LIST = 
-    {
-        "object/building/poi/generic_flatten_medium.iff",
-        "object/static/structure/corellia/corl_power_transformer_s02.iff",
-        "object/static/structure/corellia/corl_power_connector.iff",
-        "object/static/structure/tatooine/antenna_tatt_style_1.iff",
-        "coa2_relay_captain",
-        "coa2_relay_guard",
-        "coa2_relay_guard",
-        "coa2_relay_guard",
-        "coa2_relay_guard",
-        "coa2_relay_guard",
-        "coa2_relay_guard"
-    };
-    public static final float[][] LOCATION_LIST = 
-    {
-        
-        {
-            0.00f,
-            0.0f,
-            0.0f,
-            0.0f
-        },
-        
-        {
-            9.87f,
-            0.0f,
-            0.0f,
-            0.0f
-        },
-        
-        {
-            5.90f,
-            0.0f,
-            0.0f,
-            0.0f
-        },
-        
-        {
-            9.86f,
-            0.0f,
-            0.0f,
-            0.0f
-        },
-        
-        {
-            1.77f,
-            0.0f,
-            -3.70f,
-            180.0f
-        },
-        
-        {
-            -2.00f,
-            0.0f,
-            -3.57f,
-            180.0f
-        },
-        
-        {
-            9.29f,
-            0.0f,
-            -3.46f,
-            180.0f
-        },
-        
-        {
-            -14.60f,
-            0.0f,
-            -8.96f,
-            180.0f
-        },
-        
-        {
-            -14.57f,
-            0.0f,
-            6.27f,
-            180.0f
-        },
-        
-        {
-            -5.04f,
-            0.0f,
-            -12.26f,
-            180.0f
-        },
-        
-        {
-            2.26f,
-            0.0f,
-            7.65f,
-            180.0f
-        }
-    };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String planet = getCurrentSceneName();
@@ -123,6 +130,7 @@ public class imperial_relay_station extends script.base_script
         messageTo(self, "spawnNextObject", params, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnNextObject(obj_id self, dictionary params) throws InterruptedException
     {
         int objectNum = params.getInt("index");
@@ -164,17 +172,19 @@ public class imperial_relay_station extends script.base_script
             params.put("index", objectNum);
             messageTo(self, "spawnNextObject", params, 2, false);
         }
-        else 
+        else
         {
             initCamp();
         }
         return SCRIPT_CONTINUE;
     }
+
     public void initCamp() throws InterruptedException
     {
         obj_id self = getSelf();
         setObjVar(self, "coa2.rebel.numGuards", 6);
     }
+
     public int guardKilled(obj_id self, dictionary params) throws InterruptedException
     {
         int numGuards = getIntObjVar(self, "coa2.rebel.numGuards");
@@ -190,17 +200,21 @@ public class imperial_relay_station extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cleanup(obj_id self, dictionary params) throws InterruptedException
     {
         Vector objectList = getResizeableObjIdArrayObjVar(self, "coa2.rebel.obj_list");
-        for (Object o : objectList) {
-            if (isIdValid(((obj_id) o))) {
+        for (Object o : objectList)
+        {
+            if (isIdValid(((obj_id) o)))
+            {
                 destroyObject(((obj_id) o));
             }
         }
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int unlockStation(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id cell = getCellId(self, "spawn");

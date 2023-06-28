@@ -1,5 +1,11 @@
 package script.event.gcwlaunch;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.create;
 import script.library.locations;
 import script.location;
@@ -7,36 +13,39 @@ import script.obj_id;
 
 public class gcwlaunch_spawner extends script.base_script
 {
+    public static final int[] LOCS =
+            {
+                    110,
+                    52,
+                    -5342,
+                    -150,
+                    28,
+                    -4720,
+                    4812,
+                    4,
+                    -4705,
+                    -1280,
+                    0,
+                    -3590,
+                    6902,
+                    330,
+                    -5550,
+                    -4897,
+                    6,
+                    4106
+            };
+
     public gcwlaunch_spawner()
     {
     }
-    public static final int[] LOCS = 
-    {
-        110,
-        52,
-        -5342,
-        -150,
-        28,
-        -4720,
-        4812,
-        4,
-        -4705,
-        -1280,
-        0,
-        -3590,
-        6902,
-        330,
-        -5550,
-        -4897,
-        6,
-        4106
-    };
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "event.gcwlaunch.spawner"))
         {
             int locStart;
-            switch (locations.getGuardSpawnerRegionName(getLocation(self))) {
+            switch (locations.getGuardSpawnerRegionName(getLocation(self)))
+            {
                 case "@tatooine_region_names:anchorhead":
                     locStart = 0;
                     break;

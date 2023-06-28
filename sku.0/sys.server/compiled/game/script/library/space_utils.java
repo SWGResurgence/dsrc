@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 import java.util.Objects;
@@ -34,6 +40,7 @@ public class space_utils extends script.base_script
                     "ship_gunner6_pob",
                     "ship_gunner7_pob"
             };
+
     public space_utils()
     {
     }

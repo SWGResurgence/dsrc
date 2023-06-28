@@ -1,5 +1,11 @@
 package script.systems.dungeon_sequencer;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -28,6 +34,7 @@ public class sequence_controller extends script.base_script
     public static final String ABSOLUTE_TIMER = "absolute_time_sent_record";
     public static final String TABLE_DATA = "instance_data.table_data";
     public static final boolean LOGGING = true;
+
     public sequence_controller()
     {
     }
@@ -118,13 +125,13 @@ public class sequence_controller extends script.base_script
             if (!trigger_key.contains(triggerId[i]))
             {
                 trigger_key.add(triggerId[i]);
-                key_list.add("" + i);
+                key_list.add(String.valueOf(i));
                 dict.put("triggerId-" + triggerId[i], key_list);
             }
             else
             {
                 key_list = dict.getResizeableStringArray("triggerId-" + triggerId[i]);
-                key_list.add("" + i);
+                key_list.add(String.valueOf(i));
                 dict.put("triggerId-" + triggerId[i], key_list);
             }
         }
@@ -215,7 +222,7 @@ public class sequence_controller extends script.base_script
     {
         trial.bumpSession(self);
         obj_id[] children = getSpawnedChildren(self);
-        if (children != null && children.length > 0)
+        if (children != null)
         {
             for (obj_id child : children)
             {
@@ -229,7 +236,7 @@ public class sequence_controller extends script.base_script
                     else
                     {
                         obj_id[] objects = trial.getAllObjectsInDungeon(child);
-                        if (objects != null && objects.length > 0)
+                        if (objects != null)
                         {
                             for (obj_id object : objects)
                             {
@@ -260,7 +267,7 @@ public class sequence_controller extends script.base_script
         utils.removeScriptVar(self, trial.SEQUENCER_PATH_DATA);
         utils.removeScriptVarTree(self, TABLE_DATA);
         obj_id[] tempObjects = getObjectsInRange(getLocation(self), 1000.0f);
-        if (tempObjects != null && tempObjects.length > 0)
+        if (tempObjects != null)
         {
             for (obj_id tempObject : tempObjects)
             {
@@ -286,7 +293,7 @@ public class sequence_controller extends script.base_script
                     else
                     {
                         obj_id[] objects = trial.getAllObjectsInDungeon(tempObject);
-                        if (objects != null && objects.length > 0)
+                        if (objects != null)
                         {
                             for (obj_id object : objects)
                             {
@@ -310,14 +317,13 @@ public class sequence_controller extends script.base_script
             }
         }
         obj_id[] selfCellList = getCellIds(self);
-        if (selfCellList != null && selfCellList.length > 0)
+        if (selfCellList != null)
         {
             for (obj_id obj_id : selfCellList)
             {
                 permissionsMakePublic(obj_id);
             }
         }
-        return;
     }
 
     public int handleDelayCleanup(obj_id self, dictionary params) throws InterruptedException
@@ -772,7 +778,6 @@ public class sequence_controller extends script.base_script
         }
         PROFILER_STOP("LOWER_5");
         PROFILER_STOP("SPAWN_ACTOR_ROW");
-        return;
     }
 
     public void attachSpawnScripts(obj_id subject, String spawnScripts) throws InterruptedException
@@ -1084,7 +1089,7 @@ public class sequence_controller extends script.base_script
             float range = utils.stringToFloat(parse[2]);
             players = getPlayerCreaturesInRange(spawnLoc, range);
         }
-        if (players == null || players.length == 0)
+        if (players == null)
         {
             return;
         }
@@ -1295,7 +1300,7 @@ public class sequence_controller extends script.base_script
             effect = parse[2];
         }
         obj_id[] spawn_id = getObjectsInSpawnedListWithObjVar(getSelf(), "spawn_id");
-        if (spawn_id == null || spawn_id.length <= 0)
+        if (spawn_id == null)
         {
             return;
         }
@@ -1375,7 +1380,7 @@ public class sequence_controller extends script.base_script
         {
             sentIds = utils.getResizeableStringArrayScriptVar(getSelf(), ABSOLUTE_TIMER);
         }
-        if (sentIds.indexOf(triggerId) > -1)
+        if (sentIds.contains(triggerId))
         {
             return;
         }
@@ -1510,7 +1515,6 @@ public class sequence_controller extends script.base_script
                 utils.setScriptVar(getSelf(), WFC_MASTER, vectorList);
             }
         }
-        return;
     }
 
     public obj_id establishPatrolPoint(String ppData, location spawnLoc, boolean isIndoor) throws InterruptedException
@@ -1548,7 +1552,7 @@ public class sequence_controller extends script.base_script
             return;
         }
         obj_id[] pp = getObjectsInSpawnedListWithObjVar(self, "sequence_controller.patrolPointName");
-        if (pp == null || pp.length == 0)
+        if (pp == null)
         {
             return;
         }
@@ -1580,7 +1584,7 @@ public class sequence_controller extends script.base_script
             {
                 continue;
             }
-            ppData.add("" + obj_id + "-" + getDistance(point, obj_id));
+            ppData.add(obj_id + "-" + getDistance(point, obj_id));
         }
         utils.setScriptVar(point, trial.WP_DATA, ppData);
     }
@@ -1867,7 +1871,7 @@ public class sequence_controller extends script.base_script
             if (who.startsWith("player"))
             {
                 obj_id[] players = instance.getPlayersInInstanceArea(self);
-                if (players != null && players.length > 0)
+                if (players != null)
                 {
                     for (obj_id player : players)
                     {
@@ -1883,7 +1887,7 @@ public class sequence_controller extends script.base_script
                 String[] subWho = split(who, '-');
                 String spawn_id = subWho[1];
                 obj_id[] allIds = trial.getObjectsInInstanceBySpawnId(self, spawn_id);
-                if (allIds != null && allIds.length > 0)
+                if (allIds != null)
                 {
                     for (obj_id allId : allIds)
                     {
@@ -2000,7 +2004,7 @@ public class sequence_controller extends script.base_script
                     locy = masterLoc.y + locy;
                     locz = masterLoc.z + locz;
                 }
-                pathLoc = "" + locx + "," + locy + "," + locz + "," + cell + "," + masterLoc.area;
+                pathLoc = locx + "," + locy + "," + locz + "," + cell + "," + masterLoc.area;
                 newPathData.add(pointName + "|" + pathLoc);
             }
         }
@@ -2023,9 +2027,9 @@ public class sequence_controller extends script.base_script
         String[] patrolListMaster = dict.getStringArray("patrolListMaster");
         for (String s : patrolListMaster)
         {
-            doLogging("xx", "" + s);
+            doLogging("xx", s);
         }
-        doLogging("xx", "" + patrolListMaster.length);
+        doLogging("xx", String.valueOf(patrolListMaster.length));
         return SCRIPT_CONTINUE;
     }
 

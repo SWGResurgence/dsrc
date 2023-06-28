@@ -1,5 +1,11 @@
 package script.gm;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -83,37 +89,51 @@ public class cmd extends script.base_script
 
     public int cmdForceCommand(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if(!isGod(self)) {
+        if (!isGod(self))
+        {
             return SCRIPT_CONTINUE;
         }
         StringTokenizer st = new StringTokenizer(params);
-        if(!st.hasMoreTokens()) {
+        if (!st.hasMoreTokens())
+        {
             broadcast(self, "Syntax: /forceCommand <-target OR <oid>> </command with params>");
             broadcast(self, "Example: /forceCommand 9248492842 /tell bubba-joe hi");
-        } else {
+        }
+        else
+        {
             String focus = st.nextToken();
-            if(focus.contains("target")) {
+            if (focus.contains("target"))
+            {
                 target = getLookAtTarget(self);
-            } else {
-                if (focus.matches(".*\\d.*")) {
+            }
+            else
+            {
+                if (focus.matches(".*\\d.*"))
+                {
                     target = obj_id.getObjId(Long.parseLong(focus));
-                } else {
+                }
+                else
+                {
                     broadcast(self, "Syntax: /forceCommand <-target OR objId> <command with params>");
                     broadcast(self, "Example: /forceCommand 9248492842 tell bubba-joe hii");
                     return SCRIPT_CONTINUE;
                 }
             }
-            if(!isIdValid(target) || !isPlayer(target)) {
+            if (!isIdValid(target) || !isPlayer(target))
+            {
                 broadcast(self, "forceCommand: Error: Target was not valid. Target must be a player.");
                 return SCRIPT_CONTINUE;
             }
-            if(!st.hasMoreTokens()) {
+            if (!st.hasMoreTokens())
+            {
                 broadcast(self, "Syntax: /forceCommand <-target OR objId> <command with params>");
                 broadcast(self, "Example: /forceCommand 9248492842 tell bubba-joe hi");
-            } else {
+            }
+            else
+            {
                 String cmd = st.nextToken("").replaceFirst(" ", "/");
                 sendConsoleCommand(cmd, target);
-                broadcast(self, "forceCommand: Successfully sent forceful command "+cmd+" request to "+getPlayerName(target)+ "("+target+").");
+                broadcast(self, "forceCommand: Successfully sent forceful command " + cmd + " request to " + getPlayerName(target) + "(" + target + ").");
             }
             return SCRIPT_CONTINUE;
         }
@@ -2243,7 +2263,7 @@ public class cmd extends script.base_script
                     return SCRIPT_CONTINUE;
                 }
                 Vector names = (Vector) campsDat.get(1);
-                if (names.indexOf(key) < 0)
+                if (!names.contains(key))
                 {
                     broadcast(self, "'" + key + "' is not a valid camp name.  Valid camp names are:");
                     for (Object name : names)
@@ -3950,7 +3970,7 @@ public class cmd extends script.base_script
     public int cmdCompleteRestussStageOne(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id[] spawnedItems = getAllObjectsWithObjVar(getLocation(self), 200.0f, "element");
-        if (spawnedItems == null || spawnedItems.length == 0)
+        if (spawnedItems == null)
         {
             return SCRIPT_CONTINUE;
         }
@@ -4294,7 +4314,7 @@ public class cmd extends script.base_script
         if (isValidId(targetObject))
         {
             String combinedString = dump.csTargetDump(self, targetObject, true);
-            String objIdToString = "" + targetObject;
+            String objIdToString = String.valueOf(targetObject);
             utils.setScriptVar(self, "export.lookAtTarget", objIdToString);
             gm.createDumpTargetUI(self, combinedString);
         }
@@ -4509,10 +4529,10 @@ public class cmd extends script.base_script
             showAdminCmdSyntax(self);
             return SCRIPT_CONTINUE;
         }
-        if(command.equalsIgnoreCase("compileScripts") || command.equalsIgnoreCase("cs"))
+        if (command.equalsIgnoreCase("compileScripts") || command.equalsIgnoreCase("cs"))
         {
             final String result = system_process.runAndGetOutput("ant compile_java", new File("../../"));
-            if(result.contains("BUILD SUCCESSFUL"))
+            if (result.contains("BUILD SUCCESSFUL"))
             {
                 broadcast(self, "compileScripts: ant compile_java BUILD SUCCESSFUL.");
             }
@@ -4524,9 +4544,9 @@ public class cmd extends script.base_script
             return SCRIPT_CONTINUE;
         }
 
-        if(command.equalsIgnoreCase("compileAndReloadScript") || command.equalsIgnoreCase("crs"))
+        if (command.equalsIgnoreCase("compileAndReloadScript") || command.equalsIgnoreCase("crs"))
         {
-            if(!st.hasMoreTokens())
+            if (!st.hasMoreTokens())
             {
                 broadcast(self, "Syntax: /admin crs <script>");
             }
@@ -4534,9 +4554,9 @@ public class cmd extends script.base_script
             {
                 final String script = st.nextToken();
                 final String result = system_process.runAndGetOutput("ant compile_java", new File("../../"));
-                if(result.contains("BUILD SUCCESSFUL"))
+                if (result.contains("BUILD SUCCESSFUL"))
                 {
-                    broadcast(self, "compileAndReloadScript: ant compile_java BUILD SUCCESSFUL. Reloading "+script+"...");
+                    broadcast(self, "compileAndReloadScript: ant compile_java BUILD SUCCESSFUL. Reloading " + script + "...");
                     sendConsoleCommand("/script reload " + script, self);
                 }
                 else
@@ -4848,7 +4868,8 @@ public class cmd extends script.base_script
             else
             {
                 obj_id[] players = getAllPlayers(getLocation(self), 8000.0f);
-                for (obj_id player : players) {
+                for (obj_id player : players)
+                {
                     String sound = st.nextToken();
                     playClientEffectObj(player, sound, player, "");
                 }
@@ -4864,7 +4885,8 @@ public class cmd extends script.base_script
             else
             {
                 obj_id[] players = getAllPlayers(getLocation(self), 8000.0f);
-                for (obj_id player : players) {
+                for (obj_id player : players)
+                {
                     String sound = st.nextToken();
                     playClientEffectObj(player, sound, player, "head");
                 }
@@ -4882,10 +4904,12 @@ public class cmd extends script.base_script
                 String item = st.nextToken();
                 int count = Integer.parseInt(st.nextToken());
                 obj_id[] players = getAllPlayers(getLocation(self), 250.0f);
-                for (obj_id player : players) {
+                for (obj_id player : players)
+                {
                     obj_id pInv = utils.getInventoryContainer(player);
                     obj_id pItem = static_item.createNewItemFunction(item, pInv, count);
-                    if (isIdValid(pItem)) {
+                    if (isIdValid(pItem))
+                    {
                         broadcast(player, "\\#DD1234You have been awarded items!\\#FFFFFF");
                     }
                 }
@@ -4899,9 +4923,12 @@ public class cmd extends script.base_script
                 radius = Float.parseFloat(st.nextToken());
             }
             obj_id[] creatures = getCreaturesInRange(getLocation(self), radius);
-            for (obj_id creature : creatures) {
-                if (isMob(creature)) {
-                    if (hasObjVar(self, "loot.numItems")) {
+            for (obj_id creature : creatures)
+            {
+                if (isMob(creature))
+                {
+                    if (hasObjVar(self, "loot.numItems"))
+                    {
                         setObjVar(creature, "loot.numItems", st.nextToken());
                     }
                 }
@@ -4924,7 +4951,8 @@ public class cmd extends script.base_script
             {
                 chat.chat(iTar, words);
             }
-            else {
+            else
+            {
 
                 broadcast(self, "Syntax: /admin say <message>");
             }
@@ -4967,7 +4995,8 @@ public class cmd extends script.base_script
         else if (command.equalsIgnoreCase("setcountcontainer"))
         {
             obj_id[] itemsInside = utils.getContents(utils.getInventoryContainer(getIntendedTarget(self)));
-            for (obj_id itemInside : itemsInside) {
+            for (obj_id itemInside : itemsInside)
+            {
                 setCount(itemInside, Integer.parseInt(st.nextToken()));
             }
         }
@@ -5025,7 +5054,7 @@ public class cmd extends script.base_script
             float radius = Float.parseFloat(st.nextToken());
             location where = getLocation(self);
             spawnRingInterior(self, num, radius, where, creatureToSpawn);
-            
+
         }
         else if (command.equalsIgnoreCase("playsoundloctarget"))
         {
@@ -5107,12 +5136,13 @@ public class cmd extends script.base_script
             for (int i = 0; i < Integer.parseInt(copies); i++)
             {
                 obj_id cloned_item = utils.cloneObject(iTarget, pInv);
-                for (String s : getScriptList(iTarget)) {
+                for (String s : getScriptList(iTarget))
+                {
                     attachScript(iTarget, s);
                     setName(cloned_item, getName(iTarget));
                     utils.copyObjectData(iTarget, cloned_item);
                 }
-                broadcast(self,"Cloned " + getName(iTarget) + " to " + getName(self) + "'s inventory with " + copies + " copies.");
+                broadcast(self, "Cloned " + getName(iTarget) + " to " + getName(self) + "'s inventory with " + copies + " copies.");
 
             }
             return SCRIPT_CONTINUE;
@@ -5134,7 +5164,7 @@ public class cmd extends script.base_script
             }
             else
             {
-                broadcast(self,"You are not riding a vehicle.");
+                broadcast(self, "You are not riding a vehicle.");
             }
         }
         else
@@ -5155,8 +5185,8 @@ public class cmd extends script.base_script
         for (int i = 0; i < num; i++)
         {
             angle = angle + angleInc;
-            float newX = x + (float)Math.cos(angle) * radius;
-            float newY = y + (float)Math.sin(angle) * radius;
+            float newX = x + (float) Math.cos(angle) * radius;
+            float newY = y + (float) Math.sin(angle) * radius;
             location newLoc = new location(newX, newY, z, where.area, where.cell);
             obj_id creature = create.object(creatureToSpawn, newLoc);
             if (isIdValid(creature))
@@ -5265,6 +5295,7 @@ public class cmd extends script.base_script
         setCount(target, utils.stringToInt(params));
         return SCRIPT_CONTINUE;
     }
+
     public int spawnRing(obj_id self, int numMobs, float radius, location loc, String creatureName) throws InterruptedException
     {
         if (!isIdValid(self) || !exists(self))
@@ -5278,11 +5309,12 @@ public class cmd extends script.base_script
             float angle = (float) (i * (360 / numMobs));
             x = loc.x + (float) Math.cos(angle) * radius;
             z = loc.z + (float) Math.sin(angle) * radius;
-            obj_id creatureObj = create.object(creatureName, new location(x, getHeightAtLocation(x,z), z, loc.area));
+            obj_id creatureObj = create.object(creatureName, new location(x, getHeightAtLocation(x, z), z, loc.area));
             faceTo(creatureObj, self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasScript(self, "developer.soe.beta.test_create"))

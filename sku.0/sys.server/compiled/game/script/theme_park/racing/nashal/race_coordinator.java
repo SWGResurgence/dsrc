@@ -1,65 +1,72 @@
 package script.theme_park.racing.nashal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class race_coordinator extends script.base_script
 {
+    public static final String RACING_STF = "theme_park/racing/racing";
+    public static final int[] CHECK_POINT =
+            {
+                    3787,
+                    0,
+                    4764,
+                    3485,
+                    0,
+                    4556,
+                    3042,
+                    0,
+                    4565,
+                    2248,
+                    0,
+                    5169,
+                    1839,
+                    0,
+                    4966,
+                    1583,
+                    0,
+                    5062,
+                    1499,
+                    0,
+                    4802,
+                    1485,
+                    0,
+                    4366,
+                    2248,
+                    0,
+                    3905,
+                    1886,
+                    0,
+                    3211,
+                    2448,
+                    0,
+                    2457,
+                    2841,
+                    0,
+                    2923,
+                    3670,
+                    0,
+                    3475,
+                    4129,
+                    0,
+                    3652,
+                    4511,
+                    0,
+                    4054,
+                    4529,
+                    0,
+                    4831
+            };
     public race_coordinator()
     {
     }
-    public static final String RACING_STF = "theme_park/racing/racing";
-    public static final int[] CHECK_POINT = 
-    {
-        3787,
-        0,
-        4764,
-        3485,
-        0,
-        4556,
-        3042,
-        0,
-        4565,
-        2248,
-        0,
-        5169,
-        1839,
-        0,
-        4966,
-        1583,
-        0,
-        5062,
-        1499,
-        0,
-        4802,
-        1485,
-        0,
-        4366,
-        2248,
-        0,
-        3905,
-        1886,
-        0,
-        3211,
-        2448,
-        0,
-        2457,
-        2841,
-        0,
-        2923,
-        3670,
-        0,
-        3475,
-        4129,
-        0,
-        3652,
-        4511,
-        0,
-        4054,
-        4529,
-        0,
-        4831
-    };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
@@ -73,6 +80,7 @@ public class race_coordinator extends script.base_script
         messageTo(self, "resetDailyTime", null, 60 * 60 * 24, false);
         return SCRIPT_CONTINUE;
     }
+
     public int resetDailyTime(obj_id self, dictionary params) throws InterruptedException
     {
         float topRecord = 1285.0f;
@@ -82,6 +90,7 @@ public class race_coordinator extends script.base_script
         messageTo(self, "resetDailyTime", null, 60 * 60 * 24, false);
         return SCRIPT_CONTINUE;
     }
+
     public int messageStartMission(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -101,7 +110,7 @@ public class race_coordinator extends script.base_script
         {
             returnLoc = getLocation(npc);
         }
-        else 
+        else
         {
             returnLoc = getLocation(building);
         }
@@ -126,7 +135,7 @@ public class race_coordinator extends script.base_script
         {
             messageTo(player, "handleRestartMission", params, 0, false);
         }
-        else 
+        else
         {
             attachScript(player, "theme_park.racing.nashal.player_racing");
         }
@@ -134,6 +143,7 @@ public class race_coordinator extends script.base_script
         CustomerServiceLog("Racing", "Player " + playerName + " [" + player + "] started the Nashal River race.");
         return SCRIPT_CONTINUE;
     }
+
     public int messageRegisterBest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -157,9 +167,9 @@ public class race_coordinator extends script.base_script
             {
                 if (!badge.hasBadge(player, "bdg_racing_nashal_river"))
                 {
-                    
+
                 }
-                
+
                 {
                     badge.grantBadge(player, "bdg_racing_nashal_river");
                 }
@@ -210,6 +220,7 @@ public class race_coordinator extends script.base_script
         CustomerServiceLog("Racing", "Player " + playerName + " [" + player + "] finished the Nashal River race in " + bestTime + " seconds.");
         return SCRIPT_CONTINUE;
     }
+
     public int messageDisplayLeader(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -218,9 +229,10 @@ public class race_coordinator extends script.base_script
         String playerName = getStringObjVar(npc, "racing.nashal.topRecordName");
         string_id currentRecordHolder = new string_id(RACING_STF, "current_record_holder");
         sendSystemMessage(player, currentRecordHolder);
-        sendSystemMessage(player, "" + playerName + " with a time of " + topRecord + " seconds.", null);
+        sendSystemMessage(player, playerName + " with a time of " + topRecord + " seconds.", null);
         return SCRIPT_CONTINUE;
     }
+
     public int messageWhatsMyTime(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -235,6 +247,7 @@ public class race_coordinator extends script.base_script
         chat.publicChat(self, null, null, null, myBestTime);
         return SCRIPT_CONTINUE;
     }
+
     public int messageErasePersonalBest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");

@@ -1,5 +1,11 @@
 package script.theme_park.jedi_trials;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -7,9 +13,6 @@ import java.util.Vector;
 
 public class robe_collection_wave_controller extends script.base_script
 {
-    public robe_collection_wave_controller()
-    {
-    }
     public static final String DATATABLE = "datatables/quest/jedi_collection/jedi_robe_collection.iff";
     public static final String DATA_SLOT_PREREQ = "slot_prereq";
     public static final String DATA_SLOT_AWARDED = "slot_awarded";
@@ -27,6 +30,10 @@ public class robe_collection_wave_controller extends script.base_script
     public static final String SCRIPTVAR_CHILDRENLIST = "jediRobeEventChildrenList";
     public static final int EVENT_DEFAULT_AUTO_RESET = 600;
     public static final boolean LOGGING = false;
+    public robe_collection_wave_controller()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.ITEM_USE, new string_id("quest2", "jedi_event_general_menu"));
@@ -45,6 +52,7 @@ public class robe_collection_wave_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -69,7 +77,7 @@ public class robe_collection_wave_controller extends script.base_script
                 jediEventBegin(self, player);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 dictionary eventData = getJediEventData(self);
                 if (eventData != null)
@@ -99,6 +107,7 @@ public class robe_collection_wave_controller extends script.base_script
         sendSystemMessage(player, new string_id("quest/groundquests", "retrieve_item_no_interest"));
         return SCRIPT_CONTINUE;
     }
+
     public boolean isEligibleForJediEvent(obj_id self, obj_id player) throws InterruptedException
     {
         if (utils.isProfession(player, utils.FORCE_SENSITIVE))
@@ -112,16 +121,14 @@ public class robe_collection_wave_controller extends script.base_script
                     String slotAwarded = eventData.getString(DATA_SLOT_AWARDED);
                     if (hasCompletedCollectionSlot(player, slotPrereq))
                     {
-                        if (!hasCompletedCollectionSlot(player, slotAwarded) && !hasJediEventFailedBuff(self, player))
-                        {
-                            return true;
-                        }
+                        return !hasCompletedCollectionSlot(player, slotAwarded) && !hasJediEventFailedBuff(self, player);
                     }
                 }
             }
         }
         return false;
     }
+
     public dictionary getJediEventData(obj_id self) throws InterruptedException
     {
         String eventName = getStringObjVar(self, OBJVAR_EVENT_NAME);
@@ -131,19 +138,18 @@ public class robe_collection_wave_controller extends script.base_script
         }
         return null;
     }
+
     public boolean hasJediEventFailedBuff(obj_id self, obj_id player) throws InterruptedException
     {
         dictionary eventData = getJediEventData(self);
         if (eventData != null)
         {
             String failureDebuff = eventData.getString(DATA_FAILURE_DEBUFF);
-            if (buff.hasBuff(player, failureDebuff))
-            {
-                return true;
-            }
+            return buff.hasBuff(player, failureDebuff);
         }
         return false;
     }
+
     public void jediEventBegin(obj_id self, obj_id player) throws InterruptedException
     {
         if (!hasObjVar(self, OBJVAR_EVENT_NAME))
@@ -163,8 +169,8 @@ public class robe_collection_wave_controller extends script.base_script
         string_id startingMessage = new string_id("quest2", eventData.getString(DATA_STARTING_MSG));
         sendSystemMessage(player, startingMessage);
         messageTo(self, "handleStartJediEvent", null, 1, false);
-        return;
     }
+
     public int handleStartJediEvent(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, OBJVAR_EVENT_NAME))
@@ -222,11 +228,13 @@ public class robe_collection_wave_controller extends script.base_script
         utils.setScriptVar(self, SCRIPTVAR_CHILDRENLIST, jediEventChildrenList);
         return SCRIPT_CONTINUE;
     }
+
     public int jediEventChildDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         messageTo(self, "cleanupEvent", null, 0.25f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int defaultEventReset(obj_id self, dictionary params) throws InterruptedException
     {
         int passed = params.getInt(trial.MESSAGE_SESSION);
@@ -238,11 +246,13 @@ public class robe_collection_wave_controller extends script.base_script
         clearEventArea(self);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanupEvent(obj_id self, dictionary params) throws InterruptedException
     {
         clearEventArea(self);
         return SCRIPT_CONTINUE;
     }
+
     public void clearEventArea(obj_id self) throws InterruptedException
     {
         utils.removeScriptVar(self, SCRIPTVAR_EVENT_PLAYER);
@@ -253,13 +263,15 @@ public class robe_collection_wave_controller extends script.base_script
         {
             return;
         }
-        for (obj_id child : objects) {
-            if (isIdValid(child) && child != self && !isPlayer(child)) {
-                if (!hasScript(child, "corpse.ai_corpse")) {
+        for (obj_id child : objects)
+        {
+            if (isIdValid(child) && child != self && !isPlayer(child))
+            {
+                if (!hasScript(child, "corpse.ai_corpse"))
+                {
                     trial.cleanupObject(child);
                 }
             }
         }
-        return;
     }
 }

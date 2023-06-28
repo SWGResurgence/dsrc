@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,14 +14,17 @@ import script.*;
 
 public class lf_safetyquestgiver extends script.base_script
 {
+    public static String c_stringFile = "conversation/lf_safetyquestgiver";
+
     public lf_safetyquestgiver()
     {
     }
-    public static String c_stringFile = "conversation/lf_safetyquestgiver";
+
     public boolean lf_safetyquestgiver_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean lf_safetyquestgiver_condition_part1complete(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/lf_safety1");
@@ -23,11 +32,13 @@ public class lf_safetyquestgiver extends script.base_script
         boolean hasQuest2 = questIsQuestActive(questId2, player) || questIsQuestComplete(questId2, player);
         return questIsQuestComplete(questId1, player) && !hasQuest2;
     }
+
     public boolean lf_safetyquestgiver_condition_part5complete(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/lf_safety5");
         return questIsQuestComplete(questId, player);
     }
+
     public boolean lf_safetyquestgiver_condition_part4complete(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/lf_safety4");
@@ -35,6 +46,7 @@ public class lf_safetyquestgiver extends script.base_script
         boolean hasQuest5 = questIsQuestActive(questId2, player) || questIsQuestComplete(questId2, player);
         return questIsQuestComplete(questId1, player) && !hasQuest5;
     }
+
     public boolean lf_safetyquestgiver_condition_part3complete(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/lf_safety3");
@@ -42,6 +54,7 @@ public class lf_safetyquestgiver extends script.base_script
         boolean hasQuest4 = questIsQuestActive(questId2, player) || questIsQuestComplete(questId2, player);
         return questIsQuestComplete(questId1, player) && !hasQuest4;
     }
+
     public boolean lf_safetyquestgiver_condition_part2complete(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/lf_safety2");
@@ -49,6 +62,7 @@ public class lf_safetyquestgiver extends script.base_script
         boolean hasQuest3 = questIsQuestActive(questId2, player) || questIsQuestComplete(questId2, player);
         return questIsQuestComplete(questId1, player) && !hasQuest3;
     }
+
     public boolean lf_safetyquestgiver_condition_playeronquest(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/lf_safety1");
@@ -64,91 +78,109 @@ public class lf_safetyquestgiver extends script.base_script
         onQuest |= questIsQuestActive(questId5, player) || questIsQuestComplete(questId5, player);
         return onQuest;
     }
+
     public boolean lf_safetyquestgiver_condition_part1active(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/lf_safety1");
         return questIsQuestActive(questId, player);
     }
+
     public boolean lf_safetyquestgiver_condition_part2active(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/lf_safety2");
         return questIsQuestActive(questId, player);
     }
+
     public boolean lf_safetyquestgiver_condition_part3active(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/lf_safety3");
         return questIsQuestActive(questId, player);
     }
+
     public boolean lf_safetyquestgiver_condition_part4active(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/lf_safety4");
         return questIsQuestActive(questId, player);
     }
+
     public boolean lf_safetyquestgiver_condition_part5active(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/lf_safety5");
         return questIsQuestActive(questId, player);
     }
+
     public boolean lf_safetyquestgiver_condition_isquestcomplete1(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/lf_safety1");
         return questIsTaskComplete(questId, 0, player);
     }
+
     public boolean lf_safetyquestgiver_condition_isquestcomplete2(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/lf_safety2");
         return questIsTaskComplete(questId, 0, player);
     }
+
     public boolean lf_safetyquestgiver_condition_isquestcomplete3(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/lf_safety3");
         return questIsTaskComplete(questId, 0, player);
     }
+
     public boolean lf_safetyquestgiver_condition_isquestcomplete4(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/lf_safety4");
         return questIsTaskComplete(questId, 0, player);
     }
+
     public boolean lf_safetyquestgiver_condition_isquestcomplete5(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/lf_safety5");
         return questIsTaskComplete(questId, 0, player);
     }
+
     public void lf_safetyquestgiver_action_givequest1(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/lf_safety1");
         groundquests.grantQuest(questId, player, npc, true);
     }
+
     public void lf_safetyquestgiver_action_givequest2(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/lf_safety2");
         groundquests.grantQuest(questId, player, npc, true);
     }
+
     public void lf_safetyquestgiver_action_givequest5(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/lf_safety5");
         groundquests.grantQuest(questId, player, npc, true);
     }
+
     public void lf_safetyquestgiver_action_givequest4(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/lf_safety4");
         groundquests.grantQuest(questId, player, npc, true);
     }
+
     public void lf_safetyquestgiver_action_givequest3(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/lf_safety3");
         groundquests.grantQuest(questId, player, npc, true);
     }
+
     public void lf_safetyquestgiver_action_completequest1(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/lf_safety1");
         questCompleteTask(questId, 1, player);
     }
+
     public void lf_safetyquestgiver_action_completequest2(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/lf_safety2");
         questCompleteTask(questId, 1, player);
     }
+
     public void lf_safetyquestgiver_action_completequest3(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/lf_safety3");
@@ -157,11 +189,13 @@ public class lf_safetyquestgiver extends script.base_script
         String templateName = "object/tangible/skill_buff/skill_buff_pistol_speed.iff";
         obj_id newItem = createObject(templateName, playerInventory, "");
     }
+
     public void lf_safetyquestgiver_action_completequest4(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/lf_safety4");
         questCompleteTask(questId, 1, player);
     }
+
     public void lf_safetyquestgiver_action_completequest5(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/lf_safety5");
@@ -170,10 +204,12 @@ public class lf_safetyquestgiver extends script.base_script
         String templateName = "object/tangible/skill_buff/skill_buff_pistol_accuracy.iff";
         obj_id newItem = createObject(templateName, playerInventory, "");
     }
+
     public void lf_safetyquestgiver_action_faceplayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
     }
+
     public int lf_safetyquestgiver_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_111"))
@@ -202,7 +238,7 @@ public class lf_safetyquestgiver extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_115");
@@ -215,7 +251,7 @@ public class lf_safetyquestgiver extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lf_safetyquestgiver.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -248,7 +284,7 @@ public class lf_safetyquestgiver extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_127");
@@ -261,7 +297,7 @@ public class lf_safetyquestgiver extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lf_safetyquestgiver.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -295,7 +331,7 @@ public class lf_safetyquestgiver extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_146");
@@ -308,7 +344,7 @@ public class lf_safetyquestgiver extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lf_safetyquestgiver.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -318,6 +354,7 @@ public class lf_safetyquestgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lf_safetyquestgiver_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_115"))
@@ -347,6 +384,7 @@ public class lf_safetyquestgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lf_safetyquestgiver_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_127"))
@@ -376,6 +414,7 @@ public class lf_safetyquestgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lf_safetyquestgiver_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_146"))
@@ -405,6 +444,7 @@ public class lf_safetyquestgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lf_safetyquestgiver_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_166"))
@@ -430,6 +470,7 @@ public class lf_safetyquestgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lf_safetyquestgiver_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_186"))
@@ -455,6 +496,7 @@ public class lf_safetyquestgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lf_safetyquestgiver_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_206"))
@@ -480,6 +522,7 @@ public class lf_safetyquestgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lf_safetyquestgiver_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_226"))
@@ -507,7 +550,7 @@ public class lf_safetyquestgiver extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_233");
@@ -520,7 +563,7 @@ public class lf_safetyquestgiver extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lf_safetyquestgiver.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -553,7 +596,7 @@ public class lf_safetyquestgiver extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_233");
@@ -566,7 +609,7 @@ public class lf_safetyquestgiver extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lf_safetyquestgiver.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -576,6 +619,7 @@ public class lf_safetyquestgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lf_safetyquestgiver_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_233"))
@@ -604,7 +648,7 @@ public class lf_safetyquestgiver extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_238");
@@ -617,7 +661,7 @@ public class lf_safetyquestgiver extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lf_safetyquestgiver.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -651,7 +695,7 @@ public class lf_safetyquestgiver extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_254");
@@ -664,7 +708,7 @@ public class lf_safetyquestgiver extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lf_safetyquestgiver.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -674,6 +718,7 @@ public class lf_safetyquestgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lf_safetyquestgiver_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_238"))
@@ -699,6 +744,7 @@ public class lf_safetyquestgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lf_safetyquestgiver_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_254"))
@@ -726,6 +772,7 @@ public class lf_safetyquestgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lf_safetyquestgiver_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_270"))
@@ -762,6 +809,7 @@ public class lf_safetyquestgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lf_safetyquestgiver_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_296"))
@@ -788,7 +836,7 @@ public class lf_safetyquestgiver extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_304");
@@ -801,7 +849,7 @@ public class lf_safetyquestgiver extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lf_safetyquestgiver.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -833,7 +881,7 @@ public class lf_safetyquestgiver extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_328");
@@ -846,7 +894,7 @@ public class lf_safetyquestgiver extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lf_safetyquestgiver.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -856,6 +904,7 @@ public class lf_safetyquestgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lf_safetyquestgiver_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_304"))
@@ -881,6 +930,7 @@ public class lf_safetyquestgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lf_safetyquestgiver_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_328"))
@@ -906,6 +956,7 @@ public class lf_safetyquestgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lf_safetyquestgiver_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_344"))
@@ -943,6 +994,7 @@ public class lf_safetyquestgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lf_safetyquestgiver_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_358"))
@@ -968,6 +1020,7 @@ public class lf_safetyquestgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lf_safetyquestgiver_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_368"))
@@ -1016,7 +1069,7 @@ public class lf_safetyquestgiver extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_380");
@@ -1029,7 +1082,7 @@ public class lf_safetyquestgiver extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lf_safetyquestgiver.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1060,6 +1113,7 @@ public class lf_safetyquestgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lf_safetyquestgiver_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_380"))
@@ -1087,6 +1141,7 @@ public class lf_safetyquestgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -1099,6 +1154,7 @@ public class lf_safetyquestgiver extends script.base_script
         setName(self, "Gerak Vurtimis");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -1108,6 +1164,7 @@ public class lf_safetyquestgiver extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -1116,18 +1173,21 @@ public class lf_safetyquestgiver extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.lf_safetyquestgiver");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1166,7 +1226,7 @@ public class lf_safetyquestgiver extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_111");
@@ -1182,7 +1242,7 @@ public class lf_safetyquestgiver extends script.base_script
                 utils.setScriptVar(player, "conversation.lf_safetyquestgiver.branchId", 1);
                 npcStartConversation(player, npc, "lf_safetyquestgiver", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1211,7 +1271,7 @@ public class lf_safetyquestgiver extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_166");
@@ -1223,7 +1283,7 @@ public class lf_safetyquestgiver extends script.base_script
                 utils.setScriptVar(player, "conversation.lf_safetyquestgiver.branchId", 11);
                 npcStartConversation(player, npc, "lf_safetyquestgiver", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1252,7 +1312,7 @@ public class lf_safetyquestgiver extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_186");
@@ -1264,7 +1324,7 @@ public class lf_safetyquestgiver extends script.base_script
                 utils.setScriptVar(player, "conversation.lf_safetyquestgiver.branchId", 14);
                 npcStartConversation(player, npc, "lf_safetyquestgiver", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1293,7 +1353,7 @@ public class lf_safetyquestgiver extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_206");
@@ -1305,7 +1365,7 @@ public class lf_safetyquestgiver extends script.base_script
                 utils.setScriptVar(player, "conversation.lf_safetyquestgiver.branchId", 17);
                 npcStartConversation(player, npc, "lf_safetyquestgiver", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1334,7 +1394,7 @@ public class lf_safetyquestgiver extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_226");
@@ -1346,7 +1406,7 @@ public class lf_safetyquestgiver extends script.base_script
                 utils.setScriptVar(player, "conversation.lf_safetyquestgiver.branchId", 20);
                 npcStartConversation(player, npc, "lf_safetyquestgiver", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1382,7 +1442,7 @@ public class lf_safetyquestgiver extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_270");
@@ -1398,7 +1458,7 @@ public class lf_safetyquestgiver extends script.base_script
                 utils.setScriptVar(player, "conversation.lf_safetyquestgiver.branchId", 28);
                 npcStartConversation(player, npc, "lf_safetyquestgiver", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1427,7 +1487,7 @@ public class lf_safetyquestgiver extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_296");
@@ -1439,7 +1499,7 @@ public class lf_safetyquestgiver extends script.base_script
                 utils.setScriptVar(player, "conversation.lf_safetyquestgiver.branchId", 32);
                 npcStartConversation(player, npc, "lf_safetyquestgiver", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1475,7 +1535,7 @@ public class lf_safetyquestgiver extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_344");
@@ -1491,7 +1551,7 @@ public class lf_safetyquestgiver extends script.base_script
                 utils.setScriptVar(player, "conversation.lf_safetyquestgiver.branchId", 39);
                 npcStartConversation(player, npc, "lf_safetyquestgiver", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1520,7 +1580,7 @@ public class lf_safetyquestgiver extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_358");
@@ -1532,7 +1592,7 @@ public class lf_safetyquestgiver extends script.base_script
                 utils.setScriptVar(player, "conversation.lf_safetyquestgiver.branchId", 43);
                 npcStartConversation(player, npc, "lf_safetyquestgiver", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1582,7 +1642,7 @@ public class lf_safetyquestgiver extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_368");
@@ -1606,7 +1666,7 @@ public class lf_safetyquestgiver extends script.base_script
                 utils.setScriptVar(player, "conversation.lf_safetyquestgiver.branchId", 46);
                 npcStartConversation(player, npc, "lf_safetyquestgiver", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1622,6 +1682,7 @@ public class lf_safetyquestgiver extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("lf_safetyquestgiver"))

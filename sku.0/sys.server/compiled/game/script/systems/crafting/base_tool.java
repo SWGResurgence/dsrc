@@ -1,5 +1,11 @@
 package script.systems.crafting;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -23,6 +29,7 @@ public class base_tool extends script.base_script
                     "weapon_station",
                     "space_station"
             };
+
     public base_tool()
     {
     }
@@ -354,7 +361,7 @@ public class base_tool extends script.base_script
             if (critAssembly > 0)
             {
                 names[idx] = "@crafting:crit_assembly";
-                attribs[idx] = "" + critAssembly;
+                attribs[idx] = String.valueOf(critAssembly);
                 idx++;
                 if (idx >= names.length)
                 {
@@ -365,7 +372,7 @@ public class base_tool extends script.base_script
             if (critExperiment > 0)
             {
                 names[idx] = "@crafting:crit_experiment";
-                attribs[idx] = "" + critExperiment;
+                attribs[idx] = String.valueOf(critExperiment);
                 idx++;
                 if (idx >= names.length)
                 {

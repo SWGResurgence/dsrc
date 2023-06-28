@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.valley_battleground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.combat_engine.attacker_data;
 import script.combat_engine.defender_data;
 import script.combat_engine.hit_result;
@@ -13,26 +19,29 @@ import script.string_id;
 
 public class turret_operations extends script.systems.combat.combat_base_old
 {
-    public turret_operations()
-    {
-    }
     public static final String STF = "xx";
     public static final string_id takeControlObject = new string_id(STF, "take_control_object");
     public static final string_id alreadyInUse = new string_id(STF, "already_in_use");
     public static final String controllerTemplate = "object/tangible/dungeon/mustafar/valley_battlefield/turret_controller_object.iff";
     public static final boolean LOGGING = false;
+    public turret_operations()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         turret.activateTurret(self);
         doLogging("OnAttach", "Activating Turret");
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         turret.activateTurret(self);
         doLogging("OnInitialize", "Activating Turret");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToOpenContainer(obj_id self, obj_id who) throws InterruptedException
     {
         if (isIdValid(who) && !isGod(who))
@@ -41,6 +50,7 @@ public class turret_operations extends script.systems.combat.combat_base_old
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToLoseItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (isIdValid(transferer) && !isGod(transferer))
@@ -49,6 +59,7 @@ public class turret_operations extends script.systems.combat.combat_base_old
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (isIdValid(transferer) && !isGod(transferer))
@@ -57,6 +68,7 @@ public class turret_operations extends script.systems.combat.combat_base_old
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDamaged(obj_id self, obj_id attacker, obj_id weapon, int damage) throws InterruptedException
     {
         int curHP = getHitpoints(self);
@@ -68,6 +80,7 @@ public class turret_operations extends script.systems.combat.combat_base_old
         }
         return SCRIPT_CONTINUE;
     }
+
     public int doFireAction(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -77,6 +90,7 @@ public class turret_operations extends script.systems.combat.combat_base_old
         doAttack(self, target);
         return SCRIPT_CONTINUE;
     }
+
     public void explodeTurret(obj_id turret) throws InterruptedException
     {
         location viewLoc = getLocation(turret);
@@ -87,6 +101,7 @@ public class turret_operations extends script.systems.combat.combat_base_old
         }
         explodeTurret(turret, viewers[0]);
     }
+
     public void explodeTurret(obj_id turretId, obj_id killer) throws InterruptedException
     {
         location death = getLocation(turretId);
@@ -106,6 +121,7 @@ public class turret_operations extends script.systems.combat.combat_base_old
         }
         messageTo(controller, "turretDisabled", null, 0, false);
     }
+
     public void doAttack(obj_id self, obj_id target) throws InterruptedException
     {
         int curHP = getHitpoints(self);
@@ -127,49 +143,49 @@ public class turret_operations extends script.systems.combat.combat_base_old
         }
         final float DAMAGE_MODIFIER = 2.0f;
         final float HEALTH_COST_MODIFIER = 0;
-        
+
         final float ACTION_COST_MODIFIER = 0;
         final int BASE_TO_HIT_MODIFIER = 0;
         final float AMMO_COST_MODIFIER = 1.0f;
-        String[] strTimeMods = 
-        {
-            ""
-        };
-        String[] strDamageMods = 
-        {
-            ""
-        };
-        String[] strCostMods = 
-        {
-        };
-        String[] strToHitMods = 
-        {
-            ""
-        };
-        String[] strBlockMods = 
-        {
-            ""
-        };
-        String[] strEvadeMods = 
-        {
-            ""
-        };
-        String[] strCounterAttackMods = 
-        {
-            ""
-        };
+        String[] strTimeMods =
+                {
+                        ""
+                };
+        String[] strDamageMods =
+                {
+                        ""
+                };
+        String[] strCostMods =
+                {
+                };
+        String[] strToHitMods =
+                {
+                        ""
+                };
+        String[] strBlockMods =
+                {
+                        ""
+                };
+        String[] strEvadeMods =
+                {
+                        ""
+                };
+        String[] strCounterAttackMods =
+                {
+                        ""
+                };
         int intBlockMod = 1000;
         int intEvadeMod = 1000;
         int intCounterAttackMod = 1000;
         int intAttackerEndPosture = POSTURE_NONE;
         int intDefenderEndPosture = POSTURE_NONE;
         String strPlaybackAction = "fire_turret";
-        int[] intEffects = 
-        {
-        };
-        float[] fltEffectDurations = 
-        {
-        };
+        int[] intEffects =
+                {
+                };
+        float[] fltEffectDurations =
+                {
+                };
         int intChanceToApplyEffect = 0;
         obj_id objWeapon = getObjIdObjVar(self, "objWeapon");
         attacker_data cbtAttackerData = new attacker_data();
@@ -201,7 +217,7 @@ public class turret_operations extends script.systems.combat.combat_base_old
         {
             cbtDefenderResults[0].result = COMBAT_RESULT_HIT;
         }
-        else 
+        else
         {
             cbtDefenderResults[0].result = COMBAT_RESULT_MISS;
         }
@@ -210,8 +226,8 @@ public class turret_operations extends script.systems.combat.combat_base_old
         String[] strPlaybackNames = makePlaybackNames("fire_turret", cbtHitData, cbtWeaponData, cbtDefenderResults);
         doCombatResults(strPlaybackNames[0], cbtAttackerResults, cbtDefenderResults);
         String[] strEffects = makeStringArray(1);
-        return;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING)

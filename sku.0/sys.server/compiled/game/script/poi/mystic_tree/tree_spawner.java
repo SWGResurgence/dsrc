@@ -1,5 +1,11 @@
 package script.poi.mystic_tree;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.utils;
 import script.location;
@@ -10,11 +16,13 @@ public class tree_spawner extends script.base_script
     public tree_spawner()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "spawnTree", null, 5, true);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnTree(obj_id self, dictionary params) throws InterruptedException
     {
         int yaw = 140;

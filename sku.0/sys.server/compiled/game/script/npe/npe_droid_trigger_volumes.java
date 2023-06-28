@@ -1,5 +1,11 @@
 package script.npe;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.chat;
 import script.library.create;
@@ -13,6 +19,7 @@ public class npe_droid_trigger_volumes extends script.base_script
     public npe_droid_trigger_volumes()
     {
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id player, obj_id weapon, int[] damage) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "droidVolumeBreach"))
@@ -30,7 +37,8 @@ public class npe_droid_trigger_volumes extends script.base_script
         if (myname != null && !myname.equals(""))
         {
             utils.setScriptVar(self, "droidVolumeBreach", 1);
-            switch (myname) {
+            switch (myname)
+            {
                 case "mob/creature_names:npe_droid_rescind":
                     playExplosionEffect(player, self, -400);
                     break;
@@ -50,7 +58,8 @@ public class npe_droid_trigger_volumes extends script.base_script
                     playExplosionEffect(player, self, -150);
                     break;
                 case "mob/creature_names:npe_smuggler_trap":
-                    if (groundquests.isTaskActive(player, "npe_smuggler_try", "droidAlert")) {
+                    if (groundquests.isTaskActive(player, "npe_smuggler_try", "droidAlert"))
+                    {
                         debugSpeakMsg(player, "You have the quest");
                         groundquests.sendSignal(player, "gotYou");
                         guard = "npe_rakqua_warrior";
@@ -64,14 +73,15 @@ public class npe_droid_trigger_volumes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void playExplosionEffect(obj_id player, obj_id self, int damageAmount) throws InterruptedException
     {
         playClientEffectLoc(player, "clienteffect/combat_grenade_small_01.cef", getLocation(self), 1.0f);
         addAttribModifier(player, HEALTH, damageAmount, 0.0f, 0.0f, MOD_POOL);
         kill(self);
         messageTo(self, "getRidOfMe", null, 1, true);
-        return;
     }
+
     public int spawnGuards(obj_id self, dictionary params) throws InterruptedException
     {
         String guard = params.getString("guard");
@@ -89,6 +99,7 @@ public class npe_droid_trigger_volumes extends script.base_script
         detachScript(self, "npe.npe_droid_trigger_volumes");
         return SCRIPT_CONTINUE;
     }
+
     public int getRidOfMe(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);

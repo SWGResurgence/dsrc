@@ -1,15 +1,23 @@
 package script.theme_park.nym;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.obj_id;
 import script.string_id;
 
 public class pirate_engineer extends script.base_script
 {
+    public static final String CONVO = "celebrity/lok_engineer";
+
     public pirate_engineer()
     {
     }
-    public static final String CONVO = "celebrity/lok_engineer";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "Choster (Retired Engineer)");
@@ -18,32 +26,34 @@ public class pirate_engineer extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         if (!hasObjVar(speaker, "nym.jinkins"))
         {
             string_id greeting = new string_id(CONVO, "hello");
-            string_id response[] = new string_id[1];
+            string_id[] response = new string_id[1];
             response[0] = new string_id(CONVO, "who_are_you_2");
             npcStartConversation(speaker, self, "celebConvo", greeting, response);
         }
         if (hasObjVar(speaker, "nym.engineer.who"))
         {
             string_id greeting = new string_id(CONVO, "more_questions");
-            string_id response[] = new string_id[1];
+            string_id[] response = new string_id[1];
             response[0] = new string_id(CONVO, "ask_about_defenses");
             npcStartConversation(speaker, self, "celebConvo", greeting, response);
         }
-        else 
+        else
         {
             string_id greeting = new string_id(CONVO, "hello");
-            string_id response[] = new string_id[2];
+            string_id[] response = new string_id[2];
             response[0] = new string_id(CONVO, "jinkins_sent_me");
             response[1] = new string_id(CONVO, "who_are_you");
             npcStartConversation(speaker, self, "celebConvo", greeting, response);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convo, obj_id speaker, string_id response) throws InterruptedException
     {
         if ((response.getAsciiId()).equals("who_are_you"))

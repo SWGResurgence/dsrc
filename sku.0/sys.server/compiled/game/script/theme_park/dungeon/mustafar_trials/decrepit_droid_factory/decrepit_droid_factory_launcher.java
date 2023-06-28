@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.decrepit_droid_factory;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.groundquests;
 import script.library.instance;
 import script.menu_info;
@@ -9,9 +15,6 @@ import script.string_id;
 
 public class decrepit_droid_factory_launcher extends script.base_script
 {
-    public decrepit_droid_factory_launcher()
-    {
-    }
     public static final string_id SID_UNABLE_TO_FIND_DUNGEON = new string_id("dungeon/space_dungeon", "unable_to_find_dungeon");
     public static final string_id SID_NO_TICKET = new string_id("dungeon/space_dungeon", "no_ticket");
     public static final string_id SID_REQUEST_TRAVEL = new string_id("dungeon/space_dungeon", "request_travel");
@@ -22,6 +25,10 @@ public class decrepit_droid_factory_launcher extends script.base_script
     public static final string_id ACCESS = new string_id("som/som_quest", "access_destination");
     public static final string_id SID_PART1 = new string_id("som/som_quest", "decrepit_droid_factory");
     public static final string_id SID_PART2 = new string_id("som/som_quest", "working_droid_factory");
+    public decrepit_droid_factory_launcher()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int menu = mi.addRootMenu(menu_info_types.ITEM_USE, ACCESS);
@@ -35,6 +42,7 @@ public class decrepit_droid_factory_launcher extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU1)
@@ -54,33 +62,33 @@ public class decrepit_droid_factory_launcher extends script.base_script
             sendSystemMessage(player, SID_MUST_CHOOSE);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             sendSystemMessage(player, SID_NO_PERMISSION);
             return SCRIPT_CONTINUE;
         }
     }
+
     public boolean hasCorrectQuests(obj_id player) throws InterruptedException
     {
-        boolean hasCorrectQuests = false;
-        if (groundquests.isQuestActive(player, "som_story_arc_chapter_two_01") || groundquests.hasCompletedQuest(player, "som_story_arc_chapter_two_01"))
-        {
-            hasCorrectQuests = true;
-        }
+        boolean hasCorrectQuests = groundquests.isQuestActive(player, "som_story_arc_chapter_two_01") || groundquests.hasCompletedQuest(player, "som_story_arc_chapter_two_01");
         if (groundquests.isTaskActive(player, "som_story_arc_chapter_three_01", "mustafar_droidfactory_two") || groundquests.isTaskActive(player, "som_story_arc_chapter_three_01", "mustafar_milo_report") || groundquests.hasCompletedQuest(player, "som_story_arc_chapter_three_01"))
         {
             hasCorrectQuests = true;
         }
         return hasCorrectQuests;
     }
+
     public boolean canEnterDecrepit(obj_id player) throws InterruptedException
     {
         return instance.isFlaggedForInstance(player, "decrepit_droid_factory") || groundquests.isQuestActive(player, "som_story_arc_chapter_two_01") || groundquests.hasCompletedQuest(player, "som_story_arc_chapter_two_01");
     }
+
     public boolean canEnterWorking(obj_id player) throws InterruptedException
     {
         return instance.isFlaggedForInstance(player, "working_droid_factory") || groundquests.isTaskActive(player, "som_story_arc_chapter_three_01", "mustafar_droidfactory_two") || groundquests.isTaskActive(player, "som_story_arc_chapter_three_01", "mustafar_milo_report") || groundquests.hasCompletedQuest(player, "som_story_arc_chapter_three_01");
     }
+
     public void doBackflagging(obj_id player) throws InterruptedException
     {
         if (canEnterDecrepit(player))

@@ -1,5 +1,11 @@
 package script.npc.skillteacher;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.utils;
@@ -11,11 +17,13 @@ public class university_trainer_spawner extends script.base_script
     public university_trainer_spawner()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "spawnThings", null, 20, true);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnEveryone(obj_id self) throws InterruptedException
     {
         spawnWeaponStation(self);
@@ -23,6 +31,7 @@ public class university_trainer_spawner extends script.base_script
         spawnClothingStation(self);
         spawnStructureStation(self);
     }
+
     public void spawnMerchant(obj_id self) throws InterruptedException
     {
         if (utils.checkConfigFlag("ScriptFlags", "noEliteTrainers"))
@@ -36,8 +45,8 @@ public class university_trainer_spawner extends script.base_script
         setCreatureStatic(merchant, true);
         setInvulnerable(merchant, true);
         setYaw(merchant, -171);
-        return;
     }
+
     public void spawnArchitect(obj_id self) throws InterruptedException
     {
         if (utils.checkConfigFlag("ScriptFlags", "noEliteTrainers"))
@@ -51,8 +60,8 @@ public class university_trainer_spawner extends script.base_script
         setCreatureStatic(architect, true);
         setInvulnerable(architect, true);
         setYaw(architect, 0);
-        return;
     }
+
     public void spawnWeaponsmith(obj_id self) throws InterruptedException
     {
         if (utils.checkConfigFlag("ScriptFlags", "noEliteTrainers"))
@@ -66,8 +75,8 @@ public class university_trainer_spawner extends script.base_script
         setCreatureStatic(weaponsmith, true);
         setInvulnerable(weaponsmith, true);
         setYaw(weaponsmith, 136);
-        return;
     }
+
     public void spawnDroidEngineer(obj_id self) throws InterruptedException
     {
         if (utils.checkConfigFlag("ScriptFlags", "noEliteTrainers"))
@@ -81,8 +90,8 @@ public class university_trainer_spawner extends script.base_script
         setCreatureStatic(engineer, true);
         setInvulnerable(engineer, true);
         setYaw(engineer, -3);
-        return;
     }
+
     public void spawnArmorsmith(obj_id self) throws InterruptedException
     {
         if (utils.checkConfigFlag("ScriptFlags", "noEliteTrainers"))
@@ -96,8 +105,8 @@ public class university_trainer_spawner extends script.base_script
         setCreatureStatic(armorsmith, true);
         setInvulnerable(armorsmith, true);
         setYaw(armorsmith, 84);
-        return;
     }
+
     public void spawnWeaponStation(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "meetingd");
@@ -105,8 +114,8 @@ public class university_trainer_spawner extends script.base_script
         obj_id weaponStation = create.object("object/tangible/crafting/station/public_weapon_station.iff", weaponStationLoc);
         create.addDestroyMessage(weaponStation, "weaponStationDied", 10.0f, self);
         setYaw(weaponStation, 0);
-        return;
     }
+
     public void spawnDroidStation(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "meetinge");
@@ -114,8 +123,8 @@ public class university_trainer_spawner extends script.base_script
         obj_id droidStation = create.object("object/tangible/crafting/station/public_weapon_station.iff", droidStationLoc);
         create.addDestroyMessage(droidStation, "droidStationDied", 10.0f, self);
         setYaw(droidStation, -90);
-        return;
     }
+
     public void spawnClothingStation(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "meetingb");
@@ -123,8 +132,8 @@ public class university_trainer_spawner extends script.base_script
         obj_id clothingStation = create.object("object/tangible/crafting/station/public_clothing_station.iff", clothingStationLoc);
         create.addDestroyMessage(clothingStation, "clothingStationDied", 10.0f, self);
         setYaw(clothingStation, -90);
-        return;
     }
+
     public void spawnStructureStation(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "meetingc");
@@ -132,53 +141,62 @@ public class university_trainer_spawner extends script.base_script
         obj_id structureStation = create.object("object/tangible/crafting/station/public_structure_station.iff", structureStationLoc);
         create.addDestroyMessage(structureStation, "structureStationDied", 10.0f, self);
         setYaw(structureStation, -90);
-        return;
     }
+
     public int spawnThings(obj_id self, dictionary params) throws InterruptedException
     {
         spawnEveryone(self);
         return SCRIPT_CONTINUE;
     }
+
     public int merchantDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnMerchant(self);
         return SCRIPT_CONTINUE;
     }
+
     public int architectDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnArchitect(self);
         return SCRIPT_CONTINUE;
     }
+
     public int weaponsmithDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnWeaponsmith(self);
         return SCRIPT_CONTINUE;
     }
+
     public int engineerDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnDroidEngineer(self);
         return SCRIPT_CONTINUE;
     }
+
     public int armorsmithDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnArmorsmith(self);
         return SCRIPT_CONTINUE;
     }
+
     public int weaponStationDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnWeaponStation(self);
         return SCRIPT_CONTINUE;
     }
+
     public int droidStationDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnDroidStation(self);
         return SCRIPT_CONTINUE;
     }
+
     public int clothingStationDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnClothingStation(self);
         return SCRIPT_CONTINUE;
     }
+
     public int structureStationDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnStructureStation(self);

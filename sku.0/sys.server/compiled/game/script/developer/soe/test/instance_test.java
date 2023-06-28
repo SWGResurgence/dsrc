@@ -1,5 +1,11 @@
 package script.developer.soe.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.space_dungeon;
 import script.library.space_dungeon_data;
@@ -13,12 +19,13 @@ import java.util.Objects;
 
 public class instance_test extends script.base_script
 {
-    public instance_test()
-    {
-    }
     public static final String dataTable = "datatables/dungeon/space_dungeon.iff";
     public static final string_id SID_UNABLE_TO_FIND_DUNGEON = new string_id("dungeon/space_dungeon", "unable_to_find_dungeon");
     public static final boolean doLogging = false;
+    public instance_test()
+    {
+    }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "space_dungeon.ticket.point"))
@@ -39,12 +46,14 @@ public class instance_test extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdActivateInstance(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         String[] dungeons = dataTableGetStringColumn(dataTable, "dungeon");
         sui.listbox(self, self, "Select Instnace Dungeon", sui.OK_CANCEL, "Select Dungeon", dungeons, "handleSelectInstance", true);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSelectInstance(obj_id self, dictionary params) throws InterruptedException
     {
         int idx = sui.getListboxSelectedRow(params);
@@ -65,7 +74,7 @@ public class instance_test extends script.base_script
             sui.listbox(self, player, "Select Instance Type", sui.OK_CANCEL, "Select Type", parse, "handleSelectType", true);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             String dungeon = dungeonDict.getString("dungeon");
             String scene = getCurrentSceneName();
@@ -75,6 +84,7 @@ public class instance_test extends script.base_script
             return SCRIPT_CONTINUE;
         }
     }
+
     public int handleSelectType(obj_id self, dictionary params) throws InterruptedException
     {
         int dungeonIdx = utils.getIntScriptVar(self, "idx");
@@ -88,7 +98,7 @@ public class instance_test extends script.base_script
             broadcast(player, "Invalid Selection");
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             String type = parse[idx];
             String dungeon = dungeonDict.getString("dungeon");
@@ -99,6 +109,7 @@ public class instance_test extends script.base_script
             return SCRIPT_CONTINUE;
         }
     }
+
     public int OnClusterWideDataResponse(obj_id self, String manage_name, String dungeon_type, int request_id, String[] element_name_list, dictionary[] dungeon_data, int lock_key) throws InterruptedException
     {
         LOG("space_dungeon", "travel_space_dungeon.OnClusterWideDataResponse");
@@ -118,7 +129,7 @@ public class instance_test extends script.base_script
         {
             ticket = getObjIdObjVar(player, space_dungeon.VAR_TICKET_USED);
         }
-        else 
+        else
         {
             ticket = player;
         }
@@ -167,7 +178,7 @@ public class instance_test extends script.base_script
         String dungeon_name = dungeon_type.substring(0, dungeon_type.length() - 1);
         for (int i = 0; i < dungeon_data.length; i++)
         {
-            if (false == space_dungeon_data.isValidDungeon(dungeon_name))
+            if (!space_dungeon_data.isValidDungeon(dungeon_name))
             {
                 doLogging("space_dungeon", "travel_space_dungeon.OnClusterWideDataResponse -- dungeon name of " + dungeon_name + " is not in the dungeon datatable.");
                 break;
@@ -208,6 +219,7 @@ public class instance_test extends script.base_script
         sendSystemMessage(player, Objects.requireNonNullElse(success, SID_UNABLE_TO_FIND_DUNGEON));
         return SCRIPT_CONTINUE;
     }
+
     public int msgStartDungeonTravel(obj_id self, dictionary params) throws InterruptedException
     {
         int session_id = params.getInt("session_id");
@@ -244,6 +256,7 @@ public class instance_test extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (doLogging)

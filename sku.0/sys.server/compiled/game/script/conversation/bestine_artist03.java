@@ -1,31 +1,38 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.*;
 
 public class bestine_artist03 extends script.base_script
 {
+    public static String c_stringFile = "conversation/bestine_artist03";
+
     public bestine_artist03()
     {
     }
-    public static String c_stringFile = "conversation/bestine_artist03";
+
     public boolean bestine_artist03_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean bestine_artist03_condition_hasFeaturedArt(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.museumEventWinner"))
         {
             String winner = getStringObjVar(npc, "bestine.museumEventWinner");
-            if (winner.equals("bestine_artist03"))
-            {
-                return true;
-            }
+            return winner.equals("bestine_artist03");
         }
         return false;
     }
+
     public boolean bestine_artist03_condition_isActiveInEvent(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.museumEventStarted"))
@@ -59,19 +66,18 @@ public class bestine_artist03 extends script.base_script
                     {
                         return true;
                     }
-                    if (entry03.equals("bestine_artist03"))
-                    {
-                        return true;
-                    }
+                    return entry03.equals("bestine_artist03");
                 }
             }
         }
         return false;
     }
+
     public boolean bestine_artist03_condition_hasFeaturedArt_EventActive(obj_id player, obj_id npc) throws InterruptedException
     {
         return ((bestine_artist03_condition_isActiveInEvent(player, npc)) && (bestine_artist03_condition_hasFeaturedArt(player, npc)));
     }
+
     public boolean bestine_artist03_condition_hasAlreadyVoted(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.museumEventStarted"))
@@ -80,14 +86,12 @@ public class bestine_artist03 extends script.base_script
             {
                 int eventNum = getIntObjVar(npc, "bestine.museumEventStarted");
                 int playerEventNum = getIntObjVar(player, "bestine.museumEventPlayerVoted");
-                if (playerEventNum >= eventNum)
-                {
-                    return true;
-                }
+                return playerEventNum >= eventNum;
             }
         }
         return false;
     }
+
     public boolean bestine_artist03_condition_hasSpokenTo(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.museumEventStarted"))
@@ -96,17 +100,16 @@ public class bestine_artist03 extends script.base_script
             {
                 int eventNum = getIntObjVar(npc, "bestine.museumEventStarted");
                 int playerEventNum = getIntObjVar(player, "bestine.spokeToArtist03");
-                if (playerEventNum >= eventNum)
-                {
-                    return true;
-                }
+                return playerEventNum >= eventNum;
             }
         }
         return false;
     }
+
     public void bestine_artist03_action__defaultAction(obj_id player, obj_id npc) throws InterruptedException
     {
     }
+
     public void bestine_artist03_action_setHasSpokenTo(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.museumEventStarted"))
@@ -118,8 +121,8 @@ public class bestine_artist03 extends script.base_script
                 removeObjVar(player, "museumEventPlayer");
             }
         }
-        return;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -129,11 +132,13 @@ public class bestine_artist03 extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -142,12 +147,14 @@ public class bestine_artist03 extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "npc.conversation.bestine_artist03");
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -176,7 +183,7 @@ public class bestine_artist03 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_ead5e0b4");
@@ -188,7 +195,7 @@ public class bestine_artist03 extends script.base_script
                 setObjVar(player, "conversation.bestine_artist03.branchId", 1);
                 npcStartConversation(player, self, "bestine_artist03", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -216,7 +223,7 @@ public class bestine_artist03 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_9700d1c6");
@@ -228,7 +235,7 @@ public class bestine_artist03 extends script.base_script
                 setObjVar(player, "conversation.bestine_artist03.branchId", 5);
                 npcStartConversation(player, self, "bestine_artist03", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -249,6 +256,7 @@ public class bestine_artist03 extends script.base_script
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("bestine_artist03"))

@@ -1,5 +1,11 @@
 package script.item.travel_ticket;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
@@ -15,6 +21,7 @@ public class travel_shuttle_pilot extends script.base_script
     public static final string_id SID_OBTAIN_DATA_MSG = new string_id("quest/force_sensitive/fs_crafting", "tracking_data_msg");
     public static final string_id SID_OKAY_BUTTOM = new string_id("quest/force_sensitive/fs_crafting", "tracking_data_purchase_data");
     public static final string_id SID_CANCEL_BUTTON = new string_id("quest/force_sensitive/fs_crafting", "tracking_data_cancel_button");
+
     public travel_shuttle_pilot()
     {
     }

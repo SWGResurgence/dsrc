@@ -1,20 +1,29 @@
 package script.theme_park.meatlump.hideout;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.groundquests;
 import script.library.utils;
 import script.*;
 
 public class mtp_hideout_entrance_ladder extends script.base_script
 {
+    public static final String STF_FILE = "elevator_text";
+
     public mtp_hideout_entrance_ladder()
     {
     }
-    public static final String STF_FILE = "elevator_text";
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int mnu = mi.addRootMenu(menu_info_types.ITEM_USE, new string_id(STF_FILE, "mtp_ladder_climb_down"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         location here = getLocation(player);
@@ -43,17 +52,17 @@ public class mtp_hideout_entrance_ladder extends script.base_script
                         playClientEffectObj(player, "clienteffect/elevator_descend.cef", player, null);
                         warpPlayer(player, "corellia", -577.3f, -46.0f, -4337.4f, targetCell, -60.6f, -36.0f, 111.5f, "nullCallback", false);
                     }
-                    else 
+                    else
                     {
                         sendSystemMessage(player, new string_id(STF_FILE, "mtp_no_target_cell"));
                     }
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, new string_id(STF_FILE, "mtp_no_hideout"));
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(player, new string_id(STF_FILE, "mtp_unable_to_descend"));
             }

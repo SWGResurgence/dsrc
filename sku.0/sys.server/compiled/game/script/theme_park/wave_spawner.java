@@ -1,5 +1,11 @@
 package script.theme_park;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.restuss_event;
@@ -12,25 +18,26 @@ import java.util.Vector;
 
 public class wave_spawner extends script.base_script
 {
-    public wave_spawner()
-    {
-    }
     public static final String STAGE = "currentStage";
     public static final String DATA_TABLE = "wave_spawner.data_table";
     public static final String START_DELAY = "wave_spawner.start_delay";
-    public static final String[] TRIGGER_DATA_TYPES = 
-    {
-        "name",
-        "triggerInterest",
-        "size",
-        "occurance",
-        "triggerDelay",
-        "triggerType"
-    };
+    public static final String[] TRIGGER_DATA_TYPES =
+            {
+                    "name",
+                    "triggerInterest",
+                    "size",
+                    "occurance",
+                    "triggerDelay",
+                    "triggerType"
+            };
     public static final int TYPE_AI = 0;
     public static final int TYPE_TRIGGER = 1;
     public static final int TYPE_EFFECT_MANAGER = 2;
     public static final boolean LOGGING = false;
+    public wave_spawner()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         float delay = 1.0f;
@@ -41,36 +48,42 @@ public class wave_spawner extends script.base_script
         messageTo(self, "beginSpawning", null, delay, false);
         return SCRIPT_CONTINUE;
     }
+
     public int beginSpawning(obj_id self, dictionary params) throws InterruptedException
     {
         clearEventArea(self);
         dictionary dict = trial.getSessionDict(self);
-        
+
         dict.put("stage", 1);
         messageTo(self, "spawnNextStage", dict, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanupEvent(obj_id self, dictionary params) throws InterruptedException
     {
         clearEventArea(self);
         return SCRIPT_CONTINUE;
     }
+
     public void clearEventArea(obj_id self) throws InterruptedException
     {
         utils.setScriptVar(self, STAGE, 0);
         trial.bumpSession(self);
         utils.removeScriptVar(self, restuss_event.MASTER_PATROL_ARRAY);
         obj_id[] objects = trial.getChildrenInRange(self, self, 1000.0f);
-        if (objects == null || objects.length == 0)
+        if (objects == null)
         {
             return;
         }
-        for (obj_id object : objects) {
-            if (object != self && !isPlayer(object)) {
+        for (obj_id object : objects)
+        {
+            if (object != self && !isPlayer(object))
+            {
                 trial.cleanupObject(object);
             }
         }
     }
+
     public int spawnNextStage(obj_id self, dictionary params) throws InterruptedException
     {
         int stage = params.getInt("stage");
@@ -87,10 +100,12 @@ public class wave_spawner extends script.base_script
             return SCRIPT_CONTINUE;
         }
         boolean moreStages = false;
-        int nextStage = (int)Float.POSITIVE_INFINITY;
+        int nextStage = (int) Float.POSITIVE_INFINITY;
         float timeToNext = 0;
-        for (int allStage : allStages) {
-            if (allStage > stage && allStage < nextStage) {
+        for (int allStage : allStages)
+        {
+            if (allStage > stage && allStage < nextStage)
+            {
                 nextStage = allStage;
                 timeToNext = nextStage - stage;
                 moreStages = true;
@@ -103,22 +118,25 @@ public class wave_spawner extends script.base_script
             messageTo(self, "spawnNextStage", dict, timeToNext, false);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             messageTo(self, "cleanupWaveSpawner", null, 600, false);
             return SCRIPT_CONTINUE;
         }
     }
+
     public int cleanupWaveSpawner(obj_id self, dictionary params) throws InterruptedException
     {
         clearEventArea(self);
         trial.cleanupObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnActors(obj_id controller, int stage) throws InterruptedException
     {
         spawnActors(controller, stage, null);
     }
+
     public void spawnActors(obj_id controller, int stage, String override) throws InterruptedException
     {
         String spawnTable = getDataTable(controller);
@@ -186,7 +204,7 @@ public class wave_spawner extends script.base_script
                     messageTo(controller, "cleanupWaveSpawner", null, 0, false);
                     break;
                 }
-                else 
+                else
                 {
                     newObject = create.object(object, spawnLoc);
                     if (!isIdValid(newObject))
@@ -198,7 +216,7 @@ public class wave_spawner extends script.base_script
                         setObjVar(newObject, restuss_event.PATROL_TYPE, patrolType);
                         utils.setScriptVar(newObject, restuss_event.MASTER_PATROL_ARRAY, utils.getResizeableObjIdArrayScriptVar(controller, restuss_event.MASTER_PATROL_ARRAY));
                     }
-                    else 
+                    else
                     {
                         restuss_event.setIsStatic(newObject, true);
                     }
@@ -219,6 +237,7 @@ public class wave_spawner extends script.base_script
             }
         }
     }
+
     public String getDataTable(obj_id self) throws InterruptedException
     {
         String table = "";
@@ -228,6 +247,7 @@ public class wave_spawner extends script.base_script
         }
         return table;
     }
+
     public void addToWaypointData(obj_id controller, obj_id waypointObject) throws InterruptedException
     {
         Vector wp = new Vector();
@@ -240,6 +260,7 @@ public class wave_spawner extends script.base_script
         setName(waypointObject, getStringObjVar(waypointObject, "wp_name"));
         utils.setScriptVar(controller, restuss_event.MASTER_PATROL_ARRAY, wp);
     }
+
     public void transferWaypointData(obj_id controller, obj_id receiver) throws InterruptedException
     {
         if (!utils.hasScriptVar(controller, restuss_event.MASTER_PATROL_ARRAY))
@@ -249,10 +270,12 @@ public class wave_spawner extends script.base_script
         }
         setObjVar(receiver, restuss_event.MASTER_PATROL_ARRAY, utils.getResizeableObjIdArrayScriptVar(controller, restuss_event.MASTER_PATROL_ARRAY));
     }
+
     public void attachSpawnScripts(obj_id subject, String spawnScripts) throws InterruptedException
     {
         attachSpawnScripts(subject, spawnScripts, -1);
     }
+
     public void attachSpawnScripts(obj_id subject, String spawnScripts, int type) throws InterruptedException
     {
         if (type > -1)
@@ -260,13 +283,13 @@ public class wave_spawner extends script.base_script
             switch (type)
             {
                 case TYPE_AI:
-                attachScript(subject, "theme_park.wave_spawner_ai_controller");
-                break;
+                    attachScript(subject, "theme_park.wave_spawner_ai_controller");
+                    break;
                 case TYPE_TRIGGER:
-                attachScript(subject, "theme_park.restuss_event.trigger_controller");
-                break;
+                    attachScript(subject, "theme_park.restuss_event.trigger_controller");
+                    break;
                 case TYPE_EFFECT_MANAGER:
-                attachScript(subject, "theme_park.restuss_event.restuss_clientfx_controller");
+                    attachScript(subject, "theme_park.restuss_event.restuss_clientfx_controller");
             }
         }
         if (spawnScripts == null || spawnScripts.equals("none"))
@@ -274,10 +297,12 @@ public class wave_spawner extends script.base_script
             return;
         }
         String[] scripts = split(spawnScripts, ';');
-        for (String script : scripts) {
+        for (String script : scripts)
+        {
             attachScript(subject, script);
         }
     }
+
     public void setSpawnObjVar(obj_id newObject, String objvarString) throws InterruptedException
     {
         if (objvarString == null || objvarString.equals("none"))
@@ -285,34 +310,41 @@ public class wave_spawner extends script.base_script
             return;
         }
         String[] parse = split(objvarString, ';');
-        if (parse == null || parse.length == 0)
+        if (parse == null)
         {
             return;
         }
-        for (String s : parse) {
+        for (String s : parse)
+        {
             String[] typeDataSplit = split(s, ':');
             String type = typeDataSplit[0];
             String data = typeDataSplit[1];
             String[] nameValueSplit = split(data, '=');
             String name = nameValueSplit[0];
             String value = nameValueSplit[1];
-            if (type.equals("int")) {
+            if (type.equals("int"))
+            {
                 setObjVar(newObject, name, utils.stringToInt(value));
             }
-            if (type.equals("float")) {
+            if (type.equals("float"))
+            {
                 setObjVar(newObject, name, utils.stringToFloat(value));
             }
-            if (type.equals("string")) {
+            if (type.equals("string"))
+            {
                 setObjVar(newObject, name, value);
             }
-            if (type.equals("boolean") && (value.equals("true") || value.equals("1"))) {
+            if (type.equals("boolean") && (value.equals("true") || value.equals("1")))
+            {
                 setObjVar(newObject, name, true);
             }
-            if (type.equals("boolean") && (value.equals("false") || value.equals("0"))) {
+            if (type.equals("boolean") && (value.equals("false") || value.equals("0")))
+            {
                 setObjVar(newObject, name, false);
             }
         }
     }
+
     public dictionary parseTriggerData(String data) throws InterruptedException
     {
         if (data == null || data.equals(""))
@@ -333,6 +365,7 @@ public class wave_spawner extends script.base_script
         }
         return dict;
     }
+
     public void setClientEffectData(obj_id object, String passedString) throws InterruptedException
     {
         String[] parse = split(passedString, ':');
@@ -346,11 +379,12 @@ public class wave_spawner extends script.base_script
         {
             setObjVar(object, restuss_event.EFFECT_DELTA, parse[3]);
         }
-        else 
+        else
         {
             setObjVar(object, restuss_event.EFFECT_DELTA, "0");
         }
     }
+
     public int triggerFired(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params))
@@ -368,6 +402,7 @@ public class wave_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void doMessageTo(String message) throws InterruptedException
     {
         String[] completeParse = split(message, ':');
@@ -387,6 +422,7 @@ public class wave_spawner extends script.base_script
             utils.messageTo(objects, completeParse[3], null, 0, false);
         }
     }
+
     public void doPlayMusicInArea(String message) throws InterruptedException
     {
         String[] parse = split(message, ':');
@@ -401,14 +437,16 @@ public class wave_spawner extends script.base_script
             range = utils.stringToFloat(parse[2]);
         }
         obj_id[] players = getPlayerCreaturesInRange(getSelf(), range);
-        if (players == null || players.length == 0)
+        if (players == null)
         {
             return;
         }
-        for (obj_id player : players) {
+        for (obj_id player : players)
+        {
             playMusic(player, parse[1]);
         }
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING)

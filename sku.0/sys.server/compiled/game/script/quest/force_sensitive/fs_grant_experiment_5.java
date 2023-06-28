@@ -1,16 +1,23 @@
 package script.quest.force_sensitive;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.utils;
 import script.obj_id;
 
 public class fs_grant_experiment_5 extends script.base_script
 {
+    public static final String DATATABLE_SKILLS = "datatables/skill/skills.iff";
+    public static final String SKILL = "force_sensitive_crafting_mastery_experimentation_01";
     public fs_grant_experiment_5()
     {
     }
-    public static final String DATATABLE_SKILLS = "datatables/skill/skills.iff";
-    public static final String SKILL = "force_sensitive_crafting_mastery_experimentation_01";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id player = utils.getContainingPlayer(self);
@@ -23,25 +30,26 @@ public class fs_grant_experiment_5 extends script.base_script
                 String xpType = dataTableGetString(DATATABLE_SKILLS, row, "XP_TYPE");
                 if (xp > 0 && xpType != null)
                 {
-                    grantExperiencePoints(player, xpType, (int)(xp * 0.05f));
+                    grantExperiencePoints(player, xpType, (int) (xp * 0.05f));
                 }
-                else 
+                else
                 {
                     CustomerServiceLog("fs_village", "WARNING: fs_grant_experiment_5 could not find xp data for skill " + SKILL + " in the skills datatable");
                 }
             }
-            else 
+            else
             {
                 CustomerServiceLog("fs_village", "WARNING: fs_grant_experiment_5 could not find skill " + SKILL + " in the skills datatable");
             }
         }
-        else 
+        else
         {
             CustomerServiceLog("fs_village", "WARNING: fs_grant_experiment_5 could not find player containing object " + self);
         }
         messageTo(self, "handleDetachMessage", null, 1.0f, true);
         return SCRIPT_CONTINUE;
     }
+
     public int handleDetachMessage(obj_id self, dictionary params) throws InterruptedException
     {
         detachScript(self, "quest.force_sensitive.fs_grant_experiment_5");

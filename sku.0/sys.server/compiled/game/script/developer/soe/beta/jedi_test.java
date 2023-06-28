@@ -1,5 +1,11 @@
 package script.developer.soe.beta;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class jedi_test extends script.base_script
@@ -7,6 +13,7 @@ public class jedi_test extends script.base_script
     public jedi_test()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (getJediState(self) < JEDI_STATE_JEDI)

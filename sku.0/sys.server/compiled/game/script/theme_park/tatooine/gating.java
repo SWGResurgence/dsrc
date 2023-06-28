@@ -1,14 +1,17 @@
 package script.theme_park.tatooine;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.factions;
 import script.library.quests;
 import script.obj_id;
 
 public class gating extends script.base_script
 {
-    public gating()
-    {
-    }
     public static final String BIB_QUEST = "bibNewbieQuest1";
     public static final String BIB_QUEST2 = "bibNewbieQuest2";
     public static final String EPHANT_MON_QUEST = "ephantMonQuest1";
@@ -32,6 +35,10 @@ public class gating extends script.base_script
     public static final String TALMONT_CRAFTING_2 = "talmontCrafting2";
     public static final String TALMONT_COMBAT_1 = "talmontCombat1";
     public static final String TALMONT_COMBAT_2 = "talmontCombat2";
+    public gating()
+    {
+    }
+
     public static boolean canTakeQuest(obj_id player, String questId) throws InterruptedException
     {
         if (quests.hasCompletedQuest(player, questId))
@@ -48,7 +55,7 @@ public class gating extends script.base_script
         }
         if (factions.getFactionStanding(player, factions.FACTION_HUTT) < 500.0f)
         {
-            if (quests.canInfiltrate(player, DERA_QUEST_1) == false && quests.canInfiltrate(player, TALMONT_QUEST_1) == false)
+            if (!quests.canInfiltrate(player, DERA_QUEST_1) && !quests.canInfiltrate(player, TALMONT_QUEST_1))
             {
                 return false;
             }
@@ -71,14 +78,7 @@ public class gating extends script.base_script
         }
         if (questId.equals(BIB_QUEST3))
         {
-            if (quests.hasCompletedQuest(player, EPHANT_MON_QUEST) && quests.hasCompletedQuest(player, MAX_REBO_QUEST) && quests.hasCompletedQuest(player, BARADA_QUEST))
-            {
-                return true;
-            }
-            else 
-            {
-                return false;
-            }
+            return quests.hasCompletedQuest(player, EPHANT_MON_QUEST) && quests.hasCompletedQuest(player, MAX_REBO_QUEST) && quests.hasCompletedQuest(player, BARADA_QUEST);
         }
         if (questId.equals(JABBA_QUEST))
         {

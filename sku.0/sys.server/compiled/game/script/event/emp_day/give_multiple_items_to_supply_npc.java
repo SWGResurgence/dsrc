@@ -1,17 +1,24 @@
 package script.event.emp_day;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.obj_id;
 import script.string_id;
 
 public class give_multiple_items_to_supply_npc extends script.base_script
 {
-    public give_multiple_items_to_supply_npc()
-    {
-    }
     public static final boolean LOGGING_ON = true;
     public static final String LOGGING_CATEGORY = "holidayTrader";
     public static final string_id noGiveDuringCombat = new string_id("quest/ground/system_message", "no_give_during_combat");
+    public give_multiple_items_to_supply_npc()
+    {
+    }
+
     public int OnGiveItem(obj_id self, obj_id item, obj_id giver) throws InterruptedException
     {
         if (ai_lib.isInCombat(giver))
@@ -86,9 +93,12 @@ public class give_multiple_items_to_supply_npc extends script.base_script
         }
         return SCRIPT_OVERRIDE;
     }
-    public boolean isOpposingFaction(obj_id player, int npcFaction) throws InterruptedException {
+
+    public boolean isOpposingFaction(obj_id player, int npcFaction) throws InterruptedException
+    {
         return (npcFaction == holiday.IMPERIAL_PLAYER && factions.isRebel(player)) || (npcFaction == holiday.REBEL_PLAYER && factions.isImperial(player));
     }
+
     public boolean isCrateItem(obj_id player, String itemName, int faction) throws InterruptedException
     {
         blog("give_multiple_items_to_supply_npc.isCrateItem: init.");
@@ -113,7 +123,7 @@ public class give_multiple_items_to_supply_npc extends script.base_script
                 foundMatch = true;
             }
         }
-        else 
+        else
         {
             blog("give_multiple_items_to_supply_npc.isCrateItem: reb player.");
             for (int i = 0; i < holiday.ALL_REBEL_CRATE_TEMPLATES.length; i++)
@@ -127,6 +137,7 @@ public class give_multiple_items_to_supply_npc extends script.base_script
         }
         return foundMatch;
     }
+
     public boolean hasEmpireDayQuest(obj_id player, int faction) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -145,7 +156,7 @@ public class give_multiple_items_to_supply_npc extends script.base_script
                 hasQuest = true;
             }
         }
-        else 
+        else
         {
             for (int i = 0; i < holiday.ALL_REBEL_QUESTS.length; i++)
             {
@@ -158,6 +169,7 @@ public class give_multiple_items_to_supply_npc extends script.base_script
         }
         return hasQuest;
     }
+
     public String getEmpireDayCrateForQuestName(obj_id player, int faction) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -175,7 +187,7 @@ public class give_multiple_items_to_supply_npc extends script.base_script
                 return holiday.ALL_IMPERIAL_QUEST_TEMPLATES[i];
             }
         }
-        else 
+        else
         {
             for (int i = 0; i < holiday.ALL_REBEL_QUESTS.length; i++)
             {
@@ -188,6 +200,7 @@ public class give_multiple_items_to_supply_npc extends script.base_script
         }
         return null;
     }
+
     public String getEmpireDayQuestName(obj_id player, int faction) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -205,7 +218,7 @@ public class give_multiple_items_to_supply_npc extends script.base_script
                 return holiday.ALL_IMPERIAL_QUESTS[i];
             }
         }
-        else 
+        else
         {
             for (int i = 0; i < holiday.ALL_REBEL_QUESTS.length; i++)
             {
@@ -218,6 +231,7 @@ public class give_multiple_items_to_supply_npc extends script.base_script
         }
         return null;
     }
+
     public boolean incrementCollection(obj_id npc, obj_id player, int faction) throws InterruptedException
     {
         blog("give_multiple_items_to_supply_npc.incrementCollection init.");
@@ -244,7 +258,7 @@ public class give_multiple_items_to_supply_npc extends script.base_script
                 doAnimationAction(npc, "celebrate");
             }
         }
-        else 
+        else
         {
             if (getCollectionSlotValue(player, holiday.REBEL_ENGINEERING_START_SLOT) <= 0)
             {
@@ -262,6 +276,7 @@ public class give_multiple_items_to_supply_npc extends script.base_script
         }
         return true;
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON && msg != null && !msg.equals(""))

@@ -1,28 +1,37 @@
 package script.theme_park.dungeon.mustafar_trials.decrepit_droid_factory;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.sui;
 import script.library.trial;
 
 public class code_terminal_slave extends script.base_script
 {
-    public code_terminal_slave()
-    {
-    }
     public static final String DECREPIT_STF = "mustafar/decrepit_droid_factory";
     public static final string_id SID_GET_ACCESS_SNIP = new string_id(DECREPIT_STF, "get_access_snip");
     public static final string_id SID_NOT_LOCKED = new string_id(DECREPIT_STF, "decrepit_not_locked");
     public static final string_id SID_TITLE = new string_id(DECREPIT_STF, "slave_text_title");
     public static final string_id SID_TEXT = new string_id(DECREPIT_STF, "slave_text_body");
     public static final boolean LOGGING = false;
+    public code_terminal_slave()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         boolean isUnlocked = trial.isCellPublic(self, trial.DECREPIT_ONE_TWO_STAIR);
@@ -30,13 +39,14 @@ public class code_terminal_slave extends script.base_script
         {
             mi.addRootMenu(menu_info_types.ITEM_USE, SID_GET_ACCESS_SNIP);
         }
-        else 
+        else
         {
             mi.addRootMenu(menu_info_types.ITEM_USE, SID_NOT_LOCKED);
         }
         sendDirtyObjectMenuNotification(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -48,6 +58,7 @@ public class code_terminal_slave extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void showAccessSnipitSui(obj_id terminal, obj_id player) throws InterruptedException
     {
         obj_id top = getTopMostContainer(terminal);
@@ -75,6 +86,7 @@ public class code_terminal_slave extends script.base_script
         sui.msgboxButtonSetup(pid, sui.OK_ONLY);
         sui.showSUIPage(pid);
     }
+
     public String getCodeSnipit(obj_id terminal) throws InterruptedException
     {
         obj_id top = getTopMostContainer(terminal);
@@ -84,17 +96,18 @@ public class code_terminal_slave extends script.base_script
         switch (section)
         {
             case 1:
-            sub = code.substring(0, 2);
-            return sub + "XXXX";
+                sub = code.substring(0, 2);
+                return sub + "XXXX";
             case 2:
-            sub = code.substring(2, 4);
-            return "XX" + sub + "XX";
+                sub = code.substring(2, 4);
+                return "XX" + sub + "XX";
             case 3:
-            sub = code.substring(4, 6);
-            return "XXXX" + sub;
+                sub = code.substring(4, 6);
+                return "XXXX" + sub;
         }
         return sub;
     }
+
     public int handleResetTimer(obj_id self, dictionary params) throws InterruptedException
     {
         dictionary dict = new dictionary();
@@ -102,6 +115,7 @@ public class code_terminal_slave extends script.base_script
         messageTo(self, "showStatusFlyText", dict, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int showStatusFlyText(obj_id self, dictionary params) throws InterruptedException
     {
         int timer = params.getInt("timer");
@@ -112,6 +126,7 @@ public class code_terminal_slave extends script.base_script
         trial.doCountdownTimerFlyText(self, timer);
         return SCRIPT_CONTINUE;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING)

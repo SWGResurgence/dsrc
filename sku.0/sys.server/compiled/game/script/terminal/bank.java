@@ -1,5 +1,11 @@
 package script.terminal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.city;
 import script.library.money;
@@ -8,9 +14,6 @@ import script.library.utils;
 
 public class bank extends script.terminal.base.base_terminal
 {
-    public bank()
-    {
-    }
     public static final String SCRIPTVAR_BANK = "bank";
     public static final string_id SID_BANK_OPTIONS = new string_id("sui", "mnu_bank");
     public static final string_id SID_BANK_CREDITS = new string_id("sui", "bank_credits");
@@ -25,11 +28,16 @@ public class bank extends script.terminal.base.base_terminal
     public static final string_id SID_GALACTIC_RESERVE = new string_id("sui", "bank_galactic_reserve");
     public static final string_id SID_GALACTIC_RESERVE_DEPOSIT = new string_id("sui", "bank_galactic_reserve_deposit");
     public static final string_id SID_GALACTIC_RESERVE_WITHDRAW = new string_id("sui", "bank_galactic_reserve_withdraw");
+    public bank()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setObjVar(self, "banking_bankid", getCurrentSceneName());
         return super.OnInitialize(self);
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         setObjVar(player, "banking_bankid", getCurrentSceneName());
@@ -60,6 +68,7 @@ public class bank extends script.terminal.base.base_terminal
         }
         return super.OnObjectMenuRequest(self, player, mi);
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         setObjVar(player, "banking_bankid", getCurrentSceneName());
@@ -98,7 +107,7 @@ public class bank extends script.terminal.base.base_terminal
             {
                 debugSpeakMsg(player, "transaction request aborted by system...");
             }
-            else 
+            else
             {
                 closeBankTransferSui(self, player);
             }
@@ -114,7 +123,7 @@ public class bank extends script.terminal.base.base_terminal
             {
                 debugSpeakMsg(player, "transaction request aborted by system...");
             }
-            else 
+            else
             {
                 closeBankTransferSui(self, player);
             }
@@ -129,6 +138,7 @@ public class bank extends script.terminal.base.base_terminal
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean openBankMenu(obj_id player) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -143,7 +153,7 @@ public class bank extends script.terminal.base.base_terminal
             sui.closeSUI(player, oldPid);
             utils.removeScriptVar(self, scriptvar);
         }
-        else 
+        else
         {
             if (utils.hasScriptVar(player, SCRIPTVAR_BANK + ".terminal"))
             {
@@ -168,6 +178,7 @@ public class bank extends script.terminal.base.base_terminal
         }
         return false;
     }
+
     public int forceCloseBankSui(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -182,6 +193,7 @@ public class bank extends script.terminal.base.base_terminal
         }
         return SCRIPT_CONTINUE;
     }
+
     public void closeBankTransferSui(obj_id self, obj_id player) throws InterruptedException
     {
         String scriptvar = SCRIPTVAR_BANK + "." + player;
@@ -192,6 +204,7 @@ public class bank extends script.terminal.base.base_terminal
             utils.removeScriptVar(self, scriptvar);
         }
     }
+
     public int handleBankSuccess(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -206,6 +219,7 @@ public class bank extends script.terminal.base.base_terminal
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleBankUnknownError(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -220,6 +234,7 @@ public class bank extends script.terminal.base.base_terminal
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleBankDepositError(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -234,6 +249,7 @@ public class bank extends script.terminal.base.base_terminal
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleBankWithdrawError(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())

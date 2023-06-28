@@ -1,5 +1,11 @@
 package script.theme_park.newbie_tutorial;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.location;
 import script.obj_id;
@@ -9,17 +15,20 @@ public class mouse2 extends script.theme_park.newbie_tutorial.tutorial_base
     public mouse2()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "moveToLocationOne", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int moveToLocationOne(obj_id self, dictionary params) throws InterruptedException
     {
         pathToLocationOne(self);
         messageTo(self, "moveToLocationTwo", null, 120, false);
         return SCRIPT_CONTINUE;
     }
+
     public void pathToLocationOne(obj_id mouse) throws InterruptedException
     {
         setObjVar(mouse, "newbie.movingToLocation", 1);
@@ -31,18 +40,21 @@ public class mouse2 extends script.theme_park.newbie_tutorial.tutorial_base
         destLoc.cell = getCellId(bldg, MOUSE_DROID2_DEST_CELL);
         pathTo(mouse, destLoc);
     }
+
     public int moveToLocationTwo(obj_id self, dictionary params) throws InterruptedException
     {
         pathToLocationTwo(self);
         messageTo(self, "moveToLocationOne", null, 120, false);
         return SCRIPT_CONTINUE;
     }
+
     public void pathToLocationTwo(obj_id mouse) throws InterruptedException
     {
         location destLoc = getHomeLocation(mouse);
         pathTo(mouse, destLoc);
         setObjVar(mouse, "newbie.movingToLocation", 2);
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         int dest = getIntObjVar(self, "newbie.movingToLocation");
@@ -50,7 +62,7 @@ public class mouse2 extends script.theme_park.newbie_tutorial.tutorial_base
         {
             pathToLocationTwo(self);
         }
-        else 
+        else
         {
             pathToLocationOne(self);
         }

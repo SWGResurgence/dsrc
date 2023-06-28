@@ -1,5 +1,11 @@
 package script.theme_park;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.beast_lib;
@@ -13,6 +19,7 @@ public class destructible extends script.base_script
     public destructible()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         int hp = hasObjVar(self, "hp") ? getIntObjVar(self, "hp") : 5000;
@@ -32,6 +39,7 @@ public class destructible extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDisabled(obj_id self, obj_id killer) throws InterruptedException
     {
         location death = getLocation(self);
@@ -47,13 +55,16 @@ public class destructible extends script.base_script
         obj_id[] enemies = getWhoIsTargetingMe(self);
         if (enemies != null && enemies.length > 1)
         {
-            for (obj_id enemy : enemies) {
-                if (isPlayer(enemy)) {
+            for (obj_id enemy : enemies)
+            {
+                if (isPlayer(enemy))
+                {
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (!ai_lib.isMob(breacher) || beast_lib.isBeast(breacher))
@@ -71,15 +82,18 @@ public class destructible extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void setTriggerVolume(obj_id self, String vol_name, int vol_range) throws InterruptedException
     {
         createTriggerVolume(vol_name, vol_range, true);
     }
+
     public int destroyDisabledLair(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDamaged(obj_id self, obj_id attacker, obj_id weapon, int damage) throws InterruptedException
     {
         int curHP = getHitpoints(self);
@@ -96,7 +110,7 @@ public class destructible extends script.base_script
                     setObjVar(self, "playingEffect", 1);
                     messageTo(self, "effectManager", null, 15, true);
                 }
-                else 
+                else
                 {
                     location death = getLocation(self);
                     setObjVar(self, "playingEffect", 1);
@@ -106,11 +120,13 @@ public class destructible extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int effectManager(obj_id self, dictionary params) throws InterruptedException
     {
         removeObjVar(self, "playingEffect");
         return SCRIPT_CONTINUE;
     }
+
     public void reportDeath(obj_id self, obj_id killer) throws InterruptedException
     {
         int row = getIntObjVar(self, "row");

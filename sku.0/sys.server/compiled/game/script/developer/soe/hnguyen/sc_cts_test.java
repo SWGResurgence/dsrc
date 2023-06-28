@@ -1,5 +1,11 @@
 package script.developer.soe.hnguyen;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.cts;
 import script.library.utils;
 import script.obj_id;
@@ -11,6 +17,7 @@ public class sc_cts_test extends script.base_script
     public sc_cts_test()
     {
     }
+
     public int OnHearSpeech(obj_id self, obj_id objSpeaker, String strText) throws InterruptedException
     {
         if (objSpeaker != self)

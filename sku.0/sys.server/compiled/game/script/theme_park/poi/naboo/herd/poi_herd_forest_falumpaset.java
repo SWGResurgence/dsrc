@@ -1,5 +1,11 @@
 package script.theme_park.poi.naboo.herd;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.location;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class poi_herd_forest_falumpaset extends script.theme_park.poi.base
     public poi_herd_forest_falumpaset()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         poiCreateObject("object/creature/monster/falumpaset/falumpaset_forest_large.iff", 8, 8);
@@ -18,6 +25,7 @@ public class poi_herd_forest_falumpaset extends script.theme_park.poi.base
         messageTo(self, "spawnCreatures", null, 4, true);
         return SCRIPT_CONTINUE;
     }
+
     public String getFalumpaset(obj_id self) throws InterruptedException
     {
         String falumpasetSpawn = "object/creature/monster/falumpaset/falumpaset.iff";
@@ -25,14 +33,15 @@ public class poi_herd_forest_falumpaset extends script.theme_park.poi.base
         switch (falumpasetType)
         {
             case 1:
-            falumpasetSpawn = "object/creature/monster/falumpaset/falumpaset_forest_medium.iff";
-            break;
+                falumpasetSpawn = "object/creature/monster/falumpaset/falumpaset_forest_medium.iff";
+                break;
             case 2:
-            falumpasetSpawn = "object/creature/monster/falumpaset/falumpaset_forest_small.iff";
-            break;
+                falumpasetSpawn = "object/creature/monster/falumpaset/falumpaset_forest_small.iff";
+                break;
         }
         return falumpasetSpawn;
     }
+
     public int spawnCreatures(obj_id self, dictionary params) throws InterruptedException
     {
         location here = new location(getLocation(self));

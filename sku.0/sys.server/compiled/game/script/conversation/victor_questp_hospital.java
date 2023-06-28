@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.utils;
@@ -7,14 +13,17 @@ import script.*;
 
 public class victor_questp_hospital extends script.base_script
 {
+    public static String c_stringFile = "conversation/victor_questp_hospital";
+
     public victor_questp_hospital()
     {
     }
-    public static String c_stringFile = "conversation/victor_questp_hospital";
+
     public boolean victor_questp_hospital_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean victor_questp_hospital_condition_CampObjCheck(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.electionStarted"))
@@ -25,19 +34,18 @@ public class victor_questp_hospital extends script.base_script
                 int electionPlayerIsIn = getIntObjVar(player, "bestine.camp");
                 if (electionPlayerIsIn >= electionNum)
                 {
-                    if (!hasObjVar(player, "bestine.victor_hospital_noroom"))
-                    {
-                        return true;
-                    }
+                    return !hasObjVar(player, "bestine.victor_hospital_noroom");
                 }
             }
         }
         return false;
     }
+
     public boolean victor_questp_hospital_condition_alreadyHasEvidence(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.playerHasItemByTemplate(player, "object/tangible/loot/quest/victor_questp_receipt.iff");
     }
+
     public boolean victor_questp_hospital_condition_hasNoroomObjvar(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.electionStarted"))
@@ -48,19 +56,18 @@ public class victor_questp_hospital extends script.base_script
                 int electionPlayerIsIn = getIntObjVar(player, "bestine.camp");
                 if (electionPlayerIsIn >= electionNum)
                 {
-                    if (hasObjVar(player, "bestine.victor_hospital_noroom"))
-                    {
-                        return true;
-                    }
+                    return hasObjVar(player, "bestine.victor_hospital_noroom");
                 }
             }
         }
         return false;
     }
+
     public boolean victor_questp_hospital_condition_nonoffice(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasObjVar(npc, "bestine.electionEnded");
     }
+
     public boolean victor_questp_hospital_condition_noInventorySpace(obj_id player, obj_id npc) throws InterruptedException
     {
         boolean hasNoInvRoom = false;
@@ -75,13 +82,16 @@ public class victor_questp_hospital extends script.base_script
         }
         return hasNoInvRoom;
     }
+
     public void victor_questp_hospital_action__defaultAction(obj_id player, obj_id npc) throws InterruptedException
     {
     }
+
     public void victor_questp_hospital_action_Noroom(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "bestine.victor_hospital_noroom", true);
     }
+
     public void victor_questp_hospital_action_giveReceipt(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "bestine.victor_hospital_noroom"))
@@ -101,8 +111,8 @@ public class victor_questp_hospital extends script.base_script
                 }
             }
         }
-        return;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -112,11 +122,13 @@ public class victor_questp_hospital extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -125,12 +137,14 @@ public class victor_questp_hospital extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "npc.conversation.victor_questp_hospital");
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -171,7 +185,7 @@ public class victor_questp_hospital extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_90ec63e0");
@@ -183,7 +197,7 @@ public class victor_questp_hospital extends script.base_script
                 setObjVar(player, "conversation.victor_questp_hospital.branchId", 3);
                 npcStartConversation(player, self, "victor_questp_hospital", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -211,7 +225,7 @@ public class victor_questp_hospital extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_67a10ef6");
@@ -223,7 +237,7 @@ public class victor_questp_hospital extends script.base_script
                 setObjVar(player, "conversation.victor_questp_hospital.branchId", 7);
                 npcStartConversation(player, self, "victor_questp_hospital", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -238,6 +252,7 @@ public class victor_questp_hospital extends script.base_script
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("victor_questp_hospital"))
@@ -304,7 +319,7 @@ public class victor_questp_hospital extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ad2e138");
@@ -317,7 +332,7 @@ public class victor_questp_hospital extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.victor_questp_hospital.branchId");
                     npcSpeak(player, message);
@@ -358,7 +373,7 @@ public class victor_questp_hospital extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_67e6df55");
@@ -367,7 +382,7 @@ public class victor_questp_hospital extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.victor_questp_hospital.branchId");
                     npcSpeak(player, message);

@@ -1,5 +1,11 @@
 package script.npe;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.npe;
 import script.library.utils;
@@ -10,19 +16,21 @@ import java.util.Vector;
 
 public class npe_public_instance extends script.base_script
 {
-    public npe_public_instance()
-    {
-    }
     public static final boolean LOGGING = true;
     public static final float POPULATION_UPDATE_TIME = 20.0f;
     public static final float STATION_SCAN_RADIUS = 500.0f;
     public static final String VAR_STATION_INSTANCE_ID = "npe.station_instance_id";
+    public npe_public_instance()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         getClusterWideData(npe.DUNGEON_PUBLIC_MANAGER_NAME, getStringObjVar(self, "instance_name") + "_" + self, true, self);
         doLogging("OnInitialize", "Requested cluster wide data for " + getStringObjVar(self, "instance_name") + "_" + self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnClusterWideDataResponse(obj_id self, String manage_name, String name, int request_id, String[] element_name_list, dictionary[] data, int lock_key) throws InterruptedException
     {
         Vector players = getPlayersInStation(self);
@@ -42,22 +50,27 @@ public class npe_public_instance extends script.base_script
         messageTo(self, "updatePopulation", params, POPULATION_UPDATE_TIME, false);
         return SCRIPT_CONTINUE;
     }
+
     public int updatePopulation(obj_id self, dictionary params) throws InterruptedException
     {
         doLogging("updatePopulation", "Got message to updatePopulation");
         getClusterWideData(npe.DUNGEON_PUBLIC_MANAGER_NAME, getStringObjVar(self, "instance_name") + "_" + self, true, self);
         return SCRIPT_CONTINUE;
     }
+
     public Vector getPlayersInStation(obj_id self) throws InterruptedException
     {
         obj_id[] players = getPlayerCreaturesInRange(getLocation(self), STATION_SCAN_RADIUS);
         Vector players_ret = new Vector();
-        if (players != null && players.length > 0)
+        if (players != null)
         {
-            for (obj_id player : players) {
-                if (isIdValid(player) && utils.hasScriptVar(player, VAR_STATION_INSTANCE_ID)) {
+            for (obj_id player : players)
+            {
+                if (isIdValid(player) && utils.hasScriptVar(player, VAR_STATION_INSTANCE_ID))
+                {
                     obj_id station = utils.getObjIdScriptVar(player, VAR_STATION_INSTANCE_ID);
-                    if (isIdValid(station) && station == self) {
+                    if (isIdValid(station) && station == self)
+                    {
                         players_ret.add(player);
                     }
                 }
@@ -65,6 +78,7 @@ public class npe_public_instance extends script.base_script
         }
         return players_ret;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING)
@@ -72,6 +86,7 @@ public class npe_public_instance extends script.base_script
             LOG("npe_public_instance:" + section, message);
         }
     }
+
     public int OnLostItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (isPlayer(item))
@@ -81,6 +96,7 @@ public class npe_public_instance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (isPlayer(item))

@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.corvette;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.sui;
 import script.library.utils;
@@ -8,10 +14,12 @@ import java.util.Vector;
 
 public class engine extends script.base_script
 {
+    public static final String MSGS = "dungeon/corvette";
+
     public engine()
     {
     }
-    public static final String MSGS = "dungeon/corvette";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         string_id engine_name = new string_id(MSGS, "engine_name");
@@ -19,6 +27,7 @@ public class engine extends script.base_script
         setName(self, name);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);
@@ -29,6 +38,7 @@ public class engine extends script.base_script
         mid.setServerNotify(true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -37,7 +47,7 @@ public class engine extends script.base_script
             {
                 showEngineSettings(self, player);
             }
-            else 
+            else
             {
                 string_id wrongMission = new string_id(MSGS, "does_nothing");
                 sendSystemMessage(player, wrongMission);
@@ -45,6 +55,7 @@ public class engine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int showEngineSettings(obj_id pcd, obj_id player) throws InterruptedException
     {
         string_id textMsg = new string_id(MSGS, "engine_settings");
@@ -67,15 +78,15 @@ public class engine extends script.base_script
             setObjVar(self, "b", b);
             setObjVar(self, "c", c);
         }
-        else 
+        else
         {
             a = getIntObjVar(self, "a");
             b = getIntObjVar(self, "b");
             c = getIntObjVar(self, "c");
         }
-        one = "" + a;
-        two = "" + b;
-        three = "" + c;
+        one = String.valueOf(a);
+        two = String.valueOf(b);
+        three = String.valueOf(c);
         int pid = sui.createSUIPage(sui.SUI_MSGBOX, pcd, player, "CorvetteEngine");
         setSUIProperty(pid, "", "Size", "250,175");
         setSUIProperty(pid, sui.MSGBOX_TITLE, sui.PROP_TEXT, TITLE);
@@ -89,6 +100,7 @@ public class engine extends script.base_script
         sui.showSUIPage(pid);
         return pid;
     }
+
     public int CorvetteEngine(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -101,9 +113,9 @@ public class engine extends script.base_script
         int a = getIntObjVar(self, "a");
         int b = getIntObjVar(self, "b");
         int c = getIntObjVar(self, "c");
-        String one = "" + a;
-        String two = "" + b;
-        String three = "" + c;
+        String one = String.valueOf(a);
+        String two = String.valueOf(b);
+        String three = String.valueOf(c);
         obj_id top = getTopMostContainer(self);
         if ((params == null) || (params.isEmpty()))
         {
@@ -114,35 +126,36 @@ public class engine extends script.base_script
         switch (bp)
         {
             case sui.BP_OK:
-            if (revert != null && !revert.equals(""))
-            {
+                if (revert != null && !revert.equals(""))
+                {
+                    string_id setting = new string_id(MSGS, "engine_set");
+                    string_id result = new string_id(MSGS, "engine_result");
+                    sendSystemMessage(player, setting);
+                    sendSystemMessage(player, one + "%", null);
+                    setObjVar(top, "engine", a);
+                    sendSystemMessage(player, result);
+                }
+                else
+                {
+                    string_id setting = new string_id(MSGS, "engine_set");
+                    sendSystemMessage(player, setting);
+                    sendSystemMessage(player, three + "%", null);
+                    setObjVar(top, "engine", c);
+                    checkForDestroy(player, top);
+                }
+                return SCRIPT_CONTINUE;
+            case sui.BP_CANCEL:
                 string_id setting = new string_id(MSGS, "engine_set");
                 string_id result = new string_id(MSGS, "engine_result");
                 sendSystemMessage(player, setting);
-                sendSystemMessage(player, "" + one + "%", null);
-                setObjVar(top, "engine", a);
+                sendSystemMessage(player, two + "%", null);
+                setObjVar(top, "engine", b);
                 sendSystemMessage(player, result);
-            }
-            else 
-            {
-                string_id setting = new string_id(MSGS, "engine_set");
-                sendSystemMessage(player, setting);
-                sendSystemMessage(player, "" + three + "%", null);
-                setObjVar(top, "engine", c);
-                checkForDestroy(player, top);
-            }
-            return SCRIPT_CONTINUE;
-            case sui.BP_CANCEL:
-            string_id setting = new string_id(MSGS, "engine_set");
-            string_id result = new string_id(MSGS, "engine_result");
-            sendSystemMessage(player, setting);
-            sendSystemMessage(player, "" + two + "%", null);
-            setObjVar(top, "engine", b);
-            sendSystemMessage(player, result);
-            return SCRIPT_CONTINUE;
+                return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public void checkForDestroy(obj_id player, obj_id top) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -175,30 +188,30 @@ public class engine extends script.base_script
                         {
                             return;
                         }
-                        for (Object player1 : players) {
+                        for (Object player1 : players)
+                        {
                             messageTo(((obj_id) player1), "youWin", null, 1, false);
                             setObjVar(self, "destroyed", 1);
                         }
                     }
                 }
             }
-            else 
+            else
             {
                 string_id calc = new string_id(MSGS, "calculations");
                 sendSystemMessage(player, calc);
             }
         }
-        else 
+        else
         {
             string_id normal = new string_id(MSGS, "engine_result");
             string_id fuel_level = new string_id(MSGS, "fuel_is");
             string_id hypr_level = new string_id(MSGS, "hyperdrive_is");
             sendSystemMessage(player, normal);
             sendSystemMessage(player, fuel_level);
-            sendSystemMessage(player, "" + fuel, null);
+            sendSystemMessage(player, String.valueOf(fuel), null);
             sendSystemMessage(player, hypr_level);
-            sendSystemMessage(player, "" + hypr, null);
+            sendSystemMessage(player, String.valueOf(hypr), null);
         }
-        return;
     }
 }

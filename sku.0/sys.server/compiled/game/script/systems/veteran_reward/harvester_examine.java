@@ -1,5 +1,11 @@
 package script.systems.veteran_reward;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class harvester_examine extends script.base_script

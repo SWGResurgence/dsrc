@@ -1,5 +1,11 @@
 package script.theme_park.kashyyyk;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -15,6 +21,7 @@ public class bocctyyy_bet_spawner extends script.base_script
     public bocctyyy_bet_spawner()
     {
     }
+
     public int doBocctyyySpawnEvent(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || !params.containsKey("questName"))
@@ -40,6 +47,7 @@ public class bocctyyy_bet_spawner extends script.base_script
         createMob(questName, locTest, radius, self);
         return SCRIPT_CONTINUE;
     }
+
     public void createMob(String questName, location here, float radius, obj_id self) throws InterruptedException
     {
         String spawnType = getSpawnType(questName);
@@ -64,7 +72,7 @@ public class bocctyyy_bet_spawner extends script.base_script
                 setObjVar(self, "myCreations", myCreations);
             }
         }
-        else 
+        else
         {
             Vector spawnedList = getResizeableObjIdArrayObjVar(self, "myCreations");
             spawnedList.add(npc);
@@ -88,12 +96,13 @@ public class bocctyyy_bet_spawner extends script.base_script
             webster.put("questName", questName);
             messageTo(self, "doBocctyyySpawnEvent", webster, 2, false);
         }
-        return;
     }
+
     public String getSpawnType(String questName) throws InterruptedException
     {
         String spawnType = "";
-        switch (questName) {
+        switch (questName)
+        {
             case "ep3_hunt_sordaan_uller_bet":
                 spawnType = "ep3_etyyy_uller_warhoof";
                 break;
@@ -109,6 +118,7 @@ public class bocctyyy_bet_spawner extends script.base_script
         }
         return spawnType;
     }
+
     public int spawnDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id deadNpc = params.getObjId("deadNpc");
@@ -124,13 +134,14 @@ public class bocctyyy_bet_spawner extends script.base_script
             {
                 setObjVar(self, "myCreations", spawnedList);
             }
-            else 
+            else
             {
                 removeObjVar(self, "myCreations");
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int doCleanupEvent(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "myCreations"))
@@ -138,9 +149,11 @@ public class bocctyyy_bet_spawner extends script.base_script
             return SCRIPT_CONTINUE;
         }
         Vector spawnedList = getResizeableObjIdArrayObjVar(self, "myCreations");
-        for (Object o : spawnedList) {
+        for (Object o : spawnedList)
+        {
             obj_id spawnedNpc = ((obj_id) o);
-            if (isIdValid(spawnedNpc)) {
+            if (isIdValid(spawnedNpc))
+            {
                 setObjVar(spawnedNpc, "cleaningUp", true);
                 destroyObject(spawnedNpc);
             }
@@ -148,6 +161,7 @@ public class bocctyyy_bet_spawner extends script.base_script
         removeObjVar(self, "myCreations");
         return SCRIPT_CONTINUE;
     }
+
     public boolean canSpawnByConfigSetting() throws InterruptedException
     {
         String disableSpawners = getConfigSetting("GameServer", "disableAreaSpawners");
@@ -155,10 +169,6 @@ public class bocctyyy_bet_spawner extends script.base_script
         {
             return true;
         }
-        if (disableSpawners.equals("true") || disableSpawners.equals("1"))
-        {
-            return false;
-        }
-        return true;
+        return !disableSpawners.equals("true") && !disableSpawners.equals("1");
     }
 }

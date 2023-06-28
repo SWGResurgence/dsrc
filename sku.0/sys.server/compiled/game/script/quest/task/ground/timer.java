@@ -1,5 +1,11 @@
 package script.quest.task.ground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.groundquests;
 import script.library.utils;
@@ -7,15 +13,16 @@ import script.obj_id;
 
 public class timer extends script.quest.task.ground.base_task
 {
-    public timer()
-    {
-    }
     public static final String dataTableColumnMinTime = "MIN_TIME";
     public static final String dataTableColumnMaxTime = "MAX_TIME";
     public static final String dataTableColumnVisible = "IS_VISIBLE";
     public static final String timeObjVar = "playedTimeEnd";
     public static final String taskType = "timer";
     public static final String dot = ".";
+    public timer()
+    {
+    }
+
     public int OnTaskActivated(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskActivated", taskType + "task activated.");
@@ -39,10 +46,11 @@ public class timer extends script.quest.task.ground.base_task
         setObjVar(self, baseObjVar + dot + timeObjVar, playerPlayedTimeWhenTimerEnds);
         if (isVisible != 0)
         {
-            questSetQuestTaskTimer(self, questGetQuestName(questCrc), taskId, "quest/groundquests:timer_timertext", (int)playerPlayedTimeWhenTimerEnds);
+            questSetQuestTaskTimer(self, questGetQuestName(questCrc), taskId, "quest/groundquests:timer_timertext", (int) playerPlayedTimeWhenTimerEnds);
         }
         return super.OnTaskActivated(self, questCrc, taskId);
     }
+
     public int QuestTimerTaskCompleted(obj_id self, dictionary params) throws InterruptedException
     {
         int questCrc = params.getInt("questcrc");
@@ -56,7 +64,7 @@ public class timer extends script.quest.task.ground.base_task
             {
                 questCompleteTask(questCrc, taskId, self);
             }
-            else 
+            else
             {
                 dictionary newParams = new dictionary();
                 newParams.put("questcrc", questCrc);
@@ -66,33 +74,39 @@ public class timer extends script.quest.task.ground.base_task
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTaskCompleted(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         cleanup(self, questCrc, taskId);
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskCompleted", taskType + "task completed.");
         return super.OnTaskCompleted(self, questCrc, taskId);
     }
+
     public int OnTaskFailed(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         cleanup(self, questCrc, taskId);
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskFailed", taskType + "task failed.");
         return super.OnTaskFailed(self, questCrc, taskId);
     }
+
     public int OnTaskCleared(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         cleanup(self, questCrc, taskId);
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskCleared", taskType + "task cleared.");
         return super.OnTaskCleared(self, questCrc, taskId);
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         removeObjVar(self, groundquests.getTaskTypeObjVar(self, taskType));
         return SCRIPT_CONTINUE;
     }
+
     public void cleanup(obj_id player, int questCrc, int taskId) throws InterruptedException
     {
         groundquests.clearBaseObjVar(player, taskType, questGetQuestName(questCrc), taskId);
     }
+
     public int handleClientLogin(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         dictionary tasks = groundquests.getActiveTasksForTaskType(self, taskType);
@@ -101,15 +115,18 @@ public class timer extends script.quest.task.ground.base_task
             java.util.Enumeration keys = tasks.keys();
             while (keys.hasMoreElements())
             {
-                String questCrcString = (String)keys.nextElement();
+                String questCrcString = (String) keys.nextElement();
                 int questCrc = utils.stringToInt(questCrcString);
                 int[] tasksForCurrentQuest = tasks.getIntArray(questCrcString);
-                for (int taskId : tasksForCurrentQuest) {
+                for (int taskId : tasksForCurrentQuest)
+                {
                     String baseObjVar = groundquests.getBaseObjVar(self, taskType, questGetQuestName(questCrc), taskId);
                     float playerPlayedTimeWhenTimerEnds = getFloatObjVar(self, baseObjVar + dot + timeObjVar);
-                    if (getPlayerPlayedTime(self) < playerPlayedTimeWhenTimerEnds) {
+                    if (getPlayerPlayedTime(self) < playerPlayedTimeWhenTimerEnds)
+                    {
                         int isVisible = groundquests.getTaskIntDataEntry(questCrc, taskId, dataTableColumnVisible);
-                        if (isVisible != 0) {
+                        if (isVisible != 0)
+                        {
                             questSetQuestTaskTimer(self, questGetQuestName(questCrc), taskId, "quest/groundquests:timer_timertext", (int) playerPlayedTimeWhenTimerEnds);
                         }
                     }

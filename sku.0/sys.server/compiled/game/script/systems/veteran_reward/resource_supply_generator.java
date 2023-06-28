@@ -1,5 +1,11 @@
 package script.systems.veteran_reward;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.sui;
 import script.library.target_dummy;
@@ -507,7 +513,8 @@ public class resource_supply_generator extends script.base_script
         String[] resourceClasses = null;
         String[] tempResourceClass = getImmediateResourceChildClasses(parentClass);
         Vector tempResourceClassTwo = null;
-        for (String tempResourceClass1 : tempResourceClass) {
+        for (String tempResourceClass1 : tempResourceClass)
+        {
             tempResourceClassTwo = utils.addElement(tempResourceClassTwo, tempResourceClass1);
         }
         resourceClasses = new String[tempResourceClassTwo.size()];

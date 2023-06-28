@@ -1,5 +1,11 @@
 package script.theme_park.warren;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.utils;
 import script.obj_id;
 
@@ -8,6 +14,7 @@ public class inquisitor_cell extends script.base_script
     public inquisitor_cell()
     {
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))
@@ -25,6 +32,7 @@ public class inquisitor_cell extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean cellUnlocked(obj_id self) throws InterruptedException
     {
         obj_id bldg = getTopMostContainer(self);
@@ -32,10 +40,6 @@ public class inquisitor_cell extends script.base_script
         {
             return false;
         }
-        if (utils.hasScriptVar(bldg, "warren.cellOpened"))
-        {
-            return true;
-        }
-        return false;
+        return utils.hasScriptVar(bldg, "warren.cellOpened");
     }
 }

@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,54 +14,67 @@ import script.*;
 
 public class corellia_39_jzoro_quanera extends script.base_script
 {
+    public static String c_stringFile = "conversation/corellia_39_jzoro_quanera";
+
     public corellia_39_jzoro_quanera()
     {
     }
-    public static String c_stringFile = "conversation/corellia_39_jzoro_quanera";
+
     public boolean corellia_39_jzoro_quanera_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean corellia_39_jzoro_quanera_condition_movingUpOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "corellia_39_chirq_council_03", "chirq_council_03_01");
     }
+
     public boolean corellia_39_jzoro_quanera_condition_movingUpComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedTask(player, "corellia_39_chirq_council_03b", "chirq_council_03_09") || groundquests.hasCompletedQuest(player, "corellia_39_chirq_council_03b");
     }
+
     public boolean corellia_39_jzoro_quanera_condition_movingUpTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "corellia_39_chirq_council_03", "chirq_council_03_04");
     }
+
     public boolean corellia_39_jzoro_quanera_condition_movingUpThree(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "corellia_39_chirq_council_03b", "chirq_council_03_09");
     }
+
     public boolean corellia_39_jzoro_quanera_condition_movingUpOneInProgress(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedTask(player, "corellia_39_chirq_council_03", "chirq_council_03_01") && !groundquests.isTaskActive(player, "corellia_39_chirq_council_03b", "chirq_council_03_04") && !groundquests.hasCompletedTask(player, "corellia_39_chirq_council_03b", "chirq_council_03_04");
     }
+
     public boolean corellia_39_jzoro_quanera_condition_movingUpTwoInProgress(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedTask(player, "corellia_39_chirq_council_03", "chirq_council_03_04") && !groundquests.isTaskActive(player, "corellia_39_chirq_council_03", "chirq_council_03_09") && !groundquests.hasCompletedTask(player, "corellia_39_chirq_council_03", "chirq_council_03_09");
     }
+
     public boolean corellia_39_jzoro_quanera_condition_allComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "corellia_38_corsec_files_02") && groundquests.isQuestActiveOrComplete(player, "corellia_38_corsec_files_03");
     }
+
     public void corellia_39_jzoro_quanera_action_signal_movingUpThree(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "chirq_council_03_09");
     }
+
     public void corellia_39_jzoro_quanera_action_signal_movingUpTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "chirq_council_03_04");
     }
+
     public void corellia_39_jzoro_quanera_action_signal_movingUpOne(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "chirq_council_03_01");
     }
+
     public int corellia_39_jzoro_quanera_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_45"))
@@ -72,6 +91,7 @@ public class corellia_39_jzoro_quanera extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corellia_39_jzoro_quanera_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_22"))
@@ -91,7 +111,7 @@ public class corellia_39_jzoro_quanera extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_41");
@@ -100,7 +120,7 @@ public class corellia_39_jzoro_quanera extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corellia_39_jzoro_quanera.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -110,6 +130,7 @@ public class corellia_39_jzoro_quanera extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corellia_39_jzoro_quanera_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_41"))
@@ -129,7 +150,7 @@ public class corellia_39_jzoro_quanera extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -138,7 +159,7 @@ public class corellia_39_jzoro_quanera extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corellia_39_jzoro_quanera.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -148,6 +169,7 @@ public class corellia_39_jzoro_quanera extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corellia_39_jzoro_quanera_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_28"))
@@ -163,6 +185,7 @@ public class corellia_39_jzoro_quanera extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corellia_39_jzoro_quanera_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_36"))
@@ -182,7 +205,7 @@ public class corellia_39_jzoro_quanera extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_37");
@@ -191,7 +214,7 @@ public class corellia_39_jzoro_quanera extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corellia_39_jzoro_quanera.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -201,6 +224,7 @@ public class corellia_39_jzoro_quanera extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corellia_39_jzoro_quanera_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_37"))
@@ -220,7 +244,7 @@ public class corellia_39_jzoro_quanera extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_30");
@@ -229,7 +253,7 @@ public class corellia_39_jzoro_quanera extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corellia_39_jzoro_quanera.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -239,6 +263,7 @@ public class corellia_39_jzoro_quanera extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corellia_39_jzoro_quanera_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_30"))
@@ -254,6 +279,7 @@ public class corellia_39_jzoro_quanera extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -263,11 +289,13 @@ public class corellia_39_jzoro_quanera extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -276,18 +304,21 @@ public class corellia_39_jzoro_quanera extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.corellia_39_jzoro_quanera");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -316,7 +347,7 @@ public class corellia_39_jzoro_quanera extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_45");
@@ -324,7 +355,7 @@ public class corellia_39_jzoro_quanera extends script.base_script
                 utils.setScriptVar(player, "conversation.corellia_39_jzoro_quanera.branchId", 2);
                 npcStartConversation(player, npc, "corellia_39_jzoro_quanera", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -351,7 +382,7 @@ public class corellia_39_jzoro_quanera extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_22");
@@ -359,7 +390,7 @@ public class corellia_39_jzoro_quanera extends script.base_script
                 utils.setScriptVar(player, "conversation.corellia_39_jzoro_quanera.branchId", 5);
                 npcStartConversation(player, npc, "corellia_39_jzoro_quanera", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -386,7 +417,7 @@ public class corellia_39_jzoro_quanera extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_36");
@@ -394,7 +425,7 @@ public class corellia_39_jzoro_quanera extends script.base_script
                 utils.setScriptVar(player, "conversation.corellia_39_jzoro_quanera.branchId", 10);
                 npcStartConversation(player, npc, "corellia_39_jzoro_quanera", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -409,6 +440,7 @@ public class corellia_39_jzoro_quanera extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("corellia_39_jzoro_quanera"))

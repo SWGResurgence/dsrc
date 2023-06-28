@@ -1,10 +1,17 @@
 package script.player.base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 import script.library.gcw;
 
 import java.lang.reflect.Array;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Set;
@@ -359,7 +366,8 @@ public class base_player extends script.base_script
     {
         return "\\#00FFFF " + str + "\\#FFFFFF";
     }
-    public static String green (String str)
+
+    public static String green(String str)
     {
         return "\\#00FF00 " + str + "\\#FFFFFF";
     }
@@ -1147,6 +1155,7 @@ public class base_player extends script.base_script
         LOG("gaglog", getName(self) + DEATH_NOTICE[rand(0, DEATH_NOTICE.length)] + getName(killer));
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         utils.setScriptVar(self, "lastKiller", killer);
@@ -1352,14 +1361,7 @@ public class base_player extends script.base_script
         corePlanets.add("talus");
         corePlanets.add("yavin4");
         corePlanets.add("naboo");
-        if (corePlanets.contains(getCurrentSceneName()))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return corePlanets.contains(getCurrentSceneName());
     }
 
     public int exportCsDumpFile(obj_id self, dictionary params)
@@ -1612,7 +1614,7 @@ public class base_player extends script.base_script
         if (campXp > 0)
         {
             grantExperiencePoints(self, "scout", campXp);
-            grantExperiencePoints(self, "camp", 0 - campXp);
+            grantExperiencePoints(self, "camp", -campXp);
         }
         if (!utils.hasScriptVar(self, "bountyConsistencyCheck"))
         {
@@ -1680,7 +1682,7 @@ public class base_player extends script.base_script
         if (!utils.hasScriptVar(self, "shipShieldOneTimeRebalance"))
         {
             obj_id[] objPcds = space_transition.findShipControlDevicesForPlayer(self);
-            if (objPcds != null && objPcds.length > 0)
+            if (objPcds != null)
             {
                 for (obj_id objPcd : objPcds)
                 {
@@ -1954,7 +1956,7 @@ public class base_player extends script.base_script
                 }
             }
             int[] allBuffs = buff.getAllBuffs(self);
-            if (allBuffs != null && allBuffs.length > 0)
+            if (allBuffs != null)
             {
                 for (int allBuff : allBuffs)
                 {
@@ -2331,7 +2333,7 @@ public class base_player extends script.base_script
             {
                 if ((endMoney - startMoney) > utils.stringToInt(profitThreshold))
                 {
-                    LOG("money", "\nExtraordinary Profit: " + getName(self) + " (" + self + ") logged in with " + startMoney + " credits and logged out with " + endMoney + " credits, for a profit of " + (endMoney - startMoney) + " credits\n" );
+                    LOG("money", "\nExtraordinary Profit: " + getName(self) + " (" + self + ") logged in with " + startMoney + " credits and logged out with " + endMoney + " credits, for a profit of " + (endMoney - startMoney) + " credits\n");
                 }
             }
         }
@@ -2626,10 +2628,9 @@ public class base_player extends script.base_script
     public int handleUnconsentMenu(obj_id self, dictionary params) throws InterruptedException
     {
         int btnPressed = sui.getIntButtonPressed(params);
-        switch (btnPressed)
+        if (btnPressed == sui.BP_CANCEL)
         {
-            case sui.BP_CANCEL:
-                return SCRIPT_CONTINUE;
+            return SCRIPT_CONTINUE;
         }
         int idx = sui.getListboxSelectedRow(params);
         if (idx < 0)
@@ -3183,7 +3184,7 @@ public class base_player extends script.base_script
         clearSUIDataSource(pid, sui.LISTBOX_DATASOURCE);
         for (int i = 0; i < list.size(); i++)
         {
-            addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, "" + i);
+            addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, String.valueOf(i));
             setSUIProperty(pid, sui.LISTBOX_DATASOURCE + "." + i, sui.PROP_TEXT, ((String) list.get(i)));
         }
         subscribeToSUIEvent(pid, sui_event_type.SET_onGenericSelection, sui.LISTBOX_LIST, "handleCloneSuiUpdate");
@@ -3232,11 +3233,11 @@ public class base_player extends script.base_script
         }
         else if (dist < 1000)
         {
-            text = "" + (int) dist + "m";
+            text = (int) dist + "m";
         }
         else
         {
-            text = "" + (int) (dist / 1000.0f) + "km";
+            text = (int) (dist / 1000.0f) + "km";
         }
         return text;
     }
@@ -3571,7 +3572,8 @@ public class base_player extends script.base_script
         playClientEffectObj(self, "clienteffect/player_clone_compile.cef", self, null);
         if (!utils.hasScriptVar(self, "no_cloning_sickness") && !instance.isInInstanceArea(self))
         {
-            if (!isPvpRelatedDeath(self)) {
+            if (!isPvpRelatedDeath(self))
+            {
                 buff.applyBuff(self, "cloning_sickness");
             }
         }
@@ -5905,10 +5907,7 @@ public class base_player extends script.base_script
                 }
             }
             int[] newBanCities = new int[banCities.length + 1];
-            for (int i = 0; i < banCities.length; i++)
-            {
-                newBanCities[i + 1] = banCities[i];
-            }
+            System.arraycopy(banCities, 0, newBanCities, 1, banCities.length);
             newBanCities[0] = city_id;
             setObjVar(target, "city.banlist", newBanCities);
         }
@@ -6124,7 +6123,6 @@ public class base_player extends script.base_script
         sendSystemMessageProse(target, pp);
         pp = prose.getPackage(SID_RIGHTS_GRANTED_SELF, getName(target));
         sendSystemMessageProse(player, pp);
-        return;
     }
 
     public void handleStorytellerZoningRights(obj_id player, obj_id target, int city_id) throws InterruptedException
@@ -6274,7 +6272,6 @@ public class base_player extends script.base_script
             pp = prose.getPackage(SID_ST_RIGHTS_GRANTED_SELF, getName(target));
             sendSystemMessageProse(player, pp);
         }
-        return;
     }
 
     public int cmdGrantStorytellerZoningRights(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
@@ -6305,10 +6302,7 @@ public class base_player extends script.base_script
         String[] rawTerminalTypes = dataTableGetStringColumn(CITY_MISSION_TERMINALS, "STRING");
         String[] terminalTypes = new String[rawTerminalTypes.length + 1];
         terminalTypes[0] = "@city/city:current_mt " + city.getMTCount(city_id) + "/" + city.getMaxMTCount(city_id);
-        for (int i = 0; i < rawTerminalTypes.length; i++)
-        {
-            terminalTypes[i + 1] = rawTerminalTypes[i];
-        }
+        System.arraycopy(rawTerminalTypes, 0, terminalTypes, 1, rawTerminalTypes.length);
         sui.listbox(self, self, "@city/city:job_d", sui.OK_CANCEL, "@city/city:job_n", terminalTypes, "handleInstallMissionTerminal");
         return SCRIPT_CONTINUE;
     }
@@ -7263,7 +7257,7 @@ public class base_player extends script.base_script
                 {
                     name = localize(getNameStringId(newItem));
                 }
-                name = colors_hex.HEADER + colors_hex.GREEN + "" + name + " (tuned)\\#.";
+                name = colors_hex.HEADER + colors_hex.GREEN + name + " (tuned)\\#.";
                 setName(newItem, name);
             }
             if (itemDictionary.containsKey("biolink"))
@@ -7641,7 +7635,7 @@ public class base_player extends script.base_script
                         setCrafter(newItem, factoryCrateCreator);
                     }
                     obj_id[] factoryCrateContents = getContents(newItem);
-                    if ((factoryCrateContents != null) && (factoryCrateContents.length > 0))
+                    if (factoryCrateContents != null)
                     {
                         for (obj_id factoryCrateContent : factoryCrateContents)
                         {
@@ -8266,7 +8260,7 @@ public class base_player extends script.base_script
                         {
                             obj_id cellid = getCellId(item, cell);
                             obj_id[] contents = getContents(cellid);
-                            if (contents != null && contents.length > 0)
+                            if (contents != null)
                             {
                                 for (obj_id house_item : contents)
                                 {
@@ -8612,7 +8606,7 @@ public class base_player extends script.base_script
             }
             dictionary staticQuestWaypoints = new dictionary();
             String[] questIDs = dataTableGetStringColumnNoDefaults("datatables/npc/static_quest/all_quest_names.iff", "quest_ids");
-            if ((questIDs != null) && (questIDs.length > 0))
+            if (questIDs != null)
             {
                 for (String questID : questIDs)
                 {
@@ -8652,7 +8646,7 @@ public class base_player extends script.base_script
                 }
                 characterData.put("waypoints", waypointDictionaries);
             }
-            if (withItems == true)
+            if (withItems)
             {
                 int moneyFromCash = getCashBalance(self);
                 CustomerServiceLog("CharacterTransfer", "OnUploadCharacter : packing " + moneyFromCash + " credits from cash");
@@ -9186,7 +9180,7 @@ public class base_player extends script.base_script
                 }
                 ctsUseOnlySetGcwInfo(self, characterData.getInt("gcw_current_point"), characterData.getInt("gcw_current_rating"), characterData.getInt("gcw_current_pvp_kill"), characterData.getLong("gcw_lifetime_point"), characterData.getInt("gcw_max_imperial_rating"), characterData.getInt("gcw_max_rebel_rating"), characterData.getInt("gcw_lifetime_pvp_kill"), characterData.getInt("gcw_next_rating_calc_time"));
                 obj_id[] old_waypoints = getWaypointsInDatapad(self);
-                if (old_waypoints != null && old_waypoints.length > 0)
+                if (old_waypoints != null)
                 {
                     for (obj_id old_waypoint : old_waypoints)
                     {
@@ -9308,7 +9302,7 @@ public class base_player extends script.base_script
                             {
                                 if (!hasObjVar(self, "ctsHistory." + ctsHistoryIndex))
                                 {
-                                    setObjVar(self, "ctsHistory." + ctsHistoryIndex, "" + getCalendarTime() + " " + sourceCluster + " " + characterData.getObjId("source_character_oid") + " " + characterData.getString("source_character_name"));
+                                    setObjVar(self, "ctsHistory." + ctsHistoryIndex, getCalendarTime() + " " + sourceCluster + " " + characterData.getObjId("source_character_oid") + " " + characterData.getString("source_character_name"));
                                     break;
                                 }
                                 ++ctsHistoryIndex;
@@ -9340,7 +9334,7 @@ public class base_player extends script.base_script
                     }
                 }
                 boolean withItems = characterData.getBoolean("withItems");
-                if (withItems == true)
+                if (withItems)
                 {
                     obj_id[] existingItems = getInventoryAndEquipment(self);
                     obj_id inv = utils.getInventoryContainer(self);
@@ -9559,7 +9553,7 @@ public class base_player extends script.base_script
                     {
                         CustomerServiceLog("CharacterTransfer", "OnDownloadCharacter : source character had an existing buy back container: " + buyBackContainer);
                         obj_id[] buyBackObjects = getContents(buyBackContainer);
-                        if (buyBackObjects != null && buyBackObjects.length > 0)
+                        if (buyBackObjects != null)
                         {
                             for (obj_id buyBackObject : buyBackObjects)
                             {
@@ -10928,14 +10922,14 @@ public class base_player extends script.base_script
     {
         obj_id[] addObjects = params.getObjIdArray("addObjects");
         obj_id[] removeObjects = params.getObjIdArray("removeObjects");
-        if (addObjects != null && addObjects.length > 0)
+        if (addObjects != null)
         {
             for (obj_id addObject : addObjects)
             {
                 addMissionCriticalObject(self, addObject);
             }
         }
-        if (removeObjects != null && removeObjects.length > 0)
+        if (removeObjects != null)
         {
             for (obj_id removeObject : removeObjects)
             {
@@ -11859,7 +11853,7 @@ public class base_player extends script.base_script
         if ((gameTime - lastMission) > bounty_hunter.BOUNTY_MISSION_TIME_LIMIT)
         {
             obj_id[] hunters = getJediBounties(self);
-            if (hunters != null && hunters.length > 0)
+            if (hunters != null)
             {
                 for (obj_id hunter : hunters)
                 {
@@ -11877,7 +11871,7 @@ public class base_player extends script.base_script
     public boolean performCriticalHeal(obj_id self) throws InterruptedException
     {
         int[] buffs = buff.getAllBuffs(self);
-        if (buffs == null || buffs.length == 0)
+        if (buffs == null)
         {
             return false;
         }
@@ -11960,7 +11954,7 @@ public class base_player extends script.base_script
                 prose_package pp = new prose_package();
                 pp = prose.setStringId(pp, new string_id("gcw", "faction_base_correction"));
                 pp = prose.setDI(pp, correction);
-                pp = prose.setTO(pp, "" + myBases);
+                pp = prose.setTO(pp, String.valueOf(myBases));
                 sendSystemMessageProse(self, pp);
                 setObjVar(self, "factionBaseCount", myBases);
             }
@@ -12262,7 +12256,6 @@ public class base_player extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        ;
         names[idx] = utils.packStringId(new string_id("Profession"));
         int profession = utils.getPlayerProfession(self);
         String professionName = "";
@@ -12304,6 +12297,11 @@ public class base_player extends script.base_script
         {
             attribs[idx] = professionName;
         }
+        idx++;
+        names[idx] = utils.packStringId(new string_id("Net worth"));
+        int creditAmount = getTotalMoney(self);
+        DecimalFormat df = new DecimalFormat("###,###,###");
+        attribs[idx] = "" + df.format(creditAmount);
         idx++;
         names[idx] = utils.packStringId(new string_id("Level"));
         attribs[idx] = Integer.toString(getLevel(self));
@@ -13184,7 +13182,7 @@ public class base_player extends script.base_script
                 prompt += "Abbrev.: " + guildGetAbbrev(getGuildId(self)) + "\n";
                 prompt += "ID: " + getGuildId(self) + "\n";
                 prompt += "Control Device: " + guild.getGuildRemoteDevice(self) + "\n";
-                prompt += "Leader: " + guildGetLeader(getGuildId(self))+ "\n";
+                prompt += "Leader: " + guildGetLeader(getGuildId(self)) + "\n";
                 prompt += "Members:\n";
                 obj_id[] members = guildGetMemberIds(getGuildId(self));
                 for (int i = 0; i < members.length; i++)
@@ -13250,7 +13248,7 @@ public class base_player extends script.base_script
                 for (int i = 0; i < ovl.getNumItems(); i++)
                 {
                     obj_var ov = ovl.getObjVar(i);
-                    prompt += ov.getName() + " = " + ov.toString() + "\n";
+                    prompt += ov.getName() + " = " + ov + "\n";
                 }
             }
             prompt += " ------------------ " + gold("Inventory") + " ------------------ " + "\n";
@@ -13259,27 +13257,27 @@ public class base_player extends script.base_script
             {
                 if (hasObjVar(content, "noTrade"))
                 {
-                    prompt += "[NwID  " + content + "] " + " " + getEncodedName(content) + "\n\t [Template [" +  getTemplateName(content) + "] " + red(" [NO TRADE] ") + colors_hex.FOOTER +  "\n";
+                    prompt += "[NwID  " + content + "] " + " " + getEncodedName(content) + "\n\t [Template [" + getTemplateName(content) + "] " + red(" [NO TRADE] ") + colors_hex.FOOTER + "\n";
                 }
                 else if (getTemplateName(content).contains("character_builder"))
                 {
-                    prompt += "[NwID  " + content + "] " + " " + getEncodedName(content) + "\n\t [Template: [" +  getTemplateName(content) + "] " + green(" [INSTANT DELETE LIST] ") + colors_hex.FOOTER + "\n";
+                    prompt += "[NwID  " + content + "] " + " " + getEncodedName(content) + "\n\t [Template: [" + getTemplateName(content) + "] " + green(" [INSTANT DELETE LIST] ") + colors_hex.FOOTER + "\n";
                 }
                 else if (hasScript(content, "item.loot.portamedic"))
                 {
-                    prompt += "[NwID  " + content + "] " + " " + getEncodedName(content) + "\n\t [Template: [" +  getTemplateName(content) + "] " + azure(" [DEVELOPMENT ITEM] ") + colors_hex.FOOTER + "\n";
+                    prompt += "[NwID  " + content + "] " + " " + getEncodedName(content) + "\n\t [Template: [" + getTemplateName(content) + "] " + azure(" [DEVELOPMENT ITEM] ") + colors_hex.FOOTER + "\n";
                 }
                 else if (hasScript(content, "item.loot.toy"))
                 {
-                    prompt += "[NwID  " + content + "] " + " " + getEncodedName(content) + "\n\t [Template: [" +  getTemplateName(content) + "] " + azure(" [DEVELOPMENT ITEM] ") + colors_hex.FOOTER + "\n";
+                    prompt += "[NwID  " + content + "] " + " " + getEncodedName(content) + "\n\t [Template: [" + getTemplateName(content) + "] " + azure(" [DEVELOPMENT ITEM] ") + colors_hex.FOOTER + "\n";
                 }
                 else if (hasObjVar(content, "item.temporary.time_stamp"))
                 {
-                    prompt += "[NwID  " + content + "]" + " " + getEncodedName(content) + "\n\t [Template: [" +  getTemplateName(content) + "] " + azure(" [TEMPORARY ITEM] ") + colors_hex.FOOTER + "\n";
+                    prompt += "[NwID  " + content + "]" + " " + getEncodedName(content) + "\n\t [Template: [" + getTemplateName(content) + "] " + azure(" [TEMPORARY ITEM] ") + colors_hex.FOOTER + "\n";
                 }
                 else
                 {
-                    prompt += "[NwID  " + content + "] " + " " + getEncodedName(content) + "\n\t [Template: [" +  getTemplateName(content) + "] " + "\n";
+                    prompt += "[NwID  " + content + "] " + " " + getEncodedName(content) + "\n\t [Template: [" + getTemplateName(content) + "] " + "\n";
                 }
             }
             prompt += " ------------------ " + gold("End of Inventory") + " ------------------ " + "\n";
@@ -13365,12 +13363,12 @@ public class base_player extends script.base_script
         }
         else
         {
-            sendSystemMessage(player, "You have failed to create " + getEncodedName(itemObj) + " for " + getPlayerFullName(self) + ".", null);
+            sendSystemMessage(self, "You have failed to create " + getEncodedName(itemObj) + " for " + getPlayerFullName(self) + ".", null);
         }
         return SCRIPT_CONTINUE;
     }
 
-    public int cmdReadyCheck(obj_id self, obj_id target, String param, dictionary params, float defaultTime) throws InterruptedException
+    public int cmdReadyCheck(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         chat.chat(self, "Are we ready?");
         if (combat.isInCombat(self))

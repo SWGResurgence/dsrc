@@ -1,5 +1,11 @@
 package script.theme_park.heroic.tusken;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.buff;
@@ -14,36 +20,45 @@ public class tusken_king extends script.base_script
     public tusken_king()
     {
     }
+
     public int setupSquad(obj_id self, dictionary params) throws InterruptedException
     {
         messageTo(self, "establishUnity", null, 0.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         messageTo(self, "establishUnity", null, 0.0f, false);
         chat.chat(self, "ORK ORK!");
         return SCRIPT_CONTINUE;
     }
+
     public int establishUnity(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] allObj = getNPCsInRange(getLocation(self), 150.0f);
         Vector allies = new Vector();
         allies.setSize(0);
-        for (obj_id obj_id : allObj) {
-            if (isDead(obj_id)) {
+        for (obj_id obj_id : allObj)
+        {
+            if (isDead(obj_id))
+            {
                 continue;
             }
-            if (factions.getFaction(obj_id) == null || factions.getFaction(obj_id) == "") {
+            if (factions.getFaction(obj_id) == null || factions.getFaction(obj_id) == "")
+            {
                 continue;
             }
-            if (!(factions.getFaction(obj_id)).equals("heroic_tusken")) {
+            if (!(factions.getFaction(obj_id)).equals("heroic_tusken"))
+            {
                 continue;
             }
-            if (!isIdValid(getLocation(self).cell) && isIdValid(getLocation(obj_id).cell)) {
+            if (!isIdValid(getLocation(self).cell) && isIdValid(getLocation(obj_id).cell))
+            {
                 continue;
             }
-            if (isIdValid(getLocation(self).cell) && isIdValid(getLocation(obj_id).cell) && getLocation(self).cell != getLocation(obj_id).cell) {
+            if (isIdValid(getLocation(self).cell) && isIdValid(getLocation(obj_id).cell) && getLocation(self).cell != getLocation(obj_id).cell)
+            {
                 continue;
             }
             allies.add(obj_id);

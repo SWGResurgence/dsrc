@@ -1,5 +1,11 @@
 package script.systems.spawning.dropship;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.location;
 import script.obj_id;
@@ -8,6 +14,7 @@ public class emperorsday_lambda extends script.systems.spawning.dropship.base
 {
     public static final boolean LOGGING_ON = true;
     public static final String LOGGING_CATEGORY = "empireday";
+
     public emperorsday_lambda()
     {
     }

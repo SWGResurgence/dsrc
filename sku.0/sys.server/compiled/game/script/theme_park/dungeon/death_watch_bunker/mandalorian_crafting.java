@@ -1,19 +1,28 @@
 package script.theme_park.dungeon.death_watch_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.sui;
 
 public class mandalorian_crafting extends script.base_script
 {
+    public static final String MSGS = "dungeon/death_watch";
+
     public mandalorian_crafting()
     {
     }
-    public static final String MSGS = "dungeon/death_watch";
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpse_id) throws InterruptedException
     {
         detachScript(self, "theme_park.dungeon.death_watch_bunker.mandalorian_crafting");
         return SCRIPT_CONTINUE;
     }
+
     public int secondTime(obj_id self, dictionary params) throws InterruptedException
     {
         string_id terminal = new string_id(MSGS, "use_terminal");
@@ -24,6 +33,7 @@ public class mandalorian_crafting extends script.base_script
         messageTo(self, "finalTenSeconds", webster, 30, false);
         return SCRIPT_CONTINUE;
     }
+
     public int firstBox(obj_id self, dictionary params) throws InterruptedException
     {
         string_id terminal = new string_id(MSGS, "use_terminal");
@@ -34,10 +44,12 @@ public class mandalorian_crafting extends script.base_script
         messageTo(self, "thirtySecondsLeft", webster, 30, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);
@@ -48,6 +60,7 @@ public class mandalorian_crafting extends script.base_script
         mid.setServerNotify(true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -66,13 +79,14 @@ public class mandalorian_crafting extends script.base_script
             {
                 testSui(self, player);
             }
-            else 
+            else
             {
                 finishSui(self, player);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int testSui(obj_id self, obj_id player) throws InterruptedException
     {
         int pid = sui.createSUIPage(sui.SUI_MSGBOX, self, player, "readableText");
@@ -88,6 +102,7 @@ public class mandalorian_crafting extends script.base_script
         sui.showSUIPage(pid);
         return pid;
     }
+
     public int finishSui(obj_id self, obj_id player) throws InterruptedException
     {
         int pid = sui.createSUIPage(sui.SUI_MSGBOX, self, player, "completeText");
@@ -103,6 +118,7 @@ public class mandalorian_crafting extends script.base_script
         sui.showSUIPage(pid);
         return pid;
     }
+
     public int readableText(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -112,12 +128,14 @@ public class mandalorian_crafting extends script.base_script
         sendSystemMessage(player, hardening);
         return SCRIPT_CONTINUE;
     }
+
     public int notYet(obj_id self, obj_id player) throws InterruptedException
     {
         string_id notready = new string_id(MSGS, "crafting_not_yet");
         sendSystemMessage(player, notready);
         return 0;
     }
+
     public int completeText(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -130,6 +148,7 @@ public class mandalorian_crafting extends script.base_script
         sendSystemMessage(player, aerate);
         return SCRIPT_CONTINUE;
     }
+
     public int thirtySecondsLeft(obj_id self, dictionary params) throws InterruptedException
     {
         sendSystemMessage(self, new string_id(MSGS, "thirty_seconds"));
@@ -144,14 +163,15 @@ public class mandalorian_crafting extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void finishCraftingSession(obj_id self, obj_id player, obj_id droid) throws InterruptedException
     {
         removeObjVar(droid, "have");
         removeObjVar(droid, "making");
         removeObjVar(player, "dw_craft");
         detachScript(player, "theme_park.dungeon.death_watch_bunker.mandalorian_crafting");
-        return;
     }
+
     public int finalTenSeconds(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");

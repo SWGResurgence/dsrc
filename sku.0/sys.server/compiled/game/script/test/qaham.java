@@ -1,16 +1,23 @@
 package script.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 import java.util.StringTokenizer;
 
 public class qaham extends script.base_script
 {
+    public static final String QA_REGEN_OBJVAR = "test.qaham.OriginalActionRegen";
+    public static final float QA_MASSIVE_REGEN_RATE = 10000;
     public qaham()
     {
     }
-    public static final String QA_REGEN_OBJVAR = "test.qaham.OriginalActionRegen";
-    public static final float QA_MASSIVE_REGEN_RATE = 10000;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (isGod(self))
@@ -20,7 +27,7 @@ public class qaham extends script.base_script
                 detachScript(self, "test.qaham");
                 sendSystemMessage(self, "You do not have the appropriate access level to use this script.", null);
             }
-            else 
+            else
             {
                 helpMessage(self);
             }
@@ -31,11 +38,13 @@ public class qaham extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         restoreActionRegenRate(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         obj_id player = self;
@@ -67,6 +76,7 @@ public class qaham extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void restoreActionRegenRate(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -84,12 +94,13 @@ public class qaham extends script.base_script
         {
             broadcast(player, "Your Action Regen Rate has been restored");
         }
-        else 
+        else
         {
             broadcast(player, "Problem - Regen Rate was not restored!");
             broadcast(player, "Contact the QA Tool Team about this character immediately.");
         }
     }
+
     public void stopActionRegenRate(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -98,6 +109,7 @@ public class qaham extends script.base_script
         }
         setActionRegenRate(player, 0.0f);
     }
+
     public void setActionRegenRate(obj_id player, float rate) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -114,12 +126,13 @@ public class qaham extends script.base_script
         {
             broadcast(player, "Your Action Regen Rate has been set to " + rate);
         }
-        else 
+        else
         {
             broadcast(player, "Problem - Regen Rate was not set correctly!");
             broadcast(player, "Contact the QA Tool Team about this character immediately.");
         }
     }
+
     public void helpMessage(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))

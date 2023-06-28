@@ -1,5 +1,11 @@
 package script.player;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.pclib;
 import script.library.sui;
@@ -7,9 +13,6 @@ import script.obj_id;
 
 public class player_beta extends script.base_script
 {
-    public player_beta()
-    {
-    }
     public static final String SKILL_WEAPON_RANGED_BASIC = "combat_ranged_weapons_basic";
     public static final String SKILL_WEAPON_MELEE_BASIC = "combat_melee_basic";
     public static final String SKILL_NOVICE_SCOUT = "outdoors_scout_novice";
@@ -18,26 +21,34 @@ public class player_beta extends script.base_script
     public static final String SKILL_NOVICE_ENTERTAINER = "social_entertainer_novice";
     public static final String SKILL_NOVICE_MEDIC = "science_medic_novice";
     public static final String SKILL_NOVICE_ARTISAN = "crafting_artisan_novice";
+    public player_beta()
+    {
+    }
+
     public int sendLoginMessage(obj_id self, dictionary params) throws InterruptedException
     {
         detachScript(self, "player.player_beta");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAddedToWorld(obj_id self) throws InterruptedException
     {
         detachScript(self, "player.player_beta");
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogout(obj_id self) throws InterruptedException
     {
         detachScript(self, "player.player_beta");
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         detachScript(self, "player.player_beta");
         return SCRIPT_CONTINUE;
     }
+
     public void giveItemsToPlayer(obj_id self) throws InterruptedException
     {
         obj_id inventory = getObjectInSlot(self, "inventory");
@@ -84,19 +95,19 @@ public class player_beta extends script.base_script
             switch (randType)
             {
                 case 1:
-                toolType = "gas";
-                break;
+                    toolType = "gas";
+                    break;
                 case 2:
-                toolType = "liquid";
-                break;
+                    toolType = "liquid";
+                    break;
                 case 3:
-                toolType = "mineral";
-                break;
+                    toolType = "mineral";
+                    break;
                 case 4:
-                toolType = "moisture";
-                break;
+                    toolType = "moisture";
+                    break;
                 default:
-                break;
+                    break;
             }
             boolean boolGaveBlaster = giveRangedWeapon(self, inventory);
         }
@@ -107,19 +118,19 @@ public class player_beta extends script.base_script
             switch (randRifle)
             {
                 case 1:
-                rifleType = "laser";
-                break;
+                    rifleType = "laser";
+                    break;
                 case 2:
-                rifleType = "dlt20";
-                break;
+                    rifleType = "dlt20";
+                    break;
                 case 3:
-                rifleType = "dlt20a";
-                break;
+                    rifleType = "dlt20a";
+                    break;
                 case 4:
-                rifleType = "sg82";
-                break;
+                    rifleType = "sg82";
+                    break;
                 default:
-                break;
+                    break;
             }
             boolean boolGaveBlaster = giveRangedWeapon(self, inventory);
             obj_id rifle = createObject("object/weapon/ranged/rifle/rifle_" + rifleType + ".iff", self, "");
@@ -131,41 +142,41 @@ public class player_beta extends script.base_script
             switch (randSword)
             {
                 case 1:
-                swordType = "01";
-                break;
+                    swordType = "01";
+                    break;
                 case 2:
-                swordType = "02";
-                break;
+                    swordType = "02";
+                    break;
                 case 3:
-                swordType = "blade_ryyk";
-                break;
+                    swordType = "blade_ryyk";
+                    break;
                 case 4:
-                swordType = "blade_rantok";
-                break;
+                    swordType = "blade_rantok";
+                    break;
                 default:
-                break;
+                    break;
             }
             String polearmType = "sword_01";
             int randPole = rand(1, 5);
             switch (randPole)
             {
                 case 1:
-                polearmType = "controllerfp";
-                break;
+                    polearmType = "controllerfp";
+                    break;
                 case 2:
-                polearmType = "staff_metal";
-                break;
+                    polearmType = "staff_metal";
+                    break;
                 case 3:
-                polearmType = "staff_wood_s1";
-                break;
+                    polearmType = "staff_wood_s1";
+                    break;
                 case 4:
-                polearmType = "staff_wood_s2";
-                break;
+                    polearmType = "staff_wood_s2";
+                    break;
                 case 5:
-                polearmType = "vibrolance";
-                break;
+                    polearmType = "vibrolance";
+                    break;
                 default:
-                break;
+                    break;
             }
             obj_id sword = createObject("object/weapon/melee/sword/sword_" + swordType + ".iff", self, "");
             obj_id polearm = createObject("object/weapon/melee/polearm/lance_" + polearmType + ".iff", self, "");
@@ -187,28 +198,28 @@ public class player_beta extends script.base_script
             switch (randInst)
             {
                 case 1:
-                instrumentType = "bandfill";
-                break;
+                    instrumentType = "bandfill";
+                    break;
                 case 2:
-                instrumentType = "fanfar";
-                break;
+                    instrumentType = "fanfar";
+                    break;
                 case 3:
-                instrumentType = "fizz";
-                break;
+                    instrumentType = "fizz";
+                    break;
                 case 4:
-                instrumentType = "kloo_horn";
-                break;
+                    instrumentType = "kloo_horn";
+                    break;
                 case 5:
-                instrumentType = "mandoviol";
-                break;
+                    instrumentType = "mandoviol";
+                    break;
                 case 6:
-                instrumentType = "slitherhorn";
-                break;
+                    instrumentType = "slitherhorn";
+                    break;
                 case 7:
-                instrumentType = "traz";
-                break;
+                    instrumentType = "traz";
+                    break;
                 default:
-                break;
+                    break;
             }
             boolean boolGaveBlaster = giveRangedWeapon(self, inventory);
             obj_id imageKit = createObject("", self, "");
@@ -222,28 +233,28 @@ public class player_beta extends script.base_script
             switch (randMed)
             {
                 case 1:
-                medType = "damage";
-                break;
+                    medType = "damage";
+                    break;
                 case 2:
-                medType = "sm_s1";
-                break;
+                    medType = "sm_s1";
+                    break;
                 case 3:
-                medType = "wound";
-                break;
+                    medType = "wound";
+                    break;
                 case 4:
-                medType = "wound_action";
-                break;
+                    medType = "wound_action";
+                    break;
                 case 5:
-                medType = "wound_constitution";
-                break;
+                    medType = "wound_constitution";
+                    break;
                 case 6:
-                medType = "wound_health";
-                break;
+                    medType = "wound_health";
+                    break;
                 case 7:
-                medType = "wound_stamina";
-                break;
+                    medType = "wound_stamina";
+                    break;
                 default:
-                break;
+                    break;
             }
             boolean boolGaveBlaster = giveRangedWeapon(self, inventory);
             obj_id stimpack1 = createObject("object/tangible/medicine/stimpack_sm_s1.iff", self, "");
@@ -256,13 +267,14 @@ public class player_beta extends script.base_script
             boolean boolGaveBlaster = giveRangedWeapon(self, inventory);
             obj_id craftStation = createObject("object/tangible/crafting/station/generic_tool.iff", self, "");
         }
-        return;
     }
+
     public boolean givePlayerArmor(obj_id self, obj_id inventory) throws InterruptedException
     {
         boolean gaveItem = true;
         return gaveItem;
     }
+
     public boolean giveRangedWeapon(obj_id self, obj_id inventory) throws InterruptedException
     {
         boolean gaveItem = false;
@@ -271,84 +283,84 @@ public class player_beta extends script.base_script
         switch (randType)
         {
             case 0:
-            weapon = createObject("object/weapon/ranged/pistol/pistol_cdef.iff", inventory, "");
-            if (weapon != null)
-            {
-                gaveItem = true;
-            }
-            break;
+                weapon = createObject("object/weapon/ranged/pistol/pistol_cdef.iff", inventory, "");
+                if (weapon != null)
+                {
+                    gaveItem = true;
+                }
+                break;
             case 1:
-            weapon = createObject("object/weapon/ranged/pistol/pistol_d18.iff", inventory, "");
-            if (weapon != null)
-            {
-                gaveItem = true;
-            }
-            break;
+                weapon = createObject("object/weapon/ranged/pistol/pistol_d18.iff", inventory, "");
+                if (weapon != null)
+                {
+                    gaveItem = true;
+                }
+                break;
             case 2:
-            weapon = createObject("object/weapon/ranged/pistol/pistol_dh17.iff", inventory, "");
-            if (weapon != null)
-            {
-                gaveItem = true;
-            }
-            break;
+                weapon = createObject("object/weapon/ranged/pistol/pistol_dh17.iff", inventory, "");
+                if (weapon != null)
+                {
+                    gaveItem = true;
+                }
+                break;
             case 3:
-            weapon = createObject("object/weapon/ranged/pistol/pistol_dl44.iff", inventory, "");
-            if (weapon != null)
-            {
-                gaveItem = true;
-            }
-            break;
+                weapon = createObject("object/weapon/ranged/pistol/pistol_dl44.iff", inventory, "");
+                if (weapon != null)
+                {
+                    gaveItem = true;
+                }
+                break;
             case 4:
-            weapon = createObject("object/weapon/ranged/pistol/pistol_dl44_metal.iff", inventory, "");
-            if (weapon != null)
-            {
-                gaveItem = true;
-            }
-            break;
+                weapon = createObject("object/weapon/ranged/pistol/pistol_dl44_metal.iff", inventory, "");
+                if (weapon != null)
+                {
+                    gaveItem = true;
+                }
+                break;
             case 5:
-            weapon = createObject("object/weapon/ranged/pistol/pistol_dx2.iff", inventory, "");
-            if (weapon != null)
-            {
-                gaveItem = true;
-            }
-            break;
+                weapon = createObject("object/weapon/ranged/pistol/pistol_dx2.iff", inventory, "");
+                if (weapon != null)
+                {
+                    gaveItem = true;
+                }
+                break;
             case 6:
-            weapon = createObject("object/weapon/ranged/pistol/pistol_fwg5.iff", inventory, "");
-            if (weapon != null)
-            {
-                gaveItem = true;
-            }
-            break;
+                weapon = createObject("object/weapon/ranged/pistol/pistol_fwg5.iff", inventory, "");
+                if (weapon != null)
+                {
+                    gaveItem = true;
+                }
+                break;
             case 7:
-            weapon = createObject("object/weapon/ranged/pistol/pistol_power5.iff", inventory, "");
-            if (weapon != null)
-            {
-                gaveItem = true;
-            }
-            break;
+                weapon = createObject("object/weapon/ranged/pistol/pistol_power5.iff", inventory, "");
+                if (weapon != null)
+                {
+                    gaveItem = true;
+                }
+                break;
             case 8:
-            weapon = createObject("object/weapon/ranged/pistol/pistol_scout_blaster.iff", inventory, "");
-            if (weapon != null)
-            {
-                gaveItem = true;
-            }
-            break;
+                weapon = createObject("object/weapon/ranged/pistol/pistol_scout_blaster.iff", inventory, "");
+                if (weapon != null)
+                {
+                    gaveItem = true;
+                }
+                break;
             case 9:
-            weapon = createObject("object/weapon/ranged/pistol/pistol_srcombat.iff", inventory, "");
-            if (weapon != null)
-            {
-                gaveItem = true;
-            }
-            break;
+                weapon = createObject("object/weapon/ranged/pistol/pistol_srcombat.iff", inventory, "");
+                if (weapon != null)
+                {
+                    gaveItem = true;
+                }
+                break;
             case 10:
-            weapon = createObject("object/weapon/ranged/pistol/pistol_striker.iff", inventory, "");
-            if (weapon != null)
-            {
-                gaveItem = true;
-            }
-            break;
+                weapon = createObject("object/weapon/ranged/pistol/pistol_striker.iff", inventory, "");
+                if (weapon != null)
+                {
+                    gaveItem = true;
+                }
+                break;
             default:
-            break;
+                break;
         }
         if (weapon != obj_id.NULL_ID)
         {
@@ -356,6 +368,7 @@ public class player_beta extends script.base_script
         }
         return (gaveItem);
     }
+
     public boolean giveMeleeWeapon(obj_id self, obj_id inventory) throws InterruptedException
     {
         boolean gaveItem = false;
@@ -364,35 +377,35 @@ public class player_beta extends script.base_script
         switch (randType)
         {
             case 1:
-            weapon = createObject("object/weapon/melee/knife/knife_dagger.iff", inventory, "");
-            if (weapon != null)
-            {
-                gaveItem = true;
-            }
-            break;
+                weapon = createObject("object/weapon/melee/knife/knife_dagger.iff", inventory, "");
+                if (weapon != null)
+                {
+                    gaveItem = true;
+                }
+                break;
             case 2:
-            weapon = createObject("object/weapon/melee/knife/knife_stone.iff", inventory, "");
-            if (weapon != null)
-            {
-                gaveItem = true;
-            }
-            break;
+                weapon = createObject("object/weapon/melee/knife/knife_stone.iff", inventory, "");
+                if (weapon != null)
+                {
+                    gaveItem = true;
+                }
+                break;
             case 3:
-            weapon = createObject("object/weapon/melee/knife/knife_survival.iff", inventory, "");
-            if (weapon != null)
-            {
-                gaveItem = true;
-            }
-            break;
+                weapon = createObject("object/weapon/melee/knife/knife_survival.iff", inventory, "");
+                if (weapon != null)
+                {
+                    gaveItem = true;
+                }
+                break;
             case 4:
-            weapon = createObject("object/weapon/melee/knife/knife_vibroblade.iff", inventory, "");
-            if (weapon != null)
-            {
-                gaveItem = true;
-            }
-            break;
+                weapon = createObject("object/weapon/melee/knife/knife_vibroblade.iff", inventory, "");
+                if (weapon != null)
+                {
+                    gaveItem = true;
+                }
+                break;
             default:
-            break;
+                break;
         }
         if (weapon != obj_id.NULL_ID)
         {
@@ -400,6 +413,7 @@ public class player_beta extends script.base_script
         }
         return (gaveItem);
     }
+
     public boolean giveMusicalInstrument(obj_id self, obj_id inventory) throws InterruptedException
     {
         boolean gaveItem = false;
@@ -408,77 +422,77 @@ public class player_beta extends script.base_script
         switch (randType)
         {
             case 1:
-            instrument = createObject("object/tangible/instrument/kloo_horn.iff", inventory, "");
-            if (instrument != null)
-            {
-                gaveItem = true;
-            }
-            break;
+                instrument = createObject("object/tangible/instrument/kloo_horn.iff", inventory, "");
+                if (instrument != null)
+                {
+                    gaveItem = true;
+                }
+                break;
             case 2:
-            instrument = createObject("object/tangible/instrument/traz.iff", inventory, "");
-            if (instrument != null)
-            {
-                gaveItem = true;
-            }
-            break;
+                instrument = createObject("object/tangible/instrument/traz.iff", inventory, "");
+                if (instrument != null)
+                {
+                    gaveItem = true;
+                }
+                break;
             case 3:
-            instrument = createObject("object/tangible/instrument/slitherhorn.iff", inventory, "");
-            if (instrument != null)
-            {
-                gaveItem = true;
-            }
-            break;
+                instrument = createObject("object/tangible/instrument/slitherhorn.iff", inventory, "");
+                if (instrument != null)
+                {
+                    gaveItem = true;
+                }
+                break;
             case 4:
-            instrument = createObject("object/tangible/instrument/nalargon.iff", inventory, "");
-            if (instrument != null)
-            {
-                gaveItem = true;
-            }
-            break;
+                instrument = createObject("object/tangible/instrument/nalargon.iff", inventory, "");
+                if (instrument != null)
+                {
+                    gaveItem = true;
+                }
+                break;
             case 5:
-            instrument = createObject("object/tangible/instrument/traz.iff", inventory, "");
-            if (instrument != null)
-            {
-                gaveItem = true;
-            }
-            break;
+                instrument = createObject("object/tangible/instrument/traz.iff", inventory, "");
+                if (instrument != null)
+                {
+                    gaveItem = true;
+                }
+                break;
             case 6:
-            instrument = createObject("object/tangible/instrument/fanfar.iff", inventory, "");
-            if (instrument != null)
-            {
-                gaveItem = true;
-            }
-            break;
+                instrument = createObject("object/tangible/instrument/fanfar.iff", inventory, "");
+                if (instrument != null)
+                {
+                    gaveItem = true;
+                }
+                break;
             case 7:
-            instrument = createObject("object/tangible/instrument/flute_droopy.iff", inventory, "");
-            if (instrument != null)
-            {
-                gaveItem = true;
-            }
-            break;
+                instrument = createObject("object/tangible/instrument/flute_droopy.iff", inventory, "");
+                if (instrument != null)
+                {
+                    gaveItem = true;
+                }
+                break;
             case 8:
-            instrument = createObject("object/tangible/instrument/fizz.iff", inventory, "");
-            if (instrument != null)
-            {
-                gaveItem = true;
-            }
-            break;
+                instrument = createObject("object/tangible/instrument/fizz.iff", inventory, "");
+                if (instrument != null)
+                {
+                    gaveItem = true;
+                }
+                break;
             case 9:
-            instrument = createObject("object/tangible/instrument/bandfill.iff", inventory, "");
-            if (instrument != null)
-            {
-                gaveItem = true;
-            }
-            break;
+                instrument = createObject("object/tangible/instrument/bandfill.iff", inventory, "");
+                if (instrument != null)
+                {
+                    gaveItem = true;
+                }
+                break;
             case 10:
-            instrument = createObject("object/tangible/instrument/ommni_box.iff", inventory, "");
-            if (instrument != null)
-            {
-                gaveItem = true;
-            }
-            break;
+                instrument = createObject("object/tangible/instrument/ommni_box.iff", inventory, "");
+                if (instrument != null)
+                {
+                    gaveItem = true;
+                }
+                break;
             default:
-            break;
+                break;
         }
         if (instrument != obj_id.NULL_ID)
         {
@@ -486,6 +500,7 @@ public class player_beta extends script.base_script
         }
         return (gaveItem);
     }
+
     public int handleInventoryCheck(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -497,7 +512,7 @@ public class player_beta extends script.base_script
         {
             debugSpeakMsg(self, "handleInventoryCheck: no items at time of check");
         }
-        else 
+        else
         {
             String[] report = new String[items.length];
             for (int i = 0; i < items.length; i++)

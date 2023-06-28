@@ -1,5 +1,11 @@
 package script.quest.force_sensitive;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -11,11 +17,13 @@ public class fs_xp_convert extends script.base_script
     public fs_xp_convert()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         detachScript(self, "quest.force_sensitive.fs_xp_convert");
         return SCRIPT_CONTINUE;
     }
+
     public int msgFSXPConvertSelected(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "force_sensitive.xp_convert") || !utils.hasScriptVar(self, "force_sensitive.xp_convert_type"))
@@ -64,6 +72,7 @@ public class fs_xp_convert extends script.base_script
         utils.setScriptVar(self, "force_sensitive.xp_type_selected", valid_xp_types[row_selected]);
         return SCRIPT_CONTINUE;
     }
+
     public int msgFSXPConvertCommit(obj_id self, dictionary params) throws InterruptedException
     {
         detachScript(self, "quest.force_sensitive.fs_xp_convert");
@@ -124,7 +133,7 @@ public class fs_xp_convert extends script.base_script
                 amt = converted_xp * ratio;
             }
         }
-        else 
+        else
         {
             sendSystemMessage(self, new string_id("quest/force_sensitive/utils", "convert_no_skill"));
             return SCRIPT_CONTINUE;
@@ -145,6 +154,7 @@ public class fs_xp_convert extends script.base_script
         CustomerServiceLog("fs_quests", "%TU has converted " + amt + " " + xp_type + " experience into " + converted_xp + " fs_" + fs_type + " experience.", self, null);
         return SCRIPT_CONTINUE;
     }
+
     public int msgBranchSelected(obj_id self, dictionary params) throws InterruptedException
     {
         detachScript(self, "quest.force_sensitive.fs_xp_convert");
@@ -157,7 +167,7 @@ public class fs_xp_convert extends script.base_script
         {
             branches_available = utils.getStringArrayScriptVar(self, fs_quests.SCRIPT_VAR_BRANCH_SELECT_LIST);
         }
-        else 
+        else
         {
             return SCRIPT_CONTINUE;
         }
@@ -205,7 +215,7 @@ public class fs_xp_convert extends script.base_script
                 java.util.Enumeration e = req_xp.keys();
                 if (e.hasMoreElements())
                 {
-                    String xp_type = (String)(e.nextElement());
+                    String xp_type = (String) (e.nextElement());
                     if (xp_type.length() > 0)
                     {
                         xp.grant(self, xp_type, 1275000);
@@ -215,6 +225,7 @@ public class fs_xp_convert extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int getConversionRatio(String fs_type, String xp_type) throws InterruptedException
     {
         if (fs_type == null)

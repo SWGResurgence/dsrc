@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.death_watch_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.group;
@@ -9,11 +15,12 @@ import script.obj_id;
 
 public class boss_loot extends script.base_script
 {
+    public static final String BLOOD = "object/tangible/loot/dungeon/death_watch_bunker/blood_vial.iff";
+    public static final String STABLE = "object/tangible/loot/dungeon/death_watch_bunker/jetpack_stabilizer.iff";
     public boss_loot()
     {
     }
-    public static final String BLOOD = "object/tangible/loot/dungeon/death_watch_bunker/blood_vial.iff";
-    public static final String STABLE = "object/tangible/loot/dungeon/death_watch_bunker/jetpack_stabilizer.iff";
+
     public int OnIncapacitated(obj_id self, obj_id attacker) throws InterruptedException
     {
         obj_id spawner = getObjIdObjVar(self, "spawner");
@@ -23,6 +30,7 @@ public class boss_loot extends script.base_script
         removeObjVar(player, "death_watch_herald.destroy");
         return SCRIPT_CONTINUE;
     }
+
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id winner = getObjIdObjVar(self, xp.VAR_TOP_GROUP);
@@ -33,7 +41,7 @@ public class boss_loot extends script.base_script
             {
                 permitted = getGroupMemberIds(winner);
             }
-            else 
+            else
             {
                 permitted = new obj_id[1];
                 permitted[0] = winner;
@@ -42,16 +50,21 @@ public class boss_loot extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 obj_id looter = null;
-                for (obj_id obj_id : permitted) {
+                for (obj_id obj_id : permitted)
+                {
                     looter = obj_id;
-                    if (looter != null) {
-                        if (hasObjVar(looter, "death_watch_herald.imperialquest")) {
+                    if (looter != null)
+                    {
+                        if (hasObjVar(looter, "death_watch_herald.imperialquest"))
+                        {
                             createTheirLoot(self);
                             return SCRIPT_CONTINUE;
-                        } else {
+                        }
+                        else
+                        {
                             createJetpackLoot(self);
                         }
                     }
@@ -60,6 +73,7 @@ public class boss_loot extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void createTheirLoot(obj_id self) throws InterruptedException
     {
         obj_id corpseInventory = utils.getInventoryContainer(self);
@@ -74,6 +88,7 @@ public class boss_loot extends script.base_script
             obj_id jet = createObject(STABLE, corpseInventory, "");
         }
     }
+
     public void createJetpackLoot(obj_id self) throws InterruptedException
     {
         obj_id corpseInventory = utils.getInventoryContainer(self);
@@ -86,6 +101,5 @@ public class boss_loot extends script.base_script
         {
             obj_id jet = createObject(STABLE, corpseInventory, "");
         }
-        return;
     }
 }

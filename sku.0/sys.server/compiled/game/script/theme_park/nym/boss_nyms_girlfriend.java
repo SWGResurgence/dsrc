@@ -1,5 +1,11 @@
 package script.theme_park.nym;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.trial;
@@ -9,12 +15,13 @@ import script.obj_id;
 
 public class boss_nyms_girlfriend extends script.base_script
 {
-    public boss_nyms_girlfriend()
-    {
-    }
     public static final int RADIUS = 100;
     public static final int MIN_DIST = 20;
     public static final String DISTANCE_CHECK = "distance_check";
+    public boss_nyms_girlfriend()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -23,6 +30,7 @@ public class boss_nyms_girlfriend extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitateTarget(obj_id self, obj_id victim) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -49,6 +57,7 @@ public class boss_nyms_girlfriend extends script.base_script
         messageTo(parent, "defaultEventReset", webster, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -74,6 +83,7 @@ public class boss_nyms_girlfriend extends script.base_script
         messageTo(parent, "defaultEventReset", webster, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleBossDistanceCheck(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -112,12 +122,13 @@ public class boss_nyms_girlfriend extends script.base_script
             dictionary webster = trial.getSessionDict(parent);
             messageTo(parent, "defaultEventReset", webster, 2, false);
         }
-        else 
+        else
         {
             messageTo(self, "handleBossDistanceCheck", null, 3, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean getRandomCombatTarget(obj_id self, obj_id parent) throws InterruptedException
     {
         if (!isIdValid(self) || !exists(self))
@@ -145,8 +156,10 @@ public class boss_nyms_girlfriend extends script.base_script
             messageTo(parent, "defaultEventReset", webster, 2, false);
             return false;
         }
-        for (obj_id target : targets) {
-            if (!isIdValid(target)) {
+        for (obj_id target : targets)
+        {
+            if (!isIdValid(target))
+            {
                 continue;
             }
             startCombat(self, target);

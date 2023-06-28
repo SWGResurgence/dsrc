@@ -1,5 +1,11 @@
 package script.developer.soe.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.combat_engine.hit_result;
 import script.*;
 import script.library.*;
@@ -9,13 +15,16 @@ public class dmellencamp_test extends script.base_script
     public dmellencamp_test()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        if (!isGod(self) || getGodLevel(self) < 50 || !isPlayer(self)) {
+        if (!isGod(self) || getGodLevel(self) < 50 || !isPlayer(self))
+        {
             detachScript(self, "test.dmellencamp_test");
         }
         return SCRIPT_CONTINUE;
     }
+
     public void colorize(obj_id player, obj_id target, String customizationVar) throws InterruptedException
     {
         int pId = createSUIPage("Script.ColorPicker", player, player, "ColorizeCallback");
@@ -26,22 +35,26 @@ public class dmellencamp_test extends script.base_script
         setSUIAssociatedObject(pId, target);
         showSUIPage(pId);
     }
+
     public void maxStats(obj_id objPlayer) throws InterruptedException
     {
         addAttribModifier(objPlayer, HEALTH, 2000, 0, 0, MOD_POOL);
         addAttribModifier(objPlayer, ACTION, 2000, 0, 0, MOD_POOL);
         addAttribModifier(objPlayer, MIND, 2000, 0, 0, MOD_POOL);
     }
+
     public boolean sendStartingLocations(obj_id player) throws InterruptedException
     {
         newbieTutorialSendStartingLocationsToPlayer(player, null);
         return true;
     }
+
     public int newbieRequestStartingLocations(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         sendStartingLocations(self);
         return SCRIPT_CONTINUE;
     }
+
     public int newbieSelectStartingLocation(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         String name = params;
@@ -56,7 +69,7 @@ public class dmellencamp_test extends script.base_script
                 {
                     warpPlayer(self, loc.area, 0.0f, 0.0f, 0.0f, loc.cell, loc.x, loc.y, loc.z);
                 }
-                else 
+                else
                 {
                     warpPlayer(self, loc.area, loc.x, loc.y, loc.z, null, 0.0f, 0.0f, 0.0f);
                 }
@@ -64,17 +77,20 @@ public class dmellencamp_test extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnApplyPowerup(obj_id self, obj_id playerId, obj_id targetId) throws InterruptedException
     {
         chat.chat(playerId, "OnApplyPowerup " + self.toString() + " -> " + targetId.toString());
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id playerId, String[] names, String[] attribs) throws InterruptedException
     {
         names[0] = "jwatson_test";
         attribs[0] = "What's up my homies?\nYeah";
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         java.util.StringTokenizer tok = new java.util.StringTokenizer(text);
@@ -82,11 +98,15 @@ public class dmellencamp_test extends script.base_script
         {
             String command = tok.nextToken();
             debugConsoleMsg(self, "command is: " + command);
-            switch (command) {
+            switch (command)
+            {
                 case "dm_colorize":
-                    if (tok.countTokens() < 2) {
+                    if (tok.countTokens() < 2)
+                    {
                         debugSpeakMsg(self, "Not enough arguments: colorize <obj_id> <customization var>");
-                    } else {
+                    }
+                    else
+                    {
                         tok.nextToken();
                         String idString = tok.nextToken();
                         String customizationVar = tok.nextToken();
@@ -95,15 +115,21 @@ public class dmellencamp_test extends script.base_script
                     }
                     break;
                 case "dm_scale":
-                    if (tok.countTokens() < 1) {
+                    if (tok.countTokens() < 1)
+                    {
                         debugSpeakMsg(self, "Not enough arguments: scale <factor> [obj_id]");
-                    } else {
+                    }
+                    else
+                    {
                         float scaleFactor = Float.parseFloat(tok.nextToken());
                         obj_id id = null;
-                        if (tok.countTokens() > 0) {
+                        if (tok.countTokens() > 0)
+                        {
                             String idString = tok.nextToken();
                             id = obj_id.getObjId(Long.parseLong(idString));
-                        } else {
+                        }
+                        else
+                        {
                             id = self;
                         }
                         setScale(id, scaleFactor);
@@ -111,14 +137,20 @@ public class dmellencamp_test extends script.base_script
                     break;
                 case "dm_systemMessage":
                     debugSpeakMsg(self, "jwatson_test dm_systemMessage: " + text);
-                    if (tok.countTokens() < 2) {
+                    if (tok.countTokens() < 2)
+                    {
                         debugSpeakMsg(self, "Not enough arguments: dm_systemMessage <id> <msg>");
-                    } else {
+                    }
+                    else
+                    {
                         obj_id id = null;
                         String idString = tok.nextToken();
-                        if (!idString.equals("0")) {
+                        if (!idString.equals("0"))
+                        {
                             id = obj_id.getObjId(Long.parseLong(idString));
-                        } else {
+                        }
+                        else
+                        {
                             id = self;
                         }
                         broadcast(id, text);
@@ -127,7 +159,8 @@ public class dmellencamp_test extends script.base_script
                 case "dm_systemMessagePlanet":
                     sendSystemMessagePlanetTestingOnly(text);
                     break;
-                case "dm_systemMessageGalaxy": {
+                case "dm_systemMessageGalaxy":
+                {
                     LOG("jw", "dm_systemMessageGalaxy");
                     prose_package pp = new prose_package();
                     LOG("jw", "dm_systemMessageGalaxy prose created");
@@ -151,13 +184,14 @@ public class dmellencamp_test extends script.base_script
                 case "dm_maxStats":
                     maxStats(self);
                     break;
-                case "dm_pm1": {
+                case "dm_pm1":
+                {
                     prose_package bodyProse = new prose_package();
                     prose_package subjectProse = new prose_package();
                     bodyProse.stringId = new string_id("pm", "body_id");
                     String oob = chatMakePersistentMessageOutOfBandBody(null, bodyProse);
-                    String subject_str = "@" + (new string_id("pm", "subject_id")).toString();
-                    String sender_str = "@" + (new string_id("pm", "sender_id")).toString();
+                    String subject_str = "@" + (new string_id("pm", "subject_id"));
+                    String sender_str = "@" + (new string_id("pm", "sender_id"));
                     LOG("jw", "dm_pm1 oob size = " + oob.length());
                     chatSendPersistentMessage(self, subject_str, "Here is the body", oob);
                     break;
@@ -165,7 +199,8 @@ public class dmellencamp_test extends script.base_script
                 case "dm_pm2":
                     chatSendPersistentMessage(self, "This is a message (2)", "Here is the body (2)", null);
                     break;
-                case "dm_pm3": {
+                case "dm_pm3":
+                {
                     String oob = chatAppendPersistentMessageWaypoint(null, self);
                     LOG("jw", "dm_pm3 oob size = " + oob.length());
                     chatSendPersistentMessage(self, "This is a message (waypoint)", "Here is the body", oob);
@@ -177,50 +212,63 @@ public class dmellencamp_test extends script.base_script
                     String from = "default_from";
                     String subj = "default_subj";
                     String body = "default_body";
-                    if (tok.hasMoreTokens()) {
+                    if (tok.hasMoreTokens())
+                    {
                         from = tok.nextToken();
-                        if (tok.hasMoreTokens()) {
+                        if (tok.hasMoreTokens())
+                        {
                             subj = tok.nextToken();
-                            if (tok.hasMoreTokens()) {
+                            if (tok.hasMoreTokens())
+                            {
                                 body = tok.nextToken();
                             }
                         }
                     }
                     chatSendPersistentMessage(from, getChatName(self), subj, body, null);
                     break;
-                case "dm_setMaster": {
+                case "dm_setMaster":
+                {
                     obj_id target = getLookAtTarget(self);
-                    if (target != null) {
+                    if (target != null)
+                    {
                         setMaster(target, self);
                     }
                     break;
                 }
-                case "dm_joinMe": {
+                case "dm_joinMe":
+                {
                     obj_id target = getLookAtTarget(self);
-                    if (target != null) {
+                    if (target != null)
+                    {
                         queueCommand(target, (-1449236473), null, "", COMMAND_PRIORITY_DEFAULT);
                     }
                     break;
                 }
-                case "dm_inviteMe": {
+                case "dm_inviteMe":
+                {
                     obj_id target = getLookAtTarget(self);
-                    if (target != null) {
+                    if (target != null)
+                    {
                         queueCommand(target, (-2007999144), self, "", COMMAND_PRIORITY_DEFAULT);
                     }
                     break;
                 }
-                case "dm_speak": {
+                case "dm_speak":
+                {
                     obj_id target = getLookAtTarget(self);
-                    if (target != null) {
+                    if (target != null)
+                    {
                         StringBuilder output = new StringBuilder();
                         while (tok.hasMoreTokens()) output.append(tok.nextToken());
                         queueCommand(target, (-296481545), null, output.toString(), COMMAND_PRIORITY_DEFAULT);
                     }
                     break;
                 }
-                case "dm_speakProse": {
+                case "dm_speakProse":
+                {
                     obj_id target = getLookAtTarget(self);
-                    if (target != null) {
+                    if (target != null)
+                    {
                         prose_package pp = new prose_package();
                         pp.stringId = new string_id("ui", "test_pp");
                         pp.actor.set(self);
@@ -234,9 +282,11 @@ public class dmellencamp_test extends script.base_script
                     }
                     break;
                 }
-                case "dm_testSui": {
+                case "dm_testSui":
+                {
                     obj_id target = getLookAtTarget(self);
-                    if (target != null) {
+                    if (target != null)
+                    {
                         int pid = createSUIPage(sui.SUI_MSGBOX, self, target, "");
                         setSUIAssociatedObject(pid, target);
                         setSUIProperty(pid, "bg.caption.lbltitle", "Text", "MY TITLE");
@@ -247,19 +297,25 @@ public class dmellencamp_test extends script.base_script
                 }
                 case "dm_money":
                     StringBuilder output = new StringBuilder();
-                    if (tok.hasMoreTokens()) {
+                    if (tok.hasMoreTokens())
+                    {
                         String amountStr = tok.nextToken();
                         int amount = Integer.parseInt(amountStr);
-                        if (amount > 0) {
+                        if (amount > 0)
+                        {
                             money.bankTo(money.ACCT_CHARACTER_CREATION, self, amount);
-                        } else {
+                        }
+                        else
+                        {
                             money.bankTo(self, money.ACCT_CHARACTER_CREATION, -amount);
                         }
                     }
                     break;
-                case "dm_kill": {
+                case "dm_kill":
+                {
                     obj_id target = getLookAtTarget(self);
-                    if (target != null) {
+                    if (target != null)
+                    {
                         hit_result cbtHitData = new hit_result();
                         cbtHitData.success = true;
                         cbtHitData.baseRoll = 1000;
@@ -272,17 +328,22 @@ public class dmellencamp_test extends script.base_script
                     }
                     break;
                 }
-                case "dm_ownVendor": {
+                case "dm_ownVendor":
+                {
                     obj_id target = getLookAtTarget(self);
-                    if (target != null) {
+                    if (target != null)
+                    {
                         createVendorMarket(self, target, 0);
                     }
                     break;
                 }
                 case "dm_putMeInCell":
-                    if (tok.countTokens() < 3) {
+                    if (tok.countTokens() < 3)
+                    {
                         debugSpeakMsg(self, "Not enough arguments: dm_putMeInCell <planet> <obj_id> <cell name>");
-                    } else {
+                    }
+                    else
+                    {
                         String arg1 = tok.nextToken();
                         String arg2 = tok.nextToken();
                         String arg3 = tok.nextToken();
@@ -304,44 +365,51 @@ public class dmellencamp_test extends script.base_script
                     addPlanetaryMapLocation(obj_id.getObjId(8), "vendor 4", -3400, -6500, "cantina", "hospital", MLT_DYNAMIC, MLF_INACTIVE);
                     addPlanetaryMapLocation(obj_id.getObjId(9), "vendor 5", 4400, -2600, "cantina", "hospital", MLT_DYNAMIC, MLF_ACTIVE);
                     break;
-                case "dm_mapget": {
+                case "dm_mapget":
+                {
                     String arg1 = tok.nextToken();
                     obj_id id = obj_id.getObjId(Long.valueOf(arg1));
                     map_location loc = getPlanetaryMapLocation(id);
                     debugSpeakMsg(self, "got [" + loc + "]");
                     break;
                 }
-                case "dm_mapRegisterSelf": {
+                case "dm_mapRegisterSelf":
+                {
                     String arg1 = tok.nextToken();
                     String arg2 = tok.nextToken();
                     String arg3 = null;
-                    if (tok.hasMoreTokens()) {
+                    if (tok.hasMoreTokens())
+                    {
                         arg3 = tok.nextToken();
                     }
                     addPlanetaryMapLocation(self, arg1, -4000, -3000, arg2, arg3 != null ? arg3 : "", MLT_DYNAMIC, 0);
                     break;
                 }
-                case "dm_vset": {
+                case "dm_vset":
+                {
                     int index = Integer.parseInt(tok.nextToken());
                     float value = Float.parseFloat(tok.nextToken());
                     int ivalue = vehicle.setValue(getLookAtTarget(self), value, index);
                     debugSpeakMsg(self, "set value to " + ivalue);
                     break;
                 }
-                case "dm_vget": {
+                case "dm_vget":
+                {
                     int index = Integer.parseInt(tok.nextToken());
                     float value = vehicle.getValue(getLookAtTarget(self), index);
                     debugSpeakMsg(self, "value is " + value);
                     break;
                 }
-                case "dm_dirtyAttributes": {
+                case "dm_dirtyAttributes":
+                {
                     String idString = tok.nextToken();
                     obj_id id = obj_id.getObjId(Long.parseLong(idString));
                     sendDirtyAttributesNotification(id);
                     debugSpeakMsg(self, "dirty attrs");
                     break;
                 }
-                case "dm_dirtyMenu": {
+                case "dm_dirtyMenu":
+                {
                     String idString = tok.nextToken();
                     obj_id id = obj_id.getObjId(Long.parseLong(idString));
                     sendDirtyObjectMenuNotification(id);
@@ -350,7 +418,8 @@ public class dmellencamp_test extends script.base_script
                 }
                 case "dm_suiTest":
                     break;
-                case "dm_shipInstall": {
+                case "dm_shipInstall":
+                {
                     String idString = tok.nextToken();
                     int index = Integer.parseInt(tok.nextToken());
                     obj_id componentId = obj_id.getObjId(Long.parseLong(idString));
@@ -358,13 +427,15 @@ public class dmellencamp_test extends script.base_script
                     debugSpeakMsg(self, "installed result:" + result);
                     break;
                 }
-                case "dm_shipUninstall": {
+                case "dm_shipUninstall":
+                {
                     int index = Integer.parseInt(tok.nextToken());
                     obj_id componentId = shipUninstallComponent(self, getLookAtTarget(self), index, getObjectInSlot(self, "inventory"));
                     debugSpeakMsg(self, "uninstalled component:" + componentId);
                     break;
                 }
-                case "dm_shipPurge": {
+                case "dm_shipPurge":
+                {
                     int index = Integer.parseInt(tok.nextToken());
                     obj_id componentId = shipUninstallComponent(null, getLookAtTarget(self), index, null);
                     debugSpeakMsg(self, "uninstalled component:" + componentId);
@@ -374,32 +445,38 @@ public class dmellencamp_test extends script.base_script
                     debugSpeakMsg(self, "... getting slots ...");
                     obj_id shipId = getLookAtTarget(self);
                     int[] shipChassisSlots = getShipChassisSlots(shipId);
-                    if (shipChassisSlots != null) {
-                        for (int shipChassisSlot : shipChassisSlots) {
+                    if (shipChassisSlots != null)
+                    {
+                        for (int shipChassisSlot : shipChassisSlots)
+                        {
                             boolean installed = isShipSlotInstalled(shipId, shipChassisSlot);
                             debugSpeakMsg(self, "slot " + shipChassisSlot + ", installed:" + installed);
                         }
                     }
                     break;
-                case "dm_shipSetEnergyRequirement": {
+                case "dm_shipSetEnergyRequirement":
+                {
                     int index = Integer.parseInt(tok.nextToken());
                     float requirement = Float.parseFloat(tok.nextToken());
                     setShipComponentEnergyMaintenanceRequirement(getLookAtTarget(self), index, requirement);
                     break;
                 }
-                case "dm_shipSetEfficiencyGeneral": {
+                case "dm_shipSetEfficiencyGeneral":
+                {
                     int index = Integer.parseInt(tok.nextToken());
                     float requirement = Float.parseFloat(tok.nextToken());
                     setShipComponentEfficiencyGeneral(getLookAtTarget(self), index, requirement);
                     break;
                 }
-                case "dm_shipSetEfficiencyEnergy": {
+                case "dm_shipSetEfficiencyEnergy":
+                {
                     int index = Integer.parseInt(tok.nextToken());
                     float requirement = Float.parseFloat(tok.nextToken());
                     setShipComponentEfficiencyEnergy(getLookAtTarget(self), index, requirement);
                     break;
                 }
-                case "dm_shipSetArmor": {
+                case "dm_shipSetArmor":
+                {
                     int index = Integer.parseInt(tok.nextToken());
                     float cur = Float.parseFloat(tok.nextToken());
                     float max = Float.parseFloat(tok.nextToken());
@@ -407,7 +484,8 @@ public class dmellencamp_test extends script.base_script
                     setShipComponentArmorHitpointsCurrent(getLookAtTarget(self), index, cur);
                     break;
                 }
-                case "dm_shipSetHp": {
+                case "dm_shipSetHp":
+                {
                     int index = Integer.parseInt(tok.nextToken());
                     float cur = Float.parseFloat(tok.nextToken());
                     float max = Float.parseFloat(tok.nextToken());
@@ -415,56 +493,66 @@ public class dmellencamp_test extends script.base_script
                     setShipComponentHitpointsCurrent(getLookAtTarget(self), index, cur);
                     break;
                 }
-                case "dm_shipSetFlags": {
+                case "dm_shipSetFlags":
+                {
                     int index = Integer.parseInt(tok.nextToken());
                     int flags = Integer.parseInt(tok.nextToken());
                     setShipComponentFlags(getLookAtTarget(self), index, flags);
                     break;
                 }
-                case "dm_shipSetShipHp": {
+                case "dm_shipSetShipHp":
+                {
                     float cur = Float.parseFloat(tok.nextToken());
                     float max = Float.parseFloat(tok.nextToken());
                     setShipMaximumChassisHitPoints(getLookAtTarget(self), max);
                     setShipCurrentChassisHitPoints(getLookAtTarget(self), cur);
                     break;
                 }
-                case "dm_shipSetReactorGeneration": {
+                case "dm_shipSetReactorGeneration":
+                {
                     float val = Float.parseFloat(tok.nextToken());
                     setShipReactorEnergyGenerationRate(getLookAtTarget(self), val);
                     break;
                 }
-                case "dm_shipSetShieldHpFrontCurrent": {
+                case "dm_shipSetShieldHpFrontCurrent":
+                {
                     float val = Float.parseFloat(tok.nextToken());
                     setShipShieldHitpointsFrontCurrent(getLookAtTarget(self), val);
                     break;
                 }
-                case "dm_shipSetShieldHpFrontMax": {
+                case "dm_shipSetShieldHpFrontMax":
+                {
                     float val = Float.parseFloat(tok.nextToken());
                     setShipShieldHitpointsFrontMaximum(getLookAtTarget(self), val);
                     break;
                 }
-                case "dm_shipSetShieldHpBackCurrent": {
+                case "dm_shipSetShieldHpBackCurrent":
+                {
                     float val = Float.parseFloat(tok.nextToken());
                     setShipShieldHitpointsBackCurrent(getLookAtTarget(self), val);
                     break;
                 }
-                case "dm_shipSetShieldHpBackMax": {
+                case "dm_shipSetShieldHpBackMax":
+                {
                     float val = Float.parseFloat(tok.nextToken());
                     setShipShieldHitpointsBackMaximum(getLookAtTarget(self), val);
                     break;
                 }
-                case "dm_shipSetShieldRechargeRate": {
+                case "dm_shipSetShieldRechargeRate":
+                {
                     float val = Float.parseFloat(tok.nextToken());
                     setShipShieldRechargeRate(getLookAtTarget(self), val);
                     break;
                 }
-                case "dm_terminalSet": {
+                case "dm_terminalSet":
+                {
                     debugSpeakMsg(self, "terminal setting");
                     obj_id id = obj_id.getObjId(Long.parseLong(tok.nextToken()));
                     setObjVar(id, "space.destination", getWorldLocation(id));
                     break;
                 }
-                case "dm_weaponComponentSetup": {
+                case "dm_weaponComponentSetup":
+                {
                     debugSpeakMsg(self, "component setup");
                     obj_id id = obj_id.getObjId(Long.parseLong(tok.nextToken()));
                     setObjVar(id, "ship_comp.weapon.refire_rate", 20.0f);
@@ -473,55 +561,67 @@ public class dmellencamp_test extends script.base_script
                     setObjVar(id, "ship_comp.weapon.damage_maximum", 10.0f);
                     break;
                 }
-                case "dm_shipComponentName": {
+                case "dm_shipComponentName":
+                {
                     int index = Integer.parseInt(tok.nextToken());
                     String name = tok.nextToken();
                     setShipComponentName(getLookAtTarget(self), index, name);
                     break;
                 }
-                case "dm_shipDestroy": {
+                case "dm_shipDestroy":
+                {
                     float val = Float.parseFloat(tok.nextToken());
                     handleShipDestruction(getLookAtTarget(self), val);
                     break;
                 }
-                case "dm_shipDestroyComponent": {
+                case "dm_shipDestroyComponent":
+                {
                     int index = Integer.parseInt(tok.nextToken());
                     float val = Float.parseFloat(tok.nextToken());
                     handleShipComponentDestruction(getLookAtTarget(self), index, val);
                     break;
                 }
-                case "dm_shipHitMe": {
+                case "dm_shipHitMe":
+                {
                     obj_id objTarget = getLookAtTarget(self);
                     obj_id objShip = getPilotedShip(self);
                     broadcast(self, "objTarget of " + objTarget + " is attacking " + objShip);
                     ship_ai.spaceAttack(objTarget, objShip);
                     break;
                 }
-                case "dm_shipSetWeaponEfficiencyRefireRate": {
+                case "dm_shipSetWeaponEfficiencyRefireRate":
+                {
                     int index = Integer.parseInt(tok.nextToken());
                     float eff = Float.parseFloat(tok.nextToken());
                     setShipWeaponEfficiencyRefireRate(getLookAtTarget(self), index, eff);
                     break;
                 }
-                case "dm_shipSetWeaponDamage": {
+                case "dm_shipSetWeaponDamage":
+                {
                     int index = Integer.parseInt(tok.nextToken());
                     broadcast(self, "index=" + index);
                     setShipWeaponDamageMaximum(getLookAtTarget(self), ship_chassis_slot_type.SCST_weapon_0 + index, 500.0f);
                     break;
                 }
-                case "dm_leet": {
+                case "dm_leet":
+                {
                     obj_id objTarget = getLookAtTarget(self);
-                    if (objTarget == null) {
+                    if (objTarget == null)
+                    {
                         objTarget = getPilotedShip(self);
                     }
-                    for (int i = 0; i < ship_chassis_slot_type.SCST_num_types; ++i) {
-                        if (isShipSlotInstalled(objTarget, i)) {
+                    for (int i = 0; i < ship_chassis_slot_type.SCST_num_types; ++i)
+                    {
+                        if (isShipSlotInstalled(objTarget, i))
+                        {
                             setShipComponentEfficiencyEnergy(objTarget, i, 10.0f);
                             setShipComponentEfficiencyGeneral(objTarget, i, 2.0f);
                         }
                     }
-                    for (int i = ship_chassis_slot_type.SCST_weapon_first; i < ship_chassis_slot_type.SCST_weapon_last; ++i) {
-                        if (isShipSlotInstalled(objTarget, i)) {
+                    for (int i = ship_chassis_slot_type.SCST_weapon_first; i < ship_chassis_slot_type.SCST_weapon_last; ++i)
+                    {
+                        if (isShipSlotInstalled(objTarget, i))
+                        {
                             setShipWeaponEfficiencyRefireRate(objTarget, i, 10.0f);
                             setShipComponentEfficiencyEnergy(objTarget, i, 10.0f);
                             setShipComponentEfficiencyGeneral(objTarget, i, 10.0f);
@@ -530,13 +630,17 @@ public class dmellencamp_test extends script.base_script
                     }
                     break;
                 }
-                case "dm_fullAmmo": {
+                case "dm_fullAmmo":
+                {
                     obj_id objTarget = getLookAtTarget(self);
-                    if (objTarget == null) {
+                    if (objTarget == null)
+                    {
                         objTarget = getPilotedShip(self);
                     }
-                    for (int i = ship_chassis_slot_type.SCST_weapon_first; i < ship_chassis_slot_type.SCST_weapon_last; ++i) {
-                        if (isShipSlotInstalled(objTarget, i)) {
+                    for (int i = ship_chassis_slot_type.SCST_weapon_first; i < ship_chassis_slot_type.SCST_weapon_last; ++i)
+                    {
+                        if (isShipSlotInstalled(objTarget, i))
+                        {
                             broadcast(self, "up ammo");
                             setShipWeaponAmmoCurrent(objTarget, i, getShipWeaponAmmoMaximum(objTarget, i));
                         }
@@ -545,14 +649,16 @@ public class dmellencamp_test extends script.base_script
                 }
                 case "dm_clientEffect":
                     String cef = "clienteffect/space_scram_spark.cef";
-                    if (tok.hasMoreTokens()) {
+                    if (tok.hasMoreTokens())
+                    {
                         cef = tok.nextToken();
                     }
                     transform t = new transform();
                     t = t.move_p(new vector(10.0f, 0.0f, 0.0f));
                     playClientEffectObj(self, cef, getLookAtTarget(self), null, t);
                     break;
-                case "dm_powerDebug": {
+                case "dm_powerDebug":
+                {
                     obj_id[] objPcds = space_transition.findShipControlDevicesForPlayer(self);
                     obj_id objShip = space_transition.getShipFromShipControlDevice(objPcds[0]);
                     objShip = space_transition.getContainingShip(self);
@@ -565,7 +671,8 @@ public class dmellencamp_test extends script.base_script
                     broadcast(self, "whacked ");
                     break;
                 }
-                case "dm_sprTest": {
+                case "dm_sprTest":
+                {
                     obj_id[] objPcds = space_transition.findShipControlDevicesForPlayer(self);
                     obj_id objShip = space_transition.getShipFromShipControlDevice(objPcds[0]);
                     objShip = space_transition.getContainingShip(self);
@@ -574,7 +681,8 @@ public class dmellencamp_test extends script.base_script
                     setShipEngineSpeedRotationFactorOptimal(objShip, 0.75f);
                     break;
                 }
-                case "dm_chassisMod": {
+                case "dm_chassisMod":
+                {
                     obj_id[] objPcds = space_transition.findShipControlDevicesForPlayer(self);
                     obj_id objShip = space_transition.getShipFromShipControlDevice(objPcds[0]);
                     objShip = space_transition.getContainingShip(self);
@@ -582,7 +690,8 @@ public class dmellencamp_test extends script.base_script
                     setShipChassisSpeedMaximumModifier(objShip, val);
                     break;
                 }
-                case "dm_maDynVel": {
+                case "dm_maDynVel":
+                {
                     obj_id objTarget = getLookAtTarget(self);
                     float x = Float.parseFloat(tok.nextToken());
                     float y = Float.parseFloat(tok.nextToken());
@@ -592,22 +701,26 @@ public class dmellencamp_test extends script.base_script
                 }
                 case "dm_maSpawnStatic":
                     break;
-                case "dm_maSpawnDynamic": {
+                case "dm_maSpawnDynamic":
+                {
                     location selfLocation = getLocation(self);
                     obj_id spawnDynamicAsteroid = createObject("object/ship/asteroid/mining_asteroid_dynamic_default.iff", selfLocation);
                     setDynamicMiningAsteroidVelocity(spawnDynamicAsteroid, new vector(0.0f, 40.0f, 0.0f));
                     break;
                 }
-                case "dm_dt": {
+                case "dm_dt":
+                {
                     obj_id ticket = space_dungeon.createTicket(self, "tatooine", "tatooine", "npe_space");
                     break;
                 }
-                case "dm_dt_curr": {
+                case "dm_dt_curr":
+                {
                     String planet = getCurrentSceneName();
                     obj_id ticket = space_dungeon.createTicket(self, planet, planet, "npe_space");
                     break;
                 }
-                case "dm_spaceTicket": {
+                case "dm_spaceTicket":
+                {
                     obj_id objTarget = getLookAtTarget(self);
                     space_dungeon.selectDungeonTicket(objTarget, self);
                     break;
@@ -616,7 +729,8 @@ public class dmellencamp_test extends script.base_script
                     broadcast(self, "now ejecting... ");
                     space_dungeon.ejectPlayerFromDungeon(self);
                     break;
-                case "dm_dungeon_yt1300": {
+                case "dm_dungeon_yt1300":
+                {
                     location selfLocation = getLocation(self);
                     selfLocation.x += 100.0f;
                     obj_id platform1 = createObject("object/ship/dungeon/dungeon_yt1300.iff", selfLocation);
@@ -626,9 +740,12 @@ public class dmellencamp_test extends script.base_script
                 case "dm_fill_dungeon_yt1300":
                     location createLocation = getLocation(self);
                     int objCreated = 0;
-                    for (int x = -6000; x <= 6000; x = x + 3000) {
-                        for (int y = -6000; y <= 6000; y = y + 3000) {
-                            for (int z = -6000; z <= 6000; z = z + 3000) {
+                    for (int x = -6000; x <= 6000; x = x + 3000)
+                    {
+                        for (int y = -6000; y <= 6000; y = y + 3000)
+                        {
+                            for (int z = -6000; z <= 6000; z = z + 3000)
+                            {
                                 createLocation.x = x;
                                 createLocation.y = y;
                                 createLocation.z = z;
@@ -640,13 +757,15 @@ public class dmellencamp_test extends script.base_script
                         }
                     }
                     break;
-                case "dm_spaceDungeonInit": {
+                case "dm_spaceDungeonInit":
+                {
                     long id = Long.parseLong(tok.nextToken());
                     obj_id dungeon = obj_id.getObjId(id);
                     messageTo(dungeon, "msgManualDungeonReset", new dictionary(), 0.0f, false);
                     break;
                 }
-                case "dm_ticketCollector": {
+                case "dm_ticketCollector":
+                {
                     location selfLocation = getLocation(self);
                     obj_id collector = createObject("object/tangible/travel/ticket_collector/ticket_collector.iff", selfLocation);
                     attachScript(collector, "item.travel_ticket.travel_space_dungeon");
@@ -654,26 +773,31 @@ public class dmellencamp_test extends script.base_script
                     setObjVar(collector, "space_dungeon.ticket.point", getCurrentSceneName());
                     break;
                 }
-                case "dm_dungeonLandTicketless": {
+                case "dm_dungeonLandTicketless":
+                {
                     obj_id npc = getLookAtTarget(self);
                     String planet = getCurrentSceneName();
                     space_dungeon.sendGroupToDungeonWithoutTicket(self, "npe_space", planet, planet, "quest_type", npc);
                     break;
                 }
-                case "dm_shipCargoDump": {
+                case "dm_shipCargoDump":
+                {
                     obj_id ship = getPilotedShip(self);
                     obj_id[] resources = getShipCargoHoldContentsResourceTypes(ship);
-                    for (obj_id resource : resources) {
+                    for (obj_id resource : resources)
+                    {
                         setShipCargoHoldContent(ship, resource, 0);
                     }
                     break;
                 }
-                case "dm_spaceMiningSale": {
+                case "dm_spaceMiningSale":
+                {
                     obj_id ship = getPilotedShip(self);
                     openSpaceMiningUi(self, self, "tatooine");
                     break;
                 }
-                case "dm_shipTestCargo": {
+                case "dm_shipTestCargo":
+                {
                     obj_id ship = getPilotedShip(self);
                     setShipCargoHoldContentsMaximum(ship, 100);
                     setShipCargoHoldContent(ship, "space_gem_diamond", 44);
@@ -697,6 +821,7 @@ public class dmellencamp_test extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int TestSUICallback(obj_id self, dictionary params) throws InterruptedException
     {
         debugServerConsoleMsg(self, "callback started");
@@ -705,19 +830,23 @@ public class dmellencamp_test extends script.base_script
         pageId = params.getInt("pageId");
         debugSpeakMsg(player, Integer.toString(pageId));
         String[] props = params.getStringArray("propertyStrings");
-        for (String prop : props) {
+        for (String prop : props)
+        {
             debugSpeakMsg(player, prop);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ColorizeCallback(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpaceMiningSellResource(obj_id self, obj_id player, obj_id ship, obj_id station, obj_id resourceId, int amount) throws InterruptedException
     {
         int amountDeducted = -modifyShipCargoHoldContent(ship, resourceId, -amount);

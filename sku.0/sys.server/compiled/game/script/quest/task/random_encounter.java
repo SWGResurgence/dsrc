@@ -1,5 +1,11 @@
 package script.quest.task;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.quests;
 import script.library.utils;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class random_encounter extends script.base_script
     public random_encounter()
     {
     }
+
     public int OnQuestActivated(obj_id self, int questRow) throws InterruptedException
     {
         LOG("newquests", "random_encounter - OnQuestActivated(+ " + questRow + ")");
@@ -21,7 +28,7 @@ public class random_encounter extends script.base_script
             {
                 successChanceInt = getIntObjVar(self, objvarname);
             }
-            else 
+            else
             {
                 String successChance = quests.getDataEntry(questRow, "PARAMETER");
                 successChanceInt = utils.stringToInt(successChance);

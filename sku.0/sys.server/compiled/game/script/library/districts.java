@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.location;
 import script.region;
 import script.string_id;
@@ -26,6 +32,7 @@ public class districts extends script.base_script
     public static final String VAR_PLANET_DISTRICT_REGISTER = "districts.register";
     public static final String VAR_PLANET_DISTRICT_OBJ_IDS = "districts.obj_ids";
     public static final String SCRIPT_CITIES_PLANET = "systems.player_run_cities.planet";
+
     public districts()
     {
     }

@@ -1,5 +1,11 @@
 package script.money.clear;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.money;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class target extends script.base_script
     public target()
     {
     }
+
     public int handleCovertDepositReturn(obj_id self, dictionary params) throws InterruptedException
     {
         int cash = getCashBalance(self);
@@ -26,6 +33,7 @@ public class target extends script.base_script
         transferBankCreditsToNamedAccount(self, acct, bank, "finishClear", "finishClear", params);
         return SCRIPT_CONTINUE;
     }
+
     public int finishClear(obj_id self, dictionary params) throws InterruptedException
     {
         detachScript(self, "money.clear.target");

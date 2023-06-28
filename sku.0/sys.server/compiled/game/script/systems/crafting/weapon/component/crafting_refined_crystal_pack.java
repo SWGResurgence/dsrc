@@ -1,5 +1,11 @@
 package script.systems.crafting.weapon.component;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.craftinglib;
 import script.resource_weight;
 
@@ -88,6 +94,7 @@ public class crafting_refined_crystal_pack extends script.systems.crafting.weapo
                                     new resource_weight.weight(craftinglib.RESOURCE_TOUGHNESS, 1)
                             })
             };
+
     public crafting_refined_crystal_pack()
     {
     }

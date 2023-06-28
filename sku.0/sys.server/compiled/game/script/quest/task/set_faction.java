@@ -1,5 +1,11 @@
 package script.quest.task;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.factions;
 import script.library.quests;
 import script.library.utils;
@@ -10,6 +16,7 @@ public class set_faction extends script.base_script
     public set_faction()
     {
     }
+
     public int OnQuestActivated(obj_id self, int questRow) throws InterruptedException
     {
         if (quests.isMyQuest(questRow, "quest.task.set_faction"))
@@ -22,7 +29,7 @@ public class set_faction extends script.base_script
             {
                 factionName = getStringObjVar(self, targetObjVarName);
             }
-            else 
+            else
             {
                 factionName = quests.getDataEntry(questRow, "TARGET");
             }
@@ -34,7 +41,7 @@ public class set_faction extends script.base_script
                 {
                     factionPoints = getIntObjVar(self, parameterObjVarName);
                 }
-                else 
+                else
                 {
                     String factionPointsString = quests.getDataEntry(questRow, "PARAMETER");
                     if (factionPointsString != null && factionPointsString.length() > 0)
@@ -45,7 +52,7 @@ public class set_faction extends script.base_script
                 factions.setFactionStanding(self, factionName, factionPoints);
                 success = true;
             }
-            else 
+            else
             {
                 LOG("newquests", "failed to retrieve a faction name from object variable (" + targetObjVarName + ") or from the TARGET column at quest row " + questRow + " in quests.tab");
             }

@@ -1,5 +1,11 @@
 package script.item.publish_gift;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -10,6 +16,7 @@ public class holopet_emitter extends script.base_script
     public static final string_id NOT_IN_INVENTORY = new string_id("spam", "not_in_inventory");
     public static final float HEARTBEAT = 600.0f;
     public static final String PID_NAME = "holo-pet";
+
     public holopet_emitter()
     {
     }
@@ -444,7 +451,6 @@ public class holopet_emitter extends script.base_script
         {
             setName(pet, name);
         }
-        return;
     }
 
     public void turnOff(obj_id self, obj_id player) throws InterruptedException

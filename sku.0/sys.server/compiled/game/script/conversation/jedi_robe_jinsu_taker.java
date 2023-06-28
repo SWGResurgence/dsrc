@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.static_item;
@@ -8,14 +14,17 @@ import script.*;
 
 public class jedi_robe_jinsu_taker extends script.base_script
 {
+    public static String c_stringFile = "conversation/jedi_robe_jinsu_taker";
+
     public jedi_robe_jinsu_taker()
     {
     }
-    public static String c_stringFile = "conversation/jedi_robe_jinsu_taker";
+
     public boolean jedi_robe_jinsu_taker_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean jedi_robe_jinsu_taker_condition_readyToHandOverJinsu(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasCompletedCollectionSlotPrereq(player, "col_lightsaber_1h_01_02"))
@@ -23,18 +32,17 @@ public class jedi_robe_jinsu_taker extends script.base_script
             if (!hasCompletedCollectionSlot(player, "col_lightsaber_1h_01_02"))
             {
                 String jinsuTemplate = "object/weapon/melee/sword/crafted_saber/sword_lightsaber_mandalorian.iff";
-                if (utils.playerHasItemByTemplateInInventoryOrEquipped(player, jinsuTemplate))
-                {
-                    return true;
-                }
+                return utils.playerHasItemByTemplateInInventoryOrEquipped(player, jinsuTemplate);
             }
         }
         return false;
     }
+
     public boolean jedi_robe_jinsu_taker_condition_alreadyGaveJinsu(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasCompletedCollectionSlot(player, "col_lightsaber_1h_01_02");
     }
+
     public boolean jedi_robe_jinsu_taker_condition_takeJinsu(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id jinsuSaber = obj_id.NULL_ID;
@@ -42,9 +50,11 @@ public class jedi_robe_jinsu_taker extends script.base_script
         obj_id[] contents = getInventoryAndEquipment(player);
         if (contents != null)
         {
-            for (obj_id inventoryObject : contents) {
+            for (obj_id inventoryObject : contents)
+            {
                 String inventoryObjectTemplate = getTemplateName(inventoryObject);
-                if (inventoryObjectTemplate.equals(desiredTemplate)) {
+                if (inventoryObjectTemplate.equals(desiredTemplate))
+                {
                     jinsuSaber = inventoryObject;
                     break;
                 }
@@ -58,10 +68,12 @@ public class jedi_robe_jinsu_taker extends script.base_script
             if (isIdValid(jinsuInv))
             {
                 obj_id[] jinsuCrystals = getContents(jinsuInv);
-                if (jinsuCrystals != null && jinsuCrystals.length > 0)
+                if (jinsuCrystals != null)
                 {
-                    for (obj_id crystal : jinsuCrystals) {
-                        if (isIdValid(crystal)) {
+                    for (obj_id crystal : jinsuCrystals)
+                    {
+                        if (isIdValid(crystal))
+                        {
                             putInOverloaded(crystal, playerInv);
                         }
                     }
@@ -73,6 +85,7 @@ public class jedi_robe_jinsu_taker extends script.base_script
         }
         return false;
     }
+
     public boolean jedi_robe_jinsu_taker_condition_canReceive5GenPvP(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id pvpSaberSchematic1Hand = utils.getStaticItemInInventory(player, "item_schematic_pvp_bf_saber_03_01");
@@ -86,28 +99,29 @@ public class jedi_robe_jinsu_taker extends script.base_script
             return true;
         }
         obj_id pvpSaberSchematicStaff = utils.getStaticItemInInventory(player, "item_schematic_pvp_bf_saber_03_03");
-        if (isIdValid(pvpSaberSchematicStaff) && hasCompletedCollection(player, "col_lightsaber_polearm_01"))
-        {
-            return true;
-        }
-        return false;
+        return isIdValid(pvpSaberSchematicStaff) && hasCompletedCollection(player, "col_lightsaber_polearm_01");
     }
+
     public boolean jedi_robe_jinsu_taker_condition_canTrade1Hand(obj_id player, obj_id npc) throws InterruptedException
     {
         return isIdValid(utils.getStaticItemInInventory(player, "item_schematic_pvp_bf_saber_03_01"));
     }
+
     public boolean jedi_robe_jinsu_taker_condition_canTrade2Hand(obj_id player, obj_id npc) throws InterruptedException
     {
         return isIdValid(utils.getStaticItemInInventory(player, "item_schematic_pvp_bf_saber_03_02"));
     }
+
     public boolean jedi_robe_jinsu_taker_condition_canTradeStaff(obj_id player, obj_id npc) throws InterruptedException
     {
         return isIdValid(utils.getStaticItemInInventory(player, "item_schematic_pvp_bf_saber_03_03"));
     }
+
     public boolean jedi_robe_jinsu_taker_condition_canReceive5thGenSaber(obj_id player, obj_id npc) throws InterruptedException
     {
         return jedi_robe_jinsu_taker_condition_canReceive5GenPvP(player, npc) || jedi_robe_jinsu_taker_condition_canReceive5GenGCW(player, npc);
     }
+
     public boolean jedi_robe_jinsu_taker_condition_canReceive5GenGCW(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id gcwSaberSchematic1Hand = utils.getStaticItemInInventory(player, "item_schematic_pvp_gcw_saber_1h_gen4");
@@ -116,20 +130,19 @@ public class jedi_robe_jinsu_taker extends script.base_script
             return true;
         }
         obj_id gcwSaberSchematic2Hand = utils.getStaticItemInInventory(player, "item_schematic_pvp_gcw_saber_2h_gen4");
-        if (isIdValid(gcwSaberSchematic2Hand) && hasCompletedCollection(player, "col_lightsaber_2h_01"))
-        {
-            return true;
-        }
-        return false;
+        return isIdValid(gcwSaberSchematic2Hand) && hasCompletedCollection(player, "col_lightsaber_2h_01");
     }
+
     public boolean jedi_robe_jinsu_taker_condition_canTradeGcw1Hand(obj_id player, obj_id npc) throws InterruptedException
     {
         return isIdValid(utils.getStaticItemInInventory(player, "item_schematic_pvp_gcw_saber_1h_gen4"));
     }
+
     public boolean jedi_robe_jinsu_taker_condition_canTradeGcw2Hand(obj_id player, obj_id npc) throws InterruptedException
     {
         return isIdValid(utils.getStaticItemInInventory(player, "item_schematic_pvp_gcw_saber_2h_gen4"));
     }
+
     public void jedi_robe_jinsu_taker_action_upgrade1HandPvP(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id oldSchematic = utils.getStaticItemInInventory(player, "item_schematic_pvp_bf_saber_03_01");
@@ -139,12 +152,13 @@ public class jedi_robe_jinsu_taker extends script.base_script
             CustomerServiceLog("jediSaberTrade", getFirstName(player) + "(" + player + ") has upgraded their saber schematic " + getStaticItemName(oldSchematic) + "(" + oldSchematic + ") to a 5th Gen version " + getStaticItemName(newSchematic) + "(" + newSchematic + "). This will destroy the old one.");
             destroyObject(oldSchematic);
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id("spam", "couldnt_upgrade_saber_schematic"));
             CustomerServiceLog("jediSaberTrade", getFirstName(player) + "(" + player + ") could NOT upgrade their schematic " + getStaticItemName(oldSchematic) + "(" + oldSchematic + ") to a 5th Gen version. One of these statements returned false: (isIdValid(oldSchematic) && utils.getContainingPlayer(oldSchematic) == player) = " + (isIdValid(oldSchematic) && utils.getContainingPlayer(oldSchematic) == player) + "or isIdValid(newSchematic) = " + isIdValid(newSchematic));
         }
     }
+
     public void jedi_robe_jinsu_taker_action_upgrade2HandPvP(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id oldSchematic = utils.getStaticItemInInventory(player, "item_schematic_pvp_bf_saber_03_02");
@@ -154,12 +168,13 @@ public class jedi_robe_jinsu_taker extends script.base_script
             CustomerServiceLog("jediSaberTrade", getFirstName(player) + "(" + player + ") has upgraded their saber schematic " + getStaticItemName(oldSchematic) + "(" + oldSchematic + ") to a 5th Gen version " + getStaticItemName(newSchematic) + "(" + newSchematic + "). This will destroy the old one.");
             destroyObject(oldSchematic);
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id("spam", "couldnt_upgrade_saber_schematic"));
             CustomerServiceLog("jediSaberTrade", getFirstName(player) + "(" + player + ") could NOT upgrade their schematic " + getStaticItemName(oldSchematic) + "(" + oldSchematic + ") to a 5th Gen version. One of these statements returned false: (isIdValid(oldSchematic) && utils.getContainingPlayer(oldSchematic) == player) = " + (isIdValid(oldSchematic) && utils.getContainingPlayer(oldSchematic) == player) + "or isIdValid(newSchematic) = " + isIdValid(newSchematic));
         }
     }
+
     public void jedi_robe_jinsu_taker_action_upgradeStaffPvP(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id oldSchematic = utils.getStaticItemInInventory(player, "item_schematic_pvp_bf_saber_03_03");
@@ -169,12 +184,13 @@ public class jedi_robe_jinsu_taker extends script.base_script
             CustomerServiceLog("jediSaberTrade", getFirstName(player) + "(" + player + ") has upgraded their saber schematic " + getStaticItemName(oldSchematic) + "(" + oldSchematic + ") to a 5th Gen version " + getStaticItemName(newSchematic) + "(" + newSchematic + "). This will destroy the old one.");
             destroyObject(oldSchematic);
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id("spam", "couldnt_upgrade_saber_schematic"));
             CustomerServiceLog("jediSaberTrade", getFirstName(player) + "(" + player + ") could NOT upgrade their schematic " + getStaticItemName(oldSchematic) + "(" + oldSchematic + ") to a 5th Gen version. One of these statements returned false: (isIdValid(oldSchematic) && utils.getContainingPlayer(oldSchematic) == player) = " + (isIdValid(oldSchematic) && utils.getContainingPlayer(oldSchematic) == player) + "or isIdValid(newSchematic) = " + isIdValid(newSchematic));
         }
     }
+
     public void jedi_robe_jinsu_taker_action_upgradeGcw1Handed(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id oldSchematic = utils.getStaticItemInInventory(player, "item_schematic_pvp_gcw_saber_1h_gen4");
@@ -184,12 +200,13 @@ public class jedi_robe_jinsu_taker extends script.base_script
             CustomerServiceLog("jediSaberTrade", getFirstName(player) + "(" + player + ") has upgraded their saber schematic " + getStaticItemName(oldSchematic) + "(" + oldSchematic + ") to a 5th Gen version " + getStaticItemName(newSchematic) + "(" + newSchematic + "). This will destroy the old one.");
             destroyObject(oldSchematic);
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id("spam", "couldnt_upgrade_saber_schematic"));
             CustomerServiceLog("jediSaberTrade", getFirstName(player) + "(" + player + ") could NOT upgrade their schematic " + getStaticItemName(oldSchematic) + "(" + oldSchematic + ") to a 5th Gen version. One of these statements returned false: (isIdValid(oldSchematic) && utils.getContainingPlayer(oldSchematic) == player) = " + (isIdValid(oldSchematic) && utils.getContainingPlayer(oldSchematic) == player) + "or isIdValid(newSchematic) = " + isIdValid(newSchematic));
         }
     }
+
     public void jedi_robe_jinsu_taker_action_upgradeGcw2Handed(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id oldSchematic = utils.getStaticItemInInventory(player, "item_schematic_pvp_gcw_saber_2h_gen4");
@@ -199,12 +216,13 @@ public class jedi_robe_jinsu_taker extends script.base_script
             CustomerServiceLog("jediSaberTrade", getFirstName(player) + "(" + player + ") has upgraded their saber schematic " + getStaticItemName(oldSchematic) + "(" + oldSchematic + ") to a 5th Gen version " + getStaticItemName(newSchematic) + "(" + newSchematic + "). This will destroy the old one.");
             destroyObject(oldSchematic);
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id("spam", "couldnt_upgrade_saber_schematic"));
             CustomerServiceLog("jediSaberTrade", getFirstName(player) + "(" + player + ") could NOT upgrade their schematic " + getStaticItemName(oldSchematic) + "(" + oldSchematic + ") to a 5th Gen version. One of these statements returned false: (isIdValid(oldSchematic) && utils.getContainingPlayer(oldSchematic) == player) = " + (isIdValid(oldSchematic) && utils.getContainingPlayer(oldSchematic) == player) + "or isIdValid(newSchematic) = " + isIdValid(newSchematic));
         }
     }
+
     public int jedi_robe_jinsu_taker_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_29"))
@@ -259,7 +277,7 @@ public class jedi_robe_jinsu_taker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_38");
@@ -288,7 +306,7 @@ public class jedi_robe_jinsu_taker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.jedi_robe_jinsu_taker.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -308,6 +326,7 @@ public class jedi_robe_jinsu_taker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int jedi_robe_jinsu_taker_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_38"))
@@ -328,7 +347,7 @@ public class jedi_robe_jinsu_taker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_42");
@@ -337,7 +356,7 @@ public class jedi_robe_jinsu_taker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.jedi_robe_jinsu_taker.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -370,7 +389,7 @@ public class jedi_robe_jinsu_taker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_42");
@@ -379,7 +398,7 @@ public class jedi_robe_jinsu_taker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.jedi_robe_jinsu_taker.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -412,7 +431,7 @@ public class jedi_robe_jinsu_taker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_42");
@@ -421,7 +440,7 @@ public class jedi_robe_jinsu_taker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.jedi_robe_jinsu_taker.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -484,6 +503,7 @@ public class jedi_robe_jinsu_taker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int jedi_robe_jinsu_taker_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_42"))
@@ -498,6 +518,7 @@ public class jedi_robe_jinsu_taker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int jedi_robe_jinsu_taker_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_42"))
@@ -512,6 +533,7 @@ public class jedi_robe_jinsu_taker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int jedi_robe_jinsu_taker_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_42"))
@@ -526,6 +548,7 @@ public class jedi_robe_jinsu_taker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int jedi_robe_jinsu_taker_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_36"))
@@ -552,7 +575,7 @@ public class jedi_robe_jinsu_taker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_43");
@@ -565,7 +588,7 @@ public class jedi_robe_jinsu_taker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.jedi_robe_jinsu_taker.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -586,6 +609,7 @@ public class jedi_robe_jinsu_taker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int jedi_robe_jinsu_taker_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_43"))
@@ -620,6 +644,7 @@ public class jedi_robe_jinsu_taker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -630,12 +655,14 @@ public class jedi_robe_jinsu_taker extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -645,18 +672,21 @@ public class jedi_robe_jinsu_taker extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.jedi_robe_jinsu_taker");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -686,7 +716,7 @@ public class jedi_robe_jinsu_taker extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_29");
@@ -702,7 +732,7 @@ public class jedi_robe_jinsu_taker extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "jedi_robe_jinsu_taker", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -740,7 +770,7 @@ public class jedi_robe_jinsu_taker extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_36");
@@ -752,7 +782,7 @@ public class jedi_robe_jinsu_taker extends script.base_script
                 utils.setScriptVar(player, "conversation.jedi_robe_jinsu_taker.branchId", 17);
                 npcStartConversation(player, npc, "jedi_robe_jinsu_taker", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -767,6 +797,7 @@ public class jedi_robe_jinsu_taker extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("jedi_robe_jinsu_taker"))

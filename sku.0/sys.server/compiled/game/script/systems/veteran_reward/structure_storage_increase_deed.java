@@ -1,5 +1,11 @@
 package script.systems.veteran_reward;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -9,6 +15,7 @@ public class structure_storage_increase_deed extends script.base_script
     public static final string_id SID_STORAGE_INCREASE_TITLE = new string_id(player_structure.STF_FILE, "sui_storage_title");
     public static final string_id SID_STORAGE_INCREASE_PROMPT = new string_id(player_structure.STF_FILE, "sui_storage_prompt");
     public static final string_id MSG_STORAGE_INCREASED = new string_id(player_structure.STF_FILE, "msg_storage_increased");
+
     public structure_storage_increase_deed()
     {
     }
@@ -143,7 +150,7 @@ public class structure_storage_increase_deed extends script.base_script
             structureIncrease = getIntObjVar(self, player_structure.OBJVAR_STORAGE_AMOUNT);
         }
         names[free] = utils.packStringId(new string_id("player_structure", "storage_amount_display"));
-        attribs[free++] = "" + structureIncrease;
+        attribs[free++] = String.valueOf(structureIncrease);
         return SCRIPT_CONTINUE;
     }
 }

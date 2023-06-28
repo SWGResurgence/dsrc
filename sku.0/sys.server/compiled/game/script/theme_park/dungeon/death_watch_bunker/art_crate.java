@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.death_watch_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.utils;
 import script.menu_info;
 import script.menu_info_data;
@@ -11,11 +17,13 @@ public class art_crate extends script.base_script
     public art_crate()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "Art Crate");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);
@@ -26,6 +34,7 @@ public class art_crate extends script.base_script
         mid.setServerNotify(true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -34,6 +43,7 @@ public class art_crate extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void makeArt(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id inv = utils.getInventoryContainer(player);
@@ -46,11 +56,10 @@ public class art_crate extends script.base_script
         {
             createObject("object/tangible/furniture/all/frn_all_decorative_lg_s1.iff", inv, null);
         }
-        else 
+        else
         {
             createObject("object/tangible/furniture/all/frn_all_decorative_lg_s2.iff", inv, null);
         }
         destroyObject(self);
-        return;
     }
 }

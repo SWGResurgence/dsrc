@@ -1,5 +1,11 @@
 package script.developer.soe.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 import script.script_entry;
@@ -9,6 +15,7 @@ public class char_transfer extends script.base.remote_object_requester
     public char_transfer()
     {
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (isGod(self))
@@ -45,19 +52,23 @@ public class char_transfer extends script.base.remote_object_requester
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        if (!isGod(self) || getGodLevel(self) < 10 || !isPlayer(self)) {
+        if (!isGod(self) || getGodLevel(self) < 10 || !isPlayer(self))
+        {
             detachScript(self, "test.char_transfer");
         }
         debugConsoleMsg(self, "char_transfer attached!");
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         debugSpeakMsg(self, "char_transfer detached!");
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         debugServerConsoleMsg(self, "char_transfer initialized!");

@@ -1,18 +1,27 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class tutorial_imperial_broker extends script.base_script
 {
+    public static String c_stringFile = "conversation/tutorial_imperial_broker";
+
     public tutorial_imperial_broker()
     {
     }
-    public static String c_stringFile = "conversation/tutorial_imperial_broker";
+
     public boolean tutorial_imperial_broker_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean tutorial_imperial_broker_condition_isImperialFaction(obj_id player, obj_id npc) throws InterruptedException
     {
         String factionName = factions.getFaction(player);
@@ -20,27 +29,32 @@ public class tutorial_imperial_broker extends script.base_script
         {
             return false;
         }
-        else 
+        else
         {
             return (factionName.equals(factions.FACTION_IMPERIAL));
         }
     }
+
     public boolean tutorial_imperial_broker_condition_isMaleImperialFaction(obj_id player, obj_id npc) throws InterruptedException
     {
         return (tutorial_imperial_broker_condition_isImperialFaction(player, npc) && (getGender(player) == Gender.MALE));
     }
+
     public boolean tutorial_imperial_broker_condition_isMalePlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         return (getGender(player) == Gender.MALE);
     }
+
     public boolean tutorial_imperial_broker_condition_justSpokeToPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         return (utils.hasScriptVar(player, "justTalkedToImpBroker"));
     }
+
     public boolean tutorial_imperial_broker_condition_justSpokeToMalePlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         return (tutorial_imperial_broker_condition_isMalePlayer(player, npc) && tutorial_imperial_broker_condition_justSpokeToPlayer(player, npc));
     }
+
     public boolean tutorial_imperial_broker_condition_isRebelFaction(obj_id player, obj_id npc) throws InterruptedException
     {
         String factionName = factions.getFaction(player);
@@ -48,74 +62,90 @@ public class tutorial_imperial_broker extends script.base_script
         {
             return false;
         }
-        else 
+        else
         {
             return (factionName.equals(factions.FACTION_REBEL));
         }
     }
+
     public boolean tutorial_imperial_broker_condition_isWookieePlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         return (getSpecies(player) == SPECIES_WOOKIEE);
     }
+
     public boolean tutorial_imperial_broker_condition_wasDismissedRebel(obj_id player, obj_id npc) throws InterruptedException
     {
         return (utils.getIntScriptVar(player, "brokerDismissed") == 3);
     }
+
     public boolean tutorial_imperial_broker_condition_wasDismissedWookiee(obj_id player, obj_id npc) throws InterruptedException
     {
         return (utils.getIntScriptVar(player, "brokerDismissed") == 2);
     }
+
     public boolean tutorial_imperial_broker_condition_wasDismissedWoman(obj_id player, obj_id npc) throws InterruptedException
     {
         return (utils.getIntScriptVar(player, "brokerDismissed") == 1);
     }
+
     public boolean tutorial_imperial_broker_condition_isImperialPilot(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_skill.hasImperialSkill(player);
     }
+
     public boolean tutorial_imperial_broker_condition_isPilot(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_skill.hasSpaceSkills(player);
     }
+
     public boolean tutorial_imperial_broker_condition_hasSpace(obj_id player, obj_id npc) throws InterruptedException
     {
         return (features.isSpaceEdition(player));
     }
+
     public void tutorial_imperial_broker_action_addCorelliaImpWaypoint(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "justTalkedToImpBroker", true);
         trainerlocs.getTrainerLocationWaypoint(player, "imperial", "corellia");
     }
+
     public void tutorial_imperial_broker_action_addTatooineImpWaypoint(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "justTalkedToImpBroker", true);
         trainerlocs.getTrainerLocationWaypoint(player, "imperial", "tatooine");
     }
+
     public void tutorial_imperial_broker_action_addNabooImpWaypoint(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "justTalkedToImpBroker", true);
         trainerlocs.getTrainerLocationWaypoint(player, "imperial", "naboo");
     }
+
     public void tutorial_imperial_broker_action_dismissWoman(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "brokerDismissed", 1);
     }
+
     public void tutorial_imperial_broker_action_dismissWookiee(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "brokerDismissed", 2);
     }
+
     public void tutorial_imperial_broker_action_dismissRebel(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "brokerDismissed", 3);
     }
+
     public void tutorial_imperial_broker_action_retireImperial(obj_id player, obj_id npc) throws InterruptedException
     {
         space_skill.retire(player, space_skill.IMPERIAL);
     }
+
     public void tutorial_imperial_broker_action_doSystemMessage(obj_id player, obj_id npc) throws InterruptedException
     {
         sendSystemMessage(player, new string_id("skill_teacher", "requires_jtl"));
     }
+
     public int tutorial_imperial_broker_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6edcb265"))
@@ -144,7 +174,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b369f7cd");
@@ -157,7 +187,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -168,6 +198,7 @@ public class tutorial_imperial_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tutorial_imperial_broker_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b369f7cd"))
@@ -196,6 +227,7 @@ public class tutorial_imperial_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tutorial_imperial_broker_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1b2086de"))
@@ -223,7 +255,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -236,7 +268,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -270,7 +302,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -283,7 +315,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -317,7 +349,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -330,7 +362,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -341,6 +373,7 @@ public class tutorial_imperial_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tutorial_imperial_broker_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1b2086de"))
@@ -368,7 +401,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -381,7 +414,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -415,7 +448,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -428,7 +461,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -462,7 +495,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -475,7 +508,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -486,6 +519,7 @@ public class tutorial_imperial_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tutorial_imperial_broker_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4b0c16d2"))
@@ -513,7 +547,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8ed93c34");
@@ -526,7 +560,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -549,6 +583,7 @@ public class tutorial_imperial_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tutorial_imperial_broker_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_8ed93c34"))
@@ -595,7 +630,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1b2086de");
@@ -612,7 +647,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -623,6 +658,7 @@ public class tutorial_imperial_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tutorial_imperial_broker_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1b2086de"))
@@ -650,7 +686,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -663,7 +699,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -697,7 +733,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -710,7 +746,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -744,7 +780,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -757,7 +793,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -768,6 +804,7 @@ public class tutorial_imperial_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tutorial_imperial_broker_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_70f18874"))
@@ -802,7 +839,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1b2086de");
@@ -819,7 +856,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -843,6 +880,7 @@ public class tutorial_imperial_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tutorial_imperial_broker_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1b2086de"))
@@ -870,7 +908,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -883,7 +921,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -917,7 +955,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -930,7 +968,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -964,7 +1002,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -977,7 +1015,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -988,6 +1026,7 @@ public class tutorial_imperial_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tutorial_imperial_broker_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_70f18874"))
@@ -1022,7 +1061,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1b2086de");
@@ -1039,7 +1078,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1063,6 +1102,7 @@ public class tutorial_imperial_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tutorial_imperial_broker_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1b2086de"))
@@ -1090,7 +1130,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -1103,7 +1143,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1137,7 +1177,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -1150,7 +1190,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1184,7 +1224,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -1197,7 +1237,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1208,6 +1248,7 @@ public class tutorial_imperial_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tutorial_imperial_broker_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_70f18874"))
@@ -1242,7 +1283,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1b2086de");
@@ -1259,7 +1300,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1283,6 +1324,7 @@ public class tutorial_imperial_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tutorial_imperial_broker_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1b2086de"))
@@ -1310,7 +1352,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -1323,7 +1365,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1357,7 +1399,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -1370,7 +1412,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1404,7 +1446,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -1417,7 +1459,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1428,6 +1470,7 @@ public class tutorial_imperial_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tutorial_imperial_broker_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4b0c16d2"))
@@ -1455,7 +1498,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8ed93c34");
@@ -1468,7 +1511,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1491,6 +1534,7 @@ public class tutorial_imperial_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tutorial_imperial_broker_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_8ed93c34"))
@@ -1537,7 +1581,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1b2086de");
@@ -1554,7 +1598,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1565,6 +1609,7 @@ public class tutorial_imperial_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tutorial_imperial_broker_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1b2086de"))
@@ -1592,7 +1637,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -1605,7 +1650,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1639,7 +1684,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -1652,7 +1697,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1686,7 +1731,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -1699,7 +1744,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1710,6 +1755,7 @@ public class tutorial_imperial_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tutorial_imperial_broker_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_70f18874"))
@@ -1744,7 +1790,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1b2086de");
@@ -1761,7 +1807,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1785,6 +1831,7 @@ public class tutorial_imperial_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tutorial_imperial_broker_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1b2086de"))
@@ -1812,7 +1859,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -1825,7 +1872,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1859,7 +1906,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -1872,7 +1919,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1906,7 +1953,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -1919,7 +1966,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1930,6 +1977,7 @@ public class tutorial_imperial_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tutorial_imperial_broker_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_70f18874"))
@@ -1964,7 +2012,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1b2086de");
@@ -1981,7 +2029,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -2005,6 +2053,7 @@ public class tutorial_imperial_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tutorial_imperial_broker_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1b2086de"))
@@ -2032,7 +2081,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -2045,7 +2094,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -2079,7 +2128,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -2092,7 +2141,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -2126,7 +2175,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -2139,7 +2188,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -2150,6 +2199,7 @@ public class tutorial_imperial_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tutorial_imperial_broker_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_70f18874"))
@@ -2184,7 +2234,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1b2086de");
@@ -2201,7 +2251,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -2225,6 +2275,7 @@ public class tutorial_imperial_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tutorial_imperial_broker_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1b2086de"))
@@ -2252,7 +2303,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -2265,7 +2316,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -2299,7 +2350,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -2312,7 +2363,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -2346,7 +2397,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -2359,7 +2410,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -2370,6 +2421,7 @@ public class tutorial_imperial_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tutorial_imperial_broker_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_57d2e86d"))
@@ -2404,7 +2456,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ee369d68");
@@ -2421,7 +2473,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -2444,6 +2496,7 @@ public class tutorial_imperial_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tutorial_imperial_broker_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ee369d68"))
@@ -2471,7 +2524,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -2484,7 +2537,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -2518,7 +2571,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -2531,7 +2584,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -2565,7 +2618,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -2578,7 +2631,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -2589,6 +2642,7 @@ public class tutorial_imperial_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tutorial_imperial_broker_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_70f18874"))
@@ -2623,7 +2677,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ee369d68");
@@ -2640,7 +2694,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -2668,7 +2722,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_987445c9");
@@ -2677,7 +2731,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -2688,6 +2742,7 @@ public class tutorial_imperial_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tutorial_imperial_broker_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ee369d68"))
@@ -2715,7 +2770,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -2728,7 +2783,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -2762,7 +2817,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -2775,7 +2830,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -2809,7 +2864,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -2822,7 +2877,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -2833,6 +2888,7 @@ public class tutorial_imperial_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tutorial_imperial_broker_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_987445c9"))
@@ -2850,6 +2906,7 @@ public class tutorial_imperial_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tutorial_imperial_broker_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_70f18874"))
@@ -2884,7 +2941,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1b2086de");
@@ -2901,7 +2958,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -2929,7 +2986,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_987445c9");
@@ -2938,7 +2995,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -2949,6 +3006,7 @@ public class tutorial_imperial_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tutorial_imperial_broker_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1b2086de"))
@@ -2976,7 +3034,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -2989,7 +3047,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -3023,7 +3081,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -3036,7 +3094,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -3070,7 +3128,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -3083,7 +3141,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -3094,6 +3152,7 @@ public class tutorial_imperial_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tutorial_imperial_broker_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_987445c9"))
@@ -3111,6 +3170,7 @@ public class tutorial_imperial_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tutorial_imperial_broker_handleBranch45(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_70f18874"))
@@ -3145,7 +3205,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1b2086de");
@@ -3162,7 +3222,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -3190,7 +3250,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_987445c9");
@@ -3199,7 +3259,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -3210,6 +3270,7 @@ public class tutorial_imperial_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tutorial_imperial_broker_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1b2086de"))
@@ -3237,7 +3298,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -3250,7 +3311,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -3284,7 +3345,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -3297,7 +3358,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -3331,7 +3392,7 @@ public class tutorial_imperial_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70f18874");
@@ -3344,7 +3405,7 @@ public class tutorial_imperial_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.tutorial_imperial_broker.branchId");
                     chat.chat(npc, player, message);
@@ -3355,6 +3416,7 @@ public class tutorial_imperial_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tutorial_imperial_broker_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_987445c9"))
@@ -3372,6 +3434,7 @@ public class tutorial_imperial_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -3384,6 +3447,7 @@ public class tutorial_imperial_broker extends script.base_script
         factions.setFaction(self, factions.FACTION_IMPERIAL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_SPACE_INTERESTING);
@@ -3392,6 +3456,7 @@ public class tutorial_imperial_broker extends script.base_script
         factions.setFaction(self, factions.FACTION_IMPERIAL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -3400,18 +3465,21 @@ public class tutorial_imperial_broker extends script.base_script
         faceToBehavior(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.tutorial_imperial_broker");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -3435,7 +3503,7 @@ public class tutorial_imperial_broker extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_6edcb265");
@@ -3443,7 +3511,7 @@ public class tutorial_imperial_broker extends script.base_script
                 setObjVar(player, "conversation.tutorial_imperial_broker.branchId", 1);
                 npcStartConversation(player, npc, "tutorial_imperial_broker", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3479,7 +3547,7 @@ public class tutorial_imperial_broker extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1b2086de");
@@ -3495,7 +3563,7 @@ public class tutorial_imperial_broker extends script.base_script
                 setObjVar(player, "conversation.tutorial_imperial_broker.branchId", 10);
                 npcStartConversation(player, npc, "tutorial_imperial_broker", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3531,7 +3599,7 @@ public class tutorial_imperial_broker extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1b2086de");
@@ -3547,7 +3615,7 @@ public class tutorial_imperial_broker extends script.base_script
                 setObjVar(player, "conversation.tutorial_imperial_broker.branchId", 24);
                 npcStartConversation(player, npc, "tutorial_imperial_broker", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3577,7 +3645,7 @@ public class tutorial_imperial_broker extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_4b0c16d2");
@@ -3589,7 +3657,7 @@ public class tutorial_imperial_broker extends script.base_script
                 setObjVar(player, "conversation.tutorial_imperial_broker.branchId", 7);
                 npcStartConversation(player, npc, "tutorial_imperial_broker", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3619,7 +3687,7 @@ public class tutorial_imperial_broker extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_4b0c16d2");
@@ -3631,7 +3699,7 @@ public class tutorial_imperial_broker extends script.base_script
                 setObjVar(player, "conversation.tutorial_imperial_broker.branchId", 21);
                 npcStartConversation(player, npc, "tutorial_imperial_broker", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3660,7 +3728,7 @@ public class tutorial_imperial_broker extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_57d2e86d");
@@ -3672,7 +3740,7 @@ public class tutorial_imperial_broker extends script.base_script
                 setObjVar(player, "conversation.tutorial_imperial_broker.branchId", 35);
                 npcStartConversation(player, npc, "tutorial_imperial_broker", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3681,6 +3749,7 @@ public class tutorial_imperial_broker extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("tutorial_imperial_broker"))

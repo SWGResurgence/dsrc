@@ -1,5 +1,11 @@
 package script.systems.tcg;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.tcg;
 import script.library.utils;
@@ -21,6 +27,7 @@ public class tcg_video_game extends script.base_script
                     "death_star",
                     "jedi_temple"
             };
+
     public tcg_video_game()
     {
     }

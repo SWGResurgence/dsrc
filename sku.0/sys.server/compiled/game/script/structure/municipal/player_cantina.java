@@ -1,5 +1,11 @@
 package script.structure.municipal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.buff;
 import script.library.create;

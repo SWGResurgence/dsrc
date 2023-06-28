@@ -1,5 +1,11 @@
 package script.quest.task.pgc;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.pgc_quests;
 import script.library.utils;
 import script.menu_info;
@@ -12,6 +18,7 @@ public class quest_control_device extends script.base_script
     public quest_control_device()
     {
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         if (utils.isNestedWithin(self, player))
@@ -20,6 +27,7 @@ public class quest_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int menu_item) throws InterruptedException
     {
         if (menu_item == menu_info_types.SERVER_MENU1)
@@ -31,6 +39,7 @@ public class quest_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -73,7 +82,7 @@ public class quest_control_device extends script.base_script
                 return SCRIPT_CONTINUE;
             }
             names[idx] = "pgc_quest_level";
-            attribs[idx] = "" + questLevel;
+            attribs[idx] = String.valueOf(questLevel);
             idx++;
             if (idx >= names.length)
             {

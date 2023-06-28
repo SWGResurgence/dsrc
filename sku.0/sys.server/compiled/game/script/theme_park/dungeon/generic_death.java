@@ -1,5 +1,11 @@
 package script.theme_park.dungeon;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,6 +14,7 @@ public class generic_death extends script.base_script
     public generic_death()
     {
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);
@@ -29,6 +36,7 @@ public class generic_death extends script.base_script
         messageTo(mom, "tellingMomIDied", info, respawnTime, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDisabled(obj_id self, obj_id killer) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);

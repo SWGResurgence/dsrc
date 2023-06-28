@@ -1,5 +1,11 @@
 package script.theme_park.heroic.axkva_min;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.buff;
@@ -12,6 +18,7 @@ public class crystal_prison extends script.base_script
     public crystal_prison()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "validateTarget", null, 1.0f, false);
@@ -20,12 +27,14 @@ public class crystal_prison extends script.base_script
         trial.markAsTempObject(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public void setupSelf(obj_id self) throws InterruptedException
     {
         setMaxHitpoints(self, 50000);
         setHitpoints(self, 50000);
         setInvulnerable(self, false);
     }
+
     public int OnObjectDisabled(obj_id self, obj_id killer) throws InterruptedException
     {
         location death = getLocation(self);
@@ -35,8 +44,10 @@ public class crystal_prison extends script.base_script
         obj_id[] enemies = getWhoIsTargetingMe(self);
         if (enemies != null && enemies.length > 1)
         {
-            for (obj_id enemy : enemies) {
-                if (isPlayer(enemy)) {
+            for (obj_id enemy : enemies)
+            {
+                if (isPlayer(enemy))
+                {
                     setTarget(enemy, null);
                     setCombatTarget(enemy, null);
                 }
@@ -50,6 +61,7 @@ public class crystal_prison extends script.base_script
         trial.cleanupObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int validateTarget(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self) || !exists(self))
@@ -72,6 +84,7 @@ public class crystal_prison extends script.base_script
         messageTo(self, "validateTarget", null, 2.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanupSelf(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, "player");

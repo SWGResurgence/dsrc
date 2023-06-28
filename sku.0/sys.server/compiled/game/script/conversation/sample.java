@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.anims;
 import script.library.chat;
@@ -7,42 +13,52 @@ import script.*;
 
 public class sample extends script.base_script
 {
+    public static String c_stringFile = "conversation/sample";
+
     public sample()
     {
     }
-    public static String c_stringFile = "conversation/sample";
+
     public boolean sample_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean sample_condition_knowsPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         return getIntObjVar(player, "asommers_test.playerLevel") == 0;
     }
+
     public boolean sample_condition_likesPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         return getIntObjVar(player, "asommers_test.playerLevel") == 1;
     }
+
     public boolean sample_condition_dislikesPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         return getIntObjVar(player, "asommers_test.playerLevel") == 2;
     }
+
     public void sample_action__defaultAction(obj_id player, obj_id npc) throws InterruptedException
     {
     }
+
     public void sample_action_cheer(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "asommers_test.playerLevel", 1);
         doAnimationAction(npc, anims.PLAYER_APPLAUSE_POLITE);
     }
+
     public void sample_action_greet(obj_id player, obj_id npc) throws InterruptedException
     {
         doAnimationAction(npc, anims.PLAYER_BOW2);
     }
+
     public void sample_action_clear(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "asommers_test.playerLevel", 0);
     }
+
     public void sample_action_impress(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "asommers_test.playerLevel", 1);
@@ -54,15 +70,18 @@ public class sample extends script.base_script
             playClientEffectLoc(player, "clienteffect/entertainer_color_lights_level_3.cef", loc, 0.0f);
         }
     }
+
     public void sample_action_shakeFist(obj_id player, obj_id npc) throws InterruptedException
     {
         doAnimationAction(npc, anims.PLAYER_GESTICULATE_WILDLY);
     }
+
     public void sample_action_scratchHead(obj_id player, obj_id npc) throws InterruptedException
     {
         doAnimationAction(npc, anims.PLAYER_SCRATCH_HEAD);
         setObjVar(player, "asommers_test.playerLevel", 2);
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -72,11 +91,13 @@ public class sample extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -85,12 +106,14 @@ public class sample extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "npc.conversation.sample");
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -120,7 +143,7 @@ public class sample extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_9f39d936");
@@ -132,7 +155,7 @@ public class sample extends script.base_script
                 setObjVar(player, "conversation.sample.branchId", 1);
                 npcStartConversation(player, self, "sample", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -167,7 +190,7 @@ public class sample extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_b6a01563");
@@ -183,7 +206,7 @@ public class sample extends script.base_script
                 setObjVar(player, "conversation.sample.branchId", 4);
                 npcStartConversation(player, self, "sample", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -218,7 +241,7 @@ public class sample extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_5c203407");
@@ -234,7 +257,7 @@ public class sample extends script.base_script
                 setObjVar(player, "conversation.sample.branchId", 9);
                 npcStartConversation(player, self, "sample", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -243,6 +266,7 @@ public class sample extends script.base_script
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("sample"))
@@ -295,7 +319,7 @@ public class sample extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2280847e");
@@ -304,7 +328,7 @@ public class sample extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.sample.branchId");
                     npcSpeak(player, message);
@@ -381,7 +405,7 @@ public class sample extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ef420789");
@@ -394,7 +418,7 @@ public class sample extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.sample.branchId");
                     npcSpeak(player, message);

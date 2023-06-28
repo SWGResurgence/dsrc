@@ -1,5 +1,11 @@
 package script.developer.soe.e3demo;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.location;
 import script.obj_id;
@@ -9,17 +15,20 @@ public class e3_ship_nodamage extends script.base_script
     public e3_ship_nodamage()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setAnimationMood(self, "npc_imperial");
         setObjVar(self, "intDestination", 1);
         return SCRIPT_CONTINUE;
     }
+
     public int moveToLocationOne(obj_id self, dictionary params) throws InterruptedException
     {
         pathToLocationOne(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id objSpeaker, String strText) throws InterruptedException
     {
         if (strText.equals("reset"))
@@ -32,6 +41,7 @@ public class e3_ship_nodamage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void pathToLocationOne(obj_id self) throws InterruptedException
     {
         location destLoc = new location(getLocation(self));
@@ -41,6 +51,7 @@ public class e3_ship_nodamage extends script.base_script
         setObjVar(self, "intIndex", 1);
         pathTo(self, destLoc);
     }
+
     public void pathToLocationTwo(obj_id self) throws InterruptedException
     {
         location destLoc = new location(getLocation(self));
@@ -50,11 +61,13 @@ public class e3_ship_nodamage extends script.base_script
         setObjVar(self, "intIndex", 2);
         pathTo(self, destLoc);
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         messageTo(self, "doFaceTo", null, 2.5f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int doFaceTo(obj_id self, dictionary params) throws InterruptedException
     {
         int intIndex = getIntObjVar(self, "intIndex");
@@ -64,16 +77,18 @@ public class e3_ship_nodamage extends script.base_script
             obj_id[] objObjects = getAllObjectsWithTemplate(getLocation(self), 2000, "object/mobile/boba_fett.iff");
             faceTo(self, getLocation(objObjects[0]));
         }
-        else 
+        else
         {
         }
         return SCRIPT_CONTINUE;
     }
+
     public int doLocationOne(obj_id self, dictionary params) throws InterruptedException
     {
         pathToLocationOne(self);
         return SCRIPT_CONTINUE;
     }
+
     public int doLocationTwo(obj_id self, dictionary params) throws InterruptedException
     {
         pathToLocationTwo(self);

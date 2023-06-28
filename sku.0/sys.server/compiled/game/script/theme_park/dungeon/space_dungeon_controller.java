@@ -1,5 +1,11 @@
 package script.theme_park.dungeon;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.locations;
 import script.library.space_dungeon;
@@ -10,11 +16,12 @@ import script.string_id;
 
 public class space_dungeon_controller extends script.base_script
 {
+    public static final string_id SID_SESSION_UPDATE = new string_id("dungeon/space_dungeon", "session_time_update");
+    public static final boolean LOGGING = true;
     public space_dungeon_controller()
     {
     }
-    public static final string_id SID_SESSION_UPDATE = new string_id("dungeon/space_dungeon", "session_time_update");
-    public static final boolean LOGGING = true;
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         space_dungeon.intializeSpaceDungeon(self);
@@ -24,6 +31,7 @@ public class space_dungeon_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnClusterWideDataResponse(obj_id self, String manage_name, String dungeon_name, int request_id, String[] element_name_list, dictionary[] dungeon_data, int lock_key) throws InterruptedException
     {
         String instanceName = space_dungeon.getDungeonInstanceName(self);
@@ -57,6 +65,7 @@ public class space_dungeon_controller extends script.base_script
         messageTo(self, "msgSpaceDungeonCleanup", null, 1.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnBuildoutObjectRegisterWithController(obj_id self, obj_id registeringObject) throws InterruptedException
     {
         if (!hasObjVar(registeringObject, "ignoreInBuildoutArray"))
@@ -66,6 +75,7 @@ public class space_dungeon_controller extends script.base_script
         setObjVar(registeringObject, "dungeonController", self);
         return SCRIPT_CONTINUE;
     }
+
     public String getDungeonRemainingTimeString(obj_id dungeon) throws InterruptedException
     {
         int currentTime = getGameTime();
@@ -79,6 +89,7 @@ public class space_dungeon_controller extends script.base_script
         }
         return utils.formatTimeVerbose(sessionTimeRemaining);
     }
+
     public int msgSetSessionId(obj_id self, dictionary params) throws InterruptedException
     {
         int request_id = params.getInt("request_id");
@@ -110,7 +121,7 @@ public class space_dungeon_controller extends script.base_script
             d.put("request_id", request_id);
             messageTo(collector, "msgStartDungeonTravel", d, 0.0f, false);
         }
-        else 
+        else
         {
             LOG("space_dungeon", "space_dungeon_controller.msgSetSessionId -- collector is invalid for session id set on " + self + ".");
         }
@@ -121,11 +132,13 @@ public class space_dungeon_controller extends script.base_script
         messageTo(self, "beginSpawn", null, 5.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleLockoutTimerUpdate(obj_id self, dictionary params) throws InterruptedException
     {
         space_dungeon.setDungeonLockoutTimer(self);
         return SCRIPT_CONTINUE;
     }
+
     public int msgManualDungeonReset(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("space_dungeon", "space_dungeon_controller.msgManualDungeonReset received for " + self + ".");
@@ -133,6 +146,7 @@ public class space_dungeon_controller extends script.base_script
         space_dungeon.endDungeonSession(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSessionTimerUpdate(obj_id self, dictionary params) throws InterruptedException
     {
         int sessionId = space_dungeon.getDungeonSessionId(self);
@@ -158,7 +172,7 @@ public class space_dungeon_controller extends script.base_script
                 doLogging("handleSessionTimerUpdate", "Sending next message in (" + nextMessage + ") seconds");
                 messageTo(self, "handleSessionTimerUpdate", dict, nextMessage, false);
             }
-            else 
+            else
             {
                 doLogging("handleSessionTimerUpdate", "Next message was not greater than 0, calling for dungeon reset");
                 space_dungeon.endDungeonSession(self);
@@ -166,12 +180,14 @@ public class space_dungeon_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int addPlayerToParticipantIdList(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId(space_dungeon.PLAYER_ID);
         space_dungeon.incrementDungeonParticipantCounter(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int removePlayerFromParticipantIdList(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId(space_dungeon.PLAYER_ID);
@@ -183,6 +199,7 @@ public class space_dungeon_controller extends script.base_script
         messageTo(player, "removeDungeonArea", params, 0.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING)

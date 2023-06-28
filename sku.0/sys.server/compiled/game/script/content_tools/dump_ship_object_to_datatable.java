@@ -1,5 +1,11 @@
 package script.content_tools;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.datatable;
 import script.library.space_utils;
@@ -12,6 +18,7 @@ public class dump_ship_object_to_datatable extends script.base_script
     public dump_ship_object_to_datatable()
     {
     }
+
     public int OnSpeaking(obj_id self, String strText) throws InterruptedException
     {
         if (!isGod(self))
@@ -38,42 +45,42 @@ public class dump_ship_object_to_datatable extends script.base_script
             String strDataTable = "";
             strDataTable = "datatables/ship_interiors/shipObjectsTemp" + getGameTime() + ".tab";
             LOG("space", "table name is " + strDataTable);
-            String[] strHeaderTypes = 
-            {
-                "s",
-                "f",
-                "f",
-                "f",
-                "f",
-                "f",
-                "f",
-                "f",
-                "f",
-                "f",
-                "p",
-                "s",
-                "s",
-                "i",
-                "s"
-            };
-            String[] strHeaders = 
-            {
-                "strTemplate",
-                "fltJX",
-                "fltJY",
-                "fltJZ",
-                "fltKX",
-                "fltKY",
-                "fltKZ",
-                "fltPX",
-                "fltPY",
-                "fltPZ",
-                "strObjVars",
-                "strScripts",
-                "strCellName",
-                "intNoCreate",
-                "strLocationList"
-            };
+            String[] strHeaderTypes =
+                    {
+                            "s",
+                            "f",
+                            "f",
+                            "f",
+                            "f",
+                            "f",
+                            "f",
+                            "f",
+                            "f",
+                            "f",
+                            "p",
+                            "s",
+                            "s",
+                            "i",
+                            "s"
+                    };
+            String[] strHeaders =
+                    {
+                            "strTemplate",
+                            "fltJX",
+                            "fltJY",
+                            "fltJZ",
+                            "fltKX",
+                            "fltKY",
+                            "fltKZ",
+                            "fltPX",
+                            "fltPY",
+                            "fltPZ",
+                            "strObjVars",
+                            "strScripts",
+                            "strCellName",
+                            "intNoCreate",
+                            "strLocationList"
+                    };
             boolean boolTest = datatable.createDataTable(strDataTable, strHeaders, strHeaderTypes);
             if (!boolTest)
             {
@@ -82,8 +89,10 @@ public class dump_ship_object_to_datatable extends script.base_script
             }
             obj_id[] objObjects = getBuildingContents(objBuilding);
             broadcast(self, "dumping contents of " + objBuilding);
-            for (obj_id objObject : objObjects) {
-                if (isDumpable(objObject)) {
+            for (obj_id objObject : objObjects)
+            {
+                if (isDumpable(objObject))
+                {
                     dictionary dctRow = new dictionary();
                     int intNoCreate = 0;
                     locTest = getLocation(objObject);
@@ -92,11 +101,13 @@ public class dump_ship_object_to_datatable extends script.base_script
                     float fltY = locTest.y;
                     float fltZ = locTest.z;
                     String strCellName = space_utils.getCellName(objBuilding, locTest.cell);
-                    if (hasObjVar(objObject, "intNoCreate")) {
+                    if (hasObjVar(objObject, "intNoCreate"))
+                    {
                         intNoCreate = 1;
                     }
                     String strLocationList = "";
-                    if (hasObjVar(objObject, "strLocationList")) {
+                    if (hasObjVar(objObject, "strLocationList"))
+                    {
                         strLocationList = getStringObjVar(objObject, "strLocationList");
                     }
                     dctRow.put("strLocationList", strLocationList);
@@ -127,6 +138,7 @@ public class dump_ship_object_to_datatable extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean isDumpable(obj_id objObject) throws InterruptedException
     {
         if (isPlayer(objObject))
@@ -143,21 +155,21 @@ public class dump_ship_object_to_datatable extends script.base_script
         {
             return false;
         }
-        if (hasScript(objObject, "systems.spawning.spawned_tracker"))
-        {
-            return false;
-        }
-        return true;
+        return !hasScript(objObject, "systems.spawning.spawned_tracker");
     }
+
     public obj_id[] getBuildingContents(obj_id objObject) throws InterruptedException
     {
         Vector objContents = new Vector();
         objContents.setSize(0);
         obj_id[] objCells = getContents(objObject);
-        for (obj_id objCell : objCells) {
+        for (obj_id objCell : objCells)
+        {
             obj_id[] objTestContents = getContents(objCell);
-            if ((objTestContents != null) && (objTestContents.length > 0)) {
-                for (obj_id objTestContent : objTestContents) {
+            if (objTestContents != null)
+            {
+                for (obj_id objTestContent : objTestContents)
+                {
                     objContents = utils.addElement(objContents, objTestContent);
                 }
             }

@@ -1,5 +1,11 @@
 package script.ai;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.attrib;
@@ -9,14 +15,15 @@ import script.obj_id;
 
 public class tusken_raider extends script.base_script
 {
-    public tusken_raider()
-    {
-    }
     public static final String SOCIAL_VOLUME = "npc_socialization";
     public static final float SOCIAL_RANGE = 15.0f;
     public static final String ACTION_ALERT = "alert";
     public static final String ACTION_THREATEN = "threaten";
     public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
+    public tusken_raider()
+    {
+    }
+
     public void initializeScript() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -28,24 +35,28 @@ public class tusken_raider extends script.base_script
         setAttributeAttained(self, attrib.TUSKEN_RAIDER);
         setAttributeAttained(self, attrib.THUG);
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(self), "debug_ai", "tusken_raider::OnAttach() self(" + self + ":" + getName(self) + ")");
         initializeScript();
         return SCRIPT_CONTINUE;
     }
+
     public int OnAddedToWorld(obj_id self) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(self), "debug_ai", "tusken_raider::OnAddedToWorld() self(" + self + ":" + getName(self) + ")");
         initializeScript();
         return SCRIPT_CONTINUE;
     }
+
     public int OnAiTetherStart(obj_id self) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(self), "debug_ai", "tusken_raider::OnAiTetherStart() self(" + self + ":" + getName(self) + ")");
         removeTriggerVolume(SOCIAL_VOLUME);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAiTetherComplete(obj_id self) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(self), "debug_ai", "tusken_raider::OnAiTetherComplete() self(" + self + ":" + getName(self) + ")");
@@ -55,6 +66,7 @@ public class tusken_raider extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(self), "debug_ai", "tusken_raider::OnTriggerVolumeEntered() self(" + self + ":" + getName(self) + ") volumeName(" + volumeName + ") breacher(" + breacher + ":" + getName(breacher) + ")");
@@ -86,11 +98,12 @@ public class tusken_raider extends script.base_script
                 {
                     return SCRIPT_CONTINUE;
                 }
-                if(hasTriggerVolume(self, SOCIAL_VOLUME)) {
+                if (hasTriggerVolume(self, SOCIAL_VOLUME))
+                {
                     addTriggerVolumeEventSource(SOCIAL_VOLUME, breacher);
                 }
             }
-            else 
+            else
             {
                 boolean isBantha = false;
                 final String creatureName = getCreatureName(breacher);
@@ -122,6 +135,7 @@ public class tusken_raider extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(self), "debug_ai", "tusken_raider::OnTriggerVolumeExited() self(" + self + ":" + getName(self) + ") volumeName(" + volumeName + ") breacher(" + breacher + ":" + getName(breacher) + ")");
@@ -134,6 +148,7 @@ public class tusken_raider extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void initiateDialog(obj_id talker, obj_id listener) throws InterruptedException
     {
         if (!(isIdValid(talker) && isIdValid(listener)))
@@ -163,9 +178,8 @@ public class tusken_raider extends script.base_script
             String msg = "ai.tusken_raider.initiateDialog(): ";
             String msg2 = "Null location for listener (obj_id: " + listener + " pathToLoc: " + pathToLoc + ") and/or talker (obj_id: " + talker + " myLoc: " + myLoc + ")";
             LOG("DESIGNER_FATAL", msg + msg2);
-            return;
         }
-        else 
+        else
         {
             utils.setScriptVar(talker, "ai.speaking", true);
             utils.setScriptVar(listener, "ai.speaking", true);
@@ -178,7 +192,7 @@ public class tusken_raider extends script.base_script
             {
                 pathToLoc.x += 1.5f;
             }
-            else 
+            else
             {
                 pathToLoc.x -= 1.5f;
             }
@@ -186,7 +200,7 @@ public class tusken_raider extends script.base_script
             {
                 pathToLoc.z += 1.5f;
             }
-            else 
+            else
             {
                 pathToLoc.z -= 1.5f;
             }
@@ -195,6 +209,7 @@ public class tusken_raider extends script.base_script
             messageTo(listener, "handleSocializingRecovery", null, 45, isObjectPersisted(listener));
         }
     }
+
     public int handleSocializingRecovery(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "ai.pathingToSocialize"))
@@ -206,6 +221,7 @@ public class tusken_raider extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "ai.pathingToSocialize"))
@@ -221,6 +237,7 @@ public class tusken_raider extends script.base_script
         messageTo(self, "handleEndSocializing", null, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleEndSocializing(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "ai.pathingToSocialize"))
@@ -228,10 +245,11 @@ public class tusken_raider extends script.base_script
             return SCRIPT_CONTINUE;
         }
         obj_id listener = utils.getObjIdScriptVar(self, "ai.pathingToSocialize");
-        if(listener != null)
+        if (listener != null)
             endSocializing(self, listener);
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathNotFound(obj_id self) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "ai.pathingToSocialize"))
@@ -242,6 +260,7 @@ public class tusken_raider extends script.base_script
         endSocializing(self, listener);
         return SCRIPT_CONTINUE;
     }
+
     public void endSocializing(obj_id talker, obj_id listener) throws InterruptedException
     {
         ai_lib.setMood(talker, ai_lib.MOOD_CALM);
@@ -253,6 +272,7 @@ public class tusken_raider extends script.base_script
         utils.removeScriptVar(talker, "ai.speaking");
         removeTriggerVolumeEventSource(SOCIAL_VOLUME, listener);
     }
+
     public int OnBehaviorChange(obj_id self, int newBehavior, int oldBehavior, int[] changeFlags) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(self), "debug_ai", "tusken_raider::OnBehaviorChange() self(" + self + ":" + getName(self) + ")");
@@ -289,6 +309,7 @@ public class tusken_raider extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void doAgitateBehavior(obj_id npc, int behavior) throws InterruptedException
     {
         if (isInvulnerable(npc))
@@ -299,8 +320,8 @@ public class tusken_raider extends script.base_script
         {
             return;
         }
-        return;
     }
+
     public void followTusken(obj_id npc, obj_id target) throws InterruptedException
     {
         if (!isIncapacitated(npc))
@@ -325,12 +346,13 @@ public class tusken_raider extends script.base_script
                 setObjVar(target, "ai.isFollowedBy", npc);
                 setObjVar(npc, "ai.isFollowing", target);
             }
-            else 
+            else
             {
                 followTusken(npc, isFollowedBy);
             }
         }
     }
+
     public int resumeLoitering(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id isFollowing = getObjIdObjVar(self, "ai.isFollowing");
@@ -342,12 +364,13 @@ public class tusken_raider extends script.base_script
             }
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             followTusken(self, isFollowing);
             return SCRIPT_OVERRIDE;
         }
     }
+
     public void cancelFollowing(obj_id npc) throws InterruptedException
     {
         utils.removeScriptVar(npc, "ai.speaking");
@@ -358,11 +381,13 @@ public class tusken_raider extends script.base_script
         }
         removeObjVar(npc, "ai.isFollowing");
     }
+
     public int stopBeingFollowed(obj_id self, dictionary params) throws InterruptedException
     {
         removeObjVar(self, "ai.isFollowedBy");
         return SCRIPT_CONTINUE;
     }
+
     public int stopFollowing(obj_id self, dictionary params) throws InterruptedException
     {
         removeObjVar(self, "ai.isFollowing");
@@ -370,18 +395,21 @@ public class tusken_raider extends script.base_script
         messageTo(self, "resumeLoitering", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnFollowTargetLost(obj_id self, obj_id oldTarget) throws InterruptedException
     {
         cancelFollowing(self);
         messageTo(self, "resumeLoitering", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnFollowPathNotFound(obj_id self, obj_id target) throws InterruptedException
     {
         cancelFollowing(self);
         messageTo(self, "resumeLoitering", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public void takeBantha(obj_id tusken, obj_id bantha) throws InterruptedException
     {
         if (hasScript(bantha, "ai.tusken_bantha"))
@@ -396,6 +424,7 @@ public class tusken_raider extends script.base_script
         utils.setScriptVar(bantha, "ai.tusken", tusken);
         attachScript(bantha, "ai.tusken_bantha");
     }
+
     public int OnIncapacitated(obj_id self, obj_id attacker) throws InterruptedException
     {
         removeTriggerVolume(SOCIAL_VOLUME);

@@ -1,5 +1,11 @@
 package script.theme_park.heroic.echo_base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.stealth;
 import script.obj_id;
 
@@ -8,12 +14,14 @@ public class vehicle_mine extends script.base_script
     public vehicle_mine()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         createTriggerVolume("hoth_vehicle_mine", 10.0f, true);
         addSkillModModifier(self, "strength_modified", "strength_modified", 1000, -1, false, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (!isIdValid(breacher) || !isMob(breacher))
@@ -30,16 +38,19 @@ public class vehicle_mine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnHateTargetAdded(obj_id self, obj_id target) throws InterruptedException
     {
         queueCommand(self, (-1220440242), target, "", COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         removeTriggerVolume("hoth_vehicle_mine");
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         removeTriggerVolume("hoth_vehicle_mine");

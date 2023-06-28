@@ -1,5 +1,11 @@
 package script.systems.combat;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.combat_engine.combat_data;
 import script.combat_engine.weapon_data;
@@ -631,7 +637,6 @@ public class combat_actions extends script.systems.combat.combat_base
                 }
             }
         }
-        return;
     }
 
     public boolean successfulFastAttack(obj_id attacker, String specialLine) throws InterruptedException
@@ -4289,7 +4294,6 @@ public class combat_actions extends script.systems.combat.combat_base
                 }
             }
         }
-        return;
     }
 
     public int of_buff_def_1(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
@@ -4463,12 +4467,6 @@ public class combat_actions extends script.systems.combat.combat_base
     }
 
 
-
-
-
-
-
-
     public int of_del_ae_dm_2(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!combatStandardAction("of_del_ae_dm_2", self, target, params, "", ""))
@@ -4616,7 +4614,7 @@ public class combat_actions extends script.systems.combat.combat_base
             prose_package pp = new prose_package();
             prose.setStringId(pp, new string_id("squad_leader", "of_set_rally_point"));
             prose.setTT(pp, self);
-            if (members != null && members.length > 0)
+            if (members != null)
             {
                 for (obj_id member : members)
                 {
@@ -4671,7 +4669,7 @@ public class combat_actions extends script.systems.combat.combat_base
             prose_package pp = new prose_package();
             prose.setStringId(pp, new string_id("squad_leader", "of_set_rally_point"));
             prose.setTT(pp, self);
-            if (members != null && members.length > 0)
+            if (members != null)
             {
                 for (obj_id member : members)
                 {
@@ -6176,7 +6174,6 @@ public class combat_actions extends script.systems.combat.combat_base
                 sendCombatSpamMessageProse(officer, pp, COMBAT_RESULT_GENERIC);
             }
         }
-        return;
     }
 
     public int of_last_words_recourse(obj_id self, dictionary params) throws InterruptedException
@@ -7821,9 +7818,11 @@ public class combat_actions extends script.systems.combat.combat_base
         buff.applyBuff(target, self, "invis_sm_buff_invis_1");
         return SCRIPT_CONTINUE;
     }
-    
-    public int sm_how_are_you(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException {
-        if (!combatStandardAction("sm_how_are_you", self, target, params, "", "") || !buff.hasBuff(self, "set_bonus_smuggler_utility_b_3")) {
+
+    public int sm_how_are_you(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
+    {
+        if (!combatStandardAction("sm_how_are_you", self, target, params, "", "") || !buff.hasBuff(self, "set_bonus_smuggler_utility_b_3"))
+        {
             return SCRIPT_OVERRIDE;
         }
         doMedicEvasion(self);
@@ -8075,7 +8074,7 @@ public class combat_actions extends script.systems.combat.combat_base
                 continue;
             }
             obj_id[] hateList = getHateList(hater);
-            if (hateList == null || hateList.length == 0)
+            if (hateList == null)
             {
                 continue;
             }
@@ -11058,7 +11057,7 @@ public class combat_actions extends script.systems.combat.combat_base
             return SCRIPT_OVERRIDE;
         }
         target = beast;
-        if (!isDead(beast) == false)
+        if (!!isDead(beast))
         {
             setCommandTimerValue(self, TIMER_COOLDOWN, 0.0f);
             sendSystemMessage(self, new string_id("spam", "pet_beyond_healing"));
@@ -13003,7 +13002,7 @@ public class combat_actions extends script.systems.combat.combat_base
         obj_id[] defenders = pvpGetTargetsInCone(self, self, where, 64, 10);
         Vector filteredDefenders = new Vector();
         filteredDefenders.setSize(0);
-        if (defenders != null && defenders.length > 0)
+        if (defenders != null)
         {
             for (obj_id defender : defenders)
             {
@@ -13034,7 +13033,7 @@ public class combat_actions extends script.systems.combat.combat_base
         obj_id[] defenders = pvpGetTargetsInCone(self, self, where, 64, 10);
         Vector filteredDefenders = new Vector();
         filteredDefenders.setSize(0);
-        if (defenders != null && defenders.length > 0)
+        if (defenders != null)
         {
             for (obj_id defender : defenders)
             {
@@ -13150,7 +13149,7 @@ public class combat_actions extends script.systems.combat.combat_base
     public int ig88_shockwave(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         location loc = getLocation(self);
-        String strLoc = "" + loc.x + " " + loc.y + " " + loc.z + " " + loc.cell + " " + loc.x + " " + loc.y + " " + loc.z;
+        String strLoc = loc.x + " " + loc.y + " " + loc.z + " " + loc.cell + " " + loc.x + " " + loc.y + " " + loc.z;
         if (!combatStandardAction("ig88_shockwave", self, target, strLoc, "", ""))
         {
             return SCRIPT_OVERRIDE;
@@ -13161,7 +13160,7 @@ public class combat_actions extends script.systems.combat.combat_base
     public int ig88_grenade(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         location loc = getLocation(self);
-        String strLoc = "" + loc.x + " " + loc.y + " " + loc.z + " " + loc.cell + " " + loc.x + " " + loc.y + " " + loc.z;
+        String strLoc = loc.x + " " + loc.y + " " + loc.z + " " + loc.cell + " " + loc.x + " " + loc.y + " " + loc.z;
         if (!combatStandardAction("ig88_grenade", self, target, strLoc, "", ""))
         {
             return SCRIPT_OVERRIDE;
@@ -13236,7 +13235,7 @@ public class combat_actions extends script.systems.combat.combat_base
     {
         obj_id[] hateList = getHateList(self);
         location loc = getLocation(hateList[rand(0, hateList.length - 1)]);
-        String targetLoc = "" + loc.x + " " + loc.y + " " + loc.z + " " + loc.cell + " " + loc.x + " " + loc.y + " " + loc.z;
+        String targetLoc = loc.x + " " + loc.y + " " + loc.z + " " + loc.cell + " " + loc.x + " " + loc.y + " " + loc.z;
         if (!combatStandardAction("kimaru_flame_patch", self, target, targetLoc, "", ""))
         {
             return SCRIPT_OVERRIDE;
@@ -13457,7 +13456,7 @@ public class combat_actions extends script.systems.combat.combat_base
     public int grenadier_cold(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         location loc = getLocation(target);
-        String targetLoc = "" + loc.x + " " + loc.y + " " + loc.z + " " + loc.cell + " " + loc.x + " " + loc.y + " " + loc.z;
+        String targetLoc = loc.x + " " + loc.y + " " + loc.z + " " + loc.cell + " " + loc.x + " " + loc.y + " " + loc.z;
         if (!combatStandardAction("grenadier_cold", self, target, targetLoc, "", ""))
         {
             return SCRIPT_OVERRIDE;
@@ -13469,7 +13468,7 @@ public class combat_actions extends script.systems.combat.combat_base
     public int grenadier_heat(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         location loc = getLocation(target);
-        String targetLoc = "" + loc.x + " " + loc.y + " " + loc.z + " " + loc.cell + " " + loc.x + " " + loc.y + " " + loc.z;
+        String targetLoc = loc.x + " " + loc.y + " " + loc.z + " " + loc.cell + " " + loc.x + " " + loc.y + " " + loc.z;
         if (!combatStandardAction("grenadier_heat", self, target, targetLoc, "", ""))
         {
             return SCRIPT_OVERRIDE;
@@ -13481,7 +13480,7 @@ public class combat_actions extends script.systems.combat.combat_base
     public int grenadier_acid(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         location loc = getLocation(target);
-        String targetLoc = "" + loc.x + " " + loc.y + " " + loc.z + " " + loc.cell + " " + loc.x + " " + loc.y + " " + loc.z;
+        String targetLoc = loc.x + " " + loc.y + " " + loc.z + " " + loc.cell + " " + loc.x + " " + loc.y + " " + loc.z;
         if (!combatStandardAction("grenadier_acid", self, target, targetLoc, "", ""))
         {
             return SCRIPT_OVERRIDE;
@@ -13493,7 +13492,7 @@ public class combat_actions extends script.systems.combat.combat_base
     public int grenadier_kinetic(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         location loc = getLocation(target);
-        String targetLoc = "" + loc.x + " " + loc.y + " " + loc.z + " " + loc.cell + " " + loc.x + " " + loc.y + " " + loc.z;
+        String targetLoc = loc.x + " " + loc.y + " " + loc.z + " " + loc.cell + " " + loc.x + " " + loc.y + " " + loc.z;
         if (!combatStandardAction("grenadier_kinetic", self, target, targetLoc, "", ""))
         {
             return SCRIPT_OVERRIDE;
@@ -13529,7 +13528,7 @@ public class combat_actions extends script.systems.combat.combat_base
     public int kenkirk_droid_blast(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         location loc = getLocation(target);
-        String strLoc = "" + loc.x + " " + loc.y + " " + loc.z + " " + loc.cell + " " + loc.x + " " + loc.y + " " + loc.z;
+        String strLoc = loc.x + " " + loc.y + " " + loc.z + " " + loc.cell + " " + loc.x + " " + loc.y + " " + loc.z;
         if (!combatStandardAction("kenkirk_droid_blast", self, target, strLoc, "", ""))
         {
             return SCRIPT_OVERRIDE;
@@ -14823,7 +14822,7 @@ public class combat_actions extends script.systems.combat.combat_base
     public int hoth_atat_mine(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         location loc = getLocation(self);
-        String targetLoc = "" + loc.x + " " + loc.y + " " + loc.z + " " + loc.cell + " " + loc.x + " " + loc.y + " " + loc.z;
+        String targetLoc = loc.x + " " + loc.y + " " + loc.z + " " + loc.cell + " " + loc.x + " " + loc.y + " " + loc.z;
         if (!combatStandardAction("hoth_atat_mine", self, target, targetLoc, "", ""))
         {
             return SCRIPT_OVERRIDE;

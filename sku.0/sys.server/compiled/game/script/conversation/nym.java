@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,62 +14,77 @@ import script.*;
 
 public class nym extends script.base_script
 {
+    public static String c_stringFile = "conversation/nym";
+
     public nym()
     {
     }
-    public static String c_stringFile = "conversation/nym";
+
     public boolean nym_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean nym_condition_hasCompletedFacility(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_kole_to_nym") && !groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_nym_arena");
     }
+
     public boolean nym_condition_hasNotCompletedArena(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "u16_nym_themepark_nym_arena");
     }
+
     public boolean nym_condition_hasCompletedArenaTask(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "u16_nym_themepark_nym_arena", "hasCompletedArenaForNym");
     }
+
     public boolean nym_condition_isReadyForQuestAfterArena(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "u16_nym_themepark_nym_arena");
     }
+
     public boolean nym_condition_hasCompletedShuttleTask(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "u16_nym_themepark_shuttle_ambush", "hasCompletedShuttleForNym");
     }
+
     public boolean nym_condition_isReadyForFinale(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "u16_nym_themepark_negotiate_peace");
     }
+
     public boolean nym_condition_hasFinishedTownsPeople(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "u16_nym_return_townsperson", "nymTownpersonDone");
     }
+
     public boolean nym_condition_isReadyPeaceMission(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "u16_nym_return_townsperson") && !groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_negotiate_peace");
     }
+
     public boolean nym_condition_hasCompletedPeaceMission(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "u16_nym_themepark_negotiate_peace", "returnToNymSheeli");
     }
+
     public boolean nym_condition_isDoneThemePark(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "u16_nym_themepark_shuttle_ambush");
     }
+
     public boolean nym_condition_hasPeaceMission(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "u16_nym_themepark_negotiate_peace");
     }
+
     public boolean nym_condition_hasShuttleQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "u16_nym_themepark_shuttle_ambush");
     }
+
     public void nym_action_grantArenaQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_nym_arena"))
@@ -71,6 +92,7 @@ public class nym extends script.base_script
             groundquests.grantQuest(player, "u16_nym_themepark_nym_arena");
         }
     }
+
     public void nym_action_completeArenaQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isTaskActive(player, "u16_nym_themepark_nym_arena", "hasCompletedArenaForNym"))
@@ -86,6 +108,7 @@ public class nym extends script.base_script
             modifyCollectionSlotValue(player, "icon_arena_badge_received", 1);
         }
     }
+
     public void nym_action_grantShuttleQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_shuttle_ambush"))
@@ -93,6 +116,7 @@ public class nym extends script.base_script
             groundquests.grantQuest(player, "u16_nym_themepark_shuttle_ambush");
         }
     }
+
     public void nym_action_completeShuttleQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isTaskActive(player, "u16_nym_themepark_shuttle_ambush", "hasCompletedShuttleForNym"))
@@ -108,10 +132,12 @@ public class nym extends script.base_script
             modifyCollectionSlotValue(player, "icon_emissary_badge_received", 1);
         }
     }
+
     public void nym_action_hasFoundNym(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "hasFoundNym");
     }
+
     public void nym_action_grantTownspersonQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!groundquests.isQuestActiveOrComplete(player, "u16_nym_meet_townspeople"))
@@ -119,10 +145,12 @@ public class nym extends script.base_script
             groundquests.grantQuest(player, "u16_nym_meet_townspeople");
         }
     }
+
     public void nym_action_finishTownsPeople(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "hasCompletedTownPersonQuest");
     }
+
     public void nym_action_givePeaceMission(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_negotiate_peace"))
@@ -130,15 +158,18 @@ public class nym extends script.base_script
             groundquests.grantQuest(player, "u16_nym_themepark_negotiate_peace");
         }
     }
+
     public void nym_action_finishPeaceMission(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "hasReturnedToNymSheeli");
     }
+
     public void nym_action_validateAllNymRewards(obj_id player, obj_id npc) throws InterruptedException
     {
         nym_action_completeArenaQuest(player, npc);
         nym_action_completeShuttleQuest(player, npc);
     }
+
     public int nym_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_38"))
@@ -155,6 +186,7 @@ public class nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_25"))
@@ -174,7 +206,7 @@ public class nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_27");
@@ -183,7 +215,7 @@ public class nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -193,6 +225,7 @@ public class nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_27"))
@@ -212,7 +245,7 @@ public class nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_29");
@@ -221,7 +254,7 @@ public class nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -231,6 +264,7 @@ public class nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_29"))
@@ -250,6 +284,7 @@ public class nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_87"))
@@ -269,7 +304,7 @@ public class nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_101");
@@ -278,7 +313,7 @@ public class nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -288,6 +323,7 @@ public class nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_101"))
@@ -307,6 +343,7 @@ public class nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_89"))
@@ -326,7 +363,7 @@ public class nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_104");
@@ -335,7 +372,7 @@ public class nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -345,6 +382,7 @@ public class nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_104"))
@@ -364,7 +402,7 @@ public class nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -373,7 +411,7 @@ public class nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -383,6 +421,7 @@ public class nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_106"))
@@ -402,7 +441,7 @@ public class nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_108");
@@ -411,7 +450,7 @@ public class nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -421,6 +460,7 @@ public class nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_108"))
@@ -440,7 +480,7 @@ public class nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_110");
@@ -453,7 +493,7 @@ public class nym extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.nym.branchId");
                     prose_package pp = new prose_package();
@@ -467,6 +507,7 @@ public class nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_110"))
@@ -486,7 +527,7 @@ public class nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_112");
@@ -495,7 +536,7 @@ public class nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -505,6 +546,7 @@ public class nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_112"))
@@ -520,6 +562,7 @@ public class nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_83"))
@@ -536,6 +579,7 @@ public class nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_50"))
@@ -556,7 +600,7 @@ public class nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_54");
@@ -565,7 +609,7 @@ public class nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -591,7 +635,7 @@ public class nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_60");
@@ -600,7 +644,7 @@ public class nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -610,6 +654,7 @@ public class nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_54"))
@@ -630,7 +675,7 @@ public class nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_60");
@@ -639,7 +684,7 @@ public class nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -649,6 +694,7 @@ public class nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_60"))
@@ -670,7 +716,7 @@ public class nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_66");
@@ -679,7 +725,7 @@ public class nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -689,6 +735,7 @@ public class nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_66"))
@@ -710,7 +757,7 @@ public class nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_68");
@@ -719,7 +766,7 @@ public class nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -729,6 +776,7 @@ public class nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_68"))
@@ -745,6 +793,7 @@ public class nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_78"))
@@ -764,7 +813,7 @@ public class nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -773,7 +822,7 @@ public class nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -805,7 +854,7 @@ public class nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_97");
@@ -818,7 +867,7 @@ public class nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -828,6 +877,7 @@ public class nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_91"))
@@ -854,7 +904,7 @@ public class nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_97");
@@ -867,7 +917,7 @@ public class nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -877,6 +927,7 @@ public class nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_97"))
@@ -896,7 +947,7 @@ public class nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_114");
@@ -905,7 +956,7 @@ public class nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -930,7 +981,7 @@ public class nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_126");
@@ -939,7 +990,7 @@ public class nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -949,6 +1000,7 @@ public class nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_114"))
@@ -968,7 +1020,7 @@ public class nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_118");
@@ -977,7 +1029,7 @@ public class nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -987,6 +1039,7 @@ public class nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_118"))
@@ -1002,6 +1055,7 @@ public class nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_126"))
@@ -1021,7 +1075,7 @@ public class nym extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_114");
@@ -1030,7 +1084,7 @@ public class nym extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.nym.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1040,6 +1094,7 @@ public class nym extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -1049,11 +1104,13 @@ public class nym extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -1062,18 +1119,21 @@ public class nym extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.nym");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1107,7 +1167,7 @@ public class nym extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_38");
@@ -1119,7 +1179,7 @@ public class nym extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "nym", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1154,7 +1214,7 @@ public class nym extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_25");
@@ -1166,7 +1226,7 @@ public class nym extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "nym", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1191,7 +1251,7 @@ public class nym extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_87");
@@ -1199,7 +1259,7 @@ public class nym extends script.base_script
                 utils.setScriptVar(player, "conversation.nym.branchId", 9);
                 npcStartConversation(player, npc, "nym", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1230,7 +1290,7 @@ public class nym extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_89");
@@ -1242,7 +1302,7 @@ public class nym extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "nym", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1267,7 +1327,7 @@ public class nym extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_83");
@@ -1279,7 +1339,7 @@ public class nym extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "nym", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1311,7 +1371,7 @@ public class nym extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_50");
@@ -1323,7 +1383,7 @@ public class nym extends script.base_script
                 utils.setScriptVar(player, "conversation.nym.branchId", 22);
                 npcStartConversation(player, npc, "nym", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1369,7 +1429,7 @@ public class nym extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_78");
@@ -1385,7 +1445,7 @@ public class nym extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "nym", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1404,6 +1464,7 @@ public class nym extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("nym"))

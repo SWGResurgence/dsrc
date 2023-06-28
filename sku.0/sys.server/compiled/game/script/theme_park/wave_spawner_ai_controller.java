@@ -1,5 +1,11 @@
 package script.theme_park;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -10,10 +16,12 @@ import java.util.Vector;
 
 public class wave_spawner_ai_controller extends script.base_script
 {
+    public static final boolean LOGGING = true;
+
     public wave_spawner_ai_controller()
     {
     }
-    public static final boolean LOGGING = true;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (getIntObjVar(self, restuss_event.PATROL_TYPE) > 0)
@@ -21,7 +29,7 @@ public class wave_spawner_ai_controller extends script.base_script
             findWayPoints(self);
             messageTo(self, "pathToNextPoint", null, 2, false);
         }
-        else 
+        else
         {
             ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         }
@@ -29,11 +37,13 @@ public class wave_spawner_ai_controller extends script.base_script
         messageTo(self, "spawnSquad", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         trial.cleanupObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnSquad(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] children = trial.getChildrenInRange(self, self, 200.0f);
@@ -90,6 +100,7 @@ public class wave_spawner_ai_controller extends script.base_script
         ai_lib.establishAgroLink(self, allies);
         return SCRIPT_CONTINUE;
     }
+
     public void findWayPoints(obj_id self) throws InterruptedException
     {
         Vector wayPoints = utils.getResizeableObjIdArrayScriptVar(self, restuss_event.MASTER_PATROL_ARRAY);
@@ -104,7 +115,7 @@ public class wave_spawner_ai_controller extends script.base_script
         {
             pathNum = getIntObjVar(self, "path");
         }
-        else 
+        else
         {
             doLogging("findWayPoints", "I did not have the path ObjVar");
             trial.cleanupObject(self);
@@ -125,10 +136,14 @@ public class wave_spawner_ai_controller extends script.base_script
         }
         Vector myPath = new Vector();
         myPath.setSize(0);
-        for (String s : pathList) {
-            for (Object wayPoint : wayPoints) {
-                if (hasObjVar(((obj_id) wayPoint), "wp_name")) {
-                    if (s.equals(getStringObjVar(((obj_id) wayPoint), "wp_name"))) {
+        for (String s : pathList)
+        {
+            for (Object wayPoint : wayPoints)
+            {
+                if (hasObjVar(((obj_id) wayPoint), "wp_name"))
+                {
+                    if (s.equals(getStringObjVar(((obj_id) wayPoint), "wp_name")))
+                    {
                         utils.addElement(myPath, getLocation(((obj_id) wayPoint)));
                     }
                 }
@@ -154,6 +169,7 @@ public class wave_spawner_ai_controller extends script.base_script
         }
         utils.setScriptVar(self, restuss_event.PATROL_POINTS, patrolPoints);
     }
+
     public int pathToNextPoint(obj_id self, dictionary params) throws InterruptedException
     {
         location[] patrolPoints = utils.getLocationArrayScriptVar(self, restuss_event.PATROL_POINTS);
@@ -161,53 +177,60 @@ public class wave_spawner_ai_controller extends script.base_script
         switch (patrolType)
         {
             case restuss_event.PATROL:
-            ai_lib.setPatrolPath(self, patrolPoints);
-            break;
+                ai_lib.setPatrolPath(self, patrolPoints);
+                break;
             case restuss_event.PATROL_ONCE:
-            ai_lib.setPatrolOncePath(self, patrolPoints);
-            break;
+                ai_lib.setPatrolOncePath(self, patrolPoints);
+                break;
             case restuss_event.PATROL_FLIP:
-            ai_lib.setPatrolFlipPath(self, patrolPoints);
-            break;
+                ai_lib.setPatrolFlipPath(self, patrolPoints);
+                break;
             case restuss_event.PATROL_FLIP_ONCE:
-            ai_lib.setPatrolFlipOncePath(self, patrolPoints);
-            break;
+                ai_lib.setPatrolFlipOncePath(self, patrolPoints);
+                break;
             case restuss_event.PATROL_RANDOM:
-            ai_lib.setPatrolRandomPath(self, patrolPoints);
-            break;
+                ai_lib.setPatrolRandomPath(self, patrolPoints);
+                break;
             case restuss_event.PATROL_RANDOM_ONCE:
-            ai_lib.setPatrolRandomOncePath(self, patrolPoints);
-            break;
+                ai_lib.setPatrolRandomOncePath(self, patrolPoints);
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public String getDataTable(obj_id self) throws InterruptedException
     {
         return hasObjVar(self, "wave_spawner.data_table") ? getStringObjVar(self, "wave_spawner.data_table") : "noTable";
     }
+
     public int wsDoAnimation(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int wsPlayEmote(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int wsSignalMaster(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int wsDespawn(obj_id self, dictionary params) throws InterruptedException
     {
         messageTo(self, "destroySelf", null, 5.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int wsToggleInvulnerability(obj_id self, dictionary params) throws InterruptedException
     {
         boolean toggleVulnerable = !isInvulnerable(self);
         setInvulnerable(self, toggleVulnerable);
         return SCRIPT_CONTINUE;
     }
+
     public int customSignal(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("doLogging", "in custom signal");
@@ -221,15 +244,18 @@ public class wave_spawner_ai_controller extends script.base_script
             Vector customTrigger = utils.getResizeableStringArrayScriptVar(self, restuss_event.TRIG_CUSTOMSIGNAL);
             if (customTrigger != null && customTrigger.size() > 0)
             {
-                for (Object o : customTrigger) {
-                    if (((String) o).startsWith(signalName)) {
-                        executeTriggerData(self, ((String) o).substring(signalName.length() + 1, ((String) o).length()));
+                for (Object o : customTrigger)
+                {
+                    if (((String) o).startsWith(signalName))
+                    {
+                        executeTriggerData(self, ((String) o).substring(signalName.length() + 1));
                     }
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         if (utils.hasScriptVar(self, restuss_event.TRIG_ONDEATH))
@@ -237,13 +263,15 @@ public class wave_spawner_ai_controller extends script.base_script
             Vector deathTriggers = utils.getResizeableStringArrayScriptVar(self, restuss_event.TRIG_ONDEATH);
             if (deathTriggers != null && deathTriggers.size() > 0)
             {
-                for (Object deathTrigger : deathTriggers) {
+                for (Object deathTrigger : deathTriggers)
+                {
                     executeTriggerData(self, ((String) deathTrigger).concat(":" + killer));
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, restuss_event.TRIG_ENTERCOMBAT))
@@ -251,13 +279,15 @@ public class wave_spawner_ai_controller extends script.base_script
             Vector combatTriggers = utils.getResizeableStringArrayScriptVar(self, restuss_event.TRIG_ENTERCOMBAT);
             if (combatTriggers != null && combatTriggers.size() > 0)
             {
-                for (Object combatTrigger : combatTriggers) {
+                for (Object combatTrigger : combatTriggers)
+                {
                     executeTriggerData(self, ((String) combatTrigger));
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         if (ai_lib.isDead(self))
@@ -269,13 +299,15 @@ public class wave_spawner_ai_controller extends script.base_script
             Vector combatTriggers = utils.getResizeableStringArrayScriptVar(self, restuss_event.TRIG_EXITCOMBAT);
             if (combatTriggers != null && combatTriggers.size() > 0)
             {
-                for (Object combatTrigger : combatTriggers) {
+                for (Object combatTrigger : combatTriggers)
+                {
                     executeTriggerData(self, ((String) combatTrigger));
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, restuss_event.TRIG_ARRIVELOCATION))
@@ -283,13 +315,15 @@ public class wave_spawner_ai_controller extends script.base_script
             Vector moveTriggers = utils.getResizeableStringArrayScriptVar(self, restuss_event.TRIG_ARRIVELOCATION);
             if (moveTriggers != null && moveTriggers.size() > 0)
             {
-                for (Object moveTrigger : moveTriggers) {
+                for (Object moveTrigger : moveTriggers)
+                {
                     executeTriggerData(self, ((String) moveTrigger));
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public void executeTriggerData(obj_id self, String triggerData) throws InterruptedException
     {
         String[] parse = split(triggerData, ':');
@@ -314,7 +348,7 @@ public class wave_spawner_ai_controller extends script.base_script
                 {
                     dict.put(parse[1], utils.stringToFloat(valueSplit[1]));
                 }
-                else 
+                else
                 {
                     dict.put(parse[1], valueSplit[1]);
                 }
@@ -349,7 +383,7 @@ public class wave_spawner_ai_controller extends script.base_script
                 {
                     dict.put(parse[2], utils.stringToFloat(valueSplit[1]));
                 }
-                else 
+                else
                 {
                     dict.put(parse[2], valueSplit[1]);
                 }
@@ -364,6 +398,7 @@ public class wave_spawner_ai_controller extends script.base_script
             messageTo(trial.getParent(self), "triggerFired", dict, 0.0f, false);
         }
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING)

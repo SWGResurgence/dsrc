@@ -1,13 +1,16 @@
 package script.theme_park.dungeon.corvette;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.utils;
 
 public class corvette_document_search extends script.base_script
 {
-    public corvette_document_search()
-    {
-    }
     public static final String DATATABLE_NAME = "datatables/dungeon/corellian_corvette_quest.iff";
     public static final string_id SEARCH_ITEM = new string_id("bestine", "search_item");
     public static final string_id ALREADY_SEARCHED_MSG = new string_id("bestine", "already_searched");
@@ -20,6 +23,10 @@ public class corvette_document_search extends script.base_script
     public static final String FILLER_02_DOCUMENT_COLUMN = "filler02_document";
     public static final String DOCUMENTS_LIST_OBJVAR_BASE = "corl_corvette.documentsList";
     public static final String SEARCH_OBJECT_INDEX_OBJVAR = "corl_corvette.searchObject";
+    public corvette_document_search()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (canSearch(self, player))
@@ -28,6 +35,7 @@ public class corvette_document_search extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_ITEM_OPTIONS)
@@ -47,13 +55,10 @@ public class corvette_document_search extends script.base_script
                 if (hasObjVar(player, documentsListObjvar))
                 {
                     String[] tempArray = getStringArrayObjVar(player, documentsListObjvar);
-                    for (int i = 0; i < tempArray.length; i++)
-                    {
-                        documents[i] = tempArray[i];
-                    }
+                    System.arraycopy(tempArray, 0, documents, 0, tempArray.length);
                     documentFoundColumn = documents[searchObjectIndex];
                 }
-                else 
+                else
                 {
                     String document01 = INTEL_DOCUMENT_COLUMN;
                     String document02 = FILLER_01_DOCUMENT_COLUMN;
@@ -62,35 +67,35 @@ public class corvette_document_search extends script.base_script
                     switch (documentSetup)
                     {
                         case 1:
-                        document01 = INTEL_DOCUMENT_COLUMN;
-                        document02 = FILLER_01_DOCUMENT_COLUMN;
-                        document03 = FILLER_02_DOCUMENT_COLUMN;
-                        break;
+                            document01 = INTEL_DOCUMENT_COLUMN;
+                            document02 = FILLER_01_DOCUMENT_COLUMN;
+                            document03 = FILLER_02_DOCUMENT_COLUMN;
+                            break;
                         case 2:
-                        document01 = INTEL_DOCUMENT_COLUMN;
-                        document02 = FILLER_02_DOCUMENT_COLUMN;
-                        document03 = FILLER_01_DOCUMENT_COLUMN;
-                        break;
+                            document01 = INTEL_DOCUMENT_COLUMN;
+                            document02 = FILLER_02_DOCUMENT_COLUMN;
+                            document03 = FILLER_01_DOCUMENT_COLUMN;
+                            break;
                         case 3:
-                        document01 = FILLER_01_DOCUMENT_COLUMN;
-                        document02 = INTEL_DOCUMENT_COLUMN;
-                        document03 = FILLER_02_DOCUMENT_COLUMN;
-                        break;
+                            document01 = FILLER_01_DOCUMENT_COLUMN;
+                            document02 = INTEL_DOCUMENT_COLUMN;
+                            document03 = FILLER_02_DOCUMENT_COLUMN;
+                            break;
                         case 4:
-                        document01 = FILLER_02_DOCUMENT_COLUMN;
-                        document02 = INTEL_DOCUMENT_COLUMN;
-                        document03 = FILLER_01_DOCUMENT_COLUMN;
-                        break;
+                            document01 = FILLER_02_DOCUMENT_COLUMN;
+                            document02 = INTEL_DOCUMENT_COLUMN;
+                            document03 = FILLER_01_DOCUMENT_COLUMN;
+                            break;
                         case 5:
-                        document01 = FILLER_01_DOCUMENT_COLUMN;
-                        document02 = FILLER_02_DOCUMENT_COLUMN;
-                        document03 = INTEL_DOCUMENT_COLUMN;
-                        break;
+                            document01 = FILLER_01_DOCUMENT_COLUMN;
+                            document02 = FILLER_02_DOCUMENT_COLUMN;
+                            document03 = INTEL_DOCUMENT_COLUMN;
+                            break;
                         case 6:
-                        document01 = FILLER_02_DOCUMENT_COLUMN;
-                        document02 = FILLER_01_DOCUMENT_COLUMN;
-                        document03 = INTEL_DOCUMENT_COLUMN;
-                        break;
+                            document01 = FILLER_02_DOCUMENT_COLUMN;
+                            document02 = FILLER_01_DOCUMENT_COLUMN;
+                            document03 = INTEL_DOCUMENT_COLUMN;
+                            break;
                     }
                     documents[0] = document01;
                     documents[1] = document02;
@@ -126,7 +131,7 @@ public class corvette_document_search extends script.base_script
                                 setObjVar(player, documentsListObjvar, documents);
                             }
                         }
-                        else 
+                        else
                         {
                             sendSystemMessage(player, INVENTORY_FULL_MSG);
                         }
@@ -136,6 +141,7 @@ public class corvette_document_search extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean canSearch(obj_id self, obj_id player) throws InterruptedException
     {
         boolean result = false;

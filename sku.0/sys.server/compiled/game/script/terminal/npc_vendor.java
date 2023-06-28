@@ -1,5 +1,11 @@
 package script.terminal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -8,9 +14,6 @@ import java.util.Vector;
 
 public class npc_vendor extends script.base_script
 {
-    public npc_vendor()
-    {
-    }
     public static final String LOGGING_CATEGORY = "vendor";
     public static final boolean LOGGING_ON = false;
     public static final string_id SID_ITEM_DROP = new string_id("ui_radial", "item_drop");
@@ -32,12 +35,17 @@ public class npc_vendor extends script.base_script
     public static final String ITH_VENDOR_SHIRT = "object/tangible/wearables/ithorian/ith_shirt_s05.iff";
     public static final String ITH_VENDOR_PANTS = "object/tangible/wearables/ithorian/ith_pants_s03.iff";
     public static final String NON_ENHANCEMENT_BUFF = "buff.non_enhancement";
+    public npc_vendor()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         removeTriggerVolume("alertTriggerVolume");
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "vendor.areaBarks"))
@@ -52,6 +60,7 @@ public class npc_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id ownerId = getObjIdObjVar(self, "vendor_owner");
@@ -66,6 +75,7 @@ public class npc_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         obj_id ownerId = getObjIdObjVar(self, "vendor_owner");
@@ -82,7 +92,7 @@ public class npc_vendor extends script.base_script
                 removeTriggerVolume(ALERT_VOLUME_NAME);
                 sendSystemMessage(player, SID_AREABARKS_DISABLED);
             }
-            else 
+            else
             {
                 String[] rawAnims = dataTableGetStringColumnNoDefaults(TBL_VENDOR_ANIMS, 0);
                 String[] anims = new String[rawAnims.length];
@@ -102,6 +112,7 @@ public class npc_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (hasObjVar(self, "vendor.areaBarks"))
@@ -111,6 +122,7 @@ public class npc_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGiveItem(obj_id self, obj_id item, obj_id player) throws InterruptedException
     {
         blog("OnGiveItem init");
@@ -193,7 +205,7 @@ public class npc_vendor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             if (itemName.contains("wke_"))
             {
@@ -244,20 +256,21 @@ public class npc_vendor extends script.base_script
             {
                 chat._chat(self, null, chat.CHAT_SAY, chat.MOOD_HAPPY, null, new string_id("player_structure", "wear_yes_weapon"), null);
             }
-            else 
+            else
             {
                 chat._chat(self, null, chat.CHAT_SAY, chat.MOOD_HAPPY, null, new string_id("player_structure", "wear_yes"), null);
             }
             doAnimationAction(self, "pose_proudly");
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             chat._chat(self, null, chat.CHAT_SAY, chat.MOOD_CHEERFUL, null, new string_id("player_structure", "wear_no"), null);
             doAnimationAction(self, "slow_down");
             return SCRIPT_CONTINUE;
         }
     }
+
     public int handleVendorAnimSelect(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -282,6 +295,7 @@ public class npc_vendor extends script.base_script
         sui.listbox(self, player, "@player_structure:vendor_moods_d", sui.OK_CANCEL, "@player_structure:vendor_moods_t", moods, "handleVendorMoodSelect", true);
         return SCRIPT_CONTINUE;
     }
+
     public int handleVendorMoodSelect(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -299,7 +313,8 @@ public class npc_vendor extends script.base_script
         setObjVar(self, "vendor.barkMood", rawMoods[idx]);
         String[] rawStrCats = dataTableGetStringColumnNoDefaults(TBL_VENDOR_STRCATS, 0);
         Vector strcats = null;
-        for (String rawStrCat : rawStrCats) {
+        for (String rawStrCat : rawStrCats)
+        {
             strcats = utils.addElement(strcats, "@player_structure:subcat_" + rawStrCat);
         }
         if (utils.isProfession(player, utils.TRADER))
@@ -309,6 +324,7 @@ public class npc_vendor extends script.base_script
         sui.listbox(self, player, "@player_structure:vendor_strcats_d", sui.OK_CANCEL, "@player_structure:vendor_strcats_t", strcats, "handleVendorStrCatSelect", true);
         return SCRIPT_CONTINUE;
     }
+
     public int handleVendorStrCatSelect(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -328,8 +344,8 @@ public class npc_vendor extends script.base_script
         {
             rawStrCats = utils.addElement(rawStrCats, "custom");
         }
-        setObjVar(self, "vendor.barkStrCat", ((String)rawStrCats.get(idx)));
-        if (((String)rawStrCats.get(idx)).equals("custom"))
+        setObjVar(self, "vendor.barkStrCat", ((String) rawStrCats.get(idx)));
+        if (rawStrCats.get(idx).equals("custom"))
         {
             sui.inputbox(self, player, "@player_structure:cust_d", sui.OK_CANCEL, "@player_structure:cust_t", sui.INPUT_NORMAL, null, "handleSetCustomBark", null);
             return SCRIPT_CONTINUE;
@@ -340,6 +356,7 @@ public class npc_vendor extends script.base_script
         sendSystemMessage(player, SID_AREABARKS_ENABLED);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetCustomBark(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -369,6 +386,7 @@ public class npc_vendor extends script.base_script
         sendSystemMessage(player, SID_AREABARKS_ENABLED);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (hasObjVar(breacher, "gm"))
@@ -414,7 +432,7 @@ public class npc_vendor extends script.base_script
             {
                 chat._chat(self, breacher, chat.CHAT_SAY, mood, custbark, null, null);
             }
-            else 
+            else
             {
                 prose_package pp = prose.getPackage(new string_id("player_structure", "areabark_" + strcat), breacher);
                 chat.publicChat(self, breacher, chat.CHAT_SAY, mood, pp);
@@ -426,11 +444,13 @@ public class npc_vendor extends script.base_script
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int resetBarkTimer(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "bark.alreadyBarked");
         return SCRIPT_CONTINUE;
     }
+
     public int checkNakedSlots(obj_id self, dictionary params) throws InterruptedException
     {
         String templateName = getTemplateName(self);
@@ -463,7 +483,7 @@ public class npc_vendor extends script.base_script
             {
                 createObject(ITH_VENDOR_SHIRT, self, slots.CHEST1);
             }
-            else 
+            else
             {
                 createObject(STANDARD_VENDOR_SHIRT, self, slots.CHEST1);
             }
@@ -475,7 +495,7 @@ public class npc_vendor extends script.base_script
             {
                 createObject(ITH_VENDOR_PANTS, self, slots.PANTS1);
             }
-            else 
+            else
             {
                 createObject(STANDARD_VENDOR_PANTS, self, slots.PANTS1);
             }
@@ -487,6 +507,7 @@ public class npc_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON && msg != null && !msg.equals(""))

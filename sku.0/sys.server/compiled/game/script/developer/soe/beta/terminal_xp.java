@@ -1,5 +1,11 @@
 package script.developer.soe.beta;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.prose;
 import script.library.sui;
@@ -8,9 +14,6 @@ import script.library.xp;
 
 public class terminal_xp extends script.terminal.base.terminal_add_use
 {
-    public terminal_xp()
-    {
-    }
     public static final int XP_AMOUNT = 100000;
     public static final String TBL = "datatables/skill/skills.iff";
     public static final String VAR_XP_TYPES = "xp_types";
@@ -20,16 +23,22 @@ public class terminal_xp extends script.terminal.base.terminal_add_use
     public static final String HANDLER_XP_AMOUNT_SELECT = "handleXpAmountSelect";
     public static final string_id PROSE_GRANT_XP = new string_id("base_player", "prose_grant_xp");
     public static final String VAR_DESIRED_XP_TYPE = "desired_xpType";
+    public terminal_xp()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         removeObjVar(self, VAR_XP_TYPES_LIST);
         initializeXpTerminal(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isGod(player) || hasObjVar(player, "beta.terminal_ok"))
@@ -46,12 +55,13 @@ public class terminal_xp extends script.terminal.base.terminal_add_use
             }
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             broadcast(player, "Only authorized users may access this terminal.");
             return SCRIPT_CONTINUE;
         }
     }
+
     public void initializeXpTerminal(obj_id self) throws InterruptedException
     {
         String[] xpTypes = xp.getXpTypes(self);
@@ -60,6 +70,7 @@ public class terminal_xp extends script.terminal.base.terminal_add_use
             setXpTypesScriptVar(self, xpTypes);
         }
     }
+
     public void setXpTypesScriptVar(obj_id self, String[] varData) throws InterruptedException
     {
         if ((varData == null) || (varData.length == 0))
@@ -75,6 +86,7 @@ public class terminal_xp extends script.terminal.base.terminal_add_use
         }
         utils.setBatchScriptVar(self, VAR_XP_TYPES_NAMES, xpNames);
     }
+
     public int handleXpSelect(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -106,6 +118,7 @@ public class terminal_xp extends script.terminal.base.terminal_add_use
         sui.transfer(self, player, prompt, title, "Available", XP_AMOUNT, "Amount", 0, HANDLER_XP_AMOUNT_SELECT);
         return SCRIPT_CONTINUE;
     }
+
     public int handleXpAmountSelect(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -128,6 +141,7 @@ public class terminal_xp extends script.terminal.base.terminal_add_use
         messageTo(self, "handleDisplayXp", d, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleDisplayXp(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("playerId");

@@ -1,5 +1,11 @@
 package script.item.travel_ticket;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.space_dungeon;
 import script.library.space_dungeon_data;
@@ -12,6 +18,7 @@ public class travel_space_dungeon extends script.base_script
     public static final string_id SID_NO_TICKET = new string_id("dungeon/space_dungeon", "no_ticket");
     public static final string_id SID_REQUEST_TRAVEL = new string_id("dungeon/space_dungeon", "request_travel");
     public static final string_id SID_REQUEST_TRAVEL_OUTSTANDING = new string_id("dungeon/space_dungeon", "request_travel_outstanding");
+
     public travel_space_dungeon()
     {
     }
@@ -106,7 +113,7 @@ public class travel_space_dungeon extends script.base_script
         String dungeon_name = dungeon_type.substring(0, dungeon_type.length() - 1);
         for (int i = 0; i < dungeon_data.length; i++)
         {
-            if (false == space_dungeon_data.isValidDungeon(dungeon_name))
+            if (!space_dungeon_data.isValidDungeon(dungeon_name))
             {
                 LOG("space_dungeon", "travel_space_dungeon.OnClusterWideDataResponse -- dungeon name of " + dungeon_name + " is not in the dungeon datatable.");
                 break;

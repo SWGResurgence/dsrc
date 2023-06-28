@@ -1,5 +1,11 @@
 package script.space.ship;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.dot;
 import script.library.utils;
@@ -11,10 +17,12 @@ public class ship_cell_manager extends script.base_script
     public ship_cell_manager()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int incrementDotDamage(obj_id self, dictionary params) throws InterruptedException
     {
         int intSlot = params.getInt("intSlot");
@@ -24,13 +32,18 @@ public class ship_cell_manager extends script.base_script
         utils.setScriptVar(self, "intDamage", intDamage);
         if (objContents != null)
         {
-            for (obj_id objContent : objContents) {
-                if (isPlayer(objContent)) {
-                    if (dot.hasDotId(objContent, "plasma_conduit")) {
+            for (obj_id objContent : objContents)
+            {
+                if (isPlayer(objContent))
+                {
+                    if (dot.hasDotId(objContent, "plasma_conduit"))
+                    {
                         int intStrength = dot.getDotStrength(objContent, "plasma_conduit");
                         intStrength = intDamage;
                         dot.applyDotEffect(objContent, self, dot.DOT_FIRE, "plasma_conduit", HEALTH, -1, intDamage, 10000000, false, null);
-                    } else {
+                    }
+                    else
+                    {
                         string_id strSpam = new string_id("space/space_interaction", "plasma_leak_begin");
                         sendSystemMessage(objContent, strSpam);
                         dot.applyDotEffect(objContent, self, dot.DOT_FIRE, "plasma_conduit", HEALTH, -1, intDamage, 10000000, true, null);
@@ -40,6 +53,7 @@ public class ship_cell_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int decrementDotDamage(obj_id self, dictionary params) throws InterruptedException
     {
         int intSlot = params.getInt("intSlot");
@@ -48,19 +62,27 @@ public class ship_cell_manager extends script.base_script
         LOG("space", "Decredmenting damage.. new damage i s" + intDamage);
         obj_id[] objContents = getContents(self);
         utils.setScriptVar(self, "intDamage", intDamage);
-        if ((objContents != null) && (objContents.length > 0))
+        if (objContents != null)
         {
-            for (obj_id objContent : objContents) {
-                if (isPlayer(objContent)) {
-                    if (intDamage > 0) {
-                        if (dot.hasDotId(objContent, "plasma_conduit")) {
+            for (obj_id objContent : objContents)
+            {
+                if (isPlayer(objContent))
+                {
+                    if (intDamage > 0)
+                    {
+                        if (dot.hasDotId(objContent, "plasma_conduit"))
+                        {
                             int intStrength = dot.getDotStrength(objContent, "plasma_conduit");
                             intStrength = intDamage;
                             dot.applyDotEffect(objContent, null, dot.DOT_FIRE, "plasma_conduit", HEALTH, -1, intDamage, 10000000, false, null);
-                        } else {
+                        }
+                        else
+                        {
                             dot.applyDotEffect(objContent, null, dot.DOT_FIRE, "plasma_conduit", HEALTH, -1, intDamage, 10000000, true, null);
                         }
-                    } else {
+                    }
+                    else
+                    {
                         string_id strSpam = new string_id("space/space_interaction", "plasma_leak_end");
                         sendSystemMessage(objContent, strSpam);
                         dot.removeDotEffect(objContent, "plasma_conduit", true);
@@ -77,14 +99,18 @@ public class ship_cell_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         obj_id[] objContents = getContents(self);
         if (objContents != null)
         {
-            for (obj_id objContent : objContents) {
-                if (isPlayer(objContent)) {
-                    if (dot.hasDotId(objContent, "plasma_conduit")) {
+            for (obj_id objContent : objContents)
+            {
+                if (isPlayer(objContent))
+                {
+                    if (dot.hasDotId(objContent, "plasma_conduit"))
+                    {
                         string_id strSpam = new string_id("space/space_interaction", "plasma_leak_end");
                         sendSystemMessage(objContent, strSpam);
                         dot.removeDotEffect(objContent, "plasma_conduit", true);
@@ -94,6 +120,7 @@ public class ship_cell_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnReceivedItem(obj_id self, obj_id objDestContainer, obj_id objTransferer, obj_id objItem) throws InterruptedException
     {
         if (isPlayer(objItem))
@@ -105,13 +132,14 @@ public class ship_cell_manager extends script.base_script
                 sendSystemMessage(objItem, strSpam);
                 dot.applyDotEffect(objItem, null, dot.DOT_FIRE, "plasma_conduit", HEALTH, -1, intDamage, 10000000, false, null);
             }
-            else 
+            else
             {
                 detachScript(self, "space.ship.ship_cell_manager");
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnLostItem(obj_id self, obj_id objDestContainer, obj_id objTransferer, obj_id objItem) throws InterruptedException
     {
         if (isPlayer(objItem))

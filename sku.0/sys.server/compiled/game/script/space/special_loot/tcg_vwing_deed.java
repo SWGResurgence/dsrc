@@ -1,5 +1,11 @@
 package script.space.special_loot;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.space_crafting;
 import script.library.utils;
 import script.menu_info;
@@ -9,9 +15,6 @@ import script.string_id;
 
 public class tcg_vwing_deed extends script.base_script
 {
-    public tcg_vwing_deed()
-    {
-    }
     public static final String LOGGING_CATEGORY = "vwing";
     public static final boolean LOGGING_ON = false;
     public static final string_id MNU_CREATE_VEHICLE = new string_id("sui", "create_vehicle");
@@ -20,6 +23,10 @@ public class tcg_vwing_deed extends script.base_script
     public static final float SHIP_HP = 3000.0f;
     public static final float SHIP_CURRENT_HP = 3000.0f;
     public static final float SHIP_MASS = 100000.0f;
+    public tcg_vwing_deed()
+    {
+    }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -38,6 +45,7 @@ public class tcg_vwing_deed extends script.base_script
         idx++;
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         blog("tcg_vwing_deed.OnObjectMenuRequest: init");
@@ -48,6 +56,7 @@ public class tcg_vwing_deed extends script.base_script
         int mnuColor = mi.addRootMenu(menu_info_types.SERVER_MENU1, MNU_CREATE_VEHICLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         blog("tcg_vwing_deed.OnObjectMenuSelect: init");
@@ -71,6 +80,7 @@ public class tcg_vwing_deed extends script.base_script
         CustomerServiceLog("ship_deed", "PLAYER: " + player + "(" + getPlayerName(player) + ") created SHIP: " + newShip + " from DEED:" + self + " which provided the PCD: " + SHIP_PCD + " MASS: " + SHIP_MASS + " MAX CHASSIS HP: " + SHIP_HP + " and CURRENT CHASSIS HP: " + SHIP_CURRENT_HP);
         return SCRIPT_CONTINUE;
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON)

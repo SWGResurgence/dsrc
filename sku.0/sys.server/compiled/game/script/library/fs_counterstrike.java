@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.location;
 import script.obj_id;
@@ -70,6 +76,7 @@ public class fs_counterstrike extends script.base_script
     public static final String OBJVAR_CAMP_GUARDS_KILLED = "fs_cs.campGuardKilled";
     public static final String OBJVAR_BORN_ON = "fs_cs.creationDate";
     public static final int MAX_NUM_CAMPS_PER_CYCLE = 20;
+
     public fs_counterstrike()
     {
     }

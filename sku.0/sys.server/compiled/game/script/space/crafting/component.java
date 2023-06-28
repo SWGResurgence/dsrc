@@ -1,5 +1,11 @@
 package script.space.crafting;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.space_crafting;
 import script.library.static_item;
@@ -12,6 +18,7 @@ public class component extends script.base_script
     public component()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         String template = getTemplateName(self);
@@ -26,10 +33,12 @@ public class component extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data data = mi.getMenuItemByType(menu_info_types.ITEM_USE);
@@ -39,6 +48,7 @@ public class component extends script.base_script
         mi.addRootMenu(menu_info_types.ITEM_ACTIVATE, strSpam);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id objPlayer, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -51,7 +61,7 @@ public class component extends script.base_script
                 sendSystemMessage(objPlayer, strSpam);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 space_crafting.repairComponentInInventory(self, objKits, objPlayer);
             }
@@ -66,16 +76,17 @@ public class component extends script.base_script
                 sendSystemMessage(objPlayer, strSpam);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 Vector objNewKits = new Vector();
                 objNewKits.setSize(1);
-                objNewKits = utils.addElement(objNewKits, ((obj_id)objKits.get(0)));
+                objNewKits = utils.addElement(objNewKits, objKits.get(0));
                 space_crafting.repairComponentInInventory(self, objKits, objPlayer);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         blog("component_fix", "INIT - OnAboutToBeTransferred Test check");
@@ -108,6 +119,7 @@ public class component extends script.base_script
         messageTo(self, "handlerReInitialize", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int forceCollectionReactorInit(obj_id self, dictionary params) throws InterruptedException
     {
         String template = getTemplateName(self);
@@ -122,6 +134,7 @@ public class component extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int startCollectionReactorReplacement(obj_id self, dictionary params) throws InterruptedException
     {
         String objectName = getName(self);
@@ -163,7 +176,7 @@ public class component extends script.base_script
                         blog("component_fix", "INIT - ITEM PLACED IN CELL: " + container);
                         return SCRIPT_CONTINUE;
                     }
-                    else 
+                    else
                     {
                         CustomerServiceLog("ShipComponents", "Component: (" + self + ") " + objectName + " could not be replaced and will not be destroyed. This is a major issue.");
                         blog("component_fix", "INIT - ITEM FAILED TO BE CREATED IN CELL: " + container);
@@ -206,12 +219,14 @@ public class component extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int destroyDeprecatedCollectionReactor(obj_id self, dictionary params) throws InterruptedException
     {
         CustomerServiceLog("ShipComponents", "Component: (" + self + ") " + getName(self) + " is about to be destroyed. Good bye world!");
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handlerReInitialize(obj_id self, dictionary params) throws InterruptedException
     {
         CustomerServiceLog("ShipComponents", "Component: (" + self + ") " + getName(self) + " is being reinitialized. This message is currently initiated due to the object being in a vendor.");
@@ -221,6 +236,7 @@ public class component extends script.base_script
         utils.callTrigger("OnInitialize", newParams);
         return SCRIPT_CONTINUE;
     }
+
     public boolean getUsableContainer(obj_id self, obj_id container) throws InterruptedException
     {
         String objectName = getName(self);
@@ -274,6 +290,7 @@ public class component extends script.base_script
         blog("component_fix", "INIT - THIS OBJECT IN UNKNOWN LOCATION!!!!");
         return false;
     }
+
     public boolean uninstallDeleteReplaceCollectionReactor(obj_id self, obj_id container) throws InterruptedException
     {
         String objectName = getName(self);
@@ -285,6 +302,7 @@ public class component extends script.base_script
         }
         return uninstallDeleteReplaceCollectionReactor(self, container, null);
     }
+
     public boolean uninstallDeleteReplaceCollectionReactor(obj_id self, obj_id container, location objLocation) throws InterruptedException
     {
         String objectName = getName(self);
@@ -310,7 +328,8 @@ public class component extends script.base_script
         obj_id newItem = null;
         String markVersion = "";
         String replacementSchematic = "";
-        switch (template) {
+        switch (template)
+        {
             case "object/tangible/ship/crafted/reactor/collection_reward_reactor_01_mk1.iff":
                 markVersion = "1";
                 replacementSchematic = space_crafting.COLLECTION_REWARD_REACTOR_MK1_V2;
@@ -350,7 +369,7 @@ public class component extends script.base_script
             CustomerServiceLog("ShipComponents", "Component: (" + self + ") " + objectName + " is a Mark " + markVersion + " Reactor and is located at: (" + objLocation + ") in container: (" + container + ") will be replaced with a new Mark " + markVersion + " schematic: " + replacementSchematic + ".");
             newItem = static_item.createNewItemFunction(replacementSchematic, container, objLocation);
         }
-        else 
+        else
         {
             blog("component_fix", "INIT - CREATE IN PLAYER CONTAINER: " + container);
             CustomerServiceLog("ShipComponents", "Component: (" + self + ") " + objectName + " is a Mark " + markVersion + " Reactor in container: (" + container + ") will be replaced with a new Mark 1 schematic: " + replacementSchematic + ".");
@@ -376,6 +395,7 @@ public class component extends script.base_script
         messageTo(self, "destroyDeprecatedCollectionReactor", null, 0, false);
         return true;
     }
+
     public boolean blog(String category, String msg) throws InterruptedException
     {
         return true;

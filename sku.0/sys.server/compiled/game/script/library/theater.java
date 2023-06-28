@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 import java.util.Vector;
@@ -38,6 +44,7 @@ public class theater extends script.base_script
     public static final String HANDLE_THEATER_COMPLETE = "handleTheaterComplete";
     public static final int NUM_TO_SPAWN = 3;
     public static final float DELAY_TO_SPAWN = 0.50f;
+
     public theater()
     {
     }

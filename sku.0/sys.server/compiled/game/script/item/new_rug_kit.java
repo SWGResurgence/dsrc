@@ -4,6 +4,12 @@ package script.item;/*
 @Purpose: Way to obtain new rugs.
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.create;
 import script.library.static_item;
@@ -43,10 +49,11 @@ public class new_rug_kit extends script.base_script
         }
         if (utils.isNestedWithinAPlayer(self))
         {
-           mi.addRootMenu(menu_info_types.ITEM_USE, unlocalized("Fabricate Rugs"));
+            mi.addRootMenu(menu_info_types.ITEM_USE, unlocalized("Fabricate Rugs"));
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -74,7 +81,7 @@ public class new_rug_kit extends script.base_script
             obj_id[] items = new obj_id[theSet.size()];
             for (int i = 0; i < theSet.size(); i++)
             {
-                items[i] = (obj_id)theSet.toArray()[i];
+                items[i] = (obj_id) theSet.toArray()[i];
                 setName(items[i], "an exotic rug");
                 setObjVar(items[i], "null_desc", "This exotic rug was fabricated from Abbub's Rug Kit. What a spectacular rug!");
                 attachScript(items[i], "developer.bubbajoe.sync");

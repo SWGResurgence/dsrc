@@ -1,5 +1,11 @@
 package script.systems.fs_quest.calibrationpuzzle;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.utils;
 import script.obj_id;
@@ -64,9 +70,9 @@ public class puzzle2 extends script.base_script
         utils.setScriptVar(self, "calibpuzzle2_barPos0", sliderPos0);
         utils.setScriptVar(self, "calibpuzzle2_barPos1", sliderPos1);
         utils.setScriptVar(self, "calibpuzzle2_barPos2", sliderPos2);
-        setSUIProperty(pid, "%slider1%", "Value", "" + (100 * sliderPos0));
-        setSUIProperty(pid, "%slider2%", "Value", "" + (100 * sliderPos1));
-        setSUIProperty(pid, "%slider3%", "Value", "" + (100 * sliderPos2));
+        setSUIProperty(pid, "%slider1%", "Value", String.valueOf(100 * sliderPos0));
+        setSUIProperty(pid, "%slider2%", "Value", String.valueOf(100 * sliderPos1));
+        setSUIProperty(pid, "%slider3%", "Value", String.valueOf(100 * sliderPos2));
         utils.setScriptVar(self, "calibpuzzle2_moves", 25);
         setSUIProperty(pid, "%attemptsRemaining%", "Text", "" + 25);
         float n;
@@ -85,7 +91,7 @@ public class puzzle2 extends script.base_script
             {
                 value = 1.0f;
             }
-            setSUIProperty(pid, "%barTop" + i + "%", "Value", "" + (100 * value));
+            setSUIProperty(pid, "%barTop" + i + "%", "Value", String.valueOf(100 * value));
             setSUIProperty(pid, "%barTop" + i + "%", "RunScript", "");
         }
         for (i = 0; i < 7; i++)
@@ -100,7 +106,7 @@ public class puzzle2 extends script.base_script
             {
                 value = 1.0f;
             }
-            setSUIProperty(pid, "%barBottom" + i + "%", "Value", "" + (100 * value));
+            setSUIProperty(pid, "%barBottom" + i + "%", "Value", String.valueOf(100 * value));
             setSUIProperty(pid, "%barBottom" + i + "%", "RunScript", "");
         }
         setSUIProperty(pid, "%okButton%", "IsDefaultButton", "true");
@@ -158,7 +164,7 @@ public class puzzle2 extends script.base_script
                 detachScript(self, "systems.fs_quest.calibrationpuzzle.puzzle2");
                 forceCloseSUIPage(pid);
             }
-            setSUIProperty(pid, "%attemptsRemaining%", "Text", "" + currentMoves);
+            setSUIProperty(pid, "%attemptsRemaining%", "Text", String.valueOf(currentMoves));
             debugSpeakMsg(self, "bar0 = " + bar0 + " bar1 = " + bar1 + " bar2 = " + bar2);
             debugSpeakMsg(self, "c0 = " + c0 + " c1 = " + c1 + " c2 = " + c2);
             float n;
@@ -174,7 +180,7 @@ public class puzzle2 extends script.base_script
                 {
                     value = 1.0f;
                 }
-                setSUIProperty(pid, "%barTop" + i + "%", "Value", "" + (100 * value));
+                setSUIProperty(pid, "%barTop" + i + "%", "Value", String.valueOf(100 * value));
                 setSUIProperty(pid, "%barTop" + i + "%", "RunScript", "");
             }
             debugSpeakMsg(self, "Inside buttonOK 4, currentMoves = " + currentMoves);

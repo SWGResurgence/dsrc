@@ -1,5 +1,11 @@
 package script.theme_park.meatlump;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.create;
 import script.library.stealth;
 import script.library.utils;
@@ -8,9 +14,6 @@ import script.obj_id;
 
 public class meatlump_guard_trigger_volume extends script.base_script
 {
-    public meatlump_guard_trigger_volume()
-    {
-    }
     public static final boolean LOGGING_ON = false;
     public static final String MEATLUMP_TRIGGER_NAME_PREFIX = "meatlump_guardian_trigger_";
     public static final String MEATLUMP_TRIGGER = "meatlump_trigger";
@@ -20,11 +23,16 @@ public class meatlump_guard_trigger_volume extends script.base_script
     public static final String SPAM_STRING_FILE = "spam";
     public static final String MEATLUMP_LOG = "meatlump_trigger";
     public static final float MEATLUMP_TRIGGER_RADIUS = 8.0f;
+    public meatlump_guard_trigger_volume()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         createTriggerVolume(MEATLUMP_TRIGGER_NAME_PREFIX + self, MEATLUMP_TRIGGER_RADIUS, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id whoTriggeredMe) throws InterruptedException
     {
         if (!isPlayer(whoTriggeredMe))
@@ -53,11 +61,13 @@ public class meatlump_guard_trigger_volume extends script.base_script
         attachScript(mob, MEATLUMP_ENEMY_SCRIPT);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volumeName, obj_id whoTriggeredMe) throws InterruptedException
     {
         blog("Exited trigger volume: " + whoTriggeredMe);
         return SCRIPT_CONTINUE;
     }
+
     public boolean getRandomPhrases(obj_id mob) throws InterruptedException
     {
         if (!isValidId(mob) || !exists(mob))
@@ -71,77 +81,78 @@ public class meatlump_guard_trigger_volume extends script.base_script
         switch (attackPhraseInt)
         {
             case 1:
-            attackPhrase = "enemy_attack_rest";
-            break;
+                attackPhrase = "enemy_attack_rest";
+                break;
             case 2:
-            attackPhrase = "enemy_attack_oh_look";
-            break;
+                attackPhrase = "enemy_attack_oh_look";
+                break;
             case 3:
-            attackPhrase = "enemy_attack_surprise";
-            break;
+                attackPhrase = "enemy_attack_surprise";
+                break;
             case 4:
-            attackPhrase = "enemy_attack_now_got";
-            break;
+                attackPhrase = "enemy_attack_now_got";
+                break;
             case 5:
-            attackPhrase = "enemy_attack_what_did";
-            break;
+                attackPhrase = "enemy_attack_what_did";
+                break;
             case 6:
-            attackPhrase = "enemy_attack_sneaky";
-            break;
+                attackPhrase = "enemy_attack_sneaky";
+                break;
             case 7:
-            attackPhrase = "enemy_attack_youre_not";
-            break;
+                attackPhrase = "enemy_attack_youre_not";
+                break;
             case 8:
-            attackPhrase = "enemy_attack_lotta_nerve";
-            break;
+                attackPhrase = "enemy_attack_lotta_nerve";
+                break;
             case 9:
-            attackPhrase = "enemy_attack_stop";
-            break;
+                attackPhrase = "enemy_attack_stop";
+                break;
             case 10:
-            attackPhrase = "enemy_attack_you_thief";
-            break;
+                attackPhrase = "enemy_attack_you_thief";
+                break;
             default:
-            break;
+                break;
         }
         switch (defeatPhraseInt)
         {
             case 1:
-            defeatPhrase = "enemy_defeat_oops";
-            break;
+                defeatPhrase = "enemy_defeat_oops";
+                break;
             case 2:
-            defeatPhrase = "enemy_defeat_challenging";
-            break;
+                defeatPhrase = "enemy_defeat_challenging";
+                break;
             case 3:
-            defeatPhrase = "enemy_defeat_boo_hoo";
-            break;
+                defeatPhrase = "enemy_defeat_boo_hoo";
+                break;
             case 4:
-            defeatPhrase = "enemy_defeat_take_that";
-            break;
+                defeatPhrase = "enemy_defeat_take_that";
+                break;
             case 5:
-            defeatPhrase = "enemy_defeat_entertainer";
-            break;
+                defeatPhrase = "enemy_defeat_entertainer";
+                break;
             case 6:
-            defeatPhrase = "enemy_defeat_trader";
-            break;
+                defeatPhrase = "enemy_defeat_trader";
+                break;
             case 7:
-            defeatPhrase = "enemy_defeat_sweat";
-            break;
+                defeatPhrase = "enemy_defeat_sweat";
+                break;
             case 8:
-            defeatPhrase = "enemy_defeat_training";
-            break;
+                defeatPhrase = "enemy_defeat_training";
+                break;
             case 9:
-            defeatPhrase = "enemy_defeat_lunch";
-            break;
+                defeatPhrase = "enemy_defeat_lunch";
+                break;
             case 10:
-            defeatPhrase = "enemy_defeat_tell_everyone";
-            break;
+                defeatPhrase = "enemy_defeat_tell_everyone";
+                break;
             default:
-            break;
+                break;
         }
         setObjVar(mob, "attack_phrase", attackPhrase);
         setObjVar(mob, "defeat_phrase", defeatPhrase);
         return true;
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON)

@@ -1,5 +1,11 @@
 package script.theme_park.rebel;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.location;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class rtp_luke_force_altar extends script.base_script
     public rtp_luke_force_altar()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "forceCrystalSpawned"))
@@ -17,6 +24,7 @@ public class rtp_luke_force_altar extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "forceCrystalSpawned"))
@@ -25,6 +33,7 @@ public class rtp_luke_force_altar extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleQuestFlavorObject(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "forceCrystalSpawned"))
@@ -38,6 +47,7 @@ public class rtp_luke_force_altar extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleQuestFlavorObjectCleanup(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "forceCrystalSpawned"))

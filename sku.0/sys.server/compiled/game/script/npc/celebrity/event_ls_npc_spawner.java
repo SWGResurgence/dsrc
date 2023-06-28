@@ -1,5 +1,11 @@
 package script.npc.celebrity;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -10,6 +16,7 @@ public class event_ls_npc_spawner extends script.base_script
     public event_ls_npc_spawner()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "event.lost_squadron.num_rewards"))
@@ -56,12 +63,13 @@ public class event_ls_npc_spawner extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             return SCRIPT_OVERRIDE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rewardGiven(obj_id self, dictionary params) throws InterruptedException
     {
         int numRewards = getIntObjVar(self, "event.lost_squadron.num_rewards");

@@ -1,5 +1,11 @@
 package script.theme_park.kashyyyk;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,6 +14,7 @@ public class kash_rodian_shuttle extends script.base_script
     public kash_rodian_shuttle()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         detachScript(self, "ai.ai");
@@ -25,6 +32,7 @@ public class kash_rodian_shuttle extends script.base_script
         messageTo(self, "msgShuttleTakeOff", null, 60, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setPosture(self, POSTURE_UPRIGHT);
@@ -36,10 +44,12 @@ public class kash_rodian_shuttle extends script.base_script
         messageTo(self, "msgShuttleTakeOff", null, 60, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int msgShuttleTakeOff(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasMessageTo(self, "msgShuttleTakeOff"))
@@ -55,6 +65,7 @@ public class kash_rodian_shuttle extends script.base_script
         messageTo(self, "msgShuttleLand", null, rand(40, 60), false);
         return SCRIPT_CONTINUE;
     }
+
     public int msgShuttleLand(obj_id self, dictionary params) throws InterruptedException
     {
         setPosture(self, POSTURE_UPRIGHT);
@@ -66,6 +77,7 @@ public class kash_rodian_shuttle extends script.base_script
         messageTo(self, "msgShuttleTakeOff", null, rand(60, 300), false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id objParent = getObjIdObjVar(self, "objParent");

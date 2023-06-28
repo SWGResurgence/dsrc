@@ -1,5 +1,11 @@
 package script.theme_park.newbie_tutorial;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,11 +14,13 @@ public class bankuser extends script.theme_park.newbie_tutorial.tutorial_base
     public bankuser()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleUseBank", null, rand(15, 30), false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleUseBank(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "newbie.trooperTalking"))
@@ -22,6 +30,7 @@ public class bankuser extends script.theme_park.newbie_tutorial.tutorial_base
         messageTo(self, "handleUseBank", null, rand(15, 30), false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleStormtrooper(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, "newbie.trooperTalking", true);
@@ -30,6 +39,7 @@ public class bankuser extends script.theme_park.newbie_tutorial.tutorial_base
         messageTo(self, "handleDenial", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleDenial(obj_id self, dictionary params) throws InterruptedException
     {
         doAnimationAction(self, "standing_placate");

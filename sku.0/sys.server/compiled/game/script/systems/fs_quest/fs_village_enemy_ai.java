@@ -1,5 +1,11 @@
 package script.systems.fs_quest;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.ai.ai_combat;
 import script.dictionary;
 import script.library.ai_lib;

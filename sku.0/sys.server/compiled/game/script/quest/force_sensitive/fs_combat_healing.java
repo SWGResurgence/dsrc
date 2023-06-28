@@ -1,5 +1,11 @@
 package script.quest.force_sensitive;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.quests;
 import script.obj_id;
@@ -7,10 +13,12 @@ import script.string_id;
 
 public class fs_combat_healing extends script.base_script
 {
+    public static final boolean DEBUGGING = false;
+
     public fs_combat_healing()
     {
     }
-    public static final boolean DEBUGGING = false;
+
     public int receiveCreditForCombatHealing(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = params.getObjId("target");
@@ -24,7 +32,7 @@ public class fs_combat_healing extends script.base_script
                     healTotal++;
                     setObjVar(self, "quest.fs_combat_healing.totalhealed", healTotal);
                 }
-                else 
+                else
                 {
                     setObjVar(self, "quest.fs_combat_healing.totalhealed", 1);
                 }
@@ -32,11 +40,13 @@ public class fs_combat_healing extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgQuestAbortPhaseChange(obj_id self, dictionary params) throws InterruptedException
     {
         detachScript(self, "quest.force_sensitive.fs_combat_healing");
         return SCRIPT_CONTINUE;
     }
+
     public void cleanUpStuff(obj_id player) throws InterruptedException
     {
         removeObjVar(player, "quest.fs_combat_healing.totalhealed");
@@ -56,6 +66,7 @@ public class fs_combat_healing extends script.base_script
             quests.complete("fs_combat_healing_finish", player, true);
         }
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         cleanUpStuff(self);

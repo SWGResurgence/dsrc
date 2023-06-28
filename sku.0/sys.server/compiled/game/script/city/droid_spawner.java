@@ -1,5 +1,11 @@
 package script.city;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.utils;
@@ -10,11 +16,13 @@ public class droid_spawner extends script.base_script
     public droid_spawner()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "checkForStart", null, 30, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "current"))
@@ -22,12 +30,13 @@ public class droid_spawner extends script.base_script
             killAll(self);
             messageTo(self, "checkForStart", null, 30, true);
         }
-        else 
+        else
         {
             messageTo(self, "checkForStart", null, 30, true);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (!hasObjVar(speaker, "gm"))
@@ -36,7 +45,7 @@ public class droid_spawner extends script.base_script
         }
         if (text.contains("max"))
         {
-            setObjVar(self, "pop", utils.stringToInt(text.substring(text.indexOf(" ") + 1, text.length())));
+            setObjVar(self, "pop", utils.stringToInt(text.substring(text.indexOf(" ") + 1)));
         }
         if (text.equals("killall"))
         {
@@ -48,6 +57,7 @@ public class droid_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int checkForStart(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "pop"))
@@ -55,13 +65,14 @@ public class droid_spawner extends script.base_script
             messageTo(self, "startSpawning", null, 10, true);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             setObjVar(self, "pop", 3);
             messageTo(self, "checkForStart", null, 30, true);
             return SCRIPT_CONTINUE;
         }
     }
+
     public int startSpawning(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "current"))
@@ -69,7 +80,7 @@ public class droid_spawner extends script.base_script
             setObjVar(self, "current", 1);
             doSpawn(self);
         }
-        else 
+        else
         {
             if (getIntObjVar(self, "current") <= getIntObjVar(self, "pop"))
             {
@@ -78,6 +89,7 @@ public class droid_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void doSpawn(obj_id self) throws InterruptedException
     {
         int currentPop = getIntObjVar(self, "current");
@@ -93,6 +105,7 @@ public class droid_spawner extends script.base_script
 
         messageTo(self, "startSpawning", null, 10, true);
     }
+
     public void killAll(obj_id self) throws InterruptedException
     {
         int increment = 1;
@@ -109,6 +122,7 @@ public class droid_spawner extends script.base_script
         removeObjVar(self, "current");
         removeObjVar(self, "spawn");
     }
+
     public String npcToSpawn() throws InterruptedException
     {
         String spawn = "commoner";

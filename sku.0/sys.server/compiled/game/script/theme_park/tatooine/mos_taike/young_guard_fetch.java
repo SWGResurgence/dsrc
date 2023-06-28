@@ -1,5 +1,11 @@
 package script.theme_park.tatooine.mos_taike;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -8,6 +14,7 @@ public class young_guard_fetch extends script.base_script
     public young_guard_fetch()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         attachScript(self, "npc.converse.npc_converse_menu");
@@ -15,6 +22,7 @@ public class young_guard_fetch extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         String datatable = "datatables/theme_park/mos_taike_young_guard.iff";
@@ -35,7 +43,7 @@ public class young_guard_fetch extends script.base_script
             if (boss == self)
             {
                 obj_id playerInv = utils.getInventoryContainer(speaker);
-                if (checkForItem(self, playerInv) == true || hasObjVar(speaker, "mos_taike.young_guard.questDone"))
+                if (checkForItem(self, playerInv) || hasObjVar(speaker, "mos_taike.young_guard.questDone"))
                 {
                     String reward = "npc_reward_" + questNum;
                     string_id message = new string_id(CONVO, reward);
@@ -45,28 +53,28 @@ public class young_guard_fetch extends script.base_script
                     messageTo(self, "giveReward", parms, 0, true);
                     return SCRIPT_OVERRIDE;
                 }
-                else 
+                else
                 {
                     string_id work = new string_id(CONVO, "gotowork");
                     chat.chat(self, work);
                     return SCRIPT_CONTINUE;
                 }
             }
-            else 
+            else
             {
                 string_id cant = new string_id(CONVO, "cantwork");
                 chat.chat(self, cant);
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             String npcGreet = "npc_1_" + questNum;
             String response1 = "player_1_" + questNum;
             String response2 = "player_2_" + questNum;
             String response3 = "player_3_" + questNum;
             string_id greeting = new string_id(CONVO, npcGreet);
-            string_id response[] = new string_id[3];
+            string_id[] response = new string_id[3];
             response[0] = new string_id(CONVO, response1);
             response[1] = new string_id(CONVO, response2);
             response[2] = new string_id(CONVO, response3);
@@ -74,6 +82,7 @@ public class young_guard_fetch extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convo, obj_id player, string_id response) throws InterruptedException
     {
         String datatable = "datatables/theme_park/mos_taike.iff";
@@ -93,7 +102,7 @@ public class young_guard_fetch extends script.base_script
                 npcEndConversation(player);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 String npcAnswer1 = "npc_2_" + questNum;
                 string_id message = new string_id(CONVO, npcAnswer1);
@@ -126,6 +135,7 @@ public class young_guard_fetch extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public location getTargetLocation(obj_id self) throws InterruptedException
     {
         location target = new location();
@@ -143,6 +153,7 @@ public class young_guard_fetch extends script.base_script
         }
         return target;
     }
+
     public int OnGiveItem(obj_id self, obj_id item, obj_id giver) throws InterruptedException
     {
         String datatable = "datatables/theme_park/mos_taike_young_guard.iff";
@@ -152,7 +163,7 @@ public class young_guard_fetch extends script.base_script
             debugSpeakMsg(self, "I don't know you.");
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             obj_id boss = getObjIdObjVar(giver, "mos_taike.young_guard.young_guard");
             if (boss != self)
@@ -181,18 +192,20 @@ public class young_guard_fetch extends script.base_script
             messageTo(self, "giveReward", parms, 0, true);
             return SCRIPT_OVERRIDE;
         }
-        else 
+        else
         {
             string_id notit = new string_id(CONVO, "not_it");
             chat.chat(self, notit);
             return SCRIPT_OVERRIDE;
         }
     }
+
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         destroyObject(item);
         return SCRIPT_CONTINUE;
     }
+
     public int giveReward(obj_id self, dictionary params) throws InterruptedException
     {
         String datatable = "datatables/theme_park/mos_taike_young_guard.iff";
@@ -208,7 +221,7 @@ public class young_guard_fetch extends script.base_script
             setObjVar(player, "mos_taike.young_guard_quest", questNum + 1);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             obj_id playerInv = utils.getInventoryContainer(player);
             createObject(reward, playerInv, "");
@@ -218,6 +231,7 @@ public class young_guard_fetch extends script.base_script
             return SCRIPT_CONTINUE;
         }
     }
+
     public boolean checkForItem(obj_id self, obj_id inv) throws InterruptedException
     {
         String datatable = "datatables/theme_park/mos_taike_young_guard.iff";
@@ -227,12 +241,16 @@ public class young_guard_fetch extends script.base_script
         String giveMe = dataTableGetString(datatable, 2, questNum - 1);
         boolean hadIt = false;
         obj_id[] contents = getContents(inv);
-        for (obj_id content : contents) {
+        for (obj_id content : contents)
+        {
             String itemInInventory = getTemplateName(content);
-            if (itemInInventory.equals(giveMe)) {
+            if (itemInInventory.equals(giveMe))
+            {
                 destroyObject(content);
                 hadIt = true;
-            } else {
+            }
+            else
+            {
                 hadIt = false;
             }
         }

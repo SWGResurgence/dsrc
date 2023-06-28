@@ -1,14 +1,22 @@
 package script.developer.soe.csr;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.utils;
 import script.obj_id;
 
 public class get_resource_crate extends script.base_script
 {
+    public static final int MAX_AMOUNT = 100000;
+
     public get_resource_crate()
     {
     }
-    public static final int MAX_AMOUNT = 100000;
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (isPlayer(self) && !isGod(self))
@@ -40,12 +48,12 @@ public class get_resource_crate extends script.base_script
                         }
                         getResourceCrate(self, resourceName, amount);
                     }
-                    else 
+                    else
                     {
                         notEnoughParams = true;
                     }
                 }
-                else 
+                else
                 {
                     notEnoughParams = true;
                 }
@@ -57,6 +65,7 @@ public class get_resource_crate extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void getResourceCrate(obj_id player, String resourceName, int amount) throws InterruptedException
     {
         obj_id resourceType = getResourceTypeByName(resourceName);
@@ -73,29 +82,29 @@ public class get_resource_crate extends script.base_script
                     {
                         sendSystemMessage(player, "getResourceCrate: FAILURE - Could not create crate.", "");
                     }
-                    else 
+                    else
                     {
                         if (addResourceToContainer(crate, resourceType, amount, player))
                         {
                             sendSystemMessage(player, "getResourceCrate: Crate of " + resourceName + " created and filled with " + amount + " units.  It has been placed in your inventory.", "");
                         }
-                        else 
+                        else
                         {
                             sendSystemMessage(player, "getResourceCrate: FAILURE - Crate created, but could not be filled.", "");
                         }
                     }
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, "getResourceCrate: FAILURE - Could not get your inventroy to put the container in.", "");
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(player, "getResourceCrate: FAILURE - Could not get the crate template.", "");
             }
         }
-        else 
+        else
         {
             sendSystemMessage(player, "getResourceCrate: FAILURE - Could not find resource type by name, check resource name.", "");
         }

@@ -1,5 +1,11 @@
 package script.item.dna;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.static_item;
 import script.library.utils;
@@ -9,6 +15,7 @@ public class cracktooth_dna extends script.base_script
 {
     public static final String CRACKTOOTH_NARGLATCH_DNA_LOOT_ITEM = "item_cs_dna_mutated_narglatch";
     public static final int CRACKTOOTH_NARGLATCH_DNA_LOOT_CHANCE = 5;
+
     public cracktooth_dna()
     {
     }

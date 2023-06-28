@@ -1,5 +1,11 @@
 package script.event.ep3demo;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -12,12 +18,14 @@ public class battle_spawner extends script.base_script
     public battle_spawner()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "ep3demoCleanUpBattle", null, 36000, false);
         startBattle(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         float timeStamp = getFloatObjVar(self, "ep3demo.timeStamp");
@@ -28,6 +36,7 @@ public class battle_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAddedToWorld(obj_id self) throws InterruptedException
     {
         float timeStamp = getFloatObjVar(self, "ep3demo.timeStamp");
@@ -38,6 +47,7 @@ public class battle_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void startBattle(obj_id self) throws InterruptedException
     {
         String[] aggressorTemplate = getStringArrayObjVar(self, "ep3demo.aggressorTemplate");
@@ -67,8 +77,8 @@ public class battle_spawner extends script.base_script
             setObjVar(victim, "ep3demo.spawnPoint", theOtherSpawnLoc);
             attachScript(victim, "event.ep3demo.combatant");
         }
-        return;
     }
+
     public int OnHearSpeech(obj_id self, obj_id objSpeaker, String strText) throws InterruptedException
     {
         if (!isGod(objSpeaker))
@@ -87,11 +97,13 @@ public class battle_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3demoCleanUpBattle(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnAnotherVictim(obj_id self, dictionary params) throws InterruptedException
     {
         String[] victimTemplate = getStringArrayObjVar(self, "ep3demo.victimTemplate");
@@ -106,6 +118,7 @@ public class battle_spawner extends script.base_script
         attachScript(victim, "event.ep3demo.combatant");
         return SCRIPT_CONTINUE;
     }
+
     public int spawnAnotherAggressor(obj_id self, dictionary params) throws InterruptedException
     {
         String[] aggressorTemplate = getStringArrayObjVar(self, "ep3demo.aggressorTemplate");

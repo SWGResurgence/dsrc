@@ -1,13 +1,16 @@
 package script.theme_park.heroic.ig88;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class ig88 extends script.base_script
 {
-    public ig88()
-    {
-    }
     public static final String COMBAT_WEAPON_PHASE = "ig88.weapon.phase";
     public static final int COMBAT_WEAPON_PHASE_UNKNOWN = 0;
     public static final int COMBAT_WEAPON_PHASE_ROCKET = 1;
@@ -44,6 +47,10 @@ public class ig88 extends script.base_script
     public static final int COMBAT_ACTION_TIME_DROIDEKA_0 = 1;
     public static final int COMBAT_ACTION_TIME_DROIDEKA_1 = 15;
     public static final int COMBAT_ACTION_TIME_DROIDEKA_2 = 10;
+    public ig88()
+    {
+    }
+
     public void shoutRandom(obj_id self, String msg) throws InterruptedException
     {
         msg = msg + rand(1, 10);
@@ -61,8 +68,8 @@ public class ig88 extends script.base_script
             pp = prose.setTU(pp, new string_id("spam", msg));
             utils.sendSystemMessageProse(targets, pp);
         }
-        return;
     }
+
     public int waypoint1(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -76,6 +83,7 @@ public class ig88 extends script.base_script
         pathTo(self, loc);
         return SCRIPT_CONTINUE;
     }
+
     public int waypoint2(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -89,6 +97,7 @@ public class ig88 extends script.base_script
         pathTo(self, loc);
         return SCRIPT_CONTINUE;
     }
+
     public int shoutRegret(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -107,6 +116,7 @@ public class ig88 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int shoutBombDroids(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -117,6 +127,7 @@ public class ig88 extends script.base_script
         doAnimationAction(self, "threaten");
         return SCRIPT_CONTINUE;
     }
+
     public int shoutDroidekas(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -127,6 +138,7 @@ public class ig88 extends script.base_script
         doAnimationAction(self, "threaten");
         return SCRIPT_CONTINUE;
     }
+
     public int shoutSuperDroids(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -137,6 +149,7 @@ public class ig88 extends script.base_script
         doAnimationAction(self, "threaten");
         return SCRIPT_CONTINUE;
     }
+
     public int shoutAssassination(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -147,6 +160,7 @@ public class ig88 extends script.base_script
         doAnimationAction(self, "threaten");
         return SCRIPT_CONTINUE;
     }
+
     public int shoutBombIntermission(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -157,6 +171,7 @@ public class ig88 extends script.base_script
         doAnimationAction(self, "threaten");
         return SCRIPT_CONTINUE;
     }
+
     public int shoutFailed(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -183,6 +198,7 @@ public class ig88 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void findNextTarget(obj_id self) throws InterruptedException
     {
         if (ai_lib.isDead(self))
@@ -217,6 +233,7 @@ public class ig88 extends script.base_script
         messageTo(self, "nextComboPhase", params, 1, false);
         setHate(self, target, 5000);
     }
+
     public int findTarget(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -242,6 +259,7 @@ public class ig88 extends script.base_script
         messageTo(self, "nextComboPhase", sessionDict, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -251,6 +269,7 @@ public class ig88 extends script.base_script
         findNextTarget(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -267,6 +286,7 @@ public class ig88 extends script.base_script
         messageTo(dungeon, "ig88_failure_check", sessionDict, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int colorize(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -277,6 +297,7 @@ public class ig88 extends script.base_script
         hue.setColor(self, hue.INDEX_2, 46);
         return SCRIPT_CONTINUE;
     }
+
     public int nextWeaponPhase(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self) || ai_lib.isDead(self))
@@ -308,35 +329,36 @@ public class ig88 extends script.base_script
         {
             default:
             case COMBAT_WEAPON_PHASE_UNKNOWN:
-            utils.setScriptVar(self, COMBAT_WEAPON_PHASE, COMBAT_WEAPON_PHASE_ROCKET);
-            combination = utils.getIntScriptVar(self, COMBAT_ACTION_COMBINATION);
-            if (combination != COMBAT_ACTION_COMBINATION_DROIDEKA)
-            {
-                aiEquipPrimaryWeapon(self);
-            }
-            messageTo(self, "nextWeaponPhase", sessionDict, COMBAT_WEAPON_TIME_ROCKET, false);
-            break;
+                utils.setScriptVar(self, COMBAT_WEAPON_PHASE, COMBAT_WEAPON_PHASE_ROCKET);
+                combination = utils.getIntScriptVar(self, COMBAT_ACTION_COMBINATION);
+                if (combination != COMBAT_ACTION_COMBINATION_DROIDEKA)
+                {
+                    aiEquipPrimaryWeapon(self);
+                }
+                messageTo(self, "nextWeaponPhase", sessionDict, COMBAT_WEAPON_TIME_ROCKET, false);
+                break;
             case COMBAT_WEAPON_PHASE_ROCKET:
-            utils.setScriptVar(self, COMBAT_WEAPON_PHASE, COMBAT_WEAPON_PHASE_FLAME_THROWER);
-            combination = utils.getIntScriptVar(self, COMBAT_ACTION_COMBINATION);
-            if (combination != COMBAT_ACTION_COMBINATION_DROIDEKA)
-            {
-                aiEquipPrimaryWeapon(self);
-            }
-            messageTo(self, "nextWeaponPhase", sessionDict, COMBAT_WEAPON_TIME_ROCKET, false);
-            break;
+                utils.setScriptVar(self, COMBAT_WEAPON_PHASE, COMBAT_WEAPON_PHASE_FLAME_THROWER);
+                combination = utils.getIntScriptVar(self, COMBAT_ACTION_COMBINATION);
+                if (combination != COMBAT_ACTION_COMBINATION_DROIDEKA)
+                {
+                    aiEquipPrimaryWeapon(self);
+                }
+                messageTo(self, "nextWeaponPhase", sessionDict, COMBAT_WEAPON_TIME_ROCKET, false);
+                break;
             case COMBAT_WEAPON_PHASE_FLAME_THROWER:
-            utils.setScriptVar(self, COMBAT_WEAPON_PHASE, COMBAT_WEAPON_PHASE_ROCKET);
-            combination = utils.getIntScriptVar(self, COMBAT_ACTION_COMBINATION);
-            if (combination != COMBAT_ACTION_COMBINATION_DROIDEKA)
-            {
-                aiEquipSecondaryWeapon(self);
-            }
-            messageTo(self, "nextWeaponPhase", sessionDict, COMBAT_WEAPON_TIME_FLAME_THROWER, false);
-            break;
+                utils.setScriptVar(self, COMBAT_WEAPON_PHASE, COMBAT_WEAPON_PHASE_ROCKET);
+                combination = utils.getIntScriptVar(self, COMBAT_ACTION_COMBINATION);
+                if (combination != COMBAT_ACTION_COMBINATION_DROIDEKA)
+                {
+                    aiEquipSecondaryWeapon(self);
+                }
+                messageTo(self, "nextWeaponPhase", sessionDict, COMBAT_WEAPON_TIME_FLAME_THROWER, false);
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nextComboPhase(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self) || ai_lib.isDead(self))
@@ -382,85 +404,87 @@ public class ig88 extends script.base_script
         switch (combination)
         {
             case COMBAT_ACTION_COMBINATION_ELECTRICAL:
-            switch (phase)
-            {
-                case COMBAT_ACTION_PHASE_ELECTRICAL_0:
-                phaseTime = COMBAT_ACTION_TIME_ELECTRICAL_0;
-                setObjVar(self, "ai.combat.oneShotAction", "ig88_droideka_electrify");
-                break;
-                case COMBAT_ACTION_PHASE_ELECTRICAL_1:
-                setObjVar(self, "ai.combat.oneShotAction", "bh_dread_strike_5");
-                phaseTime = COMBAT_ACTION_TIME_ELECTRICAL_1;
-                break;
-                case COMBAT_ACTION_PHASE_ELECTRICAL_2:
-                setObjVar(self, "ai.combat.oneShotAction", "ig88_rocket_launch");
-                phaseTime = COMBAT_ACTION_TIME_ELECTRICAL_2;
-                break;
-                case COMBAT_ACTION_PHASE_ELECTRICAL_3:
-                utils.setScriptVar(self, COMBAT_ACTION_COMBINATION, COMBAT_ACTION_COMBINATION_INTERMISSION);
-                phaseTime = COMBAT_ACTION_TIME_ELECTRICAL_3;
-                break;
-            }
-            maxPhase = COMBAT_ACTION_PHASE_ELECTRICAL_3;
-            break;
-            case COMBAT_ACTION_COMBINATION_GRENADE:
-            switch (phase)
-            {
-                case COMBAT_ACTION_PHASE_GRENADE_0:
-                phaseTime = COMBAT_ACTION_TIME_GRENADE_0;
-                setObjVar(self, "ai.combat.oneShotAction", "ig88_shockwave");
-                break;
-                case COMBAT_ACTION_PHASE_GRENADE_1:
-                phaseTime = COMBAT_ACTION_TIME_GRENADE_1;
-                setObjVar(self, "ai.combat.oneShotAction", "ig88_grenade");
-                break;
-                case COMBAT_ACTION_PHASE_GRENADE_2:
-                utils.setScriptVar(self, COMBAT_ACTION_COMBINATION, COMBAT_ACTION_COMBINATION_INTERMISSION);
-                phaseTime = COMBAT_ACTION_TIME_GRENADE_2;
-                break;
-            }
-            maxPhase = COMBAT_ACTION_PHASE_GRENADE_2;
-            break;
-            case COMBAT_ACTION_COMBINATION_DROIDEKA:
-            switch (phase)
-            {
-                case COMBAT_ACTION_PHASE_DROIDEKA_0:
-                phaseTime = COMBAT_ACTION_TIME_DROIDEKA_0;
-                setObjVar(self, "ai.combat.oneShotAction", "ig88_shield");
-                break;
-                case COMBAT_ACTION_PHASE_DROIDEKA_1:
-                aiUnEquipWeapons(self);
-                obj_id[] targets = trial.getObjectsInDungeonWithObjVar(dungeon, "spawn_id");
-                int droidekaCount = 0;
-                    for (obj_id target : targets) {
-                        String id = getStringObjVar(target, "spawn_id");
-                        if (id.equals("normal_droideka")) {
-                            droidekaCount++;
-                        }
-                    }
-                if (droidekaCount < 5)
+                switch (phase)
                 {
-                    dictionary dungeonParams = trial.getSessionDict(dungeon);
-                    dungeonParams.put("triggerName", "message_ig88_normal_droidekas");
-                    dungeonParams.put("target", self);
-                    dungeonParams.put("triggerType", "triggerId");
-                    messageTo(dungeon, "triggerFired", dungeonParams, 0, false);
+                    case COMBAT_ACTION_PHASE_ELECTRICAL_0:
+                        phaseTime = COMBAT_ACTION_TIME_ELECTRICAL_0;
+                        setObjVar(self, "ai.combat.oneShotAction", "ig88_droideka_electrify");
+                        break;
+                    case COMBAT_ACTION_PHASE_ELECTRICAL_1:
+                        setObjVar(self, "ai.combat.oneShotAction", "bh_dread_strike_5");
+                        phaseTime = COMBAT_ACTION_TIME_ELECTRICAL_1;
+                        break;
+                    case COMBAT_ACTION_PHASE_ELECTRICAL_2:
+                        setObjVar(self, "ai.combat.oneShotAction", "ig88_rocket_launch");
+                        phaseTime = COMBAT_ACTION_TIME_ELECTRICAL_2;
+                        break;
+                    case COMBAT_ACTION_PHASE_ELECTRICAL_3:
+                        utils.setScriptVar(self, COMBAT_ACTION_COMBINATION, COMBAT_ACTION_COMBINATION_INTERMISSION);
+                        phaseTime = COMBAT_ACTION_TIME_ELECTRICAL_3;
+                        break;
                 }
-                phaseTime = COMBAT_ACTION_TIME_DROIDEKA_1;
+                maxPhase = COMBAT_ACTION_PHASE_ELECTRICAL_3;
                 break;
-                case COMBAT_ACTION_PHASE_DROIDEKA_2:
-                utils.setScriptVar(self, COMBAT_ACTION_COMBINATION, COMBAT_ACTION_COMBINATION_INTERMISSION);
-                phaseTime = COMBAT_ACTION_TIME_DROIDEKA_2;
-                messageTo(self, "nextWeaponPhase", sessionDict, 1, false);
+            case COMBAT_ACTION_COMBINATION_GRENADE:
+                switch (phase)
+                {
+                    case COMBAT_ACTION_PHASE_GRENADE_0:
+                        phaseTime = COMBAT_ACTION_TIME_GRENADE_0;
+                        setObjVar(self, "ai.combat.oneShotAction", "ig88_shockwave");
+                        break;
+                    case COMBAT_ACTION_PHASE_GRENADE_1:
+                        phaseTime = COMBAT_ACTION_TIME_GRENADE_1;
+                        setObjVar(self, "ai.combat.oneShotAction", "ig88_grenade");
+                        break;
+                    case COMBAT_ACTION_PHASE_GRENADE_2:
+                        utils.setScriptVar(self, COMBAT_ACTION_COMBINATION, COMBAT_ACTION_COMBINATION_INTERMISSION);
+                        phaseTime = COMBAT_ACTION_TIME_GRENADE_2;
+                        break;
+                }
+                maxPhase = COMBAT_ACTION_PHASE_GRENADE_2;
                 break;
-            }
-            maxPhase = COMBAT_ACTION_TIME_DROIDEKA_2;
-            break;
+            case COMBAT_ACTION_COMBINATION_DROIDEKA:
+                switch (phase)
+                {
+                    case COMBAT_ACTION_PHASE_DROIDEKA_0:
+                        phaseTime = COMBAT_ACTION_TIME_DROIDEKA_0;
+                        setObjVar(self, "ai.combat.oneShotAction", "ig88_shield");
+                        break;
+                    case COMBAT_ACTION_PHASE_DROIDEKA_1:
+                        aiUnEquipWeapons(self);
+                        obj_id[] targets = trial.getObjectsInDungeonWithObjVar(dungeon, "spawn_id");
+                        int droidekaCount = 0;
+                        for (obj_id target : targets)
+                        {
+                            String id = getStringObjVar(target, "spawn_id");
+                            if (id.equals("normal_droideka"))
+                            {
+                                droidekaCount++;
+                            }
+                        }
+                        if (droidekaCount < 5)
+                        {
+                            dictionary dungeonParams = trial.getSessionDict(dungeon);
+                            dungeonParams.put("triggerName", "message_ig88_normal_droidekas");
+                            dungeonParams.put("target", self);
+                            dungeonParams.put("triggerType", "triggerId");
+                            messageTo(dungeon, "triggerFired", dungeonParams, 0, false);
+                        }
+                        phaseTime = COMBAT_ACTION_TIME_DROIDEKA_1;
+                        break;
+                    case COMBAT_ACTION_PHASE_DROIDEKA_2:
+                        utils.setScriptVar(self, COMBAT_ACTION_COMBINATION, COMBAT_ACTION_COMBINATION_INTERMISSION);
+                        phaseTime = COMBAT_ACTION_TIME_DROIDEKA_2;
+                        messageTo(self, "nextWeaponPhase", sessionDict, 1, false);
+                        break;
+                }
+                maxPhase = COMBAT_ACTION_TIME_DROIDEKA_2;
+                break;
             case COMBAT_ACTION_COMBINATION_INTERMISSION:
-            utils.setScriptVar(self, COMBAT_ACTION_COMBINATION, 0);
-            utils.setScriptVar(self, COMBAT_ACTION_COBMINATION_PHASE, 0);
-            messageTo(self, "nextComboPhase", sessionDict, COMBAT_ACTION_TIME_INTERMISSION, false);
-            return SCRIPT_CONTINUE;
+                utils.setScriptVar(self, COMBAT_ACTION_COMBINATION, 0);
+                utils.setScriptVar(self, COMBAT_ACTION_COBMINATION_PHASE, 0);
+                messageTo(self, "nextComboPhase", sessionDict, COMBAT_ACTION_TIME_INTERMISSION, false);
+                return SCRIPT_CONTINUE;
         }
         phase++;
         if (phase > maxPhase)
@@ -471,6 +495,7 @@ public class ig88 extends script.base_script
         messageTo(self, "nextComboPhase", sessionDict, phaseTime, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -489,7 +514,7 @@ public class ig88 extends script.base_script
                 setMovementPercent(self, 100.0f);
                 pathTo(self, loc);
             }
-            else 
+            else
             {
                 setMovementPercent(self, 0.0f);
             }
@@ -503,6 +528,7 @@ public class ig88 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -523,6 +549,7 @@ public class ig88 extends script.base_script
         messageTo(dungeon, "ig88died", params, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpse) throws InterruptedException
     {
         obj_id[] players = trial.getPlayersInDungeon(trial.getParent(self));

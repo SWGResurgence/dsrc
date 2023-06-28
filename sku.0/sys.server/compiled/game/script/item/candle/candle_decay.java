@@ -1,5 +1,11 @@
 package script.item.candle;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class candle_decay extends script.base_script

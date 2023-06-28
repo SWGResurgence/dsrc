@@ -1,5 +1,11 @@
 package script.developer.soe.beta;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.utils;
 import script.obj_id;
 
@@ -8,6 +14,7 @@ public class xp_test extends script.base_script
     public xp_test()
     {
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if ((text.startsWith("grantXP")) || (text.startsWith("revokeXP")))

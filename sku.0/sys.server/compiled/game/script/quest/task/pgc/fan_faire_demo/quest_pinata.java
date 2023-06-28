@@ -1,5 +1,11 @@
 package script.quest.task.pgc.fan_faire_demo;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.obj_id;
@@ -9,11 +15,13 @@ public class quest_pinata extends script.base_script
     public quest_pinata()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "initializeQuestPinata", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int initializeQuestPinata(obj_id self, dictionary params) throws InterruptedException
     {
         removeTriggerVolume(ai_lib.ALERT_VOLUME_NAME);
@@ -24,6 +32,7 @@ public class quest_pinata extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id wpn, int[] damage) throws InterruptedException
     {
         int maxHealth = getUnmodifiedMaxAttrib(self, HEALTH);

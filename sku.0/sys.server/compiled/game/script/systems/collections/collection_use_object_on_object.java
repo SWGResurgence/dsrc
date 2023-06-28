@@ -1,5 +1,11 @@
 package script.systems.collections;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.groundquests;
 import script.library.utils;
@@ -13,6 +19,7 @@ public class collection_use_object_on_object extends script.base_script
     public static final string_id OBJECT_DESTROYED = new string_id("collection", "object_destroyed");
     public static final String OBJECT_KEY = "quest.object_key";
     public static final String COLLECTION_OBJECT_TABLE = "datatables/collection/use_object_on_object.iff";
+
     public collection_use_object_on_object()
     {
     }

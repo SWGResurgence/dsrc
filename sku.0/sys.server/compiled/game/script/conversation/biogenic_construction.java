@@ -1,88 +1,78 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.*;
 
 public class biogenic_construction extends script.base_script
 {
+    public static String c_stringFile = "conversation/biogenic_construction";
+
     public biogenic_construction()
     {
     }
-    public static String c_stringFile = "conversation/biogenic_construction";
+
     public boolean biogenic_construction_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean biogenic_construction_condition_get_tracker_1(obj_id player, obj_id npc) throws InterruptedException
     {
         int tracker = getIntObjVar(player, "biogenic.construction_convo");
-        if (tracker == 1)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return tracker == 1;
     }
+
     public boolean biogenic_construction_condition_get_tracker_2(obj_id player, obj_id npc) throws InterruptedException
     {
         int tracker = getIntObjVar(player, "biogenic.construction_convo");
-        if (tracker >= 2)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return tracker >= 2;
     }
+
     public boolean biogenic_construction_condition_get_ass_tracker_3(obj_id player, obj_id npc) throws InterruptedException
     {
         int tracker = getIntObjVar(player, "biogenic.assistant_convo");
-        if (tracker == 3)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return tracker == 3;
     }
+
     public boolean biogenic_construction_condition_get_multi_tracker(obj_id player, obj_id npc) throws InterruptedException
     {
         int ass_tracker = getIntObjVar(player, "biogenic.assistant_convo");
         int tracker = getIntObjVar(player, "biogenic.construction_convo");
-        if (tracker > 0 && ass_tracker == 3)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return tracker > 0 && ass_tracker == 3;
     }
+
     public void biogenic_construction_action__defaultAction(obj_id player, obj_id npc) throws InterruptedException
     {
     }
+
     public void biogenic_construction_action_face_to(obj_id player, obj_id npc) throws InterruptedException
     {
         faceToBehavior(npc, player);
     }
+
     public void biogenic_construction_action_give_drill(obj_id player, obj_id npc) throws InterruptedException
     {
     }
+
     public void biogenic_construction_action_set_tracker_2(obj_id player, obj_id npc) throws InterruptedException
     {
         faceToBehavior(npc, player);
         setObjVar(player, "biogenic.construction_convo", 2);
     }
+
     public void biogenic_construction_action_set_tracker_3(obj_id player, obj_id npc) throws InterruptedException
     {
         faceToBehavior(npc, player);
         setObjVar(player, "biogenic.construction_convo", 3);
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -93,12 +83,14 @@ public class biogenic_construction extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -107,12 +99,14 @@ public class biogenic_construction extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "npc.conversation.biogenic_construction");
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -156,7 +150,7 @@ public class biogenic_construction extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_82e89d37");
@@ -168,7 +162,7 @@ public class biogenic_construction extends script.base_script
                 setObjVar(player, "conversation.biogenic_construction.branchId", 3);
                 npcStartConversation(player, self, "biogenic_construction", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -211,7 +205,7 @@ public class biogenic_construction extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_e4b06f76");
@@ -231,7 +225,7 @@ public class biogenic_construction extends script.base_script
                 setObjVar(player, "conversation.biogenic_construction.branchId", 6);
                 npcStartConversation(player, self, "biogenic_construction", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -240,6 +234,7 @@ public class biogenic_construction extends script.base_script
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("biogenic_construction"))
@@ -298,7 +293,7 @@ public class biogenic_construction extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4136c2df");
@@ -311,7 +306,7 @@ public class biogenic_construction extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_construction.branchId");
                     npcSpeak(player, message);
@@ -347,7 +342,7 @@ public class biogenic_construction extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4136c2df");
@@ -360,7 +355,7 @@ public class biogenic_construction extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_construction.branchId");
                     npcSpeak(player, message);
@@ -396,7 +391,7 @@ public class biogenic_construction extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4136c2df");
@@ -409,7 +404,7 @@ public class biogenic_construction extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_construction.branchId");
                     npcSpeak(player, message);
@@ -445,7 +440,7 @@ public class biogenic_construction extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4136c2df");
@@ -458,7 +453,7 @@ public class biogenic_construction extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_construction.branchId");
                     npcSpeak(player, message);

@@ -1,5 +1,11 @@
 package script.systems.event_perk;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.create;
 import script.library.event_perk;
@@ -18,6 +24,7 @@ public class shuttle_beacon extends script.base_script
                     "object/creature/npc/theme_park/event_transport.iff",
                     "object/creature/npc/theme_park/event_transport_theed_hangar.iff"
             };
+
     public shuttle_beacon()
     {
     }
@@ -157,7 +164,6 @@ public class shuttle_beacon extends script.base_script
         utils.setScriptVar(self, "event_perk.heading", heading);
         utils.setScriptVar(self, "event_perk.terminalRegistration", terminalRegistration);
         sui.listbox(self, player, "@event_perk:shuttle_beacon_d", sui.OK_CANCEL, "@event_perk:shuttle_beacon_t", shuttleOptions, "handleCallShuttle", true);
-        return;
     }
 
     public int handleCallShuttle(obj_id self, dictionary params) throws InterruptedException
@@ -224,7 +230,6 @@ public class shuttle_beacon extends script.base_script
     public void dismissShuttle(obj_id self, obj_id player) throws InterruptedException
     {
         messageTo(self, "handleDismissShuttle", null, 0, false);
-        return;
     }
 
     public int handleDismissShuttle(obj_id self, dictionary params) throws InterruptedException
@@ -253,7 +258,6 @@ public class shuttle_beacon extends script.base_script
             destroyObject(self);
             sendSystemMessage(player, new string_id(STF_FILE, "deed_expired"));
         }
-        return;
     }
 
     public int toggleShuttleStatus(obj_id self, dictionary params) throws InterruptedException

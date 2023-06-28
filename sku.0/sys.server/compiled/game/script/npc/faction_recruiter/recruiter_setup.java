@@ -1,5 +1,11 @@
 package script.npc.faction_recruiter;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.menu_info;
 import script.menu_info_data;
@@ -11,24 +17,27 @@ public class recruiter_setup extends script.base_script
     public recruiter_setup()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setUpRecruiter(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setUpRecruiter(self);
         return SCRIPT_CONTINUE;
     }
+
     public void setUpRecruiter(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         setCondition(self, CONDITION_CONVERSABLE);
         String faction = getStringObjVar(self, "recruiter");
         setFactionRecruiter(self, faction);
-        return;
     }
+
     public boolean setFactionRecruiter(obj_id npc, String faction) throws InterruptedException
     {
         if (npc == null || npc == obj_id.NULL_ID)
@@ -43,6 +52,7 @@ public class recruiter_setup extends script.base_script
         attachScript(npc, "npc.faction_recruiter.faction_recruiter");
         return true;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!ai_lib.isAiDead(self))

@@ -1,5 +1,11 @@
 package script.theme_park.nym;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.obj_id;
@@ -9,12 +15,14 @@ public class dumpster_spawner extends script.base_script
     public dumpster_spawner()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         CustomerServiceLog("nyms_themepark", "dumpster_spawner.OnAttach() Initializing spawning functionality for spawner: " + self);
         messageTo(self, "spawnObject", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnObject(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id object = create.object("object/tangible/furniture/nym_themepark/city_dumpster.iff", getLocation(self));

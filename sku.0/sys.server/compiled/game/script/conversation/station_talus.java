@@ -1,107 +1,115 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class station_talus extends script.base_script
 {
+    public static String c_stringFile = "conversation/station_talus";
+
     public station_talus()
     {
     }
-    public static String c_stringFile = "conversation/station_talus";
+
     public boolean station_talus_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean station_talus_condition_canAfford50(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.canAffordShipRepairs(player, npc, 0.50f);
     }
+
     public boolean station_talus_condition_canAfford25(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_crafting.canAffordShipRepairs(player, npc, 0.25f) && space_crafting.isDamaged(player));
     }
+
     public boolean station_talus_condition_canAfford75(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.canAffordShipRepairs(player, npc, 0.75f);
     }
+
     public boolean station_talus_condition_canAfford100(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.canAffordShipRepairs(player, npc, 1.0f);
     }
+
     public boolean station_talus_condition_needRepairs(obj_id player, obj_id npc) throws InterruptedException
     {
         float fltDamage = space_crafting.getDamageTotal(player, getPilotedShip(player));
-        if (fltDamage > 0)
-        {
-            return true;
-        }
-        return false;
+        return fltDamage > 0;
     }
+
     public boolean station_talus_condition_isTooFar(obj_id player, obj_id npc) throws InterruptedException
     {
         space_combat.playCombatTauntSound(player);
         obj_id containingShip = space_transition.getContainingShip(player);
         return (getDistance(npc, containingShip) > space_transition.STATION_COMM_MAX_DISTANCE);
     }
+
     public boolean station_talus_condition_isSmuggler(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasSkill(player, "combat_smuggler_underworld_01");
     }
+
     public boolean station_talus_condition_isSmugglerTooFar(obj_id player, obj_id npc) throws InterruptedException
     {
         return (station_talus_condition_isSmuggler(player, npc) && station_talus_condition_isTooFar(player, npc));
     }
+
     public boolean station_talus_condition_isTalusSmuggler(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasObjVar(player, "talus_station.smuggler");
     }
+
     public boolean station_talus_condition_isTier1CorelliaImperial(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_flags.isInTierOne(player) && space_flags.isSpaceTrack(player, space_flags.IMPERIAL_CORELLIA));
     }
+
     public boolean station_talus_condition_isImperialCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_flags.isImperialPilot(player);
     }
+
     public boolean station_talus_condition_failedStoryQuest(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuestRecursive(player, "delivery", "talus_station_mission1_1") || space_quest.hasAbortedQuestRecursive(player, "delivery", "talus_station_mission1_1"))
-        {
-            return true;
-        }
-        return false;
+        return space_quest.hasFailedQuestRecursive(player, "delivery", "talus_station_mission1_1") || space_quest.hasAbortedQuestRecursive(player, "delivery", "talus_station_mission1_1");
     }
+
     public boolean station_talus_condition_wonStoryQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasSkill(player, "combat_smuggler_underworld_01") && space_quest.hasWonQuest(player, "delivery", "talus_station_mission4_2"))
         {
             int flag = space_flags.getIntSpaceFlag(player, "talus_station");
-            if (flag == 1)
-            {
-                return true;
-            }
-            return false;
+            return flag == 1;
         }
         return false;
     }
+
     public boolean station_talus_condition_readyForRun(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_flags.hasSpaceFlag(player, "talus_station"))
         {
             int flag = space_flags.getIntSpaceFlag(player, "talus_station");
-            if (flag == 2)
-            {
-                return true;
-            }
-            return false;
+            return flag == 2;
         }
         return false;
     }
+
     public boolean station_talus_condition_hasAQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasQuest(player);
     }
+
     public boolean station_talus_condition_canLandAtHouse(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "homingBeacon.planet"))
@@ -109,164 +117,176 @@ public class station_talus extends script.base_script
             String homePlanet = getStringObjVar(player, "homingBeacon.planet");
             return (homePlanet.endsWith("talus"));
         }
-        else 
+        else
         {
             return false;
         }
     }
+
     public boolean station_talus_condition_canTakeQuest(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasQuest(player))
-        {
-            return false;
-        }
-        return true;
+        return !space_quest.hasQuest(player);
     }
+
     public boolean station_talus_condition_canAttackImperial(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_flags.isRebelPilot(player) || space_flags.isRebelHelperPilot(player))
-        {
-            return true;
-        }
-        return false;
+        return space_flags.isRebelPilot(player) || space_flags.isRebelHelperPilot(player);
     }
+
     public boolean station_talus_condition_canAttackRebel(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_flags.isImperialPilot(player) || space_flags.isImperialHelperPilot(player))
-        {
-            return true;
-        }
-        return false;
+        return space_flags.isImperialPilot(player) || space_flags.isImperialHelperPilot(player);
     }
+
     public boolean station_talus_condition_canTakeTier5ImperialDuty(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_skill.isMasterPilot(player))
         {
             return false;
         }
-        if (space_flags.isImperialPilot(player) || space_flags.isImperialHelperPilot(player))
-        {
-            return true;
-        }
-        return false;
+        return space_flags.isImperialPilot(player) || space_flags.isImperialHelperPilot(player);
     }
+
     public boolean station_talus_condition_canTakeTier5RebelDuty(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_skill.isMasterPilot(player))
         {
             return false;
         }
-        if (space_flags.isRebelPilot(player) || space_flags.isRebelHelperPilot(player))
-        {
-            return true;
-        }
-        return false;
+        return space_flags.isRebelPilot(player) || space_flags.isRebelHelperPilot(player);
     }
+
     public void station_talus_action_landStation3(obj_id player, obj_id npc) throws InterruptedException
     {
         space_content.landPlayer(player, npc, "Daoba Guerfel Starport");
     }
+
     public void station_talus_action_fix25(obj_id player, obj_id npc) throws InterruptedException
     {
         space_crafting.doStationToShipRepairs(player, npc, 0.25f);
     }
+
     public void station_talus_action_fix50(obj_id player, obj_id npc) throws InterruptedException
     {
         space_crafting.doStationToShipRepairs(player, npc, 0.50f);
     }
+
     public void station_talus_action_fix75(obj_id player, obj_id npc) throws InterruptedException
     {
         space_crafting.doStationToShipRepairs(player, npc, 0.75f);
     }
+
     public void station_talus_action_fix100(obj_id player, obj_id npc) throws InterruptedException
     {
         space_crafting.doStationToShipRepairs(player, npc, 1.0f);
     }
+
     public void station_talus_action_landStation1(obj_id player, obj_id npc) throws InterruptedException
     {
         space_content.landPlayer(player, npc, "Dearic Starport");
     }
+
     public void station_talus_action_landStation2(obj_id player, obj_id npc) throws InterruptedException
     {
         space_content.landPlayer(player, npc, "Nashal Starport");
     }
+
     public void station_talus_action_landStation4(obj_id player, obj_id npc) throws InterruptedException
     {
         space_content.landPlayer(player, npc, "Talus Imperial Outpost");
     }
+
     public void station_talus_action_flagTalusSmuggler(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "talus_station.smuggler", true);
     }
+
     public void station_talus_action_grantStoryQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "delivery", "talus_station_mission1_1");
         space_flags.setSpaceFlag(player, "talus_station", 1);
     }
+
     public void station_talus_action_giveStoryReward(obj_id player, obj_id npc) throws InterruptedException
     {
         space_flags.setSpaceFlag(player, "talus_station", 2);
     }
+
     public void station_talus_action_grantTuskCatRun(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "delivery", "talus_station_mission5_1");
     }
+
     public void station_talus_action_landHoming(obj_id player, obj_id npc) throws InterruptedException
     {
         space_content.landPlayerHoming(player, npc);
     }
+
     public void station_talus_action_grantImperialDuty1(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "corellia_imperial_tier1");
     }
+
     public void station_talus_action_grantImperialDuty2(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "corellia_imperial_tier2");
     }
+
     public void station_talus_action_grantRebelDuty1(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "corellia_rebel_tier1");
     }
+
     public void station_talus_action_grantRebelDuty2(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "corellia_rebel_tier2");
     }
+
     public void station_talus_action_grantBlackSunDuty1(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "corellia_blacksun_tier1");
     }
+
     public void station_talus_action_grantBlackSunDuty2(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "corellia_blacksun_tier2");
     }
+
     public void station_talus_action_grantRebelDuty5(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "corellia_rebel_tier5");
     }
+
     public void station_talus_action_grantImperialDuty5(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "corellia_imperial_tier5");
     }
+
     public String station_talus_tokenTO_tokenTO0001(obj_id player, obj_id npc) throws InterruptedException
     {
-        return new String();
+        return "";
     }
+
     public int station_talus_tokenDI_getStationRepairCost25(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.getStationRepairCost(player, npc, 0.25f);
     }
+
     public int station_talus_tokenDI_getStationRepairCost50(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.getStationRepairCost(player, npc, 0.50f);
     }
+
     public int station_talus_tokenDI_getStationRepairCost75(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.getStationRepairCost(player, npc, 0.75f);
     }
+
     public int station_talus_tokenDI_getStationRepairCost100(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.getStationRepairCost(player, npc, 1.0f);
     }
+
     public int station_talus_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f3dea437"))
@@ -299,6 +319,7 @@ public class station_talus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_talus_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9"))
@@ -323,6 +344,7 @@ public class station_talus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_talus_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_38ddef56"))
@@ -363,7 +385,7 @@ public class station_talus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f7c832f1");
@@ -388,7 +410,7 @@ public class station_talus extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_talus.branchId");
                     prose_package pp = new prose_package();
@@ -445,7 +467,7 @@ public class station_talus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d082abf0");
@@ -474,7 +496,7 @@ public class station_talus extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_talus.branchId");
                     prose_package pp = new prose_package();
@@ -569,7 +591,7 @@ public class station_talus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_253");
@@ -610,7 +632,7 @@ public class station_talus extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_talus.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -620,6 +642,7 @@ public class station_talus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_talus_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_305434ff"))
@@ -660,7 +683,7 @@ public class station_talus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f7c832f1");
@@ -685,7 +708,7 @@ public class station_talus extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_talus.branchId");
                     prose_package pp = new prose_package();
@@ -742,7 +765,7 @@ public class station_talus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d082abf0");
@@ -771,7 +794,7 @@ public class station_talus extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_talus.branchId");
                     prose_package pp = new prose_package();
@@ -821,7 +844,7 @@ public class station_talus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b27ab51e");
@@ -838,7 +861,7 @@ public class station_talus extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_talus.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -867,7 +890,7 @@ public class station_talus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e03a2006");
@@ -880,7 +903,7 @@ public class station_talus extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_talus.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -902,7 +925,7 @@ public class station_talus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_998a06e6");
@@ -911,7 +934,7 @@ public class station_talus extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_talus.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -992,7 +1015,7 @@ public class station_talus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_253");
@@ -1033,7 +1056,7 @@ public class station_talus extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_talus.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1043,6 +1066,7 @@ public class station_talus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_talus_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f7c832f1"))
@@ -1069,7 +1093,7 @@ public class station_talus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_67820697");
@@ -1082,7 +1106,7 @@ public class station_talus extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_talus.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1114,7 +1138,7 @@ public class station_talus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_33");
@@ -1127,7 +1151,7 @@ public class station_talus extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_talus.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1159,7 +1183,7 @@ public class station_talus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_43");
@@ -1172,7 +1196,7 @@ public class station_talus extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_talus.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1204,7 +1228,7 @@ public class station_talus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_54");
@@ -1217,7 +1241,7 @@ public class station_talus extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_talus.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1227,6 +1251,7 @@ public class station_talus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_talus_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_67820697"))
@@ -1260,6 +1285,7 @@ public class station_talus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_talus_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_33"))
@@ -1293,6 +1319,7 @@ public class station_talus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_talus_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_43"))
@@ -1326,6 +1353,7 @@ public class station_talus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_talus_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_54"))
@@ -1359,6 +1387,7 @@ public class station_talus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_talus_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d082abf0"))
@@ -1385,7 +1414,7 @@ public class station_talus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d70dba34");
@@ -1403,7 +1432,7 @@ public class station_talus extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_talus.branchId");
                     prose_package pp = new prose_package();
@@ -1440,7 +1469,7 @@ public class station_talus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_72");
@@ -1458,7 +1487,7 @@ public class station_talus extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_talus.branchId");
                     prose_package pp = new prose_package();
@@ -1495,7 +1524,7 @@ public class station_talus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82");
@@ -1513,7 +1542,7 @@ public class station_talus extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_talus.branchId");
                     prose_package pp = new prose_package();
@@ -1550,7 +1579,7 @@ public class station_talus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_92");
@@ -1568,7 +1597,7 @@ public class station_talus extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_talus.branchId");
                     prose_package pp = new prose_package();
@@ -1597,6 +1626,7 @@ public class station_talus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_talus_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d70dba34"))
@@ -1626,6 +1656,7 @@ public class station_talus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_talus_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_72"))
@@ -1655,6 +1686,7 @@ public class station_talus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_talus_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_82"))
@@ -1684,6 +1716,7 @@ public class station_talus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_talus_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_92"))
@@ -1713,6 +1746,7 @@ public class station_talus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_talus_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b27ab51e"))
@@ -1743,7 +1777,7 @@ public class station_talus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ab77f60d");
@@ -1752,7 +1786,7 @@ public class station_talus extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_talus.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1772,6 +1806,7 @@ public class station_talus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_talus_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ab77f60d"))
@@ -1798,7 +1833,7 @@ public class station_talus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8c4754ed");
@@ -1811,7 +1846,7 @@ public class station_talus extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_talus.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1821,6 +1856,7 @@ public class station_talus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_talus_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_8c4754ed"))
@@ -1846,6 +1882,7 @@ public class station_talus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_talus_handleBranch45(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_e03a2006"))
@@ -1871,6 +1908,7 @@ public class station_talus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_talus_handleBranch48(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_998a06e6"))
@@ -1890,7 +1928,7 @@ public class station_talus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_fe3902e2");
@@ -1899,7 +1937,7 @@ public class station_talus extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_talus.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1909,6 +1947,7 @@ public class station_talus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_talus_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_fe3902e2"))
@@ -1928,7 +1967,7 @@ public class station_talus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b3c0bdbd");
@@ -1937,7 +1976,7 @@ public class station_talus extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_talus.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1947,6 +1986,7 @@ public class station_talus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_talus_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b3c0bdbd"))
@@ -1966,7 +2006,7 @@ public class station_talus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7b41cc12");
@@ -1979,7 +2019,7 @@ public class station_talus extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_talus.branchId");
                     prose_package pp = new prose_package();
@@ -1993,6 +2033,7 @@ public class station_talus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_talus_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_7b41cc12"))
@@ -2020,7 +2061,7 @@ public class station_talus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9288900f");
@@ -2029,7 +2070,7 @@ public class station_talus extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_talus.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2039,6 +2080,7 @@ public class station_talus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_talus_handleBranch53(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9288900f"))
@@ -2053,6 +2095,7 @@ public class station_talus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_talus_handleBranch55(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f34bcf78"))
@@ -2100,7 +2143,7 @@ public class station_talus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_142");
@@ -2129,7 +2172,7 @@ public class station_talus extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_talus.branchId");
                     prose_package pp = new prose_package();
@@ -2186,7 +2229,7 @@ public class station_talus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_194");
@@ -2215,7 +2258,7 @@ public class station_talus extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_talus.branchId");
                     prose_package pp = new prose_package();
@@ -2300,7 +2343,7 @@ public class station_talus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_253");
@@ -2341,7 +2384,7 @@ public class station_talus extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_talus.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2351,6 +2394,7 @@ public class station_talus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_talus_handleBranch56(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_142"))
@@ -2377,7 +2421,7 @@ public class station_talus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_145");
@@ -2390,7 +2434,7 @@ public class station_talus extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_talus.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2422,7 +2466,7 @@ public class station_talus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_155");
@@ -2435,7 +2479,7 @@ public class station_talus extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_talus.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2467,7 +2511,7 @@ public class station_talus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_166");
@@ -2480,7 +2524,7 @@ public class station_talus extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_talus.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2512,7 +2556,7 @@ public class station_talus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_178");
@@ -2525,7 +2569,7 @@ public class station_talus extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_talus.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2557,7 +2601,7 @@ public class station_talus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_236");
@@ -2570,7 +2614,7 @@ public class station_talus extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_talus.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2580,6 +2624,7 @@ public class station_talus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_talus_handleBranch57(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_145"))
@@ -2605,6 +2650,7 @@ public class station_talus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_talus_handleBranch60(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_155"))
@@ -2630,6 +2676,7 @@ public class station_talus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_talus_handleBranch63(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_166"))
@@ -2655,6 +2702,7 @@ public class station_talus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_talus_handleBranch66(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_178"))
@@ -2680,6 +2728,7 @@ public class station_talus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_talus_handleBranch69(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_236"))
@@ -2705,6 +2754,7 @@ public class station_talus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_talus_handleBranch72(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_194"))
@@ -2731,7 +2781,7 @@ public class station_talus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_197");
@@ -2749,7 +2799,7 @@ public class station_talus extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_talus.branchId");
                     prose_package pp = new prose_package();
@@ -2786,7 +2836,7 @@ public class station_talus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_208");
@@ -2804,7 +2854,7 @@ public class station_talus extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_talus.branchId");
                     prose_package pp = new prose_package();
@@ -2841,7 +2891,7 @@ public class station_talus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_220");
@@ -2859,7 +2909,7 @@ public class station_talus extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_talus.branchId");
                     prose_package pp = new prose_package();
@@ -2896,7 +2946,7 @@ public class station_talus extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_232");
@@ -2914,7 +2964,7 @@ public class station_talus extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_talus.branchId");
                     prose_package pp = new prose_package();
@@ -2939,6 +2989,7 @@ public class station_talus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_talus_handleBranch73(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_197"))
@@ -2964,6 +3015,7 @@ public class station_talus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_talus_handleBranch76(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_208"))
@@ -2989,6 +3041,7 @@ public class station_talus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_talus_handleBranch79(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_220"))
@@ -3014,6 +3067,7 @@ public class station_talus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_talus_handleBranch82(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_232"))
@@ -3039,6 +3093,7 @@ public class station_talus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_talus_handleBranch86(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_253"))
@@ -3141,18 +3196,21 @@ public class station_talus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setObjVar(self, "convo.appearance", "object/mobile/space_comm_station_talus.iff");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setObjVar(self, "convo.appearance", "object/mobile/space_comm_station_talus.iff");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -3161,18 +3219,21 @@ public class station_talus extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.station_talus");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -3202,7 +3263,7 @@ public class station_talus extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_f3dea437");
@@ -3218,7 +3279,7 @@ public class station_talus extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "station_talus", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -3250,7 +3311,7 @@ public class station_talus extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_9");
@@ -3262,7 +3323,7 @@ public class station_talus extends script.base_script
                 utils.setScriptVar(player, "conversation.station_talus.branchId", 4);
                 npcStartConversation(player, npc, "station_talus", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3305,7 +3366,7 @@ public class station_talus extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_38ddef56");
@@ -3325,7 +3386,7 @@ public class station_talus extends script.base_script
                 utils.setScriptVar(player, "conversation.station_talus.branchId", 7);
                 npcStartConversation(player, npc, "station_talus", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3367,7 +3428,7 @@ public class station_talus extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_305434ff");
@@ -3391,7 +3452,7 @@ public class station_talus extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "station_talus", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -3430,7 +3491,7 @@ public class station_talus extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_f34bcf78");
@@ -3450,7 +3511,7 @@ public class station_talus extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "station_talus", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -3463,6 +3524,7 @@ public class station_talus extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("station_talus"))

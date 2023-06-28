@@ -1,5 +1,11 @@
 package script.quest.task.ground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.groundquests;
 import script.library.utils;
 import script.location;
@@ -7,9 +13,6 @@ import script.obj_id;
 
 public class go_to_location extends script.quest.task.ground.base_task
 {
-    public go_to_location()
-    {
-    }
     public static final String dataTableColumnPlanetName = "PLANET_NAME";
     public static final String dataTableColumnLocationX = "LOCATION_X";
     public static final String dataTableColumnLocationY = "LOCATION_Y";
@@ -22,6 +25,10 @@ public class go_to_location extends script.quest.task.ground.base_task
     public static final String dot = ".";
     public static final String taskType = "go_to_location";
     public static final String JOURNAL_UPDATED_MUSIC = "sound/ui_objective_reached.snd";
+    public go_to_location()
+    {
+    }
+
     public int OnTaskActivated(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskCompleted", taskType + "task activated.");
@@ -39,6 +46,7 @@ public class go_to_location extends script.quest.task.ground.base_task
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskActivated", "Must reach within " + sphereSize + " meters of " + locationX + ", " + locationY + ", " + locationZ + " on " + planetName + ".");
         return super.OnTaskActivated(self, questCrc, taskId);
     }
+
     public int OnArrivedAtLocation(obj_id self, String locationName) throws InterruptedException
     {
         String questName = locationName;
@@ -70,28 +78,33 @@ public class go_to_location extends script.quest.task.ground.base_task
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTaskCompleted(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         cleanup(self, questCrc, taskId);
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskCompleted", taskType + "task completed.");
         return super.OnTaskCompleted(self, questCrc, taskId);
     }
+
     public int OnTaskFailed(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         cleanup(self, questCrc, taskId);
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskFailed", taskType + "task failed.");
         return super.OnTaskFailed(self, questCrc, taskId);
     }
+
     public int OnTaskCleared(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         cleanup(self, questCrc, taskId);
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskCleared", taskType + " task cleared.");
         return super.OnTaskCleared(self, questCrc, taskId);
     }
+
     public void cleanup(obj_id player, int questCrc, int taskId) throws InterruptedException
     {
         groundquests.clearBaseObjVar(player, taskType, questGetQuestName(questCrc), taskId);
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         removeObjVar(self, groundquests.getTaskTypeObjVar(self, taskType));

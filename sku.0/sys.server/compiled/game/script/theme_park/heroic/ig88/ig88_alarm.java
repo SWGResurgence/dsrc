@@ -1,5 +1,11 @@
 package script.theme_park.heroic.ig88;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,6 +14,7 @@ public class ig88_alarm extends script.base_script
     public ig88_alarm()
     {
     }
+
     public int alarm_on(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -17,6 +24,7 @@ public class ig88_alarm extends script.base_script
         setCondition(self, CONDITION_ON);
         return SCRIPT_CONTINUE;
     }
+
     public int alarm_off(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self))

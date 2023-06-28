@@ -1,13 +1,16 @@
 package script.theme_park.meatlump;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class slicing_minigame extends script.base_script
 {
-    public slicing_minigame()
-    {
-    }
     public static final boolean LOGGING_ON = true;
     public static final String VAR_PREFIX = "meatlump_safe";
     public static final String NONIMPERATIVE_VAR_PREFIX = "meatlump_safe_nonimperative";
@@ -44,17 +47,22 @@ public class slicing_minigame extends script.base_script
     public static final int BUFF_THRESHOLD_INCREASE = 3;
     public static final int BUFF_POINTS_NEEDED_DECREASE = 1;
     public static final String[] RESERVED_RULES_TO_IGNORE = new String[]
+            {
+                    "name_declined_number",
+                    "name_declined_syntax",
+                    "name_declined_fictionally_reserved",
+                    "name_declined_reserved"
+            };
+    public slicing_minigame()
     {
-        "name_declined_number",
-        "name_declined_syntax",
-        "name_declined_fictionally_reserved",
-        "name_declined_reserved"
-    };
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.ITEM_USE, SID_OPEN_SAFE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -85,6 +93,7 @@ public class slicing_minigame extends script.base_script
         createSafeSui(collectionItem, player);
         return SCRIPT_CONTINUE;
     }
+
     public boolean createSafeSui(obj_id collectionItem, obj_id player) throws InterruptedException
     {
         if (!isValidId(collectionItem) || !isValidId(player))
@@ -105,7 +114,7 @@ public class slicing_minigame extends script.base_script
                 return false;
             }
         }
-        else 
+        else
         {
             closeOldWindow(player);
         }
@@ -117,7 +126,7 @@ public class slicing_minigame extends script.base_script
             int count = utils.getIntScriptVar(player, TOTAL_ANSWER_COUNT);
             utils.setScriptVar(player, TOTAL_ANSWER_COUNT, count++);
         }
-        else 
+        else
         {
             utils.setScriptVar(player, TOTAL_ANSWER_COUNT, 0);
         }
@@ -164,6 +173,7 @@ public class slicing_minigame extends script.base_script
         flushSUIPage(pid);
         return true;
     }
+
     public int handleDialogInput(obj_id self, dictionary params) throws InterruptedException
     {
         blog("handleDialogInput");
@@ -252,7 +262,7 @@ public class slicing_minigame extends script.base_script
             {
                 continue;
             }
-            else 
+            else
             {
                 blog("handleDialogInput - match found for: " + playerGuess);
                 recreateSui = givePoints(self, player, anagram);
@@ -275,6 +285,7 @@ public class slicing_minigame extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean applyPuzzleDebuff(obj_id collectionItem, obj_id player) throws InterruptedException
     {
         if (!isValidId(collectionItem) || !isValidId(player))
@@ -285,6 +296,7 @@ public class slicing_minigame extends script.base_script
         removePlayerNonImperativeVars(player);
         return true;
     }
+
     public boolean incrementWrongAnswer(obj_id collectionItem, obj_id player) throws InterruptedException
     {
         blog("incrementWrongAnswer - INIT");
@@ -317,9 +329,9 @@ public class slicing_minigame extends script.base_script
         {
             if (buff.applyBuff(player, "safe_puzzle_downer"))
             {
-                
+
             }
-            
+
             {
                 sendSystemMessage(player, YOU_FAILED);
             }
@@ -330,6 +342,7 @@ public class slicing_minigame extends script.base_script
         blog("incrementWrongAnswer - INCREMENTED " + utils.getIntScriptVar(player, WRONG_ANSWER_COUNT));
         return true;
     }
+
     public boolean getRandomPassword(obj_id collectionItem, obj_id player) throws InterruptedException
     {
         if (!isValidId(collectionItem) || !exists(collectionItem))
@@ -395,6 +408,7 @@ public class slicing_minigame extends script.base_script
         utils.setScriptVar(player, UNSCRAMBLED_PASSWORD_ROW + "_" + collectionItem, randomNum);
         return true;
     }
+
     public boolean rerollPuzzleNeeded(obj_id collectionItem, obj_id player) throws InterruptedException
     {
         if (!isValidId(collectionItem) || !exists(collectionItem))
@@ -472,6 +486,7 @@ public class slicing_minigame extends script.base_script
         blog("rerollPuzzleNeeded - None of the conditions met. NOT DISTURBING.");
         return false;
     }
+
     public String scramblePassword(String password) throws InterruptedException
     {
         if (password == null || password.equals(""))
@@ -488,7 +503,7 @@ public class slicing_minigame extends script.base_script
             {
                 scrambled = scrambled + password.charAt(i);
             }
-            else 
+            else
             {
                 scrambled = password.charAt(i) + scrambled;
             }
@@ -507,6 +522,7 @@ public class slicing_minigame extends script.base_script
         }
         return scrambled;
     }
+
     public boolean checkGuessList(obj_id collectionItem, obj_id player, String anagram) throws InterruptedException
     {
         blog("checkGuessList");
@@ -537,15 +553,18 @@ public class slicing_minigame extends script.base_script
         }
         int listLength = splitAnagramList.length;
         blog("checkGuessList listLength: " + listLength);
-        for (String s : splitAnagramList) {
+        for (String s : splitAnagramList)
+        {
             blog("checkGuessList splitAnagramList:" + s.trim() + "* anagram:" + anagram);
-            if ((s.trim()).equals(anagram)) {
+            if ((s.trim()).equals(anagram))
+            {
                 return false;
             }
         }
         blog("checkGuessList went through the entire list and found no match.");
         return true;
     }
+
     public boolean givePoints(obj_id collectionItem, obj_id player, String anagram) throws InterruptedException
     {
         if (!isValidId(collectionItem) || !isValidId(player))
@@ -577,7 +596,7 @@ public class slicing_minigame extends script.base_script
         {
             utils.setScriptVar(player, ANAGRAM_GUESS_LIST, guessList + ", " + anagram);
         }
-        else 
+        else
         {
             utils.setScriptVar(player, ANAGRAM_GUESS_LIST, anagram);
         }
@@ -591,6 +610,7 @@ public class slicing_minigame extends script.base_script
         createSafeSui(collectionItem, player);
         return true;
     }
+
     public boolean rewardPlayer(obj_id collectionItem, obj_id player) throws InterruptedException
     {
         blog("rewardPlayer - init");
@@ -618,6 +638,7 @@ public class slicing_minigame extends script.base_script
         removePlayerImperativeVars(player);
         return true;
     }
+
     public int closeSui(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -627,9 +648,9 @@ public class slicing_minigame extends script.base_script
         }
         if (buff.applyBuff(player, "safe_puzzle_downer"))
         {
-            
+
         }
-        
+
         {
             sendSystemMessage(player, YOU_CANCELED_EARLY);
         }
@@ -639,6 +660,7 @@ public class slicing_minigame extends script.base_script
         removePlayerNonImperativeVars(player);
         return SCRIPT_CONTINUE;
     }
+
     public void closeOldWindow(obj_id player) throws InterruptedException
     {
         int pid = sui.getPid(player, PID_NAME);
@@ -648,16 +670,19 @@ public class slicing_minigame extends script.base_script
             sui.removePid(player, PID_NAME);
         }
     }
+
     public void removePlayerNonImperativeVars(obj_id player) throws InterruptedException
     {
         utils.removeScriptVarTree(player, NONIMPERATIVE_VAR_PREFIX);
         utils.removeObjVar(player, NONIMPERATIVE_VAR_PREFIX);
     }
+
     public void removePlayerImperativeVars(obj_id player) throws InterruptedException
     {
         utils.removeScriptVarTree(player, VAR_PREFIX);
         utils.removeObjVar(player, VAR_PREFIX);
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON)

@@ -1,5 +1,11 @@
 package script.theme_park.new_player;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -7,9 +13,6 @@ import java.util.Vector;
 
 public class new_player extends script.base_script
 {
-    public new_player()
-    {
-    }
     public static final int PERIODIC_CHECK_DELAY = 30 * 60;
     public static final int PERIODIC_CHECK_CAP = 3 * 60 * 60;
     public static final int ACCOUNT_AGE_CAP = 30;
@@ -85,6 +88,10 @@ public class new_player extends script.base_script
     public static final String MINERAL_SURVEY_DEVICE = "object/tangible/survey_tool/survey_tool_mineral.iff";
     public static final String SLITHERHORN = "object/tangible/instrument/slitherhorn.iff";
     public static final String NEW_PLAYER_LOG = "NEW_PLAYER_QUESTS";
+    public new_player()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (newPlayerQuestsEnabled() && !isJedi(self))
@@ -94,12 +101,13 @@ public class new_player extends script.base_script
             utils.setScriptVar(self, "new_player.firstEverDroid", true);
             messageTo(self, "handleHelperDroidCheck", null, 1, false);
         }
-        else 
+        else
         {
             detachScript(self, NEW_PLAYER_SCRIPT);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (newPlayerQuestsEnabled() && !isJedi(self))
@@ -110,12 +118,13 @@ public class new_player extends script.base_script
                 messageTo(self, "handleHelperDroidCheck", null, 9, false);
             }
         }
-        else 
+        else
         {
             detachScript(self, NEW_PLAYER_SCRIPT);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         String custLogMsg = "New Player Script Detached: %TU has had the " + NEW_PLAYER_SCRIPT + "script detached.";
@@ -143,6 +152,7 @@ public class new_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSkillRevoked(obj_id self, String skillName) throws InterruptedException
     {
         if (skillName.endsWith("_novice"))
@@ -232,6 +242,7 @@ public class new_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "new_player.berserkUsed"))
@@ -263,6 +274,7 @@ public class new_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTransferred(obj_id self, obj_id sourceContainer, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         dictionary webster = new dictionary();
@@ -285,7 +297,7 @@ public class new_player extends script.base_script
                                 messageTo(self, "handleNewPlayerEntertainerAction", webster, 1, false);
                             }
                         }
-                        else 
+                        else
                         {
                             int cantinaCheck = cantinaTemplate.indexOf("cantina");
                             if (cantinaCheck > -1)
@@ -293,7 +305,7 @@ public class new_player extends script.base_script
                                 webster.put("enteredCantina", 1);
                                 messageTo(self, "handleNewPlayerEntertainerAction", webster, 1, false);
                             }
-                            else 
+                            else
                             {
                                 int theaterCheck = cantinaTemplate.indexOf("theater");
                                 if (theaterCheck > -1)
@@ -321,7 +333,7 @@ public class new_player extends script.base_script
                             webster.put("enteredMedCenter", 1);
                             messageTo(self, "handleNewPlayerMedicAction", webster, 1, false);
                         }
-                        else 
+                        else
                         {
                             String hospitalTemplate = getTemplateName(building);
                             int hospitalCheck = hospitalTemplate.indexOf("hospital");
@@ -337,6 +349,7 @@ public class new_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleHelperDroidCheck(obj_id self, dictionary params) throws InterruptedException
     {
         if (!newPlayerQuestsEnabled() || isJedi(self))
@@ -366,7 +379,7 @@ public class new_player extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 if (hasObjVar(self, veteran_deprecated.OBJVAR_TIME_ACTIVE))
                 {
@@ -386,7 +399,7 @@ public class new_player extends script.base_script
                 messageTo(self, "setupHelperDroid", null, 10, false);
             }
         }
-        else 
+        else
         {
             if (hasObjVar(self, veteran_deprecated.OBJVAR_TIME_ACTIVE))
             {
@@ -401,7 +414,7 @@ public class new_player extends script.base_script
                             messageTo(helperDroid, "handleDroidInitiateGreeting", null, 1, false);
                         }
                     }
-                    else 
+                    else
                     {
                         unpackHelperDroid(self);
                     }
@@ -410,6 +423,7 @@ public class new_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int setupHelperDroid(obj_id self, dictionary params) throws InterruptedException
     {
         if (!newPlayerQuestsEnabled() || isJedi(self))
@@ -434,7 +448,7 @@ public class new_player extends script.base_script
             sendSystemMessage(self, pet_lib.SID_SYS_TOO_MANY_STORED_PETS);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             String custLogMsg = "New Player Quests: %TU has been given a helper droid.";
             CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
@@ -471,7 +485,7 @@ public class new_player extends script.base_script
                     }
                 }
             }
-            else 
+            else
             {
                 utils.removeScriptVar(self, "new_player.questMessage");
             }
@@ -502,6 +516,7 @@ public class new_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleNewProfessionGreetingResponse(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -524,20 +539,27 @@ public class new_player extends script.base_script
         switch (bp)
         {
             case sui.BP_OK:
-            setObjVar(self, QUEST_OBJVAR_BASE + profession, 1);
-                switch (profession) {
+                setObjVar(self, QUEST_OBJVAR_BASE + profession, 1);
+                switch (profession)
+                {
                     case BRAWLER:
-                        if (!hasObjVar(self, BRAWLER_REWARD_OBJVAR) || getIntObjVar(self, BRAWLER_REWARD_OBJVAR) < 1) {
+                        if (!hasObjVar(self, BRAWLER_REWARD_OBJVAR) || getIntObjVar(self, BRAWLER_REWARD_OBJVAR) < 1)
+                        {
                             giveBrawlerWeaponChoice(self);
-                        } else {
+                        }
+                        else
+                        {
                             setObjVar(self, BRAWLER_QUEST_OBJVAR, 2);
                             giveQuestMessage(self);
                         }
                         return SCRIPT_CONTINUE;
                     case MARKSMAN:
-                        if (!hasObjVar(self, MARKSMAN_REWARD_OBJVAR) || getIntObjVar(self, MARKSMAN_REWARD_OBJVAR) < 1) {
+                        if (!hasObjVar(self, MARKSMAN_REWARD_OBJVAR) || getIntObjVar(self, MARKSMAN_REWARD_OBJVAR) < 1)
+                        {
                             giveMarksmanWeaponChoice(self);
-                        } else {
+                        }
+                        else
+                        {
                             setObjVar(self, MARKSMAN_QUEST_OBJVAR, 2);
                             giveQuestMessage(self);
                         }
@@ -550,13 +572,14 @@ public class new_player extends script.base_script
                         giveQuestMessage(self);
                         break;
                 }
-            break;
+                break;
             case sui.BP_CANCEL:
-            showDelayedAcceptingQuestMessage(self);
-            break;
+                showDelayedAcceptingQuestMessage(self);
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleGiveQuestHelp(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -567,30 +590,31 @@ public class new_player extends script.base_script
         switch (bp)
         {
             case sui.BP_OK:
-            getProfessionQuestHelp(self);
-            break;
+                getProfessionQuestHelp(self);
+                break;
             case sui.BP_CANCEL:
-            if (hasObjVar(self, "new_player.advice.showRefusedHelp"))
-            {
-                int numShowHelp = getIntObjVar(self, "new_player.advice.showRefusedHelp") - 1;
-                if (numShowHelp <= 0)
+                if (hasObjVar(self, "new_player.advice.showRefusedHelp"))
                 {
-                    removeObjVar(self, "new_player.advice.showRefusedHelp");
+                    int numShowHelp = getIntObjVar(self, "new_player.advice.showRefusedHelp") - 1;
+                    if (numShowHelp <= 0)
+                    {
+                        removeObjVar(self, "new_player.advice.showRefusedHelp");
+                    }
+                    else
+                    {
+                        setObjVar(self, "new_player.advice.showRefusedHelp", numShowHelp);
+                    }
+                    String droidName = getDroidName(self);
+                    string_id textMsg = new string_id("new_player", "refused_quest_help");
+                    string_id okButton = new string_id("new_player", "help_now_button");
+                    string_id cancelButton = new string_id("new_player", "thank_you_button");
+                    twoButtonSui(self, self, "handleRefusedQuestHelp", droidName, textMsg, okButton, cancelButton);
                 }
-                else 
-                {
-                    setObjVar(self, "new_player.advice.showRefusedHelp", numShowHelp);
-                }
-                String droidName = getDroidName(self);
-                string_id textMsg = new string_id("new_player", "refused_quest_help");
-                string_id okButton = new string_id("new_player", "help_now_button");
-                string_id cancelButton = new string_id("new_player", "thank_you_button");
-                twoButtonSui(self, self, "handleRefusedQuestHelp", droidName, textMsg, okButton, cancelButton);
-            }
-            break;
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleShowHolocronGeneralInfo(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -602,42 +626,43 @@ public class new_player extends script.base_script
         switch (bp)
         {
             case sui.BP_OK:
-            if (profession.equals("brawler"))
-            {
-                openHolocronToPage(self, "Combat.Targeting.Consider");
-                openHolocronToPage(self, "Combat.Targeting");
-            }
-            if (profession.equals("marksman"))
-            {
-                openHolocronToPage(self, "Combat.Targeting.Consider");
-                openHolocronToPage(self, "Combat.Targeting");
-            }
-            if (profession.equals("medic"))
-            {
-                openHolocronToPage(self, "WelcomeToSWG.WhereDoIBegin.Professions.PlayingMedic.Damage");
-                openHolocronToPage(self, "WelcomeToSWG.WhereDoIBegin.Professions.PlayingMedic");
-            }
-            if (profession.equals("entertainer"))
-            {
-                openHolocronToPage(self, "WelcomeToSWG.WhereDoIBegin.Professions.PlayingEntertainer.Instruments");
-                openHolocronToPage(self, "WelcomeToSWG.WhereDoIBegin.Professions.PlayingEntertainer");
-            }
-            if (profession.equals("artisan"))
-            {
-                openHolocronToPage(self, "WelcomeToSWG.WhereDoIBegin.Professions.PlayingArtisan.Resources");
-                openHolocronToPage(self, "WelcomeToSWG.WhereDoIBegin.Professions.PlayingArtisan");
-            }
-            if (profession.equals("scout"))
-            {
-                openHolocronToPage(self, "WelcomeToSWG.WhereDoIBegin.Professions.PlayingScout.Camps");
-                openHolocronToPage(self, "WelcomeToSWG.WhereDoIBegin.Professions.PlayingScout");
-            }
-            break;
+                if (profession.equals("brawler"))
+                {
+                    openHolocronToPage(self, "Combat.Targeting.Consider");
+                    openHolocronToPage(self, "Combat.Targeting");
+                }
+                if (profession.equals("marksman"))
+                {
+                    openHolocronToPage(self, "Combat.Targeting.Consider");
+                    openHolocronToPage(self, "Combat.Targeting");
+                }
+                if (profession.equals("medic"))
+                {
+                    openHolocronToPage(self, "WelcomeToSWG.WhereDoIBegin.Professions.PlayingMedic.Damage");
+                    openHolocronToPage(self, "WelcomeToSWG.WhereDoIBegin.Professions.PlayingMedic");
+                }
+                if (profession.equals("entertainer"))
+                {
+                    openHolocronToPage(self, "WelcomeToSWG.WhereDoIBegin.Professions.PlayingEntertainer.Instruments");
+                    openHolocronToPage(self, "WelcomeToSWG.WhereDoIBegin.Professions.PlayingEntertainer");
+                }
+                if (profession.equals("artisan"))
+                {
+                    openHolocronToPage(self, "WelcomeToSWG.WhereDoIBegin.Professions.PlayingArtisan.Resources");
+                    openHolocronToPage(self, "WelcomeToSWG.WhereDoIBegin.Professions.PlayingArtisan");
+                }
+                if (profession.equals("scout"))
+                {
+                    openHolocronToPage(self, "WelcomeToSWG.WhereDoIBegin.Professions.PlayingScout.Camps");
+                    openHolocronToPage(self, "WelcomeToSWG.WhereDoIBegin.Professions.PlayingScout");
+                }
+                break;
             case sui.BP_CANCEL:
-            break;
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleDelayedAcceptingQuest(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -650,20 +675,27 @@ public class new_player extends script.base_script
         switch (bp)
         {
             case sui.BP_OK:
-            setObjVar(self, QUEST_OBJVAR_BASE + profession, 1);
-                switch (profession) {
+                setObjVar(self, QUEST_OBJVAR_BASE + profession, 1);
+                switch (profession)
+                {
                     case BRAWLER:
-                        if (!hasObjVar(self, BRAWLER_REWARD_OBJVAR) || getIntObjVar(self, BRAWLER_REWARD_OBJVAR) < 1) {
+                        if (!hasObjVar(self, BRAWLER_REWARD_OBJVAR) || getIntObjVar(self, BRAWLER_REWARD_OBJVAR) < 1)
+                        {
                             giveBrawlerWeaponChoice(self);
-                        } else {
+                        }
+                        else
+                        {
                             setObjVar(self, BRAWLER_QUEST_OBJVAR, 2);
                             giveQuestMessage(self);
                         }
                         return SCRIPT_CONTINUE;
                     case MARKSMAN:
-                        if (!hasObjVar(self, MARKSMAN_REWARD_OBJVAR) || getIntObjVar(self, MARKSMAN_REWARD_OBJVAR) < 1) {
+                        if (!hasObjVar(self, MARKSMAN_REWARD_OBJVAR) || getIntObjVar(self, MARKSMAN_REWARD_OBJVAR) < 1)
+                        {
                             giveMarksmanWeaponChoice(self);
-                        } else {
+                        }
+                        else
+                        {
                             setObjVar(self, MARKSMAN_QUEST_OBJVAR, 2);
                             giveQuestMessage(self);
                         }
@@ -676,12 +708,13 @@ public class new_player extends script.base_script
                         giveQuestMessage(self);
                         break;
                 }
-            break;
+                break;
             case sui.BP_CANCEL:
-            break;
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleRefusedQuestHelp(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -692,13 +725,14 @@ public class new_player extends script.base_script
         switch (bp)
         {
             case sui.BP_OK:
-            getProfessionQuestHelp(self);
-            break;
+                getProfessionQuestHelp(self);
+                break;
             case sui.BP_CANCEL:
-            break;
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleBrawlerWeaponChoice(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -715,16 +749,19 @@ public class new_player extends script.base_script
         obj_id[] survivalKnives = utils.getAllItemsPlayerHasByTemplateInBankAndInventory(self, SURVIVAL_KNIFE_TEMPLATE);
         if (survivalKnives != null && survivalKnives.length > 0)
         {
-            for (obj_id knife : survivalKnives) {
-                if (isIdValid(knife)) {
-                    if (!isCrafted(knife)) {
+            for (obj_id knife : survivalKnives)
+            {
+                if (isIdValid(knife))
+                {
+                    if (!isCrafted(knife))
+                    {
                         destroyObject(knife);
                         break;
                     }
                 }
             }
         }
-        else 
+        else
         {
             obj_id rightHandItem = getObjectInSlot(self, "hold_r");
             if (isIdValid(rightHandItem))
@@ -745,18 +782,18 @@ public class new_player extends script.base_script
             switch (bp)
             {
                 case sui.BP_OK:
-                if (revert != null && !revert.equals(""))
-                {
-                    obj_id item = weapons.createWeapon(WOODEN_STAFF_TEMPLATE, playerInv, 1.0f);
-                }
-                else 
-                {
-                    obj_id item = weapons.createWeapon(HEAVY_AXE_TEMPLATE, playerInv, 1.0f);
-                }
-                break;
+                    if (revert != null && !revert.equals(""))
+                    {
+                        obj_id item = weapons.createWeapon(WOODEN_STAFF_TEMPLATE, playerInv, 1.0f);
+                    }
+                    else
+                    {
+                        obj_id item = weapons.createWeapon(HEAVY_AXE_TEMPLATE, playerInv, 1.0f);
+                    }
+                    break;
                 case sui.BP_CANCEL:
-                obj_id item = weapons.createWeapon(SURVIVAL_KNIFE_TEMPLATE, playerInv, 1.0f);
-                break;
+                    obj_id item = weapons.createWeapon(SURVIVAL_KNIFE_TEMPLATE, playerInv, 1.0f);
+                    break;
             }
             String custLogMsg = "New Player Quests: %TU finished brawler task 1... which is simply to choose a weapon style.";
             CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
@@ -765,12 +802,13 @@ public class new_player extends script.base_script
             setObjVar(self, BRAWLER_REWARD_OBJVAR, 1);
             giveQuestMessage(self);
         }
-        else 
+        else
         {
             giveInventoryFullMessage(self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleMarksmanWeaponChoice(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -787,16 +825,19 @@ public class new_player extends script.base_script
         obj_id[] cdefPistols = utils.getAllItemsPlayerHasByTemplateInBankAndInventory(self, CDEF_PISTOL_TEMPLATE);
         if (cdefPistols != null && cdefPistols.length > 0)
         {
-            for (obj_id pistol : cdefPistols) {
-                if (isIdValid(pistol)) {
-                    if (!isCrafted(pistol)) {
+            for (obj_id pistol : cdefPistols)
+            {
+                if (isIdValid(pistol))
+                {
+                    if (!isCrafted(pistol))
+                    {
                         destroyObject(pistol);
                         break;
                     }
                 }
             }
         }
-        else 
+        else
         {
             obj_id rightHandItem = getObjectInSlot(self, "hold_r");
             if (isIdValid(rightHandItem))
@@ -817,18 +858,18 @@ public class new_player extends script.base_script
             switch (bp)
             {
                 case sui.BP_OK:
-                if (revert != null && !revert.equals(""))
-                {
-                    obj_id item = weapons.createWeapon(CDEF_RIFLE_TEMPLATE, playerInv, 1.0f);
-                }
-                else 
-                {
-                    obj_id item = weapons.createWeapon(CDEF_CARBINE_TEMPLATE, playerInv, 1.0f);
-                }
-                break;
+                    if (revert != null && !revert.equals(""))
+                    {
+                        obj_id item = weapons.createWeapon(CDEF_RIFLE_TEMPLATE, playerInv, 1.0f);
+                    }
+                    else
+                    {
+                        obj_id item = weapons.createWeapon(CDEF_CARBINE_TEMPLATE, playerInv, 1.0f);
+                    }
+                    break;
                 case sui.BP_CANCEL:
-                obj_id item = weapons.createWeapon(CDEF_PISTOL_TEMPLATE, playerInv, 1.0f);
-                break;
+                    obj_id item = weapons.createWeapon(CDEF_PISTOL_TEMPLATE, playerInv, 1.0f);
+                    break;
             }
             String custLogMsg = "New Player Quests: %TU finished marksman task 1... which is simply to choose a weapon style.";
             CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
@@ -837,12 +878,13 @@ public class new_player extends script.base_script
             setObjVar(self, MARKSMAN_REWARD_OBJVAR, 1);
             giveQuestMessage(self);
         }
-        else 
+        else
         {
             giveInventoryFullMessage(self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleStartingRecommendation(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -857,6 +899,7 @@ public class new_player extends script.base_script
         giveQuestMessage(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleHelperDroidDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         if (isSpaceScene())
@@ -870,7 +913,7 @@ public class new_player extends script.base_script
             {
                 removeObjVar(self, "new_player.advice.callingStoredHelperDroid");
             }
-            else 
+            else
             {
                 setObjVar(self, "new_player.advice.callingStoredHelperDroid", numTimes);
             }
@@ -881,6 +924,7 @@ public class new_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleGiveNewProfessionQuestPrompt(obj_id self, dictionary params) throws InterruptedException
     {
         String droidName = getDroidName(self);
@@ -892,11 +936,13 @@ public class new_player extends script.base_script
         twoButtonSui(self, self, "handleNewProfessionGreetingResponse", droidName, textMsg, okButton, cancelButton);
         return SCRIPT_CONTINUE;
     }
+
     public int handleGiveProfessionAddedMessage(obj_id self, dictionary params) throws InterruptedException
     {
         giveProfessionAddedMessage(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleGiveQuestMessage(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id helperDroidPcd = getHelperDroidPcd(self);
@@ -905,7 +951,7 @@ public class new_player extends script.base_script
             utils.setScriptVar(self, "new_player.questMessage", true);
             messageTo(self, "handleHelperDroidCheck", null, 1, false);
         }
-        else 
+        else
         {
             if (callable.hasCDCallable(helperDroidPcd))
             {
@@ -920,6 +966,7 @@ public class new_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleDoQuestComplete(obj_id self, dictionary params) throws InterruptedException
     {
         String profession = params.getString("profession");
@@ -930,7 +977,7 @@ public class new_player extends script.base_script
             utils.setScriptVar(self, "new_player.questMessage", true);
             messageTo(self, "handleHelperDroidCheck", null, 1, false);
         }
-        else 
+        else
         {
             if (callable.hasCDCallable(helperDroidPcd))
             {
@@ -945,6 +992,7 @@ public class new_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayerCombatKill(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = params.getObjId("target");
@@ -965,13 +1013,16 @@ public class new_player extends script.base_script
                     int numXpTypes = xpTypes.length;
                     int meleeCount = 0;
                     int rangedCount = 0;
-                    for (String xpType : xpTypes) {
+                    for (String xpType : xpTypes)
+                    {
                         int stringCheck = xpType.indexOf("melee");
-                        if (stringCheck > -1) {
+                        if (stringCheck > -1)
+                        {
                             meleeCount++;
                         }
                         stringCheck = xpType.indexOf("ranged");
-                        if (stringCheck > -1) {
+                        if (stringCheck > -1)
+                        {
                             rangedCount++;
                         }
                     }
@@ -987,38 +1038,13 @@ public class new_player extends script.base_script
                         switch (questNum)
                         {
                             case 0:
-                            break;
+                                break;
                             case 1:
-                            break;
+                                break;
                             case 2:
-                            custLogMsg = "New Player Quests: %TU finished brawler task 2 - kill a creature.";
-                            CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
-                            if (getIntObjVar(self, BRAWLER_REWARD_OBJVAR) < 2)
-                            {
-                                xpReward = xpTypes[rand(0, xpTypes.length - 1)];
-                                xpAmount = 50;
-                                creditsReward = 100;
-                                xp.grantCombatStyleXp(self, xpReward, xpAmount);
-                                money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
-                                giveTaskCompleteRewardMessage(self, SID_BRAWLER, creditsReward);
-                                checkForSpecialReward(self, false);
-                                setObjVar(self, BRAWLER_REWARD_OBJVAR, 2);
-                            }
-                            else 
-                            {
-                                giveTaskCompleteNoRewardMessage(self, SID_BRAWLER);
-                            }
-                            setObjVar(self, BRAWLER_QUEST_OBJVAR, 3);
-                            setObjVar(self, CURRENT_PROFESSION_OBJVAR, BRAWLER);
-                            messageTo(self, "handleGiveQuestMessage", null, 9, false);
-                            return SCRIPT_CONTINUE;
-                            case 3:
-                            if (utils.hasScriptVar(self, "new_player.berserkUsed"))
-                            {
-                                utils.removeScriptVar(self, "new_player.berserkUsed");
-                                custLogMsg = "New Player Quests: %TU finished brawler task 3 - use berserk.";
+                                custLogMsg = "New Player Quests: %TU finished brawler task 2 - kill a creature.";
                                 CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
-                                if (getIntObjVar(self, BRAWLER_REWARD_OBJVAR) < 3)
+                                if (getIntObjVar(self, BRAWLER_REWARD_OBJVAR) < 2)
                                 {
                                     xpReward = xpTypes[rand(0, xpTypes.length - 1)];
                                     xpAmount = 50;
@@ -1027,28 +1053,23 @@ public class new_player extends script.base_script
                                     money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
                                     giveTaskCompleteRewardMessage(self, SID_BRAWLER, creditsReward);
                                     checkForSpecialReward(self, false);
-                                    setObjVar(self, BRAWLER_REWARD_OBJVAR, 3);
+                                    setObjVar(self, BRAWLER_REWARD_OBJVAR, 2);
                                 }
-                                else 
+                                else
                                 {
                                     giveTaskCompleteNoRewardMessage(self, SID_BRAWLER);
                                 }
-                                setObjVar(self, BRAWLER_QUEST_OBJVAR, 4);
+                                setObjVar(self, BRAWLER_QUEST_OBJVAR, 3);
                                 setObjVar(self, CURRENT_PROFESSION_OBJVAR, BRAWLER);
                                 messageTo(self, "handleGiveQuestMessage", null, 9, false);
                                 return SCRIPT_CONTINUE;
-                            }
-                            break;
-                            case 4:
-                            if (utils.hasScriptVar(self, "new_player.lungeUsed"))
-                            {
-                                obj_id lungeTarget = utils.getObjIdScriptVar(self, "new_player.lungeUsed");
-                                if (lungeTarget == target)
+                            case 3:
+                                if (utils.hasScriptVar(self, "new_player.berserkUsed"))
                                 {
-                                    utils.removeScriptVar(self, "new_player.lungeUsed");
-                                    custLogMsg = "New Player Quests: %TU finished brawler task 4 - use lunge.";
+                                    utils.removeScriptVar(self, "new_player.berserkUsed");
+                                    custLogMsg = "New Player Quests: %TU finished brawler task 3 - use berserk.";
                                     CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
-                                    if (getIntObjVar(self, BRAWLER_REWARD_OBJVAR) < 4)
+                                    if (getIntObjVar(self, BRAWLER_REWARD_OBJVAR) < 3)
                                     {
                                         xpReward = xpTypes[rand(0, xpTypes.length - 1)];
                                         xpAmount = 50;
@@ -1057,89 +1078,119 @@ public class new_player extends script.base_script
                                         money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
                                         giveTaskCompleteRewardMessage(self, SID_BRAWLER, creditsReward);
                                         checkForSpecialReward(self, false);
-                                        setObjVar(self, BRAWLER_REWARD_OBJVAR, 4);
+                                        setObjVar(self, BRAWLER_REWARD_OBJVAR, 3);
                                     }
-                                    else 
+                                    else
                                     {
                                         giveTaskCompleteNoRewardMessage(self, SID_BRAWLER);
                                     }
-                                    setObjVar(self, BRAWLER_QUEST_OBJVAR, 5);
+                                    setObjVar(self, BRAWLER_QUEST_OBJVAR, 4);
                                     setObjVar(self, CURRENT_PROFESSION_OBJVAR, BRAWLER);
                                     messageTo(self, "handleGiveQuestMessage", null, 9, false);
                                     return SCRIPT_CONTINUE;
                                 }
-                            }
-                            break;
-                            case 5:
-                            if (utils.hasScriptVar(self, "new_player.centerOfBeingUsed"))
-                            {
-                                utils.removeScriptVar(self, "new_player.centerOfBeingUsed");
-                                custLogMsg = "New Player Quests: %TU finished brawler task 5 - use center of being.";
-                                CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
-                                if (getIntObjVar(self, BRAWLER_REWARD_OBJVAR) < 5)
+                                break;
+                            case 4:
+                                if (utils.hasScriptVar(self, "new_player.lungeUsed"))
                                 {
-                                    xpReward = xpTypes[rand(0, xpTypes.length - 1)];
-                                    xpAmount = 50;
-                                    creditsReward = 100;
-                                    xp.grantCombatStyleXp(self, xpReward, xpAmount);
-                                    money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
-                                    giveTaskCompleteRewardMessage(self, SID_BRAWLER, creditsReward);
-                                    checkForSpecialReward(self, false);
-                                    setObjVar(self, BRAWLER_REWARD_OBJVAR, 5);
-                                }
-                                else 
-                                {
-                                    giveTaskCompleteNoRewardMessage(self, SID_BRAWLER);
-                                }
-                                setObjVar(self, BRAWLER_QUEST_OBJVAR, 6);
-                                setObjVar(self, CURRENT_PROFESSION_OBJVAR, BRAWLER);
-                                messageTo(self, "handleGiveQuestMessage", null, 9, false);
-                                return SCRIPT_CONTINUE;
-                            }
-                            break;
-                            case 6:
-                            int numKilled = 1;
-                            if (hasObjVar(self, "new_player.temp.brawler"))
-                            {
-                                numKilled = getIntObjVar(self, "new_player.temp.brawler") + 1;
-                            }
-                            setObjVar(self, "new_player.temp.brawler", numKilled);
-                            if (numKilled >= 10)
-                            {
-                                custLogMsg = "New Player Quests: %TU finished the final brawler task - kill 10 creatures.";
-                                CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
-                                if (getIntObjVar(self, BRAWLER_REWARD_OBJVAR) < 6)
-                                {
-                                    xpReward = xpTypes[rand(0, xpTypes.length - 1)];
-                                    xpAmount = 200;
-                                    creditsReward = 2000;
-                                    String questCompleteRewardSetting = getConfigSetting("New_Player", "QuestCompleteRewardAmount");
-                                    int questCompleteReward = utils.stringToInt(questCompleteRewardSetting);
-                                    if (questCompleteReward > 0)
+                                    obj_id lungeTarget = utils.getObjIdScriptVar(self, "new_player.lungeUsed");
+                                    if (lungeTarget == target)
                                     {
-                                        creditsReward = questCompleteReward;
+                                        utils.removeScriptVar(self, "new_player.lungeUsed");
+                                        custLogMsg = "New Player Quests: %TU finished brawler task 4 - use lunge.";
+                                        CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
+                                        if (getIntObjVar(self, BRAWLER_REWARD_OBJVAR) < 4)
+                                        {
+                                            xpReward = xpTypes[rand(0, xpTypes.length - 1)];
+                                            xpAmount = 50;
+                                            creditsReward = 100;
+                                            xp.grantCombatStyleXp(self, xpReward, xpAmount);
+                                            money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
+                                            giveTaskCompleteRewardMessage(self, SID_BRAWLER, creditsReward);
+                                            checkForSpecialReward(self, false);
+                                            setObjVar(self, BRAWLER_REWARD_OBJVAR, 4);
+                                        }
+                                        else
+                                        {
+                                            giveTaskCompleteNoRewardMessage(self, SID_BRAWLER);
+                                        }
+                                        setObjVar(self, BRAWLER_QUEST_OBJVAR, 5);
+                                        setObjVar(self, CURRENT_PROFESSION_OBJVAR, BRAWLER);
+                                        messageTo(self, "handleGiveQuestMessage", null, 9, false);
+                                        return SCRIPT_CONTINUE;
                                     }
-                                    xp.grantCombatStyleXp(self, xpReward, xpAmount);
-                                    money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
-                                    giveTaskCompleteRewardMessage(self, SID_BRAWLER, creditsReward);
-                                    checkForSpecialReward(self, true);
-                                    setObjVar(self, BRAWLER_REWARD_OBJVAR, 6);
                                 }
-                                else 
+                                break;
+                            case 5:
+                                if (utils.hasScriptVar(self, "new_player.centerOfBeingUsed"))
                                 {
-                                    giveTaskCompleteNoRewardMessage(self, SID_BRAWLER);
+                                    utils.removeScriptVar(self, "new_player.centerOfBeingUsed");
+                                    custLogMsg = "New Player Quests: %TU finished brawler task 5 - use center of being.";
+                                    CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
+                                    if (getIntObjVar(self, BRAWLER_REWARD_OBJVAR) < 5)
+                                    {
+                                        xpReward = xpTypes[rand(0, xpTypes.length - 1)];
+                                        xpAmount = 50;
+                                        creditsReward = 100;
+                                        xp.grantCombatStyleXp(self, xpReward, xpAmount);
+                                        money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
+                                        giveTaskCompleteRewardMessage(self, SID_BRAWLER, creditsReward);
+                                        checkForSpecialReward(self, false);
+                                        setObjVar(self, BRAWLER_REWARD_OBJVAR, 5);
+                                    }
+                                    else
+                                    {
+                                        giveTaskCompleteNoRewardMessage(self, SID_BRAWLER);
+                                    }
+                                    setObjVar(self, BRAWLER_QUEST_OBJVAR, 6);
+                                    setObjVar(self, CURRENT_PROFESSION_OBJVAR, BRAWLER);
+                                    messageTo(self, "handleGiveQuestMessage", null, 9, false);
+                                    return SCRIPT_CONTINUE;
                                 }
-                                removeObjVar(self, BRAWLER_QUEST_OBJVAR);
-                                removeObjVar(self, "new_player.temp.brawler");
-                                removeCurrentProfessionObjVar(self, BRAWLER);
-                                webster = new dictionary();
-                                webster.put("profession", BRAWLER);
-                                messageTo(self, "handleDoQuestComplete", webster, 3, false);
-                                return SCRIPT_CONTINUE;
-                            }
-                            break;
+                                break;
+                            case 6:
+                                int numKilled = 1;
+                                if (hasObjVar(self, "new_player.temp.brawler"))
+                                {
+                                    numKilled = getIntObjVar(self, "new_player.temp.brawler") + 1;
+                                }
+                                setObjVar(self, "new_player.temp.brawler", numKilled);
+                                if (numKilled >= 10)
+                                {
+                                    custLogMsg = "New Player Quests: %TU finished the final brawler task - kill 10 creatures.";
+                                    CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
+                                    if (getIntObjVar(self, BRAWLER_REWARD_OBJVAR) < 6)
+                                    {
+                                        xpReward = xpTypes[rand(0, xpTypes.length - 1)];
+                                        xpAmount = 200;
+                                        creditsReward = 2000;
+                                        String questCompleteRewardSetting = getConfigSetting("New_Player", "QuestCompleteRewardAmount");
+                                        int questCompleteReward = utils.stringToInt(questCompleteRewardSetting);
+                                        if (questCompleteReward > 0)
+                                        {
+                                            creditsReward = questCompleteReward;
+                                        }
+                                        xp.grantCombatStyleXp(self, xpReward, xpAmount);
+                                        money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
+                                        giveTaskCompleteRewardMessage(self, SID_BRAWLER, creditsReward);
+                                        checkForSpecialReward(self, true);
+                                        setObjVar(self, BRAWLER_REWARD_OBJVAR, 6);
+                                    }
+                                    else
+                                    {
+                                        giveTaskCompleteNoRewardMessage(self, SID_BRAWLER);
+                                    }
+                                    removeObjVar(self, BRAWLER_QUEST_OBJVAR);
+                                    removeObjVar(self, "new_player.temp.brawler");
+                                    removeCurrentProfessionObjVar(self, BRAWLER);
+                                    webster = new dictionary();
+                                    webster.put("profession", BRAWLER);
+                                    messageTo(self, "handleDoQuestComplete", webster, 3, false);
+                                    return SCRIPT_CONTINUE;
+                                }
+                                break;
                             default:
-                            break;
+                                break;
                         }
                         return SCRIPT_CONTINUE;
                     }
@@ -1149,136 +1200,136 @@ public class new_player extends script.base_script
                         switch (questNum)
                         {
                             case 0:
-                            break;
+                                break;
                             case 1:
-                            break;
+                                break;
                             case 2:
-                            custLogMsg = "New Player Quests: %TU finished marksman task 2 - kill a creature.";
-                            CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
-                            if (getIntObjVar(self, MARKSMAN_REWARD_OBJVAR) < 2)
-                            {
-                                xpReward = xpTypes[rand(0, xpTypes.length - 1)];
-                                xpAmount = 60;
-                                creditsReward = 130;
-                                xp.grantCombatStyleXp(self, xpReward, xpAmount);
-                                money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
-                                giveTaskCompleteRewardMessage(self, SID_MARKSMAN, creditsReward);
-                                checkForSpecialReward(self, false);
-                                setObjVar(self, MARKSMAN_REWARD_OBJVAR, 2);
-                            }
-                            else 
-                            {
-                                giveTaskCompleteNoRewardMessage(self, SID_MARKSMAN);
-                            }
-                            setObjVar(self, MARKSMAN_QUEST_OBJVAR, 3);
-                            setObjVar(self, CURRENT_PROFESSION_OBJVAR, MARKSMAN);
-                            messageTo(self, "handleGiveQuestMessage", null, 9, false);
-                            return SCRIPT_CONTINUE;
-                            case 3:
-                            if (utils.hasScriptVar(self, "new_player.pointBlankSingleUsed"))
-                            {
-                                obj_id pointBlankTarget = utils.getObjIdScriptVar(self, "new_player.pointBlankSingleUsed");
-                                if (pointBlankTarget == target)
-                                {
-                                    utils.removeScriptVar(self, "new_player.pointBlankSingleUsed");
-                                    custLogMsg = "New Player Quests: %TU finished marksman task 3 - use point blank single.";
-                                    CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
-                                    if (getIntObjVar(self, MARKSMAN_REWARD_OBJVAR) < 3)
-                                    {
-                                        xpReward = xpTypes[rand(0, xpTypes.length - 1)];
-                                        xpAmount = 70;
-                                        creditsReward = 130;
-                                        xp.grantCombatStyleXp(self, xpReward, xpAmount);
-                                        money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
-                                        giveTaskCompleteRewardMessage(self, SID_MARKSMAN, creditsReward);
-                                        checkForSpecialReward(self, false);
-                                        setObjVar(self, MARKSMAN_REWARD_OBJVAR, 3);
-                                    }
-                                    else 
-                                    {
-                                        giveTaskCompleteNoRewardMessage(self, SID_MARKSMAN);
-                                    }
-                                    setObjVar(self, MARKSMAN_QUEST_OBJVAR, 4);
-                                    setObjVar(self, CURRENT_PROFESSION_OBJVAR, MARKSMAN);
-                                    messageTo(self, "handleGiveQuestMessage", null, 9, false);
-                                    return SCRIPT_CONTINUE;
-                                }
-                            }
-                            break;
-                            case 4:
-                            if (utils.hasScriptVar(self, "new_player.overChargeShotUsed"))
-                            {
-                                obj_id overchargeTarget = utils.getObjIdScriptVar(self, "new_player.overChargeShotUsed");
-                                if (overchargeTarget == target)
-                                {
-                                    utils.removeScriptVar(self, "new_player.overChargeShotUsed");
-                                    custLogMsg = "New Player Quests: %TU finished marksman task 4 - use overcharge shot.";
-                                    CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
-                                    if (getIntObjVar(self, MARKSMAN_REWARD_OBJVAR) < 4)
-                                    {
-                                        xpReward = xpTypes[rand(0, xpTypes.length - 1)];
-                                        xpAmount = 70;
-                                        creditsReward = 140;
-                                        xp.grantCombatStyleXp(self, xpReward, xpAmount);
-                                        money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
-                                        giveTaskCompleteRewardMessage(self, SID_MARKSMAN, creditsReward);
-                                        checkForSpecialReward(self, false);
-                                        setObjVar(self, MARKSMAN_REWARD_OBJVAR, 4);
-                                    }
-                                    else 
-                                    {
-                                        giveTaskCompleteNoRewardMessage(self, SID_MARKSMAN);
-                                    }
-                                    setObjVar(self, MARKSMAN_QUEST_OBJVAR, 5);
-                                    setObjVar(self, CURRENT_PROFESSION_OBJVAR, MARKSMAN);
-                                    messageTo(self, "handleGiveQuestMessage", null, 9, false);
-                                    return SCRIPT_CONTINUE;
-                                }
-                            }
-                            break;
-                            case 5:
-                            int numKilled = 1;
-                            if (hasObjVar(self, "new_player.temp.marksman"))
-                            {
-                                numKilled = getIntObjVar(self, "new_player.temp.marksman") + 1;
-                            }
-                            setObjVar(self, "new_player.temp.marksman", numKilled);
-                            if (numKilled >= 10)
-                            {
-                                custLogMsg = "New Player Quests: %TU finished the final marksman task - kill 10 creatures.";
+                                custLogMsg = "New Player Quests: %TU finished marksman task 2 - kill a creature.";
                                 CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
-                                if (getIntObjVar(self, MARKSMAN_REWARD_OBJVAR) < 5)
+                                if (getIntObjVar(self, MARKSMAN_REWARD_OBJVAR) < 2)
                                 {
                                     xpReward = xpTypes[rand(0, xpTypes.length - 1)];
-                                    xpAmount = 200;
-                                    creditsReward = 2000;
-                                    String questCompleteRewardSetting = getConfigSetting("New_Player", "QuestCompleteRewardAmount");
-                                    int questCompleteReward = utils.stringToInt(questCompleteRewardSetting);
-                                    if (questCompleteReward > 0)
-                                    {
-                                        creditsReward = questCompleteReward;
-                                    }
+                                    xpAmount = 60;
+                                    creditsReward = 130;
                                     xp.grantCombatStyleXp(self, xpReward, xpAmount);
                                     money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
                                     giveTaskCompleteRewardMessage(self, SID_MARKSMAN, creditsReward);
-                                    checkForSpecialReward(self, true);
-                                    setObjVar(self, MARKSMAN_REWARD_OBJVAR, 5);
+                                    checkForSpecialReward(self, false);
+                                    setObjVar(self, MARKSMAN_REWARD_OBJVAR, 2);
                                 }
-                                else 
+                                else
                                 {
                                     giveTaskCompleteNoRewardMessage(self, SID_MARKSMAN);
                                 }
-                                removeObjVar(self, MARKSMAN_QUEST_OBJVAR);
-                                removeObjVar(self, "new_player.temp.marksman");
-                                removeCurrentProfessionObjVar(self, MARKSMAN);
-                                webster = new dictionary();
-                                webster.put("profession", MARKSMAN);
-                                messageTo(self, "handleDoQuestComplete", webster, 3, false);
+                                setObjVar(self, MARKSMAN_QUEST_OBJVAR, 3);
+                                setObjVar(self, CURRENT_PROFESSION_OBJVAR, MARKSMAN);
+                                messageTo(self, "handleGiveQuestMessage", null, 9, false);
                                 return SCRIPT_CONTINUE;
-                            }
-                            break;
+                            case 3:
+                                if (utils.hasScriptVar(self, "new_player.pointBlankSingleUsed"))
+                                {
+                                    obj_id pointBlankTarget = utils.getObjIdScriptVar(self, "new_player.pointBlankSingleUsed");
+                                    if (pointBlankTarget == target)
+                                    {
+                                        utils.removeScriptVar(self, "new_player.pointBlankSingleUsed");
+                                        custLogMsg = "New Player Quests: %TU finished marksman task 3 - use point blank single.";
+                                        CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
+                                        if (getIntObjVar(self, MARKSMAN_REWARD_OBJVAR) < 3)
+                                        {
+                                            xpReward = xpTypes[rand(0, xpTypes.length - 1)];
+                                            xpAmount = 70;
+                                            creditsReward = 130;
+                                            xp.grantCombatStyleXp(self, xpReward, xpAmount);
+                                            money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
+                                            giveTaskCompleteRewardMessage(self, SID_MARKSMAN, creditsReward);
+                                            checkForSpecialReward(self, false);
+                                            setObjVar(self, MARKSMAN_REWARD_OBJVAR, 3);
+                                        }
+                                        else
+                                        {
+                                            giveTaskCompleteNoRewardMessage(self, SID_MARKSMAN);
+                                        }
+                                        setObjVar(self, MARKSMAN_QUEST_OBJVAR, 4);
+                                        setObjVar(self, CURRENT_PROFESSION_OBJVAR, MARKSMAN);
+                                        messageTo(self, "handleGiveQuestMessage", null, 9, false);
+                                        return SCRIPT_CONTINUE;
+                                    }
+                                }
+                                break;
+                            case 4:
+                                if (utils.hasScriptVar(self, "new_player.overChargeShotUsed"))
+                                {
+                                    obj_id overchargeTarget = utils.getObjIdScriptVar(self, "new_player.overChargeShotUsed");
+                                    if (overchargeTarget == target)
+                                    {
+                                        utils.removeScriptVar(self, "new_player.overChargeShotUsed");
+                                        custLogMsg = "New Player Quests: %TU finished marksman task 4 - use overcharge shot.";
+                                        CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
+                                        if (getIntObjVar(self, MARKSMAN_REWARD_OBJVAR) < 4)
+                                        {
+                                            xpReward = xpTypes[rand(0, xpTypes.length - 1)];
+                                            xpAmount = 70;
+                                            creditsReward = 140;
+                                            xp.grantCombatStyleXp(self, xpReward, xpAmount);
+                                            money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
+                                            giveTaskCompleteRewardMessage(self, SID_MARKSMAN, creditsReward);
+                                            checkForSpecialReward(self, false);
+                                            setObjVar(self, MARKSMAN_REWARD_OBJVAR, 4);
+                                        }
+                                        else
+                                        {
+                                            giveTaskCompleteNoRewardMessage(self, SID_MARKSMAN);
+                                        }
+                                        setObjVar(self, MARKSMAN_QUEST_OBJVAR, 5);
+                                        setObjVar(self, CURRENT_PROFESSION_OBJVAR, MARKSMAN);
+                                        messageTo(self, "handleGiveQuestMessage", null, 9, false);
+                                        return SCRIPT_CONTINUE;
+                                    }
+                                }
+                                break;
+                            case 5:
+                                int numKilled = 1;
+                                if (hasObjVar(self, "new_player.temp.marksman"))
+                                {
+                                    numKilled = getIntObjVar(self, "new_player.temp.marksman") + 1;
+                                }
+                                setObjVar(self, "new_player.temp.marksman", numKilled);
+                                if (numKilled >= 10)
+                                {
+                                    custLogMsg = "New Player Quests: %TU finished the final marksman task - kill 10 creatures.";
+                                    CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
+                                    if (getIntObjVar(self, MARKSMAN_REWARD_OBJVAR) < 5)
+                                    {
+                                        xpReward = xpTypes[rand(0, xpTypes.length - 1)];
+                                        xpAmount = 200;
+                                        creditsReward = 2000;
+                                        String questCompleteRewardSetting = getConfigSetting("New_Player", "QuestCompleteRewardAmount");
+                                        int questCompleteReward = utils.stringToInt(questCompleteRewardSetting);
+                                        if (questCompleteReward > 0)
+                                        {
+                                            creditsReward = questCompleteReward;
+                                        }
+                                        xp.grantCombatStyleXp(self, xpReward, xpAmount);
+                                        money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
+                                        giveTaskCompleteRewardMessage(self, SID_MARKSMAN, creditsReward);
+                                        checkForSpecialReward(self, true);
+                                        setObjVar(self, MARKSMAN_REWARD_OBJVAR, 5);
+                                    }
+                                    else
+                                    {
+                                        giveTaskCompleteNoRewardMessage(self, SID_MARKSMAN);
+                                    }
+                                    removeObjVar(self, MARKSMAN_QUEST_OBJVAR);
+                                    removeObjVar(self, "new_player.temp.marksman");
+                                    removeCurrentProfessionObjVar(self, MARKSMAN);
+                                    webster = new dictionary();
+                                    webster.put("profession", MARKSMAN);
+                                    messageTo(self, "handleDoQuestComplete", webster, 3, false);
+                                    return SCRIPT_CONTINUE;
+                                }
+                                break;
                             default:
-                            break;
+                                break;
                         }
                     }
                 }
@@ -1286,6 +1337,7 @@ public class new_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleNewPlayerScoutAction(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, SCOUT_QUEST_OBJVAR))
@@ -1298,186 +1350,187 @@ public class new_player extends script.base_script
             switch (questNum)
             {
                 case 0:
-                break;
+                    break;
                 case 1:
-                break;
+                    break;
                 case 2:
-                if (params.containsKey("resourceType"))
-                {
-                    String resType = params.getString("resourceType");
-                    int amount = params.getInt("amount");
-                    if (resType.startsWith("hide"))
+                    if (params.containsKey("resourceType"))
                     {
-                        setObjVar(self, "new_player.temp.scout_hide", amount);
-                    }
-                    else if (resType.startsWith("bone"))
-                    {
-                        setObjVar(self, "new_player.temp.scout_bone", amount);
-                    }
-                    String custLogMsg = "New Player Quests: %TU finished scout task 2 - harvest from a creature.";
-                    CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
-                    if (getIntObjVar(self, SCOUT_REWARD_OBJVAR) < 2)
-                    {
-                        xpReward = "scout";
-                        xpAmount = 60;
-                        creditsReward = 100;
-                        xp.grantCombatStyleXp(self, xpReward, xpAmount);
-                        money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
-                        giveTaskCompleteRewardMessage(self, SID_SCOUT, creditsReward);
-                        checkForSpecialReward(self, false);
-                        setObjVar(self, SCOUT_REWARD_OBJVAR, 2);
-                    }
-                    else 
-                    {
-                        giveTaskCompleteNoRewardMessage(self, SID_SCOUT);
-                    }
-                    setObjVar(self, SCOUT_QUEST_OBJVAR, 3);
-                    setObjVar(self, CURRENT_PROFESSION_OBJVAR, SCOUT);
-                    messageTo(self, "handleGiveQuestMessage", null, 9, false);
-                    return SCRIPT_CONTINUE;
-                }
-                break;
-                case 3:
-                if (params.containsKey("resourceType"))
-                {
-                    String resType = params.getString("resourceType");
-                    int amount = params.getInt("amount");
-                    int hides = 0;
-                    int bones = 0;
-                    if (hasObjVar(self, "new_player.temp.scout_hide"))
-                    {
-                        hides = getIntObjVar(self, "new_player.temp.scout_hide");
-                    }
-                    if (hasObjVar(self, "new_player.temp.scout_bone"))
-                    {
-                        bones = getIntObjVar(self, "new_player.temp.scout_bone");
-                    }
-                    if (resType.startsWith("hide"))
-                    {
-                        hides = hides + amount;
-                        setObjVar(self, "new_player.temp.scout_hide", hides);
-                    }
-                    else if (resType.startsWith("bone"))
-                    {
-                        bones = bones + amount;
-                        setObjVar(self, "new_player.temp.scout_bone", bones);
-                    }
-                    if (hides >= 3 && bones >= 3)
-                    {
-                        String custLogMsg = "New Player Quests: %TU finished scout task 3 - harvest hides and bones.";
+                        String resType = params.getString("resourceType");
+                        int amount = params.getInt("amount");
+                        if (resType.startsWith("hide"))
+                        {
+                            setObjVar(self, "new_player.temp.scout_hide", amount);
+                        }
+                        else if (resType.startsWith("bone"))
+                        {
+                            setObjVar(self, "new_player.temp.scout_bone", amount);
+                        }
+                        String custLogMsg = "New Player Quests: %TU finished scout task 2 - harvest from a creature.";
                         CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
-                        if (getIntObjVar(self, SCOUT_REWARD_OBJVAR) < 3)
+                        if (getIntObjVar(self, SCOUT_REWARD_OBJVAR) < 2)
                         {
                             xpReward = "scout";
-                            xpAmount = 70;
+                            xpAmount = 60;
                             creditsReward = 100;
                             xp.grantCombatStyleXp(self, xpReward, xpAmount);
                             money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
                             giveTaskCompleteRewardMessage(self, SID_SCOUT, creditsReward);
                             checkForSpecialReward(self, false);
-                            setObjVar(self, SCOUT_REWARD_OBJVAR, 3);
+                            setObjVar(self, SCOUT_REWARD_OBJVAR, 2);
                         }
-                        else 
+                        else
                         {
                             giveTaskCompleteNoRewardMessage(self, SID_SCOUT);
                         }
-                        setObjVar(self, SCOUT_QUEST_OBJVAR, 4);
+                        setObjVar(self, SCOUT_QUEST_OBJVAR, 3);
                         setObjVar(self, CURRENT_PROFESSION_OBJVAR, SCOUT);
-                        removeObjVar(self, "new_player.temp.scout_hide");
-                        removeObjVar(self, "new_player.temp.scout_bone");
                         messageTo(self, "handleGiveQuestMessage", null, 9, false);
                         return SCRIPT_CONTINUE;
                     }
-                }
-                break;
+                    break;
+                case 3:
+                    if (params.containsKey("resourceType"))
+                    {
+                        String resType = params.getString("resourceType");
+                        int amount = params.getInt("amount");
+                        int hides = 0;
+                        int bones = 0;
+                        if (hasObjVar(self, "new_player.temp.scout_hide"))
+                        {
+                            hides = getIntObjVar(self, "new_player.temp.scout_hide");
+                        }
+                        if (hasObjVar(self, "new_player.temp.scout_bone"))
+                        {
+                            bones = getIntObjVar(self, "new_player.temp.scout_bone");
+                        }
+                        if (resType.startsWith("hide"))
+                        {
+                            hides = hides + amount;
+                            setObjVar(self, "new_player.temp.scout_hide", hides);
+                        }
+                        else if (resType.startsWith("bone"))
+                        {
+                            bones = bones + amount;
+                            setObjVar(self, "new_player.temp.scout_bone", bones);
+                        }
+                        if (hides >= 3 && bones >= 3)
+                        {
+                            String custLogMsg = "New Player Quests: %TU finished scout task 3 - harvest hides and bones.";
+                            CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
+                            if (getIntObjVar(self, SCOUT_REWARD_OBJVAR) < 3)
+                            {
+                                xpReward = "scout";
+                                xpAmount = 70;
+                                creditsReward = 100;
+                                xp.grantCombatStyleXp(self, xpReward, xpAmount);
+                                money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
+                                giveTaskCompleteRewardMessage(self, SID_SCOUT, creditsReward);
+                                checkForSpecialReward(self, false);
+                                setObjVar(self, SCOUT_REWARD_OBJVAR, 3);
+                            }
+                            else
+                            {
+                                giveTaskCompleteNoRewardMessage(self, SID_SCOUT);
+                            }
+                            setObjVar(self, SCOUT_QUEST_OBJVAR, 4);
+                            setObjVar(self, CURRENT_PROFESSION_OBJVAR, SCOUT);
+                            removeObjVar(self, "new_player.temp.scout_hide");
+                            removeObjVar(self, "new_player.temp.scout_bone");
+                            messageTo(self, "handleGiveQuestMessage", null, 9, false);
+                            return SCRIPT_CONTINUE;
+                        }
+                    }
+                    break;
                 case 4:
-                break;
+                    break;
                 case 5:
-                if (params.containsKey("deployedCamp"))
-                {
-                    String custLogMsg = "New Player Quests: %TU finished scout task 5 - deploy a camp.";
-                    CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
-                    if (getIntObjVar(self, SCOUT_REWARD_OBJVAR) < 5)
+                    if (params.containsKey("deployedCamp"))
                     {
-                        xpReward = "scout";
-                        xpAmount = 50;
-                        creditsReward = 100;
-                        xp.grantCombatStyleXp(self, xpReward, xpAmount);
-                        money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
-                        giveTaskCompleteRewardMessage(self, SID_SCOUT, creditsReward);
-                        checkForSpecialReward(self, false);
-                        setObjVar(self, SCOUT_REWARD_OBJVAR, 5);
-                    }
-                    else 
-                    {
-                        giveTaskCompleteNoRewardMessage(self, SID_SCOUT);
-                    }
-                    setObjVar(self, SCOUT_QUEST_OBJVAR, 6);
-                    setObjVar(self, CURRENT_PROFESSION_OBJVAR, SCOUT);
-                    messageTo(self, "handleGiveQuestMessage", null, 9, false);
-                    return SCRIPT_CONTINUE;
-                }
-                break;
-                case 6:
-                if (params.containsKey("resourceType"))
-                {
-                    String resType = params.getString("resourceType");
-                    int amount = params.getInt("amount");
-                    if (!resType.startsWith("hide"))
-                    {
-                        return SCRIPT_CONTINUE;
-                    }
-                    int numHides = 0;
-                    if (hasObjVar(self, "new_player.temp.scout"))
-                    {
-                        numHides = getIntObjVar(self, "new_player.temp.scout");
-                    }
-                    numHides = numHides + amount;
-                    if (numHides < 90)
-                    {
-                        setObjVar(self, "new_player.temp.scout", numHides);
-                    }
-                    else 
-                    {
-                        String custLogMsg = "New Player Quests: %TU finished the final scout task - harvest 90 hides.";
+                        String custLogMsg = "New Player Quests: %TU finished scout task 5 - deploy a camp.";
                         CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
-                        if (getIntObjVar(self, SCOUT_REWARD_OBJVAR) < 6)
+                        if (getIntObjVar(self, SCOUT_REWARD_OBJVAR) < 5)
                         {
                             xpReward = "scout";
-                            xpAmount = 200;
-                            creditsReward = 2000;
-                            String questCompleteRewardSetting = getConfigSetting("New_Player", "QuestCompleteRewardAmount");
-                            int questCompleteReward = utils.stringToInt(questCompleteRewardSetting);
-                            if (questCompleteReward > 0)
-                            {
-                                creditsReward = questCompleteReward;
-                            }
+                            xpAmount = 50;
+                            creditsReward = 100;
                             xp.grantCombatStyleXp(self, xpReward, xpAmount);
                             money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
                             giveTaskCompleteRewardMessage(self, SID_SCOUT, creditsReward);
-                            checkForSpecialReward(self, true);
-                            setObjVar(self, SCOUT_REWARD_OBJVAR, 6);
+                            checkForSpecialReward(self, false);
+                            setObjVar(self, SCOUT_REWARD_OBJVAR, 5);
                         }
-                        else 
+                        else
                         {
                             giveTaskCompleteNoRewardMessage(self, SID_SCOUT);
                         }
-                        removeObjVar(self, SCOUT_QUEST_OBJVAR);
-                        removeObjVar(self, "new_player.temp.scout");
-                        removeCurrentProfessionObjVar(self, SCOUT);
-                        dictionary webster = new dictionary();
-                        webster.put("profession", SCOUT);
-                        messageTo(self, "handleDoQuestComplete", webster, 3, false);
+                        setObjVar(self, SCOUT_QUEST_OBJVAR, 6);
+                        setObjVar(self, CURRENT_PROFESSION_OBJVAR, SCOUT);
+                        messageTo(self, "handleGiveQuestMessage", null, 9, false);
                         return SCRIPT_CONTINUE;
                     }
-                }
-                break;
+                    break;
+                case 6:
+                    if (params.containsKey("resourceType"))
+                    {
+                        String resType = params.getString("resourceType");
+                        int amount = params.getInt("amount");
+                        if (!resType.startsWith("hide"))
+                        {
+                            return SCRIPT_CONTINUE;
+                        }
+                        int numHides = 0;
+                        if (hasObjVar(self, "new_player.temp.scout"))
+                        {
+                            numHides = getIntObjVar(self, "new_player.temp.scout");
+                        }
+                        numHides = numHides + amount;
+                        if (numHides < 90)
+                        {
+                            setObjVar(self, "new_player.temp.scout", numHides);
+                        }
+                        else
+                        {
+                            String custLogMsg = "New Player Quests: %TU finished the final scout task - harvest 90 hides.";
+                            CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
+                            if (getIntObjVar(self, SCOUT_REWARD_OBJVAR) < 6)
+                            {
+                                xpReward = "scout";
+                                xpAmount = 200;
+                                creditsReward = 2000;
+                                String questCompleteRewardSetting = getConfigSetting("New_Player", "QuestCompleteRewardAmount");
+                                int questCompleteReward = utils.stringToInt(questCompleteRewardSetting);
+                                if (questCompleteReward > 0)
+                                {
+                                    creditsReward = questCompleteReward;
+                                }
+                                xp.grantCombatStyleXp(self, xpReward, xpAmount);
+                                money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
+                                giveTaskCompleteRewardMessage(self, SID_SCOUT, creditsReward);
+                                checkForSpecialReward(self, true);
+                                setObjVar(self, SCOUT_REWARD_OBJVAR, 6);
+                            }
+                            else
+                            {
+                                giveTaskCompleteNoRewardMessage(self, SID_SCOUT);
+                            }
+                            removeObjVar(self, SCOUT_QUEST_OBJVAR);
+                            removeObjVar(self, "new_player.temp.scout");
+                            removeCurrentProfessionObjVar(self, SCOUT);
+                            dictionary webster = new dictionary();
+                            webster.put("profession", SCOUT);
+                            messageTo(self, "handleDoQuestComplete", webster, 3, false);
+                            return SCRIPT_CONTINUE;
+                        }
+                    }
+                    break;
                 default:
-                break;
+                    break;
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleQuestCraftingAction(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id prototype = params.getObjId("prototype");
@@ -1504,7 +1557,7 @@ public class new_player extends script.base_script
                     checkForSpecialReward(self, false);
                     setObjVar(self, SCOUT_REWARD_OBJVAR, 4);
                 }
-                else 
+                else
                 {
                     giveTaskCompleteNoRewardMessage(self, SID_SCOUT);
                 }
@@ -1534,7 +1587,7 @@ public class new_player extends script.base_script
                         checkForSpecialReward(self, false);
                         setObjVar(self, ARTISAN_REWARD_OBJVAR, 4);
                     }
-                    else 
+                    else
                     {
                         giveTaskCompleteNoRewardMessage(self, SID_ARTISAN);
                     }
@@ -1575,7 +1628,7 @@ public class new_player extends script.base_script
                             checkForSpecialReward(self, true);
                             setObjVar(self, ARTISAN_REWARD_OBJVAR, 5);
                         }
-                        else 
+                        else
                         {
                             giveTaskCompleteNoRewardMessage(self, SID_ARTISAN);
                         }
@@ -1607,7 +1660,7 @@ public class new_player extends script.base_script
                     checkForSpecialReward(self, false);
                     setObjVar(self, MEDIC_REWARD_OBJVAR, 5);
                 }
-                else 
+                else
                 {
                     giveTaskCompleteNoRewardMessage(self, SID_MEDIC);
                 }
@@ -1619,6 +1672,7 @@ public class new_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleNewPlayerArtisanAction(obj_id self, dictionary params) throws InterruptedException
     {
         String xpReward = "";
@@ -1648,7 +1702,7 @@ public class new_player extends script.base_script
                             checkForSpecialReward(self, false);
                             setObjVar(self, ARTISAN_REWARD_OBJVAR, 1);
                         }
-                        else 
+                        else
                         {
                             giveTaskCompleteNoRewardMessage(self, SID_ARTISAN);
                         }
@@ -1664,19 +1718,23 @@ public class new_player extends script.base_script
                 if (params.containsKey("sampling"))
                 {
                     obj_id[] minerals = utils.getAllItemsPlayerHasByTemplate(self, MINERAL_RESOURCE_CONTAINER);
-                    if (minerals != null && minerals.length > 0)
+                    if (minerals != null)
                     {
-                        for (obj_id containerId : minerals) {
+                        for (obj_id containerId : minerals)
+                        {
                             obj_id resTypeId = getResourceContainerResourceType(containerId);
                             boolean isMineral = isResourceDerivedFrom(resTypeId, "mineral");
-                            if (isMineral) {
+                            if (isMineral)
+                            {
                                 int amt = getResourceContainerQuantity(containerId);
-                                if (amt >= 8) {
+                                if (amt >= 8)
+                                {
                                     String resName = getResourceName(resTypeId);
                                     setObjVar(self, "new_player.temp.artisan_resource", resName);
                                     String custLogMsg = "New Player Quests: %TU finished artisan task 2 - sample some minerals.";
                                     CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
-                                    if (getIntObjVar(self, ARTISAN_REWARD_OBJVAR) < 2) {
+                                    if (getIntObjVar(self, ARTISAN_REWARD_OBJVAR) < 2)
+                                    {
                                         xpReward = "crafting_general";
                                         xpAmount = 25;
                                         creditsReward = 100;
@@ -1685,7 +1743,9 @@ public class new_player extends script.base_script
                                         giveTaskCompleteRewardMessage(self, SID_ARTISAN, creditsReward);
                                         checkForSpecialReward(self, false);
                                         setObjVar(self, ARTISAN_REWARD_OBJVAR, 2);
-                                    } else {
+                                    }
+                                    else
+                                    {
                                         giveTaskCompleteNoRewardMessage(self, SID_ARTISAN);
                                     }
                                     setObjVar(self, ARTISAN_QUEST_OBJVAR, 3);
@@ -1703,23 +1763,28 @@ public class new_player extends script.base_script
                 if (params.containsKey("sampling"))
                 {
                     obj_id[] minerals = utils.getAllItemsPlayerHasByTemplate(self, MINERAL_RESOURCE_CONTAINER);
-                    if (minerals != null && minerals.length > 0)
+                    if (minerals != null)
                     {
-                        for (obj_id containerId : minerals) {
+                        for (obj_id containerId : minerals)
+                        {
                             obj_id resTypeId = getResourceContainerResourceType(containerId);
                             boolean isMetal = isResourceDerivedFrom(resTypeId, "metal");
-                            if (isMetal) {
+                            if (isMetal)
+                            {
                                 int amt = getResourceContainerQuantity(containerId);
                                 int requiredResource = 19;
                                 String resName = getResourceName(resTypeId);
                                 String mineralName = getStringObjVar(self, "new_player.temp.artisan_resource");
-                                if (resName.equals(mineralName)) {
+                                if (resName.equals(mineralName))
+                                {
                                     requiredResource = 27;
                                 }
-                                if (amt >= requiredResource) {
+                                if (amt >= requiredResource)
+                                {
                                     String custLogMsg = "New Player Quests: %TU finished artisan task 3 - sample 19 units of metal.";
                                     CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
-                                    if (getIntObjVar(self, ARTISAN_REWARD_OBJVAR) < 3) {
+                                    if (getIntObjVar(self, ARTISAN_REWARD_OBJVAR) < 3)
+                                    {
                                         xpReward = "crafting_general";
                                         xpAmount = 25;
                                         creditsReward = 100;
@@ -1728,7 +1793,9 @@ public class new_player extends script.base_script
                                         giveTaskCompleteRewardMessage(self, SID_ARTISAN, creditsReward);
                                         checkForSpecialReward(self, false);
                                         setObjVar(self, ARTISAN_REWARD_OBJVAR, 3);
-                                    } else {
+                                    }
+                                    else
+                                    {
                                         giveTaskCompleteNoRewardMessage(self, SID_ARTISAN);
                                     }
                                     setObjVar(self, ARTISAN_QUEST_OBJVAR, 4);
@@ -1745,6 +1812,7 @@ public class new_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleImageDesignerSkipped(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -1756,6 +1824,7 @@ public class new_player extends script.base_script
         giveQuestMessage(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleNewPlayerEntertainerAction(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, ENTERTAINER_QUEST_OBJVAR))
@@ -1768,247 +1837,248 @@ public class new_player extends script.base_script
             switch (questNum)
             {
                 case 0:
-                break;
+                    break;
                 case 1:
-                if (params.containsKey("startedDancing"))
-                {
-                    String custLogMsg = "New Player Quests: %TU finished entertainer task 1 - dance.";
-                    CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
-                    if (getIntObjVar(self, ENTERTAINER_REWARD_OBJVAR) < 1)
+                    if (params.containsKey("startedDancing"))
                     {
-                        xpReward = "dance";
-                        xpAmount = 50;
-                        creditsReward = 80;
-                        xp.grantSocialStyleXp(self, xpReward, xpAmount);
-                        money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
-                        giveTaskCompleteRewardMessage(self, SID_ENTERTAINER, creditsReward);
-                        checkForSpecialReward(self, false);
-                        setObjVar(self, ENTERTAINER_REWARD_OBJVAR, 1);
+                        String custLogMsg = "New Player Quests: %TU finished entertainer task 1 - dance.";
+                        CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
+                        if (getIntObjVar(self, ENTERTAINER_REWARD_OBJVAR) < 1)
+                        {
+                            xpReward = "dance";
+                            xpAmount = 50;
+                            creditsReward = 80;
+                            xp.grantSocialStyleXp(self, xpReward, xpAmount);
+                            money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
+                            giveTaskCompleteRewardMessage(self, SID_ENTERTAINER, creditsReward);
+                            checkForSpecialReward(self, false);
+                            setObjVar(self, ENTERTAINER_REWARD_OBJVAR, 1);
+                        }
+                        else
+                        {
+                            giveTaskCompleteNoRewardMessage(self, SID_ENTERTAINER);
+                        }
+                        setObjVar(self, ENTERTAINER_QUEST_OBJVAR, 2);
+                        setObjVar(self, CURRENT_PROFESSION_OBJVAR, ENTERTAINER);
+                        messageTo(self, "handleGiveQuestMessage", null, 9, false);
+                        return SCRIPT_CONTINUE;
                     }
-                    else 
-                    {
-                        giveTaskCompleteNoRewardMessage(self, SID_ENTERTAINER);
-                    }
-                    setObjVar(self, ENTERTAINER_QUEST_OBJVAR, 2);
-                    setObjVar(self, CURRENT_PROFESSION_OBJVAR, ENTERTAINER);
-                    messageTo(self, "handleGiveQuestMessage", null, 9, false);
-                    return SCRIPT_CONTINUE;
-                }
-                break;
+                    break;
                 case 2:
-                if (params.containsKey("playingMusic"))
-                {
-                    String custLogMsg = "New Player Quests: %TU finished entertainer task 2 - play music.";
-                    CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
-                    if (getIntObjVar(self, ENTERTAINER_REWARD_OBJVAR) < 2)
+                    if (params.containsKey("playingMusic"))
                     {
-                        xpReward = "music";
-                        xpAmount = 50;
-                        creditsReward = 80;
-                        xp.grantSocialStyleXp(self, xpReward, xpAmount);
-                        money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
-                        giveTaskCompleteRewardMessage(self, SID_ENTERTAINER, creditsReward);
-                        checkForSpecialReward(self, false);
-                        setObjVar(self, ENTERTAINER_REWARD_OBJVAR, 2);
+                        String custLogMsg = "New Player Quests: %TU finished entertainer task 2 - play music.";
+                        CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
+                        if (getIntObjVar(self, ENTERTAINER_REWARD_OBJVAR) < 2)
+                        {
+                            xpReward = "music";
+                            xpAmount = 50;
+                            creditsReward = 80;
+                            xp.grantSocialStyleXp(self, xpReward, xpAmount);
+                            money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
+                            giveTaskCompleteRewardMessage(self, SID_ENTERTAINER, creditsReward);
+                            checkForSpecialReward(self, false);
+                            setObjVar(self, ENTERTAINER_REWARD_OBJVAR, 2);
+                        }
+                        else
+                        {
+                            giveTaskCompleteNoRewardMessage(self, SID_ENTERTAINER);
+                        }
+                        setObjVar(self, ENTERTAINER_QUEST_OBJVAR, 3);
+                        setObjVar(self, CURRENT_PROFESSION_OBJVAR, ENTERTAINER);
+                        messageTo(self, "handleGiveQuestMessage", null, 9, false);
+                        return SCRIPT_CONTINUE;
                     }
-                    else 
-                    {
-                        giveTaskCompleteNoRewardMessage(self, SID_ENTERTAINER);
-                    }
-                    setObjVar(self, ENTERTAINER_QUEST_OBJVAR, 3);
-                    setObjVar(self, CURRENT_PROFESSION_OBJVAR, ENTERTAINER);
-                    messageTo(self, "handleGiveQuestMessage", null, 9, false);
-                    return SCRIPT_CONTINUE;
-                }
-                break;
+                    break;
                 case 3:
-                if (params.containsKey("hairStyled"))
-                {
-                    boolean hairStyled = params.getBoolean("hairStyled");
-                    obj_id target = params.getObjId("target");
-                    if (hairStyled)
+                    if (params.containsKey("hairStyled"))
                     {
-                        String custLogMsg = "New Player Quests: %TU finished entertainer task 3 - style your hair.";
-                        CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
-                        if (getIntObjVar(self, ENTERTAINER_REWARD_OBJVAR) < 3)
+                        boolean hairStyled = params.getBoolean("hairStyled");
+                        obj_id target = params.getObjId("target");
+                        if (hairStyled)
                         {
-                            xpReward = "imagedesigner";
-                            xpAmount = 50;
-                            creditsReward = 80;
-                            xp.grantSocialStyleXp(self, xpReward, xpAmount);
-                            money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
-                            giveTaskCompleteRewardMessage(self, SID_ENTERTAINER, creditsReward);
-                            checkForSpecialReward(self, false);
-                            setObjVar(self, ENTERTAINER_REWARD_OBJVAR, 3);
+                            String custLogMsg = "New Player Quests: %TU finished entertainer task 3 - style your hair.";
+                            CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
+                            if (getIntObjVar(self, ENTERTAINER_REWARD_OBJVAR) < 3)
+                            {
+                                xpReward = "imagedesigner";
+                                xpAmount = 50;
+                                creditsReward = 80;
+                                xp.grantSocialStyleXp(self, xpReward, xpAmount);
+                                money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
+                                giveTaskCompleteRewardMessage(self, SID_ENTERTAINER, creditsReward);
+                                checkForSpecialReward(self, false);
+                                setObjVar(self, ENTERTAINER_REWARD_OBJVAR, 3);
+                            }
+                            else
+                            {
+                                giveTaskCompleteNoRewardMessage(self, SID_ENTERTAINER);
+                            }
+                            setObjVar(self, ENTERTAINER_QUEST_OBJVAR, 4);
+                            setObjVar(self, CURRENT_PROFESSION_OBJVAR, ENTERTAINER);
+                            messageTo(self, "handleGiveQuestMessage", null, 9, false);
+                            return SCRIPT_CONTINUE;
                         }
-                        else 
-                        {
-                            giveTaskCompleteNoRewardMessage(self, SID_ENTERTAINER);
-                        }
-                        setObjVar(self, ENTERTAINER_QUEST_OBJVAR, 4);
-                        setObjVar(self, CURRENT_PROFESSION_OBJVAR, ENTERTAINER);
-                        messageTo(self, "handleGiveQuestMessage", null, 9, false);
-                        return SCRIPT_CONTINUE;
                     }
-                }
-                break;
+                    break;
                 case 4:
-                if (params.containsKey("addingFlourish"))
-                {
-                    String entertainmentType = params.getString("entertainmentType");
-                    if (entertainmentType.equals("music") || entertainmentType.equals("dance"))
+                    if (params.containsKey("addingFlourish"))
                     {
-                        String custLogMsg = "New Player Quests: %TU finished entertainer task 4 - add a flourish to your performance.";
-                        CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
-                        if (getIntObjVar(self, ENTERTAINER_REWARD_OBJVAR) < 4)
+                        String entertainmentType = params.getString("entertainmentType");
+                        if (entertainmentType.equals("music") || entertainmentType.equals("dance"))
                         {
-                            xpReward = entertainmentType;
+                            String custLogMsg = "New Player Quests: %TU finished entertainer task 4 - add a flourish to your performance.";
+                            CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
+                            if (getIntObjVar(self, ENTERTAINER_REWARD_OBJVAR) < 4)
+                            {
+                                xpReward = entertainmentType;
+                                xpAmount = 50;
+                                creditsReward = 80;
+                                xp.grantSocialStyleXp(self, xpReward, xpAmount);
+                                money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
+                                giveTaskCompleteRewardMessage(self, SID_ENTERTAINER, creditsReward);
+                                checkForSpecialReward(self, false);
+                                setObjVar(self, ENTERTAINER_REWARD_OBJVAR, 4);
+                            }
+                            else
+                            {
+                                giveTaskCompleteNoRewardMessage(self, SID_ENTERTAINER);
+                            }
+                            setObjVar(self, ENTERTAINER_QUEST_OBJVAR, 5);
+                            setObjVar(self, CURRENT_PROFESSION_OBJVAR, ENTERTAINER);
+                            messageTo(self, "handleGiveQuestMessage", null, 9, false);
+                            return SCRIPT_CONTINUE;
+                        }
+                    }
+                    break;
+                case 5:
+                    if (params.containsKey("enteredCantina"))
+                    {
+                        String custLogMsg = "New Player Quests: %TU finished entertainer task 5 - find a cantina or theater.";
+                        CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
+                        if (getIntObjVar(self, ENTERTAINER_REWARD_OBJVAR) < 5)
+                        {
+                            xpReward = "entertainer";
                             xpAmount = 50;
                             creditsReward = 80;
                             xp.grantSocialStyleXp(self, xpReward, xpAmount);
                             money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
                             giveTaskCompleteRewardMessage(self, SID_ENTERTAINER, creditsReward);
                             checkForSpecialReward(self, false);
-                            setObjVar(self, ENTERTAINER_REWARD_OBJVAR, 4);
+                            setObjVar(self, ENTERTAINER_REWARD_OBJVAR, 5);
                         }
-                        else 
+                        else
                         {
                             giveTaskCompleteNoRewardMessage(self, SID_ENTERTAINER);
                         }
-                        setObjVar(self, ENTERTAINER_QUEST_OBJVAR, 5);
+                        setObjVar(self, ENTERTAINER_QUEST_OBJVAR, 6);
                         setObjVar(self, CURRENT_PROFESSION_OBJVAR, ENTERTAINER);
                         messageTo(self, "handleGiveQuestMessage", null, 9, false);
                         return SCRIPT_CONTINUE;
                     }
-                }
-                break;
-                case 5:
-                if (params.containsKey("enteredCantina"))
-                {
-                    String custLogMsg = "New Player Quests: %TU finished entertainer task 5 - find a cantina or theater.";
-                    CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
-                    if (getIntObjVar(self, ENTERTAINER_REWARD_OBJVAR) < 5)
-                    {
-                        xpReward = "entertainer";
-                        xpAmount = 50;
-                        creditsReward = 80;
-                        xp.grantSocialStyleXp(self, xpReward, xpAmount);
-                        money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
-                        giveTaskCompleteRewardMessage(self, SID_ENTERTAINER, creditsReward);
-                        checkForSpecialReward(self, false);
-                        setObjVar(self, ENTERTAINER_REWARD_OBJVAR, 5);
-                    }
-                    else 
-                    {
-                        giveTaskCompleteNoRewardMessage(self, SID_ENTERTAINER);
-                    }
-                    setObjVar(self, ENTERTAINER_QUEST_OBJVAR, 6);
-                    setObjVar(self, CURRENT_PROFESSION_OBJVAR, ENTERTAINER);
-                    messageTo(self, "handleGiveQuestMessage", null, 9, false);
-                    return SCRIPT_CONTINUE;
-                }
-                break;
+                    break;
                 case 6:
-                String questCompleteXp = "none";
-                if (params.containsKey("listener"))
-                {
-                    obj_id listener = params.getObjId("listener");
-                    if (isIdValid(listener))
+                    String questCompleteXp = "none";
+                    if (params.containsKey("listener"))
                     {
-                        if (listener != self)
+                        obj_id listener = params.getObjId("listener");
+                        if (isIdValid(listener))
                         {
-                            Vector listenerList = new Vector();
-                            listenerList.setSize(0);
-                            if (hasObjVar(self, "new_player.temp.entertainer_listeners"))
+                            if (listener != self)
                             {
-                                listenerList = getResizeableObjIdArrayObjVar(self, "new_player.temp.entertainer_listeners");
-                            }
-                            if (!utils.isElementInArray(listenerList, listener))
-                            {
-                                listenerList = utils.addElement(listenerList, listener);
-                            }
-                            int numListeners = listenerList.size();
-                            if (numListeners > 0)
-                            {
-                                setObjVar(self, "new_player.temp.entertainer_listeners", listenerList);
-                            }
-                            if (numListeners >= 7)
-                            {
-                                questCompleteXp = "music";
+                                Vector listenerList = new Vector();
+                                listenerList.setSize(0);
+                                if (hasObjVar(self, "new_player.temp.entertainer_listeners"))
+                                {
+                                    listenerList = getResizeableObjIdArrayObjVar(self, "new_player.temp.entertainer_listeners");
+                                }
+                                if (!utils.isElementInArray(listenerList, listener))
+                                {
+                                    listenerList = utils.addElement(listenerList, listener);
+                                }
+                                int numListeners = listenerList.size();
+                                if (numListeners > 0)
+                                {
+                                    setObjVar(self, "new_player.temp.entertainer_listeners", listenerList);
+                                }
+                                if (numListeners >= 7)
+                                {
+                                    questCompleteXp = "music";
+                                }
                             }
                         }
                     }
-                }
-                else if (params.containsKey("watcher"))
-                {
-                    obj_id watcher = params.getObjId("watcher");
-                    if (isIdValid(watcher))
+                    else if (params.containsKey("watcher"))
                     {
-                        if (watcher != self)
+                        obj_id watcher = params.getObjId("watcher");
+                        if (isIdValid(watcher))
                         {
-                            Vector watcherList = new Vector();
-                            watcherList.setSize(0);
-                            if (hasObjVar(self, "new_player.temp.entertainer_watchers"))
+                            if (watcher != self)
                             {
-                                watcherList = getResizeableObjIdArrayObjVar(self, "new_player.temp.entertainer_watchers");
-                            }
-                            if (!utils.isElementInArray(watcherList, watcher))
-                            {
-                                watcherList = utils.addElement(watcherList, watcher);
-                            }
-                            int numWatchers = watcherList.size();
-                            if (numWatchers > 0)
-                            {
-                                setObjVar(self, "new_player.temp.entertainer_watchers", watcherList);
-                            }
-                            if (numWatchers >= 7)
-                            {
-                                questCompleteXp = "dance";
+                                Vector watcherList = new Vector();
+                                watcherList.setSize(0);
+                                if (hasObjVar(self, "new_player.temp.entertainer_watchers"))
+                                {
+                                    watcherList = getResizeableObjIdArrayObjVar(self, "new_player.temp.entertainer_watchers");
+                                }
+                                if (!utils.isElementInArray(watcherList, watcher))
+                                {
+                                    watcherList = utils.addElement(watcherList, watcher);
+                                }
+                                int numWatchers = watcherList.size();
+                                if (numWatchers > 0)
+                                {
+                                    setObjVar(self, "new_player.temp.entertainer_watchers", watcherList);
+                                }
+                                if (numWatchers >= 7)
+                                {
+                                    questCompleteXp = "dance";
+                                }
                             }
                         }
                     }
-                }
-                if (!questCompleteXp.equals("none"))
-                {
-                    String custLogMsg = "New Player Quests: %TU finished the final entertainer task - perform for 7 players.";
-                    CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
-                    if (getIntObjVar(self, ENTERTAINER_REWARD_OBJVAR) < 6)
+                    if (!questCompleteXp.equals("none"))
                     {
-                        xpReward = questCompleteXp;
-                        xpAmount = 200;
-                        creditsReward = 2000;
-                        String questCompleteRewardSetting = getConfigSetting("New_Player", "QuestCompleteRewardAmount");
-                        int questCompleteReward = utils.stringToInt(questCompleteRewardSetting);
-                        if (questCompleteReward > 0)
+                        String custLogMsg = "New Player Quests: %TU finished the final entertainer task - perform for 7 players.";
+                        CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
+                        if (getIntObjVar(self, ENTERTAINER_REWARD_OBJVAR) < 6)
                         {
-                            creditsReward = questCompleteReward;
+                            xpReward = questCompleteXp;
+                            xpAmount = 200;
+                            creditsReward = 2000;
+                            String questCompleteRewardSetting = getConfigSetting("New_Player", "QuestCompleteRewardAmount");
+                            int questCompleteReward = utils.stringToInt(questCompleteRewardSetting);
+                            if (questCompleteReward > 0)
+                            {
+                                creditsReward = questCompleteReward;
+                            }
+                            xp.grantSocialStyleXp(self, xpReward, xpAmount);
+                            money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
+                            giveTaskCompleteRewardMessage(self, SID_ENTERTAINER, creditsReward);
+                            checkForSpecialReward(self, true);
+                            setObjVar(self, ENTERTAINER_REWARD_OBJVAR, 6);
                         }
-                        xp.grantSocialStyleXp(self, xpReward, xpAmount);
-                        money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
-                        giveTaskCompleteRewardMessage(self, SID_ENTERTAINER, creditsReward);
-                        checkForSpecialReward(self, true);
-                        setObjVar(self, ENTERTAINER_REWARD_OBJVAR, 6);
+                        else
+                        {
+                            giveTaskCompleteNoRewardMessage(self, SID_ENTERTAINER);
+                        }
+                        removeObjVar(self, ENTERTAINER_QUEST_OBJVAR);
+                        removeObjVar(self, "new_player.temp.entertainer_watchers");
+                        removeObjVar(self, "new_player.temp.entertainer_listeners");
+                        removeCurrentProfessionObjVar(self, ENTERTAINER);
+                        dictionary webster = new dictionary();
+                        webster.put("profession", ENTERTAINER);
+                        messageTo(self, "handleDoQuestComplete", webster, 3, false);
+                        return SCRIPT_CONTINUE;
                     }
-                    else 
-                    {
-                        giveTaskCompleteNoRewardMessage(self, SID_ENTERTAINER);
-                    }
-                    removeObjVar(self, ENTERTAINER_QUEST_OBJVAR);
-                    removeObjVar(self, "new_player.temp.entertainer_watchers");
-                    removeObjVar(self, "new_player.temp.entertainer_listeners");
-                    removeCurrentProfessionObjVar(self, ENTERTAINER);
-                    dictionary webster = new dictionary();
-                    webster.put("profession", ENTERTAINER);
-                    messageTo(self, "handleDoQuestComplete", webster, 3, false);
-                    return SCRIPT_CONTINUE;
-                }
-                break;
+                    break;
                 default:
-                break;
+                    break;
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleNewPlayerMedicAction(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, MEDIC_QUEST_OBJVAR))
@@ -2021,168 +2091,169 @@ public class new_player extends script.base_script
             switch (questNum)
             {
                 case 0:
-                break;
+                    break;
                 case 1:
-                break;
+                    break;
                 case 2:
-                if (params.containsKey("enteredMedCenter"))
-                {
-                    String custLogMsg = "New Player Quests: %TU finished medic task 2 - find a medical center.";
-                    CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
-                    if (getIntObjVar(self, MEDIC_REWARD_OBJVAR) < 2)
+                    if (params.containsKey("enteredMedCenter"))
                     {
-                        xpReward = "medical";
-                        xpAmount = 60;
-                        creditsReward = 100;
-                        xp.grantCombatStyleXp(self, xpReward, xpAmount);
-                        money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
-                        giveTaskCompleteRewardMessage(self, SID_MEDIC, creditsReward);
-                        checkForSpecialReward(self, false);
-                        setObjVar(self, MEDIC_REWARD_OBJVAR, 2);
+                        String custLogMsg = "New Player Quests: %TU finished medic task 2 - find a medical center.";
+                        CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
+                        if (getIntObjVar(self, MEDIC_REWARD_OBJVAR) < 2)
+                        {
+                            xpReward = "medical";
+                            xpAmount = 60;
+                            creditsReward = 100;
+                            xp.grantCombatStyleXp(self, xpReward, xpAmount);
+                            money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
+                            giveTaskCompleteRewardMessage(self, SID_MEDIC, creditsReward);
+                            checkForSpecialReward(self, false);
+                            setObjVar(self, MEDIC_REWARD_OBJVAR, 2);
+                        }
+                        else
+                        {
+                            giveTaskCompleteNoRewardMessage(self, SID_MEDIC);
+                        }
+                        setObjVar(self, MEDIC_QUEST_OBJVAR, 3);
+                        setObjVar(self, CURRENT_PROFESSION_OBJVAR, MEDIC);
+                        messageTo(self, "handleGiveQuestMessage", null, 9, false);
+                        return SCRIPT_CONTINUE;
                     }
-                    else 
-                    {
-                        giveTaskCompleteNoRewardMessage(self, SID_MEDIC);
-                    }
-                    setObjVar(self, MEDIC_QUEST_OBJVAR, 3);
-                    setObjVar(self, CURRENT_PROFESSION_OBJVAR, MEDIC);
-                    messageTo(self, "handleGiveQuestMessage", null, 9, false);
-                    return SCRIPT_CONTINUE;
-                }
-                break;
+                    break;
                 case 3:
-                if (params.containsKey("diagnosing"))
-                {
-                    obj_id target = params.getObjId("target");
-                    if (isIdValid(target))
+                    if (params.containsKey("diagnosing"))
                     {
-                        if (target != self && isPlayer(target))
+                        obj_id target = params.getObjId("target");
+                        if (isIdValid(target))
                         {
-                            String custLogMsg = "New Player Quests: %TU finished medic task 3 - diagnose a player's wounds.";
-                            CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
-                            if (getIntObjVar(self, MEDIC_REWARD_OBJVAR) < 3)
+                            if (target != self && isPlayer(target))
                             {
-                                xpReward = "medical";
-                                xpAmount = 70;
-                                creditsReward = 100;
-                                xp.grantCombatStyleXp(self, xpReward, xpAmount);
-                                money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
-                                giveTaskCompleteRewardMessage(self, SID_MEDIC, creditsReward);
-                                checkForSpecialReward(self, false);
-                                setObjVar(self, MEDIC_REWARD_OBJVAR, 3);
-                            }
-                            else 
-                            {
-                                giveTaskCompleteNoRewardMessage(self, SID_MEDIC);
-                            }
-                            setObjVar(self, MEDIC_QUEST_OBJVAR, 4);
-                            setObjVar(self, CURRENT_PROFESSION_OBJVAR, MEDIC);
-                            messageTo(self, "handleGiveQuestMessage", null, 9, false);
-                            return SCRIPT_CONTINUE;
-                        }
-                    }
-                }
-                break;
-                case 4:
-                if (params.containsKey("tendingWounds"))
-                {
-                    obj_id target = params.getObjId("target");
-                    if (isIdValid(target))
-                    {
-                        if (target != self)
-                        {
-                            String custLogMsg = "New Player Quests: %TU finished medic task 4 - tend a player's wounds.";
-                            CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
-                            if (getIntObjVar(self, MEDIC_REWARD_OBJVAR) < 4)
-                            {
-                                xpReward = "medical";
-                                xpAmount = 70;
-                                creditsReward = 100;
-                                xp.grantCombatStyleXp(self, xpReward, xpAmount);
-                                money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
-                                giveTaskCompleteRewardMessage(self, SID_MEDIC, creditsReward);
-                                checkForSpecialReward(self, false);
-                                setObjVar(self, MEDIC_REWARD_OBJVAR, 4);
-                            }
-                            else 
-                            {
-                                giveTaskCompleteNoRewardMessage(self, SID_MEDIC);
-                            }
-                            giveStimpackResources(self);
-                            setObjVar(self, MEDIC_QUEST_OBJVAR, 5);
-                            setObjVar(self, CURRENT_PROFESSION_OBJVAR, MEDIC);
-                            messageTo(self, "handleGiveQuestMessage", null, 9, false);
-                            return SCRIPT_CONTINUE;
-                        }
-                    }
-                }
-                break;
-                case 5:
-                break;
-                case 6:
-                if (params.containsKey("tendingWounds"))
-                {
-                    obj_id target = params.getObjId("target");
-                    if (isIdValid(target))
-                    {
-                        if (target != self)
-                        {
-                            Vector patientList = new Vector();
-                            patientList.setSize(0);
-                            if (hasObjVar(self, "new_player.temp.medic"))
-                            {
-                                patientList = getResizeableObjIdArrayObjVar(self, "new_player.temp.medic");
-                            }
-                            if (!utils.isElementInArray(patientList, target))
-                            {
-                                patientList = utils.addElement(patientList, target);
-                            }
-                            int numPatients = patientList.size();
-                            if (numPatients > 0)
-                            {
-                                setObjVar(self, "new_player.temp.medic", patientList);
-                            }
-                            if (numPatients >= 5)
-                            {
-                                String custLogMsg = "New Player Quests: %TU finished the final medic task - tend wounds on 5 players.";
+                                String custLogMsg = "New Player Quests: %TU finished medic task 3 - diagnose a player's wounds.";
                                 CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
-                                if (getIntObjVar(self, MEDIC_REWARD_OBJVAR) < 6)
+                                if (getIntObjVar(self, MEDIC_REWARD_OBJVAR) < 3)
                                 {
                                     xpReward = "medical";
-                                    xpAmount = 200;
-                                    creditsReward = 2000;
-                                    String questCompleteRewardSetting = getConfigSetting("New_Player", "QuestCompleteRewardAmount");
-                                    int questCompleteReward = utils.stringToInt(questCompleteRewardSetting);
-                                    if (questCompleteReward > 0)
-                                    {
-                                        creditsReward = questCompleteReward;
-                                    }
+                                    xpAmount = 70;
+                                    creditsReward = 100;
                                     xp.grantCombatStyleXp(self, xpReward, xpAmount);
                                     money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
                                     giveTaskCompleteRewardMessage(self, SID_MEDIC, creditsReward);
-                                    checkForSpecialReward(self, true);
-                                    setObjVar(self, MEDIC_REWARD_OBJVAR, 6);
+                                    checkForSpecialReward(self, false);
+                                    setObjVar(self, MEDIC_REWARD_OBJVAR, 3);
                                 }
-                                else 
+                                else
                                 {
                                     giveTaskCompleteNoRewardMessage(self, SID_MEDIC);
                                 }
-                                removeObjVar(self, MEDIC_QUEST_OBJVAR);
-                                removeObjVar(self, "new_player.temp.medic");
-                                removeCurrentProfessionObjVar(self, MEDIC);
-                                dictionary webster = new dictionary();
-                                webster.put("profession", MEDIC);
-                                messageTo(self, "handleDoQuestComplete", webster, 3, false);
+                                setObjVar(self, MEDIC_QUEST_OBJVAR, 4);
+                                setObjVar(self, CURRENT_PROFESSION_OBJVAR, MEDIC);
+                                messageTo(self, "handleGiveQuestMessage", null, 9, false);
                                 return SCRIPT_CONTINUE;
                             }
                         }
                     }
-                }
-                break;
+                    break;
+                case 4:
+                    if (params.containsKey("tendingWounds"))
+                    {
+                        obj_id target = params.getObjId("target");
+                        if (isIdValid(target))
+                        {
+                            if (target != self)
+                            {
+                                String custLogMsg = "New Player Quests: %TU finished medic task 4 - tend a player's wounds.";
+                                CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
+                                if (getIntObjVar(self, MEDIC_REWARD_OBJVAR) < 4)
+                                {
+                                    xpReward = "medical";
+                                    xpAmount = 70;
+                                    creditsReward = 100;
+                                    xp.grantCombatStyleXp(self, xpReward, xpAmount);
+                                    money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
+                                    giveTaskCompleteRewardMessage(self, SID_MEDIC, creditsReward);
+                                    checkForSpecialReward(self, false);
+                                    setObjVar(self, MEDIC_REWARD_OBJVAR, 4);
+                                }
+                                else
+                                {
+                                    giveTaskCompleteNoRewardMessage(self, SID_MEDIC);
+                                }
+                                giveStimpackResources(self);
+                                setObjVar(self, MEDIC_QUEST_OBJVAR, 5);
+                                setObjVar(self, CURRENT_PROFESSION_OBJVAR, MEDIC);
+                                messageTo(self, "handleGiveQuestMessage", null, 9, false);
+                                return SCRIPT_CONTINUE;
+                            }
+                        }
+                    }
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    if (params.containsKey("tendingWounds"))
+                    {
+                        obj_id target = params.getObjId("target");
+                        if (isIdValid(target))
+                        {
+                            if (target != self)
+                            {
+                                Vector patientList = new Vector();
+                                patientList.setSize(0);
+                                if (hasObjVar(self, "new_player.temp.medic"))
+                                {
+                                    patientList = getResizeableObjIdArrayObjVar(self, "new_player.temp.medic");
+                                }
+                                if (!utils.isElementInArray(patientList, target))
+                                {
+                                    patientList = utils.addElement(patientList, target);
+                                }
+                                int numPatients = patientList.size();
+                                if (numPatients > 0)
+                                {
+                                    setObjVar(self, "new_player.temp.medic", patientList);
+                                }
+                                if (numPatients >= 5)
+                                {
+                                    String custLogMsg = "New Player Quests: %TU finished the final medic task - tend wounds on 5 players.";
+                                    CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, self);
+                                    if (getIntObjVar(self, MEDIC_REWARD_OBJVAR) < 6)
+                                    {
+                                        xpReward = "medical";
+                                        xpAmount = 200;
+                                        creditsReward = 2000;
+                                        String questCompleteRewardSetting = getConfigSetting("New_Player", "QuestCompleteRewardAmount");
+                                        int questCompleteReward = utils.stringToInt(questCompleteRewardSetting);
+                                        if (questCompleteReward > 0)
+                                        {
+                                            creditsReward = questCompleteReward;
+                                        }
+                                        xp.grantCombatStyleXp(self, xpReward, xpAmount);
+                                        money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, self, creditsReward);
+                                        giveTaskCompleteRewardMessage(self, SID_MEDIC, creditsReward);
+                                        checkForSpecialReward(self, true);
+                                        setObjVar(self, MEDIC_REWARD_OBJVAR, 6);
+                                    }
+                                    else
+                                    {
+                                        giveTaskCompleteNoRewardMessage(self, SID_MEDIC);
+                                    }
+                                    removeObjVar(self, MEDIC_QUEST_OBJVAR);
+                                    removeObjVar(self, "new_player.temp.medic");
+                                    removeCurrentProfessionObjVar(self, MEDIC);
+                                    dictionary webster = new dictionary();
+                                    webster.put("profession", MEDIC);
+                                    messageTo(self, "handleDoQuestComplete", webster, 3, false);
+                                    return SCRIPT_CONTINUE;
+                                }
+                            }
+                        }
+                    }
+                    break;
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetupPeriodicProgressCheck(obj_id self, dictionary params) throws InterruptedException
     {
         if (isSpaceScene())
@@ -2216,6 +2287,7 @@ public class new_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePeriodicProgressCheck(obj_id self, dictionary params) throws InterruptedException
     {
         if (isSpaceScene())
@@ -2284,7 +2356,7 @@ public class new_player extends script.base_script
                 utils.setScriptVar(self, "new_player.questMessage", true);
                 messageTo(self, "handleHelperDroidCheck", null, 1, false);
             }
-            else 
+            else
             {
                 if (callable.hasCDCallable(helperDroidPcd))
                 {
@@ -2302,7 +2374,7 @@ public class new_player extends script.base_script
                         }
                     }
                 }
-                else 
+                else
                 {
                     utils.setScriptVar(self, "new_player.showPeriodicPrompt", true);
                     unpackHelperDroid(self);
@@ -2316,6 +2388,7 @@ public class new_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleDroidGreeting(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -2336,7 +2409,7 @@ public class new_player extends script.base_script
                 showProfessionsListbox(self, greetingEnd);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 utils.removeScriptVar(player, "new_player.professionsList");
                 utils.removeScriptVar(self, "new_player.listboxNoSelection");
@@ -2366,12 +2439,13 @@ public class new_player extends script.base_script
         {
             giveQuestMessage(self);
         }
-        else 
+        else
         {
             messageTo(self, "handleGiveNewProfessionQuestPrompt", null, 1, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public void giveQuestMessage(obj_id player) throws InterruptedException
     {
         if (!hasObjVar(player, CURRENT_PROFESSION_OBJVAR))
@@ -2403,15 +2477,17 @@ public class new_player extends script.base_script
             int species = getSpecies(player);
             String speciesName = utils.getPlayerSpeciesName(species);
             questText = questText + "_" + speciesName;
-            String[] speciesThatSkipImageDesignTask = 
+            String[] speciesThatSkipImageDesignTask =
+                    {
+                            "moncalamari",
+                            "wookiee",
+                            "sullustan",
+                            "ithorian"
+                    };
+            for (String speciesToCheckFor : speciesThatSkipImageDesignTask)
             {
-                "moncalamari",
-                "wookiee",
-                "sullustan",
-                "ithorian"
-            };
-            for (String speciesToCheckFor : speciesThatSkipImageDesignTask) {
-                if (speciesName.equals(speciesToCheckFor)) {
+                if (speciesName.equals(speciesToCheckFor))
+                {
                     skipImageDesign(player);
                     return;
                 }
@@ -2458,8 +2534,8 @@ public class new_player extends script.base_script
             handler = "handleNewProfessionGreetingResponse";
         }
         twoButtonSui(player, player, handler, droidName, textMsg, okButton, cancelButton);
-        return;
     }
+
     public void skipImageDesign(obj_id player) throws InterruptedException
     {
         int species = getSpecies(player);
@@ -2471,8 +2547,8 @@ public class new_player extends script.base_script
         String custLogMsg = "New Player Quests: %TU is skipping entertainer task 3 because they are a " + speciesName + ".";
         CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, player);
         oneButtonSui(player, player, "handleImageDesignerSkipped", droidName, textMsg, okButton);
-        return;
     }
+
     public void showDelayedAcceptingQuestMessage(obj_id player) throws InterruptedException
     {
         String droidName = getDroidName(player);
@@ -2480,8 +2556,8 @@ public class new_player extends script.base_script
         string_id okButton = new string_id("new_player", "give_quest_button");
         string_id cancelButton = new string_id("new_player", "thank_you_button");
         twoButtonSui(player, player, "handleDelayedAcceptingQuest", droidName, textMsg, okButton, cancelButton);
-        return;
     }
+
     public void giveBrawlerWeaponChoice(obj_id player) throws InterruptedException
     {
         if (getIntObjVar(player, BRAWLER_QUEST_OBJVAR) != 1)
@@ -2501,8 +2577,8 @@ public class new_player extends script.base_script
         string_id cancelButton = new string_id("new_player", "survival_knife_button");
         string_id revertButton = new string_id("new_player", "wooden_staff_button");
         threeButtonSui(player, player, "handleBrawlerWeaponChoice", droidName, textMsg, okButton, cancelButton, revertButton);
-        return;
     }
+
     public void giveMarksmanWeaponChoice(obj_id player) throws InterruptedException
     {
         if (getIntObjVar(player, MARKSMAN_QUEST_OBJVAR) != 1)
@@ -2522,8 +2598,8 @@ public class new_player extends script.base_script
         string_id cancelButton = new string_id("new_player", "cdef_pistol_button");
         string_id revertButton = new string_id("new_player", "cdef_rifle_button");
         threeButtonSui(player, player, "handleMarksmanWeaponChoice", droidName, textMsg, okButton, cancelButton, revertButton);
-        return;
     }
+
     public void giveStartingRecommendation(obj_id player) throws InterruptedException
     {
         String profession = getStringObjVar(player, CURRENT_PROFESSION_OBJVAR);
@@ -2536,8 +2612,8 @@ public class new_player extends script.base_script
         string_id textMsg = new string_id("new_player", questText);
         string_id okButton = new string_id("new_player", "continue_button");
         oneButtonSui(player, player, "handleStartingRecommendation", droidName, textMsg, okButton);
-        return;
     }
+
     public void giveProfessionAddedMessage(obj_id player) throws InterruptedException
     {
         if (!hasObjVar(player, PROFESSION_ADDED_OBJVAR))
@@ -2552,16 +2628,16 @@ public class new_player extends script.base_script
         string_id okButton = new string_id("new_player", "lets_start_button");
         string_id cancelButton = new string_id("new_player", "not_now_button");
         twoButtonSui(player, player, "handleNewProfessionGreetingResponse", droidName, textMsg, okButton, cancelButton);
-        return;
     }
+
     public void giveInventoryFullMessage(obj_id player) throws InterruptedException
     {
         String droidName = getDroidName(player);
         string_id textMsg = new string_id("new_player", "inventory_full");
         string_id okButton = new string_id("new_player", "continue_button");
         oneButtonSui(player, player, "noHandler", droidName, textMsg, okButton);
-        return;
     }
+
     public void giveQuestCompleteSui(obj_id player) throws InterruptedException
     {
         String droidName = getDroidName(player);
@@ -2571,8 +2647,8 @@ public class new_player extends script.base_script
         string_id okButton = new string_id("new_player", "okay_button");
         removeObjVar(player, QUEST_COMPLETE_OBJVAR);
         oneButtonSui(player, player, "noHandler", droidName, textMsg, okButton);
-        return;
     }
+
     public void giveFinalQuestMessage(obj_id player, int questNum) throws InterruptedException
     {
         String profession = getStringObjVar(player, CURRENT_PROFESSION_OBJVAR);
@@ -2592,8 +2668,8 @@ public class new_player extends script.base_script
         string_id okButton = new string_id("new_player", "help_please_button");
         string_id cancelButton = new string_id("new_player", "no_help_needed_button");
         twoButtonSui(player, player, "handleGiveQuestHelp", droidName, textMsgStr, okButton, cancelButton);
-        return;
     }
+
     public void giveEntertainerFinal(obj_id player) throws InterruptedException
     {
         String droidName = getDroidName(player);
@@ -2635,8 +2711,8 @@ public class new_player extends script.base_script
         string_id okButton = new string_id("new_player", "help_please_button");
         string_id cancelButton = new string_id("new_player", "no_help_needed_button");
         twoButtonSui(player, player, "handleGiveQuestHelp", droidName, textMsgStr, okButton, cancelButton);
-        return;
     }
+
     public void giveMedicFinal(obj_id player) throws InterruptedException
     {
         String droidName = getDroidName(player);
@@ -2656,24 +2732,22 @@ public class new_player extends script.base_script
         string_id okButton = new string_id("new_player", "help_please_button");
         string_id cancelButton = new string_id("new_player", "no_help_needed_button");
         twoButtonSui(player, player, "handleGiveQuestHelp", droidName, textMsgStr, okButton, cancelButton);
-        return;
     }
+
     public boolean newPlayerQuestsEnabled() throws InterruptedException
     {
         return false;
     }
+
     public boolean isOnTutorial(obj_id player) throws InterruptedException
     {
         if (hasScript(player, "theme_park.newbie_tutorial.newbie"))
         {
             return true;
         }
-        if (hasScript(player, "theme_park.newbie_tutorial.newbie_skipped"))
-        {
-            return true;
-        }
-        return false;
+        return hasScript(player, "theme_park.newbie_tutorial.newbie_skipped");
     }
+
     public void unpackHelperDroid(obj_id player) throws InterruptedException
     {
         if (isSpaceScene())
@@ -2686,7 +2760,7 @@ public class new_player extends script.base_script
         {
             pet_lib.createPetFromData(pcd);
         }
-        else 
+        else
         {
             if (hasObjVar(player, QUEST_COMPLETE_OBJVAR))
             {
@@ -2701,13 +2775,13 @@ public class new_player extends script.base_script
             {
                 giveProfessionAddedMessage(player);
             }
-            else 
+            else
             {
                 giveQuestMessage(player);
             }
         }
-        return;
     }
+
     public obj_id getHelperDroidPcd(obj_id player) throws InterruptedException
     {
         obj_id datapad = utils.getPlayerDatapad(player);
@@ -2716,13 +2790,17 @@ public class new_player extends script.base_script
             return null;
         }
         obj_id[] dataContents = getContents(datapad);
-        if (dataContents != null && dataContents.length > 0)
+        if (dataContents != null)
         {
-            for (obj_id data : dataContents) {
-                if (hasObjVar(data, "pet.creatureName")) {
-                    if (isIdValid(data)) {
+            for (obj_id data : dataContents)
+            {
+                if (hasObjVar(data, "pet.creatureName"))
+                {
+                    if (isIdValid(data))
+                    {
                         String creatureName = getStringObjVar(data, "pet.creatureName");
-                        if (creatureName != null && creatureName.equals("nhelper_droid")) {
+                        if (creatureName != null && creatureName.equals("nhelper_droid"))
+                        {
                             return data;
                         }
                     }
@@ -2731,6 +2809,7 @@ public class new_player extends script.base_script
         }
         return null;
     }
+
     public void removeCurrentProfessionObjVar(obj_id player, String profession) throws InterruptedException
     {
         if (hasObjVar(player, CURRENT_PROFESSION_OBJVAR))
@@ -2741,8 +2820,8 @@ public class new_player extends script.base_script
                 removeObjVar(player, CURRENT_PROFESSION_OBJVAR);
             }
         }
-        return;
     }
+
     public String getDroidName(obj_id player) throws InterruptedException
     {
         obj_id pcd = getHelperDroidPcd(player);
@@ -2753,6 +2832,7 @@ public class new_player extends script.base_script
         }
         return droidName;
     }
+
     public String getQuestProfession(obj_id self, String noviceSkill) throws InterruptedException
     {
         if (noviceSkill.equals(NOVICE_MARKSMAN))
@@ -2781,6 +2861,7 @@ public class new_player extends script.base_script
         }
         return null;
     }
+
     public void checkForSpecialReward(obj_id player, boolean finalCompleted) throws InterruptedException
     {
         obj_id playerInv = getObjectInSlot(player, "inventory");
@@ -2796,7 +2877,7 @@ public class new_player extends script.base_script
             {
                 item = createObject(FIREWORKS_TYPE_10, playerInv, "");
             }
-            else 
+            else
             {
                 item = createObject(FIREWORKS_TYPE_18, playerInv, "");
             }
@@ -2814,59 +2895,59 @@ public class new_player extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             int rewardNum = getIntObjVar(player, SPECIAL_REWARD_OBJVAR);
             switch (rewardNum)
             {
                 case 1:
-                item = createObject(CLONING_COUPON, playerInv, "");
-                if (isIdValid(item))
-                {
-                    String custLogMsg = "New Player Quests: %TU was given a special reward: a cloning coupon.";
-                    CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, player);
-                    sendSystemMessage(player, new string_id("new_player", "completed_second_task"));
-                    sendSystemMessage(player, new string_id("new_player", "given_cloning_coupon"));
-                    setObjVar(item, "owner", player);
-                    setObjVar(player, SPECIAL_REWARD_OBJVAR, 2);
-                    return;
-                }
-                break;
-                case 2:
-                item = createObject(TRAVEL_COUPON, playerInv, "");
-                if (isIdValid(item))
-                {
-                    String custLogMsg = "New Player Quests: %TU was given a special reward: a travel voucher.";
-                    CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, player);
-                    sendSystemMessage(player, new string_id("new_player", "completed_third_task"));
-                    sendSystemMessage(player, new string_id("new_player", "given_travel_coupon"));
-                    setObjVar(item, "owner", player);
-                    setObjVar(player, SPECIAL_REWARD_OBJVAR, 3);
-                    return;
-                }
-                break;
-                case 3:
-                if (finalCompleted)
-                {
-                    item = createObject(VEHICLE_COUPON, playerInv, "");
+                    item = createObject(CLONING_COUPON, playerInv, "");
                     if (isIdValid(item))
                     {
-                        String custLogMsg = "New Player Quests: %TU was given a special reward: a vehicle rental device.";
+                        String custLogMsg = "New Player Quests: %TU was given a special reward: a cloning coupon.";
                         CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, player);
-                        sendSystemMessage(player, new string_id("new_player", "completed_first_profession"));
-                        sendSystemMessage(player, new string_id("new_player", "given_vehicle_coupon"));
+                        sendSystemMessage(player, new string_id("new_player", "completed_second_task"));
+                        sendSystemMessage(player, new string_id("new_player", "given_cloning_coupon"));
                         setObjVar(item, "owner", player);
-                        setObjVar(player, SPECIAL_REWARD_OBJVAR, 4);
+                        setObjVar(player, SPECIAL_REWARD_OBJVAR, 2);
                         return;
                     }
-                }
-                break;
+                    break;
+                case 2:
+                    item = createObject(TRAVEL_COUPON, playerInv, "");
+                    if (isIdValid(item))
+                    {
+                        String custLogMsg = "New Player Quests: %TU was given a special reward: a travel voucher.";
+                        CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, player);
+                        sendSystemMessage(player, new string_id("new_player", "completed_third_task"));
+                        sendSystemMessage(player, new string_id("new_player", "given_travel_coupon"));
+                        setObjVar(item, "owner", player);
+                        setObjVar(player, SPECIAL_REWARD_OBJVAR, 3);
+                        return;
+                    }
+                    break;
+                case 3:
+                    if (finalCompleted)
+                    {
+                        item = createObject(VEHICLE_COUPON, playerInv, "");
+                        if (isIdValid(item))
+                        {
+                            String custLogMsg = "New Player Quests: %TU was given a special reward: a vehicle rental device.";
+                            CustomerServiceLog(NEW_PLAYER_LOG, custLogMsg, player);
+                            sendSystemMessage(player, new string_id("new_player", "completed_first_profession"));
+                            sendSystemMessage(player, new string_id("new_player", "given_vehicle_coupon"));
+                            setObjVar(item, "owner", player);
+                            setObjVar(player, SPECIAL_REWARD_OBJVAR, 4);
+                            return;
+                        }
+                    }
+                    break;
                 case 4:
-                break;
+                    break;
             }
         }
-        return;
     }
+
     public void giveStimpackResources(obj_id player) throws InterruptedException
     {
         obj_id playerInv = utils.getInventoryContainer(player);
@@ -2889,8 +2970,8 @@ public class new_player extends script.base_script
             crate = createObject(crateTemplate, playerInv, "");
             addResourceToContainer(crate, resourceId, 8, player);
         }
-        return;
     }
+
     public void checkForProfessionEquipmentNeeded(obj_id player) throws InterruptedException
     {
         if (!hasObjVar(player, CURRENT_PROFESSION_OBJVAR))
@@ -2985,8 +3066,8 @@ public class new_player extends script.base_script
                 }
             }
         }
-        return;
     }
+
     public void giveTaskCompleteRewardMessage(obj_id player, string_id profession, int credits) throws InterruptedException
     {
         String droidName = getDroidName(player);
@@ -2994,6 +3075,7 @@ public class new_player extends script.base_script
         prose_package msg = prose.getPackage(proseSid, null, droidName, null, null, null, profession, null, null, null, credits, 0.0f);
         sendSystemMessageProse(player, msg);
     }
+
     public void giveTaskCompleteNoRewardMessage(obj_id player, string_id profession) throws InterruptedException
     {
         String droidName = getDroidName(player);
@@ -3001,11 +3083,13 @@ public class new_player extends script.base_script
         prose_package msg = prose.getPackage(proseSid, null, droidName, null, null, null, profession, null, null, null, 0, 0.0f);
         sendSystemMessageProse(player, msg);
     }
+
     public int oneButtonSui(obj_id controller, obj_id player, String handler, string_id title, string_id textMsg, string_id okButton) throws InterruptedException
     {
         String newTitle = utils.packStringId(title);
         return oneButtonSui(controller, player, handler, newTitle, textMsg, okButton);
     }
+
     public int oneButtonSui(obj_id controller, obj_id player, String handler, String title, string_id textMsg, string_id okButton) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "new_player.openSui"))
@@ -3031,11 +3115,13 @@ public class new_player extends script.base_script
         playMusic(player, chooseDroidVocals());
         return pid;
     }
+
     public int twoButtonSui(obj_id controller, obj_id player, String handler, String title, string_id textMsg, string_id okButton, string_id cancelButton) throws InterruptedException
     {
         String TEXT_MSG = utils.packStringId(textMsg);
         return twoButtonSui(controller, player, handler, title, TEXT_MSG, okButton, cancelButton);
     }
+
     public int twoButtonSui(obj_id controller, obj_id player, String handler, String title, String textMsg, string_id okButton, string_id cancelButton) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "new_player.openSui"))
@@ -3062,11 +3148,13 @@ public class new_player extends script.base_script
         playMusic(player, chooseDroidVocals());
         return pid;
     }
+
     public int threeButtonSui(obj_id controller, obj_id player, String handler, string_id title, string_id textMsg, string_id okButton, string_id cancelButton, string_id revertButton) throws InterruptedException
     {
         String newTitle = utils.packStringId(title);
         return threeButtonSui(controller, player, handler, newTitle, textMsg, okButton, cancelButton, revertButton);
     }
+
     public int threeButtonSui(obj_id controller, obj_id player, String handler, String title, string_id textMsg, string_id okButton, string_id cancelButton, string_id revertButton) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "new_player.openSui"))
@@ -3098,6 +3186,7 @@ public class new_player extends script.base_script
         playMusic(player, chooseDroidVocals());
         return pid;
     }
+
     public void showProfessionsListbox(obj_id player, string_id greetingEnd) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "new_player.openSui"))
@@ -3159,8 +3248,8 @@ public class new_player extends script.base_script
             }
             playMusic(player, chooseDroidVocals());
         }
-        return;
     }
+
     public int getNumProfessionQuests(obj_id player) throws InterruptedException
     {
         int num = 0;
@@ -3190,6 +3279,7 @@ public class new_player extends script.base_script
         }
         return num;
     }
+
     public void setInitialProfessionProgress(obj_id player, String profession) throws InterruptedException
     {
         String objvarName = QUEST_OBJVAR_BASE + profession;
@@ -3199,8 +3289,8 @@ public class new_player extends script.base_script
             int currentQuestNum = getIntObjVar(player, objvarName);
             utils.setScriptVar(player, scriptvarName, currentQuestNum);
         }
-        return;
     }
+
     public boolean getProfessionProgress(obj_id player, String profession) throws InterruptedException
     {
         String objvarName = QUEST_OBJVAR_BASE + profession;
@@ -3218,20 +3308,18 @@ public class new_player extends script.base_script
                 currentQuest = getIntObjVar(player, objvarName);
                 utils.setScriptVar(player, scriptvarName, currentQuest);
             }
-            else 
+            else
             {
                 if (utils.hasScriptVar(player, scriptvarName))
                 {
                     utils.removeScriptVar(player, scriptvarName);
                 }
             }
-            if (currentQuest > previousQuest)
-            {
-                return true;
-            }
+            return currentQuest > previousQuest;
         }
         return false;
     }
+
     public void getProfessionQuestHelp(obj_id player) throws InterruptedException
     {
         if (!hasObjVar(player, CURRENT_PROFESSION_OBJVAR))
@@ -3245,10 +3333,13 @@ public class new_player extends script.base_script
         string_id textMsg = new string_id("new_player", "default_text");
         string_id okButton = new string_id("new_player", "okay_button");
         string_id cancelButton = new string_id("new_player", "thank_you_button");
-        switch (profession) {
-            case BRAWLER: {
+        switch (profession)
+        {
+            case BRAWLER:
+            {
                 int questNum = getIntObjVar(player, BRAWLER_QUEST_OBJVAR);
-                switch (questNum) {
+                switch (questNum)
+                {
                     case 0:
                         break;
                     case 1:
@@ -3278,9 +3369,11 @@ public class new_player extends script.base_script
                 }
                 break;
             }
-            case MARKSMAN: {
+            case MARKSMAN:
+            {
                 int questNum = getIntObjVar(player, MARKSMAN_QUEST_OBJVAR);
-                switch (questNum) {
+                switch (questNum)
+                {
                     case 0:
                         break;
                     case 1:
@@ -3305,9 +3398,11 @@ public class new_player extends script.base_script
                 }
                 break;
             }
-            case SCOUT: {
+            case SCOUT:
+            {
                 int questNum = getIntObjVar(player, SCOUT_QUEST_OBJVAR);
-                switch (questNum) {
+                switch (questNum)
+                {
                     case 0:
                         break;
                     case 1:
@@ -3331,9 +3426,11 @@ public class new_player extends script.base_script
                 }
                 break;
             }
-            case ENTERTAINER: {
+            case ENTERTAINER:
+            {
                 int questNum = getIntObjVar(player, ENTERTAINER_QUEST_OBJVAR);
-                switch (questNum) {
+                switch (questNum)
+                {
                     case 0:
                         break;
                     case 1:
@@ -3359,9 +3456,11 @@ public class new_player extends script.base_script
                 }
                 break;
             }
-            case ARTISAN: {
+            case ARTISAN:
+            {
                 int questNum = getIntObjVar(player, ARTISAN_QUEST_OBJVAR);
-                switch (questNum) {
+                switch (questNum)
+                {
                     case 0:
                         break;
                     case 1:
@@ -3383,9 +3482,11 @@ public class new_player extends script.base_script
                 }
                 break;
             }
-            case MEDIC: {
+            case MEDIC:
+            {
                 int questNum = getIntObjVar(player, MEDIC_QUEST_OBJVAR);
-                switch (questNum) {
+                switch (questNum)
+                {
                     case 0:
                         break;
                     case 1:
@@ -3413,8 +3514,8 @@ public class new_player extends script.base_script
                 break;
             }
         }
-        return;
     }
+
     public String getDroidName() throws InterruptedException
     {
         String secondLetter = getLetter();
@@ -3426,13 +3527,14 @@ public class new_player extends script.base_script
             {
                 secondNum = rand(0, 1);
             }
-            else 
+            else
             {
                 secondNum = rand(3, 9);
             }
         }
         return "R2-" + secondLetter + secondNum;
     }
+
     public String getLetter() throws InterruptedException
     {
         int which = rand(1, 26);
@@ -3440,86 +3542,87 @@ public class new_player extends script.base_script
         switch (which)
         {
             case 1:
-            letter = "A";
-            break;
+                letter = "A";
+                break;
             case 2:
-            letter = "B";
-            break;
+                letter = "B";
+                break;
             case 3:
-            letter = "C";
-            break;
+                letter = "C";
+                break;
             case 4:
-            letter = "D";
-            break;
+                letter = "D";
+                break;
             case 5:
-            letter = "E";
-            break;
+                letter = "E";
+                break;
             case 6:
-            letter = "F";
-            break;
+                letter = "F";
+                break;
             case 7:
-            letter = "G";
-            break;
+                letter = "G";
+                break;
             case 8:
-            letter = "H";
-            break;
+                letter = "H";
+                break;
             case 9:
-            letter = "I";
-            break;
+                letter = "I";
+                break;
             case 10:
-            letter = "J";
-            break;
+                letter = "J";
+                break;
             case 11:
-            letter = "K";
-            break;
+                letter = "K";
+                break;
             case 12:
-            letter = "L";
-            break;
+                letter = "L";
+                break;
             case 13:
-            letter = "M";
-            break;
+                letter = "M";
+                break;
             case 14:
-            letter = "N";
-            break;
+                letter = "N";
+                break;
             case 15:
-            letter = "O";
-            break;
+                letter = "O";
+                break;
             case 16:
-            letter = "P";
-            break;
+                letter = "P";
+                break;
             case 17:
-            letter = "Q";
-            break;
+                letter = "Q";
+                break;
             case 18:
-            letter = "R";
-            break;
+                letter = "R";
+                break;
             case 19:
-            letter = "S";
-            break;
+                letter = "S";
+                break;
             case 20:
-            letter = "T";
-            break;
+                letter = "T";
+                break;
             case 21:
-            letter = "U";
-            break;
+                letter = "U";
+                break;
             case 22:
-            letter = "V";
-            break;
+                letter = "V";
+                break;
             case 23:
-            letter = "W";
-            break;
+                letter = "W";
+                break;
             case 24:
-            letter = "X";
-            break;
+                letter = "X";
+                break;
             case 25:
-            letter = "Y";
-            break;
+                letter = "Y";
+                break;
             case 26:
-            letter = "Z";
-            break;
+                letter = "Z";
+                break;
         }
         return letter;
     }
+
     public void showSpaceListbox(obj_id player, string_id sid_msg, boolean useGreeting) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "new_player.openSui"))
@@ -3548,13 +3651,13 @@ public class new_player extends script.base_script
         String str_email_option = utils.packStringId(sid_email_option);
         String str_travel_option = utils.packStringId(sid_travel_option);
         String str_money_option = utils.packStringId(sid_money_option);
-        String[] connectionList = 
-        {
-            str_ship_option,
-            str_email_option,
-            str_travel_option,
-            str_money_option
-        };
+        String[] connectionList =
+                {
+                        str_ship_option,
+                        str_email_option,
+                        str_travel_option,
+                        str_money_option
+                };
         int pid = sui.listbox(player, player, str_msg, sui.OK_CANCEL, str_droid_name, connectionList, "handleSpaceIntro", false, false);
         if (pid > -1)
         {
@@ -3566,8 +3669,8 @@ public class new_player extends script.base_script
             showSUIPage(pid);
         }
         playMusic(player, chooseDroidVocals());
-        return;
     }
+
     public String chooseDroidVocals() throws InterruptedException
     {
         int choice = rand(1, 3);
@@ -3575,17 +3678,18 @@ public class new_player extends script.base_script
         switch (choice)
         {
             case 1:
-            sound = DROID_VOCALIZE_01;
-            break;
+                sound = DROID_VOCALIZE_01;
+                break;
             case 2:
-            sound = DROID_VOCALIZE_02;
-            break;
+                sound = DROID_VOCALIZE_02;
+                break;
             case 3:
-            sound = DROID_VOCALIZE_03;
-            break;
+                sound = DROID_VOCALIZE_03;
+                break;
         }
         return sound;
     }
+
     public int handleSpaceIntro(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -3601,22 +3705,23 @@ public class new_player extends script.base_script
             switch (idx)
             {
                 case 0:
-                sid_msg = new string_id("new_player", "space_info_how_to_find_ship");
-                break;
+                    sid_msg = new string_id("new_player", "space_info_how_to_find_ship");
+                    break;
                 case 1:
-                sid_msg = new string_id("new_player", "space_info_how_to_check_email");
-                break;
+                    sid_msg = new string_id("new_player", "space_info_how_to_check_email");
+                    break;
                 case 2:
-                sid_msg = new string_id("new_player", "space_info_how_to_travel");
-                break;
+                    sid_msg = new string_id("new_player", "space_info_how_to_travel");
+                    break;
                 case 3:
-                sid_msg = new string_id("new_player", "space_info_how_to_make_money");
-                break;
+                    sid_msg = new string_id("new_player", "space_info_how_to_make_money");
+                    break;
             }
         }
         showSpaceListbox(player, sid_msg, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSpaceIntroBegin(obj_id self, dictionary params) throws InterruptedException
     {
         string_id sid_msg = new string_id("new_player", "space_greeting");

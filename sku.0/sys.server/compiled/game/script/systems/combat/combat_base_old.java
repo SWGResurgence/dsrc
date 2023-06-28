@@ -1,5 +1,11 @@
 package script.systems.combat;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.combat_engine.attacker_data;
 import script.combat_engine.defender_data;
@@ -55,7 +61,7 @@ public class combat_base_old extends script.base_script
     public static final int POSTURE_UP = -3;
     public static final int POSTURE_UPRIGHT_ACTIVE_DEFENSE_MOD = 10;
     public static final int POSTURE_CROUCHED_ACTIVE_DEFENSE_MOD = 0;
-    public static final int PRONE_ACTIVE_DEFENSE_MOD = 0 - 20;
+    public static final int PRONE_ACTIVE_DEFENSE_MOD = -20;
     public static final float TIMESLICE_VALUE = 1.0f;
     public static final int BASE_TO_HIT = 75;
     public static final int BASE_UNSKILLED = -50;
@@ -92,7 +98,8 @@ public class combat_base_old extends script.base_script
     public static final int COMBAT_ATTITUDE_BLOCK = 2;
     public static final int COMBAT_ATTITUDE_DODGE = 3;
     public static final int COMBAT_ATTITUDE_UNARMED = 4;
-    public static final int CLOSE_QUARTER_FIGHTING_MOD = 0 - 20;
+    public static final int CLOSE_QUARTER_FIGHTING_MOD = -20;
+
     public combat_base_old()
     {
     }
@@ -375,8 +382,8 @@ public class combat_base_old extends script.base_script
         else
         {
             fltMinDamage = fltMaxDamage / 2;
-            fltMinDamage = fltMinDamage * 1.0f;
-            fltMaxDamage = fltMaxDamage * 1.0f;
+            fltMinDamage = fltMinDamage;
+            fltMaxDamage = fltMaxDamage;
         }
         if ((cbtWeaponData.weaponType == WEAPON_TYPE_POLEARM) || (cbtWeaponData.weaponType == WEAPON_TYPE_1HAND_MELEE) || (cbtWeaponData.weaponType == WEAPON_TYPE_2HAND_MELEE))
         {
@@ -739,7 +746,7 @@ public class combat_base_old extends script.base_script
         int intI = 0;
         while (intI < cbtHitData.length)
         {
-            if (cbtHitData[intI].success == true)
+            if (cbtHitData[intI].success)
             {
                 return true;
             }
@@ -866,7 +873,6 @@ public class combat_base_old extends script.base_script
         }
         doCombatFlyText(cbtDefenderData, objAttacker, cbtHitData, cbtDefenderResults);
         callDefenderCombatAction(objDefenders, intResults, objAttacker, cbtWeaponData.id);
-        return;
     }
 
     public void doWrappedDamage(obj_id objAttacker, obj_id objDefender, obj_id objWeapon, hit_result cbtHitData, dictionary dctCombatInfo) throws InterruptedException
@@ -895,7 +901,6 @@ public class combat_base_old extends script.base_script
         if (dctCombatInfo == null)
         {
             doDamage(objAttacker, objDefender, objWeapon, cbtHitData);
-            return;
         }
         else
         {
@@ -916,18 +921,15 @@ public class combat_base_old extends script.base_script
                     }
                     damage(objDefender, intDamageType, cbtHitData.hitLocation, cbtHitData.damage);
                     xp.updateCombatXpList(objDefender, objAttacker, "jedi_general", cbtHitData.damage);
-                    return;
                 }
                 else
                 {
                     doDamage(objAttacker, objDefender, objWeapon, cbtHitData);
-                    return;
                 }
             }
             else
             {
                 doDamage(objAttacker, objDefender, objWeapon, cbtHitData);
-                return;
             }
         }
     }
@@ -955,7 +957,6 @@ public class combat_base_old extends script.base_script
             intResults[intI] = cbtDefenderResults[intI].result;
             intI = intI + 1;
         }
-        return;
     }
 
     public color getHitColor(int intHitLocation) throws InterruptedException
@@ -1371,14 +1372,12 @@ public class combat_base_old extends script.base_script
             cbtAttackerResults.id = cbtAttackerData.id;
         }
         cbtAttackerResults.weapon = cbtWeaponData.id;
-        return;
     }
 
     public void doFumble(attacker_data cbtAttackerData, weapon_data cbtWeaponData, int intAttackerPosture, String strAnimationAction) throws InterruptedException
     {
         string_id strSpam = new string_id("cbt_spam", "fumble");
         int intFumbleDamage = rand(cbtWeaponData.minDamage, cbtWeaponData.maxDamage);
-        return;
     }
 
     public void doCounterAttack(obj_id objAttacker, obj_id objDefender) throws InterruptedException
@@ -1392,7 +1391,6 @@ public class combat_base_old extends script.base_script
         {
             setObjVar(objAttacker, "combat.doCounterAttack", 1);
         }
-        return;
     }
 
     public boolean isImmuneToStateChange(obj_id target) throws InterruptedException
@@ -2165,7 +2163,6 @@ public class combat_base_old extends script.base_script
             }
             intI = intI + 1;
         }
-        return;
     }
 
     public void doMineFieldResults(String strParticle, attacker_results cbtAttackerResults, defender_results[] cbtDefenderResults, hit_result[] cbtHitData, obj_id objTarget, weapon_data cbtWeaponData) throws InterruptedException
@@ -2201,14 +2198,12 @@ public class combat_base_old extends script.base_script
             {
             }
         }
-        return;
     }
 
     public void yellText(obj_id objSpeaker, String strText) throws InterruptedException
     {
         String strType = "none none " + strText;
         chat._chat(objSpeaker, null, chat.CHAT_YELL, null, strText, null, null);
-        return;
     }
 
     public void clearQueue(obj_id objPlayer) throws InterruptedException
@@ -2260,7 +2255,6 @@ public class combat_base_old extends script.base_script
         dictionary dctParams = new dictionary();
         dctParams.put("objTarget", objTarget);
         messageTo(objTurret, "setTarget", dctParams, 0, true);
-        return;
     }
 
     public void startTurretAttack(obj_id objTurret, obj_id objTarget) throws InterruptedException
@@ -2272,7 +2266,6 @@ public class combat_base_old extends script.base_script
 
     public void applyWound(hit_result cbtHitData, defender_data cbtDefenderData, attacker_data cbtAttackerData) throws InterruptedException
     {
-        return;
     }
 
     public String getStatName(int intStat) throws InterruptedException
@@ -2758,7 +2751,6 @@ public class combat_base_old extends script.base_script
             String[] strPlaybackNames = makePlaybackNames(strPlaybackName, cbtHitData, cbtWeaponData);
             doMultiDefenderCombatResults(strPlaybackNames, cbtAttackerResults, cbtDefenderResults, dctCombatInfo);
         }
-        return;
     }
 
     public weapon_data getOverloadedWeaponData(weapon_data cbtWeaponData, dictionary dctCombatInfo) throws InterruptedException
@@ -2789,7 +2781,6 @@ public class combat_base_old extends script.base_script
         sendSystemMessage(objTarget, strSpam);
         color colTest = colors.RED;
         showFlyText(objTarget, strText, 1, colTest);
-        return;
     }
 
     public void doForceWeaken(obj_id objTarget, obj_id objAttacker, float fltMultiplier) throws InterruptedException
@@ -2802,7 +2793,6 @@ public class combat_base_old extends script.base_script
             float fltDuration = fltBaseDuration * fltMultiplier;
             addAttribModifier(objTarget, intI, intValue, fltDuration, rand(15.0f, 30.0f), rand(15.0f, 30.0f));
         }
-        return;
     }
 
     public weapon_data calculateDamageMitigation(obj_id objDefender, String strDefenderCommand, weapon_data cbtWeaponData, int intMinDamage, int intMaxDamage) throws InterruptedException

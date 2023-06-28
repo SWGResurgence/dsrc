@@ -1,5 +1,11 @@
 package script.item.tool;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.hue;
 import script.library.static_item;
@@ -23,6 +29,7 @@ public class crafted_armor_customization_kit extends script.base_script
     public static final String TITLE = "@tool/customizer:armor_customize_title";
     public static final String PROMPT = "@tool/customizer:armor_customize_prompt";
     public static final int OBJECT_COLOR_MAX = 4;
+
     public crafted_armor_customization_kit()
     {
     }
@@ -86,7 +93,7 @@ public class crafted_armor_customization_kit extends script.base_script
             return false;
         }
         blog("invItems.length: " + invItems.length);
-        if (invItems != null && invItems.length > 0)
+        if (invItems != null)
         {
             for (obj_id invItem : invItems)
             {

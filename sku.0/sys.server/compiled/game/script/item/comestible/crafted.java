@@ -1,5 +1,11 @@
 package script.item.comestible;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.attrib_mod;
 import script.library.consumable;
 import script.library.utils;

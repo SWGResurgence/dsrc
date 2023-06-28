@@ -1,5 +1,11 @@
 package script.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.utils;
@@ -8,13 +14,14 @@ import script.string_id;
 
 public class qa_helper extends script.base_script
 {
-    public qa_helper()
-    {
-    }
     public static final String PID_SCRIPTVAR = "qa_helper";
     public static final String SCRIPTVAR = "qahelper";
     public static final String SCRIPTVAR_MOB = "qahelper_record";
     public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
+    public qa_helper()
+    {
+    }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (isGod(self))
@@ -34,13 +41,14 @@ public class qa_helper extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id weapon, int[] damage) throws InterruptedException
     {
         if (hasScript(self, "developer.soe.e3demo.yavin_e3") && utils.getBooleanScriptVar(self, SCRIPTVAR_MOB + ".recordDamage") && utils.getObjIdScriptVar(attacker, "spawnedBy") == self)
         {
             broadcast(self, "Damage numbers will not be accurate due to developer.soe.e3demo.yavin_e3 script attached to your character");
         }
-        else 
+        else
         {
             if (utils.getObjIdScriptVar(attacker, "spawnedBy") == self)
             {
@@ -71,7 +79,7 @@ public class qa_helper extends script.base_script
                     {
                         weaponString = unlocalizedWeaponName;
                     }
-                    else 
+                    else
                     {
                         weaponString = "Error Retirieving Weapon Data";
                     }
@@ -82,7 +90,7 @@ public class qa_helper extends script.base_script
                     {
                         appendDamage = damageDone + damageData;
                     }
-                    else 
+                    else
                     {
                         appendDamage = damageData;
                     }
@@ -95,6 +103,7 @@ public class qa_helper extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void makeHelper(obj_id self, String argumentString) throws InterruptedException
     {
         int creatureRowNumber = dataTableSearchColumnForString(argumentString, "creatureName", CREATURE_TABLE);
@@ -106,7 +115,7 @@ public class qa_helper extends script.base_script
             dictionary creatureRow = dataTableGetRow(CREATURE_TABLE, creatureRowNumber);
             utils.setScriptVar(self, SCRIPTVAR + ".creatureDictionary", creatureRow);
         }
-        else 
+        else
         {
             broadcast(self, "Creature name invalid.");
         }

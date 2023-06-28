@@ -1,5 +1,11 @@
 package script.space.quest_logic;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,11 +14,13 @@ public class recovery_escort extends script.base_script
     public recovery_escort()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "pendingWarp", null, 1200.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int pendingWarp(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id quest = getObjIdObjVar(self, "quest");
@@ -23,6 +31,7 @@ public class recovery_escort extends script.base_script
         destroyObjectHyperspace(self);
         return SCRIPT_CONTINUE;
     }
+
     public int missionAbort(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObjectHyperspace(self);

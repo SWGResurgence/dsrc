@@ -1,5 +1,11 @@
 package script.quest.task.ground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.groundquests;
 import script.library.stealth;
@@ -11,6 +17,7 @@ public class retrieve_item_on_item extends script.base_script
     public retrieve_item_on_item()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (isMob(self))
@@ -19,6 +26,7 @@ public class retrieve_item_on_item extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (isMob(self))
@@ -27,6 +35,7 @@ public class retrieve_item_on_item extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -45,7 +54,7 @@ public class retrieve_item_on_item extends script.base_script
         {
             menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
         }
-        else 
+        else
         {
             menu = menuInfo.addRootMenu(menu_info_types.ITEM_USE, new string_id("ui_radial", "item_use"));
         }
@@ -59,7 +68,7 @@ public class retrieve_item_on_item extends script.base_script
                 {
                     menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, menuStringId);
                 }
-                else 
+                else
                 {
                     menu = menuInfo.addRootMenu(menu_info_types.ITEM_USE, menuStringId);
                 }
@@ -72,6 +81,7 @@ public class retrieve_item_on_item extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE || item == menu_info_types.CONVERSE_START)
@@ -105,18 +115,18 @@ public class retrieve_item_on_item extends script.base_script
                             stealth.testInvisNonCombatAction(player, self);
                             int countdownSui = sui.smartCountdownTimerSUI(self, player, "quest_countdown_timer", menuStringId, startTime, countdownTimer, handler, range, flags);
                         }
-                        else 
+                        else
                         {
                             sendRetrieveObjectFoundMessage(self, player);
                         }
                     }
-                    else 
+                    else
                     {
                         sendSystemMessage(player, new string_id("quest/groundquests", "retrieve_item_not_active_duty"));
                     }
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     String itemTemplateName = getTemplateName(self);
                     dictionary tasks = groundquests.getActiveTasksForTaskType(player, "retrieve_item");
@@ -125,13 +135,15 @@ public class retrieve_item_on_item extends script.base_script
                         java.util.Enumeration keys = tasks.keys();
                         while (keys.hasMoreElements())
                         {
-                            String questCrcString = (String)keys.nextElement();
+                            String questCrcString = (String) keys.nextElement();
                             int questCrc = utils.stringToInt(questCrcString);
                             int[] tasksForCurrentQuest = tasks.getIntArray(questCrcString);
-                            for (int taskId : tasksForCurrentQuest) {
+                            for (int taskId : tasksForCurrentQuest)
+                            {
                                 String baseObjVar = groundquests.getBaseObjVar(player, "retrieve_item", questGetQuestName(questCrc), taskId);
                                 String retrieveTemplateName = groundquests.getTaskStringDataEntry(questCrc, taskId, "SERVER_TEMPLATE");
-                                if (itemTemplateName.equals(retrieveTemplateName)) {
+                                if (itemTemplateName.equals(retrieveTemplateName))
+                                {
                                     sendSystemMessage(player, new string_id("quest/groundquests", "retrieve_item_already_used"));
                                     return SCRIPT_CONTINUE;
                                 }
@@ -153,6 +165,7 @@ public class retrieve_item_on_item extends script.base_script
         sendSystemMessage(player, msg);
         return SCRIPT_CONTINUE;
     }
+
     public int handleQuestCountdownTimer(obj_id self, dictionary params) throws InterruptedException
     {
         int pid = params.getInt("id");
@@ -198,6 +211,7 @@ public class retrieve_item_on_item extends script.base_script
         sendRetrieveObjectFoundMessage(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public void sendRetrieveObjectFoundMessage(obj_id self, obj_id player) throws InterruptedException
     {
         dictionary webster = new dictionary();
@@ -216,6 +230,5 @@ public class retrieve_item_on_item extends script.base_script
         {
             messageTo(self, "handleQuestFlavorObject", webster, 0, false);
         }
-        return;
     }
 }

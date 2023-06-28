@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.utils;
@@ -7,32 +13,39 @@ import script.*;
 
 public class som_pei_yi extends script.base_script
 {
+    public static String c_stringFile = "conversation/som_pei_yi";
+
     public som_pei_yi()
     {
     }
-    public static String c_stringFile = "conversation/som_pei_yi";
+
     public boolean som_pei_yi_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean som_pei_yi_condition_isEntertainer(obj_id player, obj_id npc) throws InterruptedException
     {
         int level = getLevel(player);
         return (utils.isProfession(player, utils.ENTERTAINER) && level >= 46);
     }
+
     public boolean som_pei_yi_condition_isDancer(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasSkill(player, "social_dancer_novice");
     }
+
     public boolean som_pei_yi_condition_hasDance(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasCommand(player, "startDance+peiyi");
     }
+
     public void som_pei_yi_action_grantDance(obj_id player, obj_id npc) throws InterruptedException
     {
         sendSystemMessage(player, new string_id("som/som_quest", "grant_dance"));
         grantCommand(player, "startDance+peiyi");
     }
+
     public int som_pei_yi_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_44"))
@@ -66,7 +79,7 @@ public class som_pei_yi extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48");
@@ -83,7 +96,7 @@ public class som_pei_yi extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_pei_yi.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -103,6 +116,7 @@ public class som_pei_yi extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_pei_yi_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_48"))
@@ -137,6 +151,7 @@ public class som_pei_yi extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_pei_yi_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_17"))
@@ -163,7 +178,7 @@ public class som_pei_yi extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_21");
@@ -176,7 +191,7 @@ public class som_pei_yi extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_pei_yi.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -208,7 +223,7 @@ public class som_pei_yi extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_33");
@@ -221,7 +236,7 @@ public class som_pei_yi extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_pei_yi.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -241,6 +256,7 @@ public class som_pei_yi extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_pei_yi_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_21"))
@@ -267,7 +283,7 @@ public class som_pei_yi extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_33");
@@ -280,7 +296,7 @@ public class som_pei_yi extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_pei_yi.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -300,6 +316,7 @@ public class som_pei_yi extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_pei_yi_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_33"))
@@ -326,7 +343,7 @@ public class som_pei_yi extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_37");
@@ -339,7 +356,7 @@ public class som_pei_yi extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_pei_yi.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -359,6 +376,7 @@ public class som_pei_yi extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_pei_yi_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_33"))
@@ -385,7 +403,7 @@ public class som_pei_yi extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_37");
@@ -398,7 +416,7 @@ public class som_pei_yi extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_pei_yi.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -418,6 +436,7 @@ public class som_pei_yi extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_pei_yi_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_37"))
@@ -444,7 +463,7 @@ public class som_pei_yi extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_41");
@@ -457,7 +476,7 @@ public class som_pei_yi extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_pei_yi.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -477,6 +496,7 @@ public class som_pei_yi extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_pei_yi_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_41"))
@@ -503,7 +523,7 @@ public class som_pei_yi extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_56");
@@ -516,7 +536,7 @@ public class som_pei_yi extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_pei_yi.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -536,6 +556,7 @@ public class som_pei_yi extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_pei_yi_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_56"))
@@ -562,7 +583,7 @@ public class som_pei_yi extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_60");
@@ -575,7 +596,7 @@ public class som_pei_yi extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_pei_yi.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -595,6 +616,7 @@ public class som_pei_yi extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_pei_yi_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_60"))
@@ -627,6 +649,7 @@ public class som_pei_yi extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -636,11 +659,13 @@ public class som_pei_yi extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -649,18 +674,21 @@ public class som_pei_yi extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.som_pei_yi");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -690,7 +718,7 @@ public class som_pei_yi extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_44");
@@ -702,7 +730,7 @@ public class som_pei_yi extends script.base_script
                 utils.setScriptVar(player, "conversation.som_pei_yi.branchId", 1);
                 npcStartConversation(player, npc, "som_pei_yi", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -737,7 +765,7 @@ public class som_pei_yi extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_17");
@@ -753,7 +781,7 @@ public class som_pei_yi extends script.base_script
                 utils.setScriptVar(player, "conversation.som_pei_yi.branchId", 7);
                 npcStartConversation(player, npc, "som_pei_yi", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -762,6 +790,7 @@ public class som_pei_yi extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("som_pei_yi"))

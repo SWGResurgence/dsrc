@@ -1,5 +1,11 @@
 package script.npc;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.chat;
 import script.library.prose;
@@ -10,12 +16,13 @@ import script.string_id;
 
 public class legacy_wounded extends script.base_script
 {
-    public legacy_wounded()
-    {
-    }
     public static final String PP_FILE_LOC = "quest/legacy/legacy_wounded";
     public static final String RESPONSE_TEXT = "datatables/npc/legacy/legacy_lamentations.iff";
     public static int INITIAL_DELAY = 10;
+    public legacy_wounded()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (hasScript(self, "ai.ai"))
@@ -38,6 +45,7 @@ public class legacy_wounded extends script.base_script
         messageTo(self, "legLam", null, INITIAL_DELAY, false);
         return SCRIPT_CONTINUE;
     }
+
     public int legLam(obj_id self, dictionary params) throws InterruptedException
     {
         int randMoan = rand(0, 9);
@@ -46,6 +54,7 @@ public class legacy_wounded extends script.base_script
         messageTo(self, "legLam", null, randMsg, false);
         return SCRIPT_CONTINUE;
     }
+
     public prose_package getRandLamentation(obj_id target, int moanRow) throws InterruptedException
     {
         string_id response = new string_id(PP_FILE_LOC, utils.dataTableGetString(RESPONSE_TEXT, moanRow, 1));

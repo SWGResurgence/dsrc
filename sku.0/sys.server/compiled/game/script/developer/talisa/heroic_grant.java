@@ -1,5 +1,11 @@
 package script.developer.talisa;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.instance;
 import script.library.resource;
@@ -52,23 +58,23 @@ public class heroic_grant extends script.base_script
     {
         obj_id player = params.getObjId("player");
         int selRow = sui.getListboxSelectedRow(params);
-        switch (selRow)
+        if (selRow == -1)
         {
-            case -1:
-                return SCRIPT_CONTINUE;
-            default:
-                if ((player != null) && (player != obj_id.NULL_ID))
+            return SCRIPT_CONTINUE;
+        }
+        else
+        {
+            if ((player != null) && (player != obj_id.NULL_ID))
+            {
+                if (!resource.setToolClass(self, selRow))
                 {
-                    if (!resource.setToolClass(self, selRow))
-                    {
-                        broadcast(player, "Heroics Failed?");
-                    }
-                    else
-                    {
-                        broadcast(player, "Heroics!");
-                    }
+                    broadcast(player, "Heroics Failed?");
                 }
-                break;
+                else
+                {
+                    broadcast(player, "Heroics!");
+                }
+            }
         }
         return SCRIPT_CONTINUE;
     }

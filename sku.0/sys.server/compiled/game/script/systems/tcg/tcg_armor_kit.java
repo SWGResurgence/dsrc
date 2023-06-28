@@ -1,5 +1,11 @@
 package script.systems.tcg;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.prose;
 import script.library.utils;
@@ -20,6 +26,7 @@ public class tcg_armor_kit extends script.base_script
     public static final String DATA_TEXTURE_COLUMN = "index_texture_1";
     public static final String DATA_COLOR_1_COLUMN = "index_color_1";
     public static final String DATA_COLOR_2_COLUMN = "index_color_2";
+
     public tcg_armor_kit()
     {
     }
@@ -83,7 +90,7 @@ public class tcg_armor_kit extends script.base_script
         if (targetArmorAppearances != null && targetArmorAppearances.length() > 0)
         {
             String[] targetArmorList = split(targetArmorAppearances, ',');
-            if (targetArmorList != null && targetArmorList.length > 0)
+            if (targetArmorList != null)
             {
                 for (String targetArmorAppearance : targetArmorList)
                 {
@@ -148,7 +155,7 @@ public class tcg_armor_kit extends script.base_script
     public void activateArmorKit(obj_id armorKit, obj_id player) throws InterruptedException
     {
         obj_id[] armorPieces = getContents(armorKit);
-        if (armorPieces != null && armorPieces.length > 0)
+        if (armorPieces != null)
         {
             for (obj_id armor : armorPieces)
             {
@@ -205,14 +212,13 @@ public class tcg_armor_kit extends script.base_script
                 }
             }
         }
-        return;
     }
 
     public void flushArmorKit(obj_id armorKit, obj_id player) throws InterruptedException
     {
         obj_id playerInventory = utils.getInventoryContainer(player);
         obj_id[] armorPieces = getContents(armorKit);
-        if (armorPieces != null && armorPieces.length > 0)
+        if (armorPieces != null)
         {
             for (obj_id armor : armorPieces)
             {

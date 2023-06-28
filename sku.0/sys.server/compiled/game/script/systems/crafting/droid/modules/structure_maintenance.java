@@ -1,5 +1,11 @@
 package script.systems.crafting.droid.modules;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -181,6 +187,7 @@ public class structure_maintenance extends script.base_script
                             "yavin4"
                     }
             };
+
     public structure_maintenance()
     {
     }
@@ -301,7 +308,6 @@ public class structure_maintenance extends script.base_script
         else
         {
             sendSystemMessage(player, SID_EMPTY_LIST);
-            return;
         }
     }
 
@@ -381,7 +387,7 @@ public class structure_maintenance extends script.base_script
         int ubound = nameList.size();
         for (int i = 0; i < ubound; i++)
         {
-            addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, "" + i);
+            addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, String.valueOf(i));
             setSUIProperty(pid, sui.LISTBOX_DATASOURCE + "." + i, sui.PROP_TEXT, ((String) nameList.get(i)));
         }
         subscribeToSUIProperty(pid, sui.LISTBOX_LIST, sui.PROP_SELECTEDROW);
@@ -832,7 +838,7 @@ public class structure_maintenance extends script.base_script
         int ubound = nameList.size();
         for (int i = 0; i < ubound; i++)
         {
-            addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, "" + i);
+            addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, String.valueOf(i));
             setSUIProperty(pid, sui.LISTBOX_DATASOURCE + "." + i, sui.PROP_TEXT, ((String) nameList.get(i)));
         }
         subscribeToSUIProperty(pid, sui.LISTBOX_LIST, sui.PROP_SELECTEDROW);

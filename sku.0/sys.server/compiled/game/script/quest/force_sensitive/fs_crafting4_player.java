@@ -1,5 +1,11 @@
 package script.quest.force_sensitive;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -8,9 +14,6 @@ import script.string_id;
 
 public class fs_crafting4_player extends script.base_script
 {
-    public fs_crafting4_player()
-    {
-    }
     public static final string_id SID_NO_MONEY_MSG = new string_id("quest/force_sensitive/fs_crafting", "tracking_data_no_money");
     public static final string_id SID_PURCHASE_MSG_01 = new string_id("quest/force_sensitive/fs_crafting", "tracking_data_purchase_msg_01");
     public static final string_id SID_PURCHASE_MSG_02 = new string_id("quest/force_sensitive/fs_crafting", "tracking_data_purchase_msg_02");
@@ -31,11 +34,16 @@ public class fs_crafting4_player extends script.base_script
     public static final String SATELLITE_OBJVAR = "fs_crafting4.satellite";
     public static final String PHASE4_ENDED_OBJVAR = "fs_crafting4.myPhase4Ended";
     public static final int TRACKING_DATA_COST = 1100;
+    public fs_crafting4_player()
+    {
+    }
+
     public int msgQuestAbortPhaseChange(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, PHASE4_ENDED_OBJVAR, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnQuestActivated(obj_id self, int questRow) throws InterruptedException
     {
         String questName = quests.getDataEntry(questRow, "NAME");
@@ -48,6 +56,7 @@ public class fs_crafting4_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String locationName) throws InterruptedException
     {
         if (locationName.equals(LOCATION_TARGET_NAME))
@@ -67,12 +76,14 @@ public class fs_crafting4_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetLocationTarget(obj_id self, dictionary params) throws InterruptedException
     {
         location targetLoc = getLocationObjVar(self, TARGET_LOC_OBJVAR);
         addLocationTarget(LOCATION_TARGET_NAME, targetLoc, 64.0f);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLocationReceived(obj_id self, String locationId, obj_id locationObject, location locationLocation, float locationRadius) throws InterruptedException
     {
         if (isIdValid(locationObject) && locationLocation != null)
@@ -97,6 +108,7 @@ public class fs_crafting4_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleRemoveTrackingObjVars(obj_id self, dictionary params) throws InterruptedException
     {
         removeObjVar(self, TRACKING_BASE_OBJVAR);
@@ -104,6 +116,7 @@ public class fs_crafting4_player extends script.base_script
         setObjVar(trackingDevice, NEEDS_TRACKING_DATA_OBJVAR, true);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePurchaseTrackingData(obj_id self, dictionary params) throws InterruptedException
     {
         if (quests.isActive("fs_crafting4_quest_03", self))
@@ -113,7 +126,7 @@ public class fs_crafting4_player extends script.base_script
                 String str_no_money = utils.packStringId(SID_NO_MONEY_MSG);
                 sui.msgbox(self, str_no_money);
             }
-            else 
+            else
             {
                 obj_id starportDroid = utils.getObjIdScriptVar(self, "crafting4.starportDroid");
                 utils.moneyOutMetric(self, "FS_QUESTS", TRACKING_DATA_COST);
@@ -125,12 +138,14 @@ public class fs_crafting4_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleTrackingDataPurchaseMsg02(obj_id self, dictionary params) throws InterruptedException
     {
         sendSystemMessage(self, SID_PURCHASE_MSG_02);
         messageTo(self, "handleTrackingDataPurchaseMsg03", null, rand(1, 2), false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleTrackingDataPurchaseMsg03(obj_id self, dictionary params) throws InterruptedException
     {
         sendSystemMessage(self, SID_PURCHASE_MSG_03);
@@ -141,6 +156,7 @@ public class fs_crafting4_player extends script.base_script
         CustomerServiceLog("FS_Phase4_Crafting", custLogMsg, self);
         return SCRIPT_CONTINUE;
     }
+
     public void deactivateCrafting4Quest(obj_id self) throws InterruptedException
     {
         String str_message = utils.packStringId(SID_CRAFTING4_PHASE_OVER);
@@ -148,6 +164,5 @@ public class fs_crafting4_player extends script.base_script
         quests.deactivate("fs_crafting4_quest_06", self);
         removeObjVar(self, CRAFTING4_BASE_OBJVAR);
         detachScript(self, "quest.force_sensitive.fs_crafting4_player");
-        return;
     }
 }

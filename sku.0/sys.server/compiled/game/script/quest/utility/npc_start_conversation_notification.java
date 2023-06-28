@@ -1,5 +1,11 @@
 package script.quest.utility;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.location;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class npc_start_conversation_notification extends script.base_script
     public npc_start_conversation_notification()
     {
     }
+
     public int locationRequest(obj_id self, dictionary params) throws InterruptedException
     {
         if (params != null)
@@ -29,27 +36,28 @@ public class npc_start_conversation_notification extends script.base_script
                         messageTo(source, "receiveLocationResponse", locationResponseParameters, 0.0f, false);
                         LOG("newquests", "npc_start_conversation - locationRequest() - sending location " + myLocation + " to " + source);
                     }
-                    else 
+                    else
                     {
                         LOG("newquests", "npc_start_conversation - locationRequest() - could not determine my location, no response will be sent");
                     }
                 }
-                else 
+                else
                 {
                     LOG("newquests", "npc_start_conversation - locationRequest() - received a location request without a quest name, no response will be sent");
                 }
             }
-            else 
+            else
             {
                 LOG("newquests", "npc_start_conversation - locationRequest() - received a location request without a source object id, no response will be sent");
             }
         }
-        else 
+        else
         {
             LOG("newquests", "npc_start_conversation - locationRequest() - received a location request without parameters");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         String objvarname = "quest." + player;
@@ -63,7 +71,7 @@ public class npc_start_conversation_notification extends script.base_script
             messageTo(player, "npcStartConversationNotification", npcStartConversationParameters, 0.0f, false);
             LOG("newquests", "npc_start_conversation - OnStartNpcConversation() - sending npcStartCnversationNotification message to " + player);
         }
-        else 
+        else
         {
             LOG("newquests", "npc_start_conversation - OnNpcStartConversation() - could not retrieve obvjar " + objvarname);
         }

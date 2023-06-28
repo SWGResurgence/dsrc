@@ -1,5 +1,11 @@
 package script.item.conversion;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.armor;
 import script.library.sui;
@@ -25,6 +31,7 @@ public class armor_wookiee extends script.base_script
                     "object/tangible/wearables/armor/kashyyykian_ceremonial/armor_kashyyykian_ceremonial_bicep_l.iff",
                     "object/tangible/wearables/armor/kashyyykian_ceremonial/armor_kashyyykian_ceremonial_bicep_r.iff"
             };
+
     public armor_wookiee()
     {
     }
@@ -91,7 +98,6 @@ public class armor_wookiee extends script.base_script
         if (getVolumeFree(pInv) <= 3)
         {
             sendSystemMessage(player, new string_id("quest_armorsmith", "inventory_full"));
-            return;
         }
         else
         {

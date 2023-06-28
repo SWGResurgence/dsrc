@@ -1,5 +1,11 @@
 package script.theme_park.nym;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.groundquests;
@@ -7,15 +13,18 @@ import script.library.utils;
 
 public class nym_elevator_down extends script.base_script
 {
+    public static final String STF_FILE = "theme_park_nym/messages";
+
     public nym_elevator_down()
     {
     }
-    public static final String STF_FILE = "theme_park_nym/messages";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "makeElevatorWork", null, 5, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!hasObjVar(self, "stronghold_lobby"))
@@ -29,6 +38,7 @@ public class nym_elevator_down extends script.base_script
         int mnu = mi.addRootMenu(menu_info_types.ITEM_USE, new string_id(STF_FILE, "ladder_down"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!hasObjVar(self, "stronghold_lobby"))
@@ -55,6 +65,7 @@ public class nym_elevator_down extends script.base_script
         warpPlayer(player, "lok", 0.0f, 0.0f, 0.0f, strongHoldLobby, 0.0f, 8.9f, -32.0f);
         return SCRIPT_CONTINUE;
     }
+
     public int makeElevatorWork(obj_id self, dictionary params) throws InterruptedException
     {
         String stronghold = "6595508";

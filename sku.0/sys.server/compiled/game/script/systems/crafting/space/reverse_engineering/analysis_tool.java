@@ -1,5 +1,11 @@
 package script.systems.crafting.space.reverse_engineering;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.sui;
 import script.library.temp_schematic;
@@ -15,6 +21,7 @@ public class analysis_tool extends script.base_script
     public static final String ANALYZE_PROMPT = "@" + STF + ":analyze_prompt";
     public static final String NO_ITEMS_PROMPT = "@" + STF + ":no_items";
     public static final String BTN_ANALYZE = "@" + STF + ":analyze";
+
     public analysis_tool()
     {
     }

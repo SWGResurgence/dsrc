@@ -1,5 +1,11 @@
 package script.npc.faction_recruiter;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -8,12 +14,13 @@ import script.string_id;
 
 public class player_recruiter extends script.base_script
 {
-    public player_recruiter()
-    {
-    }
     public static final string_id SID_INCREASE_FACTION_TO_CONVERT = new string_id("faction_recruiter", "increase_faction_to_convert");
     public static final string_id SID_SUI_CONFIRM_CONVERSION_TITLE = new string_id("faction_recruiter", "sui_confirm_conversion_title");
     public static final string_id SID_SUI_CONFIRM_CONVERSION_PROMPT = new string_id("faction_recruiter", "sui_confirm_conversion_prompt");
+    public player_recruiter()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         detachScript(self, factions.SCRIPT_PLAYER_RECRUITER);
@@ -23,6 +30,7 @@ public class player_recruiter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgResignFromFaction(obj_id self, dictionary params) throws InterruptedException
     {
         detachScript(self, factions.SCRIPT_PLAYER_RECRUITER);
@@ -56,6 +64,7 @@ public class player_recruiter extends script.base_script
         factions.resignFromFaction(self, resign_faction);
         return SCRIPT_CONTINUE;
     }
+
     public int msgGoCovert(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);
@@ -99,6 +108,7 @@ public class player_recruiter extends script.base_script
         sendSystemMessage(self, factions.SID_COVERT_COMPLETE);
         return SCRIPT_CONTINUE;
     }
+
     public int msgFactionTrainingTypeSelected(obj_id self, dictionary params) throws InterruptedException
     {
         String button = params.getString("buttonPressed");
@@ -117,6 +127,7 @@ public class player_recruiter extends script.base_script
         sui.inputbox(self, self, "@faction_recruiter:enter_training_points", "msgFactionTrainingAmountSelected");
         return SCRIPT_CONTINUE;
     }
+
     public int msgFactionTrainingAmountSelected(obj_id self, dictionary params) throws InterruptedException
     {
         String amount_str = sui.getInputBoxText(params);
@@ -133,7 +144,7 @@ public class player_recruiter extends script.base_script
         {
             row_selected = getIntObjVar(self, factions.VAR_TRAINING_SELECTION);
         }
-        else 
+        else
         {
             LOG("LOG_CHANNEL", "player_recruiter::msgFactionTrainingAmountSelected -- could not find selection data on " + self);
             return SCRIPT_CONTINUE;
@@ -165,7 +176,7 @@ public class player_recruiter extends script.base_script
         float totalRatio = mod * ratio;
         float modulus = amt % mod;
         float toSpend = amt - modulus;
-        int baseXp = (int)(toSpend / mod);
+        int baseXp = (int) (toSpend / mod);
         String sName = getString(utils.unpackString(name));
         int convertedXp = xp.applySpeciesXpModifier(self, sName, baseXp);
         if (convertedXp > 0)
@@ -180,7 +191,7 @@ public class player_recruiter extends script.base_script
             String title = utils.packStringId(SID_SUI_CONFIRM_CONVERSION_TITLE);
             sui.msgbox(self, self, prompt, sui.YES_NO, title, "msgFactionTrainingAmountConfirm");
         }
-        else 
+        else
         {
             prose_package ppIncreaseFaction = prose.getPackage(SID_INCREASE_FACTION_TO_CONVERT);
             prose.setDF(ppIncreaseFaction, totalRatio);
@@ -189,6 +200,7 @@ public class player_recruiter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgFactionTrainingAmountConfirm(obj_id self, dictionary params) throws InterruptedException
     {
         int bp = sui.getIntButtonPressed(params);
@@ -204,7 +216,7 @@ public class player_recruiter extends script.base_script
             row_selected = getIntObjVar(self, factions.VAR_TRAINING_SELECTION);
             removeObjVar(self, "faction_recruiter");
         }
-        else 
+        else
         {
             LOG("LOG_CHANNEL", "player_recruiter::msgFactionTrainingAmountSelected -- could not find selection data on " + self);
             return SCRIPT_CONTINUE;
@@ -219,7 +231,7 @@ public class player_recruiter extends script.base_script
         String xp_type = row.getString("xp_type");
         float ratio = row.getFloat("ratio");
         String name = row.getString("name");
-        int toSpend = (int)(utils.getFloatScriptVar(self, factions.VAR_TRAINING_COST));
+        int toSpend = (int) (utils.getFloatScriptVar(self, factions.VAR_TRAINING_COST));
         int convertedXp = utils.getIntScriptVar(self, factions.VAR_TRAINING_XP);
         int faction_id = pvpGetAlignedFaction(self);
         if (faction_id == 0)
@@ -233,10 +245,10 @@ public class player_recruiter extends script.base_script
             LOG("LOG_CHANNEL", "player_recruiter::msgFactionTrainingAmountSelected -- unable to find " + faction_id + " in the faction datatable for " + self);
             return SCRIPT_CONTINUE;
         }
-        int standing = (int)factions.getFactionStanding(self, faction);
+        int standing = (int) factions.getFactionStanding(self, faction);
         if (standing - toSpend < factions.FACTION_RATING_DECLARABLE_MIN)
         {
-            prose_package pp = prose.getPackage(factions.SID_NOT_ENOUGH_STANDING_SPEND, faction, (int)factions.FACTION_RATING_DECLARABLE_MIN);
+            prose_package pp = prose.getPackage(factions.SID_NOT_ENOUGH_STANDING_SPEND, faction, (int) factions.FACTION_RATING_DECLARABLE_MIN);
             sendSystemMessageProse(self, pp);
             setObjVar(self, factions.VAR_TRAINING_SELECTION, row_selected);
             sui.inputbox(self, self, "@faction_recruiter:enter_training_points", "msgFactionTrainingAmountSelected");
@@ -252,12 +264,13 @@ public class player_recruiter extends script.base_script
                 LOG("LOG_CHANNEL", "player_recruiter::msgFactionTrainingAmountSelected -- unable to grant " + convertedXp + " " + xp_type + " experience to " + self);
             }
         }
-        else 
+        else
         {
             LOG("LOG_CHANNEL", "player_recruiter::msgFactionTrainingAmountSelected -- unable to decrement faction standing for " + self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgFactionTrainingAmountConfirmXpResult(obj_id self, dictionary params) throws InterruptedException
     {
         int granted = params.getInt(xp.GRANT_XP_RESULT_VALUE);

@@ -1,5 +1,11 @@
 package script.item.structure_deed;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.player_structure;
 import script.library.sui;
@@ -32,6 +38,7 @@ public class player_structure_deed extends script.base_script
                     "object/installation/mining_ore/mining_ore_harvester_heavy.iff",
                     "object/installation/mining_organic/mining_organic_flora_farm_heavy.iff"
             };
+
     public player_structure_deed()
     {
     }

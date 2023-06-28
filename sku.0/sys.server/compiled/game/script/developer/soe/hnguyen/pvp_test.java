@@ -1,5 +1,11 @@
 package script.developer.soe.hnguyen;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.utils;
 import script.obj_id;
 
@@ -10,10 +16,12 @@ public class pvp_test extends script.base_script
     public pvp_test()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id objSpeaker, String strText) throws InterruptedException
     {
         if (objSpeaker != self)
@@ -44,7 +52,7 @@ public class pvp_test extends script.base_script
                 {
                     broadcast(self, actor + " has " + target + " as a personal enemy");
                 }
-                else 
+                else
                 {
                     broadcast(self, actor + " DOESN'T have " + target + " as a personal enemy");
                 }

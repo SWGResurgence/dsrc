@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.base_class;
 import script.obj_id;
 
@@ -9,6 +15,7 @@ public class debug extends script.base_script
     public static final String VAR_DEBUG_BASE = "debug";
     public static final String VAR_DICTIONARY_IN = "debug.dict.in";
     public static final String VAR_DICTIONARY_OUT = "debug.dict.out";
+
     public debug()
     {
     }

@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.utils;
@@ -7,56 +13,67 @@ import script.*;
 
 public class ep3_rodian_hunter extends script.base_script
 {
+    public static String c_stringFile = "conversation/ep3_rodian_hunter";
+
     public ep3_rodian_hunter()
     {
     }
-    public static String c_stringFile = "conversation/ep3_rodian_hunter";
+
     public boolean ep3_rodian_hunter_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean ep3_rodian_hunter_condition_hasFinishedQuest1(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/ep3_rodian_hunter_1");
         return questIsQuestComplete(questId, player);
     }
+
     public boolean ep3_rodian_hunter_condition_hasFinishedQuest2(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/ep3_rodian_hunter_2");
         return questIsQuestComplete(questId, player);
     }
+
     public boolean ep3_rodian_hunter_condition_hasFinishedQuest3(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/ep3_rodian_hunter_3");
         return questIsQuestComplete(questId, player);
     }
+
     public boolean ep3_rodian_hunter_condition_isOnQuest1(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/ep3_rodian_hunter_1");
         return questIsQuestActive(questId, player);
     }
+
     public boolean ep3_rodian_hunter_condition_isOnQuest2(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/ep3_rodian_hunter_2");
         return questIsQuestActive(questId, player);
     }
+
     public boolean ep3_rodian_hunter_condition_hasFinished_WookieQuest1(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/ep3_wookiee_benefactor_2");
         return questIsQuestComplete(questId, player);
     }
+
     public void ep3_rodian_hunter_action_giveQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/ep3_rodian_hunter_1");
         questActivateQuest(questId, player, npc);
         playClientEffectLoc(player, "clienteffect/voc_npc_cnv_rodian_short.cef", getLocation(npc), 0.0f);
     }
+
     public void ep3_rodian_hunter_action_giveQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/ep3_rodian_hunter_2");
         questActivateQuest(questId, player, npc);
         playClientEffectLoc(player, "clienteffect/voc_npc_cnv_rodian_medium.cef", getLocation(npc), 0.0f);
     }
+
     public void ep3_rodian_hunter_action_clearQuests(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/ep3_rodian_hunter_1");
@@ -67,36 +84,43 @@ public class ep3_rodian_hunter extends script.base_script
         questClearQuest(questId3, player);
         playClientEffectLoc(player, "clienteffect/voc_npc_cnv_rodian_short.cef", getLocation(npc), 0.0f);
     }
+
     public void ep3_rodian_hunter_action_speak_SHORT(obj_id player, obj_id npc) throws InterruptedException
     {
         playClientEffectLoc(player, "clienteffect/voc_npc_cnv_rodian_short.cef", getLocation(npc), 0.0f);
     }
+
     public void ep3_rodian_hunter_action_speak_MEDIUM(obj_id player, obj_id npc) throws InterruptedException
     {
         playClientEffectLoc(player, "clienteffect/voc_npc_cnv_rodian_medium.cef", getLocation(npc), 0.0f);
     }
+
     public void ep3_rodian_hunter_action_speak_LONG(obj_id player, obj_id npc) throws InterruptedException
     {
         playClientEffectLoc(player, "clienteffect/voc_npc_cnv_rodian_long.cef", getLocation(npc), 0.0f);
     }
+
     public void ep3_rodian_hunter_action_giveQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/ep3_rodian_hunter_3");
         questActivateQuest(questId, player, npc);
         playClientEffectLoc(player, "clienteffect/voc_npc_cnv_rodian_short.cef", getLocation(npc), 0.0f);
     }
+
     public void ep3_rodian_hunter_action_giveQuestFour(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/ep3_rodian_hunter_4");
         questActivateQuest(questId, player, npc);
         playClientEffectLoc(player, "clienteffect/voc_npc_cnv_rodian_short.cef", getLocation(npc), 0.0f);
     }
+
     public void ep3_rodian_hunter_action_giveQuestFive(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/ep3_rodian_hunter_5");
         questActivateQuest(questId, player, npc);
         playClientEffectLoc(player, "clienteffect/voc_npc_cnv_rodian_short.cef", getLocation(npc), 0.0f);
     }
+
     public int ep3_rodian_hunter_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2f1410df"))
@@ -118,7 +142,7 @@ public class ep3_rodian_hunter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2fac86c");
@@ -127,7 +151,7 @@ public class ep3_rodian_hunter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_rodian_hunter.branchId");
                     chat.chat(npc, player, message);
@@ -138,6 +162,7 @@ public class ep3_rodian_hunter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_rodian_hunter_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2fac86c"))
@@ -159,7 +184,7 @@ public class ep3_rodian_hunter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cba7ab48");
@@ -168,7 +193,7 @@ public class ep3_rodian_hunter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_rodian_hunter.branchId");
                     chat.chat(npc, player, message);
@@ -179,6 +204,7 @@ public class ep3_rodian_hunter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_rodian_hunter_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_cba7ab48"))
@@ -196,6 +222,7 @@ public class ep3_rodian_hunter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_rodian_hunter_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ac3b13f5"))
@@ -217,7 +244,7 @@ public class ep3_rodian_hunter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4d5b8557");
@@ -226,7 +253,7 @@ public class ep3_rodian_hunter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_rodian_hunter.branchId");
                     chat.chat(npc, player, message);
@@ -237,6 +264,7 @@ public class ep3_rodian_hunter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_rodian_hunter_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4d5b8557"))
@@ -254,6 +282,7 @@ public class ep3_rodian_hunter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_rodian_hunter_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ff3c855b"))
@@ -275,7 +304,7 @@ public class ep3_rodian_hunter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9301eff1");
@@ -284,7 +313,7 @@ public class ep3_rodian_hunter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_rodian_hunter.branchId");
                     chat.chat(npc, player, message);
@@ -295,6 +324,7 @@ public class ep3_rodian_hunter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_rodian_hunter_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9301eff1"))
@@ -312,6 +342,7 @@ public class ep3_rodian_hunter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_rodian_hunter_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_8be640b8"))
@@ -333,7 +364,7 @@ public class ep3_rodian_hunter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1d144f53");
@@ -342,7 +373,7 @@ public class ep3_rodian_hunter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_rodian_hunter.branchId");
                     chat.chat(npc, player, message);
@@ -353,6 +384,7 @@ public class ep3_rodian_hunter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_rodian_hunter_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1d144f53"))
@@ -374,7 +406,7 @@ public class ep3_rodian_hunter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d24a2285");
@@ -383,7 +415,7 @@ public class ep3_rodian_hunter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_rodian_hunter.branchId");
                     chat.chat(npc, player, message);
@@ -394,6 +426,7 @@ public class ep3_rodian_hunter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_rodian_hunter_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d24a2285"))
@@ -411,6 +444,7 @@ public class ep3_rodian_hunter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_rodian_hunter_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b1bd5fe2"))
@@ -441,6 +475,7 @@ public class ep3_rodian_hunter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_rodian_hunter_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b84b366c"))
@@ -462,7 +497,7 @@ public class ep3_rodian_hunter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_34f24948");
@@ -471,7 +506,7 @@ public class ep3_rodian_hunter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_rodian_hunter.branchId");
                     chat.chat(npc, player, message);
@@ -482,6 +517,7 @@ public class ep3_rodian_hunter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_rodian_hunter_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_34f24948"))
@@ -503,7 +539,7 @@ public class ep3_rodian_hunter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e42b260e");
@@ -512,7 +548,7 @@ public class ep3_rodian_hunter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_rodian_hunter.branchId");
                     chat.chat(npc, player, message);
@@ -523,6 +559,7 @@ public class ep3_rodian_hunter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_rodian_hunter_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_e42b260e"))
@@ -540,6 +577,7 @@ public class ep3_rodian_hunter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_rodian_hunter_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_7e4fd412"))
@@ -566,7 +604,7 @@ public class ep3_rodian_hunter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_583053f2");
@@ -579,7 +617,7 @@ public class ep3_rodian_hunter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_rodian_hunter.branchId");
                     chat.chat(npc, player, message);
@@ -590,6 +628,7 @@ public class ep3_rodian_hunter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_rodian_hunter_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_583053f2"))
@@ -620,6 +659,7 @@ public class ep3_rodian_hunter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -632,6 +672,7 @@ public class ep3_rodian_hunter extends script.base_script
         setName(self, "Bazeedo");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -640,6 +681,7 @@ public class ep3_rodian_hunter extends script.base_script
         setName(self, "Bazeedo");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -649,18 +691,21 @@ public class ep3_rodian_hunter extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.ep3_rodian_hunter");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -685,7 +730,7 @@ public class ep3_rodian_hunter extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_2f1410df");
@@ -693,7 +738,7 @@ public class ep3_rodian_hunter extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_rodian_hunter.branchId", 1);
                 npcStartConversation(player, npc, "ep3_rodian_hunter", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -716,7 +761,7 @@ public class ep3_rodian_hunter extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_ac3b13f5");
@@ -724,7 +769,7 @@ public class ep3_rodian_hunter extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_rodian_hunter.branchId", 5);
                 npcStartConversation(player, npc, "ep3_rodian_hunter", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -747,7 +792,7 @@ public class ep3_rodian_hunter extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_ff3c855b");
@@ -755,7 +800,7 @@ public class ep3_rodian_hunter extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_rodian_hunter.branchId", 8);
                 npcStartConversation(player, npc, "ep3_rodian_hunter", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -778,7 +823,7 @@ public class ep3_rodian_hunter extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_8be640b8");
@@ -786,7 +831,7 @@ public class ep3_rodian_hunter extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_rodian_hunter.branchId", 11);
                 npcStartConversation(player, npc, "ep3_rodian_hunter", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -816,7 +861,7 @@ public class ep3_rodian_hunter extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_b1bd5fe2");
@@ -828,7 +873,7 @@ public class ep3_rodian_hunter extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_rodian_hunter.branchId", 15);
                 npcStartConversation(player, npc, "ep3_rodian_hunter", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -851,7 +896,7 @@ public class ep3_rodian_hunter extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_b84b366c");
@@ -859,7 +904,7 @@ public class ep3_rodian_hunter extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_rodian_hunter.branchId", 18);
                 npcStartConversation(player, npc, "ep3_rodian_hunter", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -882,7 +927,7 @@ public class ep3_rodian_hunter extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_7e4fd412");
@@ -890,7 +935,7 @@ public class ep3_rodian_hunter extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_rodian_hunter.branchId", 22);
                 npcStartConversation(player, npc, "ep3_rodian_hunter", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -899,6 +944,7 @@ public class ep3_rodian_hunter extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("ep3_rodian_hunter"))

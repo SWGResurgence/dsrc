@@ -1,5 +1,11 @@
 package script.item.publish_gift;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -10,6 +16,7 @@ public class magic_painting extends script.base_script
 {
     public static final string_id MOVED_CTRL_OBJ = new string_id("spam", "magic_painting_ctrl_moved");
     public static final string_id ROOM_HAS_CTRL_OBJ = new string_id("spam", "magic_painting_ctrl_already");
+
     public magic_painting()
     {
     }

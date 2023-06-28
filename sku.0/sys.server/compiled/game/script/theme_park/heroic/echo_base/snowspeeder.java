@@ -1,5 +1,11 @@
 package script.theme_park.heroic.echo_base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -12,6 +18,7 @@ public class snowspeeder extends script.base_script
     public snowspeeder()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         detachScript(self, "ai.creature_combat");
@@ -25,6 +32,7 @@ public class snowspeeder extends script.base_script
         messageTo(self, "snowspeederHeight", null, rand(5.0f, 8.0f), false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitateTarget(obj_id self, obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -45,7 +53,7 @@ public class snowspeeder extends script.base_script
             {
                 beast_lib.killBeast(target, self);
             }
-            else 
+            else
             {
                 pclib.coupDeGrace(target, self);
             }
@@ -53,6 +61,7 @@ public class snowspeeder extends script.base_script
         trial.bumpSession(self, "target");
         return SCRIPT_CONTINUE;
     }
+
     public int findTarget(obj_id self, dictionary params) throws InterruptedException
     {
         if (!exists(self))
@@ -67,14 +76,18 @@ public class snowspeeder extends script.base_script
             messageTo(self, "findTarget", null, 1.0f, false);
             return SCRIPT_CONTINUE;
         }
-        for (obj_id obj_id : allTar) {
-            if (obj_id == self) {
+        for (obj_id obj_id : allTar)
+        {
+            if (obj_id == self)
+            {
                 continue;
             }
-            if (!pvpCanAttack(self, obj_id)) {
+            if (!pvpCanAttack(self, obj_id))
+            {
                 continue;
             }
-            if (isDead(obj_id)) {
+            if (isDead(obj_id))
+            {
                 continue;
             }
             validTargets.add(obj_id);
@@ -84,7 +97,7 @@ public class snowspeeder extends script.base_script
             messageTo(self, "findTarget", null, 1.0f, false);
             return SCRIPT_CONTINUE;
         }
-        obj_id target = ((obj_id)validTargets.get(rand(0, validTargets.size() - 1)));
+        obj_id target = ((obj_id) validTargets.get(rand(0, validTargets.size() - 1)));
         String social = ai_lib.getSocialGroup(target);
         if (social == null)
         {
@@ -140,6 +153,7 @@ public class snowspeeder extends script.base_script
         messageTo(self, "findTarget", null, 1.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int snowspeederHeight(obj_id self, dictionary params) throws InterruptedException
     {
         if (!exists(self))
@@ -162,6 +176,7 @@ public class snowspeeder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDisabled(obj_id self, obj_id killer) throws InterruptedException
     {
         if (hasObjVar(self, "speederHeight"))
@@ -171,6 +186,7 @@ public class snowspeeder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void destroySnowSpeeder(obj_id disabledSnowspeeder) throws InterruptedException
     {
         setInvulnerable(disabledSnowspeeder, true);
@@ -181,12 +197,14 @@ public class snowspeeder extends script.base_script
         disabledAiSpeeder.put("disabledHothSpeeder", disabledSnowspeeder);
         messageTo(disabledSnowspeeder, "deleteDisabledSnowspeeder", disabledAiSpeeder, 1.0f, false);
     }
+
     public int deleteDisabledSnowspeeder(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id disabledHothSpeeder = params.getObjId("disabledHothSpeeder");
         destroyObject(disabledHothSpeeder);
         return SCRIPT_CONTINUE;
     }
+
     public void monitorAtatProgress(obj_id snowspeeder) throws InterruptedException
     {
         if (!isIdValid(snowspeeder) || !exists(snowspeeder))
@@ -194,12 +212,14 @@ public class snowspeeder extends script.base_script
             return;
         }
         obj_id[] atats = trial.getObjectsInInstanceByObjVar(snowspeeder, "isAtat");
-        if (atats == null || atats.length == 0)
+        if (atats == null)
         {
             return;
         }
-        for (obj_id atat : atats) {
-            if (isInvulnerable(atat)) {
+        for (obj_id atat : atats)
+        {
+            if (isInvulnerable(atat))
+            {
                 setObjVar(snowspeeder, "respawn", -1);
             }
         }

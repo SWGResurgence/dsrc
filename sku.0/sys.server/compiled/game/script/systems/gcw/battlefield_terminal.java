@@ -1,5 +1,11 @@
 package script.systems.gcw;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -37,6 +43,7 @@ public class battlefield_terminal extends script.base_script
     public static final String SCRIPT_VAR_CAPTURING = "gcw.static_base.control_terminal.capturing";
     public static final String COLOR_REBELS = colors_hex.HEADER + colors_hex.COLOR_REBELS;
     public static final String COLOR_IMPERIALS = colors_hex.HEADER + colors_hex.COLOR_IMPERIALS;
+
     public battlefield_terminal()
     {
     }

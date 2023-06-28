@@ -1,38 +1,47 @@
 package script.faction_perk.minefield;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
 
 public class advanced_minefield extends script.systems.combat.combat_base
 {
+    public static final float MAX_MINE_CHANCE = 0.8f;
+    public static final int MINE_IMMUNITY_TIME = 10;
+    public static final String[] MINE_ATTACK_COMMAND =
+            {
+                    "mine_attack_xg",
+                    "mine_attack_drx55",
+                    "mine_attack_sr88"
+            };
+    public static final String[] MINE_EFFECT =
+            {
+                    "clienteffect/mine_xg.cef",
+                    "clienteffect/mine_drx55.cef",
+                    "clienteffect/mine_sr88.cef"
+            };
     public advanced_minefield()
     {
     }
-    public static final float MAX_MINE_CHANCE = 0.8f;
-    public static final int MINE_IMMUNITY_TIME = 10;
-    public static final String[] MINE_ATTACK_COMMAND = 
-    {
-        "mine_attack_xg",
-        "mine_attack_drx55",
-        "mine_attack_sr88"
-    };
-    public static final String[] MINE_EFFECT = 
-    {
-        "clienteffect/mine_xg.cef",
-        "clienteffect/mine_drx55.cef",
-        "clienteffect/mine_sr88.cef"
-    };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleInitializeMinefield", null, 3.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleInitializeMinefield", null, 3.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String name, obj_id who) throws InterruptedException
     {
         if (!name.startsWith("hq_minefield"))
@@ -42,6 +51,7 @@ public class advanced_minefield extends script.systems.combat.combat_base
         checkMineDetonation(self, who);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String name, obj_id who) throws InterruptedException
     {
         if (!name.startsWith("hq_minefield"))
@@ -51,6 +61,7 @@ public class advanced_minefield extends script.systems.combat.combat_base
         checkMineDetonation(self, who);
         return SCRIPT_CONTINUE;
     }
+
     public int handleInitializeMinefield(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, hq.VAR_DEFENSE_PARENT))
@@ -75,6 +86,7 @@ public class advanced_minefield extends script.systems.combat.combat_base
         weapons.setWeaponData(self, 4000, 6000, 64.0f, WEAPON_TYPE_HEAVY, DAMAGE_KINETIC, DAMAGE_ELEMENTAL_HEAT, 0, 1.0f, 0.0f);
         return SCRIPT_CONTINUE;
     }
+
     public void checkMineDetonation(obj_id self, obj_id who) throws InterruptedException
     {
         if (!isIdValid(who))
@@ -97,7 +109,7 @@ public class advanced_minefield extends script.systems.combat.combat_base
             {
                 utils.removeScriptVar(who, "mine_immunity");
             }
-            else 
+            else
             {
                 return;
             }
@@ -113,18 +125,19 @@ public class advanced_minefield extends script.systems.combat.combat_base
         }
         float max = hq.getMaxMines(structure);
         float current = hq.getTotalMines(structure);
-        int chance = (int)(((current / max) * MAX_MINE_CHANCE) * 100.0f);
+        int chance = (int) (((current / max) * MAX_MINE_CHANCE) * 100.0f);
         int roll = rand(1, 100);
         if (roll < chance)
         {
             executeMineAttack(self, structure, who);
             utils.setScriptVar(who, "mine_immunity", getGameTime() + (MINE_IMMUNITY_TIME * 2));
         }
-        else 
+        else
         {
             utils.setScriptVar(who, "mine_immunity", getGameTime() + MINE_IMMUNITY_TIME);
         }
     }
+
     public void executeMineAttack(obj_id self, obj_id structure, obj_id who) throws InterruptedException
     {
         obj_id mount = getMountId(who);
@@ -154,12 +167,14 @@ public class advanced_minefield extends script.systems.combat.combat_base
             messageTo(self, "handleMineDeathBlow", d, 1.0f, false);
         }
     }
+
     public int handleMineDeathBlow(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
         pclib.coupDeGrace(player, self, false, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleAccidentalMineDetonation(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");

@@ -1,5 +1,11 @@
 package script.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -7,77 +13,80 @@ import script.string_id;
 
 public class qa_character extends script.base_script
 {
+    public static final String TEMPLATE_TABLE = "datatables/test/qa_setup_expertise.iff";
+    public static final String EXOTIC_MOD_STRINGS = "datatables/crafting/reverse_engineering_mods.iff";
+    public static final String[] QASETUP_MAIN_MENU =
+            {
+                    "Quick Buff",
+                    "Set Template",
+                    "Generate Equipment",
+                    "Write Template to Disk"
+            };
+    public static final String QASETUP_TITLE = "QA Setup";
+    public static final String QASETUP_PROMPT = "Choose the tool you want to use";
+    public static final String[] TOOL_OPTIONS =
+            {
+                    "Quick Setup",
+                    "Quick Buff",
+                    "Set Class and Template",
+                    "Generate Equipment"
+            };
+    public static final String[] MOD_TYPES =
+            {
+                    "basic1",
+                    "basic2",
+                    "basic3",
+                    "exotic1",
+                    "exotic2",
+                    "exotic3"
+            };
+    public static final String[] EQUIPMENT_OPTIONS =
+            {
+                    "Prefered Mods",
+                    "All",
+                    "Weapon",
+                    "Armor",
+                    "Powerups",
+                    "Consumables"
+            };
+    public static final String[] CLASS_LIST =
+            {
+                    "bounty_hunter_1a",
+                    "commando_1a",
+                    "officer_1a",
+                    "force_sensitive_1a",
+                    "medic_1a",
+                    "spy_1a",
+                    "smuggler_1a",
+                    "trader_1a",
+                    "trader_1d",
+                    "trader_1b",
+                    "trader_1c"
+            };
+    public static final String[] BASIC_MOD_STRINGS =
+            {
+                    "precision_modified",
+                    "strength_modified",
+                    "agility_modified",
+                    "stamina_modified",
+                    "constitution_modified",
+                    "luck_modified",
+                    "camouflage",
+                    "combat_block_value"
+            };
     public qa_character()
     {
     }
-    public static final String TEMPLATE_TABLE = "datatables/test/qa_setup_expertise.iff";
-    public static final String EXOTIC_MOD_STRINGS = "datatables/crafting/reverse_engineering_mods.iff";
-    public static final String[] QASETUP_MAIN_MENU = 
-    {
-        "Quick Buff",
-        "Set Template",
-        "Generate Equipment",
-        "Write Template to Disk"
-    };
-    public static final String QASETUP_TITLE = "QA Setup";
-    public static final String QASETUP_PROMPT = "Choose the tool you want to use";
-    public static final String[] TOOL_OPTIONS = 
-    {
-        "Quick Setup",
-        "Quick Buff",
-        "Set Class and Template",
-        "Generate Equipment"
-    };
-    public static final String[] MOD_TYPES = 
-    {
-        "basic1",
-        "basic2",
-        "basic3",
-        "exotic1",
-        "exotic2",
-        "exotic3"
-    };
-    public static final String[] EQUIPMENT_OPTIONS = 
-    {
-        "Prefered Mods",
-        "All",
-        "Weapon",
-        "Armor",
-        "Powerups",
-        "Consumables"
-    };
-    public static final String[] CLASS_LIST = 
-    {
-        "bounty_hunter_1a",
-        "commando_1a",
-        "officer_1a",
-        "force_sensitive_1a",
-        "medic_1a",
-        "spy_1a",
-        "smuggler_1a",
-        "trader_1a",
-        "trader_1d",
-        "trader_1b",
-        "trader_1c"
-    };
-    public static final String[] BASIC_MOD_STRINGS = 
-    {
-        "precision_modified",
-        "strength_modified",
-        "agility_modified",
-        "stamina_modified",
-        "constitution_modified",
-        "luck_modified",
-        "camouflage",
-        "combat_block_value"
-    };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        if (!isGod(self) || getGodLevel(self) < 10) {
+        if (!isGod(self) || getGodLevel(self) < 10)
+        {
             detachScript(self, "test.qa_character");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         debugConsoleMsg(self, text);
@@ -94,10 +103,12 @@ public class qa_character extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void qaToolMainMenu(obj_id self) throws InterruptedException
     {
         qa.refreshMenu(self, QASETUP_PROMPT, QASETUP_TITLE, QASETUP_MAIN_MENU, "handleMainMenu", true, "qasetup.pid", "qasetup.qasetup");
     }
+
     public int handleMainMenu(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "qasetup.pid"))
@@ -105,12 +116,12 @@ public class qa_character extends script.base_script
             qa.checkParams(params, "qasetup");
             int idx = sui.getListboxSelectedRow(params);
             int btn = sui.getIntButtonPressed(params);
-            String previousMainMenuArray[] = utils.getStringArrayScriptVar(self, "qasetup.qasetup");
+            String[] previousMainMenuArray = utils.getStringArrayScriptVar(self, "qasetup.qasetup");
             if (btn == sui.BP_CANCEL)
             {
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 String previousSelection = previousMainMenuArray[idx];
                 if (previousSelection.equals("Quick Buff"))
@@ -135,6 +146,7 @@ public class qa_character extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void quickBuff(obj_id self) throws InterruptedException
     {
         String prof = getSkillTemplate(self);
@@ -155,6 +167,7 @@ public class qa_character extends script.base_script
         buff.applyBuff((recipientId), "drink_flameout", 3600);
         qaToolMainMenu(self);
     }
+
     public int handleSetProfession(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "profession.pid"))
@@ -162,12 +175,12 @@ public class qa_character extends script.base_script
             qa.checkParams(params, "profession");
             int idx = sui.getListboxSelectedRow(params);
             int btn = sui.getIntButtonPressed(params);
-            String previousMainMenuArray[] = utils.getStringArrayScriptVar(self, "qasetup.qasetup");
+            String[] previousMainMenuArray = utils.getStringArrayScriptVar(self, "qasetup.qasetup");
             if (btn == sui.BP_CANCEL)
             {
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 String previousSelection = previousMainMenuArray[idx];
                 String[] selectedTemplate = dataTableGetStringColumn(TEMPLATE_TABLE, previousSelection);
@@ -189,6 +202,7 @@ public class qa_character extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void handleProfessionLevelToNinety(obj_id player, String roadmap) throws InterruptedException
     {
         revokeAllSkills(player);
@@ -200,6 +214,7 @@ public class qa_character extends script.base_script
         utils.fullExpertiseReset(player, false);
         skill.setPlayerStatsForLevel(player, 90);
     }
+
     public void revokeAllSkills(obj_id player) throws InterruptedException
     {
         String[] skillList = getSkillListingForPlayer(player);
@@ -208,8 +223,10 @@ public class qa_character extends script.base_script
         {
             while (skillList.length > 0 && attempts > 0)
             {
-                for (String skillName : skillList) {
-                    if (!skillName.startsWith("species_") && !skillName.startsWith("social_language_") && !skillName.startsWith("utility_") && !skillName.startsWith("common_") && !skillName.startsWith("demo_") && !skillName.startsWith("force_title_") && !skillName.startsWith("force_sensitive_") && !skillName.startsWith("combat_melee_basic") && !skillName.startsWith("pilot_") && !skillName.startsWith("internal_expertise_") && !skillName.startsWith("combat_ranged_weapon_basic")) {
+                for (String skillName : skillList)
+                {
+                    if (!skillName.startsWith("species_") && !skillName.startsWith("social_language_") && !skillName.startsWith("utility_") && !skillName.startsWith("common_") && !skillName.startsWith("demo_") && !skillName.startsWith("force_title_") && !skillName.startsWith("force_sensitive_") && !skillName.startsWith("combat_melee_basic") && !skillName.startsWith("pilot_") && !skillName.startsWith("internal_expertise_") && !skillName.startsWith("combat_ranged_weapon_basic"))
+                    {
                         skill.revokeSkillSilent(player, skillName);
                     }
                 }
@@ -219,6 +236,7 @@ public class qa_character extends script.base_script
         }
         skill.recalcPlayerPools(player, true);
     }
+
     public void setTemplate(obj_id self, String[] skillList, String baseClass) throws InterruptedException
     {
         handleProfessionLevelToNinety(self, baseClass);
@@ -249,6 +267,7 @@ public class qa_character extends script.base_script
         }
         qaToolMainMenu(self);
     }
+
     public void writeTemplateFile() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -262,8 +281,10 @@ public class qa_character extends script.base_script
         {
             while (pSkill.length > 0 && attempts > 0)
             {
-                for (String skillName : pSkill) {
-                    if (skillName.startsWith("expertise_")) {
+                for (String skillName : pSkill)
+                {
+                    if (skillName.startsWith("expertise_"))
+                    {
                         temp = skillName;
                         broadcast(self, "Adding line: " + skillName);
                         template += "\n" + temp;
@@ -275,6 +296,7 @@ public class qa_character extends script.base_script
         saveTextOnClient(self, "qaSetup_" + getServerFrame() + ".tab", template);
         qaToolMainMenu(self);
     }
+
     public void startModSelection() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -298,6 +320,7 @@ public class qa_character extends script.base_script
         }
         utils.removeScriptVar(self, "modSelectionInProgress");
     }
+
     public boolean removeMods() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -318,6 +341,7 @@ public class qa_character extends script.base_script
         }
         return true;
     }
+
     public int handleMod(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "selectMod.pid"))
@@ -325,7 +349,7 @@ public class qa_character extends script.base_script
             qa.checkParams(params, "selectMod");
             int idx = sui.getListboxSelectedRow(params);
             int btn = sui.getIntButtonPressed(params);
-            String previousMainMenuArray[] = utils.getStringArrayScriptVar(self, "selectMod.qasetup");
+            String[] previousMainMenuArray = utils.getStringArrayScriptVar(self, "selectMod.qasetup");
             String modChoice = previousMainMenuArray[idx];
             int basicCounter = utils.getIntScriptVar(self, "modBasic");
             int exoticCounter = utils.getIntScriptVar(self, "modExotic");
@@ -344,6 +368,7 @@ public class qa_character extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public String[] getExoticMods() throws InterruptedException
     {
         String[] skillMods = dataTableGetStringColumn(EXOTIC_MOD_STRINGS, "name");

@@ -1,5 +1,11 @@
 package script.space.crafting;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -7,9 +13,6 @@ import java.util.Vector;
 
 public class customization_kit extends script.base_script
 {
-    public customization_kit()
-    {
-    }
     public static final string_id MNU_COLOR = new string_id("sui", "set_color");
     public static final string_id MNU_COLOR_ONE = new string_id("sui", "color_ship_one");
     public static final string_id MNU_COLOR_TWO = new string_id("sui", "color_ship_two");
@@ -19,12 +22,17 @@ public class customization_kit extends script.base_script
     public static final String BTN_COLOR = "@" + STF + ":btn_color";
     public static final String PICK_A_SHIP_TITLE = "@" + STF + ":pick_a_ship_title";
     public static final String PICK_A_SHIP = "@" + STF + ":pick_a_ship";
+    public customization_kit()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, "ship_customization.usedOne", 0);
         setObjVar(self, "ship_customization.usedTwo", 0);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -45,6 +53,7 @@ public class customization_kit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -72,19 +81,21 @@ public class customization_kit extends script.base_script
             }
             Vector validControlDevices = new Vector();
             validControlDevices.setSize(0);
-            for (obj_id shipControlDevice : shipControlDevices) {
+            for (obj_id shipControlDevice : shipControlDevices)
+            {
                 obj_id objShip = space_transition.getShipFromShipControlDevice(shipControlDevice);
-                if (space_utils.isShipPaintable(objShip)) {
+                if (space_utils.isShipPaintable(objShip))
+                {
                     validControlDevices = utils.addElement(validControlDevices, shipControlDevice);
                 }
             }
-            String entries[] = new String[validControlDevices.size()];
+            String[] entries = new String[validControlDevices.size()];
             for (int i = 0; i < validControlDevices.size(); i++)
             {
-                entries[i] = getAssignedName(((obj_id)validControlDevices.get(i)));
+                entries[i] = getAssignedName(((obj_id) validControlDevices.get(i)));
                 if (entries[i] == null || entries[i].equals(""))
                 {
-                    entries[i] = "@" + getName(((obj_id)validControlDevices.get(i)));
+                    entries[i] = "@" + getName(((obj_id) validControlDevices.get(i)));
                 }
             }
             if (validControlDevices.size() > 0)
@@ -96,13 +107,13 @@ public class customization_kit extends script.base_script
                     setSUIProperty(pid, sui.LISTBOX_BTN_OK, sui.PROP_TEXT, BTN_COLOR);
                     showSUIPage(pid);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(self, "paint_kit.inuse");
                     return SCRIPT_CONTINUE;
                 }
             }
-            else 
+            else
             {
                 string_id message = new string_id(STF, "ships_not_paintable");
                 sendSystemMessage(player, message);
@@ -129,19 +140,21 @@ public class customization_kit extends script.base_script
             }
             Vector validControlDevices = new Vector();
             validControlDevices.setSize(0);
-            for (obj_id shipControlDevice : shipControlDevices) {
+            for (obj_id shipControlDevice : shipControlDevices)
+            {
                 obj_id objShip = space_transition.getShipFromShipControlDevice(shipControlDevice);
-                if (space_utils.isShipPaintable(objShip)) {
+                if (space_utils.isShipPaintable(objShip))
+                {
                     validControlDevices = utils.addElement(validControlDevices, shipControlDevice);
                 }
             }
-            String entries[] = new String[validControlDevices.size()];
+            String[] entries = new String[validControlDevices.size()];
             for (int i = 0; i < validControlDevices.size(); i++)
             {
-                entries[i] = getAssignedName(((obj_id)validControlDevices.get(i)));
+                entries[i] = getAssignedName(((obj_id) validControlDevices.get(i)));
                 if (entries[i] == null || entries[i].equals(""))
                 {
-                    entries[i] = "@" + getName(((obj_id)validControlDevices.get(i)));
+                    entries[i] = "@" + getName(((obj_id) validControlDevices.get(i)));
                 }
             }
             if (validControlDevices.size() > 0)
@@ -153,13 +166,13 @@ public class customization_kit extends script.base_script
                     setSUIProperty(pid, sui.LISTBOX_BTN_OK, sui.PROP_TEXT, BTN_COLOR);
                     showSUIPage(pid);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(self, "paint_kit.inuse");
                     return SCRIPT_CONTINUE;
                 }
             }
-            else 
+            else
             {
                 string_id message = new string_id(STF, "ships_not_paintable");
                 sendSystemMessage(player, message);
@@ -168,6 +181,7 @@ public class customization_kit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleKitColorizeOne(obj_id self, dictionary params) throws InterruptedException
     {
         int bp = sui.getIntButtonPressed(params);
@@ -177,7 +191,7 @@ public class customization_kit extends script.base_script
             utils.removeScriptVar(self, "paint_kit.inuse");
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             obj_id player = sui.getPlayerId(params);
             if (idx == -1)
@@ -216,6 +230,7 @@ public class customization_kit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleKitColorizeTwo(obj_id self, dictionary params) throws InterruptedException
     {
         int bp = sui.getIntButtonPressed(params);
@@ -225,7 +240,7 @@ public class customization_kit extends script.base_script
             utils.removeScriptVar(self, "paint_kit.inuse");
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             obj_id player = sui.getPlayerId(params);
             if (idx == -1)
@@ -249,18 +264,18 @@ public class customization_kit extends script.base_script
                     String chassis = getShipChassisType(objShip);
                     if (
                             chassis.equals("player_basic_tiefighter") ||
-                            chassis.equals("player_decimator") ||
-                            chassis.equals("player_tieadvanced") ||
-                            chassis.equals("player_tieaggressor") ||
-                            chassis.equals("player_tiebomber") ||
-                            chassis.equals("player_tiefighter") ||
-                            chassis.equals("player_tie_in") ||
-                            chassis.equals("player_tieinterceptor") ||
-                            chassis.equals("player_tie_light_duty") ||
-                            chassis.equals("player_tieoppressor") ||
-                            chassis.equals("player_tiedefender") ||
-                            chassis.equals("player_tiedefender_imperial_guard")
-                        )
+                                    chassis.equals("player_decimator") ||
+                                    chassis.equals("player_tieadvanced") ||
+                                    chassis.equals("player_tieaggressor") ||
+                                    chassis.equals("player_tiebomber") ||
+                                    chassis.equals("player_tiefighter") ||
+                                    chassis.equals("player_tie_in") ||
+                                    chassis.equals("player_tieinterceptor") ||
+                                    chassis.equals("player_tie_light_duty") ||
+                                    chassis.equals("player_tieoppressor") ||
+                                    chassis.equals("player_tiedefender") ||
+                                    chassis.equals("player_tiedefender_imperial_guard")
+                    )
                     {
                         string_id message = new string_id(STF, "imperial");
                         sendSystemMessage(player, message);
@@ -277,6 +292,7 @@ public class customization_kit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleFirstColorize(obj_id self, dictionary params) throws InterruptedException
     {
         int idx = sui.getColorPickerIndex(params);
@@ -298,7 +314,7 @@ public class customization_kit extends script.base_script
                 setObjVar(self, "ship_customization.usedOne", 1);
             }
         }
-        else 
+        else
         {
             utils.removeScriptVar(self, "paint_kit.inuse");
         }
@@ -308,6 +324,7 @@ public class customization_kit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSecondColorize(obj_id self, dictionary params) throws InterruptedException
     {
         int idx = sui.getColorPickerIndex(params);
@@ -330,7 +347,7 @@ public class customization_kit extends script.base_script
                 setObjVar(self, "ship_customization.usedTwo", 1);
             }
         }
-        else 
+        else
         {
             utils.removeScriptVar(self, "paint_kit.inuse");
         }

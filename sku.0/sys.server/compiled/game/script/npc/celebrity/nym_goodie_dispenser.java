@@ -1,5 +1,11 @@
 package script.npc.celebrity;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.create;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class nym_goodie_dispenser extends script.base_script
     public nym_goodie_dispenser()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         String setting = getConfigSetting("EventTeam", "anniversary");
@@ -48,7 +55,7 @@ public class nym_goodie_dispenser extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             return SCRIPT_OVERRIDE;
         }

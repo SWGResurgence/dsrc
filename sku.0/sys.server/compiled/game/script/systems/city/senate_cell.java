@@ -1,5 +1,11 @@
 package script.systems.city;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.utils;
 import script.obj_id;
 
@@ -7,6 +13,7 @@ public class senate_cell extends script.base_script
 {
     public static final String JEDI_ROOM_PERMISSIONS_TABLE = "datatables/pvp/jedi_enclave_room_permissions.iff";
     public static final String DATA_COLUMN_COMMUNITY_CELLS = "_community_cells";
+
     public senate_cell()
     {
     }

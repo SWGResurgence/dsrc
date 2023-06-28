@@ -1,5 +1,11 @@
 package script.gm;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -10,11 +16,13 @@ public class handler extends script.base_script
     public handler()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         detachScript(self, gm.SCRIPT_HANDLER);
         return SCRIPT_CONTINUE;
     }
+
     public int confirmWipeItems(obj_id self, dictionary params) throws InterruptedException
     {
         gm.decrementMessageCount(self);
@@ -37,6 +45,7 @@ public class handler extends script.base_script
         pclib.destroyPlayerBank(target);
         return SCRIPT_CONTINUE;
     }
+
     public int handleHueVarUI(obj_id self, dictionary params) throws InterruptedException
     {
         gm.decrementMessageCount(self);
@@ -67,6 +76,7 @@ public class handler extends script.base_script
         queueCommand(self, (606342220), target, toPass, COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
+
     public int handleHueColorUI(obj_id self, dictionary params) throws InterruptedException
     {
         gm.decrementMessageCount(self);
@@ -85,18 +95,21 @@ public class handler extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cleanupShowFaction(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, gm.SCRIPTVAR_SHOWFACTION_PID);
         gm.decrementMessageCount(self);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanupMoneyStatus(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, gm.SCRIPTVAR_MONEY_PID);
         gm.decrementMessageCount(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleMoneyPass(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId(money.DICT_PLAYER_ID);
@@ -113,22 +126,23 @@ public class handler extends script.base_script
             gm.decrementMessageCount(self);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             params.remove("nextAction");
             int amt = params.getInt(money.DICT_AMOUNT);
             switch (nextAction)
             {
                 case gm.MA_WITHDRAW:
-                withdrawCashFromBank(player, amt, gm.HANDLER_MONEY_PASS, gm.HANDLER_MONEY_FAIL, params);
-                break;
+                    withdrawCashFromBank(player, amt, gm.HANDLER_MONEY_PASS, gm.HANDLER_MONEY_FAIL, params);
+                    break;
                 case gm.MA_TO_ACCT:
-                transferBankCreditsToNamedAccount(player, money.ACCT_CUSTOMER_SERVICE, amt, gm.HANDLER_MONEY_PASS, gm.HANDLER_MONEY_FAIL, params);
-                break;
+                    transferBankCreditsToNamedAccount(player, money.ACCT_CUSTOMER_SERVICE, amt, gm.HANDLER_MONEY_PASS, gm.HANDLER_MONEY_FAIL, params);
+                    break;
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleMoneyFail(obj_id self, dictionary params) throws InterruptedException
     {
         gm.decrementMessageCount(self);
@@ -140,6 +154,7 @@ public class handler extends script.base_script
         broadcast(self, "[CREDITS] Transaction request for (" + player + ") " + utils.getStringName(player) + " FAILED!");
         return SCRIPT_CONTINUE;
     }
+
     public int handleSearchCorpseSui(obj_id self, dictionary params) throws InterruptedException
     {
         gm.decrementMessageCount(self);
@@ -185,12 +200,13 @@ public class handler extends script.base_script
             broadcast(self, "/searchCorpse: a waypoint to the selected corpse is now in your datapad!");
             setName(wp, "searchCorpse=" + corpseId);
         }
-        else 
+        else
         {
             broadcast(self, "/searchCorpse: the system was unable to create a waypoint for you to the selected corpse!");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetPlayerStateUI(obj_id self, dictionary params) throws InterruptedException
     {
         int idx = sui.getListboxSelectedRow(params);
@@ -210,7 +226,7 @@ public class handler extends script.base_script
                         setState(player, idx, true);
                         newState = "*** ON ***";
                     }
-                    else 
+                    else
                     {
                         setState(player, idx, false);
                         newState = "*** OFF ***";
@@ -225,6 +241,7 @@ public class handler extends script.base_script
         gm.decrementMessageCount(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetRankSelection(obj_id self, dictionary params) throws InterruptedException
     {
         int idx = sui.getListboxSelectedRow(params);
@@ -238,6 +255,7 @@ public class handler extends script.base_script
         gm.decrementMessageCount(self);
         return SCRIPT_CONTINUE;
     }
+
     public int foundObject(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = params.getObjId("target");
@@ -257,7 +275,7 @@ public class handler extends script.base_script
         {
             text = text + getPlayerFullName(target);
         }
-        else 
+        else
         {
             text = text + sharedTemplateName;
         }
@@ -266,7 +284,7 @@ public class handler extends script.base_script
         {
             text = text + "<authoritative>";
         }
-        else 
+        else
         {
             text = text + "<proxy>";
         }
@@ -287,7 +305,8 @@ public class handler extends script.base_script
         if (containers != null && containers.length > 0)
         {
             text = text + " contained by:";
-            for (obj_id container : containers) {
+            for (obj_id container : containers)
+            {
                 text = text + " " + container;
             }
         }

@@ -1,5 +1,11 @@
 package script.event.housepackup;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -7,9 +13,6 @@ import java.util.HashSet;
 
 public class sarlacc_furniture_terminal extends script.base_script
 {
-    public sarlacc_furniture_terminal()
-    {
-    }
     public static final boolean LOGGING_ON = false;
     public static final String LOGGING_CATEGORY = "sarlacc";
     public static final string_id SID_MENU_FEED = new string_id("Feed Sarlacc");
@@ -45,6 +48,10 @@ public class sarlacc_furniture_terminal extends script.base_script
     public static final String SOUND_BREATHING = "sound/sarlacc_breathing.snd";
     public static final String ANIMATON_GROWL = "vocalize";
     public static final String ANIMATON_FEED = "eat";
+    public sarlacc_furniture_terminal()
+    {
+    }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if ((getTemplateName(self)).indexOf("mini_s01.iff") > 0)
@@ -55,6 +62,7 @@ public class sarlacc_furniture_terminal extends script.base_script
         house_pet.stopPlayingMusic(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if ((getTemplateName(self)).indexOf("mini_s01.iff") > 0)
@@ -65,6 +73,7 @@ public class sarlacc_furniture_terminal extends script.base_script
         messageTo(self, "checkTriggerVolume", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!isValidId(getOwner(self)) && utils.isNestedWithinAPlayer(self))
@@ -84,6 +93,7 @@ public class sarlacc_furniture_terminal extends script.base_script
         messageTo(self, "checkTriggerVolume", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTransferred(obj_id self, obj_id sourceContainer, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (!isValidId(getOwner(self)))
@@ -96,6 +106,7 @@ public class sarlacc_furniture_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if ((getTemplateName(self)).indexOf("mini_s01.iff") > 0)
@@ -123,7 +134,7 @@ public class sarlacc_furniture_terminal extends script.base_script
         {
             mi.addRootMenu(menu_info_types.SERVER_MENU4, SID_MENU_SOUND_ON);
         }
-        else 
+        else
         {
             mi.addRootMenu(menu_info_types.SERVER_MENU4, SID_MENU_SOUND_OFF);
         }
@@ -133,7 +144,7 @@ public class sarlacc_furniture_terminal extends script.base_script
             {
                 mi.addRootMenu(menu_info_types.SERVER_MENU3, SID_MENU_GOD_FEED);
             }
-            else 
+            else
             {
                 sendSystemMessage(player, SID_GOD_ALLOW_PLAYER_SIFT);
             }
@@ -151,6 +162,7 @@ public class sarlacc_furniture_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean setUpFirstTime(obj_id self) throws InterruptedException
     {
         if ((getTemplateName(self)).indexOf("mini_s01.iff") > 0)
@@ -172,6 +184,7 @@ public class sarlacc_furniture_terminal extends script.base_script
         customerSvcLogVerbose(self, "Sarlacc: " + self + " has been set up for the very first time.");
         return true;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if ((getTemplateName(self)).indexOf("mini_s01.iff") > 0)
@@ -246,7 +259,7 @@ public class sarlacc_furniture_terminal extends script.base_script
                 removeObjVar(self, house_pet.NO_SARLACC_SOUND);
                 sendSystemMessage(player, SID_SOUND_ON);
             }
-            else 
+            else
             {
                 setObjVar(self, house_pet.NO_SARLACC_SOUND, true);
                 sendSystemMessage(player, SID_SOUND_OFF);
@@ -255,6 +268,7 @@ public class sarlacc_furniture_terminal extends script.base_script
         sendDirtyObjectMenuNotification(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         if ((getTemplateName(self)).indexOf("mini_s01.iff") > 0)
@@ -295,7 +309,8 @@ public class sarlacc_furniture_terminal extends script.base_script
                     idx++;
                 }
                 names[idx] = "next_feed";
-                switch (currentStatus) {
+                switch (currentStatus)
+                {
                     case 0:
                         attribs[idx] = getCalendarTimeStringLocal(lastFed + house_pet.getUpdateWeekly(self));
                         break;
@@ -311,7 +326,7 @@ public class sarlacc_furniture_terminal extends script.base_script
                 attribs[idx] = getCalendarTimeStringLocal(getCalendarTime());
                 idx++;
             }
-            else 
+            else
             {
                 names[idx] = "last_fed";
                 attribs[idx] = "Never";
@@ -341,6 +356,7 @@ public class sarlacc_furniture_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if ((getTemplateName(self)).indexOf("mini_s01.iff") > 0)
@@ -374,6 +390,7 @@ public class sarlacc_furniture_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -387,6 +404,7 @@ public class sarlacc_furniture_terminal extends script.base_script
         stopClientEffectObjByLabel(breacher, self, house_pet.PET_SOUND_LABEL);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSarlaccEatSui(obj_id self, dictionary params) throws InterruptedException
     {
         if ((getTemplateName(self)).indexOf("mini_s01.iff") > 0)
@@ -422,7 +440,7 @@ public class sarlacc_furniture_terminal extends script.base_script
             cleanupSui(player);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             CustomerServiceLog("sarlacc_minigame: ", "Sarlacc: " + self + " is hungry and the owner: " + player + " selected a valid edible item.");
             obj_id[] junkFood = utils.getObjIdBatchScriptVar(player, house_pet.EDIBLES_IDS);
@@ -448,6 +466,7 @@ public class sarlacc_furniture_terminal extends script.base_script
         cleanupSui(player);
         return SCRIPT_CONTINUE;
     }
+
     public int verifySarlaccEatSui(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -494,6 +513,7 @@ public class sarlacc_furniture_terminal extends script.base_script
         cleanupSui(player);
         return SCRIPT_CONTINUE;
     }
+
     public int growlAnimation(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -516,6 +536,7 @@ public class sarlacc_furniture_terminal extends script.base_script
         doAnimationAction(self, ANIMATON_GROWL);
         return SCRIPT_CONTINUE;
     }
+
     public int playBurp(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -542,6 +563,7 @@ public class sarlacc_furniture_terminal extends script.base_script
         play2dNonLoopingSound(player, SOUND_BURP);
         return SCRIPT_CONTINUE;
     }
+
     public int playCute(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -568,6 +590,7 @@ public class sarlacc_furniture_terminal extends script.base_script
         play2dNonLoopingSound(player, SOUND_CUTE);
         return SCRIPT_CONTINUE;
     }
+
     public int checkTriggerVolume(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -586,12 +609,14 @@ public class sarlacc_furniture_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int removeRepeatAvoidanceScriptVar(obj_id self, dictionary params) throws InterruptedException
     {
         CustomerServiceLog("sarlacc_minigame: ", "Sarlacc - removeRepeatAvoidanceScriptVar removing lockout scriptvar");
         utils.removeScriptVar(self, house_pet.SARLACC_AVOID_REPEATED_UPDATES);
         return SCRIPT_CONTINUE;
     }
+
     public boolean updateSarlaccPet(obj_id sarlacc) throws InterruptedException
     {
         if (!isValidId(sarlacc) || !exists(sarlacc))
@@ -608,7 +633,7 @@ public class sarlacc_furniture_terminal extends script.base_script
             CustomerServiceLog("sarlacc_minigame: ", "updateSarlaccPet - Sarlacc: " + sarlacc + " avoiding repeated calls to this function. Bailing early.");
             return false;
         }
-        else 
+        else
         {
             utils.setScriptVar(sarlacc, house_pet.SARLACC_AVOID_REPEATED_UPDATES, true);
             messageTo(sarlacc, "removeRepeatAvoidanceScriptVar", null, 60, false);
@@ -620,7 +645,7 @@ public class sarlacc_furniture_terminal extends script.base_script
             blog("updateSarlaccPet - no last feed time");
             return false;
         }
-        else 
+        else
         {
             CustomerServiceLog("sarlacc_minigame: ", "updateSarlaccPet - Sarlacc: " + sarlacc + " has been either been fed previously or has a valid empty variable. Continuing debug procedures.");
         }
@@ -630,7 +655,7 @@ public class sarlacc_furniture_terminal extends script.base_script
             blog("updateSarlaccPet - no phase for sarlacc");
             return false;
         }
-        else 
+        else
         {
             CustomerServiceLog("sarlacc_minigame: ", "updateSarlaccPet - Sarlacc: " + sarlacc + " has a current phase, continuing debug procedures.");
         }
@@ -640,12 +665,13 @@ public class sarlacc_furniture_terminal extends script.base_script
             blog("updateSarlaccPet - no feeding iteration for sarlacc");
             return false;
         }
-        else 
+        else
         {
             CustomerServiceLog("sarlacc_minigame: ", "updateSarlaccPet - Sarlacc: " + sarlacc + " has a feeding iteration, continuing debug procedures.");
         }
         int currentPhase = getIntObjVar(sarlacc, house_pet.SARLACC_CURRENT_PHASE);
-        switch (currentPhase) {
+        switch (currentPhase)
+        {
             case house_pet.SARLACC_DEATH:
                 CustomerServiceLog("sarlacc_minigame: ", "updateSarlaccPet - Sarlacc: " + sarlacc + " we haven't even started updating yet and the Sarlacc is currently DEAD.");
                 break;
@@ -671,7 +697,7 @@ public class sarlacc_furniture_terminal extends script.base_script
                 blog("updateSarlaccPet - getSarlaccCollectionColumn FAILED!");
                 collectionCol = "generic_collectible";
             }
-            else 
+            else
             {
                 CustomerServiceLog("sarlacc_minigame: ", "updateSarlaccPet - Sarlacc: " + sarlacc + " reward is about to be issued. The random column returned was:" + collectionCol);
             }
@@ -712,7 +738,7 @@ public class sarlacc_furniture_terminal extends script.base_script
                 setObjVar(sarlacc, house_pet.SARLACC_FREE_CHANCE, false);
             }
         }
-        else 
+        else
         {
             CustomerServiceLog("sarlacc_minigame: ", "updateSarlaccPet - Sarlacc: " + sarlacc + " has no version number so the sarlacc is being stamped for the first time. ");
             setObjVar(sarlacc, house_pet.SARLACC_VERSION_VAR, house_pet.SARLACC_VERSION);
@@ -732,7 +758,7 @@ public class sarlacc_furniture_terminal extends script.base_script
                 CustomerServiceLog("sarlacc_minigame: ", "updateSarlaccPet - Sarlacc: " + sarlacc + " had a bugged current phase of: " + currentPhase + " so we will correct that now.");
                 setObjVar(sarlacc, house_pet.SARLACC_CURRENT_PHASE, house_pet.SARLACC_HUNGRY);
             }
-            else 
+            else
             {
                 CustomerServiceLog("sarlacc_minigame: ", "updateSarlaccPet - Sarlacc: " + sarlacc + " had a bugged current phase is Hungry which is correct.");
             }
@@ -780,6 +806,7 @@ public class sarlacc_furniture_terminal extends script.base_script
         }
         return true;
     }
+
     public boolean getEdibleContents(obj_id player, obj_id sarlacc) throws InterruptedException
     {
         blog("getEdibleContents - Init");
@@ -812,7 +839,7 @@ public class sarlacc_furniture_terminal extends script.base_script
                 return false;
             }
         }
-        else 
+        else
         {
             if (getIntObjVar(sarlacc, house_pet.SARLACC_CURRENT_PHASE) < house_pet.SARLACC_HUNGRY)
             {
@@ -862,6 +889,7 @@ public class sarlacc_furniture_terminal extends script.base_script
         }
         return true;
     }
+
     public boolean eatJunkItem(obj_id self, obj_id player, obj_id item) throws InterruptedException
     {
         blog("eatJunkItem - Init");
@@ -914,7 +942,7 @@ public class sarlacc_furniture_terminal extends script.base_script
             feedingList[0] = templateName;
             setObjVar(self, house_pet.SARLACC_FEED_ARRAY, feedingList);
         }
-        else 
+        else
         {
             CustomerServiceLog("sarlacc_minigame: ", "Sarlacc: " + self + " has A previous feeding list. Getting data.");
             String[] feedingList = getStringArrayObjVar(self, house_pet.SARLACC_FEED_ARRAY);
@@ -970,6 +998,7 @@ public class sarlacc_furniture_terminal extends script.base_script
         messageTo(self, "growlAnimation", params, 2, false);
         return true;
     }
+
     public boolean validateItemForSarlacc(obj_id player, obj_id item) throws InterruptedException
     {
         if (utils.getContainingPlayer(item) != (player))
@@ -998,6 +1027,7 @@ public class sarlacc_furniture_terminal extends script.base_script
         }
         return true;
     }
+
     public String getSarlaccCollectionColumn(obj_id self) throws InterruptedException
     {
         blog("getSarlaccCollectionColumn - Init");
@@ -1074,7 +1104,7 @@ public class sarlacc_furniture_terminal extends script.base_script
                 CustomerServiceLog("sarlacc_minigame: ", "getSarlaccCollectionColumn - Sarlacc: " + self + " could not find the collectible_cols row needed for the item fed and returned the default random column.");
                 return "generic_collectible";
             }
-            else 
+            else
             {
                 String[] possibleCols = split(lootColumn, ',');
                 if (possibleCols == null || possibleCols.length <= 0)
@@ -1087,7 +1117,7 @@ public class sarlacc_furniture_terminal extends script.base_script
                     CustomerServiceLog("sarlacc_minigame: ", "getSarlaccCollectionColumn - Sarlacc: " + self + " had length of 1 and is returning: " + possibleCols[0]);
                     return possibleCols[0];
                 }
-                else 
+                else
                 {
                     int randNum = rand(0, possibleCols.length - 1);
                     CustomerServiceLog("sarlacc_minigame: ", "getSarlaccCollectionColumn - Sarlacc: " + self + " had length of 1 and is returning a random item: " + possibleCols[randNum]);
@@ -1095,7 +1125,7 @@ public class sarlacc_furniture_terminal extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             String randTemplate = templateArray[rand(0, templateArray.length - 1)];
             int lootRow = dataTableSearchColumnForString(randTemplate, "item", house_pet.SARLACC_CTS_CRC_TABLE);
@@ -1105,7 +1135,7 @@ public class sarlacc_furniture_terminal extends script.base_script
             {
                 return "generic_collectible";
             }
-            else 
+            else
             {
                 String[] possibleCols = split(lootColumn, ',');
                 if (possibleCols == null || possibleCols.length <= 0)
@@ -1116,13 +1146,14 @@ public class sarlacc_furniture_terminal extends script.base_script
                 {
                     return possibleCols[0];
                 }
-                else 
+                else
                 {
                     return possibleCols[rand(0, possibleCols.length - 1)];
                 }
             }
         }
     }
+
     public boolean getPlayerReward(obj_id owner, obj_id self) throws InterruptedException
     {
         if (!isValidId(owner) || !exists(owner))
@@ -1171,6 +1202,7 @@ public class sarlacc_furniture_terminal extends script.base_script
         blog("rewardPlayer - REWARD GIVEN");
         return true;
     }
+
     public boolean checkPlayerInventoryForSarlaccFood(obj_id player) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -1183,30 +1215,37 @@ public class sarlacc_furniture_terminal extends script.base_script
             return false;
         }
         obj_id[] contents = utils.getContents(inventory, true);
-        if (contents == null || contents.length <= 0)
+        if (contents == null)
         {
             return false;
         }
-        for (obj_id content : contents) {
-            if (!validateItemForSarlacc(player, content)) {
+        for (obj_id content : contents)
+        {
+            if (!validateItemForSarlacc(player, content))
+            {
                 continue;
             }
-            if (hasObjVar(content, "noTrade") || utils.isEquipped(content)) {
+            if (hasObjVar(content, "noTrade") || utils.isEquipped(content))
+            {
                 continue;
             }
-            if (isCrafted(content)) {
+            if (isCrafted(content))
+            {
                 continue;
             }
-            if (static_item.getStaticObjectValue(getStaticItemName(content)) > 0) {
+            if (static_item.getStaticObjectValue(getStaticItemName(content)) > 0)
+            {
                 return true;
             }
             String itemTemplate = getTemplateName(content);
-            if (dataTableSearchColumnForString(itemTemplate, "items", smuggler.TBL) > -1) {
+            if (dataTableSearchColumnForString(itemTemplate, "items", smuggler.TBL) > -1)
+            {
                 return true;
             }
         }
         return false;
     }
+
     public boolean setSarlaccStarvingOrDead(obj_id sarlacc, int currentPhase) throws InterruptedException
     {
         if (!isValidId(sarlacc) || !exists(sarlacc))
@@ -1219,6 +1258,7 @@ public class sarlacc_furniture_terminal extends script.base_script
         setObjVar(sarlacc, house_pet.SARLACC_CURRENT_PHASE, currentPhase);
         return true;
     }
+
     public void cleanupSui(obj_id player) throws InterruptedException
     {
         blog("cleanupSui removing vars");
@@ -1226,6 +1266,7 @@ public class sarlacc_furniture_terminal extends script.base_script
         utils.removeBatchScriptVar(player, house_pet.EDIBLES_IDS);
         utils.removeScriptVar(player, "junkfood");
     }
+
     public boolean customerSvcLogVerbose(obj_id sarlacc, String msg) throws InterruptedException
     {
         if (!isValidId(sarlacc) || !exists(sarlacc))
@@ -1241,7 +1282,7 @@ public class sarlacc_furniture_terminal extends script.base_script
         {
             logData += " Owner: " + getOwner(sarlacc) + ".";
         }
-        else 
+        else
         {
             logData += " No valid sarlacc owner.";
         }
@@ -1251,7 +1292,7 @@ public class sarlacc_furniture_terminal extends script.base_script
             logData += " Cal Birth Date: " + getCalendarTimeStringLocal(birthDay) + ".";
             logData += " Cal Date Int: " + birthDay + ".";
         }
-        else 
+        else
         {
             logData += " No birth date for this sarlacc.";
         }
@@ -1260,7 +1301,7 @@ public class sarlacc_furniture_terminal extends script.base_script
             int phase = getIntObjVar(sarlacc, house_pet.SARLACC_CURRENT_PHASE);
             logData += " Phase: " + phase + ".";
         }
-        else 
+        else
         {
             logData += " No current phase for this sarlacc.";
         }
@@ -1270,7 +1311,7 @@ public class sarlacc_furniture_terminal extends script.base_script
             logData += " Cal Phase Start: " + getCalendarTimeStringLocal(phaseStart) + ".";
             logData += " Phase Start Int: " + phaseStart + ".";
         }
-        else 
+        else
         {
             logData += " No Feeding phase start for this sarlacc.";
         }
@@ -1280,7 +1321,7 @@ public class sarlacc_furniture_terminal extends script.base_script
             logData += " Cal Last Fed: " + getCalendarTimeStringLocal(lastFed) + ".";
             logData += " Last Fed Int: " + lastFed + ".";
         }
-        else 
+        else
         {
             logData += " Sarlacc has never been fed.";
         }
@@ -1289,7 +1330,7 @@ public class sarlacc_furniture_terminal extends script.base_script
             int currentIteration = getIntObjVar(sarlacc, house_pet.SARLACC_FEEDING_ITERATION);
             logData += " Feeding Iteration: " + currentIteration + ".";
         }
-        else 
+        else
         {
             logData += " No Feeding iteration for this sarlacc.";
         }
@@ -1298,7 +1339,7 @@ public class sarlacc_furniture_terminal extends script.base_script
         {
             logData += " " + listData + " ";
         }
-        else 
+        else
         {
             logData += " No Feeding list for this sarlacc.";
         }
@@ -1307,7 +1348,7 @@ public class sarlacc_furniture_terminal extends script.base_script
             int sarlaccVer = getIntObjVar(sarlacc, house_pet.SARLACC_VERSION_VAR);
             logData += " Sarlacc Version Number: " + sarlaccVer + ".";
         }
-        else 
+        else
         {
             logData += " No Sarlacc Version Number for this sarlacc.";
         }
@@ -1316,7 +1357,7 @@ public class sarlacc_furniture_terminal extends script.base_script
             boolean freeChanceUsed = getBooleanObjVar(sarlacc, house_pet.SARLACC_FREE_CHANCE);
             logData += " Has Used Free Chance (T/F): " + freeChanceUsed + ".";
         }
-        else 
+        else
         {
             logData += " No Sarlacc Free Chance Variable for this sarlacc.";
         }
@@ -1324,7 +1365,7 @@ public class sarlacc_furniture_terminal extends script.base_script
         {
             logData += " Sarlacc has PENALTY VARIABLE.";
         }
-        else 
+        else
         {
             logData += " No Sarlacc Penalty Variable.";
         }
@@ -1335,6 +1376,7 @@ public class sarlacc_furniture_terminal extends script.base_script
         CustomerServiceLog("sarlacc_minigame: ", logData);
         return true;
     }
+
     public String getListOfFoodItems(obj_id sarlacc) throws InterruptedException
     {
         if (!isValidId(sarlacc))
@@ -1356,6 +1398,7 @@ public class sarlacc_furniture_terminal extends script.base_script
         }
         return logData;
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON && msg != null && !msg.equals(""))

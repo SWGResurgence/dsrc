@@ -1,5 +1,11 @@
 package script.theme_park.recruitment;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.factions;
@@ -11,6 +17,7 @@ public class hutt_recruit extends script.base_script
     public hutt_recruit()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         persistObject(self);
@@ -18,6 +25,7 @@ public class hutt_recruit extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         stop(self);
@@ -25,6 +33,7 @@ public class hutt_recruit extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         float huttness = getFloatObjVar(speaker, "faction.Hutt");
@@ -47,7 +56,7 @@ public class hutt_recruit extends script.base_script
             detachScript(speaker, "theme_park.recruitment.hutt_quest2");
             removeObjVar(speaker, "hutt.thisGuy");
             string_id greeting = new string_id("recruiting/hutt_recruit", "hr_25");
-            string_id response[] = new string_id[1];
+            string_id[] response = new string_id[1];
             response[0] = new string_id("recruiting/hutt_recruit", "hr_26");
             factions.addFactionStanding(speaker, "Hutt", 501.0f);
             npcStartConversation(speaker, self, "recruiting/hutt_recruit", greeting, response);
@@ -57,7 +66,7 @@ public class hutt_recruit extends script.base_script
             detachScript(speaker, "theme_park.recruitment.hutt_quest1");
             removeObjVar(speaker, "hutt.thisGuy");
             string_id greeting = new string_id("recruiting/hutt_recruit", "hr_13");
-            string_id response[] = new string_id[2];
+            string_id[] response = new string_id[2];
             response[0] = new string_id("recruiting/hutt_recruit", "hr_14");
             response[1] = new string_id("recruiting/hutt_recruit", "hr_15");
             removeObjVar(speaker, "hutt.beenToHuttRecruiter");
@@ -66,21 +75,22 @@ public class hutt_recruit extends script.base_script
         else if (hasObjVar(speaker, "hutt.beenToHuttRecruiter"))
         {
             string_id greeting = new string_id("recruiting/hutt_recruit", "hr_29");
-            string_id response[] = new string_id[2];
+            string_id[] response = new string_id[2];
             response[0] = new string_id("recruiting/hutt_recruit", "hr_2");
             response[1] = new string_id("recruiting/hutt_recruit", "hr_3");
             npcStartConversation(speaker, self, "recruiting/hutt_recruit", greeting, response);
         }
-        else 
+        else
         {
             string_id greeting = new string_id("recruiting/hutt_recruit", "hr_1");
-            string_id response[] = new string_id[2];
+            string_id[] response = new string_id[2];
             response[0] = new string_id("recruiting/hutt_recruit", "hr_2");
             response[1] = new string_id("recruiting/hutt_recruit", "hr_3");
             npcStartConversation(speaker, self, "recruiting/hutt_recruit", greeting, response);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convo, obj_id player, string_id response) throws InterruptedException
     {
         if ((response.getAsciiId()).equals("hr_2"))
@@ -201,6 +211,7 @@ public class hutt_recruit extends script.base_script
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id palace = getObjIdObjVar(self, "palace");

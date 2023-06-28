@@ -6,6 +6,12 @@
  */
 package script.event;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.anims;
 import script.library.static_item;
 import script.library.utils;

@@ -1,5 +1,11 @@
 package script.quest.task.ground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.groundquests;
 import script.library.prose;
@@ -7,9 +13,6 @@ import script.library.utils;
 
 public class static_escort extends script.quest.task.ground.base_task
 {
-    public static_escort()
-    {
-    }
     public static final String dataTableColumnServerTemplate = "SERVER_TEMPLATE";
     public static final String dataTableColumnMovementType = "MOVEMENT_TYPE";
     public static final String dataTableColumnMaxAllowedDistance = "MAX_ALLOWED_ESCORT_DISTANCE";
@@ -27,6 +30,10 @@ public class static_escort extends script.quest.task.ground.base_task
     public static final String taskType = "static_escort";
     public static final String dot = ".";
     public static final float escortDistanceTimeCheck = 10;
+    public static_escort()
+    {
+    }
+
     public int OnTaskActivated(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskActivated", taskType + " task activated.");
@@ -56,7 +63,7 @@ public class static_escort extends script.quest.task.ground.base_task
             groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskActivated", "The first escort point is flagged as unused, so autocomplete the task");
             questCompleteTask(questCrc, taskId, self);
         }
-        else 
+        else
         {
             String xLoc = groundquests.getTaskStringDataEntry(questCrc, taskId, dataTableColumnLocationXPre + pointIndex);
             String yLoc = groundquests.getTaskStringDataEntry(questCrc, taskId, dataTableColumnLocationYPre + pointIndex);
@@ -73,6 +80,7 @@ public class static_escort extends script.quest.task.ground.base_task
         messageTo(self, "messageStaticEscortCheckDistance", distanceCheckParams, escortDistanceTimeCheck, false);
         return super.OnTaskActivated(self, questCrc, taskId);
     }
+
     public int messageStaticEscortCheckDistance(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -87,13 +95,14 @@ public class static_escort extends script.quest.task.ground.base_task
                 removeObjVar(player, baseObjVar + objvarBeenWarnedDistance);
             }
         }
-        else 
+        else
         {
             failEscortDistanceCheck(player, questCrc, taskId, escortTarget);
         }
         messageTo(self, "messageStaticEscortCheckDistance", params, escortDistanceTimeCheck, false);
         return SCRIPT_CONTINUE;
     }
+
     public int messageEscortTaskCreatureDied(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id deadCreature = params.getObjId("source");
@@ -108,6 +117,7 @@ public class static_escort extends script.quest.task.ground.base_task
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean isEscortNearby(int questCrc, int taskId, obj_id player, obj_id escortTarget) throws InterruptedException
     {
         boolean result = false;
@@ -118,6 +128,7 @@ public class static_escort extends script.quest.task.ground.base_task
         }
         return result;
     }
+
     public void failEscortDistanceCheck(obj_id player, int questCrc, int taskId, obj_id escortTarget) throws InterruptedException
     {
         String baseObjVar = groundquests.getBaseObjVar(player, taskType, questGetQuestName(questCrc), taskId);
@@ -129,7 +140,7 @@ public class static_escort extends script.quest.task.ground.base_task
             prose.setDF(pp, escortDistanceTimeCheck);
             sendSystemMessageProse(player, pp);
         }
-        else 
+        else
         {
             string_id message = new string_id("quest/groundquests", "static_escort_failed_due_to_distance");
             prose_package pp = prose.getPackage(message, player, player, 0);
@@ -137,24 +148,28 @@ public class static_escort extends script.quest.task.ground.base_task
             questFailTask(questCrc, taskId, player);
         }
     }
+
     public int OnTaskCompleted(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskCompleted", taskType + " task completed.");
         cleanup(self, questCrc, taskId);
         return super.OnTaskCompleted(self, questCrc, taskId);
     }
+
     public int OnTaskFailed(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskFailed", taskType + " task failed.");
         cleanup(self, questCrc, taskId);
         return super.OnTaskFailed(self, questCrc, taskId);
     }
+
     public int OnTaskCleared(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskCleared", taskType + " task cleared.");
         cleanup(self, questCrc, taskId);
         return super.OnTaskCleared(self, questCrc, taskId);
     }
+
     public void cleanup(obj_id player, int questCrc, int taskId) throws InterruptedException
     {
         String baseObjVar = groundquests.getBaseObjVar(player, taskType, questGetQuestName(questCrc), taskId);
@@ -167,16 +182,19 @@ public class static_escort extends script.quest.task.ground.base_task
         }
         groundquests.clearBaseObjVar(player, taskType, questGetQuestName(questCrc), taskId);
     }
+
     public int OnLogout(obj_id self) throws InterruptedException
     {
         groundquests.failAllActiveTasksOfType(self, taskType);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         groundquests.failAllActiveTasksOfType(self, taskType);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         removeObjVar(self, groundquests.getTaskTypeObjVar(self, taskType));

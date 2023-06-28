@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.utils;
@@ -7,18 +13,22 @@ import script.*;
 
 public class tour_aryon extends script.base_script
 {
+    public static String c_stringFile = "conversation/tour_aryon";
+
     public tour_aryon()
     {
     }
-    public static String c_stringFile = "conversation/tour_aryon";
+
     public boolean tour_aryon_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean tour_aryon_condition_electionEnded(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasObjVar(npc, "bestine.electionEnded");
     }
+
     public boolean tour_aryon_condition_alreadyVoted(obj_id player, obj_id npc) throws InterruptedException
     {
         boolean tour_aryon_condition_alreadyVoted = false;
@@ -41,6 +51,7 @@ public class tour_aryon extends script.base_script
         }
         return tour_aryon_condition_alreadyVoted;
     }
+
     public boolean tour_aryon_condition_canVoteForVictor(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "bestine.camp"))
@@ -57,14 +68,12 @@ public class tour_aryon extends script.base_script
                 {
                     return true;
                 }
-                if (utils.playerHasItemByTemplate(player, "object/tangible/loot/quest/victor_questp_receipt.iff"))
-                {
-                    return true;
-                }
+                return utils.playerHasItemByTemplate(player, "object/tangible/loot/quest/victor_questp_receipt.iff");
             }
         }
         return false;
     }
+
     public boolean tour_aryon_condition_canVoteForSean(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "bestine.campaign"))
@@ -81,57 +90,51 @@ public class tour_aryon extends script.base_script
                 {
                     return true;
                 }
-                if (utils.playerHasItemByTemplate(player, "object/tangible/loot/quest/sean_questp_htestimony.iff"))
-                {
-                    return true;
-                }
+                return utils.playerHasItemByTemplate(player, "object/tangible/loot/quest/sean_questp_htestimony.iff");
             }
         }
         return false;
     }
+
     public boolean tour_aryon_condition_canVote(obj_id player, obj_id npc) throws InterruptedException
     {
         return ((!tour_aryon_condition_alreadyVoted(player, npc)) && ((tour_aryon_condition_canVoteForVictor(player, npc)) || (tour_aryon_condition_canVoteForSean(player, npc))));
     }
+
     public boolean tour_aryon_condition_electionStarted(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasObjVar(npc, "bestine.electionStarted");
     }
+
     public boolean tour_aryon_condition_seanWon(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.electionWinner"))
         {
             String winner = getStringObjVar(npc, "bestine.electionWinner");
-            if (winner.equals("sean") || winner.equals("Sean"))
-            {
-                return true;
-            }
+            return winner.equals("sean") || winner.equals("Sean");
         }
         return false;
     }
+
     public boolean tour_aryon_condition_victorWon(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.electionWinner"))
         {
             String winner = getStringObjVar(npc, "bestine.electionWinner");
-            if (winner.equals("victor") || winner.equals("Victor"))
-            {
-                return true;
-            }
+            return winner.equals("victor") || winner.equals("Victor");
         }
         return false;
     }
+
     public boolean tour_aryon_condition_allowTimeLeftRequest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.electionEnded"))
         {
-            if (hasObjVar(npc, "bestine.timeNextElectionStarts"))
-            {
-                return true;
-            }
+            return hasObjVar(npc, "bestine.timeNextElectionStarts");
         }
         return false;
     }
+
     public boolean tour_aryon_condition_moreThanAWeek(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.electionEnded"))
@@ -141,14 +144,12 @@ public class tour_aryon extends script.base_script
                 int timeNextElectionStarts = getIntObjVar(npc, "bestine.timeNextElectionStarts");
                 int currentTime = getGameTime();
                 int timeUntilElection = timeNextElectionStarts - currentTime;
-                if (timeUntilElection >= 604800 && timeUntilElection < 1209600)
-                {
-                    return true;
-                }
+                return timeUntilElection >= 604800 && timeUntilElection < 1209600;
             }
         }
         return false;
     }
+
     public boolean tour_aryon_condition_lessThanAWeek(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.electionEnded"))
@@ -158,14 +159,12 @@ public class tour_aryon extends script.base_script
                 int timeNextElectionStarts = getIntObjVar(npc, "bestine.timeNextElectionStarts");
                 int currentTime = getGameTime();
                 int timeUntilElection = timeNextElectionStarts - currentTime;
-                if (timeUntilElection >= 345600 && timeUntilElection < 604800)
-                {
-                    return true;
-                }
+                return timeUntilElection >= 345600 && timeUntilElection < 604800;
             }
         }
         return false;
     }
+
     public boolean tour_aryon_condition_justAFewDays(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.electionEnded"))
@@ -175,14 +174,12 @@ public class tour_aryon extends script.base_script
                 int timeNextElectionStarts = getIntObjVar(npc, "bestine.timeNextElectionStarts");
                 int currentTime = getGameTime();
                 int timeUntilElection = timeNextElectionStarts - currentTime;
-                if (timeUntilElection >= 172800 && timeUntilElection < 345600)
-                {
-                    return true;
-                }
+                return timeUntilElection >= 172800 && timeUntilElection < 345600;
             }
         }
         return false;
     }
+
     public boolean tour_aryon_condition_lessThanADay(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.electionEnded"))
@@ -192,14 +189,12 @@ public class tour_aryon extends script.base_script
                 int timeNextElectionStarts = getIntObjVar(npc, "bestine.timeNextElectionStarts");
                 int currentTime = getGameTime();
                 int timeUntilElection = timeNextElectionStarts - currentTime;
-                if (timeUntilElection >= 14400 && timeUntilElection < 86400)
-                {
-                    return true;
-                }
+                return timeUntilElection >= 14400 && timeUntilElection < 86400;
             }
         }
         return false;
     }
+
     public boolean tour_aryon_condition_moreThan2Weeks(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.electionEnded"))
@@ -209,14 +204,12 @@ public class tour_aryon extends script.base_script
                 int timeNextElectionStarts = getIntObjVar(npc, "bestine.timeNextElectionStarts");
                 int currentTime = getGameTime();
                 int timeUntilElection = timeNextElectionStarts - currentTime;
-                if (timeUntilElection >= 1209600)
-                {
-                    return true;
-                }
+                return timeUntilElection >= 1209600;
             }
         }
         return false;
     }
+
     public boolean tour_aryon_condition_justAFewHours(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.electionEnded"))
@@ -226,14 +219,12 @@ public class tour_aryon extends script.base_script
                 int timeNextElectionStarts = getIntObjVar(npc, "bestine.timeNextElectionStarts");
                 int currentTime = getGameTime();
                 int timeUntilElection = timeNextElectionStarts - currentTime;
-                if (timeUntilElection >= 3600 && timeUntilElection < 14400)
-                {
-                    return true;
-                }
+                return timeUntilElection >= 3600 && timeUntilElection < 14400;
             }
         }
         return false;
     }
+
     public boolean tour_aryon_condition_withinTheHour(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.electionEnded"))
@@ -243,14 +234,12 @@ public class tour_aryon extends script.base_script
                 int timeNextElectionStarts = getIntObjVar(npc, "bestine.timeNextElectionStarts");
                 int currentTime = getGameTime();
                 int timeUntilElection = timeNextElectionStarts - currentTime;
-                if (timeUntilElection < 3600)
-                {
-                    return true;
-                }
+                return timeUntilElection < 3600;
             }
         }
         return false;
     }
+
     public boolean tour_aryon_condition_moreThanADay(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.electionEnded"))
@@ -260,14 +249,12 @@ public class tour_aryon extends script.base_script
                 int timeNextElectionStarts = getIntObjVar(npc, "bestine.timeNextElectionStarts");
                 int currentTime = getGameTime();
                 int timeUntilElection = timeNextElectionStarts - currentTime;
-                if (timeUntilElection >= 86400 && timeUntilElection < 172800)
-                {
-                    return true;
-                }
+                return timeUntilElection >= 86400 && timeUntilElection < 172800;
             }
         }
         return false;
     }
+
     public void tour_aryon_action_removeSeanEvidence(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id evidenceItem01 = utils.getItemPlayerHasByTemplate(player, "object/tangible/loot/quest/sean_questp_ctestimony.iff");
@@ -285,8 +272,8 @@ public class tour_aryon extends script.base_script
         {
             destroyObject(evidenceItem03);
         }
-        return;
     }
+
     public void tour_aryon_action_votedSean(obj_id player, obj_id npc) throws InterruptedException
     {
         int electionNum = getIntObjVar(npc, "bestine.electionStarted");
@@ -302,11 +289,12 @@ public class tour_aryon extends script.base_script
             int votesForSean = (getIntObjVar(npc, "bestine.votesForSean")) + 1;
             setObjVar(npc, "bestine.votesForSean", votesForSean);
         }
-        else 
+        else
         {
             setObjVar(npc, "bestine.votesForSean", 1);
         }
     }
+
     public void tour_aryon_action_votedVictor(obj_id player, obj_id npc) throws InterruptedException
     {
         int electionNum = getIntObjVar(npc, "bestine.electionStarted");
@@ -322,11 +310,12 @@ public class tour_aryon extends script.base_script
             int votesForVictor = (getIntObjVar(npc, "bestine.votesForVictor")) + 1;
             setObjVar(npc, "bestine.votesForVictor", votesForVictor);
         }
-        else 
+        else
         {
             setObjVar(npc, "bestine.votesForVictor", 1);
         }
     }
+
     public void tour_aryon_action_removeVictorEvidence(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id evidenceItem01 = utils.getItemPlayerHasByTemplate(player, "object/tangible/loot/quest/victor_questp_testimony.iff");
@@ -344,8 +333,8 @@ public class tour_aryon extends script.base_script
         {
             destroyObject(evidenceItem03);
         }
-        return;
     }
+
     public void tour_aryon_action_removeElectionObjVars(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "bestine.campaign"))
@@ -413,6 +402,7 @@ public class tour_aryon extends script.base_script
             removeObjVar(player, "bestine.victor_noroom");
         }
     }
+
     public int tour_aryon_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_5d2e1112"))
@@ -500,6 +490,7 @@ public class tour_aryon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tour_aryon_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_fad1aba"))
@@ -526,7 +517,7 @@ public class tour_aryon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1a74caee");
@@ -539,7 +530,7 @@ public class tour_aryon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tour_aryon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -585,7 +576,7 @@ public class tour_aryon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_bb225c00");
@@ -602,7 +593,7 @@ public class tour_aryon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tour_aryon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -622,6 +613,7 @@ public class tour_aryon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tour_aryon_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1a74caee"))
@@ -648,7 +640,7 @@ public class tour_aryon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b51737ff");
@@ -661,7 +653,7 @@ public class tour_aryon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tour_aryon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -690,7 +682,7 @@ public class tour_aryon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_42");
@@ -703,7 +695,7 @@ public class tour_aryon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tour_aryon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -730,6 +722,7 @@ public class tour_aryon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tour_aryon_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_bb225c00"))
@@ -749,7 +742,7 @@ public class tour_aryon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_540ac7e9");
@@ -758,7 +751,7 @@ public class tour_aryon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tour_aryon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -797,7 +790,7 @@ public class tour_aryon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_74");
@@ -814,7 +807,7 @@ public class tour_aryon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tour_aryon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -834,6 +827,7 @@ public class tour_aryon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tour_aryon_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_540ac7e9"))
@@ -853,7 +847,7 @@ public class tour_aryon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e547fd1e");
@@ -862,7 +856,7 @@ public class tour_aryon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tour_aryon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -872,6 +866,7 @@ public class tour_aryon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tour_aryon_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_e547fd1e"))
@@ -898,7 +893,7 @@ public class tour_aryon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47117f94");
@@ -911,7 +906,7 @@ public class tour_aryon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tour_aryon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -921,6 +916,7 @@ public class tour_aryon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tour_aryon_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_47117f94"))
@@ -954,7 +950,7 @@ public class tour_aryon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_34");
@@ -971,7 +967,7 @@ public class tour_aryon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tour_aryon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -991,6 +987,7 @@ public class tour_aryon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tour_aryon_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_34"))
@@ -1017,7 +1014,7 @@ public class tour_aryon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b51737ff");
@@ -1030,7 +1027,7 @@ public class tour_aryon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tour_aryon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1059,7 +1056,7 @@ public class tour_aryon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_42");
@@ -1072,7 +1069,7 @@ public class tour_aryon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tour_aryon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1104,7 +1101,7 @@ public class tour_aryon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_53");
@@ -1113,7 +1110,7 @@ public class tour_aryon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tour_aryon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1145,7 +1142,7 @@ public class tour_aryon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_90ec63e0");
@@ -1158,7 +1155,7 @@ public class tour_aryon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tour_aryon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1168,6 +1165,7 @@ public class tour_aryon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tour_aryon_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b51737ff"))
@@ -1193,6 +1191,7 @@ public class tour_aryon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tour_aryon_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_42"))
@@ -1218,6 +1217,7 @@ public class tour_aryon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tour_aryon_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_53"))
@@ -1237,7 +1237,7 @@ public class tour_aryon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_56");
@@ -1246,7 +1246,7 @@ public class tour_aryon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tour_aryon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1256,6 +1256,7 @@ public class tour_aryon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tour_aryon_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_56"))
@@ -1275,7 +1276,7 @@ public class tour_aryon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_eea34749");
@@ -1284,7 +1285,7 @@ public class tour_aryon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tour_aryon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1294,6 +1295,7 @@ public class tour_aryon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tour_aryon_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_eea34749"))
@@ -1308,6 +1310,7 @@ public class tour_aryon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tour_aryon_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_90ec63e0"))
@@ -1327,7 +1330,7 @@ public class tour_aryon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_65");
@@ -1336,7 +1339,7 @@ public class tour_aryon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tour_aryon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1356,6 +1359,7 @@ public class tour_aryon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tour_aryon_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_65"))
@@ -1382,7 +1386,7 @@ public class tour_aryon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b51737ff");
@@ -1395,7 +1399,7 @@ public class tour_aryon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tour_aryon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1424,7 +1428,7 @@ public class tour_aryon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_42");
@@ -1437,7 +1441,7 @@ public class tour_aryon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tour_aryon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1454,6 +1458,7 @@ public class tour_aryon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tour_aryon_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_74"))
@@ -1473,7 +1478,7 @@ public class tour_aryon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_78");
@@ -1482,7 +1487,7 @@ public class tour_aryon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tour_aryon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1514,7 +1519,7 @@ public class tour_aryon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_94");
@@ -1527,7 +1532,7 @@ public class tour_aryon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tour_aryon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1559,7 +1564,7 @@ public class tour_aryon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b51737ff");
@@ -1572,7 +1577,7 @@ public class tour_aryon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tour_aryon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1601,7 +1606,7 @@ public class tour_aryon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_42");
@@ -1614,7 +1619,7 @@ public class tour_aryon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tour_aryon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1631,6 +1636,7 @@ public class tour_aryon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tour_aryon_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_78"))
@@ -1650,7 +1656,7 @@ public class tour_aryon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82");
@@ -1659,7 +1665,7 @@ public class tour_aryon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tour_aryon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1669,6 +1675,7 @@ public class tour_aryon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tour_aryon_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_82"))
@@ -1688,7 +1695,7 @@ public class tour_aryon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_86");
@@ -1697,7 +1704,7 @@ public class tour_aryon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tour_aryon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1707,6 +1714,7 @@ public class tour_aryon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tour_aryon_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_86"))
@@ -1721,6 +1729,7 @@ public class tour_aryon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tour_aryon_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_94"))
@@ -1740,7 +1749,7 @@ public class tour_aryon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_98");
@@ -1749,7 +1758,7 @@ public class tour_aryon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tour_aryon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1769,6 +1778,7 @@ public class tour_aryon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tour_aryon_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_98"))
@@ -1795,7 +1805,7 @@ public class tour_aryon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b51737ff");
@@ -1808,7 +1818,7 @@ public class tour_aryon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tour_aryon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1837,7 +1847,7 @@ public class tour_aryon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_42");
@@ -1850,7 +1860,7 @@ public class tour_aryon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tour_aryon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1867,6 +1877,7 @@ public class tour_aryon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -1876,11 +1887,13 @@ public class tour_aryon extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -1889,18 +1902,21 @@ public class tour_aryon extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.tour_aryon");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1930,7 +1946,7 @@ public class tour_aryon extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_5d2e1112");
@@ -1942,7 +1958,7 @@ public class tour_aryon extends script.base_script
                 utils.setScriptVar(player, "conversation.tour_aryon.branchId", 1);
                 npcStartConversation(player, npc, "tour_aryon", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1977,7 +1993,7 @@ public class tour_aryon extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_fad1aba");
@@ -1993,7 +2009,7 @@ public class tour_aryon extends script.base_script
                 utils.setScriptVar(player, "conversation.tour_aryon.branchId", 13);
                 npcStartConversation(player, npc, "tour_aryon", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2008,6 +2024,7 @@ public class tour_aryon extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("tour_aryon"))

@@ -1,5 +1,11 @@
 package script.npe;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.chat;
 import script.library.utils;
@@ -9,6 +15,7 @@ public class npe_npc_blurts extends script.base_script
     public npe_npc_blurts()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -17,6 +24,7 @@ public class npe_npc_blurts extends script.base_script
         messageTo(self, "npeSetName", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -25,6 +33,7 @@ public class npe_npc_blurts extends script.base_script
         messageTo(self, "npeSetName", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -36,6 +45,7 @@ public class npe_npc_blurts extends script.base_script
         blurtChosenStatement(self, player, room, name);
         return SCRIPT_CONTINUE;
     }
+
     public int npeSetName(obj_id self, dictionary params) throws InterruptedException
     {
         String myName = utils.getStringObjVar(self, "npe.blurt.name");
@@ -67,12 +77,14 @@ public class npe_npc_blurts extends script.base_script
         setName(self, stfName);
         return SCRIPT_CONTINUE;
     }
+
     public string_id blurtChosenStatement(obj_id npc, obj_id player, String roomName, String npcName) throws InterruptedException
     {
         string_id message = randomizeChat(roomName, npcName);
         chat.chat(npc, player, message, chat.ChatFlag_targetOnly);
         return message;
     }
+
     public string_id randomizeChat(String roomName, String npcName) throws InterruptedException
     {
         String[] myArray = new String[3];

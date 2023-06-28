@@ -1,15 +1,22 @@
 package script.corpse;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class ai_corpse extends script.base_script
 {
+    public static final string_id SID_NO_ITEMS = new string_id("loot_n", "no_items");
+    public static final string_id SID_NOT_IN_COMBAT = new string_id("loot_n", "not_in_combat");
     public ai_corpse()
     {
     }
-    public static final string_id SID_NO_ITEMS = new string_id("loot_n", "no_items");
-    public static final string_id SID_NOT_IN_COMBAT = new string_id("loot_n", "not_in_combat");
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCreatureStatic(self, true);
@@ -26,9 +33,11 @@ public class ai_corpse extends script.base_script
         messageTo(self, corpse.HANDLER_CORPSE_EXPIRE, null, corpse.AI_CORPSE_EXPIRATION_TIME, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
-        if(!isIdValid(self) || !exists(self)){
+        if (!isIdValid(self) || !exists(self))
+        {
             debugServerConsoleMsg(self, "Exception: Unable to get the objid for the corpse! (ai_corpse)");
             return SCRIPT_CONTINUE;
         }
@@ -43,7 +52,7 @@ public class ai_corpse extends script.base_script
         {
             mnu = mi.addRootMenu(menu_info_types.LOOT, new string_id("", ""));
         }
-        else 
+        else
         {
             mid.setServerNotify(true);
             mnu = mid.getId();
@@ -90,6 +99,7 @@ public class ai_corpse extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (getState(player, STATE_COMBAT) == 1)
@@ -176,7 +186,7 @@ public class ai_corpse extends script.base_script
                                 {
                                     queueCommand(player, (1880585606), inv, "", COMMAND_PRIORITY_DEFAULT);
                                 }
-                                else 
+                                else
                                 {
                                     sendSystemMessage(player, SID_NO_ITEMS);
                                     if (!canHarvest(self, player) && !utils.hasScriptVar(self, "quickDestroy"))
@@ -197,7 +207,7 @@ public class ai_corpse extends script.base_script
                     {
                         queueCommand(player, (1880585606), inv, "", COMMAND_PRIORITY_DEFAULT);
                     }
-                    else 
+                    else
                     {
                         sendSystemMessage(player, SID_NO_ITEMS);
                         if (!canHarvest(self, player) && !utils.hasScriptVar(self, "quickDestroy"))
@@ -210,7 +220,7 @@ public class ai_corpse extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             if (canOpen)
             {
@@ -242,6 +252,7 @@ public class ai_corpse extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int harvestCorpse(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -257,31 +268,36 @@ public class ai_corpse extends script.base_script
         corpse.harvestCreatureCorpse(player, self, args);
         return SCRIPT_CONTINUE;
     }
+
     public int handleLootAddPass(obj_id self, dictionary params) throws InterruptedException
     {
         int bankBalance = getBankBalance(self);
         withdrawCashFromBank(self, bankBalance, money.HANDLER_LOOT_WITHDRAW_PASS, money.HANDLER_LOOT_WITHDRAW_FAIL, params);
         return SCRIPT_CONTINUE;
     }
+
     public int handleLootAddFail(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int handleLootWithdrawPass(obj_id self, dictionary params) throws InterruptedException
     {
         if (params != null)
         {
             int amt = params.getInt(money.DICT_AMOUNT);
         }
-        else 
+        else
         {
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleLootWithdrawFail(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int handleCorpseExpire(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id inv = utils.getInventoryContainer(self);
@@ -302,6 +318,7 @@ public class ai_corpse extends script.base_script
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleCorpseEmpty(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id inv = utils.getInventoryContainer(self);
@@ -318,7 +335,7 @@ public class ai_corpse extends script.base_script
                         messageTo(self, corpse.HANDLER_CORPSE_EXPIRE, null, 0, false);
                         return SCRIPT_CONTINUE;
                     }
-                    else 
+                    else
                     {
                         messageTo(self, corpse.HANDLER_CORPSE_EXPIRE, null, corpse.AI_CORPSE_EMPTY_TIME, false);
                         return SCRIPT_CONTINUE;
@@ -328,22 +345,28 @@ public class ai_corpse extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleAttemptCorpseCleanup(obj_id self, dictionary params) throws InterruptedException
     {
         messageTo(self, "handleCorpseEmpty", null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLootLotterySelected(obj_id self, obj_id player, obj_id[] selection_ids) throws InterruptedException
     {
         obj_id selfInv = utils.getInventoryContainer(self);
         int numWindowsOpen = getIntObjVar(self, "numWindowsOpen");
         numWindowsOpen = numWindowsOpen - 1;
         setObjVar(self, "numWindowsOpen", numWindowsOpen);
-        for (obj_id thisObject : selection_ids) {
-            if (!hasObjVar(thisObject, "numLotteryPlayers")) {
+        for (obj_id thisObject : selection_ids)
+        {
+            if (!hasObjVar(thisObject, "numLotteryPlayers"))
+            {
                 setObjVar(thisObject, "numLotteryPlayers", 1);
                 setObjVar(thisObject, "lotteryPlayer1", player);
-            } else {
+            }
+            else
+            {
                 int numLotteryPlayers = getIntObjVar(thisObject, "numLotteryPlayers");
                 numLotteryPlayers = numLotteryPlayers + 1;
                 setObjVar(thisObject, "lotteryPlayer" + numLotteryPlayers, player);
@@ -352,6 +375,7 @@ public class ai_corpse extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int fireLotteryPulse(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -368,34 +392,44 @@ public class ai_corpse extends script.base_script
         {
             boolean allTransfersComplete = true;
             obj_id[] corpseContents = getContents(corpseInv);
-            for (obj_id item : corpseContents) {
+            for (obj_id item : corpseContents)
+            {
                 int numLotteryPlayers = getIntObjVar(item, "numLotteryPlayers");
                 int lotteryNumber = rand(1, numLotteryPlayers);
                 obj_id lottoWinner = getObjIdObjVar(item, "lotteryPlayer" + lotteryNumber);
-                if (numWindowsOpen > 0) {
+                if (numWindowsOpen > 0)
+                {
                     setObjVar(item, "pickupable", lottoWinner);
                 }
                 obj_id winventory = utils.getInventoryContainer(lottoWinner);
                 utils.setScriptVar(lottoWinner, "autostack.ignoreitems", 1);
-                if (loot.isCashLootItem(item)) {
-                    if (isIdNull(winventory)) {
+                if (loot.isCashLootItem(item))
+                {
+                    if (isIdNull(winventory))
+                    {
                         winventory = utils.getObjIdScriptVar(self, "default_money_recipient_inventory");
                     }
                     putIn(item, winventory);
                     continue;
                 }
-                if (!putIn(item, winventory)) {
-                    if (!loot.isCashLootItem(item)) {
+                if (!putIn(item, winventory))
+                {
+                    if (!loot.isCashLootItem(item))
+                    {
                         String transferProblem = "full_inventory_free_for_all";
                         boolean inventoryHasRoom = (getVolumeFree(winventory) > 0);
-                        if (inventoryHasRoom) {
+                        if (inventoryHasRoom)
+                        {
                             transferProblem = "unable_to_transfer";
                             setObjVar(corpseId, "allowedToOpenFromFailedTransfer_" + lottoWinner, 1);
                             setObjVar(item, "pickupable", lottoWinner);
-                        } else {
+                        }
+                        else
+                        {
                             loot.setAutoLootComplete(lottoWinner, corpseId, item);
                         }
-                        if (isValidId(lottoWinner)) {
+                        if (isValidId(lottoWinner))
+                        {
                             dictionary proseParameters = new dictionary();
                             proseParameters.put("stf", group.GROUP_STF);
                             proseParameters.put("message", transferProblem);
@@ -403,15 +437,19 @@ public class ai_corpse extends script.base_script
                             proseParameters.put("TT", lottoWinner);
                             obj_id gid = getGroupObject(lottoWinner);
                             obj_id[] members = utils.getLocalGroupMemberIds(gid);
-                            if (members != null) {
-                                for (obj_id member : members) {
+                            if (members != null)
+                            {
+                                for (obj_id member : members)
+                                {
                                     messageTo(member, "sendSystemMessageProseAuthoritative", proseParameters, 1, true);
                                 }
                             }
                         }
                         allTransfersComplete = false;
                     }
-                } else {
+                }
+                else
+                {
                     loot.sendGroupLootSystemMessage(item, lottoWinner, "loot_n", "group_looted");
                     messageTo(item, "msgStackItem", null, 1, false);
                 }
@@ -432,6 +470,7 @@ public class ai_corpse extends script.base_script
         messageTo(self, "fireLotteryPulse", lottery, 2, true);
         return SCRIPT_CONTINUE;
     }
+
     public boolean canHarvest(obj_id self, obj_id player) throws InterruptedException
     {
         return (hasObjVar(self, corpse.VAR_HAS_RESOURCE) && !utils.hasScriptVar(self, "harvestedBy." + player));

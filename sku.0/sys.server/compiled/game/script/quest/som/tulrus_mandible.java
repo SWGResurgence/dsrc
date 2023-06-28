@@ -1,5 +1,11 @@
 package script.quest.som;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.groundquests;
 import script.library.mustafar;
@@ -8,15 +14,16 @@ import script.library.utils;
 
 public class tulrus_mandible extends script.base_script
 {
-    public tulrus_mandible()
-    {
-    }
     public static final String STF = "som/som_quest";
     public static final string_id EXAMINE = new string_id(STF, "tulrus_horn_examine");
     public static final string_id DESTROY = new string_id(STF, "tulrus_horn_destroy");
     public static final string_id ALREADY = new string_id(STF, "tulrus_horn_already");
     public static final string_id UNABLE = new string_id(STF, "unable_to_examine");
     public static final string_id DECLINE = new string_id(STF, "quest_decline");
+    public tulrus_mandible()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (utils.getContainingPlayer(self) != null)
@@ -31,6 +38,7 @@ public class tulrus_mandible extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -44,13 +52,14 @@ public class tulrus_mandible extends script.base_script
             {
                 mustafar.activateQuestAcceptSUI(player, self);
             }
-            else 
+            else
             {
                 sendSystemMessage(player, ALREADY);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleQuestOfferResponse(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -62,13 +71,13 @@ public class tulrus_mandible extends script.base_script
         switch (bp)
         {
             case sui.BP_OK:
-            groundquests.grantQuest(player, "som_tulrus_hunt_20");
-            sendSystemMessage(player, DESTROY);
-            destroyObject(self);
-            break;
+                groundquests.grantQuest(player, "som_tulrus_hunt_20");
+                sendSystemMessage(player, DESTROY);
+                destroyObject(self);
+                break;
             case sui.BP_CANCEL:
-            sendSystemMessage(player, DECLINE);
-            break;
+                sendSystemMessage(player, DECLINE);
+                break;
         }
         return SCRIPT_CONTINUE;
     }

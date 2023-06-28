@@ -1,5 +1,11 @@
 package script.systems.storyteller;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -20,6 +26,7 @@ public class blueprint extends script.base_script
                     "name_declined_fictionally_reserved",
                     "name_declined_reserved"
             };
+
     public blueprint()
     {
     }
@@ -204,7 +211,6 @@ public class blueprint extends script.base_script
             }
             sui.showSUIPage(pid);
         }
-        return;
     }
 
     public int handleBlueprintDescriptionSet(obj_id self, dictionary params) throws InterruptedException
@@ -403,7 +409,6 @@ public class blueprint extends script.base_script
         {
             utils.removeScriptVar(player, "storyteller.godModeStopOverrideMessages");
         }
-        return;
     }
 
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException

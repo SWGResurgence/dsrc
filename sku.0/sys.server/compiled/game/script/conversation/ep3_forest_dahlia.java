@@ -1,138 +1,142 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class ep3_forest_dahlia extends script.base_script
 {
+    public static String c_stringFile = "conversation/ep3_forest_dahlia";
+
     public ep3_forest_dahlia()
     {
     }
-    public static String c_stringFile = "conversation/ep3_forest_dahlia";
+
     public boolean ep3_forest_dahlia_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean ep3_forest_dahlia_condition_isGoodGuy(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "ep3_forest_wirartu_epic_3", 0) || groundquests.hasCompletedQuest(player, "ep3_forest_wirartu_epic_3") || groundquests.hasCompletedQuest(player, "ep3_forest_kerritamba_epic_7"));
     }
+
     public boolean ep3_forest_dahlia_condition_isBadGuy(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "ep3_forest_wirartu_epic_2", 0) || groundquests.hasCompletedQuest(player, "ep3_forest_wirartu_epic_2"));
     }
+
     public boolean ep3_forest_dahlia_condition_hasCompletedInitial(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "ep3_forest_aveso_quest_2") && groundquests.hasCompletedQuest(player, "ep3_forest_cryl_quest_2") && groundquests.hasCompletedQuest(player, "ep3_forest_rhiek_quest_3"));
     }
+
     public boolean ep3_forest_dahlia_condition_isFemale(obj_id player, obj_id npc) throws InterruptedException
     {
         return (getGender(player) == Gender.FEMALE);
     }
+
     public boolean ep3_forest_dahlia_condition_isMale(obj_id player, obj_id npc) throws InterruptedException
     {
         return (getGender(player) == Gender.MALE);
     }
+
     public boolean ep3_forest_dahlia_condition_isTaskActiveOne(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "ep3_forest_dahlia_epic_1", 0) || groundquests.hasCompletedTask(player, "ep3_forest_dahlia_epic_1", 0))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.isTaskActive(player, "ep3_forest_dahlia_epic_1", 0) || groundquests.hasCompletedTask(player, "ep3_forest_dahlia_epic_1", 0);
     }
+
     public boolean ep3_forest_dahlia_condition_hasCompletedTaskOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedTask(player, "ep3_forest_dahlia_epic_1", 0) && !groundquests.hasCompletedQuest(player, "ep3_forest_dahlia_epic_1"));
     }
+
     public boolean ep3_forest_dahlia_condition_hasCompletedQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "ep3_forest_dahlia_epic_1");
     }
+
     public boolean ep3_forest_dahlia_condition_isTaskActiveTwo(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "ep3_forest_dahlia_epic_2", 0) || groundquests.hasCompletedTask(player, "ep3_forest_dahlia_epic_2", 0))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.isTaskActive(player, "ep3_forest_dahlia_epic_2", 0) || groundquests.hasCompletedTask(player, "ep3_forest_dahlia_epic_2", 0);
     }
+
     public boolean ep3_forest_dahlia_condition_hasCompletedTaskTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedTask(player, "ep3_forest_dahlia_epic_2", 0) && !groundquests.hasCompletedQuest(player, "ep3_forest_dahlia_epic_2"));
     }
+
     public boolean ep3_forest_dahlia_condition_hasCompletedQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "ep3_forest_dahlia_epic_2");
     }
+
     public boolean ep3_forest_dahlia_condition_isTaskActiveThree(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "ep3_forest_dahlia_epic_4", 0) || groundquests.hasCompletedTask(player, "ep3_forest_dahlia_epic_4", 0))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.isTaskActive(player, "ep3_forest_dahlia_epic_4", 0) || groundquests.hasCompletedTask(player, "ep3_forest_dahlia_epic_4", 0);
     }
+
     public boolean ep3_forest_dahlia_condition_hasCompletedTaskThree(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedTask(player, "ep3_forest_dahlia_epic_4", 0) && !groundquests.hasCompletedQuest(player, "ep3_forest_dahlia_epic_4"));
     }
+
     public boolean ep3_forest_dahlia_condition_hasCompletedQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "ep3_forest_dahlia_epic_4");
     }
+
     public boolean ep3_forest_dahlia_condition_isTaskStillActive(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "ep3_forest_dahlia_epic_3", 0) || groundquests.hasCompletedTask(player, "ep3_forest_dahlia_epic_3", 0))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.isTaskActive(player, "ep3_forest_dahlia_epic_3", 0) || groundquests.hasCompletedTask(player, "ep3_forest_dahlia_epic_3", 0);
     }
+
     public void ep3_forest_dahlia_action_giveQuestAssassin(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_forest_outcast_assassin_2");
     }
+
     public void ep3_forest_dahlia_action_applyDamage(obj_id player, obj_id npc) throws InterruptedException
     {
     }
+
     public void ep3_forest_dahlia_action_giveQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_forest_dahlia_epic_1");
     }
+
     public void ep3_forest_dahlia_action_giveSignalOne(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "warriors");
     }
+
     public void ep3_forest_dahlia_action_giveQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_forest_dahlia_epic_2");
     }
+
     public void ep3_forest_dahlia_action_giveSignalTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "war");
     }
+
     public void ep3_forest_dahlia_action_giveQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_forest_dahlia_epic_3");
     }
+
     public void ep3_forest_dahlia_action_giveSignalThree(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "win");
         badge.grantBadge(player, "bdg_kash_outcast_story");
     }
+
     public int ep3_forest_dahlia_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3136"))
@@ -147,6 +151,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3142"))
@@ -167,7 +172,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3146");
@@ -176,7 +181,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -201,7 +206,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3158");
@@ -210,7 +215,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -235,7 +240,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3174");
@@ -244,7 +249,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -254,6 +259,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3146"))
@@ -273,7 +279,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3150");
@@ -282,7 +288,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -292,6 +298,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3150"))
@@ -306,6 +313,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3158"))
@@ -326,7 +334,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3162");
@@ -335,7 +343,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -345,6 +353,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3162"))
@@ -364,7 +373,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3166");
@@ -373,7 +382,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -383,6 +392,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3166"))
@@ -397,6 +407,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3174"))
@@ -416,7 +427,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3178");
@@ -425,7 +436,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -435,6 +446,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3178"))
@@ -450,6 +462,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3188"))
@@ -476,7 +489,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3192");
@@ -489,7 +502,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -521,7 +534,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3212");
@@ -534,7 +547,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -566,7 +579,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3228");
@@ -579,7 +592,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -589,6 +602,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3192"))
@@ -609,7 +623,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3196");
@@ -618,7 +632,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -643,7 +657,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3204");
@@ -652,7 +666,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -662,6 +676,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3196"))
@@ -676,6 +691,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3204"))
@@ -690,6 +706,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3212"))
@@ -710,7 +727,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3216");
@@ -719,7 +736,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -739,6 +756,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3216"))
@@ -753,6 +771,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3228"))
@@ -773,7 +792,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3232");
@@ -782,7 +801,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -802,6 +821,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3232"))
@@ -822,7 +842,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3236");
@@ -831,7 +851,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -841,6 +861,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3236"))
@@ -855,6 +876,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3246"))
@@ -875,7 +897,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3250");
@@ -884,7 +906,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -910,7 +932,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3258");
@@ -919,7 +941,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -945,7 +967,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3266");
@@ -954,7 +976,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -964,6 +986,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3250"))
@@ -978,6 +1001,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3258"))
@@ -992,6 +1016,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3266"))
@@ -1006,6 +1031,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3272"))
@@ -1020,6 +1046,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3278"))
@@ -1039,7 +1066,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3282");
@@ -1048,7 +1075,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1073,7 +1100,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3298");
@@ -1082,7 +1109,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1108,7 +1135,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3318");
@@ -1117,7 +1144,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1127,6 +1154,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3282"))
@@ -1153,7 +1181,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3286");
@@ -1166,7 +1194,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1176,6 +1204,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3286"))
@@ -1201,6 +1230,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch45(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3298"))
@@ -1220,7 +1250,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3302");
@@ -1229,7 +1259,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1239,6 +1269,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3302"))
@@ -1265,7 +1296,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3306");
@@ -1278,7 +1309,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1288,6 +1319,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3306"))
@@ -1313,6 +1345,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3318"))
@@ -1332,7 +1365,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3322");
@@ -1341,7 +1374,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1351,6 +1384,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3322"))
@@ -1370,7 +1404,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3326");
@@ -1379,7 +1413,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1389,6 +1423,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch52(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3326"))
@@ -1415,7 +1450,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3330");
@@ -1428,7 +1463,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1438,6 +1473,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch53(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3330"))
@@ -1458,7 +1494,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3334");
@@ -1467,7 +1503,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1487,6 +1523,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3334"))
@@ -1501,6 +1538,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch57(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3344"))
@@ -1521,7 +1559,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3348");
@@ -1530,7 +1568,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1556,7 +1594,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3356");
@@ -1565,7 +1603,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1591,7 +1629,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3364");
@@ -1600,7 +1638,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1610,6 +1648,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch58(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3348"))
@@ -1624,6 +1663,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch60(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3356"))
@@ -1638,6 +1678,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch62(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3364"))
@@ -1652,6 +1693,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch64(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3370"))
@@ -1666,6 +1708,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch66(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3376"))
@@ -1685,7 +1728,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3380");
@@ -1694,7 +1737,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1719,7 +1762,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3400");
@@ -1728,7 +1771,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1760,7 +1803,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3416");
@@ -1773,7 +1816,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1783,6 +1826,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch67(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3380"))
@@ -1809,7 +1853,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3384");
@@ -1822,7 +1866,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1832,6 +1876,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch68(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3384"))
@@ -1852,7 +1897,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3388");
@@ -1861,7 +1906,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1881,6 +1926,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch69(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3388"))
@@ -1895,6 +1941,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch72(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3400"))
@@ -1921,7 +1968,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3404");
@@ -1934,7 +1981,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1944,6 +1991,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch73(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3404"))
@@ -1969,6 +2017,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch76(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3416"))
@@ -1995,7 +2044,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3420");
@@ -2008,7 +2057,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2034,7 +2083,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3432");
@@ -2043,7 +2092,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2053,6 +2102,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch77(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3420"))
@@ -2078,6 +2128,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch80(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3432"))
@@ -2104,7 +2155,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3436");
@@ -2117,7 +2168,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2127,6 +2178,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch81(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3436"))
@@ -2153,7 +2205,7 @@ public class ep3_forest_dahlia extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3440");
@@ -2166,7 +2218,7 @@ public class ep3_forest_dahlia extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_dahlia.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2186,6 +2238,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch82(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3440"))
@@ -2211,6 +2264,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch86(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3454"))
@@ -2225,6 +2279,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_dahlia_handleBranch89(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3462"))
@@ -2239,6 +2294,7 @@ public class ep3_forest_dahlia extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -2250,6 +2306,7 @@ public class ep3_forest_dahlia extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -2257,6 +2314,7 @@ public class ep3_forest_dahlia extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -2266,18 +2324,21 @@ public class ep3_forest_dahlia extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.ep3_forest_dahlia");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -2300,7 +2361,7 @@ public class ep3_forest_dahlia extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_3136");
@@ -2308,7 +2369,7 @@ public class ep3_forest_dahlia extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_dahlia.branchId", 1);
                 npcStartConversation(player, npc, "ep3_forest_dahlia", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2343,7 +2404,7 @@ public class ep3_forest_dahlia extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_3142");
@@ -2359,7 +2420,7 @@ public class ep3_forest_dahlia extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_dahlia.branchId", 3);
                 npcStartConversation(player, npc, "ep3_forest_dahlia", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2406,7 +2467,7 @@ public class ep3_forest_dahlia extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_3188");
@@ -2422,7 +2483,7 @@ public class ep3_forest_dahlia extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_dahlia.branchId", 16);
                 npcStartConversation(player, npc, "ep3_forest_dahlia", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2457,7 +2518,7 @@ public class ep3_forest_dahlia extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_3246");
@@ -2473,7 +2534,7 @@ public class ep3_forest_dahlia extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_dahlia.branchId", 31);
                 npcStartConversation(player, npc, "ep3_forest_dahlia", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2494,7 +2555,7 @@ public class ep3_forest_dahlia extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_3272");
@@ -2502,7 +2563,7 @@ public class ep3_forest_dahlia extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_dahlia.branchId", 38);
                 npcStartConversation(player, npc, "ep3_forest_dahlia", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2537,7 +2598,7 @@ public class ep3_forest_dahlia extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_3278");
@@ -2553,7 +2614,7 @@ public class ep3_forest_dahlia extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_dahlia.branchId", 40);
                 npcStartConversation(player, npc, "ep3_forest_dahlia", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2588,7 +2649,7 @@ public class ep3_forest_dahlia extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_3344");
@@ -2604,7 +2665,7 @@ public class ep3_forest_dahlia extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_dahlia.branchId", 57);
                 npcStartConversation(player, npc, "ep3_forest_dahlia", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2625,7 +2686,7 @@ public class ep3_forest_dahlia extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_3370");
@@ -2633,7 +2694,7 @@ public class ep3_forest_dahlia extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_dahlia.branchId", 64);
                 npcStartConversation(player, npc, "ep3_forest_dahlia", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2668,7 +2729,7 @@ public class ep3_forest_dahlia extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_3376");
@@ -2684,7 +2745,7 @@ public class ep3_forest_dahlia extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_dahlia.branchId", 66);
                 npcStartConversation(player, npc, "ep3_forest_dahlia", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2705,7 +2766,7 @@ public class ep3_forest_dahlia extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_3454");
@@ -2713,7 +2774,7 @@ public class ep3_forest_dahlia extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_dahlia.branchId", 86);
                 npcStartConversation(player, npc, "ep3_forest_dahlia", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2740,7 +2801,7 @@ public class ep3_forest_dahlia extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_3462");
@@ -2748,7 +2809,7 @@ public class ep3_forest_dahlia extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_dahlia.branchId", 89);
                 npcStartConversation(player, npc, "ep3_forest_dahlia", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2757,6 +2818,7 @@ public class ep3_forest_dahlia extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("ep3_forest_dahlia"))

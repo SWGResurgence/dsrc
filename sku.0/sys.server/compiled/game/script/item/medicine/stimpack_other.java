@@ -1,5 +1,11 @@
 package script.item.medicine;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.buff;
 import script.library.groundquests;
 import script.library.healing;
@@ -10,6 +16,7 @@ public class stimpack_other extends script.base_script
     public static final string_id SID_ITEM_YOU_MUST_TARGET = new string_id("healing", "item_must_target");
     public static final string_id SID_ITEM_ONLY_OTHERS = new string_id("healing", "item_only_on_others");
     public static final String ACTION_NAME = "bactaShot";
+
     public stimpack_other()
     {
     }

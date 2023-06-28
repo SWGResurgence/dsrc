@@ -1,5 +1,11 @@
 package script.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.space_combat;
 import script.library.space_create;
@@ -8,12 +14,13 @@ import script.obj_id;
 
 public class qaspace extends script.base_script
 {
-    public qaspace()
-    {
-    }
     public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
     public static final String SPACE_MOBILE_TABLE = "datatables/space_mobile/space_mobile.iff";
     public static final String MASTER_ITEM_TABLE = "datatables/item/master_item/master_item.iff";
+    public qaspace()
+    {
+    }
+
     public int runSpaceLootIteration(obj_id self, dictionary params) throws InterruptedException
     {
         int victimCount = params.getInt("victimCount");
@@ -21,21 +28,26 @@ public class qaspace extends script.base_script
         spaceLootIteration(self, victimName, victimCount);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        if (!isGod(self) || getGodLevel(self) < 50 || !isPlayer(self)) {
+        if (!isGod(self) || getGodLevel(self) < 50 || !isPlayer(self))
+        {
             detachScript(self, "test.qaspace");
         }
-        else {
+        else
+        {
             broadcast(self, "QaSpace script attached.");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         broadcast(self, "QaSpace script detached.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         debugConsoleMsg(self, text);
@@ -52,7 +64,7 @@ public class qaspace extends script.base_script
         {
             victimShip = st.nextToken();
         }
-        else 
+        else
         {
             broadcast(self, "Space Loot Error: Missing name of victim ship");
         }
@@ -63,6 +75,7 @@ public class qaspace extends script.base_script
         spaceLoot(self, victimShip, victimCount);
         return SCRIPT_CONTINUE;
     }
+
     public void spaceLoot(obj_id self, String victimName, int victimCount) throws InterruptedException
     {
         obj_id objMyShip = getPilotedShip(self);
@@ -99,8 +112,7 @@ public class qaspace extends script.base_script
                 {
                     incrementDict.put("victimCount", 10);
                     messageTo(self, "runSpaceLootIteration", incrementDict, 5, true);
-                }
-                catch(Exception e)
+                } catch (Exception e)
                 {
                     broadcast(self, "Interrupted! " + e);
                 }
@@ -112,6 +124,7 @@ public class qaspace extends script.base_script
             messageTo(self, "runSpaceLootIteration", incrementDict, 5, true);
         }
     }
+
     public void spaceLootIteration(obj_id self, String victimName, int victimCount) throws InterruptedException
     {
         if (victimCount < 1)
@@ -126,7 +139,7 @@ public class qaspace extends script.base_script
             {
                 objVictimShip = space_create.createShip(victimName, getTransform_o2p(getPilotedShip(self)));
             }
-            else 
+            else
             {
                 objVictimShip = space_create.createShip(victimName, getTransform_o2p(self));
             }
@@ -134,7 +147,7 @@ public class qaspace extends script.base_script
             {
                 broadcast(self, "Space Loot Error: You passed in a bad shipType. Type is " + victimName);
             }
-            else 
+            else
             {
                 broadcast(self, "Space Loot: Made ship of type " + victimName + " object id is: " + objVictimShip);
                 notifyShipDamage(objVictimShip, objMyShip, 10.0f);

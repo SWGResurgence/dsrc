@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.myyydril;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.groundquests;
 import script.obj_id;
@@ -7,15 +13,18 @@ import script.string_id;
 
 public class grievous_player extends script.base_script
 {
+    public static final boolean isLogging = false;
+
     public grievous_player()
     {
     }
-    public static final boolean isLogging = false;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         groundquests.sendSignal(self, "signalLornRetrieveCompleted");
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);
@@ -28,12 +37,14 @@ public class grievous_player extends script.base_script
         messageTo(top, "validatePlayersInEvent", null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleGrievousTimerUpdate(obj_id self, dictionary params) throws InterruptedException
     {
         String message = params.getString("message");
         broadcast(self, message);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanupEjectedPlayers(obj_id self, dictionary params) throws InterruptedException
     {
         doLogging("cleanupEjectedPlayers", "Recieved message to clean up players");
@@ -42,6 +53,7 @@ public class grievous_player extends script.base_script
         detachScript(self, "theme_park.dungeon.myyydril.grievous_player");
         return SCRIPT_CONTINUE;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (isLogging)

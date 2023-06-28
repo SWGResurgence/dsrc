@@ -1,5 +1,11 @@
 package script.item.goggles;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.features;
 import script.library.hue;
@@ -23,6 +29,7 @@ public class menu extends script.base_script
                     "object/tangible/wearables/goggles/goggles_s05.iff",
                     "object/tangible/wearables/goggles/goggles_s06.iff"
             };
+
     public menu()
     {
     }

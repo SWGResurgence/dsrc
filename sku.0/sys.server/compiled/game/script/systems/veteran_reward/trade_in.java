@@ -1,5 +1,11 @@
 package script.systems.veteran_reward;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.sui;
 import script.library.utils;
 import script.menu_info;
@@ -12,6 +18,7 @@ public class trade_in extends script.base_script
     public static final string_id REWARD_TRADE_IN = new string_id("veteran_new", "trade_in_reward");
     public static final String SCRIPTVAR_REWARD_TRADE_IN_SUI_ID = "rewardTradeInSuiId";
     public static final String SCRIPTVAR_REWARD_TRADE_IN_ITEM_ID = "rewardTradeInItemId";
+
     public trade_in()
     {
     }

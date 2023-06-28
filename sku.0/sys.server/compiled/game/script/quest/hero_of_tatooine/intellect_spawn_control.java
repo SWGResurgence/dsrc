@@ -1,5 +1,11 @@
 package script.quest.hero_of_tatooine;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.utils;
 import script.location;
@@ -7,9 +13,6 @@ import script.obj_id;
 
 public class intellect_spawn_control extends script.base_script
 {
-    public intellect_spawn_control()
-    {
-    }
     public static final String SPAWNER_DATATABLE = "datatables/quest/hero_of_tatooine/intellect_spawner.iff";
     public static final String SPAWNER_OBJVAR = "quest.hero_of_tatooine.intellect.spawner";
     public static final String SPAWNER_IDS = SPAWNER_OBJVAR + ".ids";
@@ -19,6 +22,10 @@ public class intellect_spawn_control extends script.base_script
     public static final float SPAWN_TIME = 1800.0f;
     public static final float REVALIDATE_TIME = 10800.0f;
     public static final float SPAWN_CHECK_TIME = SPAWN_TIME + VALIDATION_CHECK_TIME;
+    public intellect_spawn_control()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, SPAWNER_OBJVAR))
@@ -28,6 +35,7 @@ public class intellect_spawn_control extends script.base_script
         messageTo(self, "handleForcedValidation", null, 600.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, SPAWNER_OBJVAR))
@@ -38,6 +46,7 @@ public class intellect_spawn_control extends script.base_script
         messageTo(self, "handleForcedValidation", null, 600.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (!isGod(speaker))
@@ -56,6 +65,7 @@ public class intellect_spawn_control extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleValidation(obj_id self, dictionary params) throws InterruptedException
     {
         int spawn = params.getInt("spawn");
@@ -76,6 +86,7 @@ public class intellect_spawn_control extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSingleValidationCheck(obj_id self, dictionary params) throws InterruptedException
     {
         if (countActiveSpawns(self) == 0)
@@ -84,6 +95,7 @@ public class intellect_spawn_control extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleAllValidationCheck(obj_id self, dictionary params) throws InterruptedException
     {
         if (countActiveSpawns(self) == 0)
@@ -92,6 +104,7 @@ public class intellect_spawn_control extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSpawnValidation(obj_id self, dictionary params) throws InterruptedException
     {
         float time = params.getFloat("time");
@@ -105,6 +118,7 @@ public class intellect_spawn_control extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleCompletion(obj_id self, dictionary params) throws InterruptedException
     {
         int number = params.getInt("number");
@@ -119,6 +133,7 @@ public class intellect_spawn_control extends script.base_script
         validateSpawners(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleLocationResponse(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id seeker = params.getObjId("seeker");
@@ -126,6 +141,7 @@ public class intellect_spawn_control extends script.base_script
         broadcast(seeker, "Intellect Spawn: " + loc.toString());
         return SCRIPT_CONTINUE;
     }
+
     public int handleForcedValidation(obj_id self, dictionary params) throws InterruptedException
     {
         CustomerServiceLog("quest", "HERO OF TATOOINE - Forcing Mark of Intellect validation");
@@ -133,6 +149,7 @@ public class intellect_spawn_control extends script.base_script
         messageTo(self, "handleForcedValidation", null, REVALIDATE_TIME, false);
         return SCRIPT_CONTINUE;
     }
+
     public void setupSpawnerObjVars(obj_id self) throws InterruptedException
     {
         int numRows = dataTableGetNumRows(SPAWNER_DATATABLE);
@@ -151,6 +168,7 @@ public class intellect_spawn_control extends script.base_script
             setObjVar(self, SPAWNER_STATUS, status);
         }
     }
+
     public void validateSpawners(obj_id self) throws InterruptedException
     {
         if (countActiveSpawns(self) == 0)
@@ -172,6 +190,7 @@ public class intellect_spawn_control extends script.base_script
         }
         messageTo(self, "handleSingleValidationCheck", null, VALIDATION_CHECK_TIME, true);
     }
+
     public void validateAllSpawners(obj_id self) throws InterruptedException
     {
         obj_id[] ids = getObjIdArrayObjVar(self, SPAWNER_IDS);
@@ -185,6 +204,7 @@ public class intellect_spawn_control extends script.base_script
         }
         messageTo(self, "handleAllValidationCheck", null, VALIDATION_CHECK_TIME, true);
     }
+
     public void startSpawnSequence(obj_id self, float time, boolean override) throws InterruptedException
     {
         if (hasObjVar(self, SPAWNER_SPAWN_MODE) && !override)
@@ -197,7 +217,7 @@ public class intellect_spawn_control extends script.base_script
                 CustomerServiceLog("quest", "HERO OF TATOOINE - Intellect spawn control failing; Trying to spawn while currently in spawn mode. Spawn Time: " + spawn_time + " Game Time: " + game_time + ". Difference: " + difference_time);
                 return;
             }
-            else 
+            else
             {
                 CustomerServiceLog("quest", "HERO OF TATOOINE - Intellect autospawner attempting to spawn. Possibly for the first time. Spawn Time: " + spawn_time + " Game Time: " + game_time + ". Difference: " + difference_time);
             }
@@ -219,10 +239,12 @@ public class intellect_spawn_control extends script.base_script
         messageTo(ids[randSpawn], "handleSpawn", d, time, true);
         messageTo(self, "handleSpawnValidation", d, check_time, true);
     }
+
     public void startSpawnSequence(obj_id self, float time) throws InterruptedException
     {
         startSpawnSequence(self, time, false);
     }
+
     public void findSpawned(obj_id self, obj_id speaker) throws InterruptedException
     {
         obj_id[] ids = getObjIdArrayObjVar(self, SPAWNER_IDS);
@@ -244,6 +266,7 @@ public class intellect_spawn_control extends script.base_script
             broadcast(speaker, "No active spawns found");
         }
     }
+
     public int countActiveSpawns(obj_id self) throws InterruptedException
     {
         int[] status = getIntArrayObjVar(self, SPAWNER_STATUS);
@@ -252,8 +275,10 @@ public class intellect_spawn_control extends script.base_script
             return -1;
         }
         int count = 0;
-        for (int status1 : status) {
-            if (status1 == 1) {
+        for (int status1 : status)
+        {
+            if (status1 == 1)
+            {
                 count++;
             }
         }

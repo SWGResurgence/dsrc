@@ -1,5 +1,11 @@
 package script.theme_park.dungeon;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -8,12 +14,13 @@ import script.obj_var_list;
 
 public class generic_spawner extends script.base_script
 {
-    public generic_spawner()
-    {
-    }
     public static final String SPAWNED_LIST = "spawned";
     public static final String SPAWNED = SPAWNED_LIST + "." + "spawnNumber_";
     public static final String GENERIC_SPAWNER_ACTIVE = "genericSpawner.isActive";
+    public generic_spawner()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (getTemplateName(self).equals("object/building/general/bunker_allum_mine.iff"))
@@ -34,6 +41,7 @@ public class generic_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (getTemplateName(self).equals("object/building/general/bunker_allum_mine.iff"))
@@ -54,6 +62,7 @@ public class generic_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int beginSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         String datatable = getStringObjVar(self, "spawn_table");
@@ -72,7 +81,7 @@ public class generic_spawner extends script.base_script
                     spawnCreatures(x, datatable, self);
                 }
             }
-            else 
+            else
             {
                 spawnCreatures(x, datatable, self);
             }
@@ -88,11 +97,13 @@ public class generic_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cleanupSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         messageTo(self, "dungeonCleanup", null, 0.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int dungeonCleanup(obj_id self, dictionary params) throws InterruptedException
     {
         setDungeonActive(self, false);
@@ -106,26 +117,33 @@ public class generic_spawner extends script.base_script
             }
         }
         obj_id[] objects = trial.getAllObjectsInDungeon(self);
-        if (objects == null || objects.length == 0)
+        if (objects == null)
         {
             return SCRIPT_CONTINUE;
         }
-        for (obj_id object : objects) {
-            if (isPlayer(object)) {
-                if (instance.isInInstanceArea(object)) {
+        for (obj_id object : objects)
+        {
+            if (isPlayer(object))
+            {
+                if (instance.isInInstanceArea(object))
+                {
                     instance.requestExitPlayer(self, object, 1);
                     continue;
-                } else {
+                }
+                else
+                {
                     space_dungeon.verifyPlayerSession(object);
                     continue;
                 }
             }
-            if (isMob(object) || trial.isTempObject(object)) {
+            if (isMob(object) || trial.isTempObject(object))
+            {
                 trial.cleanupNpc(object);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tellingMomIDied(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isDungeonActive(self))
@@ -139,13 +157,17 @@ public class generic_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
-    public boolean isDungeonActive(obj_id dungeon) throws InterruptedException {
+
+    public boolean isDungeonActive(obj_id dungeon) throws InterruptedException
+    {
         return !utils.hasScriptVar(dungeon, GENERIC_SPAWNER_ACTIVE) || utils.getBooleanScriptVar(dungeon, GENERIC_SPAWNER_ACTIVE);
     }
+
     public void setDungeonActive(obj_id dungeon, boolean state) throws InterruptedException
     {
         utils.setScriptVar(dungeon, GENERIC_SPAWNER_ACTIVE, state);
     }
+
     public void attachRoomScripts(obj_id self, String datatable) throws InterruptedException
     {
         int passThrough = 0;
@@ -169,6 +191,7 @@ public class generic_spawner extends script.base_script
             passThrough++;
         }
     }
+
     public void setRoomObjVars(obj_id self, String datatable) throws InterruptedException
     {
         int numRooms = dataTableGetStringColumnNoDefaults(datatable, "room_objvar").length;
@@ -195,6 +218,7 @@ public class generic_spawner extends script.base_script
             passThrough++;
         }
     }
+
     public void spawnCreatures(int x, String datatable, obj_id self) throws InterruptedException
     {
         String spawn = dataTableGetString(datatable, x, "spawns");
@@ -229,7 +253,7 @@ public class generic_spawner extends script.base_script
                         {
                             creatureName = bossName;
                         }
-                        else 
+                        else
                         {
                             creatureName = "";
                         }
@@ -283,7 +307,8 @@ public class generic_spawner extends script.base_script
             if (scriptList != null && !scriptList.equals(""))
             {
                 String[] scriptArray = split(scriptList, ',');
-                for (String s : scriptArray) {
+                for (String s : scriptArray)
+                {
                     attachScript(spawnedCreature, s);
                 }
             }
@@ -317,7 +342,7 @@ public class generic_spawner extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             if (dataTableHasColumn(datatable, "spawn_objvar"))
             {
@@ -345,6 +370,7 @@ public class generic_spawner extends script.base_script
             }
         }
     }
+
     public int animationMood(obj_id self, dictionary params) throws InterruptedException
     {
         String creatureAnimationMood = dataTableGetString(params.getString("datatable"), params.getInt("x"), "animation_mood");
@@ -354,6 +380,7 @@ public class generic_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void setCreatureObjVars(obj_id creature, String objVarList) throws InterruptedException
     {
         if (objVarList == null || objVarList.equals(""))
@@ -361,13 +388,15 @@ public class generic_spawner extends script.base_script
             return;
         }
         String[] pairs = split(objVarList, ',');
-        for (String pair : pairs) {
+        for (String pair : pairs)
+        {
             String[] objVarToSet = split(pair, '=');
             String objVarValue = objVarToSet[1];
             String[] objVarNameAndType = split(objVarToSet[0], ':');
             String objVarType = objVarNameAndType[0];
             String objVarName = objVarNameAndType[1];
-            switch (objVarType) {
+            switch (objVarType)
+            {
                 case "string":
                     setObjVar(creature, objVarName, objVarValue);
                     break;
@@ -387,10 +416,13 @@ public class generic_spawner extends script.base_script
             }
         }
     }
-    public boolean canSpawnByConfigSetting() throws InterruptedException {
+
+    public boolean canSpawnByConfigSetting() throws InterruptedException
+    {
         String disableSpawners = getConfigSetting("GameServer", "disableGenericSpawner");
         return disableSpawners == null || !(disableSpawners.equals("true") || disableSpawners.equals("1"));
     }
+
     public int getRandomPlanetCreatureLevel(obj_id spawner, String npcType, location here) throws InterruptedException
     {
         int minLevel = locations.getMinDifficultyForPlanet(here.area);

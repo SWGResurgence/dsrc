@@ -1,18 +1,27 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class naboo_rebel_tier1_kiizete extends script.base_script
 {
+    public static String c_stringFile = "conversation/naboo_rebel_tier1_kiizete";
+
     public naboo_rebel_tier1_kiizete()
     {
     }
-    public static String c_stringFile = "conversation/naboo_rebel_tier1_kiizete";
+
     public boolean naboo_rebel_tier1_kiizete_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean naboo_rebel_tier1_kiizete_condition_isImperialPilot(obj_id player, obj_id npc) throws InterruptedException
     {
         int playerFactionID = pvpGetAlignedFaction(player);
@@ -20,50 +29,59 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         {
             return true;
         }
-        else 
+        else
         {
             return (hasSkill(player, "pilot_imperial_navy_novice"));
         }
     }
+
     public boolean naboo_rebel_tier1_kiizete_condition_hasCompletedQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasCompletedQuest(player, "destroy_surpriseattack", "naboo_rebel_1"));
     }
+
     public boolean naboo_rebel_tier1_kiizete_condition_hasFailedQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasFailedQuest(player, "destroy_surpriseattack", "naboo_rebel_1_surprise") || space_quest.hasAbortedQuest(player, "destroy_surpriseattack", "naboo_rebel_1_surprise") || space_quest.hasFailedQuest(player, "patrol", "naboo_rebel_1") || space_quest.hasAbortedQuest(player, "patrol", "naboo_rebel_1"));
     }
+
     public boolean naboo_rebel_tier1_kiizete_condition_hasSpaceExpansion(obj_id player, obj_id npc) throws InterruptedException
     {
         return (features.isSpaceEdition(player));
     }
+
     public boolean naboo_rebel_tier1_kiizete_condition_hasVeryFirstQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_quest.hasCertifiedShip(player))
         {
             return false;
         }
-        else 
+        else
         {
             return (space_quest.hasQuest(player, "patrol", "naboo_rebel_1") || space_quest.hasQuest(player, "destroy_surpriseattack", "naboo_rebel_1"));
         }
     }
+
     public boolean naboo_rebel_tier1_kiizete_condition_imp_isasking(obj_id player, obj_id npc) throws InterruptedException
     {
         return (utils.hasScriptVar(player, "imp_isasking"));
     }
+
     public boolean naboo_rebel_tier1_kiizete_condition_q1_has_discussed(obj_id player, obj_id npc) throws InterruptedException
     {
         return (utils.hasScriptVar(player, "q1_discussed"));
     }
+
     public void naboo_rebel_tier1_kiizete_action_an_imp_is_asking(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "imp_isasking", true);
     }
+
     public void naboo_rebel_tier1_kiizete_action_q1_set_discussed(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "q1_discussed", true);
     }
+
     public int naboo_rebel_tier1_kiizete_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ee55c9ed"))
@@ -91,7 +109,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8668104f");
@@ -104,7 +122,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -127,6 +145,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_tier1_kiizete_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_8668104f"))
@@ -155,6 +174,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_tier1_kiizete_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9ddf5e8a"))
@@ -189,7 +209,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9ddf5e8a");
@@ -206,7 +226,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -247,7 +267,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9ddf5e8a");
@@ -264,7 +284,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -298,7 +318,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_fdbd2351");
@@ -311,7 +331,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -322,6 +342,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_tier1_kiizete_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9ddf5e8a"))
@@ -356,7 +377,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9ddf5e8a");
@@ -373,7 +394,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -414,7 +435,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9ddf5e8a");
@@ -431,7 +452,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -465,7 +486,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_fdbd2351");
@@ -478,7 +499,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -489,6 +510,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_tier1_kiizete_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9ddf5e8a"))
@@ -523,7 +545,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9ddf5e8a");
@@ -540,7 +562,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -581,7 +603,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9ddf5e8a");
@@ -598,7 +620,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -632,7 +654,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_fdbd2351");
@@ -645,7 +667,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -656,6 +678,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_tier1_kiizete_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_fdbd2351"))
@@ -684,6 +707,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_tier1_kiizete_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b41e5c00"))
@@ -719,7 +743,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6a1ce31d");
@@ -736,7 +760,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -770,7 +794,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e97d81c5");
@@ -783,7 +807,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -817,7 +841,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1c48bff0");
@@ -830,7 +854,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -841,6 +865,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_tier1_kiizete_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6a1ce31d"))
@@ -881,6 +906,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_tier1_kiizete_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_e97d81c5"))
@@ -908,7 +934,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4ed31d3f");
@@ -921,7 +947,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -954,7 +980,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e97d81c5");
@@ -967,7 +993,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -978,6 +1004,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_tier1_kiizete_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4ed31d3f"))
@@ -1005,7 +1032,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a65b9c24");
@@ -1018,7 +1045,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -1040,6 +1067,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_tier1_kiizete_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a65b9c24"))
@@ -1067,7 +1095,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a65b9c24");
@@ -1080,7 +1108,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -1114,7 +1142,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a65b9c24");
@@ -1127,7 +1155,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -1138,6 +1166,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_tier1_kiizete_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a65b9c24"))
@@ -1165,7 +1194,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a65b9c24");
@@ -1178,7 +1207,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -1212,7 +1241,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a65b9c24");
@@ -1225,7 +1254,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -1236,6 +1265,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_tier1_kiizete_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a65b9c24"))
@@ -1263,7 +1293,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a65b9c24");
@@ -1276,7 +1306,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -1310,7 +1340,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a65b9c24");
@@ -1323,7 +1353,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -1334,6 +1364,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_tier1_kiizete_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_e97d81c5"))
@@ -1361,7 +1392,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4ed31d3f");
@@ -1374,7 +1405,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -1407,7 +1438,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e97d81c5");
@@ -1420,7 +1451,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -1431,6 +1462,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_tier1_kiizete_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1c48bff0"))
@@ -1459,6 +1491,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_tier1_kiizete_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_77e48d5b"))
@@ -1498,7 +1531,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_fc27931b");
@@ -1511,7 +1544,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -1522,6 +1555,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_tier1_kiizete_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_fc27931b"))
@@ -1550,6 +1584,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_tier1_kiizete_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4bd66142"))
@@ -1584,7 +1619,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4c90db01");
@@ -1601,7 +1636,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -1628,7 +1663,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a5fe9928");
@@ -1637,7 +1672,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -1660,6 +1695,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_tier1_kiizete_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4c90db01"))
@@ -1700,6 +1736,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_tier1_kiizete_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a5fe9928"))
@@ -1716,6 +1753,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_tier1_kiizete_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_e518378e"))
@@ -1750,7 +1788,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6bd02793");
@@ -1771,7 +1809,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     prose_package pp = new prose_package();
@@ -1802,7 +1840,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b26194cb");
@@ -1811,7 +1849,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -1822,6 +1860,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_tier1_kiizete_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6bd02793"))
@@ -1861,7 +1900,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9940f453");
@@ -1874,7 +1913,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -1915,7 +1954,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ed72de53");
@@ -1936,7 +1975,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     prose_package pp = new prose_package();
@@ -1951,6 +1990,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_tier1_kiizete_handleBranch45(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9940f453"))
@@ -1978,7 +2018,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c9274747");
@@ -1991,7 +2031,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -2014,6 +2054,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_tier1_kiizete_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c9274747"))
@@ -2034,7 +2075,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_afd1368");
@@ -2043,7 +2084,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -2066,6 +2107,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_tier1_kiizete_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_afd1368"))
@@ -2082,6 +2124,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_tier1_kiizete_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ed72de53"))
@@ -2109,7 +2152,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a95b1747");
@@ -2122,7 +2165,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -2157,6 +2200,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_tier1_kiizete_handleBranch52(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a95b1747"))
@@ -2196,7 +2240,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9f32bc26");
@@ -2209,7 +2253,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -2220,6 +2264,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_tier1_kiizete_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9f32bc26"))
@@ -2248,6 +2293,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_tier1_kiizete_handleBranch59(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b26194cb"))
@@ -2275,7 +2321,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e518378e");
@@ -2288,7 +2334,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -2299,6 +2345,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_tier1_kiizete_handleBranch60(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_e518378e"))
@@ -2333,7 +2380,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6bd02793");
@@ -2354,7 +2401,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     prose_package pp = new prose_package();
@@ -2381,6 +2428,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_tier1_kiizete_handleBranch61(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6bd02793"))
@@ -2420,7 +2468,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9940f453");
@@ -2433,7 +2481,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -2474,7 +2522,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ed72de53");
@@ -2495,7 +2543,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     prose_package pp = new prose_package();
@@ -2510,6 +2558,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_tier1_kiizete_handleBranch63(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9940f453"))
@@ -2537,7 +2586,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c9274747");
@@ -2550,7 +2599,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -2573,6 +2622,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_tier1_kiizete_handleBranch64(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c9274747"))
@@ -2593,7 +2643,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_afd1368");
@@ -2602,7 +2652,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -2625,6 +2675,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_tier1_kiizete_handleBranch65(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_afd1368"))
@@ -2641,6 +2692,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_tier1_kiizete_handleBranch69(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ed72de53"))
@@ -2668,7 +2720,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a95b1747");
@@ -2681,7 +2733,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -2716,6 +2768,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_tier1_kiizete_handleBranch70(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a95b1747"))
@@ -2755,7 +2808,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9f32bc26");
@@ -2768,7 +2821,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId");
                     chat.chat(npc, player, message);
@@ -2779,6 +2832,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_tier1_kiizete_handleBranch72(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9f32bc26"))
@@ -2807,6 +2861,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -2819,6 +2874,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         factions.setFaction(self, factions.FACTION_REBEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -2827,6 +2883,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         factions.setFaction(self, factions.FACTION_REBEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -2835,18 +2892,21 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.naboo_rebel_tier1_kiizete");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -2877,7 +2937,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_ee55c9ed");
@@ -2889,7 +2949,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId", 1);
                 npcStartConversation(player, npc, "naboo_rebel_tier1_kiizete", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2933,7 +2993,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_9ddf5e8a");
@@ -2949,7 +3009,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId", 7);
                 npcStartConversation(player, npc, "naboo_rebel_tier1_kiizete", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2993,7 +3053,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_b41e5c00");
@@ -3009,7 +3069,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId", 14);
                 npcStartConversation(player, npc, "naboo_rebel_tier1_kiizete", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3038,7 +3098,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_77e48d5b");
@@ -3050,7 +3110,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId", 29);
                 npcStartConversation(player, npc, "naboo_rebel_tier1_kiizete", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3085,7 +3145,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_4bd66142");
@@ -3101,7 +3161,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId", 34);
                 npcStartConversation(player, npc, "naboo_rebel_tier1_kiizete", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3130,7 +3190,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_e518378e");
@@ -3142,7 +3202,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_rebel_tier1_kiizete.branchId", 42);
                 npcStartConversation(player, npc, "naboo_rebel_tier1_kiizete", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3151,6 +3211,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("naboo_rebel_tier1_kiizete"))

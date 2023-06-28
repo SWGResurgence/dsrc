@@ -1,5 +1,11 @@
 package script.item.publish_gift;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.player_structure;
 import script.library.static_item;
 import script.library.utils;
@@ -13,6 +19,7 @@ public class homing_beacon extends script.base_script
     public static final string_id BEACON_ACTIVE = new string_id("spam", "homing_activated");
     public static final string_id BEACON_DESTROY = new string_id("spam", "homing_destroy");
     public static final string_id BEACON_DEACTIVE = new string_id("spam", "homing_deactivated");
+
     public homing_beacon()
     {
     }

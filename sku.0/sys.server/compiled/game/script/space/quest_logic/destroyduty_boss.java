@@ -1,5 +1,11 @@
 package script.space.quest_logic;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.prose;
 import script.library.space_quest;
@@ -12,11 +18,13 @@ public class destroyduty_boss extends script.space.quest_logic.destroyduty_ship
     public destroyduty_boss()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "deliverTaunt", null, 3.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int deliverTaunt(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, "player");

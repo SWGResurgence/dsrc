@@ -1,5 +1,11 @@
 package script.developer.soe.e3demo;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.factions;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class e3_hangar_worker_1 extends script.base_script
     public e3_hangar_worker_1()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "doLoopingEmote", null, 5, false);
@@ -16,6 +23,7 @@ public class e3_hangar_worker_1 extends script.base_script
         factions.setFaction(self, "Imperial");
         return SCRIPT_CONTINUE;
     }
+
     public int doLoopingEmote(obj_id self, dictionary params) throws InterruptedException
     {
         float fltDelay = rand(2, 5);

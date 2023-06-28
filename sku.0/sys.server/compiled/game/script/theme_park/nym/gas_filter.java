@@ -1,25 +1,34 @@
 package script.theme_park.nym;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.groundquests;
 
 public class gas_filter extends script.base_script
 {
+    public static final String STF_FILE = "theme_park_nym/messages";
+    public static final string_id RETRIEVE = new string_id("celebrity/kole", "retrieve");
     public gas_filter()
     {
     }
-    public static final String STF_FILE = "theme_park_nym/messages";
-    public static final string_id RETRIEVE = new string_id("celebrity/kole", "retrieve");
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info item) throws InterruptedException
     {
         item.addRootMenu(menu_info_types.ITEM_USE, RETRIEVE);
         return SCRIPT_CONTINUE;
     }
+
     public int makeNewModule(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id filter = createObject("object/tangible/loot/quest/nym_filtered_gas.iff", self, "");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item != menu_info_types.ITEM_USE)
@@ -34,6 +43,7 @@ public class gas_filter extends script.base_script
         groundquests.sendSignal(player, "hasFoundFiltrationSystem");
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasScript(self, "item.container.base.base_container"))

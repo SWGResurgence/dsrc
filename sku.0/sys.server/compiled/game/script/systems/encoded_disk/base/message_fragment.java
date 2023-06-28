@@ -1,5 +1,11 @@
 package script.systems.encoded_disk.base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.scenario;
 import script.library.sui;
@@ -18,6 +24,7 @@ public class message_fragment extends script.base_script
     public static final String VAR_INDEX = "messageTableIndex";
     public static final String VAR_PART_NUMBER = "partNumber";
     public static final String ASSEMBLED_MESSAGE = "object/tangible/encoded_disk/message_assembled_base.iff";
+
     public message_fragment()
     {
     }

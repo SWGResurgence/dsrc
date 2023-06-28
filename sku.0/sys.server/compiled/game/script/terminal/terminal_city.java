@@ -1,5 +1,11 @@
 package script.terminal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -9,9 +15,6 @@ import java.util.Vector;
 
 public class terminal_city extends script.base_script
 {
-    public terminal_city()
-    {
-    }
     public static final String STF = "city/city";
     public static final string_id SID_CITY_HACKS = new string_id(STF, "city_hacks");
     public static final string_id SID_CITY_FORCE_UPDATE = new string_id(STF, "force_update");
@@ -80,30 +83,30 @@ public class terminal_city extends script.base_script
     public static final string_id PUBLIC_ELECTION_SUBJECT = new string_id(STF, "public_election_subject");
     public static final string_id PUBLIC_ELECTION_BODY = new string_id(STF, "public_election_body");
     public static final String CITY_SPECS = "datatables/city/specializations.iff";
-    public static final String[] TAX_STRING = 
-    {
-        "income",
-        "property",
-        "sales",
-        "travel",
-        "garage"
-    };
-    public static final int[] TAX_MIN = 
-    {
-        0,
-        0,
-        0,
-        1,
-        0
-    };
-    public static final int[] TAX_MAX = 
-    {
-        2000,
-        50,
-        20,
-        500,
-        30
-    };
+    public static final String[] TAX_STRING =
+            {
+                    "income",
+                    "property",
+                    "sales",
+                    "travel",
+                    "garage"
+            };
+    public static final int[] TAX_MIN =
+            {
+                    0,
+                    0,
+                    0,
+                    1,
+                    0
+            };
+    public static final int[] TAX_MAX =
+            {
+                    2000,
+                    50,
+                    20,
+                    500,
+                    30
+            };
     public static final string_id SID_CITY_ZONE = new string_id(STF, "zone");
     public static final string_id SID_CITY_UNZONE = new string_id(STF, "unzone");
     public static final string_id SID_ZONING_ENABLED = new string_id(STF, "zoning_enabled");
@@ -139,6 +142,10 @@ public class terminal_city extends script.base_script
     public static final string_id SID_BEGIN_GCW_REGION_DEFENDER = new string_id(STF, "begin_gcw_region_defender");
     public static final string_id SID_END_GCW_REGION_DEFENDER = new string_id(STF, "end_gcw_region_defender");
     public static final string_id SID_DERANK_EXEMPT = new string_id("Toggle De-Rank Exemption");
+    public terminal_city()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);
@@ -172,7 +179,7 @@ public class terminal_city extends script.base_script
             {
                 mi.addSubMenu(menu, menu_info_types.CITY_REGISTER, SID_CITY_REGISTER);
             }
-            else 
+            else
             {
                 mi.addSubMenu(menu, menu_info_types.CITY_REGISTER, SID_CITY_UNREGISTER);
             }
@@ -180,7 +187,7 @@ public class terminal_city extends script.base_script
             {
                 mi.addSubMenu(menu, menu_info_types.SERVER_MENU2, SID_CITY_UNZONE);
             }
-            else 
+            else
             {
                 mi.addSubMenu(menu, menu_info_types.SERVER_MENU2, SID_CITY_ZONE);
             }
@@ -200,7 +207,7 @@ public class terminal_city extends script.base_script
             {
                 mi.addSubMenu(menu, menu_info_types.SERVER_MENU16, SID_ALIGN_NEUTRAL);
             }
-            else 
+            else
             {
                 mi.addSubMenu(menu, menu_info_types.SERVER_MENU14, SID_ALIGN_IMPERIAL);
                 mi.addSubMenu(menu, menu_info_types.SERVER_MENU15, SID_ALIGN_REBEL);
@@ -210,7 +217,7 @@ public class terminal_city extends script.base_script
             {
                 mi.addSubMenu(menu, menu_info_types.SERVER_MENU17, SID_BEGIN_GCW_REGION_DEFENDER);
             }
-            else 
+            else
             {
                 mi.addSubMenu(menu, menu_info_types.SERVER_MENU18, SID_END_GCW_REGION_DEFENDER);
             }
@@ -231,6 +238,7 @@ public class terminal_city extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);
@@ -303,7 +311,7 @@ public class terminal_city extends script.base_script
                 {
                     sui.msgbox(self, player, "@city/city:register_d", sui.YES_NO, "@city/city:register_t", sui.MSG_QUESTION, "handleRegisterCity");
                 }
-                else 
+                else
                 {
                     sui.msgbox(self, player, "@city/city:unregister_d", sui.YES_NO, "@city/city:unregister_t", sui.MSG_QUESTION, "handleUnregisterCity");
                 }
@@ -339,7 +347,7 @@ public class terminal_city extends script.base_script
                 {
                     message = getStringObjVar(structure, "city_visitor_message");
                 }
-                else 
+                else
                 {
                     message = "Enter a Message for Visitors";
                 }
@@ -352,7 +360,7 @@ public class terminal_city extends script.base_script
                 {
                     message = getStringObjVar(structure, "city_citizen_message");
                 }
-                else 
+                else
                 {
                     message = "Enter a Message for Citizens";
                 }
@@ -370,29 +378,29 @@ public class terminal_city extends script.base_script
                     int cooldown = (getIntObjVar(structure, "cityTimeEndRebelAlign") + (isGod(player) ? 10 : 86400)) - getCalendarTime();
                     if (cooldown > 0)
                     {
-                        String cooldownStr = "" + cooldown + "s";
+                        String cooldownStr = cooldown + "s";
                         int[] convertedTime = player_structure.convertSecondsTime(cooldown);
                         if ((convertedTime != null) && (convertedTime.length == 4))
                         {
                             if (convertedTime[0] > 0)
                             {
-                                cooldownStr = "" + convertedTime[0] + "d:" + convertedTime[1] + "h:" + convertedTime[2] + "m:" + convertedTime[3] + "s";
+                                cooldownStr = convertedTime[0] + "d:" + convertedTime[1] + "h:" + convertedTime[2] + "m:" + convertedTime[3] + "s";
                             }
                             else if (convertedTime[1] > 0)
                             {
-                                cooldownStr = "" + convertedTime[1] + "h:" + convertedTime[2] + "m:" + convertedTime[3] + "s";
+                                cooldownStr = convertedTime[1] + "h:" + convertedTime[2] + "m:" + convertedTime[3] + "s";
                             }
                             else if (convertedTime[2] > 0)
                             {
-                                cooldownStr = "" + convertedTime[2] + "m:" + convertedTime[3] + "s";
+                                cooldownStr = convertedTime[2] + "m:" + convertedTime[3] + "s";
                             }
                             else if (convertedTime[3] > 0)
                             {
-                                cooldownStr = "" + convertedTime[3] + "s";
+                                cooldownStr = convertedTime[3] + "s";
                             }
-                            else 
+                            else
                             {
-                                cooldownStr = "" + cooldown + "s";
+                                cooldownStr = cooldown + "s";
                             }
                         }
                         sendSystemMessage(player, "You must wait " + cooldownStr + " before you can change the city's factional alignment to Imperial.", "");
@@ -414,29 +422,29 @@ public class terminal_city extends script.base_script
                     int cooldown = (getIntObjVar(structure, "cityTimeEndImperialAlign") + (isGod(player) ? 10 : 86400)) - getCalendarTime();
                     if (cooldown > 0)
                     {
-                        String cooldownStr = "" + cooldown + "s";
+                        String cooldownStr = cooldown + "s";
                         int[] convertedTime = player_structure.convertSecondsTime(cooldown);
                         if ((convertedTime != null) && (convertedTime.length == 4))
                         {
                             if (convertedTime[0] > 0)
                             {
-                                cooldownStr = "" + convertedTime[0] + "d:" + convertedTime[1] + "h:" + convertedTime[2] + "m:" + convertedTime[3] + "s";
+                                cooldownStr = convertedTime[0] + "d:" + convertedTime[1] + "h:" + convertedTime[2] + "m:" + convertedTime[3] + "s";
                             }
                             else if (convertedTime[1] > 0)
                             {
-                                cooldownStr = "" + convertedTime[1] + "h:" + convertedTime[2] + "m:" + convertedTime[3] + "s";
+                                cooldownStr = convertedTime[1] + "h:" + convertedTime[2] + "m:" + convertedTime[3] + "s";
                             }
                             else if (convertedTime[2] > 0)
                             {
-                                cooldownStr = "" + convertedTime[2] + "m:" + convertedTime[3] + "s";
+                                cooldownStr = convertedTime[2] + "m:" + convertedTime[3] + "s";
                             }
                             else if (convertedTime[3] > 0)
                             {
-                                cooldownStr = "" + convertedTime[3] + "s";
+                                cooldownStr = convertedTime[3] + "s";
                             }
-                            else 
+                            else
                             {
-                                cooldownStr = "" + cooldown + "s";
+                                cooldownStr = cooldown + "s";
                             }
                         }
                         sendSystemMessage(player, "You must wait " + cooldownStr + " before you can change the city's factional alignment to Rebel.", "");
@@ -457,7 +465,7 @@ public class terminal_city extends script.base_script
                 {
                     sendSystemMessage(player, "You cannot change the city's factional alignment to Neutral while it is a GCW region defender.", "");
                 }
-                else 
+                else
                 {
                     int factionId = cityGetFaction(city_id);
                     if ((-615855020) == factionId)
@@ -487,7 +495,7 @@ public class terminal_city extends script.base_script
                 {
                     sendSystemMessage(player, "The city cannot become a GCW region defender until it is aligned with a faction.", "");
                 }
-                else 
+                else
                 {
                     final String gcwDefenderRegion = cityGetGcwDefenderRegion(city_id);
                     if ((gcwDefenderRegion == null) || (gcwDefenderRegion.length() <= 0))
@@ -516,29 +524,29 @@ public class terminal_city extends script.base_script
                                 final int cooldown = previousRegionTimeEndDefend + (isGod(player) ? 10 : 86400) - getCalendarTime();
                                 if (cooldown > 0)
                                 {
-                                    String cooldownStr = "" + cooldown + "s";
+                                    String cooldownStr = cooldown + "s";
                                     int[] convertedTime = player_structure.convertSecondsTime(cooldown);
                                     if ((convertedTime != null) && (convertedTime.length == 4))
                                     {
                                         if (convertedTime[0] > 0)
                                         {
-                                            cooldownStr = "" + convertedTime[0] + "d:" + convertedTime[1] + "h:" + convertedTime[2] + "m:" + convertedTime[3] + "s";
+                                            cooldownStr = convertedTime[0] + "d:" + convertedTime[1] + "h:" + convertedTime[2] + "m:" + convertedTime[3] + "s";
                                         }
                                         else if (convertedTime[1] > 0)
                                         {
-                                            cooldownStr = "" + convertedTime[1] + "h:" + convertedTime[2] + "m:" + convertedTime[3] + "s";
+                                            cooldownStr = convertedTime[1] + "h:" + convertedTime[2] + "m:" + convertedTime[3] + "s";
                                         }
                                         else if (convertedTime[2] > 0)
                                         {
-                                            cooldownStr = "" + convertedTime[2] + "m:" + convertedTime[3] + "s";
+                                            cooldownStr = convertedTime[2] + "m:" + convertedTime[3] + "s";
                                         }
                                         else if (convertedTime[3] > 0)
                                         {
-                                            cooldownStr = "" + convertedTime[3] + "s";
+                                            cooldownStr = convertedTime[3] + "s";
                                         }
-                                        else 
+                                        else
                                         {
-                                            cooldownStr = "" + cooldown + "s";
+                                            cooldownStr = cooldown + "s";
                                         }
                                     }
                                     announcement += "\n";
@@ -546,14 +554,14 @@ public class terminal_city extends script.base_script
                                     announcement += "You must wait " + cooldownStr + " before you can defend a different GCW region.";
                                 }
                             }
-                            final String[] columnHeader = 
-                            {
-                                "GCW Region"
-                            };
-                            final String[] columnHeaderType = 
-                            {
-                                "text"
-                            };
+                            final String[] columnHeader =
+                                    {
+                                            "GCW Region"
+                                    };
+                            final String[] columnHeaderType =
+                                    {
+                                            "text"
+                                    };
                             final String[][] columnData = new String[1][0];
                             columnData[0] = gcwDefenderRegions;
                             sui.tableColumnMajor(player, player, sui.OK_CANCEL, "@gcw:gcw_region_defender_war_terminal_menu", "handleCityGcwRegionDefenderChoice", announcement, columnHeader, columnHeaderType, columnData, false);
@@ -572,7 +580,7 @@ public class terminal_city extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             if (item == menu_info_types.SERVER_MENU5)
             {
@@ -616,11 +624,15 @@ public class terminal_city extends script.base_script
             {
                 clearStructureScriptVars(player, self, city_id);
             }
-            else if (item == menu_info_types.SERVER_MENU24) {
-                if(!hasObjVar(structure, city.OBJVAR_DERANK_EXEMPT)) {
+            else if (item == menu_info_types.SERVER_MENU24)
+            {
+                if (!hasObjVar(structure, city.OBJVAR_DERANK_EXEMPT))
+                {
                     setObjVar(structure, city.OBJVAR_DERANK_EXEMPT, true);
                     broadcast(player, "The city is now de-rank exempt and will not lose its rank standing during normal city reset cycles.");
-                } else {
+                }
+                else
+                {
                     removeObjVar(structure, city.OBJVAR_DERANK_EXEMPT);
                     broadcast(player, "The city is no longer de-rank exempt.");
                 }
@@ -628,10 +640,12 @@ public class terminal_city extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void forceUpdate(obj_id player, obj_id self, int city_id) throws InterruptedException
     {
         sui.msgbox(self, player, "@city/city:force_election_only", sui.YES_NO, "@city/city:force_city_update_t", sui.MSG_QUESTION, "handleForceUpdateElection");
     }
+
     public int handleForceUpdateElection(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -656,7 +670,7 @@ public class terminal_city extends script.base_script
         {
             sui.msgbox(self, player, "@city/city:confirm_city_update", sui.YES_NO, "@city/city:force_city_update_t", sui.MSG_QUESTION, "handleForceUpdateConfirmed");
         }
-        else 
+        else
         {
             CustomerServiceLog("player_city", "!!!!! A CITY ELECTION WAS FORCED !!!!! Player: " + player + " City: " + city_id);
             sendSystemMessageProse(self, prose.getPackage(new string_id(STF, "force_city_election"), city_id));
@@ -667,6 +681,7 @@ public class terminal_city extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleForceUpdateConfirmed(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -678,6 +693,7 @@ public class terminal_city extends script.base_script
         sui.msgbox(self, player, "@city/city:confirm_disable_cleanup", sui.YES_NO, "@city/city:disable_cleanup_t", sui.MSG_QUESTION, "handleForceUpdateNow");
         return SCRIPT_CONTINUE;
     }
+
     public int handleForceUpdateNow(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -696,11 +712,13 @@ public class terminal_city extends script.base_script
         messageTo(cityMaster, "forceUpdate", outparams, 0.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public void forceRank(obj_id player, obj_id self, int city_id, int rank) throws InterruptedException
     {
         utils.setScriptVar(self, "rank_change", rank);
         sui.msgbox(self, player, "@city/city:force_city_rank_d", sui.YES_NO, "@city/city:force_city_rank_t", sui.MSG_QUESTION, "handleForceRankConfirmed");
     }
+
     public int handleForceRankConfirmed(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -720,6 +738,7 @@ public class terminal_city extends script.base_script
         messageTo(cityMaster, "forceRank", outparams, 0.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public void makeMayor(obj_id player, obj_id self, int city_id) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(self))
@@ -745,7 +764,7 @@ public class terminal_city extends script.base_script
             {
                 citizen_names[i] = "Null Citizen";
             }
-            else 
+            else
             {
                 citizen_names[i] = citizen;
             }
@@ -754,6 +773,7 @@ public class terminal_city extends script.base_script
         utils.setScriptVar(player, "god_command_make_mayor_citizen_names", citizen_names);
         sui.listbox(self, player, "Select the Citizen to Make Mayor. You can only select Online Citizens to become the New Mayor", sui.OK_CANCEL, "God Command: Make Mayor", citizen_names, "handleMakeMayor", true);
     }
+
     public int handleMakeMayor(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -813,10 +833,12 @@ public class terminal_city extends script.base_script
         sendNewMayorMail(city_id, newMayorId);
         return SCRIPT_CONTINUE;
     }
+
     public void resetCloneData(obj_id player, obj_id self, int city_id) throws InterruptedException
     {
         sui.msgbox(self, player, "@city/city:reset_clone_data_d", sui.YES_NO, "@city/city:reset_clone_data_t", sui.MSG_QUESTION, "handleResetCloneData");
     }
+
     public int handleResetCloneData(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -832,10 +854,12 @@ public class terminal_city extends script.base_script
         CustomerServiceLog("player_city", "CSR wiped clone data.  Player: " + player + " City: " + city_id);
         return SCRIPT_CONTINUE;
     }
+
     public void resetShuttleData(obj_id player, obj_id self, int city_id) throws InterruptedException
     {
         sui.msgbox(self, player, "@city/city:reset_shuttle_data_d", sui.YES_NO, "@city/city:reset_shuttle_data_t", sui.MSG_QUESTION, "handleResetShuttleData");
     }
+
     public int handleResetShuttleData(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -851,6 +875,7 @@ public class terminal_city extends script.base_script
         CustomerServiceLog("player_city", "CSR wiped shuttle data.  Player: " + player + " City: " + city_id);
         return SCRIPT_CONTINUE;
     }
+
     public void clearStructureScriptVars(obj_id player, obj_id self, int city_id) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "loadedStructuresIds") && utils.hasScriptVar(self, "loadedStructuresNames") && utils.hasScriptVar(self, "loadedStructuresLocations"))
@@ -868,6 +893,7 @@ public class terminal_city extends script.base_script
             utils.removeScriptVarTree(self, city.CITIZEN_LIST_DATA);
         }
     }
+
     public void modifyStructureList(obj_id player, obj_id self, int city_id) throws InterruptedException
     {
         Vector list_structures = new Vector();
@@ -875,22 +901,28 @@ public class terminal_city extends script.base_script
         Vector list_strings = new Vector();
         list_strings.setSize(0);
         obj_id[] structures = cityGetStructureIds(city_id);
-        for (obj_id structure : structures) {
-            if (city.isMissionTerminal(city_id, structure)) {
+        for (obj_id structure : structures)
+        {
+            if (city.isMissionTerminal(city_id, structure))
+            {
                 String name = localize(getNameStringId(structure));
                 String str = "Mission Terminal: ";
                 str += Objects.requireNonNullElse(name, "\\#FF0000Unloaded or Bad Entry\\");
                 str += " (" + structure + ")";
                 list_structures = utils.addElement(list_structures, structure);
                 list_strings = utils.addElement(list_strings, str);
-            } else if (city.isSkillTrainer(city_id, structure)) {
+            }
+            else if (city.isSkillTrainer(city_id, structure))
+            {
                 String name = localize(getNameStringId(structure));
                 String str = "Skill Trainer: ";
                 str += Objects.requireNonNullElse(name, "\\#FF0000Unloaded or Bad Entry\\");
                 str += " (" + structure + ")";
                 list_structures = utils.addElement(list_structures, structure);
                 list_strings = utils.addElement(list_strings, str);
-            } else if (city.isDecoration(city_id, structure)) {
+            }
+            else if (city.isDecoration(city_id, structure))
+            {
                 String name = localize(getNameStringId(structure));
                 String str = "Decoration: ";
                 str += Objects.requireNonNullElse(name, "\\#FF0000Unloaded or Bad Entry\\");
@@ -908,6 +940,7 @@ public class terminal_city extends script.base_script
         utils.setScriptVar(self, "list_strings", list_strings);
         sui.listbox(self, player, "@city/city:city_object_list_d", sui.OK_CANCEL, "@city/city:city_object_list_t", list_strings, "handleCityObjectRemove", true);
     }
+
     public int handleCityObjectRemove(obj_id self, dictionary params) throws InterruptedException
     {
         int idx = sui.getListboxSelectedRow(params);
@@ -925,10 +958,11 @@ public class terminal_city extends script.base_script
         utils.setScriptVar(self, "list_idx", idx);
         string_id destroy_prefix = new string_id(STF, "destroy_prefix");
         string_id destroy_suffix = new string_id(STF, "destroy_suffix");
-        String prompt = getString(destroy_prefix) + ((String)list_strings.get(idx)) + getString(destroy_suffix);
+        String prompt = getString(destroy_prefix) + list_strings.get(idx) + getString(destroy_suffix);
         sui.msgbox(self, player, prompt, sui.YES_NO, utils.packStringId(SID_SUI_CONFIRM_REMOVE_TITLE), sui.MSG_QUESTION, "handleConfirmObjectRemove");
         return SCRIPT_CONTINUE;
     }
+
     public int handleConfirmObjectRemove(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -942,13 +976,14 @@ public class terminal_city extends script.base_script
         int idx = utils.getIntScriptVar(self, "list_idx");
         Vector list_strings = utils.getResizeableStringArrayScriptVar(self, "list_strings");
         Vector list_structures = utils.getResizeableObjIdArrayScriptVar(self, "list_structures");
-        String name = ((String)list_strings.get(idx));
-        messageTo(((obj_id)list_structures.get(idx)), "requestDestroy", null, 0.0f, true);
-        cityRemoveStructure(city_id, ((obj_id)list_structures.get(idx)));
+        String name = ((String) list_strings.get(idx));
+        messageTo(((obj_id) list_structures.get(idx)), "requestDestroy", null, 0.0f, true);
+        cityRemoveStructure(city_id, ((obj_id) list_structures.get(idx)));
         sendSystemMessageProse(self, prose.getPackage(new string_id(STF, "destroy_object"), city_id));
-        CustomerServiceLog("player_city", "CSR remove city object via menu.  Player: " + player + " City: " + city_id + " Object: " + ((obj_id)list_structures.get(idx)));
+        CustomerServiceLog("player_city", "CSR remove city object via menu.  Player: " + player + " City: " + city_id + " Object: " + list_structures.get(idx));
         return SCRIPT_CONTINUE;
     }
+
     public int handleRevokeCitizenship(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -970,6 +1005,7 @@ public class terminal_city extends script.base_script
         CustomerServiceLog("player_city", "Removed citizen by their request.  City: " + city_name + " (" + city_id + "/" + city_hall + ")" + " Citizen: " + player);
         return SCRIPT_CONTINUE;
     }
+
     public void showCityInfo(obj_id player, obj_id self, int city_id) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(self))
@@ -1018,7 +1054,7 @@ public class terminal_city extends script.base_script
             city_info[2] = "GCW Region Defender: (None)";
             city_info[3] = "GCW Region Defender Bonus: (None)";
         }
-        else 
+        else
         {
             final int timeJoinedGcwDefenderRegion = cityGetTimeJoinedGcwDefenderRegion(city_id);
             city_info[2] = "GCW Region Defender: " + localize(new string_id("gcw_regions", gcwDefenderRegion));
@@ -1037,17 +1073,17 @@ public class terminal_city extends script.base_script
                     {
                         city_info[3] = "GCW Region Defender Bonus: " + getGcwDefenderRegionRebelBonus(gcwDefenderRegion) + "%";
                     }
-                    else 
+                    else
                     {
                         city_info[3] = "GCW Region Defender Bonus: (None - cannot determine factional alignment)";
                     }
                 }
-                else 
+                else
                 {
                     city_info[3] = ("GCW Region Defender Bonus: (None - hasn't defended for " + gcwDaysRequiredForGcwRegionDefenderBonus + " days)\n");
                 }
             }
-            else 
+            else
             {
                 city_info[3] = "GCW Region Defender Bonus: (None - cannot determine time started defending)";
             }
@@ -1055,7 +1091,7 @@ public class terminal_city extends script.base_script
         location city_loc = cityGetLocation(city_id);
         string_id city_location_text = new string_id(STF, "location_prompt");
         string_id city_radius_text = new string_id(STF, "radius_prompt");
-        city_info[4] = getString(city_location_text) + (int)city_loc.x + ", " + (int)city_loc.z + getString(city_radius_text) + cityGetRadius(city_id) + "m";
+        city_info[4] = getString(city_location_text) + (int) city_loc.x + ", " + (int) city_loc.z + getString(city_radius_text) + cityGetRadius(city_id) + "m";
         string_id citizens_text = new string_id(STF, "citizen_prompt");
         string_id structures_text = new string_id(STF, "structures_prompt");
         city_info[5] = getString(citizens_text) + cityGetCitizenIds(city_id).length + getString(structures_text) + cityGetStructureIds(city_id).length;
@@ -1073,6 +1109,7 @@ public class terminal_city extends script.base_script
         city_info[11] = "@city/city:garage_tax" + " -- " + getIntObjVar(cityHall, garage) + "%";
         sui.listbox(self, player, "@city/city:city_info_d", sui.OK_CANCEL, "@city/city:city_info_t", city_info, "handleCityInfoSelect", true);
     }
+
     public void showCitizensList(obj_id player, obj_id self, int city_id) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(self))
@@ -1102,18 +1139,23 @@ public class terminal_city extends script.base_script
             utils.setScriptVar(self, city.CITIZEN_LIST_QUERIED, true);
         }
         dictionary residentInfo = new dictionary();
-        for (obj_id structure : structures) {
-            if (!exists(structure) && !hasAsked) {
+        for (obj_id structure : structures)
+        {
+            if (!exists(structure) && !hasAsked)
+            {
                 dictionary dict = new dictionary();
                 dict.put("terminal_id", self);
                 dict.put("city_id", city_id);
-                if (!messageTo(structure, "getStructureCitizenInformation", dict, 0.0f, false)) {
+                if (!messageTo(structure, "getStructureCitizenInformation", dict, 0.0f, false))
+                {
                     CustomerServiceLog("player_city", "Citizen List: City(" + city_id + ")" + cityGetName(city_id) + " MessageTo failed!  Attempted to message Object(" + structure + ").");
                 }
                 CustomerServiceLog("player_city", "Citizen List: City(" + city_id + ")" + cityGetName(city_id) + " Structure(" + structure + ") does not exist on this Server - Messaging to object to obtain Data.");
             }
-            if (city.isNormalStructure(city_id, structure) && !player_structure.isCivic(structure)) {
-                if (exists(structure) && hasObjVar(structure, player_structure.VAR_RESIDENCE_BUILDING)) {
+            if (city.isNormalStructure(city_id, structure) && !player_structure.isCivic(structure))
+            {
+                if (exists(structure) && hasObjVar(structure, player_structure.VAR_RESIDENCE_BUILDING))
+                {
                     obj_id citizenId = getObjIdObjVar(structure, player_structure.VAR_RESIDENCE_BUILDING);
                     dictionary residentDict = new dictionary();
                     residentDict.put("house_id", structure);
@@ -1129,6 +1171,7 @@ public class terminal_city extends script.base_script
         sendSystemMessage(player, new string_id(STF, "accessing_citizen_city_network"));
         messageTo(self, "DisplayCitizenList", residentInfo, 3.0f, false);
     }
+
     public int DisplayCitizenList(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -1155,167 +1198,167 @@ public class terminal_city extends script.base_script
                 switch (l)
                 {
                     case 0:
-                    if (ownerName == null || ownerName.length() <= 0)
-                    {
-                        ownerName = "@city/city:unknown_owner_data";
-                    }
-                    if (!isGod(player))
-                    {
-                        if (city.isMilitiaOfCity(listOfResidents[k], city_id))
+                        if (ownerName == null || ownerName.length() <= 0)
                         {
-                            displayData[k][l] = ownerName + " (Militia)";
+                            ownerName = "@city/city:unknown_owner_data";
                         }
-                        else 
+                        if (!isGod(player))
                         {
-                            displayData[k][l] = ownerName;
+                            if (city.isMilitiaOfCity(listOfResidents[k], city_id))
+                            {
+                                displayData[k][l] = ownerName + " (Militia)";
+                            }
+                            else
+                            {
+                                displayData[k][l] = ownerName;
+                            }
                         }
-                    }
-                    else 
-                    {
-                        if (city.isMilitiaOfCity(listOfResidents[k], city_id))
+                        else
                         {
-                            displayData[k][l] = ownerName + " (Militia) : " + listOfResidents[k];
+                            if (city.isMilitiaOfCity(listOfResidents[k], city_id))
+                            {
+                                displayData[k][l] = ownerName + " (Militia) : " + listOfResidents[k];
+                            }
+                            else
+                            {
+                                displayData[k][l] = ownerName + " : " + listOfResidents[k];
+                            }
                         }
-                        else 
-                        {
-                            displayData[k][l] = ownerName + " : " + listOfResidents[k];
-                        }
-                    }
-                    break;
+                        break;
                     case 1:
-                    if (params.containsKey(listOfResidents[k]))
-                    {
-                        dictionary residentDict = params.getDictionary(listOfResidents[k]);
-                        obj_id house = residentDict.getObjId("house_id");
-                        String houseName = getEncodedName(house);
-                        if (houseName == null || houseName.length() <= 0)
+                        if (params.containsKey(listOfResidents[k]))
                         {
-                            houseName = "@city/city:unknown_structure_data";
+                            dictionary residentDict = params.getDictionary(listOfResidents[k]);
+                            obj_id house = residentDict.getObjId("house_id");
+                            String houseName = getEncodedName(house);
+                            if (houseName == null || houseName.length() <= 0)
+                            {
+                                houseName = "@city/city:unknown_structure_data";
+                            }
+                            if (!isGod(player))
+                            {
+                                displayData[k][l] = houseName;
+                            }
+                            else
+                            {
+                                displayData[k][l] = houseName + " : " + house;
+                            }
                         }
-                        if (!isGod(player))
+                        else if (utils.hasScriptVarTree(self, city.CITIZEN_LIST_DATA + "." + listOfResidents[k]))
                         {
-                            displayData[k][l] = houseName;
+                            obj_id house = utils.getObjIdScriptVar(self, city.CITIZEN_LIST_DATA + "." + listOfResidents[k] + ".house_id");
+                            String houseName = utils.getStringScriptVar(self, city.CITIZEN_LIST_DATA + "." + listOfResidents[k] + ".house_name");
+                            if (houseName == null || houseName.length() <= 0)
+                            {
+                                houseName = "@city/city:unknown_structure_data";
+                            }
+                            if (!isGod(player))
+                            {
+                                displayData[k][l] = houseName;
+                            }
+                            else
+                            {
+                                displayData[k][l] = houseName + " : " + house;
+                            }
                         }
-                        else 
+                        else if (cityGetLeader(city_id) == listOfResidents[k])
                         {
-                            displayData[k][l] = houseName + " : " + house;
+                            obj_id house = getTopMostContainer(self);
+                            String houseName = getEncodedName(house);
+                            if (houseName == null || houseName.length() <= 0)
+                            {
+                                houseName = "@city/city:unknown_structure_data";
+                            }
+                            if (!isGod(player))
+                            {
+                                displayData[k][l] = houseName;
+                            }
+                            else
+                            {
+                                displayData[k][l] = houseName + " : " + house;
+                            }
                         }
-                    }
-                    else if (utils.hasScriptVarTree(self, city.CITIZEN_LIST_DATA + "." + listOfResidents[k]))
-                    {
-                        obj_id house = utils.getObjIdScriptVar(self, city.CITIZEN_LIST_DATA + "." + listOfResidents[k] + ".house_id");
-                        String houseName = utils.getStringScriptVar(self, city.CITIZEN_LIST_DATA + "." + listOfResidents[k] + ".house_name");
-                        if (houseName == null || houseName.length() <= 0)
+                        else
                         {
-                            houseName = "@city/city:unknown_structure_data";
+                            String houseName = "unkown";
+                            if (!isGod(player))
+                            {
+                                displayData[k][l] = houseName;
+                            }
+                            else
+                            {
+                                displayData[k][l] = houseName + " : No Id found";
+                            }
                         }
-                        if (!isGod(player))
-                        {
-                            displayData[k][l] = houseName;
-                        }
-                        else 
-                        {
-                            displayData[k][l] = houseName + " : " + house;
-                        }
-                    }
-                    else if (cityGetLeader(city_id) == listOfResidents[k])
-                    {
-                        obj_id house = getTopMostContainer(self);
-                        String houseName = getEncodedName(house);
-                        if (houseName == null || houseName.length() <= 0)
-                        {
-                            houseName = "@city/city:unknown_structure_data";
-                        }
-                        if (!isGod(player))
-                        {
-                            displayData[k][l] = houseName;
-                        }
-                        else 
-                        {
-                            displayData[k][l] = houseName + " : " + house;
-                        }
-                    }
-                    else 
-                    {
-                        String houseName = "unkown";
-                        if (!isGod(player))
-                        {
-                            displayData[k][l] = houseName;
-                        }
-                        else 
-                        {
-                            displayData[k][l] = houseName + " : No Id found";
-                        }
-                    }
-                    break;
+                        break;
                     case 2:
-                    if (params.containsKey(listOfResidents[k]))
-                    {
-                        dictionary residentDict = params.getDictionary(listOfResidents[k]);
-                        obj_id house = residentDict.getObjId("house_id");
-                        String houseLoc = getStructureDisplayLocation(residentDict.getLocation("house_loc"));
-                        if (houseLoc == null || houseLoc.length() <= 0)
+                        if (params.containsKey(listOfResidents[k]))
                         {
-                            houseLoc = "@city/city:unknown_location_data";
+                            dictionary residentDict = params.getDictionary(listOfResidents[k]);
+                            obj_id house = residentDict.getObjId("house_id");
+                            String houseLoc = getStructureDisplayLocation(residentDict.getLocation("house_loc"));
+                            if (houseLoc == null || houseLoc.length() <= 0)
+                            {
+                                houseLoc = "@city/city:unknown_location_data";
+                            }
+                            displayData[k][l] = houseLoc;
+                            locationData[k] = residentDict.getLocation("house_loc");
                         }
-                        displayData[k][l] = houseLoc;
-                        locationData[k] = residentDict.getLocation("house_loc");
-                    }
-                    else if (utils.hasScriptVarTree(self, city.CITIZEN_LIST_DATA + "." + listOfResidents[k]))
-                    {
-                        obj_id house = utils.getObjIdScriptVar(self, city.CITIZEN_LIST_DATA + "." + listOfResidents[k] + ".house_id");
-                        String houseLoc = getStructureDisplayLocation(utils.getLocationScriptVar(self, city.CITIZEN_LIST_DATA + "." + listOfResidents[k] + ".house_loc"));
-                        if (houseLoc == null || houseLoc.length() <= 0)
+                        else if (utils.hasScriptVarTree(self, city.CITIZEN_LIST_DATA + "." + listOfResidents[k]))
                         {
-                            houseLoc = "@city/city:unknown_location_data";
+                            obj_id house = utils.getObjIdScriptVar(self, city.CITIZEN_LIST_DATA + "." + listOfResidents[k] + ".house_id");
+                            String houseLoc = getStructureDisplayLocation(utils.getLocationScriptVar(self, city.CITIZEN_LIST_DATA + "." + listOfResidents[k] + ".house_loc"));
+                            if (houseLoc == null || houseLoc.length() <= 0)
+                            {
+                                houseLoc = "@city/city:unknown_location_data";
+                            }
+                            displayData[k][l] = houseLoc;
+                            locationData[k] = utils.getLocationScriptVar(self, city.CITIZEN_LIST_DATA + "." + listOfResidents[k] + ".house_loc");
                         }
-                        displayData[k][l] = houseLoc;
-                        locationData[k] = utils.getLocationScriptVar(self, city.CITIZEN_LIST_DATA + "." + listOfResidents[k] + ".house_loc");
-                    }
-                    else if (cityGetLeader(city_id) == listOfResidents[k])
-                    {
-                        obj_id house = getTopMostContainer(self);
-                        String houseLoc = getStructureDisplayLocation(getLocation(house));
-                        if (houseLoc == null || houseLoc.length() <= 0)
+                        else if (cityGetLeader(city_id) == listOfResidents[k])
                         {
-                            houseLoc = "@city/city:unknown_location_data";
+                            obj_id house = getTopMostContainer(self);
+                            String houseLoc = getStructureDisplayLocation(getLocation(house));
+                            if (houseLoc == null || houseLoc.length() <= 0)
+                            {
+                                houseLoc = "@city/city:unknown_location_data";
+                            }
+                            displayData[k][l] = houseLoc;
+                            locationData[k] = getLocation(house);
                         }
-                        displayData[k][l] = houseLoc;
-                        locationData[k] = getLocation(house);
-                    }
-                    else 
-                    {
-                        String houseLoc = "@city/city:unknown_location_data";
-                        displayData[k][l] = houseLoc;
-                        locationData[k] = null;
-                    }
-                    break;
+                        else
+                        {
+                            String houseLoc = "@city/city:unknown_location_data";
+                            displayData[k][l] = houseLoc;
+                            locationData[k] = null;
+                        }
+                        break;
                     case 3:
-                    int ownerLevel = cityGetCitizenLevel(city_id, listOfResidents[k]);
-                    if (ownerLevel != 0)
-                    {
-                        displayData[k][l] = "" + ownerLevel;
-                    }
-                    else 
-                    {
-                        displayData[k][l] = "@city/city:unknown_level";
-                    }
-                    break;
+                        int ownerLevel = cityGetCitizenLevel(city_id, listOfResidents[k]);
+                        if (ownerLevel != 0)
+                        {
+                            displayData[k][l] = String.valueOf(ownerLevel);
+                        }
+                        else
+                        {
+                            displayData[k][l] = "@city/city:unknown_level";
+                        }
+                        break;
                     case 4:
-                    String ownerProfession = cityGetCitizenProfession(city_id, listOfResidents[k]);
-                    if (ownerProfession != null && ownerProfession.length() > 0)
-                    {
-                        displayData[k][l] = "@ui_roadmap:" + ownerProfession;
-                    }
-                    else 
-                    {
-                        displayData[k][l] = "@city/city:unknown_profession";
-                    }
-                    break;
+                        String ownerProfession = cityGetCitizenProfession(city_id, listOfResidents[k]);
+                        if (ownerProfession != null && ownerProfession.length() > 0)
+                        {
+                            displayData[k][l] = "@ui_roadmap:" + ownerProfession;
+                        }
+                        else
+                        {
+                            displayData[k][l] = "@city/city:unknown_profession";
+                        }
+                        break;
                     case 5:
-                    String onlineOfflineStatus = utils.getOnlineOfflineStatus(listOfResidents[k]);
-                    displayData[k][l] = onlineOfflineStatus;
-                    break;
+                        String onlineOfflineStatus = utils.getOnlineOfflineStatus(listOfResidents[k]);
+                        displayData[k][l] = onlineOfflineStatus;
+                        break;
                 }
             }
         }
@@ -1324,6 +1367,7 @@ public class terminal_city extends script.base_script
         showCitizenshipListSui(self, player, displayData);
         return SCRIPT_CONTINUE;
     }
+
     public int handleCitizenSelect(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -1363,7 +1407,7 @@ public class terminal_city extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             location chosenLoc = locationData[idx];
             obj_id structureWaypoint = createWaypointInDatapad(player, chosenLoc);
@@ -1374,30 +1418,32 @@ public class terminal_city extends script.base_script
         showCitizenshipListSui(self, player, displayData);
         return SCRIPT_CONTINUE;
     }
+
     public void showCitizenshipListSui(obj_id self, obj_id player, String[][] displayData) throws InterruptedException
     {
-        String[] colTitles = 
-        {
-            "@city/city:column_citizen_name",
-            "@city/city:column_structure_name",
-            "@city/city:column_structure_location",
-            "@city/city:column_citizen_level",
-            "@city/city:column_citizen_profession",
-            "@city/city:column_location_or_last_login"
-        };
-        String[] colTypes = 
-        {
-            "text",
-            "text",
-            "text",
-            "integer",
-            "text",
-            "text"
-        };
+        String[] colTitles =
+                {
+                        "@city/city:column_citizen_name",
+                        "@city/city:column_structure_name",
+                        "@city/city:column_structure_location",
+                        "@city/city:column_citizen_level",
+                        "@city/city:column_citizen_profession",
+                        "@city/city:column_location_or_last_login"
+                };
+        String[] colTypes =
+                {
+                        "text",
+                        "text",
+                        "text",
+                        "integer",
+                        "text",
+                        "text"
+                };
         string_id prompt = new string_id(STF, "citizen_list_prompt");
         String stringPrompt = getString(prompt);
         sui.tableRowMajor(self, player, sui.OK_CANCEL, "@city/city:citizen_list_t", "handleCitizenSelect", stringPrompt, colTitles, colTypes, displayData, true);
     }
+
     public void showStructuresList(obj_id player, obj_id self, int city_id) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(self))
@@ -1414,17 +1460,18 @@ public class terminal_city extends script.base_script
                 sendSystemMessage(player, new string_id(STF, "accessing_city_network"));
                 getCityStructuresInfo(player, self, city_id);
             }
-            else 
+            else
             {
                 showCityStructuresSuiFromScriptVars(self, player);
             }
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id(STF, "accessing_city_network"));
             getCityStructuresInfo(player, self, city_id);
         }
     }
+
     public void getCityStructuresInfo(obj_id player, obj_id self, int city_id) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(self))
@@ -1437,10 +1484,14 @@ public class terminal_city extends script.base_script
         loadedStructures.setSize(0);
         Vector unloadedStructures = new Vector();
         unloadedStructures.setSize(0);
-        for (obj_id structure : structures) {
-            if (structure.isLoaded()) {
+        for (obj_id structure : structures)
+        {
+            if (structure.isLoaded())
+            {
                 utils.addElement(loadedStructures, structure);
-            } else {
+            }
+            else
+            {
                 utils.addElement(unloadedStructures, structure);
             }
         }
@@ -1455,6 +1506,7 @@ public class terminal_city extends script.base_script
             messageUnloadedCityStructures(self, player, city_id, unloadedStructuresStaticArray);
         }
     }
+
     public void LoadedCityStructuresInfo(obj_id self, obj_id player, int city_id, obj_id[] loadedStructures) throws InterruptedException
     {
         location[] structuresLocation = new location[loadedStructures.length];
@@ -1469,11 +1521,11 @@ public class terminal_city extends script.base_script
             else if (player_structure.isCivic(loadedStructures[i]))
             {
                 structuresLocation[i] = getLocation(loadedStructures[i]);
-                float cond = ((float)player_structure.getStructureCondition(loadedStructures[i])) / player_structure.getMaxCondition(loadedStructures[i]);
-                int outcond = (int)(cond * 100);
+                float cond = ((float) player_structure.getStructureCondition(loadedStructures[i])) / player_structure.getMaxCondition(loadedStructures[i]);
+                int outcond = (int) (cond * 100);
                 structuresName[i] = getEncodedName(loadedStructures[i]) + " (Condition : " + outcond + "%)";
             }
-            else 
+            else
             {
                 loadedStructures[i] = null;
             }
@@ -1507,19 +1559,23 @@ public class terminal_city extends script.base_script
         dict.put("city_terminal", self);
         messageTo(self, "DisplayCityStructuresList", dict, 3.0f, false);
     }
+
     public void messageUnloadedCityStructures(obj_id self, obj_id player, int city_id, obj_id[] unloadedStructures) throws InterruptedException
     {
-        for (obj_id unloadedStructure : unloadedStructures) {
+        for (obj_id unloadedStructure : unloadedStructures)
+        {
             dictionary d = new dictionary();
             d.put("player", player);
             d.put("city_id", city_id);
             d.put("city_terminal", self);
-            if (!messageTo(unloadedStructure, "handleUnloadedCityStructureReportData", d, 0.0f, false)) {
+            if (!messageTo(unloadedStructure, "handleUnloadedCityStructureReportData", d, 0.0f, false))
+            {
                 CustomerServiceLog("player_city", "Structure List: City(" + city_id + ")" + cityGetName(city_id) + " MessageTo Structure(" + unloadedStructure + ") Failed!");
             }
             CustomerServiceLog("player_city", "Structure List: City(" + city_id + ")" + cityGetName(city_id) + " Requesting Structure Info from Object(" + unloadedStructure + ") - Sent Data: (requesting)Player(" + player + "), CityID(" + city_id + "), City Terminal(" + self + ").");
         }
     }
+
     public int DisplayCityStructuresList(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -1547,43 +1603,44 @@ public class terminal_city extends script.base_script
                 switch (k)
                 {
                     case 0:
-                    if (structureNames[i] == null || structureNames[i].equals(""))
-                    {
-                        structureNames[i] = "Unknown Structure";
-                    }
-                    displayData[i][k] = structureNames[i];
-                    break;
+                        if (structureNames[i] == null || structureNames[i].equals(""))
+                        {
+                            structureNames[i] = "Unknown Structure";
+                        }
+                        displayData[i][k] = structureNames[i];
+                        break;
                     case 1:
-                    displayData[i][k] = getStructureDisplayLocation(structureLocs[i]);
-                    break;
+                        displayData[i][k] = getStructureDisplayLocation(structureLocs[i]);
+                        break;
                     case 2:
-                    String template = getTemplateName(structureIds[i]);
-                    if (template.contains("garden_"))
-                    {
-                        displayData[i][k] = "Garden";
+                        String template = getTemplateName(structureIds[i]);
+                        if (template.contains("garden_"))
+                        {
+                            displayData[i][k] = "Garden";
+                            break;
+                        }
+                        if (city.isMissionTerminal(city_id, structureIds[i]))
+                        {
+                            displayData[i][k] = "Terminal";
+                            break;
+                        }
+                        if (city.isDecoration(city_id, structureIds[i]))
+                        {
+                            displayData[i][k] = "Decoration";
+                            break;
+                        }
+                        displayData[i][k] = "Structure";
                         break;
-                    }
-                    if (city.isMissionTerminal(city_id, structureIds[i]))
-                    {
-                        displayData[i][k] = "Terminal";
-                        break;
-                    }
-                    if (city.isDecoration(city_id, structureIds[i]))
-                    {
-                        displayData[i][k] = "Decoration";
-                        break;
-                    }
-                    displayData[i][k] = "Structure";
-                    break;
                     default:
-                    LOG("sissynoid", "Horrible Failure");
-                    break;
+                        LOG("sissynoid", "Horrible Failure");
+                        break;
                 }
             }
         }
         showCityStructuresSui(self, player, displayData);
         return SCRIPT_CONTINUE;
     }
+
     public void showCityStructuresSuiFromScriptVars(obj_id self, obj_id player) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "loadedStructuresIds") && !utils.hasScriptVar(self, "loadedStructuresNames") && !utils.hasScriptVar(self, "loadedStructuresLocations"))
@@ -1603,66 +1660,69 @@ public class terminal_city extends script.base_script
                 switch (k)
                 {
                     case 0:
-                    if (structureNames[i] == null || structureNames[i].equals(""))
-                    {
-                        structureNames[i] = "Unknown Structure";
-                    }
-                    displayData[i][k] = structureNames[i];
-                    break;
+                        if (structureNames[i] == null || structureNames[i].equals(""))
+                        {
+                            structureNames[i] = "Unknown Structure";
+                        }
+                        displayData[i][k] = structureNames[i];
+                        break;
                     case 1:
-                    displayData[i][k] = getStructureDisplayLocation(structureLocs[i]);
-                    break;
+                        displayData[i][k] = getStructureDisplayLocation(structureLocs[i]);
+                        break;
                     case 2:
-                    String template = getTemplateName(structureIds[i]);
-                    if (template.contains("garden_"))
-                    {
-                        displayData[i][k] = "Garden";
+                        String template = getTemplateName(structureIds[i]);
+                        if (template.contains("garden_"))
+                        {
+                            displayData[i][k] = "Garden";
+                            break;
+                        }
+                        if (city.isMissionTerminal(city_id, structureIds[i]))
+                        {
+                            displayData[i][k] = "Terminal";
+                            break;
+                        }
+                        if (city.isDecoration(city_id, structureIds[i]))
+                        {
+                            displayData[i][k] = "Decoration";
+                            break;
+                        }
+                        displayData[i][k] = "Structure";
                         break;
-                    }
-                    if (city.isMissionTerminal(city_id, structureIds[i]))
-                    {
-                        displayData[i][k] = "Terminal";
-                        break;
-                    }
-                    if (city.isDecoration(city_id, structureIds[i]))
-                    {
-                        displayData[i][k] = "Decoration";
-                        break;
-                    }
-                    displayData[i][k] = "Structure";
-                    break;
                     default:
-                    LOG("sissynoid", "Horrible Failure");
-                    broadcast(player, "Found an unknown structure type. Please advise!");
-                    break;
+                        LOG("sissynoid", "Horrible Failure");
+                        broadcast(player, "Found an unknown structure type. Please advise!");
+                        break;
                 }
             }
         }
         showCityStructuresSui(self, player, displayData);
     }
+
     public void showCityStructuresSui(obj_id self, obj_id player, String[][] displayData) throws InterruptedException
     {
-        String[] colTitles = 
-        {
-            "Structure Name",
-            "Structure Location",
-            "Structure Type"
-        };
-        String[] colTypes = 
-        {
-            "text",
-            "text",
-            "text"
-        };
+        String[] colTitles =
+                {
+                        "Structure Name",
+                        "Structure Location",
+                        "Structure Type"
+                };
+        String[] colTypes =
+                {
+                        "text",
+                        "text",
+                        "text"
+                };
         string_id prompt = new string_id(STF, "structure_list_prompt");
         String stringPrompt = getString(prompt);
         sui.tableRowMajor(self, player, sui.OK_CANCEL, "@city/city:structure_list_t", "handleStructureWaypointSelect", stringPrompt, colTitles, colTypes, displayData, true);
     }
+
     public String getStructureDisplayLocation(location loc) throws InterruptedException
     {
-        String returnString = "" + Math.round(loc.x) + ", " + Math.round(loc.y) + ", " + Math.round(loc.z);
+        String returnString = Math.round(loc.x) + ", " + Math.round(loc.y) + ", " + Math.round(loc.z);
         return returnString;
     }
+
     public int RecievedUnloadedStructureResponse(obj_id self, dictionary params) throws InterruptedException
     {
         int city_id_for_log = getCityAtLocation(getLocation(self), 0);
@@ -1704,6 +1764,7 @@ public class terminal_city extends script.base_script
         utils.setScriptVar(self, "loadedStructuresLocations", loadedStructuresLocations);
         return SCRIPT_CONTINUE;
     }
+
     public int handleStructureWaypointSelect(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -1730,7 +1791,7 @@ public class terminal_city extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             obj_id structureWaypoint = createWaypointInDatapad(player, structureLocs[idx]);
             setWaypointName(structureWaypoint, structureNames[idx]);
@@ -1740,6 +1801,7 @@ public class terminal_city extends script.base_script
         showCityStructuresSuiFromScriptVars(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public void showAdvancementInfo(obj_id player, obj_id self, int city_id) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(self))
@@ -1777,7 +1839,7 @@ public class terminal_city extends script.base_script
             string_id prev_rank_citizens = new string_id(STF, "citizens");
             rankInfo = utils.addElement(rankInfo, "\\#FF0000" + getString(pop_req_rank_current_green) + cur_pop_req + getString(prev_rank_citizens) + "\\");
         }
-        else 
+        else
         {
             string_id pop_req_rank_current = new string_id(STF, "pop_req_current_rank");
             string_id prev_rank_citizens = new string_id(STF, "citizens");
@@ -1788,7 +1850,7 @@ public class terminal_city extends script.base_script
             string_id max_rank_achieved = new string_id(STF, "max_rank_achieved");
             rankInfo = utils.addElement(rankInfo, getString(max_rank_achieved));
         }
-        else 
+        else
         {
             string_id pop_req_rank_next = new string_id(STF, "pop_req_next_rank");
             string_id next_rank_citizens = new string_id(STF, "citizens");
@@ -1844,6 +1906,7 @@ public class terminal_city extends script.base_script
         outparams.put("city_id", city_id);
         messageTo(city_master, "reportUpdateEstimate", outparams, 0.0f, false);
     }
+
     public void showMaintInfo(obj_id player, obj_id self, int city_id) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(self))
@@ -1871,7 +1934,7 @@ public class terminal_city extends script.base_script
             total_cost += 75000 * over_cap;
             maintInfo = new String[9];
         }
-        else 
+        else
         {
             maintInfo = new String[7];
         }
@@ -1879,15 +1942,22 @@ public class terminal_city extends script.base_script
         int deco_cost = 0;
         int other_cost = 0;
         obj_id[] structures = cityGetStructureIds(city_id);
-        for (obj_id structure : structures) {
-            if (structure == city_hall) {
+        for (obj_id structure : structures)
+        {
+            if (structure == city_hall)
+            {
                 continue;
             }
-            if (city.isNormalStructure(city_id, structure)) {
+            if (city.isNormalStructure(city_id, structure))
+            {
                 structures_cost += city.getStructureCost(city_id, structure);
-            } else if (city.isDecoration(city_id, structure)) {
+            }
+            else if (city.isDecoration(city_id, structure))
+            {
                 deco_cost += city.getStructureCost(city_id, structure);
-            } else {
+            }
+            else
+            {
                 other_cost += city.getStructureCost(city_id, structure);
             }
         }
@@ -1915,7 +1985,7 @@ public class terminal_city extends script.base_script
             string_id map_reg_cost = new string_id(STF, "map_reg_cost");
             maintInfo[i++] = getString(map_reg_cost);
         }
-        else 
+        else
         {
             string_id map_unreg = new string_id(STF, "map_unreg");
             maintInfo[i++] = getString(map_unreg);
@@ -1935,6 +2005,7 @@ public class terminal_city extends script.base_script
         outparams.put("city_id", city_id);
         messageTo(city_master, "reportUpdateEstimate", outparams, 0.0f, false);
     }
+
     public void changeCityName(obj_id player, obj_id self, int city_id) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(self))
@@ -1944,6 +2015,7 @@ public class terminal_city extends script.base_script
         }
         sui.inputbox(self, player, "@city/city:city_name_new_d", sui.OK_CANCEL, "@city/city:city_name_new_t", sui.INPUT_NORMAL, null, "handleSetCityName", null);
     }
+
     public int handleSetCityName(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -1980,6 +2052,7 @@ public class terminal_city extends script.base_script
         sendSystemMessage(mayor, SID_NAME_CHANGED);
         return SCRIPT_CONTINUE;
     }
+
     public void modifyMilitia(obj_id player, obj_id self, int city_id) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(self))
@@ -1996,14 +2069,17 @@ public class terminal_city extends script.base_script
         Vector militiaMembers = new Vector();
         militiaMembers.setSize(0);
         militiaMembers = utils.addElement(militiaMembers, "Add Militia Member");
-        for (obj_id citizen : citizens) {
-            if (city.hasMilitiaFlag(citizen, city_id)) {
+        for (obj_id citizen : citizens)
+        {
+            if (city.hasMilitiaFlag(citizen, city_id))
+            {
                 String name = cityGetCitizenName(city_id, citizen);
                 militiaMembers = utils.addElement(militiaMembers, name);
             }
         }
         sui.listbox(self, player, "@city/city:militia_d", sui.OK_CANCEL, "@city/city:militia_t", militiaMembers, "handleRemoveMilitia", true);
     }
+
     public int handleRemoveMilitia(obj_id self, dictionary params) throws InterruptedException
     {
         int idx = sui.getListboxSelectedRow(params);
@@ -2027,7 +2103,7 @@ public class terminal_city extends script.base_script
         {
             sui.inputbox(self, player, "@city/city:militia_new_d", sui.OK_CANCEL, "@city/city:militia_new_t", sui.INPUT_NORMAL, null, "handleAddMilitia", null);
         }
-        else 
+        else
         {
             int j = 0;
             String removeName = null;
@@ -2035,12 +2111,15 @@ public class terminal_city extends script.base_script
             Vector militiaMembers = new Vector();
             militiaMembers.setSize(0);
             militiaMembers = utils.addElement(militiaMembers, "Add Militia Member");
-            for (obj_id citizen : citizens) {
-                if (city.hasMilitiaFlag(citizen, city_id)) {
+            for (obj_id citizen : citizens)
+            {
+                if (city.hasMilitiaFlag(citizen, city_id))
+                {
                     j++;
                     String name = cityGetCitizenName(city_id, citizen);
                     militiaMembers = utils.addElement(militiaMembers, name);
-                    if (j == idx) {
+                    if (j == idx)
+                    {
                         utils.setScriptVar(self, "removal.temp", citizen);
                         removeName = name;
                         break;
@@ -2058,6 +2137,7 @@ public class terminal_city extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleAddMilitia(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -2075,18 +2155,24 @@ public class terminal_city extends script.base_script
         }
         String s2 = playerName.toLowerCase();
         obj_id[] players = getPlayerCreaturesInRange(getLocation(self), 10);
-        for (obj_id player1 : players) {
+        for (obj_id player1 : players)
+        {
             String s1 = (getName(player1)).toLowerCase();
             int indexOf = s1.indexOf(' ');
-            if (indexOf > -1) {
+            if (indexOf > -1)
+            {
                 s1 = s1.substring(0, indexOf);
             }
-            if (s1.compareTo(s2) == 0) {
-                if (city.isCitizenOfCity(player1, city_id)) {
+            if (s1.compareTo(s2) == 0)
+            {
+                if (city.isCitizenOfCity(player1, city_id))
+                {
                     city.addMilitia(city_id, player1);
                     sendSystemMessage(player, SID_ADDED_MILITIA);
                     sendSystemMessage(player1, SID_ADDED_MILITIA_TARGET);
-                } else {
+                }
+                else
+                {
                     sendSystemMessage(player, SID_NOT_CITIZEN);
                 }
                 return SCRIPT_CONTINUE;
@@ -2095,6 +2181,7 @@ public class terminal_city extends script.base_script
         sendSystemMessage(player, SID_CANT_FIND_PLAYER);
         return SCRIPT_CONTINUE;
     }
+
     public int handleRemoveMilitiaConfirmed(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -2116,12 +2203,13 @@ public class terminal_city extends script.base_script
             sendSystemMessage(player, SID_REMOVED_MILITIA);
             sendSystemMessage(removeTarget, SID_REMOVED_MILITIA_TARGET);
         }
-        else 
+        else
         {
             sendSystemMessage(player, SID_NOT_CITIZEN);
         }
         return SCRIPT_CONTINUE;
     }
+
     public void showTreasuryInfo(obj_id player, obj_id self, int city_id) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(self))
@@ -2157,6 +2245,7 @@ public class terminal_city extends script.base_script
         treasury_info[5] = "@city/city:garage_tax" + " -- " + garage_fee + "%";
         sui.listbox(self, player, "@city/city:treasury_balance_d", sui.OK_CANCEL, "@city/city:treasury_balance_t", treasury_info, "handleTreasuryInfoSelect", true);
     }
+
     public void makeTreasuryDeposit(obj_id player, obj_id self, int city_id) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(self))
@@ -2177,11 +2266,12 @@ public class terminal_city extends script.base_script
             int maint_pool = getBankBalance(structure);
             int pid = sui.transfer(self, player, "@city/city:treasury_deposit_d", "@city/city:treasury_deposit", "@city/city:total_funds", total, "@city/city:treasury", 0, "depositTreasury");
         }
-        else 
+        else
         {
             sendSystemMessage(player, SID_NO_MONEY);
         }
     }
+
     public int depositTreasury(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);
@@ -2202,7 +2292,7 @@ public class terminal_city extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             money.requestPayment(player, structure, amt, "handlePayment", null);
             int city_id = findCityByCityHall(structure);
@@ -2214,6 +2304,7 @@ public class terminal_city extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void makeTreasuryWithdraw(obj_id player, obj_id self, int city_id) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(self))
@@ -2223,6 +2314,7 @@ public class terminal_city extends script.base_script
         }
         sui.inputbox(self, player, "@city/city:withdraw_reason_d", sui.OK_CANCEL, "@city/city:withdraw_reason_t", sui.INPUT_NORMAL, null, "handleWithdrawReason", null);
     }
+
     public int handleWithdrawReason(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -2240,12 +2332,13 @@ public class terminal_city extends script.base_script
             int player_cash = getCashBalance(player);
             int pid = sui.transfer(self, player, "@city/city:treasury_withdraw_prompt", "@city/city:treasury_withdraw", "@city/city:treasury", total, "@city/city:funds", 0, "withdrawTreasury");
         }
-        else 
+        else
         {
             sendSystemMessage(player, SID_NO_MONEY);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int withdrawTreasury(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);
@@ -2276,7 +2369,7 @@ public class terminal_city extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             if ((amt < 5000) || (amt > 5000000))
             {
@@ -2291,6 +2384,7 @@ public class terminal_city extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleWithdrawSuccess(obj_id self, dictionary params) throws InterruptedException
     {
         int city_id = params.getInt("city_id");
@@ -2306,19 +2400,22 @@ public class terminal_city extends script.base_script
         String citizen_name = "";
         String withdraw_reason = utils.getStringScriptVar(self, "withdrawReason");
         obj_id[] citizens = cityGetCitizenIds(city_id);
-        for (obj_id citizen : citizens) {
+        for (obj_id citizen : citizens)
+        {
             citizen_name = cityGetCitizenName(city_id, citizen);
             prose_package bodypp = prose.getPackage(TREASURY_WITHDRAW_BODY, withdraw_reason, mayor_name, amt);
             utils.sendMail(TREASURY_WITHDRAW_SUBJECT, bodypp, citizen_name, "City Hall");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleWithdrawFail(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
         sendSystemMessage(player, new string_id(STF, "withdraw_treasury_error"));
         return SCRIPT_CONTINUE;
     }
+
     public void adjustTaxes(obj_id player, obj_id self, int city_id) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(self))
@@ -2351,6 +2448,7 @@ public class terminal_city extends script.base_script
         tax_info[4] = "@city/city:garage_tax" + " -- " + garage_fee + " %";
         sui.listbox(self, player, "@city/city:adjust_taxes_d", sui.OK_CANCEL, "@city/city:adjust_taxes_t", tax_info, "handleTaxInfoSelect", true);
     }
+
     public int handleTaxInfoSelect(obj_id self, dictionary params) throws InterruptedException
     {
         int idx = sui.getListboxSelectedRow(params);
@@ -2373,6 +2471,7 @@ public class terminal_city extends script.base_script
         sui.inputbox(self, player, "@city/city:set_tax_d_" + TAX_STRING[idx], sui.OK_CANCEL, "@city/city:set_tax_t_" + TAX_STRING[idx], sui.INPUT_NORMAL, null, "handleSetTax", null);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetTax(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -2393,8 +2492,7 @@ public class terminal_city extends script.base_script
         try
         {
             desired_tax = Integer.valueOf(tax_string);
-        }
-        catch(NumberFormatException err)
+        } catch (NumberFormatException err)
         {
             sendSystemMessage(player, SID_TAX_OUT_OF_RANGE);
             return SCRIPT_CONTINUE;
@@ -2412,61 +2510,67 @@ public class terminal_city extends script.base_script
         switch (set_tax)
         {
             case 0:
-            city.setIncomeTax(city_id, desired_tax);
-            pp = prose.getPackage(SID_INCOME_TAX, desired_tax);
-                for (obj_id citizen4 : citizens) {
+                city.setIncomeTax(city_id, desired_tax);
+                pp = prose.getPackage(SID_INCOME_TAX, desired_tax);
+                for (obj_id citizen4 : citizens)
+                {
                     String citizen_name = cityGetCitizenName(city_id, citizen4);
                     prose_package bodypp = prose.getPackage(TAX_INCOME_BODY, city_name, desired_tax);
                     utils.sendMail(TAX_INCOME_SUBJECT, bodypp, citizen_name, "City Hall");
                 }
-            break;
+                break;
             case 1:
-            city.setPropertyTax(city_id, desired_tax);
-            pp = prose.getPackage(SID_PROPERTY_TAX, desired_tax);
-                for (obj_id citizen3 : citizens) {
+                city.setPropertyTax(city_id, desired_tax);
+                pp = prose.getPackage(SID_PROPERTY_TAX, desired_tax);
+                for (obj_id citizen3 : citizens)
+                {
                     String citizen_name = cityGetCitizenName(city_id, citizen3);
                     prose_package bodypp = prose.getPackage(TAX_PROPERTY_BODY, city_name, desired_tax);
                     utils.sendMail(TAX_PROPERTY_SUBJECT, bodypp, citizen_name, "City Hall");
                 }
-            break;
+                break;
             case 2:
-            city.setSalesTax(city_id, desired_tax);
-            pp = prose.getPackage(SID_SALES_TAX, desired_tax);
-                for (obj_id citizen2 : citizens) {
+                city.setSalesTax(city_id, desired_tax);
+                pp = prose.getPackage(SID_SALES_TAX, desired_tax);
+                for (obj_id citizen2 : citizens)
+                {
                     String citizen_name = cityGetCitizenName(city_id, citizen2);
                     prose_package bodypp = prose.getPackage(TAX_SALES_BODY, city_name, desired_tax);
                     utils.sendMail(TAX_SALES_SUBJECT, bodypp, citizen_name, "City Hall");
                 }
-            break;
+                break;
             case 3:
-            location cityTravelLoc = cityGetTravelLocation(city_id);
-            if ((cityTravelLoc == null) || ((cityTravelLoc.x == 0) && (cityTravelLoc.y == 0) && (cityTravelLoc.z == 0)))
-            {
-                sendSystemMessage(player, SID_NO_SHUTTLEPORT);
-                return SCRIPT_CONTINUE;
-            }
-            city.setTravelFee(city_id, desired_tax);
-            pp = prose.getPackage(SID_TRAVEL_FEE, desired_tax);
-                for (obj_id citizen1 : citizens) {
+                location cityTravelLoc = cityGetTravelLocation(city_id);
+                if ((cityTravelLoc == null) || ((cityTravelLoc.x == 0) && (cityTravelLoc.y == 0) && (cityTravelLoc.z == 0)))
+                {
+                    sendSystemMessage(player, SID_NO_SHUTTLEPORT);
+                    return SCRIPT_CONTINUE;
+                }
+                city.setTravelFee(city_id, desired_tax);
+                pp = prose.getPackage(SID_TRAVEL_FEE, desired_tax);
+                for (obj_id citizen1 : citizens)
+                {
                     String citizen_name = cityGetCitizenName(city_id, citizen1);
                     prose_package bodypp = prose.getPackage(TAX_TRAVEL_BODY, city_name, desired_tax);
                     utils.sendMail(TAX_TRAVEL_SUBJECT, bodypp, citizen_name, "City Hall");
                 }
-            break;
+                break;
             case 4:
-            String garageFee = city_name + ".garageFee";
-            setObjVar(structure, garageFee, desired_tax);
-            pp = prose.getPackage(SID_GARAGE_TAX, desired_tax);
-                for (obj_id citizen : citizens) {
+                String garageFee = city_name + ".garageFee";
+                setObjVar(structure, garageFee, desired_tax);
+                pp = prose.getPackage(SID_GARAGE_TAX, desired_tax);
+                for (obj_id citizen : citizens)
+                {
                     String citizen_name = cityGetCitizenName(city_id, citizen);
                     prose_package bodypp = prose.getPackage(GARAGE_FEE_BODY, city_name, desired_tax);
                     utils.sendMail(GARAGE_FEE_SUBJECT, bodypp, citizen_name, "City Hall");
                 }
-            break;
+                break;
         }
         sendSystemMessageProse(player, pp);
         return SCRIPT_CONTINUE;
     }
+
     public int handleRegisterCity(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -2499,6 +2603,7 @@ public class terminal_city extends script.base_script
         sendSystemMessage(player, SID_REGISTERED);
         return SCRIPT_CONTINUE;
     }
+
     public int handleUnregisterCity(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -2521,6 +2626,7 @@ public class terminal_city extends script.base_script
         sendSystemMessage(player, SID_UNREGISTERED);
         return SCRIPT_CONTINUE;
     }
+
     public void changeSpecialization(obj_id player, obj_id self, int city_id) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(self))
@@ -2552,6 +2658,7 @@ public class terminal_city extends script.base_script
         }
         sui.listbox(self, player, "@city/city:city_specs_d", sui.OK_CANCEL, "@city/city:city_specs_t", knownSpecs, "handleCitySpecInfo", true);
     }
+
     public int handleCitySpecInfo(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -2580,9 +2687,10 @@ public class terminal_city extends script.base_script
             }
         }
         utils.setScriptVar(self, "spec", idx);
-        sui.msgbox(self, player, "@city/city:" + ((String)knownSpecs.get(idx)) + "_d", sui.YES_NO, "@city/city:" + ((String)knownSpecs.get(idx)), sui.MSG_QUESTION, "handleSetCitySpec");
+        sui.msgbox(self, player, "@city/city:" + knownSpecs.get(idx) + "_d", sui.YES_NO, "@city/city:" + knownSpecs.get(idx), sui.MSG_QUESTION, "handleSetCitySpec");
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetCitySpec(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -2627,11 +2735,12 @@ public class terminal_city extends script.base_script
             }
         }
         setObjVar(structure, "spec_stamp", getGameTime());
-        city.setSpecialization(city_id, ((String)knownSpecs.get(spec)));
-        prose_package pp = prose.getPackage(SID_SPEC_SET, "@city/city:" + ((String)knownSpecs.get(spec)));
+        city.setSpecialization(city_id, ((String) knownSpecs.get(spec)));
+        prose_package pp = prose.getPackage(SID_SPEC_SET, "@city/city:" + knownSpecs.get(spec));
         sendSystemMessageProse(player, pp);
         return SCRIPT_CONTINUE;
     }
+
     public void changeZoning(obj_id player, obj_id self, int city_id) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(self))
@@ -2644,18 +2753,19 @@ public class terminal_city extends script.base_script
             city.setCityZoned(city_id, false);
             sendSystemMessage(player, SID_ZONING_DISABLED);
         }
-        else 
+        else
         {
             if (!hasSkill(player, "social_politician_novice"))
             {
                 sendSystemMessage(player, SID_ZONING_SKILL);
             }
-            else 
+            else
             {
                 sui.msgbox(self, player, "@city/city:zoning_d", sui.YES_NO, "@city/city:zoning_t", sui.MSG_QUESTION, "handleSetCityZoning");
             }
         }
     }
+
     public int handleSetCityZoning(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -2678,19 +2788,21 @@ public class terminal_city extends script.base_script
         sendSystemMessage(player, SID_ZONING_ENABLED);
         return SCRIPT_CONTINUE;
     }
+
     public void sendNewMayorMail(int city_id, obj_id mayor) throws InterruptedException
     {
         String nmayor_name = cityGetCitizenName(city_id, mayor);
         obj_id[] citizens = cityGetCitizenIds(city_id);
         String city_name = cityGetName(city_id);
-        for (obj_id citizen : citizens) {
+        for (obj_id citizen : citizens)
+        {
             city.setCitizenAllegiance(city_id, citizen, mayor);
             String citizen_name = cityGetCitizenName(city_id, citizen);
             prose_package bodypp = prose.getPackage(PUBLIC_ELECTION_BODY, city_name, nmayor_name);
             utils.sendMail(PUBLIC_ELECTION_SUBJECT, bodypp, citizen_name, "City Hall");
         }
-        return;
     }
+
     public boolean destroyCitySkillTrainers(obj_id mayor, int city_id) throws InterruptedException
     {
         if (!isValidId(mayor) || !exists(mayor))
@@ -2706,10 +2818,14 @@ public class terminal_city extends script.base_script
             return false;
         }
         obj_id[] structures = cityGetStructureIds(city_id);
-        for (obj_id structure : structures) {
-            if (structure.isLoaded()) {
-                if (!city.isNormalStructure(city_id, structure)) {
-                    if (hasScript(structure, PROFESSION_TRAINER_SCRIPT)) {
+        for (obj_id structure : structures)
+        {
+            if (structure.isLoaded())
+            {
+                if (!city.isNormalStructure(city_id, structure))
+                {
+                    if (hasScript(structure, PROFESSION_TRAINER_SCRIPT))
+                    {
                         CustomerServiceLog("player_city", "Player: " + mayor + " - " + getName(mayor) + " deleted " + structure + " - " + getName(structure) + " at City: " + city_id + " - " + cityGetName(city_id));
                         destroyObject(structure);
                     }
@@ -2718,6 +2834,7 @@ public class terminal_city extends script.base_script
         }
         return true;
     }
+
     public boolean citySkillTrainersExist(int city_id) throws InterruptedException
     {
         if (!cityExists(city_id))
@@ -2725,15 +2842,19 @@ public class terminal_city extends script.base_script
             return false;
         }
         obj_id[] structures = cityGetStructureIds(city_id);
-        for (obj_id structure : structures) {
-            if (structure.isLoaded()) {
-                if (!city.isNormalStructure(city_id, structure)) {
+        for (obj_id structure : structures)
+        {
+            if (structure.isLoaded())
+            {
+                if (!city.isNormalStructure(city_id, structure))
+                {
                     return true;
                 }
             }
         }
         return false;
     }
+
     public int handleCityVisitorMessage(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -2766,6 +2887,7 @@ public class terminal_city extends script.base_script
         setObjVar(city_hall, "city_visitor_message", message);
         return SCRIPT_CONTINUE;
     }
+
     public int handleCityCitizenMessage(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -2798,6 +2920,7 @@ public class terminal_city extends script.base_script
         setObjVar(city_hall, "city_citizen_message", message);
         return SCRIPT_CONTINUE;
     }
+
     public int getStructureCitizenInformationReturn(obj_id self, dictionary params) throws InterruptedException
     {
         int city_id = getCityAtLocation(getLocation(self), 0);
@@ -2816,6 +2939,7 @@ public class terminal_city extends script.base_script
         utils.setScriptVar(self, city.CITIZEN_LIST_DATA + "." + citizen + ".house_loc", houseLoc);
         return SCRIPT_CONTINUE;
     }
+
     public void showSafeHouseCitizenList(obj_id player, obj_id self, int city_id) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(self))
@@ -2843,57 +2967,58 @@ public class terminal_city extends script.base_script
                 switch (l)
                 {
                     case 0:
-                    if (ownerName == null || ownerName.length() <= 0)
-                    {
-                        ownerName = "@city/city:unknown_owner_data";
-                    }
-                    if (!isGod(player))
-                    {
-                        displayData[k][l] = ownerName;
-                    }
-                    else 
-                    {
-                        displayData[k][l] = ownerName + " : " + citizens[k];
-                    }
-                    break;
+                        if (ownerName == null || ownerName.length() <= 0)
+                        {
+                            ownerName = "@city/city:unknown_owner_data";
+                        }
+                        if (!isGod(player))
+                        {
+                            displayData[k][l] = ownerName;
+                        }
+                        else
+                        {
+                            displayData[k][l] = ownerName + " : " + citizens[k];
+                        }
+                        break;
                     case 1:
-                    String onlineOfflineStatus = utils.getOnlineOfflineStatus(citizens[k]);
-                    displayData[k][l] = onlineOfflineStatus;
-                    break;
+                        String onlineOfflineStatus = utils.getOnlineOfflineStatus(citizens[k]);
+                        displayData[k][l] = onlineOfflineStatus;
+                        break;
                     case 2:
-                    if (city.hasMayorProtectionFlag(citizens[k], city_id))
-                    {
-                        displayData[k][l] = "Protected Citizen";
-                    }
-                    else 
-                    {
-                        displayData[k][l] = "";
-                    }
-                    break;
+                        if (city.hasMayorProtectionFlag(citizens[k], city_id))
+                        {
+                            displayData[k][l] = "Protected Citizen";
+                        }
+                        else
+                        {
+                            displayData[k][l] = "";
+                        }
+                        break;
                     default:
-                    break;
+                        break;
                 }
             }
         }
         utils.setScriptVar(player, "safeHouseCitizenList", citizens);
         utils.setScriptVar(player, "city_id", city_id);
-        String[] colTitles = 
-        {
-            "@city/city:column_citizen_name",
-            "@city/city:column_location_or_last_login",
-            "@city/city:column_safe_house_status"
-        };
-        String[] colTypes = 
-        {
-            "text",
-            "text",
-            "text"
-        };
+        String[] colTitles =
+                {
+                        "@city/city:column_citizen_name",
+                        "@city/city:column_location_or_last_login",
+                        "@city/city:column_safe_house_status"
+                };
+        String[] colTypes =
+                {
+                        "text",
+                        "text",
+                        "text"
+                };
         int currentSafeCount = city.getCurrentSafeHouseCount(city_id);
         int maxSafeCount = city.getMaxSafeHouseCount(city_id);
         String prompt = "Mayor Safe House System:  \nThis system allows for the Mayor of a city to protect a Citizen's Structures by flagging them as a 'Safe House'.  This should only be used in extreme circumstances where a Citizen can not log in during a 90 day time period.\n\n" + "Maximum Number of Safe Houses available: " + maxSafeCount + "\nCurrent Number of Safe Houses Used: " + currentSafeCount;
         sui.tableRowMajor(self, player, sui.OK_CANCEL, "@city/city:safe_house_list_t", "handleSafeHouseCitizenSelect", prompt, colTitles, colTypes, displayData, false);
     }
+
     public int handleSafeHouseCitizenSelect(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -2922,7 +3047,7 @@ public class terminal_city extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             obj_id mayor = cityGetLeader(city_id);
             if (citizenList[idx] == mayor)
@@ -2942,7 +3067,7 @@ public class terminal_city extends script.base_script
                 prose.setTT(bodypp, cityGetCitizenName(city_id, citizenList[idx]));
                 utils.sendMail(SID_REMOVE_SAFE_HOUSE_CITIZEN_SUBJECT, bodypp, player, "City Hall");
             }
-            else 
+            else
             {
                 int currentSafeCount = city.getCurrentSafeHouseCount(city_id);
                 int maxSafeCount = city.getMaxSafeHouseCount(city_id);
@@ -2968,6 +3093,7 @@ public class terminal_city extends script.base_script
         sendSystemMessage(player, new string_id(STF, "updating_citizen_protection"));
         return SCRIPT_CONTINUE;
     }
+
     public int updateSafeHouseCitizenList(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())

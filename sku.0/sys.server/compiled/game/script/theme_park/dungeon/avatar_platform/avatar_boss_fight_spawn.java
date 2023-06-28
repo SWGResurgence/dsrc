@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.avatar_platform;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.groundquests;
@@ -10,12 +16,13 @@ import script.string_id;
 
 public class avatar_boss_fight_spawn extends script.base_script
 {
-    public avatar_boss_fight_spawn()
-    {
-    }
     public static final String STF = "dungeon/avatar_platform";
     public static final String TBL_BOSS_FIGHT = "datatables/dungeon/avatar_platform/ep3_avatar_platform_boss_trando.iff";
     public static final string_id TAUNT = new string_id(STF, "harwakokok_taunt");
+    public avatar_boss_fight_spawn()
+    {
+    }
+
     public int OnReceivedItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))
@@ -37,6 +44,7 @@ public class avatar_boss_fight_spawn extends script.base_script
         setObjVar(structure, "avatar_platform.boss_fight", 1);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnBossFight(obj_id commanddeck, obj_id player) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -60,14 +68,14 @@ public class avatar_boss_fight_spawn extends script.base_script
             {
                 attachScript(spawnedCreature, "theme_park.dungeon.avatar_platform.avatar_boss_clean_up");
             }
-            else 
+            else
             {
                 attachScript(spawnedCreature, "theme_park.dungeon.avatar_platform.avatar_minon_clean_up");
             }
             x = x + 1;
         }
-        return;
     }
+
     public void beginTaunt(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);
@@ -79,13 +87,14 @@ public class avatar_boss_fight_spawn extends script.base_script
         int numPlayers = players.length;
         if (numPlayers > 0)
         {
-            for (obj_id player1 : players) {
+            for (obj_id player1 : players)
+            {
                 groundquests.grantQuest(player1, "ep3_avatar_boss_taunt");
             }
         }
         messageTo(self, "handleOpenDoor", null, 10.0f, false);
-        return;
     }
+
     public int handleOpenDoor(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);

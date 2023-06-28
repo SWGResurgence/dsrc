@@ -1,5 +1,11 @@
 package script.theme_park.heroic.echo_base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -7,10 +13,12 @@ import script.obj_id;
 
 public class echo_controller extends script.base_script
 {
+    public static final boolean LOGGING = true;
+
     public echo_controller()
     {
     }
-    public static final boolean LOGGING = true;
+
     public int updateCloneLocation(obj_id self, dictionary params) throws InterruptedException
     {
         if (!params.containsKey("cloneLocation"))
@@ -34,6 +42,7 @@ public class echo_controller extends script.base_script
         messageTo(self, "registerCloningFacility", dict, 0.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int createClientPath(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] players = utils.getPlayersInBuildoutRow(self);
@@ -47,22 +56,26 @@ public class echo_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int buff_atat(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] atats = trial.getObjectsInInstanceByObjVar(self, "isAtat");
         buff.applyBuff(atats, "hoth_atat_shield");
         return SCRIPT_CONTINUE;
     }
+
     public int beginSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVarTree(self, "quest_tracker");
         return SCRIPT_CONTINUE;
     }
+
     public int p1_end(obj_id self, dictionary params) throws InterruptedException
     {
         utils.setScriptVar(self, "quest_tracker.p1_ended", 1);
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_p1_update(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "quest_tracker.p1_ended"))
@@ -73,6 +86,7 @@ public class echo_controller extends script.base_script
         utils.setScriptVar(self, "quest_tracker.rebel." + thisUpdate, 1);
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_p1_update(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "quest_tracker.p1_ended"))
@@ -83,11 +97,13 @@ public class echo_controller extends script.base_script
         utils.setScriptVar(self, "quest_tracker.imperial." + thisUpdate, 1);
         return SCRIPT_CONTINUE;
     }
+
     public int p2_end(obj_id self, dictionary params) throws InterruptedException
     {
         utils.setScriptVar(self, "quest_tracker.p2_ended", 1);
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_p2_update(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "quest_tracker.p2_ended"))
@@ -98,6 +114,7 @@ public class echo_controller extends script.base_script
         utils.setScriptVar(self, "quest_tracker.rebel." + thisUpdate, 1);
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_p2_update(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "quest_tracker.p2_ended"))
@@ -108,23 +125,27 @@ public class echo_controller extends script.base_script
         utils.setScriptVar(self, "quest_tracker.imperial." + thisUpdate, 1);
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_p3_update(obj_id self, dictionary params) throws InterruptedException
     {
         String thisUpdate = params.getString("objective");
         utils.setScriptVar(self, "quest_tracker.rebel." + thisUpdate, 1);
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_p3_update(obj_id self, dictionary params) throws InterruptedException
     {
         String thisUpdate = params.getString("objective");
         utils.setScriptVar(self, "quest_tracker.imperial." + thisUpdate, 1);
         return SCRIPT_CONTINUE;
     }
+
     public int wampa_boss_died(obj_id self, dictionary params) throws InterruptedException
     {
         utils.setScriptVar(self, "quest_tracker.wampa_boss_dead", 1);
         return SCRIPT_CONTINUE;
     }
+
     public int conclude_rebel_p3(obj_id self, dictionary params) throws InterruptedException
     {
         int tokens = getRebelTokenCountByVictory();
@@ -163,6 +184,7 @@ public class echo_controller extends script.base_script
         winSuiDisplay(players, "rebel");
         return SCRIPT_CONTINUE;
     }
+
     public int conclude_imperial_p3(obj_id self, dictionary params) throws InterruptedException
     {
         int tokens = getImperialTokenCountByVictory();
@@ -201,6 +223,7 @@ public class echo_controller extends script.base_script
         winSuiDisplay(players, "imperial");
         return SCRIPT_CONTINUE;
     }
+
     public void winSuiDisplay(obj_id[] players, String version) throws InterruptedException
     {
         if (players == null || players.length <= 0)
@@ -225,7 +248,7 @@ public class echo_controller extends script.base_script
                     p1VictoryMinor = true;
                 }
             }
-            else 
+            else
             {
                 p1VictoryMajor = true;
             }
@@ -278,7 +301,7 @@ public class echo_controller extends script.base_script
                     p2VictoryMinor = true;
                 }
             }
-            else 
+            else
             {
                 p2VictoryMajor = true;
             }
@@ -302,7 +325,7 @@ public class echo_controller extends script.base_script
                     p3VictoryMinor = true;
                 }
             }
-            else 
+            else
             {
                 p3VictoryMajor = true;
             }
@@ -345,7 +368,7 @@ public class echo_controller extends script.base_script
             {
                 message += " \t\\#00FF00Destroyed Command Center\n";
             }
-            else 
+            else
             {
                 message += " \t\\#FF0000Destroyed Command Center\n";
             }
@@ -353,7 +376,7 @@ public class echo_controller extends script.base_script
             {
                 message += " \t\\#00FF00Equipment Evacuated\n";
             }
-            else 
+            else
             {
                 message += " \t\\#FF0000Equipment Evacuated\n";
             }
@@ -361,7 +384,7 @@ public class echo_controller extends script.base_script
             {
                 message += " \t\\#00FF00Thermal Generator Personnel Evacuated\n";
             }
-            else 
+            else
             {
                 message += " \t\\#FF0000Thermal Generator Personnel Evacuated\n";
             }
@@ -369,7 +392,7 @@ public class echo_controller extends script.base_script
             {
                 message += " \t\\#00FF00Medical Personnel Evacuated\n";
             }
-            else 
+            else
             {
                 message += " \t\\#FF0000Medical Personnel Evacuated\n";
             }
@@ -377,7 +400,7 @@ public class echo_controller extends script.base_script
             {
                 message += " \t\\#00FF00Command Personnel Evacuated\n";
             }
-            else 
+            else
             {
                 message += " \t\\#FF0000Command Personnel Evacuated\n";
             }
@@ -385,7 +408,7 @@ public class echo_controller extends script.base_script
             {
                 message += " \t\\#00FF00Non-Essential Personnel Evacuated\n";
             }
-            else 
+            else
             {
                 message += " \t\\#FF0000Non-Essential Personnel Evacuated\n";
             }
@@ -402,11 +425,12 @@ public class echo_controller extends script.base_script
             {
                 message += " \\#FF6103You did your best to get as many transports away as you could.";
             }
-            for (obj_id player : players) {
+            for (obj_id player : players)
+            {
                 sui.msgbox(self, player, message, sui.OK_ONLY, "Alliance: Echo Base", "noHandler");
             }
         }
-        else 
+        else
         {
             int fail_major = utils.getIntScriptVar(self, "quest_tracker.imperial.fail_major");
             int fail_minor = utils.getIntScriptVar(self, "quest_tracker.imperial.fail_minor");
@@ -419,7 +443,7 @@ public class echo_controller extends script.base_script
                     p1VictoryMinor = true;
                 }
             }
-            else 
+            else
             {
                 p1VictoryMajor = true;
             }
@@ -472,7 +496,7 @@ public class echo_controller extends script.base_script
                     p2VictoryMinor = true;
                 }
             }
-            else 
+            else
             {
                 p2VictoryMajor = true;
             }
@@ -496,7 +520,7 @@ public class echo_controller extends script.base_script
                     p3VictoryMinor = true;
                 }
             }
-            else 
+            else
             {
                 p3VictoryMajor = true;
             }
@@ -539,7 +563,7 @@ public class echo_controller extends script.base_script
             {
                 message += " \t\\#00FF00Captured Command Center\n";
             }
-            else 
+            else
             {
                 message += " \t\\#FF0000Captured Command Center\n";
             }
@@ -547,7 +571,7 @@ public class echo_controller extends script.base_script
             {
                 message += " \t\\#00FF00Main Hangar Captured\n";
             }
-            else 
+            else
             {
                 message += " \t\\#FF0000Main Hangar Captured\n";
             }
@@ -555,7 +579,7 @@ public class echo_controller extends script.base_script
             {
                 message += " \t\\#00FF00Ion Cannon Capacitor Destroyed\n";
             }
-            else 
+            else
             {
                 message += " \t\\#FF0000Ion Cannon Capacitor Destroyed\n";
             }
@@ -563,7 +587,7 @@ public class echo_controller extends script.base_script
             {
                 message += " \t\\#00FF00Food Supplies Destroyed \n";
             }
-            else 
+            else
             {
                 message += " \t\\#FF0000Food Supplies Destroyed \n";
             }
@@ -571,7 +595,7 @@ public class echo_controller extends script.base_script
             {
                 message += " \t\\#00FF00Medical Supplies Destroyed\n";
             }
-            else 
+            else
             {
                 message += " \t\\#FF0000Medical Supplies Destroyed\n";
             }
@@ -579,7 +603,7 @@ public class echo_controller extends script.base_script
             {
                 message += " \t\\#00FF00Equipment Stores Destroyed\n\n";
             }
-            else 
+            else
             {
                 message += " \t\\#FF0000Equipment Stores Destroyed\n\n";
             }
@@ -596,57 +620,59 @@ public class echo_controller extends script.base_script
             {
                 message += " \\#FF6103You destroyed many of the transports before they could take off.";
             }
-            for (obj_id player : players) {
+            for (obj_id player : players)
+            {
                 sui.msgbox(self, player, message, sui.OK_ONLY, "Imperial: Echo Base", "noHandler");
             }
         }
     }
+
     public int ping(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("sender");
-        String[] p1_obj = 
-        {
-            "at_minor",
-            "at_major"
-        };
+        String[] p1_obj =
+                {
+                        "at_minor",
+                        "at_major"
+                };
         int[] p1_obj_int = new int[2];
-        String[] p2_obj = 
-        {
-            "command_destroy",
-            "equipment",
-            "thermal",
-            "medical",
-            "command_escape",
-            "nonescape"
-        };
+        String[] p2_obj =
+                {
+                        "command_destroy",
+                        "equipment",
+                        "thermal",
+                        "medical",
+                        "command_escape",
+                        "nonescape"
+                };
         int[] p2_obj_int = new int[6];
-        String[] p3_obj = 
-        {
-            "xport_minor",
-            "xport_major"
-        };
+        String[] p3_obj =
+                {
+                        "xport_minor",
+                        "xport_major"
+                };
         int[] p3_obj_int = new int[2];
-        String[] imp_p1_obj = 
-        {
-            "fail_major",
-            "fail_minor"
-        };
+        String[] imp_p1_obj =
+                {
+                        "fail_major",
+                        "fail_minor"
+                };
         int[] imp_p1_obj_int = new int[2];
-        String[] imp_p2_obj = 
-        {
-            "command_capture",
-            "hangar_capture",
-            "ion_cap_destroyed",
-            "food_destroy",
-            "medical_destroy",
-            "equipment_destroy"
-        };
+        String[] imp_p2_obj =
+                {
+                        "command_capture",
+                        "hangar_capture",
+                        "ion_cap_destroyed",
+                        "food_destroy",
+                        "medical_destroy",
+                        "equipment_destroy"
+                };
         int[] imp_p2_obj_int = new int[6];
-        String[] imp_p3_obj = 
-        {
-            "p3_minor",
-            "p3_major"
-        };
+        String[] imp_p3_obj =
+                {
+                        "p3_minor",
+                        "p3_major"
+                };
         int[] imp_p3_obj_int = new int[2];
         String message = "";
         dictionary dict = new dictionary();
@@ -704,12 +730,14 @@ public class echo_controller extends script.base_script
         resendPingToPlayer(player, "Imperial Tokens = " + getImperialTokenCountByVictory());
         return SCRIPT_CONTINUE;
     }
+
     public void resendPingToPlayer(obj_id player, String message) throws InterruptedException
     {
         dictionary dict = new dictionary();
         dict.put("message", message);
         messageTo(player, "instance_ping_response", dict, 0.0f, false);
     }
+
     public int getRebelTokenCountByVictory() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -719,32 +747,35 @@ public class echo_controller extends script.base_script
         int p1_token = 0;
         int p2_token = 0;
         int p3_token = 0;
-        String[] p1_obj = 
+        String[] p1_obj =
+                {
+                        "at_minor",
+                        "at_major"
+                };
+        String[] p2_obj =
+                {
+                        "command_destroy",
+                        "equipment",
+                        "thermal",
+                        "medical",
+                        "command_escape",
+                        "nonescape"
+                };
+        String[] p3_obj =
+                {
+                        "xport_minor",
+                        "xport_major"
+                };
+        for (String s2 : p1_obj)
         {
-            "at_minor",
-            "at_major"
-        };
-        String[] p2_obj = 
-        {
-            "command_destroy",
-            "equipment",
-            "thermal",
-            "medical",
-            "command_escape",
-            "nonescape"
-        };
-        String[] p3_obj = 
-        {
-            "xport_minor",
-            "xport_major"
-        };
-        for (String s2 : p1_obj) {
             p1_eval += utils.getIntScriptVar(self, "quest_tracker.rebel." + s2);
         }
-        for (String s1 : p2_obj) {
+        for (String s1 : p2_obj)
+        {
             p2_eval += utils.getIntScriptVar(self, "quest_tracker.rebel." + s1);
         }
-        for (String s : p3_obj) {
+        for (String s : p3_obj)
+        {
             p3_eval += utils.getIntScriptVar(self, "quest_tracker.rebel." + s);
         }
         if (p1_eval > 0)
@@ -761,6 +792,7 @@ public class echo_controller extends script.base_script
         }
         return p1_token + p2_token + p3_token;
     }
+
     public int getImperialTokenCountByVictory() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -770,39 +802,42 @@ public class echo_controller extends script.base_script
         int p1_token = 0;
         int p2_token = 0;
         int p3_token = 0;
-        String[] p1_obj = 
+        String[] p1_obj =
+                {
+                        "fail_major",
+                        "fail_minor"
+                };
+        String[] p2_obj =
+                {
+                        "command_capture",
+                        "hangar_capture",
+                        "ion_cap_destroyed",
+                        "food_destroy",
+                        "medical_destroy",
+                        "equipment_destroy"
+                };
+        String[] p3_obj =
+                {
+                        "p3_minor",
+                        "p3_major"
+                };
+        for (String s2 : p1_obj)
         {
-            "fail_major",
-            "fail_minor"
-        };
-        String[] p2_obj = 
-        {
-            "command_capture",
-            "hangar_capture",
-            "ion_cap_destroyed",
-            "food_destroy",
-            "medical_destroy",
-            "equipment_destroy"
-        };
-        String[] p3_obj = 
-        {
-            "p3_minor",
-            "p3_major"
-        };
-        for (String s2 : p1_obj) {
             p1_eval += utils.getIntScriptVar(self, "quest_tracker.imperial." + s2);
         }
-        for (String s1 : p2_obj) {
+        for (String s1 : p2_obj)
+        {
             p2_eval += utils.getIntScriptVar(self, "quest_tracker.imperial." + s1);
         }
-        for (String s : p3_obj) {
+        for (String s : p3_obj)
+        {
             p3_eval += utils.getIntScriptVar(self, "quest_tracker.imperial." + s);
         }
         if (p1_eval > 0)
         {
             p1_token = p1_eval == 1 ? 1 : 0;
         }
-        else 
+        else
         {
             p1_token = 3;
         }
@@ -816,6 +851,7 @@ public class echo_controller extends script.base_script
         }
         return p1_token + p2_token + p3_token;
     }
+
     public int grantP2Waypoint(obj_id self, dictionary params) throws InterruptedException
     {
         location myLoc = getLocation(self);
@@ -824,11 +860,12 @@ public class echo_controller extends script.base_script
         myLoc.z += 318;
         location wpLoc = new location(myLoc.x, myLoc.y, myLoc.z);
         obj_id[] players = instance.getPlayersInInstanceArea(self);
-        if (players == null || players.length == 0)
+        if (players == null)
         {
             return SCRIPT_CONTINUE;
         }
-        for (obj_id player : players) {
+        for (obj_id player : players)
+        {
             obj_id waypoint = createWaypointInDatapad(player, wpLoc);
             setWaypointName(waypoint, "Echo Base");
             setWaypointColor(waypoint, "blue");
@@ -837,6 +874,7 @@ public class echo_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int make_p3_end_wp(obj_id self, dictionary params) throws InterruptedException
     {
         location myLoc = getLocation(self);
@@ -845,11 +883,12 @@ public class echo_controller extends script.base_script
         myLoc.z -= 844;
         location wpLoc = new location(myLoc.x, myLoc.y, myLoc.z);
         obj_id[] players = instance.getPlayersInInstanceArea(self);
-        if (players == null || players.length == 0)
+        if (players == null)
         {
             return SCRIPT_CONTINUE;
         }
-        for (obj_id player : players) {
+        for (obj_id player : players)
+        {
             obj_id waypoint = createWaypointInDatapad(player, wpLoc);
             setWaypointName(waypoint, "Extraction Point");
             setWaypointColor(waypoint, "orange");
@@ -858,22 +897,26 @@ public class echo_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int crateTaken(obj_id self, dictionary params) throws InterruptedException
     {
         String type = params.getString("type");
         obj_id[] crates = trial.getObjectsInInstanceBySpawnId(self, type);
-        if (crates == null || crates.length == 0)
+        if (crates == null)
         {
             return SCRIPT_CONTINUE;
         }
-        for (obj_id crate : crates) {
-            if (exists(crate)) {
+        for (obj_id crate : crates)
+        {
+            if (exists(crate))
+            {
                 trial.cleanupObject(crate);
                 break;
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING)

@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 public class colors_hex extends script.base_script
 {
     public static final String HEADER = "\\#";
@@ -139,6 +145,7 @@ public class colors_hex extends script.base_script
     public static final String GOLD = "CD7F32";
     public static final String SILVER = "E6E8FA";
     public static final String FOOTER = "\\#.";
+
     public colors_hex()
     {
     }

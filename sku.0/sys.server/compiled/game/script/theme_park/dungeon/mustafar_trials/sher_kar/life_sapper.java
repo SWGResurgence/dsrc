@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.sher_kar;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.combat;
 import script.library.healing;
@@ -14,27 +20,32 @@ public class life_sapper extends script.base_script
     public life_sapper()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         trial.setHp(self, trial.HP_SHER_KAR_LIFESAPPER);
         trial.bumpSession(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         messageTo(trial.getTop(self), "lifeSapperDied", null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         messageTo(self, "lifeTap", trial.getSessionDict(self), 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         trial.bumpSession(self);
         return SCRIPT_CONTINUE;
     }
+
     public int doAttack(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] players = trial.getValidTargetsInDungeon(trial.getTop(self));
@@ -42,6 +53,7 @@ public class life_sapper extends script.base_script
         startCombat(self, closest);
         return SCRIPT_CONTINUE;
     }
+
     public int lifeTap(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params))

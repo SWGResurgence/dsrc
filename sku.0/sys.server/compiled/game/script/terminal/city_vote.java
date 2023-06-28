@@ -1,5 +1,11 @@
 package script.terminal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.city;
 import script.library.prose;
@@ -10,9 +16,6 @@ import java.util.Vector;
 
 public class city_vote extends script.terminal.base.base_terminal
 {
-    public city_vote()
-    {
-    }
     public static final string_id SID_MAYORAL_RACE = new string_id("city/city", "mayoral_race");
     public static final string_id SID_MAYORAL_STANDINGS = new string_id("city/city", "mayoral_standings");
     public static final string_id SID_MAYORAL_VOTE = new string_id("city/city", "mayoral_vote");
@@ -39,6 +42,10 @@ public class city_vote extends script.terminal.base.base_terminal
     public static final string_id SID_ALREADY_MAYOR = new string_id("city/city", "already_mayor");
     public static final String STF_FILE = "city/city";
     public static final string_id SID_NOT_OLD_ENOUGH = new string_id("city/city", "not_old_enough");
+    public city_vote()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         dictionary outparams = new dictionary();
@@ -47,6 +54,7 @@ public class city_vote extends script.terminal.base.base_terminal
         messageTo(city_hall, "registerVoteTerminal", outparams, 0.0f, true);
         return super.OnInitialize(self);
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -93,12 +101,16 @@ public class city_vote extends script.terminal.base.base_terminal
                     obj_id[] candidates = getObjIdArrayObjVar(city_hall, "candidate_list");
                     if (candidates != null)
                     {
-                        for (obj_id candidate : candidates) {
-                            if (candidate == mayor) {
+                        for (obj_id candidate : candidates)
+                        {
+                            if (candidate == mayor)
+                            {
                                 names[idx] = "incumbent";
                                 attribs[idx] = cityGetCitizenName(city_id, mayor);
                                 idx++;
-                            } else {
+                            }
+                            else
+                            {
                                 names[idx] = "candidate";
                                 attribs[idx] = cityGetCitizenName(city_id, candidate);
                                 idx++;
@@ -110,6 +122,7 @@ public class city_vote extends script.terminal.base.base_terminal
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id city_hall = getTopMostContainer(self);
@@ -122,7 +135,7 @@ public class city_vote extends script.terminal.base.base_terminal
         {
             mi.addSubMenu(menu, menu_info_types.SERVER_MENU4, SID_MAYORAL_REGISTER);
         }
-        else 
+        else
         {
             mi.addSubMenu(menu, menu_info_types.SERVER_MENU5, SID_MAYORAL_UNREGISTER);
         }
@@ -132,6 +145,7 @@ public class city_vote extends script.terminal.base.base_terminal
         }
         return super.OnObjectMenuRequest(self, player, mi);
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU1 || item == menu_info_types.SERVER_MENU2)
@@ -157,7 +171,8 @@ public class city_vote extends script.terminal.base.base_terminal
                 obj_id city_hall = getTopMostContainer(self);
                 int city_id = findCityByCityHall(city_hall);
                 obj_id[] citizens = cityGetCitizenIds(city_id);
-                for (obj_id citizen : citizens) {
+                for (obj_id citizen : citizens)
+                {
                     city.setCitizenAllegiance(city_id, citizen, null);
                 }
                 removeObjVar(city_hall, "candidate_list");
@@ -167,6 +182,7 @@ public class city_vote extends script.terminal.base.base_terminal
         }
         return SCRIPT_CONTINUE;
     }
+
     public void showStandings(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id city_hall = getTopMostContainer(self);
@@ -177,16 +193,20 @@ public class city_vote extends script.terminal.base.base_terminal
         Vector vote_counts = new Vector();
         vote_counts.setSize(0);
         obj_id[] citizens = cityGetCitizenIds(city_id);
-        for (obj_id citizen : citizens) {
+        for (obj_id citizen : citizens)
+        {
             obj_id vote = cityGetCitizenAllegiance(city_id, citizen);
             int found = 0;
-            for (int j = 0; (j < vote_ids.size()) && (found == 0); j++) {
-                if (((obj_id) vote_ids.get(j)) == vote) {
+            for (int j = 0; (j < vote_ids.size()) && (found == 0); j++)
+            {
+                if (vote_ids.get(j) == vote)
+                {
                     found = 1;
                     vote_counts.set(j, (Integer) vote_counts.get(j) + 1);
                 }
             }
-            if (found == 0) {
+            if (found == 0)
+            {
                 utils.addElement(vote_ids, vote);
                 utils.addElement(vote_counts, 1);
             }
@@ -205,13 +225,14 @@ public class city_vote extends script.terminal.base.base_terminal
             {
                 candidate_names[i] = "Incumbent: " + cityGetCitizenName(city_id, mayor) + " -- Votes: " + getNumVotes(mayor, vote_ids, vote_counts);
             }
-            else 
+            else
             {
                 candidate_names[i] = cityGetCitizenName(city_id, candidates[i]) + " -- Votes: " + getNumVotes(candidates[i], vote_ids, vote_counts);
             }
         }
         sui.listbox(self, player, "@city/city:mayoral_standings_d", sui.OK_CANCEL, "@city/city:mayoral_standings_t", candidate_names, "handleNone", true);
     }
+
     public void placeVote(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id city_hall = getTopMostContainer(self);
@@ -241,6 +262,7 @@ public class city_vote extends script.terminal.base.base_terminal
         }
         sui.listbox(self, player, "@city/city:mayoral_vote_d", sui.OK_CANCEL, "@city/city:mayoral_vote_t", candidate_names, "handlePlaceVote", true);
     }
+
     public int handlePlaceVote(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -271,7 +293,7 @@ public class city_vote extends script.terminal.base.base_terminal
         {
             vote = null;
         }
-        else 
+        else
         {
             vote = candidates[idx - 1];
         }
@@ -281,13 +303,14 @@ public class city_vote extends script.terminal.base.base_terminal
         {
             pp = prose.getPackage(SID_VOTE_PLACED, cityGetCitizenName(city_id, vote));
         }
-        else 
+        else
         {
             pp = prose.getPackage(SID_VOTE_ABSTAIN);
         }
         sendSystemMessageProse(player, pp);
         return SCRIPT_CONTINUE;
     }
+
     public void registerToRun(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id city_hall = getTopMostContainer(self);
@@ -332,10 +355,7 @@ public class city_vote extends script.terminal.base.base_terminal
             return;
         }
         obj_id[] new_candidates = new obj_id[candidates.length + 1];
-        for (int i = 0; i < candidates.length; i++)
-        {
-            new_candidates[i] = candidates[i];
-        }
+        System.arraycopy(candidates, 0, new_candidates, 0, candidates.length);
         new_candidates[new_candidates.length - 1] = player;
         setObjVar(city_hall, "candidate_list", new_candidates);
         city.setCitizenAllegiance(city_id, player, player);
@@ -345,13 +365,15 @@ public class city_vote extends script.terminal.base.base_terminal
         if (citizens != null)
         {
             String pname = cityGetCitizenName(city_id, player);
-            for (obj_id citizen : citizens) {
+            for (obj_id citizen : citizens)
+            {
                 String cname = cityGetCitizenName(city_id, citizen);
                 prose_package bodypp = prose.getPackage(REGISTERED_CITIZEN_EMAIL_BODY, pname);
                 utils.sendMail(REGISTERED_CITIZEN_EMAIL_SUBJECT, bodypp, cname, "Planetary Civic Authority");
             }
         }
     }
+
     public boolean isRegisteredToRun(obj_id player, obj_id self) throws InterruptedException
     {
         obj_id city_hall = getTopMostContainer(self);
@@ -360,13 +382,16 @@ public class city_vote extends script.terminal.base.base_terminal
         {
             candidates = new obj_id[0];
         }
-        for (obj_id candidate : candidates) {
-            if (candidate == player) {
+        for (obj_id candidate : candidates)
+        {
+            if (candidate == player)
+            {
                 return true;
             }
         }
         return false;
     }
+
     public void unregisterFromRace(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id city_hall = getTopMostContainer(self);
@@ -392,12 +417,14 @@ public class city_vote extends script.terminal.base.base_terminal
         {
             removeObjVar(city_hall, "candidate_list");
         }
-        else 
+        else
         {
             int j = 0;
             obj_id[] new_candidates = new obj_id[candidates.length - 1];
-            for (obj_id candidate : candidates) {
-                if (candidate != player) {
+            for (obj_id candidate : candidates)
+            {
+                if (candidate != player)
+                {
                     new_candidates[j++] = candidate;
                 }
             }
@@ -407,9 +434,11 @@ public class city_vote extends script.terminal.base.base_terminal
         if (citizens != null)
         {
             String pname = cityGetCitizenName(city_id, player);
-            for (obj_id citizen : citizens) {
+            for (obj_id citizen : citizens)
+            {
                 obj_id vote = cityGetCitizenAllegiance(city_id, citizen);
-                if (vote == player) {
+                if (vote == player)
+                {
                     city.setCitizenAllegiance(city_id, citizen, null);
                 }
                 String cname = cityGetCitizenName(city_id, citizen);
@@ -419,12 +448,14 @@ public class city_vote extends script.terminal.base.base_terminal
         }
         sendSystemMessage(player, SID_UNREGISTERED);
     }
+
     public int resetVoteTerminal(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id city_hall = getTopMostContainer(self);
         removeObjVar(city_hall, "candidate_list");
         return SCRIPT_CONTINUE;
     }
+
     public void cleanCandidates(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id city_hall = getTopMostContainer(self);
@@ -443,7 +474,7 @@ public class city_vote extends script.terminal.base.base_terminal
                 bad_array[i] = 1;
                 bad_entries++;
             }
-            else 
+            else
             {
                 bad_array[i] = 0;
             }
@@ -466,7 +497,7 @@ public class city_vote extends script.terminal.base.base_terminal
         {
             setObjVar(city_hall, "candidate_list", new_candidates);
         }
-        else 
+        else
         {
             if (hasObjVar(city_hall, "candidate_list"))
             {
@@ -474,18 +505,20 @@ public class city_vote extends script.terminal.base.base_terminal
             }
         }
     }
+
     public String getNumVotes(obj_id candidate, Vector vote_ids, Vector vote_counts) throws InterruptedException
     {
         for (int j = 0; j < vote_ids.size(); j++)
         {
-            if (candidate == (obj_id)vote_ids.elementAt(j))
+            if (candidate == vote_ids.elementAt(j))
             {
-                Integer votes = (Integer)vote_counts.elementAt(j);
-                return "" + votes;
+                Integer votes = (Integer) vote_counts.elementAt(j);
+                return String.valueOf(votes);
             }
         }
         return "0";
     }
+
     public boolean isOldEnough(obj_id player) throws InterruptedException
     {
         boolean isOldEnough = false;
@@ -498,6 +531,7 @@ public class city_vote extends script.terminal.base.base_terminal
         }
         return isOldEnough;
     }
+
     public String convertInterval(int currentInterval) throws InterruptedException
     {
         if (currentInterval == 0)

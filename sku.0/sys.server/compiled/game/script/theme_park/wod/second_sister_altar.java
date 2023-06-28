@@ -1,11 +1,19 @@
 package script.theme_park.wod;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.base_class.*;
 import script.combat_engine.*;
+
 import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.Vector;
+
 import script.base_script;
 
 import script.library.groundquests;
@@ -14,11 +22,12 @@ import script.library.ai_lib;
 
 public class second_sister_altar extends script.base_script
 {
+    public static final string_id TOO_SOON_REUSE = new string_id("spam", "snowball_not_ready");
+    public static string_id SID_MNU_USE = new string_id("pet/pet_menu", "menu_store");
     public second_sister_altar()
     {
     }
-    public static string_id SID_MNU_USE = new string_id("pet/pet_menu", "menu_store");
-    public static final string_id TOO_SOON_REUSE = new string_id("spam", "snowball_not_ready");
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -36,6 +45,7 @@ public class second_sister_altar extends script.base_script
         mi.addRootMenu(menu_info_types.ITEM_USE, SID_MNU_USE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))

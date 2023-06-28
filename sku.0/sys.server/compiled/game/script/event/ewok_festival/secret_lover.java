@@ -5,6 +5,12 @@ package script.event.ewok_festival;/*
 @Date $TODAY
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.marriage;
 import script.library.utils;
 import script.menu_info;
@@ -71,6 +77,7 @@ public class secret_lover extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item)
     {
         if (item == menu_info_types.SERVER_MENU10)
@@ -83,9 +90,10 @@ public class secret_lover extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int setupLoveLink(obj_id self, obj_id player)
     {
-        obj_id [] players = getAllPlayers(getLocation(player), 160000f);
+        obj_id[] players = getAllPlayers(getLocation(player), 160000f);
         if (players == null || players.length == 0)
         {
             broadcast(player, "The Love Master 5000 has detected no players in the area. Try a different location.");

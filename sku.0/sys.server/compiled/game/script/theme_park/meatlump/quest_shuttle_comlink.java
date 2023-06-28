@@ -1,5 +1,11 @@
 package script.theme_park.meatlump;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -7,9 +13,6 @@ import java.util.Vector;
 
 public class quest_shuttle_comlink extends script.base_script
 {
-    public quest_shuttle_comlink()
-    {
-    }
     public static final boolean LOGGING_ON = false;
     public static final string_id CALL_SHIP = new string_id("meatlump/meatlump", "comlink_use");
     public static final string_id MUST_DISMOUNT = new string_id("quest/ground/util/quest_giver_object", "must_dismount");
@@ -40,11 +43,16 @@ public class quest_shuttle_comlink extends script.base_script
     public static final int NORMAL_MOB_COUNT = 2;
     public static final int EPIC_MOB_COUNT = 4;
     public static final int MOB_LEVEL_HANDICAP = 6;
+    public quest_shuttle_comlink()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         attachScript(self, NO_TRADE_SCRIPT);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         blog("OnObjectMenuRequest init ");
@@ -67,6 +75,7 @@ public class quest_shuttle_comlink extends script.base_script
         int menuOption = mi.addRootMenu(menu_info_types.ITEM_USE, CALL_SHIP);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         blog("OnObjectMenuSelect init.");
@@ -82,7 +91,7 @@ public class quest_shuttle_comlink extends script.base_script
                 blog("OnObjectMenuSelect - has USED_OBJVAR and OWNER_OBJVAR buy the incorrect player is using comlink.");
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 blog("OnObjectMenuSelect - has USED_OBJVAR and OWNER_OBJVAR. Comparing to check player owner.");
             }
@@ -125,18 +134,20 @@ public class quest_shuttle_comlink extends script.base_script
                 sendSystemMessage(player, SID_COMLINK_ERROR);
                 blog("OnObjectMenuSelect - spawnEvent FAILED");
             }
-            else 
+            else
             {
                 blog("OnObjectMenuSelect - spawnEvent SUCCESS");
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public void destroySelf(obj_id self) throws InterruptedException
     {
         detachScript(self, "item.special.nodestroy");
         destroyObject(self);
     }
+
     public boolean wildLocation(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -161,6 +172,7 @@ public class quest_shuttle_comlink extends script.base_script
         }
         return true;
     }
+
     public boolean spawnEvent(obj_id self, obj_id player) throws InterruptedException
     {
         blog("spawnEvent - Init");
@@ -195,6 +207,7 @@ public class quest_shuttle_comlink extends script.base_script
         }
         return false;
     }
+
     public boolean spawnShuttle(obj_id self, obj_id player) throws InterruptedException
     {
         blog("spawnShuttle - init");
@@ -219,6 +232,7 @@ public class quest_shuttle_comlink extends script.base_script
         destroySelf(self);
         return true;
     }
+
     public boolean spawnRagTags(obj_id self, obj_id player) throws InterruptedException
     {
         blog("spawnRagTags - init");
@@ -234,6 +248,7 @@ public class quest_shuttle_comlink extends script.base_script
         setObjVar(self, ENEMY_SPAWNED_OBJVAR, true);
         return true;
     }
+
     public location getRandomLocationAroundPlayer(obj_id self, obj_id player) throws InterruptedException
     {
         blog("getRandomLocationAroundPlayer - init");
@@ -250,6 +265,7 @@ public class quest_shuttle_comlink extends script.base_script
         blog("getRandomLocationAroundPlayer - returning: " + loc);
         return loc;
     }
+
     public int spawnEnemies(obj_id self, dictionary params) throws InterruptedException
     {
         blog("spawnEnemies - Init");
@@ -288,6 +304,7 @@ public class quest_shuttle_comlink extends script.base_script
         blog("spawnEnemies - ragtag list length: " + ragtags.size());
         return SCRIPT_CONTINUE;
     }
+
     public boolean checkScene(obj_id self, obj_id player) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -302,6 +319,7 @@ public class quest_shuttle_comlink extends script.base_script
         sendSystemMessage(player, SID_COMLINK_WRONG_PLANET);
         return false;
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON)

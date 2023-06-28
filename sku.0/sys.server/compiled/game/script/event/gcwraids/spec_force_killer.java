@@ -1,5 +1,11 @@
 package script.event.gcwraids;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -11,6 +17,7 @@ public class spec_force_killer extends script.base_script
     public spec_force_killer()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         int killReb5 = questGetQuestId("quest/event_gcwcheerleader_sfreb5");
@@ -39,6 +46,7 @@ public class spec_force_killer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         int killReb5 = questGetQuestId("quest/event_gcwcheerleader_sfreb5");
@@ -62,6 +70,7 @@ public class spec_force_killer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleKillerDeathBlow(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id victim = params.getObjId("victim");
@@ -109,6 +118,7 @@ public class spec_force_killer extends script.base_script
         sendSystemMessageProse(self, pp);
         return SCRIPT_CONTINUE;
     }
+
     public int detachSpecForceKillerScript(obj_id self, dictionary params) throws InterruptedException
     {
         detachScript(self, "event.gcwraids.spec_force_killer");

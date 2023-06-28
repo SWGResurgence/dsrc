@@ -1,119 +1,136 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class station_rebel_outpost extends script.base_script
 {
+    public static String c_stringFile = "conversation/station_rebel_outpost";
+
     public station_rebel_outpost()
     {
     }
-    public static String c_stringFile = "conversation/station_rebel_outpost";
+
     public boolean station_rebel_outpost_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean station_rebel_outpost_condition_hasFailed_rebel_escort_alpha(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasFailedQuest(player, "escort", "ep3_kash_station_rebel_escort_alpha"));
     }
+
     public boolean station_rebel_outpost_condition_isPlayerImperial(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_battlefield.isInImperialShip(player) || pvpGetAlignedFaction(player) == (-615855020));
     }
+
     public boolean station_rebel_outpost_condition_isRebelFactionWithMission(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_battlefield.isInNeutralShip(player))
         {
             return ((pvpGetAlignedFaction(player) == (370444368)) && space_quest.hasQuest(player));
         }
-        else 
+        else
         {
             return false;
         }
     }
+
     public boolean station_rebel_outpost_condition_isInYacht(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id ship = space_transition.getContainingShip(player);
         if (isIdValid(ship))
         {
             String template = getTemplateName(ship);
-            if (template != null && template.endsWith("_yacht.iff"))
-            {
-                return true;
-            }
+            return template != null && template.endsWith("_yacht.iff");
         }
         return false;
     }
+
     public boolean station_rebel_outpost_condition_isPlayerNeutral(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_battlefield.isInNeutralShip(player))
         {
-            if (pvpGetAlignedFaction(player) == (370444368))
-            {
-                return false;
-            }
-            else 
-            {
-                return true;
-            }
+            return pvpGetAlignedFaction(player) != (370444368);
         }
         return false;
     }
+
     public boolean station_rebel_outpost_condition_isTooFar(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id containingShip = space_transition.getContainingShip(player);
         return (getDistance(npc, containingShip) > space_transition.STATION_COMM_MAX_DISTANCE);
     }
+
     public boolean station_rebel_outpost_condition_hasWon_rebel_escort_alpha(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasWonQuest(player, "escort", "ep3_kash_station_rebel_escort_alpha"));
     }
+
     public boolean station_rebel_outpost_condition_hasBeenRewarded_rebel_escort_alpha(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasReceivedReward(player, "escort", "ep3_kash_station_rebel_escort_alpha"));
     }
+
     public boolean station_rebel_outpost_condition_isReady_for_escort_alpha(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasWonQuest(player, "assassinate", "ep3_kash_station_assassinate_rebel") && !space_quest.hasWonQuest(player, "escort", "ep3_kash_station_rebel_escort_alpha"));
     }
+
     public boolean station_rebel_outpost_condition_hasBeenRewarded_heavy_xwing(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasReceivedReward(player, "recovery", "ep3_heavy_xwing_recovery"));
     }
+
     public boolean station_rebel_outpost_condition_hasWon_heavy_xwing_recovery(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasWonQuest(player, "recovery", "ep3_heavy_xwing_recovery") && !space_quest.hasReceivedReward(player, "recovery", "ep3_heavy_xwing_recovery"));
     }
+
     public void station_rebel_outpost_action_grant_duty_destroy(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "ep3_kash_station_destroy_duty_rebel");
     }
+
     public void station_rebel_outpost_action_grant_duty_escort(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "escort_duty", "ep3_kash_station_escort_duty_rebel");
     }
+
     public void station_rebel_outpost_action_grant_escort_alpha(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "escort", "ep3_kash_station_rebel_escort_alpha");
     }
+
     public void station_rebel_outpost_action_setPlayerToOvertStatus(obj_id player, obj_id npc) throws InterruptedException
     {
         space_transition.setPlayerOvert(player, (370444368));
     }
+
     public void station_rebel_outpost_action_giveReward_rebel_hologram(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.giveReward(player, "escort", "ep3_kash_station_rebel_escort_alpha", 5000, "object/tangible/furniture/ep3_rewards/hologram_insignia_rebel_01.iff");
     }
+
     public void station_rebel_outpost_action_grantMission_heavy_xwing_recovery(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "recovery", "ep3_heavy_xwing_recovery");
     }
+
     public void station_rebel_outpost_action_giveReward_heavy_xwing(obj_id player, obj_id npc) throws InterruptedException
     {
         badge.grantBadge(player, "bdg_kash_rebel_heavy_xwing");
         space_quest.giveReward(player, "recovery", "ep3_heavy_xwing_recovery", 15000, "object/tangible/ship/crafted/chassis/advanced_xwing_reward_deed.iff");
     }
+
     public int station_rebel_outpost_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_719"))
@@ -144,6 +161,7 @@ public class station_rebel_outpost extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rebel_outpost_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1110"))
@@ -160,6 +178,7 @@ public class station_rebel_outpost extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rebel_outpost_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_731"))
@@ -176,6 +195,7 @@ public class station_rebel_outpost extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rebel_outpost_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_737"))
@@ -203,7 +223,7 @@ public class station_rebel_outpost extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_741");
@@ -216,7 +236,7 @@ public class station_rebel_outpost extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rebel_outpost.branchId");
                     chat.chat(npc, player, message);
@@ -227,6 +247,7 @@ public class station_rebel_outpost extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rebel_outpost_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_741"))
@@ -246,7 +267,7 @@ public class station_rebel_outpost extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_745");
@@ -255,7 +276,7 @@ public class station_rebel_outpost extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rebel_outpost.branchId");
                     chat.chat(npc, player, message);
@@ -281,7 +302,7 @@ public class station_rebel_outpost extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_753");
@@ -290,7 +311,7 @@ public class station_rebel_outpost extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rebel_outpost.branchId");
                     chat.chat(npc, player, message);
@@ -301,6 +322,7 @@ public class station_rebel_outpost extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rebel_outpost_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_745"))
@@ -316,6 +338,7 @@ public class station_rebel_outpost extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rebel_outpost_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_753"))
@@ -335,7 +358,7 @@ public class station_rebel_outpost extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_757");
@@ -344,7 +367,7 @@ public class station_rebel_outpost extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rebel_outpost.branchId");
                     chat.chat(npc, player, message);
@@ -355,6 +378,7 @@ public class station_rebel_outpost extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rebel_outpost_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_757"))
@@ -370,6 +394,7 @@ public class station_rebel_outpost extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rebel_outpost_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_763"))
@@ -403,7 +428,7 @@ public class station_rebel_outpost extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_767");
@@ -420,7 +445,7 @@ public class station_rebel_outpost extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rebel_outpost.branchId");
                     chat.chat(npc, player, message);
@@ -476,7 +501,7 @@ public class station_rebel_outpost extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_797");
@@ -493,7 +518,7 @@ public class station_rebel_outpost extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rebel_outpost.branchId");
                     chat.chat(npc, player, message);
@@ -515,6 +540,7 @@ public class station_rebel_outpost extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rebel_outpost_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_767"))
@@ -541,7 +567,7 @@ public class station_rebel_outpost extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_771");
@@ -554,7 +580,7 @@ public class station_rebel_outpost extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rebel_outpost.branchId");
                     chat.chat(npc, player, message);
@@ -587,7 +613,7 @@ public class station_rebel_outpost extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_781");
@@ -600,7 +626,7 @@ public class station_rebel_outpost extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rebel_outpost.branchId");
                     chat.chat(npc, player, message);
@@ -626,6 +652,7 @@ public class station_rebel_outpost extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rebel_outpost_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_771"))
@@ -671,7 +698,7 @@ public class station_rebel_outpost extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_767");
@@ -688,7 +715,7 @@ public class station_rebel_outpost extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rebel_outpost.branchId");
                     chat.chat(npc, player, message);
@@ -699,6 +726,7 @@ public class station_rebel_outpost extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rebel_outpost_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_781"))
@@ -744,7 +772,7 @@ public class station_rebel_outpost extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_767");
@@ -761,7 +789,7 @@ public class station_rebel_outpost extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rebel_outpost.branchId");
                     chat.chat(npc, player, message);
@@ -772,6 +800,7 @@ public class station_rebel_outpost extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rebel_outpost_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_797"))
@@ -792,7 +821,7 @@ public class station_rebel_outpost extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_801");
@@ -801,7 +830,7 @@ public class station_rebel_outpost extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rebel_outpost.branchId");
                     chat.chat(npc, player, message);
@@ -827,7 +856,7 @@ public class station_rebel_outpost extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_809");
@@ -836,7 +865,7 @@ public class station_rebel_outpost extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rebel_outpost.branchId");
                     chat.chat(npc, player, message);
@@ -876,7 +905,7 @@ public class station_rebel_outpost extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_797");
@@ -893,7 +922,7 @@ public class station_rebel_outpost extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rebel_outpost.branchId");
                     chat.chat(npc, player, message);
@@ -904,6 +933,7 @@ public class station_rebel_outpost extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rebel_outpost_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_801"))
@@ -919,6 +949,7 @@ public class station_rebel_outpost extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rebel_outpost_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_809"))
@@ -952,7 +983,7 @@ public class station_rebel_outpost extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_797");
@@ -969,7 +1000,7 @@ public class station_rebel_outpost extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rebel_outpost.branchId");
                     chat.chat(npc, player, message);
@@ -980,6 +1011,7 @@ public class station_rebel_outpost extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rebel_outpost_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_797"))
@@ -1000,7 +1032,7 @@ public class station_rebel_outpost extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_801");
@@ -1009,7 +1041,7 @@ public class station_rebel_outpost extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rebel_outpost.branchId");
                     chat.chat(npc, player, message);
@@ -1035,7 +1067,7 @@ public class station_rebel_outpost extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_809");
@@ -1044,7 +1076,7 @@ public class station_rebel_outpost extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rebel_outpost.branchId");
                     chat.chat(npc, player, message);
@@ -1084,7 +1116,7 @@ public class station_rebel_outpost extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_797");
@@ -1101,7 +1133,7 @@ public class station_rebel_outpost extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rebel_outpost.branchId");
                     chat.chat(npc, player, message);
@@ -1112,6 +1144,7 @@ public class station_rebel_outpost extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rebel_outpost_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_797"))
@@ -1132,7 +1165,7 @@ public class station_rebel_outpost extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_801");
@@ -1141,7 +1174,7 @@ public class station_rebel_outpost extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rebel_outpost.branchId");
                     chat.chat(npc, player, message);
@@ -1167,7 +1200,7 @@ public class station_rebel_outpost extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_809");
@@ -1176,7 +1209,7 @@ public class station_rebel_outpost extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rebel_outpost.branchId");
                     chat.chat(npc, player, message);
@@ -1216,7 +1249,7 @@ public class station_rebel_outpost extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_797");
@@ -1233,7 +1266,7 @@ public class station_rebel_outpost extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rebel_outpost.branchId");
                     chat.chat(npc, player, message);
@@ -1244,6 +1277,7 @@ public class station_rebel_outpost extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rebel_outpost_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_823"))
@@ -1260,6 +1294,7 @@ public class station_rebel_outpost extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rebel_outpost_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_829"))
@@ -1306,7 +1341,7 @@ public class station_rebel_outpost extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_843");
@@ -1315,7 +1350,7 @@ public class station_rebel_outpost extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rebel_outpost.branchId");
                     chat.chat(npc, player, message);
@@ -1326,6 +1361,7 @@ public class station_rebel_outpost extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rebel_outpost_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_843"))
@@ -1345,7 +1381,7 @@ public class station_rebel_outpost extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_847");
@@ -1354,7 +1390,7 @@ public class station_rebel_outpost extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rebel_outpost.branchId");
                     chat.chat(npc, player, message);
@@ -1365,6 +1401,7 @@ public class station_rebel_outpost extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rebel_outpost_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_847"))
@@ -1398,7 +1435,7 @@ public class station_rebel_outpost extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_829");
@@ -1419,7 +1456,7 @@ public class station_rebel_outpost extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rebel_outpost.branchId");
                     prose_package pp = new prose_package();
@@ -1434,6 +1471,7 @@ public class station_rebel_outpost extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rebel_outpost_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_829"))
@@ -1480,7 +1518,7 @@ public class station_rebel_outpost extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_843");
@@ -1489,7 +1527,7 @@ public class station_rebel_outpost extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rebel_outpost.branchId");
                     chat.chat(npc, player, message);
@@ -1500,12 +1538,14 @@ public class station_rebel_outpost extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setObjVar(self, "convo.appearance", "object/mobile/space_comm_kash_reb_base.iff");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -1513,6 +1553,7 @@ public class station_rebel_outpost extends script.base_script
         detachScript(self, "space.content_tools.spacestation");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -1521,18 +1562,21 @@ public class station_rebel_outpost extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.station_rebel_outpost");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1574,7 +1618,7 @@ public class station_rebel_outpost extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_719");
@@ -1590,7 +1634,7 @@ public class station_rebel_outpost extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "station_rebel_outpost", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1627,7 +1671,7 @@ public class station_rebel_outpost extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1110");
@@ -1635,7 +1679,7 @@ public class station_rebel_outpost extends script.base_script
                 utils.setScriptVar(player, "conversation.station_rebel_outpost.branchId", 8);
                 npcStartConversation(player, npc, "station_rebel_outpost", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1656,7 +1700,7 @@ public class station_rebel_outpost extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_731");
@@ -1664,7 +1708,7 @@ public class station_rebel_outpost extends script.base_script
                 utils.setScriptVar(player, "conversation.station_rebel_outpost.branchId", 10);
                 npcStartConversation(player, npc, "station_rebel_outpost", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1685,7 +1729,7 @@ public class station_rebel_outpost extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_737");
@@ -1697,7 +1741,7 @@ public class station_rebel_outpost extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "station_rebel_outpost", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1743,7 +1787,7 @@ public class station_rebel_outpost extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_763");
@@ -1767,7 +1811,7 @@ public class station_rebel_outpost extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "station_rebel_outpost", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1792,7 +1836,7 @@ public class station_rebel_outpost extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_823");
@@ -1800,7 +1844,7 @@ public class station_rebel_outpost extends script.base_script
                 utils.setScriptVar(player, "conversation.station_rebel_outpost.branchId", 33);
                 npcStartConversation(player, npc, "station_rebel_outpost", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1835,7 +1879,7 @@ public class station_rebel_outpost extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_829");
@@ -1855,7 +1899,7 @@ public class station_rebel_outpost extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "station_rebel_outpost", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1868,6 +1912,7 @@ public class station_rebel_outpost extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("station_rebel_outpost"))

@@ -1,5 +1,11 @@
 package script.theme_park.heroic.echo_base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -7,9 +13,6 @@ import script.obj_id;
 
 public class wampa_boss extends script.base_script
 {
-    public wampa_boss()
-    {
-    }
     public static final String ADDS_VAR_BASE = "uncleJoeAdds";
     public static final String TEN_PERCENT = ADDS_VAR_BASE + ".tenPercent";
     public static final String TWENTY_PERCENT = ADDS_VAR_BASE + ".twentyPercent";
@@ -19,20 +22,27 @@ public class wampa_boss extends script.base_script
     public static final String WAMPA_DNA_LOOT_ITEM = "item_cs_dna_wampa";
     public static final int WAMPA_DNA_LOOT_CHANCE = 5;
     public static final int UNCLE_JOE_MAX_DISTANCE = 104;
+    public wampa_boss()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         trial.setHp(self, trial.HP_UNCLE_JOE);
         applySkillStatisticModifier(self, "expertise_glancing_blow_reduction", 100);
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         buff.applyBuff(self, "open_balance_buff", -1.0f);
         obj_id[] players = getPlayerCreaturesInRange(self, 250.0f);
-        if (players != null && players.length > 0)
+        if (players != null)
         {
-            for (obj_id player : players) {
-                if (isIdValid(player) && exists(player) && !isIncapacitated(player) && !isDead(player)) {
+            for (obj_id player : players)
+            {
+                if (isIdValid(player) && exists(player) && !isIncapacitated(player) && !isDead(player))
+                {
                     addHate(self, player, 1000.0f);
                     startCombat(self, player);
                 }
@@ -41,6 +51,7 @@ public class wampa_boss extends script.base_script
         messageTo(self, "handleUncleJoeDistanceCheck", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleUncleJoeDistanceCheck(obj_id self, dictionary params) throws InterruptedException
     {
         location currentLoc = getLocation(self);
@@ -59,16 +70,19 @@ public class wampa_boss extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnHateTargetAdded(obj_id self, obj_id target) throws InterruptedException
     {
         reportHateListTesting(self, "OnHateTargetAdded");
         return SCRIPT_CONTINUE;
     }
+
     public int OnHateTargetChanged(obj_id self, obj_id target) throws InterruptedException
     {
         reportHateListTesting(self, "OnHateTargetChanged");
         return SCRIPT_CONTINUE;
     }
+
     public int OnHateTargetRemoved(obj_id self, obj_id target) throws InterruptedException
     {
         if (!isInvulnerable(self))
@@ -80,6 +94,7 @@ public class wampa_boss extends script.base_script
         reportHateListTesting(self, "OnHateTargetRemoved");
         return SCRIPT_CONTINUE;
     }
+
     public int handleUncleJoePutsYouBackIntoCombat(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -102,12 +117,14 @@ public class wampa_boss extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleUncleJoeHateTesting(obj_id self, dictionary params) throws InterruptedException
     {
         reportHateListTesting(self, "handleUncleJoeHateTesting");
         messageTo(self, "handleUncleJoeHateTesting", null, 19, false);
         return SCRIPT_CONTINUE;
     }
+
     public void reportHateListTesting(obj_id self, String from) throws InterruptedException
     {
         String hateReport = "Uncle Joe Hate List \n";
@@ -124,15 +141,18 @@ public class wampa_boss extends script.base_script
             }
         }
         obj_id[] players = getPlayerCreaturesInRange(self, 250.0f);
-        if (players != null && players.length > 0)
+        if (players != null)
         {
-            for (obj_id player : players) {
-                if (isGod(player) && hasObjVar(player, "uncleJoeHateTesting")) {
+            for (obj_id player : players)
+            {
+                if (isGod(player) && hasObjVar(player, "uncleJoeHateTesting"))
+                {
                     sendSystemMessage(player, hateReport, "");
                 }
             }
         }
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         reportHateListTesting(self, "OnExitedCombat");
@@ -142,6 +162,7 @@ public class wampa_boss extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id wpn, int[] damage) throws InterruptedException
     {
         int maxHealth = getUnmodifiedMaxAttrib(self, HEALTH);
@@ -173,6 +194,7 @@ public class wampa_boss extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int summon_adds(obj_id self, dictionary params) throws InterruptedException
     {
         if (isDead(self))
@@ -190,6 +212,7 @@ public class wampa_boss extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wampaBossLinkAgro(obj_id self, dictionary params) throws InterruptedException
     {
         if (isDead(self))
@@ -199,19 +222,23 @@ public class wampa_boss extends script.base_script
         ai_lib.establishAgroLink(self, 250.0f);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id[] children = trial.getChildArray(self);
-        if (children != null && children.length > 0)
+        if (children != null)
         {
-            for (obj_id child : children) {
-                if (isIdValid(child) && exists(child)) {
+            for (obj_id child : children)
+            {
+                if (isIdValid(child) && exists(child))
+                {
                     trial.cleanupObject(child);
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException
     {
         int chanceDna = rand(1, 100);

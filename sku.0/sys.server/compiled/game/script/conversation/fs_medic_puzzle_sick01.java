@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.quests;
@@ -10,47 +16,47 @@ import java.util.Vector;
 
 public class fs_medic_puzzle_sick01 extends script.base_script
 {
+    public static final boolean DEBUGGING = false;
+    public static final int MAX_NUM_OF_SYMPTOMS = 12;
+    public static final String MEDIC_QUEST_NAME = "fs_medic_puzzle_quest";
+    public static final String SCRIPT_VAR = "fs_quest.";
+    public static final String SYMPTOM_LIST = "symptom_list";
+    public static final String ONE_SYMPTOM_LEFT = "one_symptom_left";
+    public static final String CRAFT_VAR = "crafting_components.";
+    public static final String CURE_SYMPTOM_ONE = "cureSymptomOne";
+    public static final String CURE_SYMPTOM_TWO = "cureSymptomTwo";
+    public static final String GIVE_SYMPTOM_ONE = "giveSymptomOne";
+    public static String c_stringFile = "conversation/fs_medic_puzzle_sick01";
     public fs_medic_puzzle_sick01()
     {
     }
-    public static String c_stringFile = "conversation/fs_medic_puzzle_sick01";
+
     public boolean fs_medic_puzzle_sick01_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean fs_medic_puzzle_sick01_condition_onHealingQuest(obj_id player, obj_id npc) throws InterruptedException
     {
-        boolean result = false;
-        if (quests.isActive("fs_medic_puzzle_quest_01", player) || quests.isActive("fs_medic_puzzle_quest_02", player) || quests.isActive("fs_medic_puzzle_quest_03", player))
-        {
-            result = true;
-        }
+        boolean result = quests.isActive("fs_medic_puzzle_quest_01", player) || quests.isActive("fs_medic_puzzle_quest_02", player) || quests.isActive("fs_medic_puzzle_quest_03", player);
         if (quests.isActive("fs_combat_healing_1", player) || quests.isActive("fs_combat_healing_2", player))
         {
             result = true;
         }
         return result;
     }
+
     public boolean fs_medic_puzzle_sick01_condition_hasSymptoms(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (utils.hasScriptVar(player, SCRIPT_VAR + SYMPTOM_LIST + npc))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return utils.hasScriptVar(player, SCRIPT_VAR + SYMPTOM_LIST + npc);
     }
+
     public boolean fs_medic_puzzle_sick01_condition_onCombatHealingQuest(obj_id player, obj_id npc) throws InterruptedException
     {
-        boolean result = false;
-        if (quests.isActive("fs_combat_healing_1", player) || quests.isActive("fs_combat_healing_2", player))
-        {
-            result = true;
-        }
+        boolean result = quests.isActive("fs_combat_healing_1", player) || quests.isActive("fs_combat_healing_2", player);
         return result;
     }
+
     public void fs_medic_puzzle_sick01_action_giveSymptoms(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -67,7 +73,7 @@ public class fs_medic_puzzle_sick01 extends script.base_script
         while (numberOfSymptoms > 0)
         {
             int index = rand(0, symptomListVector.size() - 1);
-            Integer symptom = (Integer)symptomListVector.get(index);
+            Integer symptom = (Integer) symptomListVector.get(index);
             symptomList[symptom] = true;
             symptomListVector.remove(index);
             numberOfSymptoms--;
@@ -75,7 +81,7 @@ public class fs_medic_puzzle_sick01 extends script.base_script
         for (int i = 0; i < numberOfSymptoms; i++)
         {
             int symptom = rand(0, MAX_NUM_OF_SYMPTOMS - 1);
-            if (symptomList[symptom] == true)
+            if (symptomList[symptom])
             {
                 i--;
             }
@@ -83,12 +89,13 @@ public class fs_medic_puzzle_sick01 extends script.base_script
         }
         utils.setScriptVar(player, SCRIPT_VAR + SYMPTOM_LIST + npc, symptomList);
     }
+
     public String fs_medic_puzzle_sick01_tokenTO_getSymptoms(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!isIdValid(player))
         {
             LOG("fs_quest", "Medic Puzzle -- player is invalid.");
-            return new String();
+            return "";
         }
         boolean[] symptomList = utils.getBooleanArrayScriptVar(player, SCRIPT_VAR + SYMPTOM_LIST + npc);
         int lastSymptom = 0;
@@ -108,7 +115,7 @@ public class fs_medic_puzzle_sick01 extends script.base_script
             symptomString = symptomString + localize(cure);
             return symptomString;
         }
-        else 
+        else
         {
             utils.setScriptVar(player, SCRIPT_VAR + ONE_SYMPTOM_LEFT + npc, false);
         }
@@ -127,6 +134,7 @@ public class fs_medic_puzzle_sick01 extends script.base_script
         }
         return symptomString;
     }
+
     public String fs_medic_puzzle_sick01_tokenTO_numberHealed(obj_id player, obj_id npc) throws InterruptedException
     {
         int totalhealed = 0;
@@ -136,16 +144,7 @@ public class fs_medic_puzzle_sick01 extends script.base_script
         }
         return " " + totalhealed;
     }
-    public static final boolean DEBUGGING = false;
-    public static final int MAX_NUM_OF_SYMPTOMS = 12;
-    public static final String MEDIC_QUEST_NAME = "fs_medic_puzzle_quest";
-    public static final String SCRIPT_VAR = "fs_quest.";
-    public static final String SYMPTOM_LIST = "symptom_list";
-    public static final String ONE_SYMPTOM_LEFT = "one_symptom_left";
-    public static final String CRAFT_VAR = "crafting_components.";
-    public static final String CURE_SYMPTOM_ONE = "cureSymptomOne";
-    public static final String CURE_SYMPTOM_TWO = "cureSymptomTwo";
-    public static final String GIVE_SYMPTOM_ONE = "giveSymptomOne";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -155,11 +154,13 @@ public class fs_medic_puzzle_sick01 extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -168,12 +169,14 @@ public class fs_medic_puzzle_sick01 extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "npc.conversation.fs_medic_puzzle_sick01");
         return SCRIPT_CONTINUE;
     }
+
     public int OnGiveItem(obj_id self, obj_id item, obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -195,9 +198,9 @@ public class fs_medic_puzzle_sick01 extends script.base_script
                 {
                     broadcast(player, "Changing Symptoms yo");
                 }
-                int cureSymptomOne = (int)utils.getFloatObjVar(item, CRAFT_VAR + CURE_SYMPTOM_ONE);
-                int cureSymptomTwo = (int)utils.getFloatObjVar(item, CRAFT_VAR + CURE_SYMPTOM_TWO);
-                int giveSymptomOne = (int)utils.getFloatObjVar(item, CRAFT_VAR + GIVE_SYMPTOM_ONE);
+                int cureSymptomOne = (int) utils.getFloatObjVar(item, CRAFT_VAR + CURE_SYMPTOM_ONE);
+                int cureSymptomTwo = (int) utils.getFloatObjVar(item, CRAFT_VAR + CURE_SYMPTOM_TWO);
+                int giveSymptomOne = (int) utils.getFloatObjVar(item, CRAFT_VAR + GIVE_SYMPTOM_ONE);
                 symptomList[giveSymptomOne] = true;
                 symptomList[cureSymptomOne] = false;
                 symptomList[cureSymptomTwo] = false;
@@ -228,7 +231,7 @@ public class fs_medic_puzzle_sick01 extends script.base_script
                         peopleHealed++;
                         utils.setObjVar(player, "fs.numberHealed", peopleHealed);
                     }
-                    else 
+                    else
                     {
                         utils.setObjVar(player, "fs.numberHealed", 1);
                     }
@@ -238,12 +241,14 @@ public class fs_medic_puzzle_sick01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -265,7 +270,7 @@ public class fs_medic_puzzle_sick01 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_67e6df55");
@@ -273,7 +278,7 @@ public class fs_medic_puzzle_sick01 extends script.base_script
                 setObjVar(player, "conversation.fs_medic_puzzle_sick01.branchId", 1);
                 npcStartConversation(player, self, "fs_medic_puzzle_sick01", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -294,7 +299,7 @@ public class fs_medic_puzzle_sick01 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_67e6df55");
@@ -307,7 +312,7 @@ public class fs_medic_puzzle_sick01 extends script.base_script
                 pp.other.set(fs_medic_puzzle_sick01_tokenTO_numberHealed(player, self));
                 npcStartConversation(player, self, "fs_medic_puzzle_sick01", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -333,7 +338,7 @@ public class fs_medic_puzzle_sick01 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_67e6df55");
@@ -346,7 +351,7 @@ public class fs_medic_puzzle_sick01 extends script.base_script
                 pp.other.set(fs_medic_puzzle_sick01_tokenTO_getSymptoms(player, self));
                 npcStartConversation(player, self, "fs_medic_puzzle_sick01", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -379,7 +384,7 @@ public class fs_medic_puzzle_sick01 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_12ec68a8");
@@ -391,7 +396,7 @@ public class fs_medic_puzzle_sick01 extends script.base_script
                 setObjVar(player, "conversation.fs_medic_puzzle_sick01.branchId", 7);
                 npcStartConversation(player, self, "fs_medic_puzzle_sick01", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -400,6 +405,7 @@ public class fs_medic_puzzle_sick01 extends script.base_script
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("fs_medic_puzzle_sick01"))

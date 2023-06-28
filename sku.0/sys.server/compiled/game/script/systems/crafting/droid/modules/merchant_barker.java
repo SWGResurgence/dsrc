@@ -1,5 +1,11 @@
 package script.systems.crafting.droid.modules;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.ai.pet;
 import script.*;
 import script.library.*;
@@ -16,6 +22,7 @@ public class merchant_barker extends script.base_script
     public static final String VAR_BARK_WAYPOINT_LOC = "module_data.bark_waypoint_loc";
     public static final String VAR_BARK_WAYPOINT_NAME = "module_data.bark_waypoint_name";
     public static final string_id SID_NO_FREE_TRIAL = new string_id("base_player", "no_free_trial_barker");
+
     public merchant_barker()
     {
     }

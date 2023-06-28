@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.factions;
@@ -8,73 +14,55 @@ import script.*;
 
 public class death_watch_imperial_herald extends script.base_script
 {
+    public static String c_stringFile = "conversation/death_watch_imperial_herald";
+
     public death_watch_imperial_herald()
     {
     }
-    public static String c_stringFile = "conversation/death_watch_imperial_herald";
+
     public boolean death_watch_imperial_herald_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean death_watch_imperial_herald_condition_ImperialCheck(obj_id player, obj_id npc) throws InterruptedException
     {
         String playerFaction = factions.getFaction(player);
-        if (playerFaction.equals("Imperial"))
-        {
-            return true;
-        }
-        return false;
+        return playerFaction.equals("Imperial");
     }
+
     public boolean death_watch_imperial_herald_condition_BloodCheck(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (utils.playerHasItemByTemplate(player, "object/tangible/loot/dungeon/death_watch_bunker/blood_vial.iff"))
-        {
-            return true;
-        }
-        return false;
+        return utils.playerHasItemByTemplate(player, "object/tangible/loot/dungeon/death_watch_bunker/blood_vial.iff");
     }
+
     public boolean death_watch_imperial_herald_condition_RewardCheck(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (!hasObjVar(player, "death_watch_herald.imperialfinish"))
-        {
-            return true;
-        }
-        return false;
+        return !hasObjVar(player, "death_watch_herald.imperialfinish");
     }
+
     public boolean death_watch_imperial_herald_condition_dungeonInactive(obj_id player, obj_id npc) throws InterruptedException
     {
         String isDungeonActive = getConfigSetting("Dungeon", "Death_Watch");
-        if (isDungeonActive == null || isDungeonActive.equals("false") || isDungeonActive.equals("0"))
-        {
-            return true;
-        }
-        return false;
+        return isDungeonActive == null || isDungeonActive.equals("false") || isDungeonActive.equals("0");
     }
+
     public boolean death_watch_imperial_herald_condition_QuestComplete(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (hasObjVar(player, "death_watch_herald.imperialfinish"))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(player, "death_watch_herald.imperialfinish");
     }
+
     public boolean death_watch_imperial_herald_condition_ReturnCheck(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (hasObjVar(player, "death_watch_herald.imperialquest"))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(player, "death_watch_herald.imperialquest");
     }
+
     public boolean death_watch_imperial_herald_condition_notImperial(obj_id player, obj_id npc) throws InterruptedException
     {
         String playerFaction = factions.getFaction(player);
-        if (playerFaction == null || !playerFaction.equals("Imperial"))
-        {
-            return true;
-        }
-        return false;
+        return playerFaction == null || !playerFaction.equals("Imperial");
     }
+
     public void death_watch_imperial_herald_action_RewardGive(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "death_watch_herald.imperialfinish"))
@@ -87,10 +75,13 @@ public class death_watch_imperial_herald extends script.base_script
                     obj_id[] objContents = utils.getContents(objInventory);
                     if (objContents != null)
                     {
-                        for (obj_id objContent : objContents) {
-                            if (isIdValid(objContent)) {
+                        for (obj_id objContent : objContents)
+                        {
+                            if (isIdValid(objContent))
+                            {
                                 String strItemTemplate = getTemplateName(objContent);
-                                if (strItemTemplate.equals("object/tangible/loot/dungeon/death_watch_bunker/blood_vial.iff")) {
+                                if (strItemTemplate.equals("object/tangible/loot/dungeon/death_watch_bunker/blood_vial.iff"))
+                                {
                                     destroyObject(objContent);
                                     factions.addFactionStanding(player, "Imperial", 500);
                                     setObjVar(player, "death_watch_herald.imperialfinish", true);
@@ -102,16 +93,19 @@ public class death_watch_imperial_herald extends script.base_script
             }
         }
     }
+
     public void death_watch_imperial_herald_action_Questaccept(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "death_watch_herald.imperialquest", true);
         setObjVar(player, "death_watch_herald.destroy", true);
     }
+
     public void death_watch_imperial_herald_action_QuestRemove(obj_id player, obj_id npc) throws InterruptedException
     {
         removeObjVar(player, "death_watch_herald.imperialquest");
         removeObjVar(player, "death_watch_herald.destroy");
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -122,6 +116,7 @@ public class death_watch_imperial_herald extends script.base_script
         setCondition(self, CONDITION_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -129,6 +124,7 @@ public class death_watch_imperial_herald extends script.base_script
         setName(self, "Commander D`krn");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -137,18 +133,21 @@ public class death_watch_imperial_herald extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "npc.conversation.death_watch_imperial_herald");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -183,7 +182,7 @@ public class death_watch_imperial_herald extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_aaed8520");
@@ -195,7 +194,7 @@ public class death_watch_imperial_herald extends script.base_script
                 setObjVar(player, "conversation.death_watch_imperial_herald.branchId", 2);
                 npcStartConversation(player, self, "death_watch_imperial_herald", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -237,7 +236,7 @@ public class death_watch_imperial_herald extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_4f1e472e");
@@ -257,7 +256,7 @@ public class death_watch_imperial_herald extends script.base_script
                 setObjVar(player, "conversation.death_watch_imperial_herald.branchId", 5);
                 npcStartConversation(player, self, "death_watch_imperial_herald", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -298,7 +297,7 @@ public class death_watch_imperial_herald extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_8107be6d");
@@ -314,7 +313,7 @@ public class death_watch_imperial_herald extends script.base_script
                 setObjVar(player, "conversation.death_watch_imperial_herald.branchId", 12);
                 npcStartConversation(player, self, "death_watch_imperial_herald", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -323,6 +322,7 @@ public class death_watch_imperial_herald extends script.base_script
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("death_watch_imperial_herald"))
@@ -455,7 +455,7 @@ public class death_watch_imperial_herald extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_43908466");
@@ -468,7 +468,7 @@ public class death_watch_imperial_herald extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.death_watch_imperial_herald.branchId");
                     npcSpeak(player, message);
@@ -503,7 +503,7 @@ public class death_watch_imperial_herald extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6decea2a");
@@ -516,7 +516,7 @@ public class death_watch_imperial_herald extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.death_watch_imperial_herald.branchId");
                     npcSpeak(player, message);
@@ -551,7 +551,7 @@ public class death_watch_imperial_herald extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b6b25f13");
@@ -564,7 +564,7 @@ public class death_watch_imperial_herald extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.death_watch_imperial_herald.branchId");
                     npcSpeak(player, message);
@@ -640,7 +640,7 @@ public class death_watch_imperial_herald extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_43908466");
@@ -653,7 +653,7 @@ public class death_watch_imperial_herald extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.death_watch_imperial_herald.branchId");
                     npcSpeak(player, message);
@@ -701,7 +701,7 @@ public class death_watch_imperial_herald extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b6b25f13");
@@ -714,7 +714,7 @@ public class death_watch_imperial_herald extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.death_watch_imperial_herald.branchId");
                     npcSpeak(player, message);

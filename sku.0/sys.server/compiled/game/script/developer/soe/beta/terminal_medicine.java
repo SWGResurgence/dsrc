@@ -1,28 +1,36 @@
 package script.developer.soe.beta;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 public class terminal_medicine extends script.base_script
 {
-    public terminal_medicine()
-    {
-    }
     public static final string_id SID_ORDER_DAMAGE_MEDICINE = new string_id("sui", "order_damage_medicine");
     public static final string_id SID_ORDER_WOUND_MEDICINE = new string_id("sui", "order_wound_medicine");
     public static final String VAR_CAN_USE_TERMINAL = "terminal.can_use_terminal";
     public static final int VAR_TERMINAL_TIME = 1;
-    public static final String[] TEMPLATES = 
+    public static final String[] TEMPLATES =
+            {
+                    "object/tangible/medicine/medpack_wound_health.iff",
+                    "object/tangible/medicine/medpack_wound_constitution.iff",
+                    "object/tangible/medicine/medpack_wound_action.iff",
+                    "object/tangible/medicine/medpack_wound_stamina.iff"
+            };
+    public terminal_medicine()
     {
-        "object/tangible/medicine/medpack_wound_health.iff",
-        "object/tangible/medicine/medpack_wound_constitution.iff",
-        "object/tangible/medicine/medpack_wound_action.iff",
-        "object/tangible/medicine/medpack_wound_stamina.iff"
-    };
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCanUseTerminal(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (canUseTerminal(self))
@@ -32,6 +40,7 @@ public class terminal_medicine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isGod(player) || hasObjVar(player, "beta.terminal_ok"))
@@ -67,12 +76,13 @@ public class terminal_medicine extends script.base_script
             }
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             broadcast(player, "Only authorized users may access this terminal.");
             return SCRIPT_CONTINUE;
         }
     }
+
     public boolean setCanUseTerminal(obj_id terminal, boolean toggle) throws InterruptedException
     {
         if (terminal == null)
@@ -83,16 +93,17 @@ public class terminal_medicine extends script.base_script
         {
             setObjVar(terminal, VAR_CAN_USE_TERMINAL, 1);
         }
-        if (toggle == true)
+        if (toggle)
         {
             setObjVar(terminal, VAR_CAN_USE_TERMINAL, 1);
         }
-        else 
+        else
         {
             setObjVar(terminal, VAR_CAN_USE_TERMINAL, 0);
         }
         return true;
     }
+
     public boolean canUseTerminal(obj_id terminal) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "canUseTerminal called.");
@@ -104,15 +115,9 @@ public class terminal_medicine extends script.base_script
         {
             setObjVar(terminal, VAR_CAN_USE_TERMINAL, 1);
         }
-        if (getIntObjVar(terminal, VAR_CAN_USE_TERMINAL) == 0)
-        {
-            return false;
-        }
-        else 
-        {
-            return true;
-        }
+        return getIntObjVar(terminal, VAR_CAN_USE_TERMINAL) != 0;
     }
+
     public int msgMedicineTerminal(obj_id self, dictionary params) throws InterruptedException
     {
         setCanUseTerminal(self, true);

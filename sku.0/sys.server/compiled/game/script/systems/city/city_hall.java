@@ -1,5 +1,11 @@
 package script.systems.city;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -20,6 +26,7 @@ public class city_hall extends script.base_script
     public static final string_id CITIZEN_OVERAGE_WARNING_SUBJECT = new string_id("city/city", "safe_citizen_overage_subject");
     public static final string_id CITIZEN_OVERAGE_WARNING_BODY = new string_id("city/city", "safe_citizen_overage_body");
     public static final int SAFE_HOUSE_GRACE_PERIOD = 60 * 60 * 24 * 4;
+
     public city_hall()
     {
     }
@@ -84,7 +91,7 @@ public class city_hall extends script.base_script
         {
             obj_id ownerId = player_structure.getStructureOwnerObjId(self);
             String[] adminList = new String[1];
-            adminList[0] = "" + ownerId;
+            adminList[0] = String.valueOf(ownerId);
             setObjVar(self, player_structure.VAR_ADMIN_LIST, adminList);
         }
         validateSafeCitizenCount(self, city_id);

@@ -1,5 +1,11 @@
 package script.theme_park.corellia;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.location;
@@ -10,18 +16,21 @@ public class rebel_hideout_path extends script.base_script
     public rebel_hideout_path()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         int timeOut = rand(20, 40);
         messageTo(self, "startPatrol", null, timeOut, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         int timeOut = rand(20, 40);
         messageTo(self, "startPatrol", null, timeOut, false);
         return SCRIPT_CONTINUE;
     }
+
     public int startPatrol(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id bldg = getTopMostContainer(self);
@@ -85,6 +94,7 @@ public class rebel_hideout_path extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nextSpot(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id bldg = getTopMostContainer(self);
@@ -148,6 +158,7 @@ public class rebel_hideout_path extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String name) throws InterruptedException
     {
         if (name.equals("marker"))
@@ -167,6 +178,7 @@ public class rebel_hideout_path extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nextSpot2(obj_id self, dictionary params) throws InterruptedException
     {
         final location home = aiGetHomeLocation(self);

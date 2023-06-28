@@ -1,5 +1,11 @@
 package script.poi.heromark;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.obj_id;
 import script.string_id;
@@ -8,23 +14,26 @@ import java.util.Vector;
 
 public class mediator extends script.poi.base.scenario_actor
 {
-    public mediator()
-    {
-    }
     public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
     public static final String LOG_NAME = "poiHeroMark Mediator";
     public static final int CONV_GREET = 0;
     public static final int CONV_SPOKE = 1;
+    public mediator()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         attachScript(self, SCRIPT_CONVERSE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         attachScript(self, SCRIPT_CONVERSE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         if (ai_lib.isInCombat(self))
@@ -52,7 +61,7 @@ public class mediator extends script.poi.base.scenario_actor
             poi.quickSay(self, "m_chatter_" + idx);
             npcEndConversation(speaker);
         }
-        else 
+        else
         {
             if (badge.hasBadge(speaker, "poi_prisonbreak") && badge.hasBadge(speaker, "poi_factoryliberation") && badge.hasBadge(speaker, "poi_rabidbeast") && badge.hasBadge(speaker, "poi_twoliars"))
             {
@@ -60,7 +69,7 @@ public class mediator extends script.poi.base.scenario_actor
                 responses = utils.addElement(responses, new string_id(convo, "r_m_relatestory"));
                 npcStartConversation(speaker, self, convo, msg, responses);
             }
-            else 
+            else
             {
                 msg = new string_id(convo, "m_greet");
                 responses = utils.addElement(responses, new string_id(convo, "r_m_greet"));
@@ -69,6 +78,7 @@ public class mediator extends script.poi.base.scenario_actor
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convoName, obj_id speaker, string_id response) throws InterruptedException
     {
         if (ai_lib.isInCombat(self))
@@ -89,7 +99,8 @@ public class mediator extends script.poi.base.scenario_actor
         Vector responses = new Vector();
         responses.setSize(0);
         npcSetConversationResponses(speaker, responses);
-        switch (aId) {
+        switch (aId)
+        {
             case "r_m_greet":
                 npcSpeak(speaker, new string_id(convo, "m_herotalk1"));
                 responses = utils.addElement(responses, new string_id(convo, "r_m_herotalk1"));

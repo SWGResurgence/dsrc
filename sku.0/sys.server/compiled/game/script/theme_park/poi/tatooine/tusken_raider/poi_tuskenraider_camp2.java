@@ -1,5 +1,11 @@
 package script.theme_park.poi.tatooine.tusken_raider;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.location;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class poi_tuskenraider_camp2 extends script.theme_park.poi.base
     public poi_tuskenraider_camp2()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String objective = poiGetObjective(self);
@@ -32,9 +39,9 @@ public class poi_tuskenraider_camp2 extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public void setPatrolPath(obj_id npc, String[] patrolPoints) throws InterruptedException
     {
         ai_lib.setPatrolPath(npc, patrolPoints);
-        return;
     }
 }

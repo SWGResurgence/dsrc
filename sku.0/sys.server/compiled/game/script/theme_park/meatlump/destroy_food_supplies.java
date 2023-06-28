@@ -1,13 +1,16 @@
 package script.theme_park.meatlump;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class destroy_food_supplies extends script.base_script
 {
-    public destroy_food_supplies()
-    {
-    }
     public static final boolean LOGGING_ON = false;
     public static final String VAR_PREFIX = "meatlump_food_supplies";
     public static final String PID_NAME = VAR_PREFIX + ".pid";
@@ -32,17 +35,22 @@ public class destroy_food_supplies extends script.base_script
     public static final String FOOD_PUZZLE_BUFF = "food_supplies_puzzle_buff";
     public static final int DEFAULT_TRIES = 10;
     public static final int BUFF_TRIES_INCREASE = 10;
-    public static final int[] DEFAULT_GOAL_CURRENT_ARRAY = 
+    public static final int[] DEFAULT_GOAL_CURRENT_ARRAY =
+            {
+                    0,
+                    0,
+                    0
+            };
+    public destroy_food_supplies()
     {
-        0,
-        0,
-        0
-    };
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.ITEM_USE, SID_OPEN);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -73,6 +81,7 @@ public class destroy_food_supplies extends script.base_script
         yeastAdjustmentPuzzle(collectionItem, player);
         return SCRIPT_CONTINUE;
     }
+
     public boolean yeastAdjustmentPuzzle(obj_id collectionItem, obj_id player) throws InterruptedException
     {
         blog("gyroReceiverPuzzle - INIT");
@@ -129,7 +138,7 @@ public class destroy_food_supplies extends script.base_script
         for (int i = 0; i < goal.length; i++)
         {
             float pct = goal[i] / 100.0f;
-            int dec = (int)(255 * pct);
+            int dec = (int) (255 * pct);
             String hex = Integer.toHexString(dec);
             if (hex.length() == 1)
             {
@@ -150,6 +159,7 @@ public class destroy_food_supplies extends script.base_script
         flushSUIPage(pid);
         return true;
     }
+
     public int yeastReceiverPuzzleCallback(obj_id self, dictionary params) throws InterruptedException
     {
         blog("gyroReceiverPuzzleCallback - INIT");
@@ -169,9 +179,9 @@ public class destroy_food_supplies extends script.base_script
         {
             if (buff.applyBuff(player, "food_supplies_puzzle_downer"))
             {
-                
+
             }
-            
+
             {
                 sendSystemMessage(player, YOU_CANCELED_EARLY);
             }
@@ -197,7 +207,7 @@ public class destroy_food_supplies extends script.base_script
                 win = false;
             }
             float pct = current[i] / 100.0f;
-            int dec = (int)(255 * pct);
+            int dec = (int) (255 * pct);
             String hex = Integer.toHexString(dec);
             if (hex.length() == 1)
             {
@@ -208,7 +218,7 @@ public class destroy_food_supplies extends script.base_script
         }
         blog("gyroReceiverPuzzleCallback - loop finish");
         tries--;
-        int integrity = (int)(((float)tries / max_tries) * 100);
+        int integrity = (int) (((float) tries / max_tries) * 100);
         if (win)
         {
             blog("gyroReceiverPuzzleCallback - YOU WIN");
@@ -226,7 +236,7 @@ public class destroy_food_supplies extends script.base_script
             for (int i = 0; i < current.length; i++)
             {
                 float pct = current[i] / 100.0f;
-                int dec = (int)(255 * pct);
+                int dec = (int) (255 * pct);
                 String hex = Integer.toHexString(dec);
                 if (hex.length() == 1)
                 {
@@ -239,16 +249,16 @@ public class destroy_food_supplies extends script.base_script
             setSUIProperty(pid, "description.attempts", "Text", CALIBRATION_ATTEMPTS_REMAINING + " " + integrity + "%");
             if (buff.applyBuff(player, "food_supplies_puzzle_downer"))
             {
-                
+
             }
-            
+
             {
                 sendSystemMessage(player, YOU_FAILED);
             }
             closeOldWindow(player);
             removePlayerVars(player);
         }
-        else 
+        else
         {
             blog("gyroReceiverPuzzleCallback - Try again");
             setSUIProperty(pid, "description.attempts", "Text", CALIBRATION_ATTEMPTS_REMAINING + " " + integrity + "%");
@@ -257,6 +267,7 @@ public class destroy_food_supplies extends script.base_script
         flushSUIPage(pid);
         return SCRIPT_CONTINUE;
     }
+
     public boolean rewardPlayer(obj_id collectionItem, obj_id player) throws InterruptedException
     {
         blog("rewardPlayer - init");
@@ -281,6 +292,7 @@ public class destroy_food_supplies extends script.base_script
         removePlayerVars(player);
         return true;
     }
+
     public int closeSui(obj_id self, dictionary params) throws InterruptedException
     {
         blog("closeSui - init");
@@ -291,9 +303,9 @@ public class destroy_food_supplies extends script.base_script
         }
         if (buff.applyBuff(player, "food_supplies_puzzle_downer"))
         {
-            
+
         }
-        
+
         {
             blog("closeSui applying food_supplies_puzzle_downer");
             sendSystemMessage(player, YOU_CANCELED_EARLY);
@@ -303,6 +315,7 @@ public class destroy_food_supplies extends script.base_script
         removePlayerVars(player);
         return SCRIPT_CONTINUE;
     }
+
     public void closeOldWindow(obj_id player) throws InterruptedException
     {
         blog("closeOldWindow - init");
@@ -315,11 +328,13 @@ public class destroy_food_supplies extends script.base_script
             sui.removePid(player, PID_NAME);
         }
     }
+
     public void removePlayerVars(obj_id player) throws InterruptedException
     {
         utils.removeScriptVarTree(player, VAR_PREFIX);
         utils.removeObjVar(player, VAR_PREFIX);
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON)

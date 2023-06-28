@@ -1,5 +1,11 @@
 package script.systems.skills.stealth;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.prose;
 import script.library.stealth;
@@ -69,7 +75,7 @@ public class bioprobe extends script.base_script
         }
         else
         {
-            attribs[free++] = "" + floatFormat.format((thisProbeStorage / 60)) + " minutes";
+            attribs[free++] = floatFormat.format((thisProbeStorage / 60)) + " minutes";
         }
         names[free] = "sample_target";
         if (!hasObjVar(self, stealth.BIO_PROBE_TRAP_TARGET))
@@ -85,7 +91,7 @@ public class bioprobe extends script.base_script
         }
         else
         {
-            attribs[free++] = "" + getStringObjVar(self, stealth.BIO_PROBE_TARGET_NAME);
+            attribs[free++] = getStringObjVar(self, stealth.BIO_PROBE_TARGET_NAME);
         }
         utils.addClassRequirementAttributes(player, self, names, attribs, free, "");
         return SCRIPT_CONTINUE;

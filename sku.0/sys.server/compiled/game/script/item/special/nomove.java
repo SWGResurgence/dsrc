@@ -1,5 +1,11 @@
 package script.item.special;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.jedi;
 import script.library.utils;
 import script.obj_id;
@@ -64,6 +70,5 @@ public class nomove extends script.item.special.nomove_base
         int maxDam = getWeaponMaxDamage(self);
         float attSpeed = getWeaponAttackSpeed(self);
         CustomerServiceLog("Lightsaber:", "%TU: Owns lightsaber: %TT: " + " minDamage: " + minDam + " maxDamage: " + maxDam + " attackSpeed: " + attSpeed, owner, self);
-        return;
     }
 }

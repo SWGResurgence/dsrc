@@ -1,5 +1,11 @@
 package script.space.combat;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.space_transition;
 import script.library.utils;
@@ -8,10 +14,12 @@ import script.string_id;
 
 public class combat_space_loot extends script.base_script
 {
+    public static final string_id SID_NO_PERMISSION_OPEN = new string_id("space/space_loot", "no_permission_open");
+
     public combat_space_loot()
     {
     }
-    public static final string_id SID_NO_PERMISSION_OPEN = new string_id("space/space_loot", "no_permission_open");
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setOwner(self, null);
@@ -28,11 +36,13 @@ public class combat_space_loot extends script.base_script
         messageTo(self, "destroySelf", null, 300, false);
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToLoseItem(obj_id self, obj_id objDestination, obj_id objPlayer, obj_id objItem) throws InterruptedException
     {
         if (!isIdValid(objPlayer))
@@ -50,6 +60,7 @@ public class combat_space_loot extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnLostItem(obj_id self, obj_id objDestination, obj_id objPlayer, obj_id objItem) throws InterruptedException
     {
         LOG("space", "I lost an item1");
@@ -73,6 +84,7 @@ public class combat_space_loot extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int recheckContents(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] objContents = getContents(self);

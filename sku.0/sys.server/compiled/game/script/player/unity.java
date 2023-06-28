@@ -1,5 +1,11 @@
 package script.player;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -10,17 +16,19 @@ import java.util.Vector;
 
 public class unity extends script.base_script
 {
-    public unity()
-    {
-    }
     public static final string_id SID_SUI_PROPOSE_PROMPT = new string_id("unity", "sui_propose_prompt");
     public static final string_id SID_SUI_RING_SPEC = new string_id("unity", "sui_ring_spec");
     public static final string_id SID_SUI_RING_EQUIP = new string_id("unity", "sui_ring_equip");
+    public unity()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, marriage.HANDLER_PROPOSAL_EXPIRE, null, marriage.PROPOSAL_TIME, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, marriage.VAR_PROPOSAL_TARGET))
@@ -38,6 +46,7 @@ public class unity extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogout(obj_id self) throws InterruptedException
     {
         obj_id target = null;
@@ -56,6 +65,7 @@ public class unity extends script.base_script
         messageTo(self, marriage.HANDLER_PROPOSAL_EXPIRE, null, 0, true);
         return SCRIPT_CONTINUE;
     }
+
     public int handleProposedTo(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -86,13 +96,14 @@ public class unity extends script.base_script
         {
             utils.setScriptVar(self, marriage.VAR_ACCEPT_SUI, pid);
         }
-        else 
+        else
         {
             detachScript(self, marriage.SCRIPT_UNITY);
             detachScript(proposer, marriage.SCRIPT_UNITY);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleProposalSui(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -114,10 +125,13 @@ public class unity extends script.base_script
         }
         Vector entries = new Vector();
         entries.setSize(0);
-        for (obj_id ring : rings) {
+        for (obj_id ring : rings)
+        {
             String entry = null;
-            if (static_item.isStaticItem(ring)) {
-                if (!static_item.canEquip(self, ring)) {
+            if (static_item.isStaticItem(ring))
+            {
+                if (!static_item.canEquip(self, ring))
+                {
                     continue;
                 }
             }
@@ -134,7 +148,7 @@ public class unity extends script.base_script
             utils.setScriptVar(self, marriage.VAR_ACCEPT_SUI, pid);
             utils.setBatchScriptVar(self, marriage.VAR_ACCEPT_SUI_OPTIONS, rings);
         }
-        else 
+        else
         {
             obj_id proposer = utils.getObjIdScriptVar(self, marriage.VAR_PROPOSEDTO_TARGET);
             if (isIdValid(proposer))
@@ -145,6 +159,7 @@ public class unity extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleRingSelectionSui(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -197,6 +212,7 @@ public class unity extends script.base_script
         marriage.wed(proposer, self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleProposalExpire(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, marriage.VAR_PROPOSAL_TARGET))
@@ -207,7 +223,7 @@ public class unity extends script.base_script
                 prose_package ppExpirePlayer = prose.getPackage(marriage.PROSE_EXPIRE_PLAYER, proposee);
                 sendSystemMessageProse(self, ppExpirePlayer);
             }
-            else 
+            else
             {
                 sendSystemMessage(self, marriage.SID_EXPIRED_PLAYER);
             }
@@ -220,7 +236,7 @@ public class unity extends script.base_script
                 prose_package ppExpireTarget = prose.getPackage(marriage.PROSE_EXPIRE_TARGET, proposer);
                 sendSystemMessageProse(self, ppExpireTarget);
             }
-            else 
+            else
             {
                 sendSystemMessage(self, marriage.SID_EXPIRED_TARGET);
             }
@@ -228,6 +244,7 @@ public class unity extends script.base_script
         detachScript(self, marriage.SCRIPT_UNITY);
         return SCRIPT_CONTINUE;
     }
+
     public int handleAcceptFail(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, marriage.VAR_PROPOSAL_TARGET))
@@ -238,7 +255,7 @@ public class unity extends script.base_script
                 prose_package ppAcceptFail = prose.getPackage(marriage.PROSE_ACCEPT_FAIL, proposee);
                 sendSystemMessageProse(self, ppAcceptFail);
             }
-            else 
+            else
             {
                 sendSystemMessage(self, marriage.SID_ACCEPT_FAIL);
             }
@@ -246,6 +263,7 @@ public class unity extends script.base_script
         detachScript(self, marriage.SCRIPT_UNITY);
         return SCRIPT_CONTINUE;
     }
+
     public int handleProposalDeclined(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, marriage.VAR_PROPOSAL_TARGET))
@@ -256,7 +274,7 @@ public class unity extends script.base_script
                 prose_package ppDeclined = prose.getPackage(marriage.PROSE_DECLINED, proposee);
                 sendSystemMessageProse(self, ppDeclined);
             }
-            else 
+            else
             {
                 sendSystemMessage(self, marriage.SID_DECLINED);
             }
@@ -264,6 +282,7 @@ public class unity extends script.base_script
         detachScript(self, marriage.SCRIPT_UNITY);
         return SCRIPT_CONTINUE;
     }
+
     public int handleRingExchange(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id other = params.getObjId("other");
@@ -279,12 +298,13 @@ public class unity extends script.base_script
             sendSystemMessageProse(self, ppExchangeRings);
             messageTo(other, marriage.HANDLER_RING_SETUP, params, 1, false);
         }
-        else 
+        else
         {
             marriage.weddingError(self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleRingSetup(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id spouse = params.getObjId("other");
@@ -309,7 +329,7 @@ public class unity extends script.base_script
                 detachScript(self, marriage.SCRIPT_UNITY);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
             }
         }

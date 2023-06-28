@@ -1,5 +1,11 @@
 package script.ai;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.attrib;
 import script.library.factions;
@@ -7,11 +13,12 @@ import script.obj_id;
 
 public class soldier extends script.base_script
 {
+    public static final String ACTION_ALERT = "alert";
+    public static final String ACTION_THREATEN = "threaten";
     public soldier()
     {
     }
-    public static final String ACTION_ALERT = "alert";
-    public static final String ACTION_THREATEN = "threaten";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "ai.diction"))
@@ -33,6 +40,7 @@ public class soldier extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (ai_lib.isInCombat(self))
@@ -65,27 +73,28 @@ public class soldier extends script.base_script
             switch (reaction)
             {
                 case factions.REACTION_NEGATIVE:
-                if (!hasObjVar(self, "ai.inFormation"))
-                {
-                    ai_lib.barkString(self, "hi_mean");
-                }
-                break;
+                    if (!hasObjVar(self, "ai.inFormation"))
+                    {
+                        ai_lib.barkString(self, "hi_mean");
+                    }
+                    break;
                 case factions.REACTION_POSITIVE:
-                if (!hasObjVar(self, "ai.inFormation"))
-                {
-                    ai_lib.barkString(self, "hi_nice");
-                }
-                break;
+                    if (!hasObjVar(self, "ai.inFormation"))
+                    {
+                        ai_lib.barkString(self, "hi_nice");
+                    }
+                    break;
                 default:
-                if (!hasObjVar(self, "ai.inFormation"))
-                {
-                    ai_lib.barkString(self, "hi_mid");
-                }
-                break;
+                    if (!hasObjVar(self, "ai.inFormation"))
+                    {
+                        ai_lib.barkString(self, "hi_mid");
+                    }
+                    break;
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (ai_lib.isAiDead(self))
@@ -98,18 +107,19 @@ public class soldier extends script.base_script
             switch (reaction)
             {
                 case factions.REACTION_NEGATIVE:
-                ai_lib.barkString(self, "bye_mean");
-                break;
+                    ai_lib.barkString(self, "bye_mean");
+                    break;
                 case factions.REACTION_POSITIVE:
-                ai_lib.barkString(self, "bye_nice");
-                break;
+                    ai_lib.barkString(self, "bye_nice");
+                    break;
                 default:
-                ai_lib.barkString(self, "bye_mid");
-                break;
+                    ai_lib.barkString(self, "bye_mid");
+                    break;
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnBehaviorChange(obj_id self, int newBehavior, int oldBehavior, int[] changeFlags) throws InterruptedException
     {
         if (ai_lib.isAiDead(self))
@@ -136,6 +146,7 @@ public class soldier extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void doAgitateBehavior(obj_id npc, int behavior) throws InterruptedException
     {
         if (isInvulnerable(npc))
@@ -144,7 +155,6 @@ public class soldier extends script.base_script
         }
         if (getConfigSetting("GameServer", "disableAICombat") != null)
         {
-            return;
         }
     }
 }

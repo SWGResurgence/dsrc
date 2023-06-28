@@ -1,5 +1,11 @@
 package script.theme_park.nym;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.spawning;
@@ -9,11 +15,12 @@ import script.obj_id;
 
 public class mining_cave extends script.base_script
 {
+    public static final String NYM_OBJECT_DATATABLE = "datatables/spawning/theme_park/nym_mining_cave_objects.iff";
+    public static final String SPAWNER_DATATABLE = "datatables/spawning/theme_park/nym_imperial_mine.iff";
     public mining_cave()
     {
     }
-    public static final String NYM_OBJECT_DATATABLE = "datatables/spawning/theme_park/nym_mining_cave_objects.iff";
-    public static final String SPAWNER_DATATABLE = "datatables/spawning/theme_park/nym_imperial_mine.iff";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "spawnQuestObjects", null, 3, false);
@@ -21,6 +28,7 @@ public class mining_cave extends script.base_script
         messageTo(self, "handleEliteSpawns", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnQuestObjects(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -47,6 +55,7 @@ public class mining_cave extends script.base_script
         spawning.spawnObjectsInDungeonFromTable(self, planet, NYM_OBJECT_DATATABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSpawns(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -81,6 +90,7 @@ public class mining_cave extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tellingMomIDied(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -116,6 +126,7 @@ public class mining_cave extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean doSpawn(int spawn_num, String planet, obj_id self) throws InterruptedException
     {
         if (spawn_num < 0)
@@ -167,8 +178,10 @@ public class mining_cave extends script.base_script
         if (script != null && script.length() > 0)
         {
             String[] scripts = split(script, ',');
-            for (String script1 : scripts) {
-                if (!hasScript(objectCreated, script1)) {
+            for (String script1 : scripts)
+            {
+                if (!hasScript(objectCreated, script1))
+                {
                     attachScript(objectCreated, script1);
                 }
             }

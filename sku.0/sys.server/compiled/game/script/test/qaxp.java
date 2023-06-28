@@ -1,14 +1,17 @@
 package script.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
 
 public class qaxp extends script.base_script
 {
-    public qaxp()
-    {
-    }
     public static final int XP_AMOUNT = 1000000;
     public static final String SCRIPTVAR = "qaxp";
     public static final String PROMPT = "Select the amount of XP you desire in the right box";
@@ -24,30 +27,36 @@ public class qaxp extends script.base_script
     public static final int PRESTIGE_IMP = 6;
     public static final int PRESTIGE_REB = 7;
     public static final int PRESTIGE_NEUTRAL = 8;
-    public static final String[] THIS_TOOL_MENU = 
+    public static final String[] THIS_TOOL_MENU =
+            {
+                    "Revoke non-pilot experience",
+                    "combat_general",
+                    "quest_combat",
+                    "quest_crafting",
+                    "quest_social",
+                    "quest_general",
+                    "prestige_imperial",
+                    "prestige_rebel",
+                    "prestige_pilot"
+            };
+    public static final String[] NON_COMBAT_PRFESSIONS =
+            {
+                    "entertainer",
+                    "trader"
+            };
+    public qaxp()
     {
-        "Revoke non-pilot experience",
-        "combat_general",
-        "quest_combat",
-        "quest_crafting",
-        "quest_social",
-        "quest_general",
-        "prestige_imperial",
-        "prestige_rebel",
-        "prestige_pilot"
-    };
-    public static final String[] NON_COMBAT_PRFESSIONS = 
-    {
-        "entertainer",
-        "trader"
-    };
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        if (!isGod(self) || getGodLevel(self) < 50 || !isPlayer(self)) {
+        if (!isGod(self) || getGodLevel(self) < 50 || !isPlayer(self))
+        {
             detachScript(self, "test.qaxp");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (isGod(self))
@@ -60,6 +69,7 @@ public class qaxp extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleXpOptions(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -85,38 +95,39 @@ public class qaxp extends script.base_script
         switch (idx)
         {
             case REVOKE_XP:
-            revokeGroungXp(player);
-            break;
+                revokeGroungXp(player);
+                break;
             case COMBAT_GENERAL:
-            validateTemplateThenConstructTransferUI(player, THIS_TOOL_MENU[idx], template);
-            break;
+                validateTemplateThenConstructTransferUI(player, THIS_TOOL_MENU[idx], template);
+                break;
             case QUEST_COMBAT:
-            validateTemplateThenConstructTransferUI(player, THIS_TOOL_MENU[idx], template);
-            break;
+                validateTemplateThenConstructTransferUI(player, THIS_TOOL_MENU[idx], template);
+                break;
             case QUEST_CRAFTING:
-            validateTemplateThenConstructTransferUI(player, THIS_TOOL_MENU[idx], template);
-            break;
+                validateTemplateThenConstructTransferUI(player, THIS_TOOL_MENU[idx], template);
+                break;
             case QUEST_SOCIAL:
-            validateTemplateThenConstructTransferUI(player, THIS_TOOL_MENU[idx], template);
-            break;
+                validateTemplateThenConstructTransferUI(player, THIS_TOOL_MENU[idx], template);
+                break;
             case QUEST_GENERAL:
-            validateTemplateThenConstructTransferUI(player, THIS_TOOL_MENU[idx], template);
-            break;
+                validateTemplateThenConstructTransferUI(player, THIS_TOOL_MENU[idx], template);
+                break;
             case PRESTIGE_IMP:
-            validateTemplateThenConstructTransferUI(player, THIS_TOOL_MENU[idx], template);
-            break;
+                validateTemplateThenConstructTransferUI(player, THIS_TOOL_MENU[idx], template);
+                break;
             case PRESTIGE_REB:
-            validateTemplateThenConstructTransferUI(player, THIS_TOOL_MENU[idx], template);
-            break;
+                validateTemplateThenConstructTransferUI(player, THIS_TOOL_MENU[idx], template);
+                break;
             case PRESTIGE_NEUTRAL:
-            validateTemplateThenConstructTransferUI(player, THIS_TOOL_MENU[idx], template);
-            break;
+                validateTemplateThenConstructTransferUI(player, THIS_TOOL_MENU[idx], template);
+                break;
             default:
-            removePlayer(player, "");
-            return SCRIPT_CONTINUE;
+                removePlayer(player, "");
+                return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleXpAmountAdd(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = qa.findTarget(self);
@@ -133,6 +144,7 @@ public class qaxp extends script.base_script
         toolMainMenu(player);
         return SCRIPT_CONTINUE;
     }
+
     public int handleXpAmountRevoke(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = qa.findTarget(self);
@@ -149,62 +161,68 @@ public class qaxp extends script.base_script
         toolMainMenu(player);
         return SCRIPT_CONTINUE;
     }
+
     public void toolMainMenu(obj_id player) throws InterruptedException
     {
         qa.refreshMenu(player, "Select the xp type...", "NPE XP Tool", THIS_TOOL_MENU, "handleXpOptions", "qaxp.pid", SCRIPTVAR + ".mainMenu", sui.OK_CANCEL_REFRESH);
     }
+
     public void removePlayer(obj_id player, String err) throws InterruptedException
     {
         broadcast(player, err);
         qa.removeScriptVars(player, SCRIPTVAR);
         utils.removeScriptVarTree(player, SCRIPTVAR);
     }
+
     public void validateTemplateThenConstructTransferUI(obj_id player, String choice, String template) throws InterruptedException
     {
         if (choice.startsWith("prestige"))
         {
-            if (space_flags.hasAnyPilotSkill(player) == true)
+            if (space_flags.hasAnyPilotSkill(player))
             {
                 if (choice.startsWith("prestige"))
                 {
-                    if (choice.equals("prestige_imperial") && space_flags.isImperialPilot(player) == true)
+                    if (choice.equals("prestige_imperial") && space_flags.isImperialPilot(player))
                     {
                         utils.setScriptVar(player, SCRIPTVAR + ".xpType", choice);
                         sui.transfer(player, player, PROMPT, "XP Tool", "Available", XP_AMOUNT, "Amount", 0, "handleXpAmountAdd");
                     }
-                    else if (choice.equals("prestige_rebel") && space_flags.isRebelPilot(player) == true)
+                    else if (choice.equals("prestige_rebel") && space_flags.isRebelPilot(player))
                     {
                         utils.setScriptVar(player, SCRIPTVAR + ".xpType", choice);
                         sui.transfer(player, player, PROMPT, "XP Tool", "Available", XP_AMOUNT, "Amount", 0, "handleXpAmountAdd");
                     }
-                    else if (choice.equals("prestige_pilot") && space_flags.isNeutralPilot(player) == true)
+                    else if (choice.equals("prestige_pilot") && space_flags.isNeutralPilot(player))
                     {
                         utils.setScriptVar(player, SCRIPTVAR + ".xpType", choice);
                         sui.transfer(player, player, PROMPT, "XP Tool", "Available", XP_AMOUNT, "Amount", 0, "handleXpAmountAdd");
                     }
-                    else 
+                    else
                     {
                         broadcast(player, "The player has to be the correct Pilot Faction in order to receive this prestige.");
                     }
                 }
-                else 
+                else
                 {
                     utils.setScriptVar(player, SCRIPTVAR + ".xpType", choice);
                     sui.transfer(player, player, PROMPT, "XP Tool", "Available", XP_AMOUNT, "Amount", 0, "handleXpAmountAdd");
                 }
             }
-            else 
+            else
             {
                 removePlayer(player, "The test character does not have a pilot skill");
                 toolMainMenu(player);
             }
         }
-        else 
+        else
         {
             String templateType = "";
-            for (String nonCombatPrfession : NON_COMBAT_PRFESSIONS) {
-                if (template.startsWith(nonCombatPrfession)) {
+            for (String nonCombatPrfession : NON_COMBAT_PRFESSIONS)
+            {
+                if (template.startsWith(nonCombatPrfession))
+                {
                     templateType = "noncombat";
+                    break;
                 }
             }
             if (templateType.equals(""))
@@ -214,13 +232,13 @@ public class qaxp extends script.base_script
                     utils.setScriptVar(player, SCRIPTVAR + ".xpType", choice);
                     sui.transfer(player, player, PROMPT, "XP Tool", "Available", XP_AMOUNT, "Amount", 0, "handleXpAmountAdd");
                 }
-                else 
+                else
                 {
                     removePlayer(player, "The player needs to have the correct profession to seek a non-Combat XP type. (You are a Combat Profession) ");
                     toolMainMenu(player);
                 }
             }
-            else 
+            else
             {
                 if (choice.equals("quest_social") && template.startsWith("entertainer") || choice.equals("quest_general") && template.startsWith("entertainer"))
                 {
@@ -234,7 +252,7 @@ public class qaxp extends script.base_script
                     utils.setScriptVar(player, SCRIPTVAR + ".xpType", choice);
                     sui.transfer(player, player, PROMPT, "XP Tool", "Available", XP_AMOUNT, "Amount", 0, "handleXpAmountAdd");
                 }
-                else 
+                else
                 {
                     removePlayer(player, "The player needs to have the correct profession to seek that XP type.");
                     toolMainMenu(player);
@@ -242,6 +260,7 @@ public class qaxp extends script.base_script
             }
         }
     }
+
     public void revokeGroungXp(obj_id player) throws InterruptedException
     {
         String skillName = getWorkingSkill(player);

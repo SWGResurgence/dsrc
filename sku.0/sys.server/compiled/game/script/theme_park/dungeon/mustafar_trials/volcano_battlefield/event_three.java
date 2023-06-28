@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.volcano_battlefield;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -12,14 +18,15 @@ import java.util.Vector;
 
 public class event_three extends script.base_script
 {
-    public event_three()
-    {
-    }
     public static final String boss = "som_volcano_three_forward_commander";
     public static final String GUARD = "som_volcano_three_hk77";
     public static final String risen = "som_volcano_three_risen_commander";
     public static final String INDEX = "guardIndex";
     public static final boolean LOGGING = false;
+    public event_three()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         trial.bumpSession(self);
@@ -27,11 +34,13 @@ public class event_three extends script.base_script
         messageTo(self, "spawnGuards", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int activateEvent(obj_id self, dictionary params) throws InterruptedException
     {
         setTriggerVolume(self);
         return SCRIPT_CONTINUE;
     }
+
     public void setTriggerVolume(obj_id self) throws InterruptedException
     {
         if (!hasTriggerVolume(self, "activateVolume"))
@@ -39,6 +48,7 @@ public class event_three extends script.base_script
             createTriggerVolume("activateVolume", 45, true);
         }
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (isPlayer(breacher) && !isIncapacitated(breacher))
@@ -50,12 +60,14 @@ public class event_three extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void activateEncounter(obj_id self) throws InterruptedException
     {
         dictionary dict = trial.getSessionDict(self);
         dict.put(INDEX, 0);
         messageTo(self, "doGuardAttackCycle", dict, 1, false);
     }
+
     public void spawnBoss(obj_id self) throws InterruptedException
     {
         location here = getLocation(self);
@@ -71,27 +83,28 @@ public class event_three extends script.base_script
         trial.setParent(self, eventBoss, false);
         utils.setScriptVar(self, "boss", eventBoss);
     }
+
     public int spawnGuards(obj_id self, dictionary params) throws InterruptedException
     {
         location here = getLocation(self);
-        String[] offSet = 
-        {
-            "-6:-10",
-            "-3:-10",
-            "0:-10",
-            "3:-10",
-            "6:-10",
-            "-6:-8",
-            "-3:-8",
-            "0:-8",
-            "3:-8",
-            "6:-8",
-            "-6:-6",
-            "-3:-6",
-            "0:-6",
-            "3:-6",
-            "6:-6"
-        };
+        String[] offSet =
+                {
+                        "-6:-10",
+                        "-3:-10",
+                        "0:-10",
+                        "3:-10",
+                        "6:-10",
+                        "-6:-8",
+                        "-3:-8",
+                        "0:-8",
+                        "3:-8",
+                        "6:-8",
+                        "-6:-6",
+                        "-3:-6",
+                        "0:-6",
+                        "3:-6",
+                        "6:-6"
+                };
         obj_id[] guards = new obj_id[15];
         for (int i = 0; i < offSet.length; i++)
         {
@@ -116,6 +129,7 @@ public class event_three extends script.base_script
         trial.bumpSession(self);
         return SCRIPT_CONTINUE;
     }
+
     public int doGuardAttackCycle(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params))
@@ -141,7 +155,7 @@ public class event_three extends script.base_script
                 messageTo(self, "doGuardAttackCycle", dict, 10, false);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 dictionary dict = trial.getSessionDict(self);
                 index++;
@@ -152,6 +166,7 @@ public class event_three extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int eventMobDied(obj_id self, dictionary params) throws InterruptedException
     {
         String type = params.getString("type");
@@ -189,6 +204,7 @@ public class event_three extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void winEncounter(obj_id self) throws InterruptedException
     {
         obj_id top = trial.getParent(self);
@@ -199,26 +215,27 @@ public class event_three extends script.base_script
         }
         messageTo(top, "eventDefeated", null, 0, false);
     }
+
     public void placeGuardCorpse(obj_id self) throws InterruptedException
     {
-        String[] offSet = 
-        {
-            "7:4",
-            "2:-6",
-            "0:-11",
-            "-5:1",
-            "14:-13",
-            "-18:-32",
-            "-18:-23",
-            "6:-2",
-            "16:-8",
-            "18:-14",
-            "-18:4",
-            "5:-4",
-            "11:4",
-            "-3:-12",
-            "7:-29"
-        };
+        String[] offSet =
+                {
+                        "7:4",
+                        "2:-6",
+                        "0:-11",
+                        "-5:1",
+                        "14:-13",
+                        "-18:-32",
+                        "-18:-23",
+                        "6:-2",
+                        "16:-8",
+                        "18:-14",
+                        "-18:4",
+                        "5:-4",
+                        "11:4",
+                        "-3:-12",
+                        "7:-29"
+                };
         int idx = 0;
         if (utils.hasScriptVar(self, "corpseIdx"))
         {
@@ -239,6 +256,7 @@ public class event_three extends script.base_script
         setInvulnerable(corpse, true);
         setObjVar(corpse, "boss", utils.getObjIdScriptVar(self, "boss"));
     }
+
     public void activateBoss(obj_id self) throws InterruptedException
     {
         obj_id eventBoss = utils.getObjIdScriptVar(self, "boss");
@@ -250,6 +268,7 @@ public class event_three extends script.base_script
         messageTo(eventBoss, "beginAttack", null, 3, false);
         messageTo(self, "doResEffect", trial.getSessionDict(self), 10, false);
     }
+
     public int doResEffect(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params))
@@ -265,8 +284,10 @@ public class event_three extends script.base_script
         }
         Vector liveBoss = new Vector();
         liveBoss.setSize(0);
-        for (obj_id boss1 : boss) {
-            if (!isDead(boss1)) {
+        for (obj_id boss1 : boss)
+        {
+            if (!isDead(boss1))
+            {
                 utils.addElement(liveBoss, boss1);
             }
         }
@@ -289,6 +310,7 @@ public class event_three extends script.base_script
         performRez(self, boss, corpseList);
         return SCRIPT_CONTINUE;
     }
+
     public void performRez(obj_id self, obj_id[] bossList, obj_id[] corpseList) throws InterruptedException
     {
         for (int i = 0; i < bossList.length && i < corpseList.length; i++)
@@ -318,14 +340,17 @@ public class event_three extends script.base_script
         }
         messageTo(self, "doResEffect", trial.getSessionDict(self), 35, false);
     }
+
     public void checkForLastBoss(obj_id self) throws InterruptedException
     {
         obj_id[] boss = trial.getObjectsInRangeWithScriptVar(self, trial.VOLCANO_THREE_IS_BOSS, 400.0f);
         obj_id[] corpseList = trial.getObjectsInRangeWithScriptVar(self, trial.VOLCANO_THREE_IS_CORPSE, 400.0f);
         Vector bossList = new Vector();
         bossList.setSize(0);
-        for (obj_id boss1 : boss) {
-            if (!isDead(boss1)) {
+        for (obj_id boss1 : boss)
+        {
+            if (!isDead(boss1))
+            {
                 utils.addElement(bossList, boss1);
             }
         }
@@ -348,6 +373,7 @@ public class event_three extends script.base_script
             performSoloCorpseRez(self, corpseList[0]);
         }
     }
+
     public void performSoloCorpseRez(obj_id self, obj_id corpse) throws InterruptedException
     {
         playClientEffectObj(corpse, trial.PRT_DROID_REVIVE, corpse, "");
@@ -366,6 +392,7 @@ public class event_three extends script.base_script
         destroyObject(corpse);
         messageTo(self, "doResEffect", trial.getSessionDict(self), 18, false);
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING || trial.VOLCANO_LOGGING)

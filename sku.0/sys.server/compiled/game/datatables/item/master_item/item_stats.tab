@@ -2233,7 +2233,7 @@ item_deed_podracer_anakin			"string:vehicle_attribs.object_ref=podracer_anakin,f
 item_deed_snowspeeder_06_01			"string:vehicle_attribs.object_ref=snowspeeder,float:hit_points=15000"								
 item_deed_walker_06_02			"string:vehicle_attribs.object_ref=walker_at_rt_camo,float:hit_points=10000"								
 item_deed_walker_at_xt_06_02			"string:vehicle_attribs.object_ref=walker_at_xt,float:hit_points=10000"								
-item_development_combat_test_ring_06_01	"stamina_modified=200,agility_modified=200,constitution_modified=200,strength_modified=200,precision_modified=200,luck_modified=200"										
+item_development_combat_test_ring_06_01			"stamina_modified=200,agility_modified=200,constitution_modified=200,strength_modified=200,precision_modified=200,luck_modified=200"
 item_dianoga_dumpster											
 item_dna_kittle			"string:beast.dna.creature_template=object/mobile/beast_master/bm_kittle.iff,float:beast.dna.quality=90.000000,int:beast.dna.cs_item=1"								
 item_dna_minstyngar			"string:beast.dna.creature_template=object/mobile/beast_master/bm_minstyngar.iff,float:beast.dna.quality=90.000000,int:beast.dna.cs_item=1"								
@@ -4226,7 +4226,7 @@ item_tcg_loot_reward_series3_mustafar_travel_advertisement
 item_tcg_loot_reward_series3_nightsister_vendor	special_vendor_tcg_series3_nightsister=1		string:nonvendor.give_nontrader=nonvendor_nightsister								
 item_tcg_loot_reward_series3_podracer_longtail			"string:vehicle_attribs.object_ref=pod_racer_ipg_longtail,float:hit_points=15000"								
 item_tcg_loot_reward_series3_sith_meditation_room_deed			"string:player_structure.deed.template=object/building/player/player_house_sith_meditation_room.iff,int:player_structure.deed.buildtime=90"								
-item_tcg_loot_reward_series3_swamp_speeder			"string:vehicle_attribs.object_ref=swamp_speeder,float:hit_points=15002"								
+item_tcg_loot_reward_series3_swamp_speeder			"string:vehicle_attribs.object_ref=swamp_speeder,float:hit_points=15000"
 item_tcg_loot_reward_series3_swg_tcg_painting											
 item_tcg_loot_reward_series3_target_dummy			string:targetDummyCreatureName=tcg_target_dummy								
 item_tcg_loot_reward_series3_wompa_skin_rug											
@@ -4290,7 +4290,7 @@ item_tcg_loot_reward_series6_build01_hk47_statuette			"string:tcg.combineItemTem
 item_tcg_loot_reward_series6_build02_hk47_mustafar_diorama			"string:tcg.combineItemTemplatePattern=object/tangible/tcg/series6/combine_object_,string:tcg.setName=set6_hk47"								
 item_tcg_loot_reward_series6_build03_battle_droid_statuette			"string:tcg.combineItemTemplatePattern=object/tangible/tcg/series6/combine_object_,string:tcg.setName=set6_hk47"								
 item_tcg_loot_reward_series6_build04_hkdroid_series_poster			"string:tcg.combineItemTemplatePattern=object/tangible/tcg/series6/combine_object_,string:tcg.setName=set6_hk47"								
-item_tcg_loot_reward_series6_buildreward_hk47_jet_pack			"string:vehicle_attribs.object_ref=hk47_jetpack,float:hit_points=1500"								
+item_tcg_loot_reward_series6_buildreward_hk47_jet_pack			"string:vehicle_attribs.object_ref=hk47_jetpack,float:hit_points=15000"
 item_tcg_loot_reward_series6_cloud_car_itv											
 item_tcg_loot_reward_series6_cloud_city_hologram											
 item_tcg_loot_reward_series6_deed_emperor_spire			"string:player_structure.deed.template=object/building/player/player_house_tcg_emperors_spire.iff,int:player_structure.deed.buildtime=90"								
@@ -4327,7 +4327,7 @@ item_tcg_loot_reward_series7_commando_painting			string:collection.slotName=tcg_
 item_tcg_loot_reward_series7_deed_commando_bunker			"string:player_structure.deed.template=object/building/player/player_house_tcg_commando_bunker.iff,int:player_structure.deed.buildtime=90"								
 item_tcg_loot_reward_series7_deed_vehicle_garage			"string:player_structure.deed.template=object/building/player/player_house_tcg_vehicle_garage.iff,int:player_structure.deed.buildtime=90"								
 item_tcg_loot_reward_series7_deed_vip_bunker			"string:player_structure.deed.template=object/building/player/player_house_tcg_vip_bunker.iff,int:player_structure.deed.buildtime=90"								
-item_tcg_loot_reward_series7_embroidered_sash	luck_modified=300,constitution_modified=50,expertise_damage_all=5expertise_action_all=5,expertise_range_bonus_pistol=3,expertise_range_bonus_carbine=3										
+item_tcg_loot_reward_series7_embroidered_sash	luck_modified=300,constitution_modified=50,expertise_damage_all=5,expertise_action_all=5,expertise_range_bonus_pistol=3,expertise_range_bonus_carbine=3
 item_tcg_loot_reward_series7_figrin_dan_diorama			string:soundFile=sound/music_figrin_dan_tcg_diorama.snd								
 item_tcg_loot_reward_series7_gold_cape											
 item_tcg_loot_reward_series7_handmade_sash											
@@ -4364,7 +4364,7 @@ item_tcg_loot_reward_series9_jedi_library_bookshelf
 item_tcg_loot_reward_series9_lepese_dictionary					tcg_series9_lepese_dictionary					clienteffect/tcg_xp_instant.cef	
 item_tcg_loot_reward_series9_vendor_serving_droid	special_vendor_tcg_series9_serving_droid=1		string:nonvendor.give_nontrader=nonvendor_serving_droid								
 item_tcg_massiff_poodoo											
-item_tcg_merr_sonn_jt12_jetpack_deed			"string:vehicle_attribs.object_ref=mandalorian_jetpack,float:hit_points=1500"								
+item_tcg_merr_sonn_jt12_jetpack_deed			"string:vehicle_attribs.object_ref=mandalorian_jetpack,float:hit_points=15000"
 item_tcg_nuna_rotten_egg_02_01											
 item_tcg_promotion_booster_01_01			int:featureID=5251								
 item_tcg_promotion_card_01_01			int:featureID=5252								

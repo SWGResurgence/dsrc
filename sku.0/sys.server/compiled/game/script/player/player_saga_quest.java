@@ -1,5 +1,11 @@
 package script.player;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -8,16 +14,19 @@ public class player_saga_quest extends script.base_script
     public player_saga_quest()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleChronicleProfessionGranted", null, 14, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleChronicleProfessionGranted", null, 9, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnNewbieTutorialResponse(obj_id self, String action) throws InterruptedException
     {
         if (action.equals("clientReady"))
@@ -30,6 +39,7 @@ public class player_saga_quest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleChroniclesTermsOfService(obj_id self, dictionary params) throws InterruptedException
     {
         string_id prompt_sid = new string_id("saga_system", "pgc_terms_of_service_text");
@@ -50,6 +60,7 @@ public class player_saga_quest extends script.base_script
         pgc_quests.logProgression(self, obj_id.NULL_ID, "Player shown Chronicles Terms of Service window: " + utils.formatTimeVerbose(getCalendarTime()));
         return SCRIPT_CONTINUE;
     }
+
     public int handleChroniclesReserveReminder(obj_id self, dictionary params) throws InterruptedException
     {
         int[] pgcRatingData = pgcGetRatingData(self);
@@ -76,6 +87,7 @@ public class player_saga_quest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleChronicleProfessionGranted(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasSkill(self, pgc_quests.PGC_CHRONICLES_STARTING_SKILL))
@@ -90,6 +102,7 @@ public class player_saga_quest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int checkForMissedRoadmapRewards(obj_id self, dictionary params) throws InterruptedException
     {
         String[] chronicleSkills = skill_template.getSkillTemplateSkillsByTemplateName(pgc_quests.PGC_CHRONICLES_XP_TYPE);
@@ -109,7 +122,7 @@ public class player_saga_quest extends script.base_script
                             pgc_quests.grantChroniclesRoadmapItem(self, skillName, i);
                         }
                     }
-                    else 
+                    else
                     {
                         pgc_quests.grantChroniclesRoadmapItem(self, skillName, i);
                     }
@@ -118,6 +131,7 @@ public class player_saga_quest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnCreateSaga(obj_id self, dictionary params) throws InterruptedException
     {
         if (params != null && !params.isEmpty())
@@ -134,7 +148,7 @@ public class player_saga_quest extends script.base_script
                 {
                     showHolocronCreationCountdownUi(self, taskDictionary, "holocron_creation_recipe_countdown");
                 }
-                else 
+                else
                 {
                     showHolocronCreationCountdownUi(self, taskDictionary, "holocron_creation_countdown");
                 }
@@ -142,6 +156,7 @@ public class player_saga_quest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSharedPgcHolocronOffer(obj_id self, dictionary params) throws InterruptedException
     {
         if (params != null && !params.isEmpty())
@@ -159,6 +174,7 @@ public class player_saga_quest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSharedChroniclesQuestResponse(obj_id self, dictionary params) throws InterruptedException
     {
         if (params != null && !params.isEmpty())
@@ -194,7 +210,7 @@ public class player_saga_quest extends script.base_script
                         {
                             removeObjVar(questHolocron, pgc_quests.PCG_QUEST_CAN_SHARE_OBJVAR);
                         }
-                        else 
+                        else
                         {
                             setObjVar(questHolocron, pgc_quests.PCG_QUEST_CAN_SHARE_OBJVAR, newShareLimit);
                         }
@@ -209,13 +225,13 @@ public class player_saga_quest extends script.base_script
                         taskDictionary.put("quest_shared_holocron", questHolocron);
                         showSharedHolocronCreationCountdownUi(self, player, taskDictionary, "holocron_creation_shared_countdown");
                     }
-                    else 
+                    else
                     {
                         sendSystemMessage(player, new string_id("saga_system", "holocron_share_quest_failed"));
                     }
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(player, new string_id("saga_system", "holocron_share_quest_failed"));
             }
@@ -226,6 +242,7 @@ public class player_saga_quest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void showSharedHolocronCreationCountdownUi(obj_id creator, obj_id sharedTo, dictionary taskDictionary, String menuString) throws InterruptedException
     {
         string_id menuStringId = new string_id("saga_system", menuString);
@@ -241,8 +258,8 @@ public class player_saga_quest extends script.base_script
         playClientEffectObj(creator, "appearance/pt_pgc_holocron_shared.prt", creator, "", offset);
         doAnimationAction(creator, "medium");
         messageTo(sharedTo, "handleSharedPgcHolocronCreation", taskDictionary, 3, false);
-        return;
     }
+
     public int handleSharedPgcHolocronCreation(obj_id self, dictionary params) throws InterruptedException
     {
         if (params != null && !params.isEmpty())
@@ -251,6 +268,7 @@ public class player_saga_quest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePgcHolocronCreation(obj_id self, dictionary params) throws InterruptedException
     {
         if (params != null && !params.isEmpty())
@@ -259,6 +277,7 @@ public class player_saga_quest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void showHolocronCreationCountdownUi(obj_id player, dictionary taskDictionary, String menuString) throws InterruptedException
     {
         boolean isRecipe = false;
@@ -292,14 +311,14 @@ public class player_saga_quest extends script.base_script
             playClientEffectObj(player, "appearance/pt_pgc_holocron_shared.prt", player, "", offset);
             doAnimationAction(player, "medium");
         }
-        else 
+        else
         {
             transform offset = transform.identity.setPosition_p(0.0f, -0.2f, -0.6f);
             playClientEffectObj(player, "appearance/pt_pgc_holocron.prt", player, "", offset);
             doAnimationAction(player, "medium");
         }
-        return;
     }
+
     public int handlePgcHolocronCreationCountdownTimer(obj_id self, dictionary params) throws InterruptedException
     {
         int bp = sui.getIntButtonPressed(params);
@@ -332,6 +351,7 @@ public class player_saga_quest extends script.base_script
         utils.removeScriptVar(self, "temp_pgcTaskDictionary");
         return SCRIPT_CONTINUE;
     }
+
     public boolean createChronicleQuestObject(obj_id self, dictionary taskDictionary) throws InterruptedException
     {
         if (taskDictionary == null || taskDictionary.isEmpty())
@@ -359,7 +379,7 @@ public class player_saga_quest extends script.base_script
                     return false;
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(self, "[GOD_MODE] Bypassing relic consumption for chronicle holocron creation.", "");
             }
@@ -375,7 +395,7 @@ public class player_saga_quest extends script.base_script
                 {
                     questHolocron = oldRecipe;
                     // Exploit Fix (SWGSource:v3.1) - Check if the player is trying to create a recipe that has subrecipes.
-                    if(!getTemplateName(oldRecipe).equals(pgc_quests.PGC_QUEST_RECIPE_TEMPLATE))
+                    if (!getTemplateName(oldRecipe).equals(pgc_quests.PGC_QUEST_RECIPE_TEMPLATE))
                     {
                         return false;
                     }
@@ -396,10 +416,12 @@ public class player_saga_quest extends script.base_script
                     if ((rewardItems != null && rewardItems.length > 0))
                     {
                         utils.setScriptVar(oldRecipe, "chronicles.allowRewardsReclaimed", true);
-                        for (obj_id rewardItem : rewardItems) {
+                        for (obj_id rewardItem : rewardItems)
+                        {
                             putInOverloaded(rewardItem, playerInventory);
                             String template = getTemplateName(rewardItem);
-                            if (template.equals(pgc_quests.PGC_CASH_ITEM_TEMPLATE)) {
+                            if (template.equals(pgc_quests.PGC_CASH_ITEM_TEMPLATE))
+                            {
                                 int cash = getIntObjVar(rewardItem, "loot.cashAmount");
                                 money.bankTo("pgc_player_donated_credits", self, cash);
                                 destroyObject(rewardItem);
@@ -407,13 +429,13 @@ public class player_saga_quest extends script.base_script
                         }
                     }
                 }
-                else 
+                else
                 {
                     questHolocron = createObjectInInventoryAllowOverload(pgc_quests.PGC_QUEST_RECIPE_TEMPLATE, self);
                     isNewRecipe = true;
                 }
             }
-            else 
+            else
             {
                 questHolocron = createObjectInInventoryAllowOverload(pgc_quests.PGC_QUEST_RECIPE_TEMPLATE, self);
                 isNewRecipe = true;
@@ -423,7 +445,7 @@ public class player_saga_quest extends script.base_script
         {
             questHolocron = createObjectInInventoryAllowOverload(pgc_quests.PGC_QUEST_SHARED_TEMPLATE, self);
         }
-        else 
+        else
         {
             questHolocron = createObjectInInventoryAllowOverload(pgc_quests.PGC_QUEST_HOLOCRON_TEMPLATE, self);
         }
@@ -495,13 +517,13 @@ public class player_saga_quest extends script.base_script
                                         attachScript(cashItem, "quest.task.pgc.credit_item");
                                     }
                                 }
-                                else 
+                                else
                                 {
                                     sendSystemMessage(self, new string_id("saga_system", "holocron_reward_not_enough_credits"));
                                 }
                             }
                         }
-                        else 
+                        else
                         {
                             obj_id rewardItem = utils.stringToObjId(rewardParse[k]);
                             if (isIdValid(rewardItem))
@@ -526,14 +548,14 @@ public class player_saga_quest extends script.base_script
                                         putIn(rewardItem, questHolocron, self);
                                         rewardsLog += "; Reward Item = " + name + "(" + rewardItem + ")";
                                     }
-                                    else 
+                                    else
                                     {
                                         pp = prose.getPackage(new string_id("saga_system", "holocron_reward_ineligible_item"), name);
                                         sendSystemMessageProse(self, pp);
                                         pgc_quests.logReward(self, questHolocron, "Player attempted to donate a reward item but it was ineligible: " + name + "(" + rewardItem + ")");
                                     }
                                 }
-                                else 
+                                else
                                 {
                                     pp = prose.getPackage(new string_id("saga_system", "holocron_reward_not_in_inventory"), name);
                                     sendSystemMessageProse(self, pp);
@@ -571,7 +593,7 @@ public class player_saga_quest extends script.base_script
             {
                 setName(questHolocron, "[Draft] " + questTitle);
             }
-            else 
+            else
             {
                 setName(questHolocron, questTitle);
             }
@@ -599,7 +621,7 @@ public class player_saga_quest extends script.base_script
             for (int i = 0; i < numTasks; i++)
             {
                 String recipeTaskData = "";
-                String taskName = "" + i;
+                String taskName = String.valueOf(i);
                 String taskData = taskDictionary.getString(taskName);
                 String[] parse = split(taskData, '~');
                 String phase = pgc_quests.getPhaseObjVarString(i);
@@ -655,10 +677,12 @@ public class player_saga_quest extends script.base_script
                 for (int j = 4; j < parse.length; j++)
                 {
                     String data = parse[j];
-                    switch (taskType) {
+                    switch (taskType)
+                    {
                         case pgc_quests.SAGA_DESTROY_MULTIPLE:
                             involvesCombat = true;
-                            switch (j) {
+                            switch (j)
+                            {
                                 case 4:
                                     break;
                                 case 5:
@@ -672,7 +696,8 @@ public class player_saga_quest extends script.base_script
                             break;
                         case pgc_quests.SAGA_DESTROY_MULTIPLE_LOOT:
                             involvesCombat = true;
-                            switch (j) {
+                            switch (j)
+                            {
                                 case 4:
                                     break;
                                 case 5:
@@ -690,7 +715,8 @@ public class player_saga_quest extends script.base_script
                                     recipeTaskData += "~" + dropRate;
                                     break;
                             }
-                            if (taskCounterMax > -1 && dropRate > -1) {
+                            if (taskCounterMax > -1 && dropRate > -1)
+                            {
                                 int taskDifficulty = pgc_quests.getTaskDifficultySetting(relicCategoryData);
                                 taskWeightArray[i] = pgc_quests.getDestroyLootTaskWeight(taskLevel, taskDifficulty, taskCounterMax, dropRate);
                             }
@@ -698,7 +724,8 @@ public class player_saga_quest extends script.base_script
                         case pgc_quests.SAGA_PERFORM:
                             involvesEntertaining = true;
                             taskWeightArray[i] = pgc_quests.getPerformTaskWeight(taskLevel);
-                            switch (j) {
+                            switch (j)
+                            {
                                 case 4:
                                     break;
                                 case 5:
@@ -707,7 +734,8 @@ public class player_saga_quest extends script.base_script
                             break;
                         case pgc_quests.SAGA_CRAFT_ITEM:
                             involvesCrafting = true;
-                            switch (j) {
+                            switch (j)
+                            {
                                 case 4:
                                     break;
                                 case 5:
@@ -720,12 +748,14 @@ public class player_saga_quest extends script.base_script
                             break;
                         case pgc_quests.SAGA_COMM_MESSAGE:
                             taskWeightArray[i] = pgc_quests.getCommTaskWeight(taskLevel);
-                            switch (j) {
+                            switch (j)
+                            {
                                 case 4:
                                     break;
                                 case 5:
                                     String voiceOver = pgc_quests.getStringRelicData("voice_over", relicCategoryData);
-                                    if (voiceOver == null || voiceOver.length() <= 0 || voiceOver.equals("none")) {
+                                    if (voiceOver == null || voiceOver.length() <= 0 || voiceOver.equals("none"))
+                                    {
                                         setObjVar(questHolocron, baseObjVar + "message", pgc_quests.useFilteredQuestText(data));
                                         recipeTaskData += "~" + data;
                                     }
@@ -734,27 +764,29 @@ public class player_saga_quest extends script.base_script
                             break;
                         case pgc_quests.SAGA_GOTO_LOCATION:
                             taskWeightArray[i] = pgc_quests.getGoToTaskWeight(taskLevel);
-                            switch (j) {
-                                case 4:
-                                    if (relicName.equals(pgc_quests.PGC_RELIC_SLOT_GOTO_GENERIC_LOC)) {
-                                        String[] gotoParse = split(data, ':');
-                                        if (gotoParse.length == 5) {
-                                            float x = utils.stringToFloat(gotoParse[0]);
-                                            float y = utils.stringToFloat(gotoParse[1]);
-                                            float z = utils.stringToFloat(gotoParse[2]);
-                                            String planet = gotoParse[3];
-                                            String waypointName = gotoParse[4];
-                                            waypointLoc = new location(x, y, z, planet);
-                                            setObjVar(questHolocron, baseObjVar + "waypoint", waypointLoc);
-                                            setObjVar(questHolocron, baseObjVar + "waypointName", waypointName);
-                                            recipeTaskData += "~waypoint:" + planet + "," + x + "," + y + "," + z + ",none," + waypointName;
-                                        }
+                            if (j == 4)
+                            {
+                                if (relicName.equals(pgc_quests.PGC_RELIC_SLOT_GOTO_GENERIC_LOC))
+                                {
+                                    String[] gotoParse = split(data, ':');
+                                    if (gotoParse.length == 5)
+                                    {
+                                        float x = utils.stringToFloat(gotoParse[0]);
+                                        float y = utils.stringToFloat(gotoParse[1]);
+                                        float z = utils.stringToFloat(gotoParse[2]);
+                                        String planet = gotoParse[3];
+                                        String waypointName = gotoParse[4];
+                                        waypointLoc = new location(x, y, z, planet);
+                                        setObjVar(questHolocron, baseObjVar + "waypoint", waypointLoc);
+                                        setObjVar(questHolocron, baseObjVar + "waypointName", waypointName);
+                                        recipeTaskData += "~waypoint:" + planet + "," + x + "," + y + "," + z + ",none," + waypointName;
                                     }
-                                    break;
+                                }
                             }
                             break;
                         case pgc_quests.SAGA_RETRIEVE_ITEM:
-                            switch (j) {
+                            switch (j)
+                            {
                                 case 4:
                                     break;
                                 case 5:
@@ -767,7 +799,8 @@ public class player_saga_quest extends script.base_script
                             break;
                         case pgc_quests.SAGA_PVP_OBJECTIVE:
                             involvesPvp = true;
-                            switch (j) {
+                            switch (j)
+                            {
                                 case 4:
                                     taskCounterMax = utils.stringToInt(data);
                                     setObjVar(questHolocron, baseObjVar + "count", taskCounterMax);
@@ -786,7 +819,7 @@ public class player_saga_quest extends script.base_script
                     setPlayerQuestRecipe(questHolocron, true);
                     addPlayerQuestTaskRecipeData(questHolocron, recipeTaskData);
                 }
-                else 
+                else
                 {
                     addPlayerQuestTaskRecipeData(questHolocron, relicName);
                 }
@@ -816,7 +849,7 @@ public class player_saga_quest extends script.base_script
                 {
                     createdMsg = new string_id("saga_system", "holocron_created_draft");
                 }
-                else 
+                else
                 {
                     createdMsg = new string_id("saga_system", "holocron_created_draft_edit");
                 }
@@ -887,7 +920,7 @@ public class player_saga_quest extends script.base_script
                     sendSystemMessage(self, "CHRONICLES_DEBUG: ____________________xp = " + xp, "");
                 }
             }
-            else 
+            else
             {
                 pgc_quests.logProgression(self, questHolocron, "questWeight=" + questWeight + ",questRelicDiversity=" + questRelicDiversity + ",questTaskTypeDiversity=" + questTaskTypeDiversity);
             }
@@ -900,17 +933,19 @@ public class player_saga_quest extends script.base_script
                 pgc_quests.logQuest(self, questHolocron, "Sharing enabled on Chronicles Holocron with shareLimit = " + shareLimit + ".");
             }
         }
-        else 
+        else
         {
             return false;
         }
         return true;
     }
+
     public int handleCheckForGainedChroniclesLevelDelay(obj_id self, dictionary params) throws InterruptedException
     {
         pgc_quests.checkForGainedChroniclesLevel(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAbandonPlayerQuest(obj_id self, obj_id questHolocron) throws InterruptedException
     {
         if (isIdValid(questHolocron) && exists(questHolocron))
@@ -930,6 +965,7 @@ public class player_saga_quest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnRatingFinished(obj_id self, int rating) throws InterruptedException
     {
         if (rating >= 0)
@@ -941,7 +977,7 @@ public class player_saga_quest extends script.base_script
                 {
                     sendSystemMessage(self, new string_id("saga_system", "pgc_quest_already_rated"));
                 }
-                else 
+                else
                 {
                     obj_id chroniclerId = getObjIdObjVar(questHolocron, pgc_quests.PCG_QUEST_CREATOR_ID_OBJVAR);
                     String chroniclerName = getStringObjVar(questHolocron, pgc_quests.PCG_QUEST_CREATOR_NAME_OBJVAR);
@@ -952,7 +988,7 @@ public class player_saga_quest extends script.base_script
                         pgc_quests.logRating(self, questHolocron, "Player attempted to rate their own quest (a rating of " + rating + ") but the rating was ignored.");
                         rating = -1;
                     }
-                    else 
+                    else
                     {
                         pgcAdjustRating(chroniclerId, chroniclerName, rating);
                         sendSystemMessage(self, "You gave this Chonicler a rating of " + rating + " which has been added to their galaxy-wide rating.", "");
@@ -1000,23 +1036,31 @@ public class player_saga_quest extends script.base_script
         utils.removeScriptVar(self, "chronicles.rating_a_holocron");
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         obj_id[] activeHolocrons = pgc_quests.getActivateQuestHolocrons(self);
-        if (activeHolocrons != null && activeHolocrons.length > 0)
+        if (activeHolocrons != null)
         {
-            for (obj_id questHolocron : activeHolocrons) {
-                if (isIdValid(questHolocron)) {
+            for (obj_id questHolocron : activeHolocrons)
+            {
+                if (isIdValid(questHolocron))
+                {
                     String phaseObjVarString = pgc_quests.getActivePhaseObjVarString(questHolocron);
-                    for (int j = 0; j < pgc_quests.PGC_QUEST_MAX_NUM_TASKS_PER_PHASE; j++) {
+                    for (int j = 0; j < pgc_quests.PGC_QUEST_MAX_NUM_TASKS_PER_PHASE; j++)
+                    {
                         String taskObjVarString = pgc_quests.getTaskObjVarString(j);
                         String baseObjVar = pgc_quests.getPgcBaseObjVar(phaseObjVarString, taskObjVarString);
-                        if (hasObjVar(questHolocron, baseObjVar)) {
+                        if (hasObjVar(questHolocron, baseObjVar))
+                        {
                             String waypointActiveObjVar = baseObjVar + ".waypointActive";
-                            if (hasObjVar(questHolocron, waypointActiveObjVar)) {
+                            if (hasObjVar(questHolocron, waypointActiveObjVar))
+                            {
                                 pgc_quests.activatePlayerQuestWaypointFromHolocron(questHolocron, baseObjVar);
                             }
-                        } else {
+                        }
+                        else
+                        {
                             break;
                         }
                     }
@@ -1025,16 +1069,21 @@ public class player_saga_quest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int receiveCreditForKill(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] activeHolocrons = pgc_quests.getActivateQuestHolocrons(self);
-        if (activeHolocrons != null && activeHolocrons.length > 0)
+        if (activeHolocrons != null)
         {
-            for (obj_id questHolocron : activeHolocrons) {
-                if (isIdValid(questHolocron)) {
+            for (obj_id questHolocron : activeHolocrons)
+            {
+                if (isIdValid(questHolocron))
+                {
                     String phase = pgc_quests.getActivePhaseObjVarString(questHolocron);
-                    for (int j = 0; j < pgc_quests.CREDIT_FOR_KILL_TASKS.length; j++) {
-                        if (pgc_quests.phaseHasActiveTaskOfType(questHolocron, pgc_quests.CREDIT_FOR_KILL_TASKS[j], phase)) {
+                    for (int j = 0; j < pgc_quests.CREDIT_FOR_KILL_TASKS.length; j++)
+                    {
+                        if (pgc_quests.phaseHasActiveTaskOfType(questHolocron, pgc_quests.CREDIT_FOR_KILL_TASKS[j], phase))
+                        {
                             messageTo(questHolocron, "receiveCreditForKill", params, 0.0f, false);
                             break;
                         }
@@ -1044,15 +1093,19 @@ public class player_saga_quest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int recivedGcwCreditForKill(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] activeHolocrons = pgc_quests.getActivateQuestHolocrons(self);
-        if (activeHolocrons != null && activeHolocrons.length > 0)
+        if (activeHolocrons != null)
         {
-            for (obj_id questHolocron : activeHolocrons) {
-                if (isIdValid(questHolocron)) {
+            for (obj_id questHolocron : activeHolocrons)
+            {
+                if (isIdValid(questHolocron))
+                {
                     String phase = pgc_quests.getActivePhaseObjVarString(questHolocron);
-                    if (pgc_quests.phaseHasActiveTaskOfType(questHolocron, pgc_quests.SAGA_PVP_OBJECTIVE, phase)) {
+                    if (pgc_quests.phaseHasActiveTaskOfType(questHolocron, pgc_quests.SAGA_PVP_OBJECTIVE, phase))
+                    {
                         messageTo(questHolocron, "recivedGcwCreditForKill", params, 0.0f, false);
                         break;
                     }
@@ -1061,15 +1114,19 @@ public class player_saga_quest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int startPerform(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] activeHolocrons = pgc_quests.getActivateQuestHolocrons(self);
-        if (activeHolocrons != null && activeHolocrons.length > 0)
+        if (activeHolocrons != null)
         {
-            for (obj_id questHolocron : activeHolocrons) {
-                if (isIdValid(questHolocron)) {
+            for (obj_id questHolocron : activeHolocrons)
+            {
+                if (isIdValid(questHolocron))
+                {
                     String phase = pgc_quests.getActivePhaseObjVarString(questHolocron);
-                    if (pgc_quests.phaseHasActiveTaskOfType(questHolocron, pgc_quests.SAGA_PERFORM, phase)) {
+                    if (pgc_quests.phaseHasActiveTaskOfType(questHolocron, pgc_quests.SAGA_PERFORM, phase))
+                    {
                         messageTo(questHolocron, "startPerform", params, 0.0f, false);
                     }
                 }
@@ -1077,15 +1134,19 @@ public class player_saga_quest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int stopPerform(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] activeHolocrons = pgc_quests.getActivateQuestHolocrons(self);
-        if (activeHolocrons != null && activeHolocrons.length > 0)
+        if (activeHolocrons != null)
         {
-            for (obj_id questHolocron : activeHolocrons) {
-                if (isIdValid(questHolocron)) {
+            for (obj_id questHolocron : activeHolocrons)
+            {
+                if (isIdValid(questHolocron))
+                {
                     String phase = pgc_quests.getActivePhaseObjVarString(questHolocron);
-                    if (pgc_quests.phaseHasActiveTaskOfType(questHolocron, pgc_quests.SAGA_PERFORM, phase)) {
+                    if (pgc_quests.phaseHasActiveTaskOfType(questHolocron, pgc_quests.SAGA_PERFORM, phase))
+                    {
                         messageTo(questHolocron, "stopPerform", params, 0.0f, false);
                     }
                 }
@@ -1093,15 +1154,19 @@ public class player_saga_quest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnCraftedPrototype(obj_id self, obj_id prototypeObject, draft_schematic manufacturingSchematic) throws InterruptedException
     {
         obj_id[] activeHolocrons = pgc_quests.getActivateQuestHolocrons(self);
-        if (activeHolocrons != null && activeHolocrons.length > 0)
+        if (activeHolocrons != null)
         {
-            for (obj_id questHolocron : activeHolocrons) {
-                if (isIdValid(questHolocron)) {
+            for (obj_id questHolocron : activeHolocrons)
+            {
+                if (isIdValid(questHolocron))
+                {
                     String phase = pgc_quests.getActivePhaseObjVarString(questHolocron);
-                    if (pgc_quests.phaseHasActiveTaskOfType(questHolocron, pgc_quests.SAGA_CRAFT_ITEM, phase)) {
+                    if (pgc_quests.phaseHasActiveTaskOfType(questHolocron, pgc_quests.SAGA_CRAFT_ITEM, phase))
+                    {
                         dictionary webster = new dictionary();
                         webster.put("prototypeObject", prototypeObject);
                         messageTo(questHolocron, "OnCraftedPrototype", webster, 0.0f, false);
@@ -1111,6 +1176,7 @@ public class player_saga_quest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int playerQuestSetLocationTarget(obj_id self, dictionary params) throws InterruptedException
     {
         location targetLoc = params.getLocation("targetLoc");
@@ -1119,15 +1185,19 @@ public class player_saga_quest extends script.base_script
         addLocationTarget(locationTargetName, targetLoc, radius);
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String locationName) throws InterruptedException
     {
         obj_id[] activeHolocrons = pgc_quests.getActivateQuestHolocrons(self);
-        if (activeHolocrons != null && activeHolocrons.length > 0)
+        if (activeHolocrons != null)
         {
-            for (obj_id questHolocron : activeHolocrons) {
-                if (isIdValid(questHolocron)) {
+            for (obj_id questHolocron : activeHolocrons)
+            {
+                if (isIdValid(questHolocron))
+                {
                     String phase = pgc_quests.getActivePhaseObjVarString(questHolocron);
-                    if (pgc_quests.phaseHasActiveTaskOfType(questHolocron, pgc_quests.SAGA_GOTO_LOCATION, phase)) {
+                    if (pgc_quests.phaseHasActiveTaskOfType(questHolocron, pgc_quests.SAGA_GOTO_LOCATION, phase))
+                    {
                         dictionary webster = new dictionary();
                         webster.put("locationName", locationName);
                         messageTo(questHolocron, "pqOnArrivedAtLocation", webster, 0.0f, false);
@@ -1137,6 +1207,7 @@ public class player_saga_quest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int playerQuestRemoveLocationTarget(obj_id self, dictionary params) throws InterruptedException
     {
         String locationName = params.getString("locationName");

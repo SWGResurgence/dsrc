@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 import java.util.Collections;
@@ -20,6 +26,7 @@ public class cybernetic extends script.base_script
     public static final int CYBERNETIC_FOREARM_COST = 2;
     public static final int CYBERNETIC_HAND_COST = 1;
     public static final String PID_VAR = "cybernetics";
+
     public cybernetic()
     {
     }

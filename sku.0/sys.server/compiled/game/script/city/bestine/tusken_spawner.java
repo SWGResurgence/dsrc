@@ -1,24 +1,32 @@
 package script.city.bestine;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
 
 public class tusken_spawner extends script.base_script
 {
-    public tusken_spawner()
-    {
-    }
     public static final String HEAD = "object/tangible/loot/quest/tusken_head.iff";
     public static final String BATON = "object/weapon/melee/baton/victor_baton_gaderiffi.iff";
     public static final String CARVED = "object/tangible/loot/quest/carved_stone.iff";
     public static final String SMOOTH = "object/tangible/loot/quest/smooth_stone.iff";
+    public tusken_spawner()
+    {
+    }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         obj_id spawner = getObjIdObjVar(self, "spawner");
         messageTo(spawner, "doDeathRespawn", null, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id winner = getObjIdObjVar(self, xp.VAR_TOP_GROUP);
@@ -29,7 +37,7 @@ public class tusken_spawner extends script.base_script
             {
                 permitted = getGroupMemberIds(winner);
             }
-            else 
+            else
             {
                 permitted = new obj_id[1];
                 permitted[0] = winner;
@@ -38,13 +46,16 @@ public class tusken_spawner extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 obj_id looter;
-                for (obj_id aPermitted : permitted) {
+                for (obj_id aPermitted : permitted)
+                {
                     looter = aPermitted;
-                    if (looter != null) {
-                        if (hasObjVar(looter, "bestine.tuskenquest")) {
+                    if (looter != null)
+                    {
+                        if (hasObjVar(looter, "bestine.tuskenquest"))
+                        {
                             createTheirLoot(self);
                             return SCRIPT_CONTINUE;
                         }
@@ -54,6 +65,7 @@ public class tusken_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void createTheirLoot(obj_id self) throws InterruptedException
     {
         obj_id corpseInventory = utils.getInventoryContainer(self);
@@ -66,11 +78,12 @@ public class tusken_spawner extends script.base_script
             createObject(HEAD, corpseInventory, "");
             checkForLoot(self);
         }
-        else 
+        else
         {
             checkForLoot(self);
         }
     }
+
     public void checkForLoot(obj_id self) throws InterruptedException
     {
         obj_id corpseInventory = utils.getInventoryContainer(self);

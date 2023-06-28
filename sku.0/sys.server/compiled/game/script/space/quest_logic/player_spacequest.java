@@ -1,5 +1,11 @@
 package script.space.quest_logic;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -8,9 +14,6 @@ import script.string_id;
 
 public class player_spacequest extends script.base_script
 {
-    public player_spacequest()
-    {
-    }
     public static final string_id SID_REPORT_CARGO = new string_id("space/cargo", "report_cargo");
     public static final string_id SID_REPORT_CARGO_GROUP = new string_id("space/cargo", "report_cargo_group");
     public static final string_id SID_INSPECT_ALREADY = new string_id("space/cargo", "inspect_already");
@@ -43,6 +46,10 @@ public class player_spacequest extends script.base_script
     public static final String CARGO_TRANSFER = "clienteffect/ship_cargo_transfer.cef";
     public static final String DOCK_START = "clienteffect/ship_dock_repair_01.cef";
     public static final String DOCK_END = "clienteffect/ship_dock_repair_02.cef";
+    public player_spacequest()
+    {
+    }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         utils.removeScriptVar(self, "inspecting");
@@ -90,7 +97,7 @@ public class player_spacequest extends script.base_script
             {
                 removeObjVar(self, "delayedTriggers");
             }
-            else 
+            else
             {
                 String[] newTriggers = new String[delayedTriggers.length - cleanupCount];
                 int j = 0;
@@ -107,11 +114,13 @@ public class player_spacequest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnUnloadedFromMemory(obj_id self) throws InterruptedException
     {
         space_quest.cleanupOnUnload(self);
         return SCRIPT_CONTINUE;
     }
+
     public int targetDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -124,17 +133,19 @@ public class player_spacequest extends script.base_script
             obj_id[] members = space_utils.getSpaceGroupMemberIds(gid);
             if (members != null)
             {
-                for (obj_id member : members) {
+                for (obj_id member : members)
+                {
                     space_quest.notifyMissions(member, "handleShipDestroyed", params);
                 }
             }
         }
-        else 
+        else
         {
             space_quest.notifyMissions(self, "handleShipDestroyed", params);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleAsteroidMined(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -147,17 +158,19 @@ public class player_spacequest extends script.base_script
             obj_id[] members = space_utils.getSpaceGroupMemberIds(gid);
             if (members != null)
             {
-                for (obj_id member : members) {
+                for (obj_id member : members)
+                {
                     space_quest.notifyMissions(member, "asteroidMined", params);
                 }
             }
         }
-        else 
+        else
         {
             space_quest.notifyMissions(self, "asteroidMined", params);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleShipSalvage(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -170,17 +183,19 @@ public class player_spacequest extends script.base_script
             obj_id[] members = space_utils.getSpaceGroupMemberIds(gid);
             if (members != null)
             {
-                for (obj_id member : members) {
+                for (obj_id member : members)
+                {
                     space_quest.notifyMissions(member, "asteroidMined", params);
                 }
             }
         }
-        else 
+        else
         {
             space_quest.notifyMissions(self, "wasSalvaged", params);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String name) throws InterruptedException
     {
         dictionary params = new dictionary();
@@ -189,6 +204,7 @@ public class player_spacequest extends script.base_script
         space_quest.notifyMissions(self, "arrivedAtLocation", params);
         return SCRIPT_CONTINUE;
     }
+
     public int playerShipDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         dictionary outparams = new dictionary();
@@ -196,6 +212,7 @@ public class player_spacequest extends script.base_script
         space_quest.notifyMissions(self, "playerShipDestroyed", outparams);
         return SCRIPT_CONTINUE;
     }
+
     public int doSpecialEvent(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id mobj = params.getObjId("quest");
@@ -224,20 +241,16 @@ public class player_spacequest extends script.base_script
         {
             setObjVar(mobj, "pendingSplit", false);
         }
-        switch (triggerEvent)
+        if (triggerEvent == 1)
         {
-            case 1:
             if (params.getBoolean("failure") && (triggerSC == 3))
             {
                 splitQuest(self, triggerArg2, triggerOn, questName, questType, true);
             }
-            else 
+            else
             {
                 splitQuest(self, triggerArg, triggerOn, questName, questType, false);
             }
-            break;
-            default:
-            break;
         }
         if (isIdValid(mobj) && exists(mobj))
         {
@@ -245,13 +258,14 @@ public class player_spacequest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void splitQuest(obj_id self, String triggerArg, int triggerOn, String questName, String questType, boolean failure) throws InterruptedException
     {
         if (failure)
         {
             space_quest.showQuestAlert(self, new string_id("spacequest/" + questType + "/" + questName, "split_quest_alert_fail"));
         }
-        else 
+        else
         {
             space_quest.showQuestAlert(self, new string_id("spacequest/" + questType + "/" + questName, "split_quest_alert"));
         }
@@ -277,6 +291,7 @@ public class player_spacequest extends script.base_script
         }
         CustomerServiceLog("space_quest", "QUEST_SPLIT|V1|" + groupString + "|TIME:" + getGameTime() + "|PLAYER:" + self + "|TYPE:" + questType + "|NAME:" + questName + "|ZONE:" + getCurrentSceneName());
     }
+
     public int registerDelayedQuest(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -293,7 +308,7 @@ public class player_spacequest extends script.base_script
             newTriggers = new String[1];
             newTriggers[0] = questType + ":" + questName;
         }
-        else 
+        else
         {
             newTriggers = new String[delayedTriggers.length + 1];
             for (int i = 0; i < delayedTriggers.length; i++)
@@ -318,6 +333,7 @@ public class player_spacequest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int assignDelayedQuest(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -346,8 +362,10 @@ public class player_spacequest extends script.base_script
         }
         String[] newTriggers = new String[delayedTriggers.length - 1];
         int j = 0;
-        for (String delayedTrigger : delayedTriggers) {
-            if (delayedTrigger.equals(questType + ":" + questName)) {
+        for (String delayedTrigger : delayedTriggers)
+        {
+            if (delayedTrigger.equals(questType + ":" + questName))
+            {
                 continue;
             }
             newTriggers[j++] = delayedTrigger;
@@ -355,6 +373,7 @@ public class player_spacequest extends script.base_script
         setObjVar(self, "delayedTriggers", newTriggers);
         return SCRIPT_CONTINUE;
     }
+
     public int targetDisabled(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -364,6 +383,7 @@ public class player_spacequest extends script.base_script
         space_quest.notifyMissions(self, "handleShipDisabled", params);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdInspect(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (target == null)
@@ -402,6 +422,7 @@ public class player_spacequest extends script.base_script
         playClientEffectObj(self, INSPECTION_BEGIN, self, "");
         return SCRIPT_CONTINUE;
     }
+
     public int finishInspection(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "inspecting"))
@@ -424,7 +445,7 @@ public class player_spacequest extends script.base_script
             outparams.put("cargo", cargo);
             space_quest.notifyMissions(self, "inspectedShip", outparams);
         }
-        else 
+        else
         {
             string_id cargo_id = new string_id("space/cargo", "nothing");
             prose_package pp = prose.getPackage(SID_REPORT_CARGO, cargo_id);
@@ -434,6 +455,7 @@ public class player_spacequest extends script.base_script
         utils.removeScriptVar(self, "inspecting");
         return SCRIPT_CONTINUE;
     }
+
     public int cmdDock(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (target == null)
@@ -469,8 +491,10 @@ public class player_spacequest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
             obj_id[] escortShips = getObjIdArrayObjVar(target, "escortIdArray");
-            for (obj_id escortShip : escortShips) {
-                if (isIdValid(escortShip) && exists(escortShip)) {
+            for (obj_id escortShip : escortShips)
+            {
+                if (isIdValid(escortShip) && exists(escortShip))
+                {
                     sendSystemMessage(self, "You must destroy all escort ships before you can dock.", null);
                     return SCRIPT_CONTINUE;
                 }
@@ -495,7 +519,7 @@ public class player_spacequest extends script.base_script
             {
                 cargoTransfer = true;
             }
-            else 
+            else
             {
                 sendQuestSystemMessage(self, SID_CANNOT_DOCK);
                 return SCRIPT_CONTINUE;
@@ -522,11 +546,13 @@ public class player_spacequest extends script.base_script
         space_quest.notifyMissions(self, "dockingStarted", outp);
         return SCRIPT_CONTINUE;
     }
+
     public int spaceUnitDocked(obj_id self, dictionary params) throws InterruptedException
     {
         sendQuestSystemMessage(self, SID_DOCK_ACHIEVED);
         return SCRIPT_CONTINUE;
     }
+
     public int spaceUnitUnDocked(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = params.getObjId("target");
@@ -545,14 +571,12 @@ public class player_spacequest extends script.base_script
         utils.removeScriptVar(self, "transfer");
         return SCRIPT_CONTINUE;
     }
+
     public boolean canTransferCargo(obj_id self, obj_id target) throws InterruptedException
     {
-        if (!hasObjVar(target, "cargo"))
-        {
-            return false;
-        }
-        return true;
+        return hasObjVar(target, "cargo");
     }
+
     public void finishTransfer(obj_id self, obj_id target) throws InterruptedException
     {
         String cargo = getStringObjVar(target, "cargo");
@@ -610,6 +634,7 @@ public class player_spacequest extends script.base_script
         }
         sendQuestSystemMessage(self, SID_TRANSFER_CANT);
     }
+
     public int OnRemovedFromGroup(obj_id self, obj_id group) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "group_space_quest"))

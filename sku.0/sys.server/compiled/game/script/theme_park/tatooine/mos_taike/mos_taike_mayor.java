@@ -1,5 +1,11 @@
 package script.theme_park.tatooine.mos_taike;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.hue;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class mos_taike_mayor extends script.base_script
     public mos_taike_mayor()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id shirt = createObject("object/tangible/wearables/shirt/shirt_s07.iff", self, "");

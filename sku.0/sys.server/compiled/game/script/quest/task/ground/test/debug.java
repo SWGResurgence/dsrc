@@ -1,5 +1,11 @@
 package script.quest.task.ground.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,6 +14,7 @@ public class debug extends script.quest.task.ground.base_task
     public debug()
     {
     }
+
     public int completeDebugTask(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("groundquests", "quest.task.ground.debug:completeDebugTask(" + params + ")");
@@ -18,12 +25,13 @@ public class debug extends script.quest.task.ground.base_task
             LOG("groundquests", "quest.task.ground.debug:completeDebugTask() - completing task " + taskId + " for questCrc " + questCrc);
             questCompleteTask(questCrc, taskId, self);
         }
-        else 
+        else
         {
             LOG("groundquests", "quest.task.ground.debug:completeDebugTask() - params is null!");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTaskActivated(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         LOG("groundquests", "quest.task.ground.debug:OnTaskActivated(" + questCrc + ", " + taskId + ")");

@@ -4,12 +4,19 @@ package script.item;/*
 @Purpose: Grants a player a holo pet cube of their choice
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class holo_pet_selector extends script.base_script
 {
     public int MAX_PETS_PER_CACHE = 3;
+
     public int OnAttach(obj_id self)
     {
         return SCRIPT_CONTINUE;
@@ -84,7 +91,8 @@ public class holo_pet_selector extends script.base_script
                 "item_holopet_veermok_data_cube_01_01"
         };
         obj_id pInv = utils.getInventoryContainer(player);
-        for (int i = 0; i < MAX_PETS_PER_CACHE; i++) {
+        for (int i = 0; i < MAX_PETS_PER_CACHE; i++)
+        {
             int randomIndex = rand(0, petList.length - 1);
             static_item.createNewItemFunction(petList[randomIndex], pInv);
         }
@@ -92,10 +100,6 @@ public class holo_pet_selector extends script.base_script
 
     public boolean hasVolume(obj_id player, int i) throws InterruptedException
     {
-        if (getVolumeFree(utils.getInventoryContainer(player)) < i)
-        {
-            return false;
-        }
-        return true;
+        return getVolumeFree(utils.getInventoryContainer(player)) >= i;
     }
 }

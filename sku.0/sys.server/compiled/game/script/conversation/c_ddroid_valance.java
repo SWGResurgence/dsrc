@@ -1,68 +1,74 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class c_ddroid_valance extends script.base_script
 {
+    public static String c_stringFile = "conversation/c_ddroid_valance";
+
     public c_ddroid_valance()
     {
     }
-    public static String c_stringFile = "conversation/c_ddroid_valance";
+
     public boolean c_ddroid_valance_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean c_ddroid_valance_condition_hasSpaceExpansion(obj_id player, obj_id npc) throws InterruptedException
     {
         return (features.isSpaceEdition(player));
     }
+
     public boolean c_ddroid_valance_condition_playeronquest1(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/c_darndroid1");
         return questIsQuestActive(questId, player);
     }
+
     public boolean c_ddroid_valance_condition_playeronquest2part1(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/c_darndroid2");
         return questIsTaskActive(questId, 0, player) || questIsTaskActive(questId, 1, player) || questIsTaskActive(questId, 2, player) || questIsTaskActive(questId, 3, player);
     }
+
     public boolean c_ddroid_valance_condition_completedq2p2(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/c_darndroid2");
         return questIsTaskActive(questId, 4, player) && questIsTaskComplete(questId, 1, player) && questIsTaskComplete(questId, 2, player) && questIsTaskComplete(questId, 3, player);
     }
+
     public boolean c_ddroid_valance_condition_readyforquest2(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/c_darndroid1");
         int questId2 = questGetQuestId("quest/c_darndroid2");
         return questIsQuestComplete(questId, player) && !questIsQuestActive(questId2, player);
     }
+
     public boolean c_ddroid_valance_condition_failedSpace(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasAbortedQuest(player, "assassinate", "c_darndroidspace") || space_quest.hasFailedQuest(player, "assassinate", "c_darndroidspace"))
-        {
-            return true;
-        }
-        return false;
+        return space_quest.hasAbortedQuest(player, "assassinate", "c_darndroidspace") || space_quest.hasFailedQuest(player, "assassinate", "c_darndroidspace");
     }
+
     public boolean c_ddroid_valance_condition_completedspace(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasWonQuest(player, "assassinate", "c_darndroidspace"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasWonQuest(player, "assassinate", "c_darndroidspace");
     }
+
     public boolean c_ddroid_valance_condition_completedAll(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/c_darndroid1");
         int questId2 = questGetQuestId("quest/c_darndroid2");
         return questIsQuestComplete(questId, player) && questIsQuestComplete(questId2, player);
     }
+
     public void c_ddroid_valance_action_giveddroidquest2(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/c_darndroid2");
@@ -84,6 +90,7 @@ public class c_ddroid_valance extends script.base_script
         setObjVar(player, "quest.general.quest/c_darndroid2.valance", waypoint1);
         setWaypointName(waypoint1, "Valance Serth");
     }
+
     public void c_ddroid_valance_action_nojtlCompleteQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "c_darndroid2_campdead");
@@ -95,6 +102,7 @@ public class c_ddroid_valance extends script.base_script
         }
         removeObjVar(player, "quest.general.quest/c_darndroid1.taluscrash");
     }
+
     public void c_ddroid_valance_action_giveSpaceQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "assassinate", "c_darndroidspace");
@@ -106,6 +114,7 @@ public class c_ddroid_valance extends script.base_script
         }
         removeObjVar(player, "quest.general.quest/c_darndroid1.taluscrash");
     }
+
     public void c_ddroid_valance_action_completespace(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "c_darndroid2_spacedone");
@@ -120,6 +129,7 @@ public class c_ddroid_valance extends script.base_script
         setWaypointName(waypoint, "C-3TC");
         setWaypointActive(waypoint, true);
     }
+
     public void c_ddroid_valance_action_completequest1(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "c_darndroid1_valance");
@@ -130,10 +140,12 @@ public class c_ddroid_valance extends script.base_script
         }
         removeObjVar(player, "quest.general.quest/c_darndroid1.taluscrash");
     }
+
     public void c_ddroid_valance_action_faceplayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
     }
+
     public int c_ddroid_valance_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1172"))
@@ -160,6 +172,7 @@ public class c_ddroid_valance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_ddroid_valance_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1182"))
@@ -179,7 +192,7 @@ public class c_ddroid_valance extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1186");
@@ -188,7 +201,7 @@ public class c_ddroid_valance extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_ddroid_valance.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -198,6 +211,7 @@ public class c_ddroid_valance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_ddroid_valance_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1186"))
@@ -217,7 +231,7 @@ public class c_ddroid_valance extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1190");
@@ -226,7 +240,7 @@ public class c_ddroid_valance extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_ddroid_valance.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -236,6 +250,7 @@ public class c_ddroid_valance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_ddroid_valance_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1190"))
@@ -269,7 +284,7 @@ public class c_ddroid_valance extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1194");
@@ -286,7 +301,7 @@ public class c_ddroid_valance extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_ddroid_valance.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -296,6 +311,7 @@ public class c_ddroid_valance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_ddroid_valance_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1194"))
@@ -322,7 +338,7 @@ public class c_ddroid_valance extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1198");
@@ -335,7 +351,7 @@ public class c_ddroid_valance extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_ddroid_valance.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -366,6 +382,7 @@ public class c_ddroid_valance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_ddroid_valance_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1198"))
@@ -391,6 +408,7 @@ public class c_ddroid_valance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_ddroid_valance_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1216"))
@@ -425,7 +443,7 @@ public class c_ddroid_valance extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1222");
@@ -438,7 +456,7 @@ public class c_ddroid_valance extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_ddroid_valance.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -458,6 +476,7 @@ public class c_ddroid_valance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_ddroid_valance_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1222"))
@@ -483,6 +502,7 @@ public class c_ddroid_valance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_ddroid_valance_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1236"))
@@ -509,7 +529,7 @@ public class c_ddroid_valance extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1240");
@@ -522,7 +542,7 @@ public class c_ddroid_valance extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_ddroid_valance.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -542,6 +562,7 @@ public class c_ddroid_valance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_ddroid_valance_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1240"))
@@ -567,6 +588,7 @@ public class c_ddroid_valance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_ddroid_valance_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1256"))
@@ -592,6 +614,7 @@ public class c_ddroid_valance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_ddroid_valance_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1266"))
@@ -606,6 +629,7 @@ public class c_ddroid_valance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -618,6 +642,7 @@ public class c_ddroid_valance extends script.base_script
         setName(self, "Valance Serth");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -627,6 +652,7 @@ public class c_ddroid_valance extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -635,18 +661,21 @@ public class c_ddroid_valance extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.c_ddroid_valance");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -677,7 +706,7 @@ public class c_ddroid_valance extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1172");
@@ -689,7 +718,7 @@ public class c_ddroid_valance extends script.base_script
                 utils.setScriptVar(player, "conversation.c_ddroid_valance.branchId", 1);
                 npcStartConversation(player, npc, "c_ddroid_valance", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -711,7 +740,7 @@ public class c_ddroid_valance extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1182");
@@ -719,7 +748,7 @@ public class c_ddroid_valance extends script.base_script
                 utils.setScriptVar(player, "conversation.c_ddroid_valance.branchId", 4);
                 npcStartConversation(player, npc, "c_ddroid_valance", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -748,7 +777,7 @@ public class c_ddroid_valance extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1216");
@@ -760,7 +789,7 @@ public class c_ddroid_valance extends script.base_script
                 utils.setScriptVar(player, "conversation.c_ddroid_valance.branchId", 13);
                 npcStartConversation(player, npc, "c_ddroid_valance", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -789,7 +818,7 @@ public class c_ddroid_valance extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1236");
@@ -801,7 +830,7 @@ public class c_ddroid_valance extends script.base_script
                 utils.setScriptVar(player, "conversation.c_ddroid_valance.branchId", 19);
                 npcStartConversation(player, npc, "c_ddroid_valance", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -837,7 +866,7 @@ public class c_ddroid_valance extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1256");
@@ -849,7 +878,7 @@ public class c_ddroid_valance extends script.base_script
                 utils.setScriptVar(player, "conversation.c_ddroid_valance.branchId", 25);
                 npcStartConversation(player, npc, "c_ddroid_valance", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -871,7 +900,7 @@ public class c_ddroid_valance extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1266");
@@ -879,7 +908,7 @@ public class c_ddroid_valance extends script.base_script
                 utils.setScriptVar(player, "conversation.c_ddroid_valance.branchId", 28);
                 npcStartConversation(player, npc, "c_ddroid_valance", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -894,6 +923,7 @@ public class c_ddroid_valance extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("c_ddroid_valance"))

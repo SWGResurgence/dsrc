@@ -1,93 +1,84 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class restuss_rebel_space_destroy extends script.base_script
 {
+    public static String c_stringFile = "conversation/restuss_rebel_space_destroy";
+
     public restuss_rebel_space_destroy()
     {
     }
-    public static String c_stringFile = "conversation/restuss_rebel_space_destroy";
+
     public boolean restuss_rebel_space_destroy_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean restuss_rebel_space_destroy_condition_completedKill1(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "restuss_rebel_space_destroy_1", "returnGrollo");
     }
+
     public boolean restuss_rebel_space_destroy_condition_killActive1(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "restuss_rebel_space_destroy_1");
     }
+
     public boolean restuss_rebel_space_destroy_condition_completedKill2(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "restuss_rebel_space_destroy_2", "returnGrollo2");
     }
+
     public boolean restuss_rebel_space_destroy_condition_killActive2(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "restuss_rebel_space_destroy_2");
     }
+
     public boolean restuss_rebel_space_destroy_condition_inPhase2(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id object = trial.getParent(npc);
-        if (factions.isRebel(player) && (restuss_event.getPhase(object) == 2))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return factions.isRebel(player) && (restuss_event.getPhase(object) == 2);
     }
+
     public boolean restuss_rebel_space_destroy_condition_inPhase1(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (factions.isRebel(player))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return factions.isRebel(player);
     }
+
     public boolean restuss_rebel_space_destroy_condition_enoughKills(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id object = trial.getParent(npc);
-        if (factions.isRebel(player) && (restuss_event.getPhase(object) == 3))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return factions.isRebel(player) && (restuss_event.getPhase(object) == 3);
     }
+
     public boolean restuss_rebel_space_destroy_condition_isRSFPilot(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_flags.isSpaceTrack(player, space_flags.PRIVATEER_NABOO);
     }
+
     public boolean restuss_rebel_space_destroy_condition_isFailedTwo(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuestRecursive(player, "destroy", "restuss_rebel_destroy_2") || space_quest.hasAbortedQuestRecursive(player, "destroy", "restuss_rebel_destroy_2"))
-        {
-            return true;
-        }
-        return false;
+        return space_quest.hasFailedQuestRecursive(player, "destroy", "restuss_rebel_destroy_2") || space_quest.hasAbortedQuestRecursive(player, "destroy", "restuss_rebel_destroy_2");
     }
+
     public boolean restuss_rebel_space_destroy_condition_isFailedOne(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuestRecursive(player, "destroy", "restuss_rebel_destroy_1") || space_quest.hasAbortedQuestRecursive(player, "destroy", "restuss_rebel_destroy_1"))
-        {
-            return true;
-        }
-        return false;
+        return space_quest.hasFailedQuestRecursive(player, "destroy", "restuss_rebel_destroy_1") || space_quest.hasAbortedQuestRecursive(player, "destroy", "restuss_rebel_destroy_1");
     }
+
     public boolean restuss_rebel_space_destroy_condition_isImperialPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         return factions.isImperial(player);
     }
+
     public void restuss_rebel_space_destroy_action_givekill1(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id mobj = space_quest._getQuest(player, "destroy", "restuss_rebel_destroy_1");
@@ -95,6 +86,7 @@ public class restuss_rebel_space_destroy extends script.base_script
         groundquests.clearQuest(player, "restuss_rebel_space_destroy_1");
         groundquests.grantQuest(player, "restuss_rebel_space_destroy_1");
     }
+
     public void restuss_rebel_space_destroy_action_signalDone(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "returnedGrollo");
@@ -114,10 +106,10 @@ public class restuss_rebel_space_destroy extends script.base_script
             if (restuss_event.isRequiredCountMet(npc, "restuss_rebel_space_destroy_1"))
             {
                 restuss_event.incrimentPhase(npc);
-                return;
             }
         }
     }
+
     public void restuss_rebel_space_destroy_action_givekill2(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id mobj = space_quest._getQuest(player, "destroy", "restuss_rebel_destroy_2");
@@ -125,6 +117,7 @@ public class restuss_rebel_space_destroy extends script.base_script
         groundquests.clearQuest(player, "restuss_rebel_space_destroy_2");
         groundquests.grantQuest(player, "restuss_rebel_space_destroy_2");
     }
+
     public void restuss_rebel_space_destroy_action_signalDone2(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "returnedGrollo2");
@@ -135,14 +128,15 @@ public class restuss_rebel_space_destroy extends script.base_script
             if (restuss_event.isRequiredCountMet(npc, "restuss_rebel_space_destroy_2"))
             {
                 restuss_event.incrimentPhase(npc);
-                return;
             }
         }
     }
+
     public void restuss_rebel_space_destroy_action_eject(obj_id player, obj_id npc) throws InterruptedException
     {
         expelFromBuilding(player);
     }
+
     public int restuss_rebel_space_destroy_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_30"))
@@ -173,6 +167,7 @@ public class restuss_rebel_space_destroy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int restuss_rebel_space_destroy_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_27"))
@@ -203,6 +198,7 @@ public class restuss_rebel_space_destroy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int restuss_rebel_space_destroy_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_38"))
@@ -233,6 +229,7 @@ public class restuss_rebel_space_destroy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int restuss_rebel_space_destroy_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_30"))
@@ -263,6 +260,7 @@ public class restuss_rebel_space_destroy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int restuss_rebel_space_destroy_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_27"))
@@ -293,6 +291,7 @@ public class restuss_rebel_space_destroy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -302,11 +301,13 @@ public class restuss_rebel_space_destroy extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -315,18 +316,21 @@ public class restuss_rebel_space_destroy extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.restuss_rebel_space_destroy");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -387,7 +391,7 @@ public class restuss_rebel_space_destroy extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_30");
@@ -399,7 +403,7 @@ public class restuss_rebel_space_destroy extends script.base_script
                 utils.setScriptVar(player, "conversation.restuss_rebel_space_destroy.branchId", 12);
                 npcStartConversation(player, npc, "restuss_rebel_space_destroy", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -427,7 +431,7 @@ public class restuss_rebel_space_destroy extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_27");
@@ -439,7 +443,7 @@ public class restuss_rebel_space_destroy extends script.base_script
                 utils.setScriptVar(player, "conversation.restuss_rebel_space_destroy.branchId", 15);
                 npcStartConversation(player, npc, "restuss_rebel_space_destroy", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -485,7 +489,7 @@ public class restuss_rebel_space_destroy extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_38");
@@ -497,7 +501,7 @@ public class restuss_rebel_space_destroy extends script.base_script
                 utils.setScriptVar(player, "conversation.restuss_rebel_space_destroy.branchId", 9);
                 npcStartConversation(player, npc, "restuss_rebel_space_destroy", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -527,7 +531,7 @@ public class restuss_rebel_space_destroy extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_30");
@@ -539,7 +543,7 @@ public class restuss_rebel_space_destroy extends script.base_script
                 utils.setScriptVar(player, "conversation.restuss_rebel_space_destroy.branchId", 12);
                 npcStartConversation(player, npc, "restuss_rebel_space_destroy", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -569,7 +573,7 @@ public class restuss_rebel_space_destroy extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_27");
@@ -581,7 +585,7 @@ public class restuss_rebel_space_destroy extends script.base_script
                 utils.setScriptVar(player, "conversation.restuss_rebel_space_destroy.branchId", 15);
                 npcStartConversation(player, npc, "restuss_rebel_space_destroy", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -597,6 +601,7 @@ public class restuss_rebel_space_destroy extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("restuss_rebel_space_destroy"))

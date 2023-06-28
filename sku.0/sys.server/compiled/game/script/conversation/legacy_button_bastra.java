@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,23 +14,28 @@ import script.*;
 
 public class legacy_button_bastra extends script.base_script
 {
+    public static String c_stringFile = "conversation/legacy_button_bastra";
+
     public legacy_button_bastra()
     {
     }
-    public static String c_stringFile = "conversation/legacy_button_bastra";
+
     public boolean legacy_button_bastra_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean legacy_button_bastra_condition_onButtonImp(obj_id player, obj_id npc) throws InterruptedException
     {
         boolean OnTask = hasObjVar(player, "legacy.faction.imperialPath");
         return OnTask;
     }
+
     public boolean legacy_button_bastra_condition_onButtonReb(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasObjVar(player, "legacy.faction.rebelPath");
     }
+
     public boolean legacy_button_bastra_condition_failedTosche(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/legacy_button_start");
@@ -32,20 +43,24 @@ public class legacy_button_bastra extends script.base_script
         boolean OnTask = (questIsQuestComplete(questId1, player)) && (!(questIsQuestActive(questId2, player)) && !(questIsQuestComplete(questId2, player)));
         return OnTask;
     }
+
     public boolean legacy_button_bastra_condition_failedValarian(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "quest/legacy_button_jawatracks_reb_pt3") || groundquests.hasCompletedQuest(player, "quest/legacy_button_jawatracks_reb_pt3_v2")) && (!groundquests.isQuestActiveOrComplete(player, "quest/legacy_button_reb_valarian") && !groundquests.isQuestActiveOrComplete(player, "quest/legacy_button_reb_valarian_v2"));
     }
+
     public boolean legacy_button_bastra_condition_onButtonCompleteReb(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId2 = questGetQuestId("quest/legacy_button_reb_pt2");
         boolean OnTask = questIsQuestComplete(questId2, player);
         return OnTask;
     }
+
     public boolean legacy_button_bastra_condition_failedDarklighter(obj_id player, obj_id npc) throws InterruptedException
     {
         return ((groundquests.hasCompletedQuest(player, "legacy_button_reb_valarian") || groundquests.hasCompletedQuest(player, "quest/legacy_button_jawatracks_reb_pt3_v2")) && !groundquests.isQuestActiveOrComplete(player, "legacy_button_reb_darklighter"));
     }
+
     public boolean legacy_button_bastra_condition_failedSlicer(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/legacy_button_reb_darklighter");
@@ -53,23 +68,22 @@ public class legacy_button_bastra extends script.base_script
         boolean OnTask = (questIsQuestComplete(questId1, player)) && (!(questIsQuestActive(questId2, player)) && !(questIsQuestComplete(questId2, player)));
         return OnTask;
     }
+
     public boolean legacy_button_bastra_condition_finishTogether(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "legacy_together") || groundquests.hasCompletedQuest(player, "legacy_together_2"));
     }
+
     public boolean legacy_button_bastra_condition_FailedKickReb(obj_id player, obj_id npc) throws InterruptedException
     {
-        boolean hasCompleted = false;
-        if (groundquests.isQuestActiveOrComplete(player, "naboo_kadaraa_tipping_the_balance_1"))
-        {
-            hasCompleted = true;
-        }
+        boolean hasCompleted = groundquests.isQuestActiveOrComplete(player, "naboo_kadaraa_tipping_the_balance_1");
         if (groundquests.hasCompletedQuest(player, "quest/legacy_naboo_kick_reb"))
         {
             hasCompleted = true;
         }
         return hasCompleted;
     }
+
     public boolean legacy_button_bastra_condition_failedWatto(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/legacy_button_reb_pt2");
@@ -77,47 +91,58 @@ public class legacy_button_bastra extends script.base_script
         boolean OnTask = (questIsQuestComplete(questId1, player)) && (!(questIsQuestActive(questId2, player)) && !(questIsQuestComplete(questId2, player)));
         return OnTask;
     }
+
     public boolean legacy_button_bastra_condition_onButtonStart(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActiveOrComplete(player, "quest/legacy_button_start");
     }
+
     public void legacy_button_bastra_action_signalRebelButton(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "legacy.faction.rebelPath", 1);
         groundquests.grantQuest(player, "legacy_button_jawatracks_reb");
     }
+
     public void legacy_button_bastra_action_grantValarian(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "legacy_button_reb_valarian_v2");
     }
+
     public void legacy_button_bastra_action_facePlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
     }
+
     public void legacy_button_bastra_action_grantDarklighter(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "legacy_button_reb_darklighter");
     }
+
     public void legacy_button_bastra_action_grantTosche(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "legacy_button_jawatracks_reb");
     }
+
     public void legacy_button_bastra_action_grantSlicer(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "legacy_button_reb_pt2");
     }
+
     public void legacy_button_bastra_action_reGrantKickReb(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "legacy_naboo_kick_reb");
     }
+
     public void legacy_button_bastra_action_grantWatto(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "legacy_watto_pointer");
     }
+
     public void legacy_button_bastra_action_signalGoToComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "legacy_button_start_launch_e3");
     }
+
     public int legacy_button_bastra_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_71"))
@@ -147,7 +172,7 @@ public class legacy_button_bastra extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -156,7 +181,7 @@ public class legacy_button_bastra extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_button_bastra.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -166,6 +191,7 @@ public class legacy_button_bastra extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_button_bastra_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_76"))
@@ -182,6 +208,7 @@ public class legacy_button_bastra extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_button_bastra_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_85"))
@@ -197,6 +224,7 @@ public class legacy_button_bastra extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_button_bastra_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_45"))
@@ -255,6 +283,7 @@ public class legacy_button_bastra extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_button_bastra_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_115"))
@@ -277,7 +306,7 @@ public class legacy_button_bastra extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -286,7 +315,7 @@ public class legacy_button_bastra extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_button_bastra.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -308,6 +337,7 @@ public class legacy_button_bastra extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_button_bastra_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_28"))
@@ -342,7 +372,7 @@ public class legacy_button_bastra extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -359,7 +389,7 @@ public class legacy_button_bastra extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_button_bastra.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -369,6 +399,7 @@ public class legacy_button_bastra extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_button_bastra_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_91"))
@@ -389,7 +420,7 @@ public class legacy_button_bastra extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_95");
@@ -398,7 +429,7 @@ public class legacy_button_bastra extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_button_bastra.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -435,7 +466,7 @@ public class legacy_button_bastra extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_41");
@@ -444,7 +475,7 @@ public class legacy_button_bastra extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_button_bastra.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -454,6 +485,7 @@ public class legacy_button_bastra extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_button_bastra_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_95"))
@@ -469,6 +501,7 @@ public class legacy_button_bastra extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_button_bastra_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_41"))
@@ -483,6 +516,7 @@ public class legacy_button_bastra extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -496,6 +530,7 @@ public class legacy_button_bastra extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -505,6 +540,7 @@ public class legacy_button_bastra extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -513,18 +549,21 @@ public class legacy_button_bastra extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.legacy_button_bastra");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -563,7 +602,7 @@ public class legacy_button_bastra extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_71");
@@ -575,7 +614,7 @@ public class legacy_button_bastra extends script.base_script
                 utils.setScriptVar(player, "conversation.legacy_button_bastra.branchId", 2);
                 npcStartConversation(player, npc, "legacy_button_bastra", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -598,7 +637,7 @@ public class legacy_button_bastra extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_85");
@@ -606,7 +645,7 @@ public class legacy_button_bastra extends script.base_script
                 utils.setScriptVar(player, "conversation.legacy_button_bastra.branchId", 6);
                 npcStartConversation(player, npc, "legacy_button_bastra", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -657,7 +696,7 @@ public class legacy_button_bastra extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_45");
@@ -681,7 +720,7 @@ public class legacy_button_bastra extends script.base_script
                 utils.setScriptVar(player, "conversation.legacy_button_bastra.branchId", 8);
                 npcStartConversation(player, npc, "legacy_button_bastra", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -711,7 +750,7 @@ public class legacy_button_bastra extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_115");
@@ -723,7 +762,7 @@ public class legacy_button_bastra extends script.base_script
                 utils.setScriptVar(player, "conversation.legacy_button_bastra.branchId", 14);
                 npcStartConversation(player, npc, "legacy_button_bastra", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -732,6 +771,7 @@ public class legacy_button_bastra extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("legacy_button_bastra"))

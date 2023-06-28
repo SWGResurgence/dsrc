@@ -1,5 +1,11 @@
 package script.theme_park.heroic.axkva_min;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.buff;
@@ -12,6 +18,7 @@ public class suin_guard extends script.base_script
     public suin_guard()
     {
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         String aspBuff = utils.getStringScriptVar(self, "aspect");
@@ -22,11 +29,13 @@ public class suin_guard extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void enrage() throws InterruptedException
     {
         buff.applyBuff(getSelf(), "bm_enrage", -1);
         setMovementPercent(getSelf(), 300.0f);
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         obj_id suin = trial.getParent(self);
@@ -37,6 +46,7 @@ public class suin_guard extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int suin_died(obj_id self, dictionary params) throws InterruptedException
     {
         utils.setScriptVar(self, "suin_dead", 1);

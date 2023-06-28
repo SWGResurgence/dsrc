@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.establish_the_link;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.factions;
@@ -13,32 +19,34 @@ import java.util.Vector;
 
 public class droid_patrol_script extends script.base_script
 {
+    public static final string_id[] DROID_RESPONSE =
+            {
+                    new string_id(trial.UPLINK_STF, "oww"),
+                    new string_id(trial.UPLINK_STF, "quit_it"),
+                    new string_id(trial.UPLINK_STF, "honestly"),
+                    new string_id(trial.UPLINK_STF, "same_side"),
+                    new string_id(trial.UPLINK_STF, "just_a_scratch"),
+                    new string_id(trial.UPLINK_STF, "new_paint"),
+                    new string_id(trial.UPLINK_STF, "watch_your_aim"),
+                    new string_id(trial.UPLINK_STF, "hey"),
+                    new string_id(trial.UPLINK_STF, "turn_around"),
+                    new string_id(trial.UPLINK_STF, "help_help"),
+                    new string_id(trial.UPLINK_STF, "amatures"),
+                    new string_id(trial.UPLINK_STF, "stormtrooper"),
+                    new string_id(trial.UPLINK_STF, "ouch"),
+                    new string_id(trial.UPLINK_STF, "not_the_face")
+            };
+    public static final boolean LOGGING = true;
     public droid_patrol_script()
     {
     }
-    public static final string_id[] DROID_RESPONSE = 
-    {
-        new string_id(trial.UPLINK_STF, "oww"),
-        new string_id(trial.UPLINK_STF, "quit_it"),
-        new string_id(trial.UPLINK_STF, "honestly"),
-        new string_id(trial.UPLINK_STF, "same_side"),
-        new string_id(trial.UPLINK_STF, "just_a_scratch"),
-        new string_id(trial.UPLINK_STF, "new_paint"),
-        new string_id(trial.UPLINK_STF, "watch_your_aim"),
-        new string_id(trial.UPLINK_STF, "hey"),
-        new string_id(trial.UPLINK_STF, "turn_around"),
-        new string_id(trial.UPLINK_STF, "help_help"),
-        new string_id(trial.UPLINK_STF, "amatures"),
-        new string_id(trial.UPLINK_STF, "stormtrooper"),
-        new string_id(trial.UPLINK_STF, "ouch"),
-        new string_id(trial.UPLINK_STF, "not_the_face")
-    };
-    public static final boolean LOGGING = true;
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         messageTo(self, "handleBotDeath", null, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (trial.isUplinkActive(self))
@@ -48,6 +56,7 @@ public class droid_patrol_script extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         findWayPoints(self);
@@ -56,6 +65,7 @@ public class droid_patrol_script extends script.base_script
         detachScript(self, "ai.creature_combat");
         return SCRIPT_CONTINUE;
     }
+
     public int OnMoveMoving(obj_id self) throws InterruptedException
     {
         if (isInvulnerable(self))
@@ -64,14 +74,16 @@ public class droid_patrol_script extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleBotDeath(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public void findWayPoints(obj_id self) throws InterruptedException
     {
-        obj_id contents[] = utils.getSharedContainerObjects(self);
+        obj_id[] contents = utils.getSharedContainerObjects(self);
         if (contents == null || contents.length == 0)
         {
             doLogging("findWayPoints", "Contents list was empty, exiting");
@@ -86,10 +98,14 @@ public class droid_patrol_script extends script.base_script
         }
         Vector waypoints = new Vector();
         waypoints.setSize(0);
-        for (obj_id content : contents) {
-            if (utils.hasScriptVar(content, trial.WP_NAME)) {
-                for (String s : pathList) {
-                    if (s.equals(utils.getStringScriptVar(content, trial.WP_NAME))) {
+        for (obj_id content : contents)
+        {
+            if (utils.hasScriptVar(content, trial.WP_NAME))
+            {
+                for (String s : pathList)
+                {
+                    if (s.equals(utils.getStringScriptVar(content, trial.WP_NAME)))
+                    {
                         utils.addElement(waypoints, getLocation(content));
                     }
                 }
@@ -113,17 +129,20 @@ public class droid_patrol_script extends script.base_script
         }
         utils.setScriptVar(self, "patrolPoints", patrolPoints);
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         obj_id[] objects = getObjectsInRange(self, 1.0f);
-        
+
         {
-            if (objects == null || objects.length == 0)
+            if (objects == null)
             {
                 return SCRIPT_CONTINUE;
             }
-            for (obj_id object : objects) {
-                if ((getTemplateName(object)).equals(trial.WP_OBJECT)) {
+            for (obj_id object : objects)
+            {
+                if ((getTemplateName(object)).equals(trial.WP_OBJECT))
+                {
                     createNewRelay(self);
                     messageTo(self, "pathToNextPoint", null, 0, false);
                 }
@@ -131,6 +150,7 @@ public class droid_patrol_script extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void createNewRelay(obj_id self) throws InterruptedException
     {
         obj_id[] objects = getObjectsInRange(self, 5.0f);
@@ -148,8 +168,10 @@ public class droid_patrol_script extends script.base_script
             messageTo(top, "validateRelays", null, 0, false);
             return;
         }
-        for (obj_id object : objects) {
-            if ((getTemplateName(object)).equals(trial.RELAY_OBJECT)) {
+        for (obj_id object : objects)
+        {
+            if ((getTemplateName(object)).equals(trial.RELAY_OBJECT))
+            {
                 messageTo(top, "validateRelays", null, 0, false);
                 return;
             }
@@ -160,6 +182,7 @@ public class droid_patrol_script extends script.base_script
         messageTo(top, "validateRelays", null, 0, false);
         trial.markAsTempObject(newRelay, true);
     }
+
     public int pathToNextPoint(obj_id self, dictionary params) throws InterruptedException
     {
         int pathIndex = 0;
@@ -189,6 +212,7 @@ public class droid_patrol_script extends script.base_script
         utils.setScriptVar(self, "pathIndex", pathIndex);
         return SCRIPT_CONTINUE;
     }
+
     public void handlePatrolTypeReset(obj_id self, location[] patrolPoints) throws InterruptedException
     {
         location[] reversedList = new location[patrolPoints.length];
@@ -202,6 +226,7 @@ public class droid_patrol_script extends script.base_script
         utils.setScriptVar(self, "pathIndex", 1);
         messageTo(self, "pathToNextPoint", null, 25, false);
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING || trial.UPLINK_LOGGING)

@@ -1,70 +1,109 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class quest_crowd_pleaser_manager extends script.base_script
 {
+    public static final String MUSIC_COMMAND = "startMusic+";
+    public static final String DANCE_COMMAND = "startDance+";
+    public static final String[] MUSIC_NAMES =
+            {
+                    "starwars1",
+                    "rock",
+                    "starwars2",
+                    "folk",
+                    "starwars3",
+                    "ceremonial",
+                    "ballad",
+                    "waltz",
+                    "jazz",
+                    "virtuoso"
+            };
+    public static final String[] DANCE_NAMES =
+            {
+                    "basic",
+                    "rhythmic",
+                    "basic2",
+                    "rhythmic2",
+                    "footloose",
+                    "footloose2",
+                    "popular",
+                    "poplock",
+                    "popular2",
+                    "poplock2",
+                    "exotic",
+                    "exotic2",
+                    "exotic3",
+                    "exotic4"
+            };
+    public static String c_stringFile = "conversation/quest_crowd_pleaser_manager";
+
     public quest_crowd_pleaser_manager()
     {
     }
-    public static String c_stringFile = "conversation/quest_crowd_pleaser_manager";
+
     public boolean quest_crowd_pleaser_manager_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean quest_crowd_pleaser_manager_condition_has_entertainer(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.isProfession(player, utils.ENTERTAINER);
     }
+
     public boolean quest_crowd_pleaser_manager_condition_has_status_1(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "quest.crowd_pleaser.status"))
         {
             int status = getIntObjVar(player, "quest.crowd_pleaser.status");
-            if (status == 1)
-            {
-                return true;
-            }
+            return status == 1;
         }
         return false;
     }
+
     public boolean quest_crowd_pleaser_manager_condition_event_in_progress(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.hasScriptVar(npc, "quest.crowd_pleaser.performance.control");
     }
+
     public boolean quest_crowd_pleaser_manager_condition_has_dance_skill(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasSkill(player, "class_entertainer_phase1_master");
     }
+
     public boolean quest_crowd_pleaser_manager_condition_has_music_skill(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasSkill(player, "class_entertainer_phase1_master");
     }
+
     public boolean quest_crowd_pleaser_manager_condition_has_status_4(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "quest.crowd_pleaser.status"))
         {
             int status = getIntObjVar(player, "quest.crowd_pleaser.status");
-            if (status == 4)
-            {
-                return true;
-            }
+            return status == 4;
         }
         return false;
     }
+
     public boolean quest_crowd_pleaser_manager_condition_has_status_3(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "quest.crowd_pleaser.status"))
         {
             int status = getIntObjVar(player, "quest.crowd_pleaser.status");
-            if (status == 3)
-            {
-                return true;
-            }
+            return status == 3;
         }
         return false;
     }
+
     public boolean quest_crowd_pleaser_manager_condition_has_status_5(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "quest.crowd_pleaser.status"))
@@ -81,54 +120,47 @@ public class quest_crowd_pleaser_manager extends script.base_script
         }
         return false;
     }
+
     public boolean quest_crowd_pleaser_manager_condition_has_status_6(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "quest.crowd_pleaser.status"))
         {
             int status = getIntObjVar(player, "quest.crowd_pleaser.status");
-            if (status == 6)
-            {
-                return true;
-            }
+            return status == 6;
         }
         return false;
     }
+
     public boolean quest_crowd_pleaser_manager_condition_has_status_7(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "quest.crowd_pleaser.status"))
         {
             int status = getIntObjVar(player, "quest.crowd_pleaser.status");
-            if (status == 7)
-            {
-                return true;
-            }
+            return status == 7;
         }
         return false;
     }
+
     public boolean quest_crowd_pleaser_manager_condition_has_status_9(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "quest.crowd_pleaser.status"))
         {
             int status = getIntObjVar(player, "quest.crowd_pleaser.status");
-            if (status == 9)
-            {
-                return true;
-            }
+            return status == 9;
         }
         return false;
     }
+
     public boolean quest_crowd_pleaser_manager_condition_has_status_10(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "quest.crowd_pleaser.status"))
         {
             int status = getIntObjVar(player, "quest.crowd_pleaser.status");
-            if (status == 10)
-            {
-                return true;
-            }
+            return status == 10;
         }
         return false;
     }
+
     public boolean quest_crowd_pleaser_manager_condition_has_status_11(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "quest.crowd_pleaser.status"))
@@ -145,54 +177,47 @@ public class quest_crowd_pleaser_manager extends script.base_script
         }
         return false;
     }
+
     public boolean quest_crowd_pleaser_manager_condition_has_status_12(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "quest.crowd_pleaser.status"))
         {
             int status = getIntObjVar(player, "quest.crowd_pleaser.status");
-            if (status == 12)
-            {
-                return true;
-            }
+            return status == 12;
         }
         return false;
     }
+
     public boolean quest_crowd_pleaser_manager_condition_has_status_13(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "quest.crowd_pleaser.status"))
         {
             int status = getIntObjVar(player, "quest.crowd_pleaser.status");
-            if (status == 13)
-            {
-                return true;
-            }
+            return status == 13;
         }
         return false;
     }
+
     public boolean quest_crowd_pleaser_manager_condition_has_status_15(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "quest.crowd_pleaser.status"))
         {
             int status = getIntObjVar(player, "quest.crowd_pleaser.status");
-            if (status == 15)
-            {
-                return true;
-            }
+            return status == 15;
         }
         return false;
     }
+
     public boolean quest_crowd_pleaser_manager_condition_has_status_16(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "quest.crowd_pleaser.status"))
         {
             int status = getIntObjVar(player, "quest.crowd_pleaser.status");
-            if (status == 16)
-            {
-                return true;
-            }
+            return status == 16;
         }
         return false;
     }
+
     public boolean quest_crowd_pleaser_manager_condition_has_status_17(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "quest.crowd_pleaser.status"))
@@ -209,42 +234,37 @@ public class quest_crowd_pleaser_manager extends script.base_script
         }
         return false;
     }
+
     public boolean quest_crowd_pleaser_manager_condition_has_status_18(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "quest.crowd_pleaser.status"))
         {
             int status = getIntObjVar(player, "quest.crowd_pleaser.status");
-            if (status == 18)
-            {
-                return true;
-            }
+            return status == 18;
         }
         return false;
     }
+
     public boolean quest_crowd_pleaser_manager_condition_has_status_19(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "quest.crowd_pleaser.status"))
         {
             int status = getIntObjVar(player, "quest.crowd_pleaser.status");
-            if (status == 19)
-            {
-                return true;
-            }
+            return status == 19;
         }
         return false;
     }
+
     public boolean quest_crowd_pleaser_manager_condition_has_status_21(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "quest.crowd_pleaser.status"))
         {
             int status = getIntObjVar(player, "quest.crowd_pleaser.status");
-            if (status == 21)
-            {
-                return true;
-            }
+            return status == 21;
         }
         return false;
     }
+
     public boolean quest_crowd_pleaser_manager_condition_has_failed_recently(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "quest.crowd_pleaser.performance.failed"))
@@ -269,13 +289,14 @@ public class quest_crowd_pleaser_manager extends script.base_script
             {
                 return true;
             }
-            else 
+            else
             {
                 removeObjVar(player, "quest.crowd_pleaser.performance.failed");
             }
         }
         return false;
     }
+
     public boolean quest_crowd_pleaser_manager_condition_has_failed_audition(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "quest.crowd_pleaser.audition.failed"))
@@ -300,13 +321,14 @@ public class quest_crowd_pleaser_manager extends script.base_script
             {
                 return true;
             }
-            else 
+            else
             {
                 removeObjVar(player, "quest.crowd_pleaser.audition.failed");
             }
         }
         return false;
     }
+
     public boolean quest_crowd_pleaser_manager_condition_has_completed_both(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "quest.crowd_pleaser.complete"))
@@ -319,20 +341,14 @@ public class quest_crowd_pleaser_manager extends script.base_script
             removeObjVar(player, "quest.crowd_pleaser.complete");
             return false;
         }
-        if (type.equals("both"))
-        {
-            return true;
-        }
-        return false;
+        return type.equals("both");
     }
+
     public boolean quest_crowd_pleaser_manager_condition_has_completed_one(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (hasObjVar(player, "quest.crowd_pleaser.complete"))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(player, "quest.crowd_pleaser.complete");
     }
+
     public boolean quest_crowd_pleaser_manager_condition_has_completed_music(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "quest.crowd_pleaser.complete"))
@@ -344,12 +360,9 @@ public class quest_crowd_pleaser_manager extends script.base_script
         {
             return false;
         }
-        if (type.equals("music"))
-        {
-            return true;
-        }
-        return false;
+        return type.equals("music");
     }
+
     public boolean quest_crowd_pleaser_manager_condition_has_completed_dance(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "quest.crowd_pleaser.complete"))
@@ -361,16 +374,14 @@ public class quest_crowd_pleaser_manager extends script.base_script
         {
             return false;
         }
-        if (type.equals("dance"))
-        {
-            return true;
-        }
-        return false;
+        return type.equals("dance");
     }
+
     public void quest_crowd_pleaser_manager_action_set_status_1(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "quest.crowd_pleaser.status", 1);
     }
+
     public void quest_crowd_pleaser_manager_action_set_status_2(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id building = getTopMostContainer(npc);
@@ -398,14 +409,17 @@ public class quest_crowd_pleaser_manager extends script.base_script
         attachScript(player, "quest.crowd_pleaser.player_performance");
         setObjVar(player, "quest.crowd_pleaser.status", 2);
     }
+
     public void quest_crowd_pleaser_manager_action_set_music(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "quest.crowd_pleaser.audition.type", "music");
     }
+
     public void quest_crowd_pleaser_manager_action_set_dance(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "quest.crowd_pleaser.audition.type", "dance");
     }
+
     public void quest_crowd_pleaser_manager_action_set_status_4(obj_id player, obj_id npc) throws InterruptedException
     {
         final int PAY = 500;
@@ -414,6 +428,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         prose_package pp = prose.getPackage(new string_id("quest/crowd_pleaser/system_messages", "payout"), PAY);
         sendSystemMessageProse(player, pp);
     }
+
     public void quest_crowd_pleaser_manager_action_set_status_5(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "quest.crowd_pleaser.status", 5);
@@ -421,10 +436,12 @@ public class quest_crowd_pleaser_manager extends script.base_script
         setObjVar(player, "quest.crowd_pleaser.popularity.level", 1);
         attachScript(player, "quest.crowd_pleaser.player_popularity");
     }
+
     public void quest_crowd_pleaser_manager_action_set_status_7(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "quest.crowd_pleaser.status", 7);
     }
+
     public void quest_crowd_pleaser_manager_action_set_status_8(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id building = getTopMostContainer(npc);
@@ -477,6 +494,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         attachScript(player, "quest.crowd_pleaser.player_performance");
         setObjVar(player, "quest.crowd_pleaser.status", 8);
     }
+
     public void quest_crowd_pleaser_manager_action_set_status_10(obj_id player, obj_id npc) throws InterruptedException
     {
         final int PAY = 1000;
@@ -485,6 +503,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         prose_package pp = prose.getPackage(new string_id("quest/crowd_pleaser/system_messages", "payout"), PAY);
         sendSystemMessageProse(player, pp);
     }
+
     public void quest_crowd_pleaser_manager_action_set_status_11(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "quest.crowd_pleaser.status", 11);
@@ -492,10 +511,12 @@ public class quest_crowd_pleaser_manager extends script.base_script
         setObjVar(player, "quest.crowd_pleaser.popularity.level", 2);
         attachScript(player, "quest.crowd_pleaser.player_popularity");
     }
+
     public void quest_crowd_pleaser_manager_action_set_status_13(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "quest.crowd_pleaser.status", 13);
     }
+
     public void quest_crowd_pleaser_manager_action_set_status_14(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id building = getTopMostContainer(npc);
@@ -555,6 +576,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         attachScript(player, "quest.crowd_pleaser.player_performance");
         setObjVar(player, "quest.crowd_pleaser.status", 14);
     }
+
     public void quest_crowd_pleaser_manager_action_set_status_16(obj_id player, obj_id npc) throws InterruptedException
     {
         final int PAY = 1500;
@@ -563,6 +585,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         prose_package pp = prose.getPackage(new string_id("quest/crowd_pleaser/system_messages", "payout"), PAY);
         sendSystemMessageProse(player, pp);
     }
+
     public void quest_crowd_pleaser_manager_action_set_status_17(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "quest.crowd_pleaser.status", 17);
@@ -570,10 +593,12 @@ public class quest_crowd_pleaser_manager extends script.base_script
         setObjVar(player, "quest.crowd_pleaser.popularity.level", 3);
         attachScript(player, "quest.crowd_pleaser.player_popularity");
     }
+
     public void quest_crowd_pleaser_manager_action_set_status_19(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "quest.crowd_pleaser.status", 19);
     }
+
     public void quest_crowd_pleaser_manager_action_set_status_20(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id building = getTopMostContainer(npc);
@@ -633,6 +658,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         attachScript(player, "quest.crowd_pleaser.player_performance");
         setObjVar(player, "quest.crowd_pleaser.status", 20);
     }
+
     public void quest_crowd_pleaser_manager_action_set_completion(obj_id player, obj_id npc) throws InterruptedException
     {
         final int PAY = 2000;
@@ -651,7 +677,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                         removeObjVar(player, "quest.crowd_pleaser");
                         setObjVar(player, "quest.crowd_pleaser.complete", "both");
                     }
-                    else 
+                    else
                     {
                         removeObjVar(player, "quest.crowd_pleaser");
                         setObjVar(player, "quest.crowd_pleaser.complete", "dance");
@@ -666,7 +692,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                         removeObjVar(player, "quest.crowd_pleaser");
                         setObjVar(player, "quest.crowd_pleaser.complete", "both");
                     }
-                    else 
+                    else
                     {
                         removeObjVar(player, "quest.crowd_pleaser");
                         setObjVar(player, "quest.crowd_pleaser.complete", "music");
@@ -676,6 +702,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
             }
         }
     }
+
     public void quest_crowd_pleaser_manager_action_giveMissingRewards(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasCommand(player, "startDance+theatrical"))
@@ -691,6 +718,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
             grantCommand(player, "startMusic+western");
         }
     }
+
     public int quest_crowd_pleaser_manager_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_36a4e374"))
@@ -717,7 +745,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_dd4bb16d");
@@ -730,7 +758,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_crowd_pleaser_manager.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -762,7 +790,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61657d0f");
@@ -775,7 +803,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_crowd_pleaser_manager.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -795,6 +823,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_crowd_pleaser_manager_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_dd4bb16d"))
@@ -827,6 +856,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_crowd_pleaser_manager_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_61657d0f"))
@@ -853,7 +883,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_22");
@@ -866,7 +896,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_crowd_pleaser_manager.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -886,6 +916,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_crowd_pleaser_manager_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_22"))
@@ -918,6 +949,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_crowd_pleaser_manager_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_5a936e2e"))
@@ -944,7 +976,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_57c8489e");
@@ -957,7 +989,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_crowd_pleaser_manager.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -989,7 +1021,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a99397a");
@@ -1002,7 +1034,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_crowd_pleaser_manager.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1022,6 +1054,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_crowd_pleaser_manager_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_57c8489e"))
@@ -1048,7 +1081,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c6403b16");
@@ -1061,7 +1094,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_crowd_pleaser_manager.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1081,6 +1114,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_crowd_pleaser_manager_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c6403b16"))
@@ -1106,6 +1140,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_crowd_pleaser_manager_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a99397a"))
@@ -1132,7 +1167,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_57c8489e");
@@ -1145,7 +1180,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_crowd_pleaser_manager.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1165,6 +1200,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_crowd_pleaser_manager_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1dc24a1"))
@@ -1191,7 +1227,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_59a59142");
@@ -1204,7 +1240,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_crowd_pleaser_manager.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1224,6 +1260,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_crowd_pleaser_manager_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_59a59142"))
@@ -1256,6 +1293,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_crowd_pleaser_manager_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_7b58a334"))
@@ -1270,6 +1308,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_crowd_pleaser_manager_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_847c3be4"))
@@ -1296,7 +1335,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3e04f6f");
@@ -1309,7 +1348,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_crowd_pleaser_manager.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1329,6 +1368,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_crowd_pleaser_manager_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3e04f6f"))
@@ -1355,7 +1395,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b6dac7cf");
@@ -1368,7 +1408,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_crowd_pleaser_manager.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1388,6 +1428,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_crowd_pleaser_manager_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b6dac7cf"))
@@ -1413,6 +1454,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_crowd_pleaser_manager_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1377703a"))
@@ -1457,7 +1499,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_93");
@@ -1470,7 +1512,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_crowd_pleaser_manager.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1490,6 +1532,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_crowd_pleaser_manager_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_93"))
@@ -1522,6 +1565,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_crowd_pleaser_manager_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_694f2644"))
@@ -1548,7 +1592,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8ddf8010");
@@ -1561,7 +1605,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_crowd_pleaser_manager.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1581,6 +1625,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_crowd_pleaser_manager_handleBranch55(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_8ddf8010"))
@@ -1607,7 +1652,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_34bf7b50");
@@ -1620,7 +1665,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_crowd_pleaser_manager.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1640,6 +1685,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_crowd_pleaser_manager_handleBranch56(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_34bf7b50"))
@@ -1666,7 +1712,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7943785d");
@@ -1679,7 +1725,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_crowd_pleaser_manager.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1699,6 +1745,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_crowd_pleaser_manager_handleBranch57(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_7943785d"))
@@ -1724,6 +1771,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_crowd_pleaser_manager_handleBranch64(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4a1d2431"))
@@ -1757,7 +1805,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_183e8ee4");
@@ -1774,7 +1822,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_crowd_pleaser_manager.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1794,6 +1842,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_crowd_pleaser_manager_handleBranch65(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_183e8ee4"))
@@ -1860,6 +1909,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_crowd_pleaser_manager_handleBranch74(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_dda95847"))
@@ -1886,7 +1936,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_39aa9593");
@@ -1899,7 +1949,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_crowd_pleaser_manager.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1928,7 +1978,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_39aa9593");
@@ -1941,7 +1991,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_crowd_pleaser_manager.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1968,6 +2018,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_crowd_pleaser_manager_handleBranch75(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_39aa9593"))
@@ -1994,7 +2045,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9739cb4c");
@@ -2007,7 +2058,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_crowd_pleaser_manager.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2027,6 +2078,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_crowd_pleaser_manager_handleBranch76(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9739cb4c"))
@@ -2052,6 +2104,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_crowd_pleaser_manager_handleBranch80(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_39aa9593"))
@@ -2078,7 +2131,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9739cb4c");
@@ -2091,7 +2144,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_crowd_pleaser_manager.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2111,6 +2164,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_crowd_pleaser_manager_handleBranch83(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_499afb89"))
@@ -2144,7 +2198,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a2fae368");
@@ -2161,7 +2215,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_crowd_pleaser_manager.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2181,6 +2235,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_crowd_pleaser_manager_handleBranch84(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a2fae368"))
@@ -2207,7 +2262,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9288900f");
@@ -2220,7 +2275,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_crowd_pleaser_manager.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2252,7 +2307,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8e4955d6");
@@ -2265,7 +2320,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_crowd_pleaser_manager.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2285,6 +2340,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_crowd_pleaser_manager_handleBranch85(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9288900f"))
@@ -2310,6 +2366,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_crowd_pleaser_manager_handleBranch88(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_8e4955d6"))
@@ -2336,7 +2393,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9288900f");
@@ -2349,7 +2406,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_crowd_pleaser_manager.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2369,38 +2426,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
-    public static final String MUSIC_COMMAND = "startMusic+";
-    public static final String DANCE_COMMAND = "startDance+";
-    public static final String[] MUSIC_NAMES = 
-    {
-        "starwars1",
-        "rock",
-        "starwars2",
-        "folk",
-        "starwars3",
-        "ceremonial",
-        "ballad",
-        "waltz",
-        "jazz",
-        "virtuoso"
-    };
-    public static final String[] DANCE_NAMES = 
-    {
-        "basic",
-        "rhythmic",
-        "basic2",
-        "rhythmic2",
-        "footloose",
-        "footloose2",
-        "popular",
-        "poplock",
-        "popular2",
-        "poplock2",
-        "exotic",
-        "exotic2",
-        "exotic3",
-        "exotic4"
-    };
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -2411,12 +2437,14 @@ public class quest_crowd_pleaser_manager extends script.base_script
         setCondition(self, CONDITION_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setCondition(self, CONDITION_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -2426,6 +2454,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
@@ -2433,6 +2462,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         detachScript(self, "conversation.quest_crowd_pleaser_manager");
         return SCRIPT_CONTINUE;
     }
+
     public String getRandomPerformanceName(obj_id player, String type) throws InterruptedException
     {
         String name = "";
@@ -2461,7 +2491,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                     return DANCE_NAMES[r];
                 }
             }
-            else 
+            else
             {
                 return DANCE_NAMES[0];
             }
@@ -2469,12 +2499,14 @@ public class quest_crowd_pleaser_manager extends script.base_script
         } while (c < 100);
         return DANCE_NAMES[0];
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -2549,7 +2581,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_36a4e374");
@@ -2565,7 +2597,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 utils.setScriptVar(player, "conversation.quest_crowd_pleaser_manager.branchId", 7);
                 npcStartConversation(player, npc, "quest_crowd_pleaser_manager", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2613,7 +2645,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_5a936e2e");
@@ -2629,7 +2661,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 utils.setScriptVar(player, "conversation.quest_crowd_pleaser_manager.branchId", 19);
                 npcStartConversation(player, npc, "quest_crowd_pleaser_manager", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2664,7 +2696,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1dc24a1");
@@ -2676,7 +2708,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 utils.setScriptVar(player, "conversation.quest_crowd_pleaser_manager.branchId", 29);
                 npcStartConversation(player, npc, "quest_crowd_pleaser_manager", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2698,7 +2730,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_7b58a334");
@@ -2706,7 +2738,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 utils.setScriptVar(player, "conversation.quest_crowd_pleaser_manager.branchId", 35);
                 npcStartConversation(player, npc, "quest_crowd_pleaser_manager", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2740,7 +2772,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_847c3be4");
@@ -2752,7 +2784,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 utils.setScriptVar(player, "conversation.quest_crowd_pleaser_manager.branchId", 38);
                 npcStartConversation(player, npc, "quest_crowd_pleaser_manager", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2794,7 +2826,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1377703a");
@@ -2810,7 +2842,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 utils.setScriptVar(player, "conversation.quest_crowd_pleaser_manager.branchId", 46);
                 npcStartConversation(player, npc, "quest_crowd_pleaser_manager", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2851,7 +2883,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_694f2644");
@@ -2863,7 +2895,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 utils.setScriptVar(player, "conversation.quest_crowd_pleaser_manager.branchId", 54);
                 npcStartConversation(player, npc, "quest_crowd_pleaser_manager", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2898,7 +2930,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_4a1d2431");
@@ -2910,7 +2942,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 utils.setScriptVar(player, "conversation.quest_crowd_pleaser_manager.branchId", 64);
                 npcStartConversation(player, npc, "quest_crowd_pleaser_manager", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2938,7 +2970,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_dda95847");
@@ -2950,7 +2982,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 utils.setScriptVar(player, "conversation.quest_crowd_pleaser_manager.branchId", 74);
                 npcStartConversation(player, npc, "quest_crowd_pleaser_manager", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2978,7 +3010,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_499afb89");
@@ -2990,7 +3022,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 utils.setScriptVar(player, "conversation.quest_crowd_pleaser_manager.branchId", 83);
                 npcStartConversation(player, npc, "quest_crowd_pleaser_manager", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2999,6 +3031,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("quest_crowd_pleaser_manager"))

@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,14 +14,17 @@ import script.*;
 
 public class legacy_button_jawatracks_zef extends script.base_script
 {
+    public static String c_stringFile = "conversation/legacy_button_jawatracks_zef";
+
     public legacy_button_jawatracks_zef()
     {
     }
-    public static String c_stringFile = "conversation/legacy_button_jawatracks_zef";
+
     public boolean legacy_button_jawatracks_zef_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean legacy_button_jawatracks_zef_condition_onDataDownload(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/legacy_button_jawatracks_pt2");
@@ -27,6 +36,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
         boolean onTask = questIsTaskActive(questId1, onBody, player) || questIsTaskActive(questId1, onRats, player) || questIsTaskActive(questId2, onBody2, player) || questIsTaskActive(questId2, onRats2, player);
         return onTask;
     }
+
     public boolean legacy_button_jawatracks_zef_condition_onDroidDead(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/legacy_button_jawatracks_pt2");
@@ -36,6 +46,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
         boolean onTask = questIsTaskActive(questId1, onBody, player) || questIsTaskActive(questId2, onBody2, player);
         return onTask;
     }
+
     public boolean legacy_button_jawatracks_zef_condition_onKillDroid(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/legacy_button_jawatracks_pt2");
@@ -45,6 +56,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
         boolean onTask = questIsTaskActive(questId2, onDroid2, player) || questIsTaskActive(questId1, onDroid, player);
         return onTask;
     }
+
     public boolean legacy_button_jawatracks_zef_condition_failSandCrawlerImp(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/legacy_button_jawatracks_pt2");
@@ -52,6 +64,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
         boolean OnTask = (questIsQuestComplete(questId1, player)) && (!(questIsQuestActive(questId2, player)) && !(questIsQuestComplete(questId2, player)));
         return OnTask;
     }
+
     public boolean legacy_button_jawatracks_zef_condition_questTracks2Complete(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/legacy_button_jawatracks_pt2");
@@ -59,6 +72,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
         boolean OnTask = questIsQuestComplete(questId1, player) || questIsQuestComplete(questId2, player);
         return OnTask;
     }
+
     public boolean legacy_button_jawatracks_zef_condition_failSandCrawlerReb(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/legacy_button_jawatracks_reb_pt2");
@@ -66,6 +80,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
         boolean OnTask = (questIsQuestComplete(questId1, player)) && (!(questIsQuestActive(questId2, player)) && !(questIsQuestComplete(questId2, player)));
         return OnTask;
     }
+
     public boolean legacy_button_jawatracks_zef_condition_onWompratsDead(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/legacy_button_jawatracks_pt2");
@@ -75,10 +90,12 @@ public class legacy_button_jawatracks_zef extends script.base_script
         boolean onTask = questIsTaskActive(questId1, onBody, player) || questIsTaskActive(questId2, onBody2, player);
         return onTask;
     }
+
     public boolean legacy_button_jawatracks_zef_condition_playerDeletedQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return ((groundquests.hasCompletedQuest(player, "legacy_button_jawatracks") && !(groundquests.isQuestActiveOrComplete(player, "legacy_button_jawatracks_pt2"))) || (groundquests.hasCompletedQuest(player, "legacy_button_jawatracks_reb") && !(groundquests.isQuestActiveOrComplete(player, "legacy_button_jawatracks_reb_pt2"))));
     }
+
     public boolean legacy_button_jawatracks_zef_condition_onFailedHarvestor(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/legacy_button_jawatracks_pt2");
@@ -88,6 +105,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
         boolean onTask = questIsTaskActive(questId1, onfailedHarvestor, player) || questIsTaskActive(questId2, onfailedHarvestor2, player);
         return onTask;
     }
+
     public boolean legacy_button_jawatracks_zef_condition_onTracks2Quest(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/legacy_button_jawatracks_pt2");
@@ -95,6 +113,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
         boolean OnTask = (questIsQuestActive(questId1, player)) || (questIsQuestActive(questId2, player));
         return OnTask;
     }
+
     public boolean legacy_button_jawatracks_zef_condition_onkillWomprats(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/legacy_button_jawatracks_pt2");
@@ -104,26 +123,32 @@ public class legacy_button_jawatracks_zef extends script.base_script
         boolean onTask = questIsTaskActive(questId1, onBody, player) || questIsTaskActive(questId2, onBody2, player);
         return onTask;
     }
+
     public void legacy_button_jawatracks_zef_action_signaldrioid(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "legacy_button_jawatracks_launch_e14");
     }
+
     public void legacy_button_jawatracks_zef_action_giveDataPad(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "legacy_button_jawatracks_launch_e17");
     }
+
     public void legacy_button_jawatracks_zef_action_facePlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
     }
+
     public void legacy_button_jawatracks_zef_action_giveSandCrawlerImp(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "legacy_button_jawatracks_pt3_v2");
     }
+
     public void legacy_button_jawatracks_zef_action_giveSandCrawlerReb(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "legacy_button_jawatracks_reb_pt3_v2");
     }
+
     public void legacy_button_jawatracks_zef_action_giveZefQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.hasCompletedQuest(player, "legacy_button_jawatracks"))
@@ -135,10 +160,12 @@ public class legacy_button_jawatracks_zef extends script.base_script
             groundquests.grantQuest(player, "legacy_button_jawatracks_reb_pt2");
         }
     }
+
     public void legacy_button_jawatracks_zef_action_signalWomprats(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "legacy_button_jawatracks_launch_e117");
     }
+
     public int legacy_button_jawatracks_zef_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_48"))
@@ -175,6 +202,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_button_jawatracks_zef_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_151"))
@@ -202,6 +230,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_button_jawatracks_zef_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_84"))
@@ -218,6 +247,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_button_jawatracks_zef_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_71"))
@@ -237,7 +267,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_78");
@@ -246,7 +276,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_button_jawatracks_zef.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -278,7 +308,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_75");
@@ -291,7 +321,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_button_jawatracks_zef.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -301,6 +331,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_button_jawatracks_zef_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_78"))
@@ -321,7 +352,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_80");
@@ -330,7 +361,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_button_jawatracks_zef.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -340,6 +371,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_button_jawatracks_zef_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_80"))
@@ -354,6 +386,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_button_jawatracks_zef_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_75"))
@@ -373,7 +406,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_78");
@@ -382,7 +415,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_button_jawatracks_zef.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -403,6 +436,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_button_jawatracks_zef_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_45"))
@@ -419,6 +453,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_button_jawatracks_zef_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_36"))
@@ -461,7 +496,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_44");
@@ -474,7 +509,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_button_jawatracks_zef.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -495,6 +530,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_button_jawatracks_zef_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_44"))
@@ -533,7 +569,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_58");
@@ -546,7 +582,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_button_jawatracks_zef.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -556,6 +592,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_button_jawatracks_zef_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_58"))
@@ -583,6 +620,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_button_jawatracks_zef_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_115"))
@@ -604,7 +642,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_85");
@@ -613,7 +651,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_button_jawatracks_zef.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -644,6 +682,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_button_jawatracks_zef_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_85"))
@@ -658,6 +697,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -671,6 +711,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -680,6 +721,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -688,18 +730,21 @@ public class legacy_button_jawatracks_zef extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.legacy_button_jawatracks_zef");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -738,7 +783,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_48");
@@ -754,7 +799,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
                 utils.setScriptVar(player, "conversation.legacy_button_jawatracks_zef.branchId", 1);
                 npcStartConversation(player, npc, "legacy_button_jawatracks_zef", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -783,7 +828,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_151");
@@ -795,7 +840,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
                 utils.setScriptVar(player, "conversation.legacy_button_jawatracks_zef.branchId", 5);
                 npcStartConversation(player, npc, "legacy_button_jawatracks_zef", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -816,7 +861,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_84");
@@ -824,7 +869,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
                 utils.setScriptVar(player, "conversation.legacy_button_jawatracks_zef.branchId", 8);
                 npcStartConversation(player, npc, "legacy_button_jawatracks_zef", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -862,7 +907,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_71");
@@ -874,7 +919,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
                 utils.setScriptVar(player, "conversation.legacy_button_jawatracks_zef.branchId", 10);
                 npcStartConversation(player, npc, "legacy_button_jawatracks_zef", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -897,7 +942,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_45");
@@ -905,7 +950,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
                 utils.setScriptVar(player, "conversation.legacy_button_jawatracks_zef.branchId", 16);
                 npcStartConversation(player, npc, "legacy_button_jawatracks_zef", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -950,7 +995,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_36");
@@ -966,7 +1011,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
                 utils.setScriptVar(player, "conversation.legacy_button_jawatracks_zef.branchId", 19);
                 npcStartConversation(player, npc, "legacy_button_jawatracks_zef", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1003,7 +1048,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_115");
@@ -1019,7 +1064,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
                 utils.setScriptVar(player, "conversation.legacy_button_jawatracks_zef.branchId", 24);
                 npcStartConversation(player, npc, "legacy_button_jawatracks_zef", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1028,6 +1073,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("legacy_button_jawatracks_zef"))

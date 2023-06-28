@@ -1,5 +1,11 @@
 package script.systems.skills.stealth;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.stealth;
@@ -55,7 +61,7 @@ public class motionsensor extends script.base_script
         if (hasObjVar(self, stealth.BIO_PROBE_TRAP_TARGET))
         {
             names[free] = "beacon_target";
-            attribs[free++] = "" + getStringObjVar(self, stealth.BIO_PROBE_TARGET_NAME);
+            attribs[free++] = getStringObjVar(self, stealth.BIO_PROBE_TARGET_NAME);
         }
         free = utils.addClassRequirementAttributes(player, self, names, attribs, free, "trap.");
         free = utils.addClassRequirementAttributes(player, self, names, attribs, free, "trap.trigger.");

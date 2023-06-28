@@ -1,13 +1,16 @@
 package script.theme_park.jedi_trials;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class force_shrine extends script.base_script
 {
-    public force_shrine()
-    {
-    }
     public static final string_id MEDITATE_MENU = new string_id("jedi_trials", "meditate");
     public static final string_id ISSUE_ROBE_MENU = new string_id("jedi_trials", "issue_robe");
     public static final string_id SHOW_RESPECT = new string_id("jedi_trials", "show_respect");
@@ -20,6 +23,10 @@ public class force_shrine extends script.base_script
     public static final string_id ISSUE_ULTRA_ROBE_DARK_MENU = new string_id("jedi_trials", "issue_ultra_robe_dark");
     public static final string_id CLOAK_TOO_SOON = new string_id("jedi_trials", "cloak_too_soon");
     public static final String PADAWAN_ROBE = "object/tangible/wearables/robe/robe_jedi_padawan_generic.iff";
+    public force_shrine()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (canMeditateHere(self, player))
@@ -27,7 +34,8 @@ public class force_shrine extends script.base_script
             int menuOption = mi.addRootMenu(menu_info_types.SERVER_ITEM_OPTIONS, MEDITATE_MENU);
             if (utils.isProfession(player, utils.FORCE_SENSITIVE) && !utils.playerHasItemByTemplateInInventoryOrEquipped(player, PADAWAN_ROBE))
             {
-                if(!hasObjVar(player, "item.fs_padawan_robe_redeemed")) {
+                if (!hasObjVar(player, "item.fs_padawan_robe_redeemed"))
+                {
                     mi.addRootMenu(menu_info_types.SERVER_MENU5, ISSUE_ROBE_MENU);
                 }
             }
@@ -42,6 +50,7 @@ public class force_shrine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         sendDirtyObjectMenuNotification(self);
@@ -87,6 +96,7 @@ public class force_shrine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleEnterTrialsChoice(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -104,37 +114,38 @@ public class force_shrine extends script.base_script
         switch (bp)
         {
             case sui.BP_OK:
-            if (trialsType.equals("knight"))
-            {
-                if (jedi_trials.isEligibleForJediKnightTrials(player))
+                if (trialsType.equals("knight"))
                 {
-                    if (!hasScript(player, jedi_trials.KNIGHT_TRIALS_SCRIPT))
+                    if (jedi_trials.isEligibleForJediKnightTrials(player))
                     {
-                        attachScript(player, jedi_trials.KNIGHT_TRIALS_SCRIPT);
+                        if (!hasScript(player, jedi_trials.KNIGHT_TRIALS_SCRIPT))
+                        {
+                            attachScript(player, jedi_trials.KNIGHT_TRIALS_SCRIPT);
+                        }
                     }
                 }
-            }
-            else if (trialsType.equals("padawan"))
-            {
-                if (jedi_trials.isEligibleForJediPadawanTrials(player))
+                else if (trialsType.equals("padawan"))
                 {
-                    if (!hasScript(player, jedi_trials.PADAWAN_TRIALS_SCRIPT))
+                    if (jedi_trials.isEligibleForJediPadawanTrials(player))
                     {
-                        attachScript(player, jedi_trials.PADAWAN_TRIALS_SCRIPT);
-                    }
-                    else 
-                    {
-                        jedi_trials.doPadawanTrialsSetup(player);
+                        if (!hasScript(player, jedi_trials.PADAWAN_TRIALS_SCRIPT))
+                        {
+                            attachScript(player, jedi_trials.PADAWAN_TRIALS_SCRIPT);
+                        }
+                        else
+                        {
+                            jedi_trials.doPadawanTrialsSetup(player);
+                        }
                     }
                 }
-            }
-            break;
+                break;
             case sui.BP_CANCEL:
-            jedi_trials.giveGenericForceShrineMessage(player);
-            break;
+                jedi_trials.giveGenericForceShrineMessage(player);
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean canMeditateHere(obj_id forceShrine, obj_id player) throws InterruptedException
     {
         if (isIdValid(forceShrine) && isIdValid(player))
@@ -145,30 +156,22 @@ public class force_shrine extends script.base_script
             }
             else if (hasObjVar(player, "overridePTEligibility"))
             {
-                if (isGod(player))
-                {
-                    return true;
-                }
+                return isGod(player);
             }
         }
         return false;
     }
+
     public boolean isOnJediTrials(obj_id player) throws InterruptedException
     {
-        if (hasObjVar(player, jedi_trials.PADAWAN_QUESTLIST_OBJVAR) || hasObjVar(player, jedi_trials.KNIGHT_QUESTLIST_OBJVAR))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(player, jedi_trials.PADAWAN_QUESTLIST_OBJVAR) || hasObjVar(player, jedi_trials.KNIGHT_QUESTLIST_OBJVAR);
     }
+
     public boolean hasNotFoundShrine(obj_id player) throws InterruptedException
     {
-        if (hasObjVar(player, jedi_trials.JEDI_TRIALS_SHRINELOC_OBJVAR))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(player, jedi_trials.JEDI_TRIALS_SHRINELOC_OBJVAR);
     }
+
     public boolean isTargetShrine(obj_id self, obj_id player) throws InterruptedException
     {
         if (hasObjVar(player, "jedi_trials.allowAnyShrine"))
@@ -183,14 +186,12 @@ public class force_shrine extends script.base_script
             String currentPlanet = currentShrineLoc.area;
             if (targetPlanet.equals(currentPlanet))
             {
-                if (utils.getDistance2D(currentShrineLoc, targetShrineLoc) <= 10)
-                {
-                    return true;
-                }
+                return utils.getDistance2D(currentShrineLoc, targetShrineLoc) <= 10;
             }
         }
         return false;
     }
+
     public boolean isTargetShrinePlanet(obj_id self, obj_id player) throws InterruptedException
     {
         location currentShrineLoc = getLocation(self);
@@ -199,13 +200,11 @@ public class force_shrine extends script.base_script
         {
             String currentPlanet = currentShrineLoc.area;
             String targetPlanet = targetShrineLoc.area;
-            if (targetPlanet.equals(currentPlanet))
-            {
-                return true;
-            }
+            return targetPlanet.equals(currentPlanet);
         }
         return false;
     }
+
     public void issuePadawanRobe(obj_id player) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -233,10 +232,12 @@ public class force_shrine extends script.base_script
         sendSystemMessage(player, new string_id("jedi_trials", "robe_issued"));
         setObjVar(player, "item.fs_padawan_robe_redeemed", true);
     }
+
     public boolean canGetUltraCloak(obj_id player) throws InterruptedException
     {
         return (badge.hasBadge(player, "bdg_col_jedi_robe"));
     }
+
     public void issueUltraCloak(obj_id player, int robeType) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -246,17 +247,17 @@ public class force_shrine extends script.base_script
         switch (robeType)
         {
             case 0:
-            robeName = jedi.JEDI_CLOAK_LIGHT_HOOD_DOWN;
-            robeSpam = ISSUE_ROBE_ULTRA_LIGHT;
-            clientEffect = "clienteffect/jedi_master_cloak_good.cef";
-            break;
+                robeName = jedi.JEDI_CLOAK_LIGHT_HOOD_DOWN;
+                robeSpam = ISSUE_ROBE_ULTRA_LIGHT;
+                clientEffect = "clienteffect/jedi_master_cloak_good.cef";
+                break;
             case 1:
-            robeName = jedi.JEDI_CLOAK_DARK_HOOD_DOWN;
-            robeSpam = ISSUE_ROBE_ULTRA_DARK;
-            clientEffect = "clienteffect/jedi_master_cloak_evil.cef";
-            break;
+                robeName = jedi.JEDI_CLOAK_DARK_HOOD_DOWN;
+                robeSpam = ISSUE_ROBE_ULTRA_DARK;
+                clientEffect = "clienteffect/jedi_master_cloak_evil.cef";
+                break;
             default:
-            return;
+                return;
         }
         if (robeName != null && !robeName.equals(""))
         {

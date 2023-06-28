@@ -1,5 +1,11 @@
 package script.quest.task;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.quests;
 import script.obj_id;
 
@@ -8,6 +14,7 @@ public class destroy extends script.base_script
     public destroy()
     {
     }
+
     public int OnIncapacitateTarget(obj_id self, obj_id target) throws InterruptedException
     {
         LOG("newquests", "destroy - OnIncapacitateTarget()");

@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 import script.prose_package;
@@ -28,6 +34,7 @@ public class slicing extends script.base_script
     public static final string_id SID_MISSING_COMP = new string_id("slicing/slicing", "missing_comp");
     public static final String SLICE_WEAPON_TABLE = "datatables/smuggler/slice_weapon.iff";
     public static final String SLICE_ARMOR_TABLE = "datatables/smuggler/slice_armor.iff";
+
     public slicing()
     {
     }

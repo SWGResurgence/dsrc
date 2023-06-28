@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -18,10 +24,12 @@ public class aurilia_chief_engineer extends script.conversation.base.conversatio
         super.conversation = conversation;
         super.c_stringFile = c_stringFile;
     }
+
     private boolean aurilia_chief_engineer_condition_axkva_min_intro_01(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "axkva_min_intro", "axkva_min_intro_01");
     }
+
     private int aurilia_chief_engineer_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_5"))
@@ -33,6 +41,7 @@ public class aurilia_chief_engineer extends script.conversation.base.conversatio
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -42,17 +51,18 @@ public class aurilia_chief_engineer extends script.conversation.base.conversatio
         doAnimationAction(self, "embarrassed");
         string_id message = new string_id(c_stringFile, "s_4");
         if (aurilia_chief_engineer_condition_axkva_min_intro_01(player, self))
-		{
-			string_id responses[] = {new string_id(c_stringFile, "s_5")};
-			utils.setScriptVar(player, conversation + ".branchId", 1);
-			npcStartConversation(player, self, "aurilia_chief_engineer", message, responses);
-		}
-		else
-		{
-			chat.chat(self, player, message);
-		}
+        {
+            string_id[] responses = {new string_id(c_stringFile, "s_5")};
+            utils.setScriptVar(player, conversation + ".branchId", 1);
+            npcStartConversation(player, self, "aurilia_chief_engineer", message, responses);
+        }
+        else
+        {
+            chat.chat(self, player, message);
+        }
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("aurilia_chief_engineer"))

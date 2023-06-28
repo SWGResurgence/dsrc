@@ -1,5 +1,11 @@
 package script.ai;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -8,10 +14,12 @@ import script.string_id;
 
 public class smuggler_buddy extends script.base_script
 {
+    public static final float BUDDY_DURATION = 62.0f;
+
     public smuggler_buddy()
     {
     }
-    public static final float BUDDY_DURATION = 62.0f;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleGreeting", null, 2.0f, false);
@@ -19,6 +27,7 @@ public class smuggler_buddy extends script.base_script
         setObjVar(self, "ai.pet", true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "runningaway"))
@@ -28,6 +37,7 @@ public class smuggler_buddy extends script.base_script
         messageTo(self, "handleNewTarget", null, 2.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleGreeting(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id master = getMaster(self);
@@ -41,6 +51,7 @@ public class smuggler_buddy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleNewTarget(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id master = getMaster(self);
@@ -51,17 +62,18 @@ public class smuggler_buddy extends script.base_script
             {
                 startCombat(self, newTarget);
             }
-            else 
+            else
             {
                 messageTo(self, "handleRunAway", null, 2.0f, false);
             }
         }
-        else 
+        else
         {
             messageTo(self, "handleRunAway", null, 2.0f, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleRunAway(obj_id self, dictionary params) throws InterruptedException
     {
         if (isDead(self))
@@ -93,11 +105,13 @@ public class smuggler_buddy extends script.base_script
         messageTo(self, "handleCleanUp", null, 15.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleCleanUp(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id attacker) throws InterruptedException
     {
         obj_id weapon = getCurrentWeapon(self);
@@ -115,11 +129,9 @@ public class smuggler_buddy extends script.base_script
         if (!kill(self))
         {
             obj_id[] haters = getHateList(self);
-            if (haters.length > 0)
+            for (obj_id hater : haters)
             {
-                for (obj_id hater : haters) {
-                    removeHateTarget(hater, self);
-                }
+                removeHateTarget(hater, self);
             }
             destroyObject(self);
         }

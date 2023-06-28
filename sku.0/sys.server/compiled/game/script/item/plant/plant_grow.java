@@ -1,5 +1,11 @@
 package script.item.plant;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.player_structure;
 import script.library.resource;
@@ -25,6 +31,7 @@ public class plant_grow extends script.base_script
     public static final String VAR_SIZE = "plant_grow.size";
     public static final String VAR_LAST_PULSE = "plant_grow.last_pulse";
     public static final String VAR_FAST_PULSE = "plant_grow.fast_pulse";
+
     public plant_grow()
     {
     }

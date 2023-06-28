@@ -1,5 +1,11 @@
 package script.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.qa;
 import script.library.sui;
@@ -9,14 +15,15 @@ import script.string_id;
 
 public class qa_cube extends script.base_script
 {
-    public qa_cube()
-    {
-    }
     public static final String SCRIPTVAR = "qa_cube";
     public static final String CUBE_DATATABLE_1 = "datatables/item/loot_cube/republic_assembly_tool.iff";
     public static final String CHU_GON_DAR_CUBE = "object/tangible/container/loot/som_cube.iff";
     public static final String CHU_GON_DAR_TITLE = "Chu-Gon Dar Cube Tool";
     public static final String CHU_GON_DAR_PROMPT = "This tool allows you to quickly obtain items needed to create the items listed below.\n**If you do not have a Cube, one will be created for you.**\n\nSelect an item to create.";
+    public qa_cube()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (isGod(self))
@@ -33,6 +40,7 @@ public class qa_cube extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (isGod(self))
@@ -46,6 +54,7 @@ public class qa_cube extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleChuGonOptions(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -75,6 +84,7 @@ public class qa_cube extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void ChuGonMainMenu(obj_id player) throws InterruptedException
     {
         if (utils.hasScriptVar(player, SCRIPTVAR + ".codeStringArray") && utils.hasScriptVar(player, SCRIPTVAR + ".showNamesArray"))
@@ -82,11 +92,12 @@ public class qa_cube extends script.base_script
             String[] showNamesArray = utils.getStringArrayScriptVar(player, SCRIPTVAR + ".showNamesArray");
             qa.refreshMenu(player, CHU_GON_DAR_PROMPT, CHU_GON_DAR_TITLE, showNamesArray, "handleChuGonOptions", SCRIPTVAR + ".pid", SCRIPTVAR + ".ChuGonMainMenu", sui.OK_CANCEL_REFRESH);
         }
-        else 
+        else
         {
             broadcast(player, "An error has occurred, please try again.");
         }
     }
+
     public void getNamesArray(obj_id player) throws InterruptedException
     {
         String[] codeStringArray = dataTableGetStringColumn(CUBE_DATATABLE_1, "finalTemplate");
@@ -100,7 +111,7 @@ public class qa_cube extends script.base_script
                 String lookUp = codeStringArray[i].substring(idxSlash, idxPeriod) + "_n";
                 showNamesArray[i] = localize(new string_id("som/som_item", lookUp));
             }
-            else 
+            else
             {
                 showNamesArray[i] = localize(new string_id("static_item_n", codeStringArray[i]));
             }
@@ -109,22 +120,26 @@ public class qa_cube extends script.base_script
         utils.setScriptVar(player, SCRIPTVAR + ".codeStringArray", codeStringArray);
         utils.setScriptVar(player, SCRIPTVAR + ".showNamesArray", showNamesArray);
     }
+
     public void checkForCube(obj_id player) throws InterruptedException
     {
         checkInventory(player);
         boolean hasCube = false;
         obj_id[] invAndEquip = getInventoryAndEquipment(player);
-        for (obj_id obj_id : invAndEquip) {
+        for (obj_id obj_id : invAndEquip)
+        {
             String templateName = getTemplateName(obj_id);
-            if (templateName.equals("object/tangible/container/loot/som_cube.iff")) {
+            if (templateName.equals("object/tangible/container/loot/som_cube.iff"))
+            {
                 hasCube = true;
             }
         }
-        if (hasCube == false)
+        if (!hasCube)
         {
             obj_id myCube = createObjectInInventoryAllowOverload("object/tangible/container/loot/som_cube.iff", player);
         }
     }
+
     public void spawnBaseItems(obj_id player, String itemToSpawnFor, int idx) throws InterruptedException
     {
         checkForCube(player);
@@ -137,6 +152,7 @@ public class qa_cube extends script.base_script
         broadcast(player, "The components have been successfully created in your inventory.");
         qa.removePlayer(player, SCRIPTVAR, "");
     }
+
     public void checkInventory(obj_id player) throws InterruptedException
     {
         obj_id inventory = utils.getInventoryContainer(player);

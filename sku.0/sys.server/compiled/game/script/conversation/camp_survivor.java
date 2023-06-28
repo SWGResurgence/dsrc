@@ -1,22 +1,33 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class camp_survivor extends script.base_script
 {
+    public static final string_id SID_YOU_WENT_TOO_FAR = new string_id("theme_park/outbreak/outbreak", "delivery_you_went_too_far");
+    public static String c_stringFile = "conversation/camp_survivor";
+
     public camp_survivor()
     {
     }
-    public static String c_stringFile = "conversation/camp_survivor";
+
     public boolean camp_survivor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean camp_survivor_condition_isOwner(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasObjVar(npc, "myEscort") && player == getObjIdObjVar(npc, "myEscort");
     }
+
     public boolean camp_survivor_condition_isCloseToCamp(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(npc, "objParent"))
@@ -33,21 +44,20 @@ public class camp_survivor extends script.base_script
         {
             return false;
         }
-        if (utils.getDistance2D(locationObjParent, getLocation(npc)) <= 70)
-        {
-            return true;
-        }
-        return false;
+        return utils.getDistance2D(locationObjParent, getLocation(npc)) <= 70;
     }
+
     public boolean camp_survivor_condition_isUnclaimedSpawner(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (!hasObjVar(npc, "myEscort"));
     }
+
     public void camp_survivor_action_startDestroyTimer(obj_id player, obj_id npc) throws InterruptedException
     {
         messageTo(npc, "cleanUpWhileConversing", null, 90, false);
     }
+
     public void camp_survivor_action_claimSpawner(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(npc, "questName") || !hasObjVar(npc, "locationObjParent"))
@@ -85,6 +95,7 @@ public class camp_survivor extends script.base_script
         messageTo(npc, "spawnEnemies", null, 0, false);
         messageTo(npc, "checkOwnerValidity", null, 10, false);
     }
+
     public int camp_survivor_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_96"))
@@ -100,7 +111,7 @@ public class camp_survivor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
-    public static final string_id SID_YOU_WENT_TOO_FAR = new string_id("theme_park/outbreak/outbreak", "delivery_you_went_too_far");
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -111,12 +122,14 @@ public class camp_survivor extends script.base_script
         setCondition(self, CONDITION_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setCondition(self, CONDITION_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -141,6 +154,7 @@ public class camp_survivor extends script.base_script
         pathTo(self, locationObjParent);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -149,6 +163,7 @@ public class camp_survivor extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
@@ -180,6 +195,7 @@ public class camp_survivor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cleanUpWhileConversing(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "ignoreEarlyDestroy"))
@@ -189,6 +205,7 @@ public class camp_survivor extends script.base_script
         messageTo(self, "cleanUpCampNpcAndParent", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanUpCampNpcAndParent(obj_id self, dictionary params) throws InterruptedException
     {
         CustomerServiceLog("outbreak_themepark", "survivor_pathing.cleanUpCampNpcAndParent() Initalized Message Handler.");
@@ -229,6 +246,7 @@ public class camp_survivor extends script.base_script
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnEnemies(obj_id self, dictionary params) throws InterruptedException
     {
         CustomerServiceLog("outbreak_themepark", "survivor_pathing.spawnEnemies() Initalized Message Handler.");
@@ -278,6 +296,7 @@ public class camp_survivor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int checkOwnerValidity(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "myEscort"))
@@ -308,7 +327,7 @@ public class camp_survivor extends script.base_script
             {
                 groundquests.sendSignal(owner, "outbreak_camp_gamma_survivor_failed");
             }
-            else 
+            else
             {
                 groundquests.sendSignal(owner, "outbreak_camp_delta_survivor_failed");
             }
@@ -333,12 +352,14 @@ public class camp_survivor extends script.base_script
         messageTo(self, "checkOwnerValidity", null, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -368,7 +389,7 @@ public class camp_survivor extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_96");
@@ -376,7 +397,7 @@ public class camp_survivor extends script.base_script
                 utils.setScriptVar(player, "conversation.camp_survivor.branchId", 2);
                 npcStartConversation(player, npc, "camp_survivor", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -398,6 +419,7 @@ public class camp_survivor extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("camp_survivor"))

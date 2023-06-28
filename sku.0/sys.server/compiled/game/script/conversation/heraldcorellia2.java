@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.utils;
@@ -7,14 +13,17 @@ import script.*;
 
 public class heraldcorellia2 extends script.base_script
 {
+    public static String c_stringFile = "conversation/heraldcorellia2";
+
     public heraldcorellia2()
     {
     }
-    public static String c_stringFile = "conversation/heraldcorellia2";
+
     public boolean heraldcorellia2_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public void heraldcorellia2_action_waypoint1(obj_id player, obj_id npc) throws InterruptedException
     {
         location corsec = new location(5306, 0, 1524);
@@ -25,6 +34,7 @@ public class heraldcorellia2 extends script.base_script
         setWaypointActive(waypoint, true);
         doAnimationAction(npc, "shrug_shoulders");
     }
+
     public void heraldcorellia2_action_waypoint2(obj_id player, obj_id npc) throws InterruptedException
     {
         location drall = new location(1042, 0, 4193);
@@ -35,26 +45,32 @@ public class heraldcorellia2 extends script.base_script
         setWaypointActive(waypoint, true);
         doAnimationAction(npc, "point_away");
     }
+
     public void heraldcorellia2_action_snap2(obj_id player, obj_id npc) throws InterruptedException
     {
         doAnimationAction(npc, "snap_finger2");
     }
+
     public void heraldcorellia2_action_dismiss(obj_id player, obj_id npc) throws InterruptedException
     {
         doAnimationAction(npc, "wave_on_dismissing");
     }
+
     public void heraldcorellia2_action_check(obj_id player, obj_id npc) throws InterruptedException
     {
         doAnimationAction(npc, "check_wrist_device");
     }
+
     public void heraldcorellia2_action_shrug(obj_id player, obj_id npc) throws InterruptedException
     {
         doAnimationAction(npc, "shrug_shoulders");
     }
+
     public void heraldcorellia2_action_hair(obj_id player, obj_id npc) throws InterruptedException
     {
         doAnimationAction(npc, "hair_flip");
     }
+
     public int heraldcorellia2_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_34578735"))
@@ -82,7 +98,7 @@ public class heraldcorellia2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e8ba751");
@@ -95,7 +111,7 @@ public class heraldcorellia2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.heraldcorellia2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -116,6 +132,7 @@ public class heraldcorellia2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int heraldcorellia2_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_e8ba751"))
@@ -142,7 +159,7 @@ public class heraldcorellia2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5f670c9a");
@@ -155,7 +172,7 @@ public class heraldcorellia2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.heraldcorellia2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -176,6 +193,7 @@ public class heraldcorellia2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int heraldcorellia2_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_5f670c9a"))
@@ -202,7 +220,7 @@ public class heraldcorellia2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6152d272");
@@ -215,7 +233,7 @@ public class heraldcorellia2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.heraldcorellia2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -235,6 +253,7 @@ public class heraldcorellia2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int heraldcorellia2_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6152d272"))
@@ -261,6 +280,7 @@ public class heraldcorellia2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -270,11 +290,13 @@ public class heraldcorellia2 extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -283,18 +305,21 @@ public class heraldcorellia2 extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.heraldcorellia2");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -325,7 +350,7 @@ public class heraldcorellia2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_34578735");
@@ -337,7 +362,7 @@ public class heraldcorellia2 extends script.base_script
                 utils.setScriptVar(player, "conversation.heraldcorellia2.branchId", 1);
                 npcStartConversation(player, npc, "heraldcorellia2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -346,6 +371,7 @@ public class heraldcorellia2 extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("heraldcorellia2"))

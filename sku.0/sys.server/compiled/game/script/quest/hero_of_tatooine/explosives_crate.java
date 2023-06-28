@@ -1,5 +1,11 @@
 package script.quest.hero_of_tatooine;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.utils;
 import script.menu_info;
 import script.menu_info_types;
@@ -8,15 +14,16 @@ import script.string_id;
 
 public class explosives_crate extends script.base_script
 {
-    public explosives_crate()
-    {
-    }
     public static final String ALTRUISM_OBJVAR = "quest.hero_of_tatooine.altruism";
     public static final String ALTRUISM_COMPLETE = ALTRUISM_OBJVAR + ".complete";
     public static final string_id SEARCH = new string_id("quest/hero_of_tatooine/system_messages", "menu_search");
     public static final string_id INVENTORY_FULL = new string_id("quest/hero_of_tatooine/system_messages", "altruism_inventory_full");
     public static final string_id NULL_OBJECT = new string_id("quest/hero_of_tatooine/system_messages", "altruism_null_object");
     public static final string_id GOT_OBJECT = new string_id("quest/hero_of_tatooine/system_messages", "altruism_got_object");
+    public explosives_crate()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (hasObjVar(player, ALTRUISM_OBJVAR) && !hasObjVar(player, ALTRUISM_COMPLETE))
@@ -25,6 +32,7 @@ public class explosives_crate extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_ITEM_OPTIONS)

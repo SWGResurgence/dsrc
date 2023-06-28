@@ -1,5 +1,11 @@
 package script.systems.storyteller;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.storyteller;
 import script.library.trial;
@@ -13,6 +19,7 @@ public class effect_controller extends script.base_script
 {
     public static final String invisibleObject = "object/tangible/theme_park/invisible_object.iff";
     public static final String effectControlleScript = "systems.storyteller.effect_controller";
+
     public effect_controller()
     {
     }
@@ -63,7 +70,6 @@ public class effect_controller extends script.base_script
                 createTriggerVolume("storytellerPersistedEffect_far", 100.0f, true);
             }
         }
-        return;
     }
 
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException

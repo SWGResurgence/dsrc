@@ -1,5 +1,11 @@
 package script.holocron;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.factions;
@@ -12,12 +18,14 @@ public class heal_target extends script.base_script
     public heal_target()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         factions.setFaction(self, "Unattackable");
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (hasObjVar(player, "newbie_handoff.mission.heal.type"))
@@ -29,6 +37,7 @@ public class heal_target extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_HEAL_STATE)

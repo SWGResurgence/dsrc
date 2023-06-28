@@ -1,15 +1,22 @@
 package script.quest.som;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.groundquests;
 import script.*;
 
 public class hk47_final_message extends script.base_script
 {
+    public static final String STF = "som/som_quest";
+    public static final string_id ACTIVATE = new string_id(STF, "comm_console_message");
     public hk47_final_message()
     {
     }
-    public static final String STF = "som/som_quest";
-    public static final string_id ACTIVATE = new string_id(STF, "comm_console_message");
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (groundquests.isTaskActive(player, "som_story_arc_chapter_three_03", "volcano_arena_five"))
@@ -22,12 +29,13 @@ public class hk47_final_message extends script.base_script
             }
             mid.setServerNotify(true);
         }
-        else 
+        else
         {
             return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)

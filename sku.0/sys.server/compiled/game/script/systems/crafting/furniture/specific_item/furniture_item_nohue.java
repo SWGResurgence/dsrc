@@ -1,5 +1,11 @@
 package script.systems.crafting.furniture.specific_item;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.craftinglib;
 import script.resource_weight;
 
@@ -48,6 +54,7 @@ public class furniture_item_nohue extends script.systems.crafting.furniture.craf
                                     new resource_weight.weight(craftinglib.RESOURCE_QUALITY, 1)
                             })
             };
+
     public furniture_item_nohue()
     {
     }

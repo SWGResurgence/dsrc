@@ -1,5 +1,11 @@
 package script.theme_park.rebel;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.groundquests;
 import script.obj_id;
 
@@ -8,18 +14,20 @@ public class rtp_wedge_imperial_meeting extends script.base_script
     public rtp_wedge_imperial_meeting()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         createTriggerVolume("rtp_wedge_imperial_meeting", 10.0f, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volName, obj_id breecher) throws InterruptedException
     {
         if (!isPlayer(breecher))
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             if (groundquests.isQuestActive(breecher, "rtp_wedge_01"))
             {

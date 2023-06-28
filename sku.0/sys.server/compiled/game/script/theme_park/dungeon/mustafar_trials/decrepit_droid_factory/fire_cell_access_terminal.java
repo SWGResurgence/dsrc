@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.decrepit_droid_factory;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.instance;
 import script.library.trial;
 import script.menu_info;
@@ -9,20 +15,23 @@ import script.string_id;
 
 public class fire_cell_access_terminal extends script.base_script
 {
-    public fire_cell_access_terminal()
-    {
-    }
     public static final String DECREPIT_STF = "mustafar/decrepit_droid_factory";
     public static final string_id SID_OPEN_ENVIRONMENTAL = new string_id(DECREPIT_STF, "access_environmental");
     public static final string_id SID_ENVIRONMENTAL_GRANTED = new string_id(DECREPIT_STF, "environmental_granted");
+    public fire_cell_access_terminal()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         boolean isUnlocked = trial.isCellPublic(self, trial.DECREPIT_ENVIRONMENTAL);
@@ -30,13 +39,14 @@ public class fire_cell_access_terminal extends script.base_script
         {
             mi.addRootMenu(menu_info_types.ITEM_USE, SID_OPEN_ENVIRONMENTAL);
         }
-        else 
+        else
         {
             mi.addRootMenu(menu_info_types.ITEM_USE, SID_ENVIRONMENTAL_GRANTED);
         }
         sendDirtyObjectMenuNotification(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)

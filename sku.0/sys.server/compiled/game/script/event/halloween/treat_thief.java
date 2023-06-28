@@ -8,6 +8,12 @@
  */
 package script.event.halloween;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -28,6 +34,7 @@ public class treat_thief extends script.base_script
     public static final int FINAL_BUFF_POWER = 100;
     public static final float RUBBERBAND_DISTANCE = 16.0f;
     public static final String LOOT_DROP_TEMPLATE = "item_city_actor_deed";
+
     public treat_thief()
     {
     }

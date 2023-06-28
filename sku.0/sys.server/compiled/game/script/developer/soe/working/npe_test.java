@@ -1,5 +1,11 @@
 package script.developer.soe.working;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.npe;
 import script.library.utils;
@@ -125,7 +131,7 @@ public class npe_test extends script.base_script
                 if (type.equals(getTemplateName(obj_id)))
                 {
                     ++counter;
-                    broadcast(self, "" + counter + ": " + obj_id);
+                    broadcast(self, counter + ": " + obj_id);
                 }
             }
             broadcast(self, "Found " + counter + " objects");

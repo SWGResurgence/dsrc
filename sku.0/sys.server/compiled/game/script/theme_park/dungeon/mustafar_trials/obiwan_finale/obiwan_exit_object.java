@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.obiwan_finale;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.instance;
 import script.library.mustafar;
 import script.library.utils;
@@ -10,9 +16,6 @@ import script.string_id;
 
 public class obiwan_exit_object extends script.base_script
 {
-    public obiwan_exit_object()
-    {
-    }
     public static final string_id SID_LAST_QUEST = new string_id(mustafar.STF_OBI_MSGS, "obiwan_quest_almost_complete");
     public static final string_id SID_LAUNCH = new string_id(mustafar.STF_OBI_MSGS, "obiwan_finale_launch");
     public static final string_id SID_EJECT = new string_id(mustafar.STF_OBI_MSGS, "obiwan_finale_eject");
@@ -23,6 +26,10 @@ public class obiwan_exit_object extends script.base_script
     public static final string_id SID_LAIR_CRYSTAL = new string_id("travel/zone_transition", "lair_of_the_crystal");
     public static final string_id SID_NO_PERMISSION = new string_id("travel/zone_transition", "default_no_access");
     public static final boolean CONST_FLAG_DO_LOGGING = true;
+    public obiwan_exit_object()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info item) throws InterruptedException
     {
         item.addRootMenu(menu_info_types.ITEM_USE, SID_SLAVER_CAMP);
@@ -34,6 +41,7 @@ public class obiwan_exit_object extends script.base_script
         item.addRootMenu(menu_info_types.ITEM_USE, SID_EJECT);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -43,6 +51,7 @@ public class obiwan_exit_object extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void debugLogging(String section, String message) throws InterruptedException
     {
         if (CONST_FLAG_DO_LOGGING)

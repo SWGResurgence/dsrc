@@ -1,5 +1,11 @@
 package script.systems.fs_quest;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.fs_counterstrike;
 import script.library.fs_dyn_village;
 import script.library.player_structure;
@@ -33,7 +39,7 @@ public class camp_waypoint_dp extends script.base_script
         }
         int percentDecay = fs_counterstrike.getPhaseItemPercentDecay(self, 3);
         names[idx] = "fs_p3_item_decay_rate";
-        attribs[idx] = "" + percentDecay + "%";
+        attribs[idx] = percentDecay + "%";
         idx++;
         if (idx < names.length)
         {

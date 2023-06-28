@@ -1,5 +1,11 @@
 package script.ai;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.modifiable_float;
@@ -7,22 +13,27 @@ import script.obj_id;
 
 public class droid extends script.base_script
 {
+    public static final String ALERT_VOLUME_NAME = "alertTriggerVolume";
+
     public droid()
     {
     }
-    public static final String ALERT_VOLUME_NAME = "alertTriggerVolume";
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         return SCRIPT_OVERRIDE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         return SCRIPT_OVERRIDE;
     }
+
     public int OnLoiterWaiting(obj_id self, modifiable_float time) throws InterruptedException
     {
         return SCRIPT_OVERRIDE;
     }
+
     public int OnBehaviorChange(obj_id self, int newBehavior, int oldBehavior, int[] changeFlags) throws InterruptedException
     {
         if (ai_lib.isAiDead(self))
@@ -39,70 +50,73 @@ public class droid extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 return SCRIPT_OVERRIDE;
             }
         }
-        else 
+        else
         {
             if (doAgitatedBehavior(self, newBehavior, oldBehavior) == SCRIPT_CONTINUE)
             {
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 return SCRIPT_OVERRIDE;
             }
         }
     }
+
     public int doCalmerBehavior(obj_id npc, int newBehavior, int oldBehavior) throws InterruptedException
     {
         switch (newBehavior)
         {
             case BEHAVIOR_CALM:
-            messageTo(npc, "resumeDefaultCalmBehavior", null, 5, false);
-            break;
+                messageTo(npc, "resumeDefaultCalmBehavior", null, 5, false);
+                break;
             case BEHAVIOR_ALERT:
-            break;
+                break;
             case BEHAVIOR_THREATEN:
-            break;
+                break;
             case BEHAVIOR_FLEE:
-            break;
+                break;
             case BEHAVIOR_PANIC:
-            break;
+                break;
             case BEHAVIOR_ATTACK:
-            break;
+                break;
             case BEHAVIOR_FRENZY:
-            break;
+                break;
             default:
-            break;
+                break;
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int doAgitatedBehavior(obj_id npc, int newBehavior, int oldBehavior) throws InterruptedException
     {
         switch (newBehavior)
         {
             case BEHAVIOR_CALM:
-            break;
+                break;
             case BEHAVIOR_ALERT:
-            break;
+                break;
             case BEHAVIOR_THREATEN:
-            break;
+                break;
             case BEHAVIOR_FLEE:
-            break;
+                break;
             case BEHAVIOR_PANIC:
-            break;
+                break;
             case BEHAVIOR_ATTACK:
-            break;
+                break;
             case BEHAVIOR_FRENZY:
-            break;
+                break;
             default:
-            break;
+                break;
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int lairThreatened(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_OVERRIDE;

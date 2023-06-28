@@ -1,5 +1,11 @@
 package script.ai;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.deltadictionary;
 import script.dictionary;
 import script.library.ai_lib;
@@ -14,39 +20,46 @@ public class ai_combat_assist extends script.base_script
     public ai_combat_assist()
     {
     }
+
     public static void clearAssist() throws InterruptedException
     {
         final obj_id self = getSelf();
         deltadictionary dict = self.getScriptVars();
         dict.remove("ai.combat.assist");
     }
+
     public static void clearNoAssistCall() throws InterruptedException
     {
         final obj_id self = getSelf();
         deltadictionary dict = self.getScriptVars();
         dict.remove("ai.combat.assist.noAssistCall");
     }
+
     public static boolean isWaiting() throws InterruptedException
     {
         final obj_id self = getSelf();
         deltadictionary dict = self.getScriptVars();
         return dict.getBoolean("ai.combat.assist");
     }
+
     public static int getWaitTime() throws InterruptedException
     {
         final obj_id self = getSelf();
         deltadictionary dict = self.getScriptVars();
         return dict.getInt("ai.combat.assist.waitTime");
     }
+
     public static void assist(obj_id defender, obj_id target) throws InterruptedException
     {
     }
+
     public static boolean canCallForAssist() throws InterruptedException
     {
         final obj_id self = getSelf();
         deltadictionary dict = self.getScriptVars();
         return !dict.getBoolean("ai.combat.assist.noAssistCall");
     }
+
     public static boolean callForAssist() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -65,7 +78,8 @@ public class ai_combat_assist extends script.base_script
         }
         String type = getStringObjVar(self, "creature_type");
         dictionary aiData = dataTableGetRow("datatables/mob/creatures.iff", type);
-        if(aiData == null){
+        if (aiData == null)
+        {
             LOG("DESIGNER_FATAL", "Creature Type (" + type + ") not found in creatures table (datatables/mob/creatures.iff)!!");
             return false;
         }
@@ -81,35 +95,46 @@ public class ai_combat_assist extends script.base_script
         }
         Vector callToList = new Vector();
         callToList.setSize(0);
-        for (obj_id creature : creatures) {
-            if (creature.equals(self) || creature.equals(target)) {
+        for (obj_id creature : creatures)
+        {
+            if (creature.equals(self) || creature.equals(target))
+            {
                 continue;
             }
-            if (!isIdValid(creature) || !exists(creature)) {
+            if (!isIdValid(creature) || !exists(creature))
+            {
                 continue;
             }
-            if (isInvulnerable(creature)) {
+            if (isInvulnerable(creature))
+            {
                 continue;
             }
-            if (isPlayer(target) && factions.ignorePlayer(target, creature)) {
+            if (isPlayer(target) && factions.ignorePlayer(target, creature))
+            {
                 continue;
             }
-            if (isDead(creature)) {
+            if (isDead(creature))
+            {
                 continue;
             }
-            if (isIdValid(getMaster(creature))) {
+            if (isIdValid(getMaster(creature)))
+            {
                 continue;
             }
-            if (!canSee(self, creature)) {
+            if (!canSee(self, creature))
+            {
                 continue;
             }
-            if (!factions.shareSocialGroup(self, creature) && !factions.areCreaturesAllied(self, creature)) {
+            if (!factions.shareSocialGroup(self, creature) && !factions.areCreaturesAllied(self, creature))
+            {
                 continue;
             }
-            if (Math.abs(getLocation(self).y - getLocation(creature).y) > 6.0f) {
+            if (Math.abs(getLocation(self).y - getLocation(creature).y) > 6.0f)
+            {
                 continue;
             }
-            if(creature.equals(target)){
+            if (creature.equals(target))
+            {
                 continue;
             }
             callToList.add(creature);
@@ -118,11 +143,13 @@ public class ai_combat_assist extends script.base_script
         {
             return false;
         }
-        for (Object creature : callToList) {
+        for (Object creature : callToList)
+        {
             startAssistedCombat((obj_id) creature, target);
         }
         return true;
     }
+
     public static void startAssistedCombat(obj_id creature, obj_id target) throws InterruptedException
     {
         deltadictionary dict = creature.getScriptVars();

@@ -1,5 +1,11 @@
 package script.npe;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.groundquests;
 import script.library.npe;
@@ -11,11 +17,12 @@ import script.string_id;
 
 public class trigger_journal extends script.base_script
 {
+    public static final float MAX_DISTANCE = 5.0f;
+    public static final string_id TOO_FAR = new string_id("npe", "gamma_travel_too_far");
     public trigger_journal()
     {
     }
-    public static final float MAX_DISTANCE = 5.0f;
-    public static final string_id TOO_FAR = new string_id("npe", "gamma_travel_too_far");
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, npe.QUEST_REWORK_VAR))
@@ -33,12 +40,14 @@ public class trigger_journal extends script.base_script
         npe.clearActiveSpaceQuests(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         groundquests.sendSignal(self, "npe_elevator_atrium_down");
         groundquests.sendSignal(self, "npe_elevator_droid_up");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNewbieTutorialResponse(obj_id self, String strAction) throws InterruptedException
     {
         if (strAction.equals("clientReady"))
@@ -55,6 +64,7 @@ public class trigger_journal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSkillGranted(obj_id self, String skill) throws InterruptedException
     {
         String playerTemplate = getSkillTemplate(self);
@@ -69,6 +79,7 @@ public class trigger_journal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnCombatLevelChanged(obj_id self, int oldCombatLevel, int newCombatLevel) throws InterruptedException
     {
         if (newCombatLevel == 2)
@@ -81,18 +92,21 @@ public class trigger_journal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int showChat(obj_id self, dictionary params) throws InterruptedException
     {
         newbieTutorialHighlightUIElement(self, "/GroundHUD.ChatWindow", 7.0f);
         npe.giveChatPopUp(self);
         return SCRIPT_CONTINUE;
     }
+
     public int showEscape(obj_id self, dictionary params) throws InterruptedException
     {
         newbieTutorialHighlightUIElement(self, "/GroundHUD.ButtonBar.bigMenuPage", 7.0f);
         npe.giveEscPopUp(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handTransfer(obj_id self, dictionary params) throws InterruptedException
     {
         int btn = sui.getIntButtonPressed(params);
@@ -104,6 +118,7 @@ public class trigger_journal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int makeUiElementAnimate(obj_id self, dictionary params) throws InterruptedException
     {
         int location = params.getInt("location");
@@ -111,6 +126,7 @@ public class trigger_journal extends script.base_script
         newbieTutorialHighlightUIElement(self, "/GroundHUD.Toolbar.volume." + location, time);
         return SCRIPT_CONTINUE;
     }
+
     public int doDelayed3POMessage(obj_id self, dictionary params) throws InterruptedException
     {
         String strFile = params.getString("strFile");
@@ -131,6 +147,7 @@ public class trigger_journal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int groupPopUp1(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasObjVar(self, "npe.pop_group_1"))
@@ -140,6 +157,7 @@ public class trigger_journal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int groupPopUp2(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasObjVar(self, "npe.pop_group_2"))
@@ -149,6 +167,7 @@ public class trigger_journal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npeGammaTransfer(obj_id self, dictionary params) throws InterruptedException
     {
         int btn = sui.getIntButtonPressed(params);
@@ -162,7 +181,7 @@ public class trigger_journal extends script.base_script
                 npe.movePlayerFromSharedStationToOrdMantellDungeon(player);
                 groundquests.sendSignal(player, "leaving_station");
             }
-            else 
+            else
             {
                 sendSystemMessage(self, TOO_FAR);
             }
@@ -175,6 +194,7 @@ public class trigger_journal extends script.base_script
         utils.removeScriptVarTree(player, "npe.gamma_travel");
         return SCRIPT_CONTINUE;
     }
+
     public int npeStationTransfer(obj_id self, dictionary params) throws InterruptedException
     {
         int btn = sui.getIntButtonPressed(params);
@@ -188,7 +208,7 @@ public class trigger_journal extends script.base_script
                 npe.movePlayerFromOrdMantellDungeonToSharedStation(player);
                 groundquests.sendSignal(player, "leave_station");
             }
-            else 
+            else
             {
                 sendSystemMessage(self, TOO_FAR);
             }

@@ -1,5 +1,11 @@
 package script.theme_park.outbreak;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -8,9 +14,6 @@ import script.string_id;
 
 public class boss_fight_functionality extends script.base_script
 {
-    public boss_fight_functionality()
-    {
-    }
     public static final boolean LOGGING_ON = true;
     public static final String SCRIPT_LOG = "outbreak_trigger";
     public static final String FAIL_SIGNAL = "fail_signal";
@@ -20,6 +23,10 @@ public class boss_fight_functionality extends script.base_script
     public static final int MIN_DIST = 50;
     public static final string_id BOSS_LEAVING = new string_id("theme_park/outbreak/outbreak", "boss_leaving");
     public static final string_id BOSS_BEGIN = new string_id("theme_park/outbreak/outbreak", "boss_begin");
+    public boss_fight_functionality()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         CustomerServiceLog("outbreak_themepark", "boss_fight_functionality.OnAttach() trigger initialized.");
@@ -30,6 +37,7 @@ public class boss_fight_functionality extends script.base_script
         messageTo(self, "warnPlayerTimerEnd", null, 540, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         CustomerServiceLog("outbreak_themepark", "boss_fight_functionality.OnIncapacitated() Boss Mob " + self + " incapacitated by: " + killer);
@@ -52,15 +60,18 @@ public class boss_fight_functionality extends script.base_script
             CustomerServiceLog("outbreak_themepark", "rancor_boss_fight_controller.OnIncapacitated() groupMembersInRange was NULL. for player: " + playerEnemy);
             return SCRIPT_CONTINUE;
         }
-        for (obj_id obj_id : groupMembersInRange) {
+        for (obj_id obj_id : groupMembersInRange)
+        {
             CustomerServiceLog("outbreak_themepark", "boss_fight_functionality.OnIncapacitated() A player, " + obj_id + ", was found in player group of playerEnemy: " + playerEnemy);
-            if (!isIdValid(obj_id) && !exists(obj_id) || isIncapacitated(obj_id) || !isDead(obj_id)) {
+            if (!isIdValid(obj_id) && !exists(obj_id) || isIncapacitated(obj_id) || !isDead(obj_id))
+            {
                 CustomerServiceLog("outbreak_themepark", "boss_fight_functionality.OnIncapacitated() A player, " + obj_id + ", in the group of " + playerEnemy + " was dead, incapacitated or in some way not found.");
                 continue;
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitateTarget(obj_id self, obj_id victim) throws InterruptedException
     {
         obj_id parent = getObjIdObjVar(self, trial.PARENT);
@@ -79,6 +90,7 @@ public class boss_fight_functionality extends script.base_script
         messageTo(parent, "defaultEventReset", webster, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         if (ai_lib.isDead(self))
@@ -100,6 +112,7 @@ public class boss_fight_functionality extends script.base_script
         messageTo(parent, "defaultEventReset", webster, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         buff.applyBuff(self, "open_balance_buff", -1.0f);
@@ -116,13 +129,16 @@ public class boss_fight_functionality extends script.base_script
             return SCRIPT_CONTINUE;
         }
         obj_id[] players = getPlayerCreaturesInRange(self, maxDist);
-        if (players != null && players.length > 0)
+        if (players != null)
         {
-            for (obj_id player : players) {
-                if (!isIdValid(player) && !exists(player) || isIncapacitated(player) || !isDead(player)) {
+            for (obj_id player : players)
+            {
+                if (!isIdValid(player) && !exists(player) || isIncapacitated(player) || !isDead(player))
+                {
                     continue;
                 }
-                if (!group.inSameGroup(player, playerEnemy)) {
+                if (!group.inSameGroup(player, playerEnemy))
+                {
                     continue;
                 }
                 addHate(self, player, 1000.0f);
@@ -132,6 +148,7 @@ public class boss_fight_functionality extends script.base_script
         messageTo(self, "handleBossDistanceCheck", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleBossDistanceCheck(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -170,12 +187,13 @@ public class boss_fight_functionality extends script.base_script
             dictionary webster = trial.getSessionDict(parent);
             messageTo(parent, "defaultEventReset", webster, 2, false);
         }
-        else 
+        else
         {
             messageTo(self, "handleBossDistanceCheck", null, 3, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean moveCreatureToWaypoint(obj_id creature) throws InterruptedException
     {
         if (!isValidId(creature) || !exists(creature))
@@ -201,6 +219,7 @@ public class boss_fight_functionality extends script.base_script
         CustomerServiceLog("outbreak_themepark", "survivor_pathing.moveCreatureToWaypoint() unable to get a location for the boss creature: " + creature);
         return true;
     }
+
     public boolean getRandomCombatTarget(obj_id self, obj_id parent) throws InterruptedException
     {
         if (!isIdValid(self) || !exists(self))
@@ -234,11 +253,14 @@ public class boss_fight_functionality extends script.base_script
             CustomerServiceLog("outbreak_themepark", "boss_fight_functionality.getRandomCombatTarget() Mob found player but player was not part of owners group.");
             return false;
         }
-        for (obj_id target : targets) {
-            if (!isIdValid(target)) {
+        for (obj_id target : targets)
+        {
+            if (!isIdValid(target))
+            {
                 continue;
             }
-            if (!group.inSameGroup(target, playerEnemy)) {
+            if (!group.inSameGroup(target, playerEnemy))
+            {
                 CustomerServiceLog("outbreak_themepark", "boss_fight_functionality.getRandomCombatTarget(): Player " + target + " was found as an invalid target.");
                 continue;
             }
@@ -251,6 +273,7 @@ public class boss_fight_functionality extends script.base_script
         messageTo(parent, "defaultEventReset", webster, 2, false);
         return false;
     }
+
     public int warnPlayerTimerBegin(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self))
@@ -272,16 +295,18 @@ public class boss_fight_functionality extends script.base_script
                 return SCRIPT_CONTINUE;
             }
             obj_id[] objMembersWhoExist = utils.getLocalGroupMemberIds(groupId);
-            for (obj_id obj_id : objMembersWhoExist) {
+            for (obj_id obj_id : objMembersWhoExist)
+            {
                 sendSystemMessage(obj_id, BOSS_BEGIN);
             }
         }
-        else 
+        else
         {
             sendSystemMessage(playerEnemy, BOSS_BEGIN);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int warnPlayerTimerEnd(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self))
@@ -303,16 +328,18 @@ public class boss_fight_functionality extends script.base_script
                 return SCRIPT_CONTINUE;
             }
             obj_id[] objMembersWhoExist = utils.getLocalGroupMemberIds(groupId);
-            for (obj_id obj_id : objMembersWhoExist) {
+            for (obj_id obj_id : objMembersWhoExist)
+            {
                 sendSystemMessage(obj_id, BOSS_LEAVING);
             }
         }
-        else 
+        else
         {
             sendSystemMessage(playerEnemy, BOSS_LEAVING);
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON)

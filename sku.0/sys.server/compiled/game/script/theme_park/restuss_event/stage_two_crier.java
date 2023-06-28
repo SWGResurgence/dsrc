@@ -1,5 +1,11 @@
 package script.theme_park.restuss_event;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.chat;
 import script.library.create;
@@ -10,18 +16,20 @@ import script.string_id;
 
 public class stage_two_crier extends script.base_script
 {
-    public stage_two_crier()
-    {
-    }
     public static final string_id WARNING = new string_id("restuss_event/object", "restuss_battle_cryer_warning");
     public static final String FIRST_SIGNAL = "restuss_herald.first_signal";
     public static final String SECOND_SIGNAL = "restuss_herald.second_signal";
     public static final String HERALD_ID = "restuss_herald.herald_id";
+    public stage_two_crier()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCWData(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setCWData(self);
@@ -31,14 +39,12 @@ public class stage_two_crier extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean canSpawnHerald(obj_id self) throws InterruptedException
     {
-        if (hasObjVar(self, FIRST_SIGNAL) && !hasObjVar(self, SECOND_SIGNAL))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(self, FIRST_SIGNAL) && !hasObjVar(self, SECOND_SIGNAL);
     }
+
     public void setCWData(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, SECOND_SIGNAL))
@@ -51,6 +57,7 @@ public class stage_two_crier extends script.base_script
         }
         getClusterWideData("event", "stage_two_crier", true, self);
     }
+
     public int OnClusterWideDataResponse(obj_id self, String manage_name, String dungeon_name, int request_id, String[] element_name_list, dictionary[] dungeon_data, int lock_key) throws InterruptedException
     {
         String name = "stage_two_crier" + "-" + self;
@@ -66,6 +73,7 @@ public class stage_two_crier extends script.base_script
         releaseClusterWideDataLock(manage_name, lock_key);
         return SCRIPT_CONTINUE;
     }
+
     public int beginSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         location currentLoc = getLocation(self);
@@ -79,6 +87,7 @@ public class stage_two_crier extends script.base_script
         setObjVar(self, FIRST_SIGNAL, true);
         return SCRIPT_CONTINUE;
     }
+
     public int beginMessage(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id herald = utils.getObjIdScriptVar(self, HERALD_ID);
@@ -87,14 +96,16 @@ public class stage_two_crier extends script.base_script
         setObjVar(self, SECOND_SIGNAL, true);
         return SCRIPT_CONTINUE;
     }
+
     public int warningLoop(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id herald = utils.getObjIdScriptVar(self, HERALD_ID);
-        if(!isValidId(herald) || !isValidId(self)) return SCRIPT_CONTINUE;
+        if (!isValidId(herald) || !isValidId(self)) return SCRIPT_CONTINUE;
         chat.chat(herald, WARNING);
         messageTo(self, "warningLoop", null, 30.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int destroySpawn(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id battleCryer = utils.getObjIdScriptVar(self, HERALD_ID);

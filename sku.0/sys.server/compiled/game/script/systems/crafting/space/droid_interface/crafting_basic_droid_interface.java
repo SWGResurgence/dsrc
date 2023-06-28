@@ -1,5 +1,11 @@
 package script.systems.crafting.space.droid_interface;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.craftinglib;
 import script.resource_weight;
 
@@ -96,6 +102,7 @@ public class crafting_basic_droid_interface extends script.systems.crafting.spac
                                     new resource_weight.weight(craftinglib.RESOURCE_QUALITY, 1)
                             })
             };
+
     public crafting_basic_droid_interface()
     {
     }

@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.utils;
@@ -8,57 +14,49 @@ import script.*;
 
 public class bestine_stone_merchant extends script.base_script
 {
+    public static String c_stringFile = "conversation/bestine_stone_merchant";
+
     public bestine_stone_merchant()
     {
     }
-    public static String c_stringFile = "conversation/bestine_stone_merchant";
+
     public boolean bestine_stone_merchant_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean bestine_stone_merchant_condition_SearchForStones(obj_id player, obj_id npc) throws InterruptedException
     {
         if (utils.playerHasItemByTemplate(player, "object/tangible/loot/quest/carved_stone.iff"))
         {
             return true;
         }
-        if (utils.playerHasItemByTemplate(player, "object/tangible/loot/quest/smooth_stone.iff"))
-        {
-            return true;
-        }
-        return false;
+        return utils.playerHasItemByTemplate(player, "object/tangible/loot/quest/smooth_stone.iff");
     }
+
     public boolean bestine_stone_merchant_condition_SearchforSmooth(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (utils.playerHasItemByTemplate(player, "object/tangible/loot/quest/smooth_stone.iff"))
-        {
-            return true;
-        }
-        return false;
+        return utils.playerHasItemByTemplate(player, "object/tangible/loot/quest/smooth_stone.iff");
     }
+
     public boolean bestine_stone_merchant_condition_SearchforCarved(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (utils.playerHasItemByTemplate(player, "object/tangible/loot/quest/carved_stone.iff"))
-        {
-            return true;
-        }
-        return false;
+        return utils.playerHasItemByTemplate(player, "object/tangible/loot/quest/carved_stone.iff");
     }
+
     public boolean bestine_stone_merchant_condition_SearchforStoneObjs(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "bestine.carvedstonereward"))
         {
             return true;
         }
-        if (hasObjVar(player, "bestine.smoothstonereward"))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(player, "bestine.smoothstonereward");
     }
+
     public void bestine_stone_merchant_action__defaultAction(obj_id player, obj_id npc) throws InterruptedException
     {
     }
+
     public void bestine_stone_merchant_action_GiveCarvedStoneReward(obj_id player, obj_id npc) throws InterruptedException
     {
         String REWARD = "object/tangible/wearables/armor/marauder/armor_marauder_s02_chest_plate_quest.iff";
@@ -70,10 +68,13 @@ public class bestine_stone_merchant extends script.base_script
                 obj_id[] objContents = utils.getContents(objInventory);
                 if (objContents != null)
                 {
-                    for (obj_id objContent : objContents) {
-                        if (isIdValid(objContent)) {
+                    for (obj_id objContent : objContents)
+                    {
+                        if (isIdValid(objContent))
+                        {
                             String strItemTemplate = getTemplateName(objContent);
-                            if (strItemTemplate.equals("object/tangible/loot/quest/carved_stone.iff")) {
+                            if (strItemTemplate.equals("object/tangible/loot/quest/carved_stone.iff"))
+                            {
                                 destroyObject(objContent);
                                 obj_id item = createObject(REWARD, objInventory, "");
                                 setObjVar(player, "bestine.carvedstonereward", true);
@@ -84,8 +85,8 @@ public class bestine_stone_merchant extends script.base_script
                 }
             }
         }
-        return;
     }
+
     public void bestine_stone_merchant_action_GiveSmoothStoneReward(obj_id player, obj_id npc) throws InterruptedException
     {
         String REWARD = "object/weapon/ranged/carbine/carbine_e11_victor_quest.iff";
@@ -97,10 +98,13 @@ public class bestine_stone_merchant extends script.base_script
                 obj_id[] objContents = utils.getContents(objInventory);
                 if (objContents != null)
                 {
-                    for (obj_id objContent : objContents) {
-                        if (isIdValid(objContent)) {
+                    for (obj_id objContent : objContents)
+                    {
+                        if (isIdValid(objContent))
+                        {
                             String strItemTemplate = getTemplateName(objContent);
-                            if (strItemTemplate.equals("object/tangible/loot/quest/smooth_stone.iff")) {
+                            if (strItemTemplate.equals("object/tangible/loot/quest/smooth_stone.iff"))
+                            {
                                 destroyObject(objContent);
                                 obj_id item = weapons.createWeapon(REWARD, objInventory, rand(0.8f, 1.1f));
                                 setObjVar(player, "bestine.carvedstonereward", true);
@@ -111,8 +115,8 @@ public class bestine_stone_merchant extends script.base_script
                 }
             }
         }
-        return;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -122,11 +126,13 @@ public class bestine_stone_merchant extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -135,12 +141,14 @@ public class bestine_stone_merchant extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "npc.conversation.bestine_stone_merchant");
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -176,7 +184,7 @@ public class bestine_stone_merchant extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_b6e7bea1");
@@ -192,7 +200,7 @@ public class bestine_stone_merchant extends script.base_script
                 setObjVar(player, "conversation.bestine_stone_merchant.branchId", 1);
                 npcStartConversation(player, self, "bestine_stone_merchant", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -227,7 +235,7 @@ public class bestine_stone_merchant extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_98e55c89");
@@ -243,7 +251,7 @@ public class bestine_stone_merchant extends script.base_script
                 setObjVar(player, "conversation.bestine_stone_merchant.branchId", 3);
                 npcStartConversation(player, self, "bestine_stone_merchant", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -252,6 +260,7 @@ public class bestine_stone_merchant extends script.base_script
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("bestine_stone_merchant"))
@@ -290,7 +299,7 @@ public class bestine_stone_merchant extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_211ab5b4");
@@ -307,7 +316,7 @@ public class bestine_stone_merchant extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.bestine_stone_merchant.branchId");
                     npcSpeak(player, message);
@@ -349,7 +358,7 @@ public class bestine_stone_merchant extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_211ab5b4");
@@ -366,7 +375,7 @@ public class bestine_stone_merchant extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.bestine_stone_merchant.branchId");
                     npcSpeak(player, message);
@@ -414,7 +423,7 @@ public class bestine_stone_merchant extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b6f71f8a");
@@ -427,7 +436,7 @@ public class bestine_stone_merchant extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.bestine_stone_merchant.branchId");
                     npcSpeak(player, message);
@@ -495,7 +504,7 @@ public class bestine_stone_merchant extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_211ab5b4");
@@ -512,7 +521,7 @@ public class bestine_stone_merchant extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.bestine_stone_merchant.branchId");
                     npcSpeak(player, message);
@@ -554,7 +563,7 @@ public class bestine_stone_merchant extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_211ab5b4");
@@ -571,7 +580,7 @@ public class bestine_stone_merchant extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.bestine_stone_merchant.branchId");
                     npcSpeak(player, message);

@@ -1,5 +1,11 @@
 package script.poi.dungeon;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.create;
 import script.library.utils;
@@ -8,25 +14,30 @@ import java.util.Vector;
 
 public class dungeon_spawner_parent extends script.base_script
 {
+    public static final float SPAWN_DELAY = 1.0f;
+
     public dungeon_spawner_parent()
     {
     }
-    public static final float SPAWN_DELAY = 1.0f;
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "startWaves", null, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "startWaves", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int startWaves(obj_id self, dictionary params) throws InterruptedException
     {
         deltadictionary dctScriptVars = self.getScriptVars();
         obj_id[] objSpawners = getDungeonSpawners(self);
-        for (obj_id objSpawner : objSpawners) {
+        for (obj_id objSpawner : objSpawners)
+        {
             detachScript(objSpawner, "poi.interior_spawner.interior_spawner");
         }
         dctScriptVars.put("objSpawners", objSpawners);
@@ -52,6 +63,7 @@ public class dungeon_spawner_parent extends script.base_script
         messageTo(self, "spawnWave", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnWave(obj_id self, dictionary params) throws InterruptedException
     {
         deltadictionary dctScriptVars = self.getScriptVars();
@@ -82,6 +94,7 @@ public class dungeon_spawner_parent extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int continueSpawns(obj_id self, dictionary params) throws InterruptedException
     {
         deltadictionary dctScriptVars = self.getScriptVars();
@@ -112,6 +125,7 @@ public class dungeon_spawner_parent extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public location getDungeonSpawnLocation(obj_id objParent) throws InterruptedException
     {
         if (!isIdValid(objParent))
@@ -133,6 +147,7 @@ public class dungeon_spawner_parent extends script.base_script
         locSpawnLocation.z = locSpawnLocation.z + rand(-1, 1);
         return locSpawnLocation;
     }
+
     public int elementDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         deltadictionary dctScriptVars = self.getScriptVars();
@@ -146,12 +161,13 @@ public class dungeon_spawner_parent extends script.base_script
         {
             resetWave(self);
         }
-        else 
+        else
         {
             dctScriptVars.put("intNumKilled", intNumKilled);
         }
         return SCRIPT_CONTINUE;
     }
+
     public void resetWave(obj_id objParent) throws InterruptedException
     {
         deltadictionary dctScriptVars = objParent.getScriptVars();
@@ -172,15 +188,16 @@ public class dungeon_spawner_parent extends script.base_script
             {
                 string_id strSpam = utils.unpackString(strCompletionStringId);
                 obj_id[] objPlayers = getAllPlayers(getLocation(objParent), 150);
-                if ((objPlayers != null) && (objPlayers.length != 0))
+                if (objPlayers != null)
                 {
-                    for (obj_id objPlayer : objPlayers) {
+                    for (obj_id objPlayer : objPlayers)
+                    {
                         sendSystemMessage(objPlayer, strSpam);
                     }
                 }
             }
         }
-        else 
+        else
         {
             int intMinWaveDelay = dctScriptVars.getInt("intMinWaveDelay");
             int intMaxWaveDelay = dctScriptVars.getInt("intMaxWaveDelay");
@@ -188,20 +205,27 @@ public class dungeon_spawner_parent extends script.base_script
             messageTo(objParent, "spawnWave", null, rand(intMinWaveDelay, intMaxWaveDelay), false);
         }
     }
+
     public obj_id[] getDungeonSpawners(obj_id objParent) throws InterruptedException
     {
         Vector objSpawners = new Vector();
         objSpawners.setSize(0);
         obj_id[] objObjects = getAllObjectsWithObjVar(getLocation(objParent), 250, "type");
-        for (obj_id objObject : objObjects) {
+        for (obj_id objObject : objObjects)
+        {
             obj_id[] objContents = getContents(objObject);
-            if (objContents != null) {
-                for (obj_id objContent : objContents) {
-                    if (hasObjVar(objContent, "type")) {
+            if (objContents != null)
+            {
+                for (obj_id objContent : objContents)
+                {
+                    if (hasObjVar(objContent, "type"))
+                    {
                         objSpawners = utils.addElement(objSpawners, objContent);
                     }
                 }
-            } else {
+            }
+            else
+            {
                 objSpawners = utils.addElement(objSpawners, objObject);
             }
         }

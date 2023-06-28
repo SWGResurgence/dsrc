@@ -1,30 +1,43 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class fs_patrol_quest_start extends script.base_script
 {
+    public static final boolean DEBUGGING = false;
+    public static String c_stringFile = "conversation/fs_patrol_quest_start";
+
     public fs_patrol_quest_start()
     {
     }
-    public static String c_stringFile = "conversation/fs_patrol_quest_start";
+
     public boolean fs_patrol_quest_start_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean fs_patrol_quest_start_condition_canTalkToVillagers(obj_id player, obj_id npc) throws InterruptedException
     {
         return fs_quests.isVillageEligible(player);
     }
+
     public boolean fs_patrol_quest_start_condition_ableToDoQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return fs_quests.hasQuestAccepted(player);
     }
+
     public boolean fs_patrol_quest_start_condition_finished(obj_id player, obj_id npc) throws InterruptedException
     {
         return quests.isComplete("fs_patrol_quest_finish", player);
     }
+
     public boolean fs_patrol_quest_start_condition_Complete9andQualifiesToComplete10(obj_id player, obj_id npc) throws InterruptedException
     {
         if (quests.isComplete("fs_patrol_quest_9", player) && quests.isActive("fs_patrol_quest_10", player))
@@ -45,13 +58,11 @@ public class fs_patrol_quest_start extends script.base_script
             {
                 waypointCount = getIntObjVar(player, "quest." + questName + ".waypointcount");
             }
-            if (waypointCount >= 8 && currentPatrolPoint && currentPatrol)
-            {
-                return true;
-            }
+            return waypointCount >= 8 && currentPatrolPoint && currentPatrol;
         }
         return false;
     }
+
     public boolean fs_patrol_quest_start_condition_Complete19andQualifiesToComplete20(obj_id player, obj_id npc) throws InterruptedException
     {
         if (quests.isComplete("fs_patrol_quest_19", player) && quests.isActive("fs_patrol_quest_20", player))
@@ -72,33 +83,26 @@ public class fs_patrol_quest_start extends script.base_script
             {
                 waypointCount = getIntObjVar(player, "quest." + questName + ".waypointcount");
             }
-            if (waypointCount >= 8 && currentPatrolPoint && currentPatrol)
-            {
-                return true;
-            }
+            return waypointCount >= 8 && currentPatrolPoint && currentPatrol;
         }
         return false;
     }
+
     public boolean fs_patrol_quest_start_condition_CheckIfElevenIsGiven(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (quests.isComplete("fs_patrol_quest_11", player) || quests.isActive("fs_patrol_quest_11", player))
-        {
-            return true;
-        }
-        return false;
+        return quests.isComplete("fs_patrol_quest_11", player) || quests.isActive("fs_patrol_quest_11", player);
     }
+
     public boolean fs_patrol_quest_start_condition_CheckIfOneIsGiven(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (quests.isComplete("fs_patrol_quest_1", player) || quests.isActive("fs_patrol_quest_1", player))
-        {
-            return true;
-        }
-        return false;
+        return quests.isComplete("fs_patrol_quest_1", player) || quests.isActive("fs_patrol_quest_1", player);
     }
+
     public boolean fs_patrol_quest_start_condition_CheckIfTenIsComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         return quests.isComplete("fs_patrol_quest_10", player);
     }
+
     public boolean fs_patrol_quest_start_condition_FindCurrentCheckIfQualifyToComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         String questName = "fs_patrol_quest_";
@@ -137,6 +141,7 @@ public class fs_patrol_quest_start extends script.base_script
         }
         return false;
     }
+
     public boolean fs_patrol_quest_start_condition_inventoryCheck(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id inv = utils.getInventoryContainer(player);
@@ -161,14 +166,12 @@ public class fs_patrol_quest_start extends script.base_script
                 {
                     waypointCount = getIntObjVar(player, "quest." + questName + ".waypointcount");
                 }
-                if (waypointCount >= 8 && currentPatrolPoint && currentPatrol)
-                {
-                    return true;
-                }
+                return waypointCount >= 8 && currentPatrolPoint && currentPatrol;
             }
         }
         return false;
     }
+
     public void fs_patrol_quest_start_action_GiveQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         quests.activate("fs_patrol_quest_start", player, npc);
@@ -177,6 +180,7 @@ public class fs_patrol_quest_start extends script.base_script
         setObjVar(player, "quest.fs_patrol.current_patrol", true);
         setObjVar(player, "quest.fs_patrol.current_patrol_point", true);
     }
+
     public void fs_patrol_quest_start_action_GiveNextQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         String questName = "fs_patrol_quest_";
@@ -203,23 +207,27 @@ public class fs_patrol_quest_start extends script.base_script
             }
         }
     }
+
     public void fs_patrol_quest_start_action_GiveQuestEleven(obj_id player, obj_id npc) throws InterruptedException
     {
         quests.activate("fs_patrol_quest_11", player, npc);
         setObjVar(player, "quest.fs_patrol.current_patrol", true);
         setObjVar(player, "quest.fs_patrol.current_patrol_point", true);
     }
+
     public void fs_patrol_quest_start_action_UnlockFSBranch(obj_id player, obj_id npc) throws InterruptedException
     {
         fs_quests.unlockBranch(player, "force_sensitive_combat_prowess_ranged_accuracy");
         quests.complete("fs_patrol_quest_10", player, true);
     }
+
     public void fs_patrol_quest_start_action_GiveReward(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id createdObject = createObjectInInventoryAllowOverload("object/tangible/item/quest/force_sensitive/fs_village_bannerpole_s01.iff", player);
         quests.complete("fs_patrol_quest_20", player, true);
         detachScript(player, "quest.force_sensitive.fs_patrol_spawns1");
     }
+
     public void fs_patrol_quest_start_action_resetCurrentPatrol(obj_id player, obj_id npc) throws InterruptedException
     {
         String questName = "fs_patrol_quest_";
@@ -247,7 +255,7 @@ public class fs_patrol_quest_start extends script.base_script
             }
         }
     }
-    public static final boolean DEBUGGING = false;
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -257,11 +265,13 @@ public class fs_patrol_quest_start extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -270,18 +280,21 @@ public class fs_patrol_quest_start extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "npc.conversation.fs_patrol_quest_start");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -336,7 +349,7 @@ public class fs_patrol_quest_start extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_d70dba34");
@@ -348,7 +361,7 @@ public class fs_patrol_quest_start extends script.base_script
                 setObjVar(player, "conversation.fs_patrol_quest_start.branchId", 5);
                 npcStartConversation(player, self, "fs_patrol_quest_start", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -376,7 +389,7 @@ public class fs_patrol_quest_start extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_ec2d9d88");
@@ -388,7 +401,7 @@ public class fs_patrol_quest_start extends script.base_script
                 setObjVar(player, "conversation.fs_patrol_quest_start.branchId", 11);
                 npcStartConversation(player, self, "fs_patrol_quest_start", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -416,7 +429,7 @@ public class fs_patrol_quest_start extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_6d3ed33b");
@@ -428,7 +441,7 @@ public class fs_patrol_quest_start extends script.base_script
                 setObjVar(player, "conversation.fs_patrol_quest_start.branchId", 14);
                 npcStartConversation(player, self, "fs_patrol_quest_start", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -462,7 +475,7 @@ public class fs_patrol_quest_start extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_240c8c9d");
@@ -474,7 +487,7 @@ public class fs_patrol_quest_start extends script.base_script
                 setObjVar(player, "conversation.fs_patrol_quest_start.branchId", 21);
                 npcStartConversation(player, self, "fs_patrol_quest_start", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -483,6 +496,7 @@ public class fs_patrol_quest_start extends script.base_script
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("fs_patrol_quest_start"))
@@ -537,7 +551,7 @@ public class fs_patrol_quest_start extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d70dba34");
@@ -550,7 +564,7 @@ public class fs_patrol_quest_start extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.fs_patrol_quest_start.branchId");
                     npcSpeak(player, message);
@@ -662,7 +676,7 @@ public class fs_patrol_quest_start extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d70dba34");
@@ -675,7 +689,7 @@ public class fs_patrol_quest_start extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.fs_patrol_quest_start.branchId");
                     npcSpeak(player, message);
@@ -737,7 +751,7 @@ public class fs_patrol_quest_start extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_199a175c");
@@ -750,7 +764,7 @@ public class fs_patrol_quest_start extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.fs_patrol_quest_start.branchId");
                     npcSpeak(player, message);

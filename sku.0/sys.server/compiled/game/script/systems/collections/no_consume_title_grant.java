@@ -1,5 +1,11 @@
 package script.systems.collections;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.collection;
 import script.library.prose;
@@ -17,6 +23,7 @@ public class no_consume_title_grant extends script.base_script
     public static final string_id SID_REPORT_CONSUME_ITEM_FAIL = new string_id("collection", "report_consume_item_fail");
     public static final string_id SID_ALREADY_HAVE_SLOT = new string_id("collection", "already_have_slot");
     public static final string_id COLLECTION_TITLE_GRANTED = new string_id("collection", "collection_title_granted");
+
     public no_consume_title_grant()
     {
     }
@@ -119,7 +126,7 @@ public class no_consume_title_grant extends script.base_script
         }
         String slotName = getStringObjVar(self, collection.OBJVAR_SLOT_NAME);
         String[] catagories = getCollectionSlotCategoryInfo(slotName);
-        if (catagories != null && catagories.length > 0)
+        if (catagories != null)
         {
             for (String catagory : catagories)
             {

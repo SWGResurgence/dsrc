@@ -1,5 +1,11 @@
 package script.theme_park.outbreak;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -8,9 +14,6 @@ import script.string_id;
 
 public class scientist_pathing extends script.base_script
 {
-    public scientist_pathing()
-    {
-    }
     public static final boolean LOGGING_ON = true;
     public static final String SCRIPT_LOG = "outbreak_pathing";
     public static final String PATHING_NODE = "pathing_node";
@@ -21,6 +24,10 @@ public class scientist_pathing extends script.base_script
     public static final String STORMTROOPER_RETREAT = "stormtrooper_retreat";
     public static final int RADIUS = 100;
     public static final String STRINGFILE = "theme_park/outbreak/outbreak";
+    public scientist_pathing()
+    {
+    }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id weapon, int[] damage) throws InterruptedException
     {
         if (!hasObjVar(self, "invln"))
@@ -30,6 +37,7 @@ public class scientist_pathing extends script.base_script
         setAttrib(self, HEALTH, getMaxAttrib(self, HEALTH));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDamaged(obj_id self, obj_id attacker, obj_id weapon, int damage) throws InterruptedException
     {
         if (!hasObjVar(self, "invln"))
@@ -39,6 +47,7 @@ public class scientist_pathing extends script.base_script
         setHitpoints(self, getMaxHitpoints(self));
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "guard"))
@@ -54,6 +63,7 @@ public class scientist_pathing extends script.base_script
         chat.chat(self, strSpam);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         if (!hasObjVar(self, "guard"))
@@ -70,6 +80,7 @@ public class scientist_pathing extends script.base_script
         messageTo(self, "blowUp", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int blowUp(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] playerTargets = trial.getValidPlayersInRadius(self, 7);
@@ -89,8 +100,10 @@ public class scientist_pathing extends script.base_script
         if (npcTargets != null && npcTargets.length > 0)
         {
             CustomerServiceLog("outbreak_themepark", "beast_pathing.blowUp() Valid NPCs in radius.");
-            for (obj_id npcTarget : npcTargets) {
-                if ((factions.getFaction(npcTarget)).equals("afflicted")) {
+            for (obj_id npcTarget : npcTargets)
+            {
+                if ((factions.getFaction(npcTarget)).equals("afflicted"))
+                {
                     setPosture(npcTarget, POSTURE_INCAPACITATED);
                 }
             }
@@ -98,6 +111,7 @@ public class scientist_pathing extends script.base_script
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "nomi_rhane"))
@@ -116,6 +130,7 @@ public class scientist_pathing extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         CustomerServiceLog("outbreak_themepark", "survivor_pathing.OnMovePathComplete() initialized.");
@@ -136,6 +151,7 @@ public class scientist_pathing extends script.base_script
         messageTo(self, "startMovingGuardAfterDelay", null, 15, false);
         return SCRIPT_CONTINUE;
     }
+
     public int startMovingGuardAfterDelay(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] wayPointList = getAllObjectsWithObjVar(getLocation(self), RADIUS, STORMTROOPER_RETREAT);
@@ -145,9 +161,11 @@ public class scientist_pathing extends script.base_script
             return SCRIPT_CONTINUE;
         }
         location[] wayPtLocs = new location[wayPointList.length];
-        for (obj_id obj_id : wayPointList) {
+        for (obj_id obj_id : wayPointList)
+        {
             int orderNumber = getIntObjVar(obj_id, STORMTROOPER_RETREAT) - 1;
-            if (orderNumber < 0) {
+            if (orderNumber < 0)
+            {
                 continue;
             }
             wayPtLocs[orderNumber] = getLocation(obj_id);
@@ -162,12 +180,14 @@ public class scientist_pathing extends script.base_script
         setObjVar(self, "secondPath", 1);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanUpNpcTimer(obj_id self, dictionary params) throws InterruptedException
     {
         CustomerServiceLog("outbreak_themepark", "scientist_pathing.cleanUpNpcTimer() Initalized Message Handler.");
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON)

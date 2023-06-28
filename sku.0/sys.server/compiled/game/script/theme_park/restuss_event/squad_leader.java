@@ -1,5 +1,11 @@
 package script.theme_park.restuss_event;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -9,10 +15,12 @@ import java.util.Vector;
 
 public class squad_leader extends script.base_script
 {
+    public static final boolean LOGGING = true;
+
     public squad_leader()
     {
     }
-    public static final boolean LOGGING = true;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!restuss_event.getIsStatic(self))
@@ -24,16 +32,19 @@ public class squad_leader extends script.base_script
         messageTo(self, "spawnSquad", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         messageTo(self, "destroySelf", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         trial.cleanupObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnSquad(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] squad = new obj_id[4];
@@ -70,7 +81,7 @@ public class squad_leader extends script.base_script
         {
             ai_lib.establishAgroLink(self, squad);
         }
-        else 
+        else
         {
             for (int j = 0; j < squad.length; j++)
             {
@@ -78,6 +89,7 @@ public class squad_leader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void findWayPoints(obj_id self) throws InterruptedException
     {
         Vector wayPoints = utils.getResizeableObjIdArrayScriptVar(self, restuss_event.MASTER_PATROL_ARRAY);
@@ -92,7 +104,7 @@ public class squad_leader extends script.base_script
         {
             pathNum = getIntObjVar(self, "path");
         }
-        else 
+        else
         {
             doLogging("findWayPoints", "I did not have the path ObjVar");
             trial.cleanupObject(self);
@@ -108,10 +120,14 @@ public class squad_leader extends script.base_script
         }
         Vector myPath = new Vector();
         myPath.setSize(0);
-        for (String s : pathList) {
-            for (Object wayPoint : wayPoints) {
-                if (hasObjVar(((obj_id) wayPoint), "wp_name")) {
-                    if (s.equals(getStringObjVar(((obj_id) wayPoint), "wp_name"))) {
+        for (String s : pathList)
+        {
+            for (Object wayPoint : wayPoints)
+            {
+                if (hasObjVar(((obj_id) wayPoint), "wp_name"))
+                {
+                    if (s.equals(getStringObjVar(((obj_id) wayPoint), "wp_name")))
+                    {
                         utils.addElement(myPath, getLocation(((obj_id) wayPoint)));
                     }
                 }
@@ -137,6 +153,7 @@ public class squad_leader extends script.base_script
         }
         utils.setScriptVar(self, restuss_event.PATROL_POINTS, patrolPoints);
     }
+
     public int pathToNextPoint(obj_id self, dictionary params) throws InterruptedException
     {
         location[] patrolPoints = utils.getLocationArrayScriptVar(self, restuss_event.PATROL_POINTS);
@@ -144,26 +161,27 @@ public class squad_leader extends script.base_script
         switch (patrolType)
         {
             case restuss_event.PATROL:
-            ai_lib.setPatrolPath(self, patrolPoints);
-            break;
+                ai_lib.setPatrolPath(self, patrolPoints);
+                break;
             case restuss_event.PATROL_ONCE:
-            ai_lib.setPatrolOncePath(self, patrolPoints);
-            break;
+                ai_lib.setPatrolOncePath(self, patrolPoints);
+                break;
             case restuss_event.PATROL_FLIP:
-            ai_lib.setPatrolFlipPath(self, patrolPoints);
-            break;
+                ai_lib.setPatrolFlipPath(self, patrolPoints);
+                break;
             case restuss_event.PATROL_FLIP_ONCE:
-            ai_lib.setPatrolFlipOncePath(self, patrolPoints);
-            break;
+                ai_lib.setPatrolFlipOncePath(self, patrolPoints);
+                break;
             case restuss_event.PATROL_RANDOM:
-            ai_lib.setPatrolRandomPath(self, patrolPoints);
-            break;
+                ai_lib.setPatrolRandomPath(self, patrolPoints);
+                break;
             case restuss_event.PATROL_RANDOM_ONCE:
-            ai_lib.setPatrolRandomOncePath(self, patrolPoints);
-            break;
+                ai_lib.setPatrolRandomOncePath(self, patrolPoints);
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING)

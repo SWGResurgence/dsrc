@@ -1,5 +1,11 @@
 package script.npc.random_quest;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.create;
 import script.location;
 import script.obj_id;
@@ -9,10 +15,12 @@ public class quest_setup extends script.base_script
     public quest_setup()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public void createStaticMissionNpc(obj_id self) throws InterruptedException
     {
         String type = getStringObjVar(self, "type");
@@ -28,8 +36,8 @@ public class quest_setup extends script.base_script
         String questScript = "npc.random_quest.quest_convo";
         attachScript(npc, questScript);
         setObjVar(npc, "quest_table", type);
-        return;
     }
+
     public String getRandomType() throws InterruptedException
     {
         String type = "businessman";
@@ -37,20 +45,21 @@ public class quest_setup extends script.base_script
         switch (randType)
         {
             case 1:
-            type = "businessman";
-            break;
+                type = "businessman";
+                break;
             case 2:
-            type = "criminal";
-            break;
+                type = "criminal";
+                break;
             case 3:
-            type = "noble";
-            break;
+                type = "noble";
+                break;
             case 4:
-            type = "scientist";
-            break;
+                type = "scientist";
+                break;
         }
         return type;
     }
+
     public String determineSpawnType(String type, obj_id self) throws InterruptedException
     {
         String text = getTemplateName(self);

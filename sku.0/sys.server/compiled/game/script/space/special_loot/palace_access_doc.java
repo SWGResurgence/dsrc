@@ -1,23 +1,31 @@
 package script.space.special_loot;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.sui;
 
 public class palace_access_doc extends script.base_script
 {
-    public palace_access_doc()
-    {
-    }
     public static final string_id SID_READ = new string_id("space/quest", "read");
     public static final string_id SID_SYS_NOT_IN_INV = new string_id("space/quest", "not_in_inv");
     public static final string_id SID_SIGNED = new string_id("space/quest", "signed_palace_access");
     public static final String SID_SIGN = "@space/quest:sign";
     public static final String SID_CLOSE = "@space/quest:close";
+    public palace_access_doc()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.SERVER_MENU1, SID_READ);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU1)
@@ -26,6 +34,7 @@ public class palace_access_doc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void displayDialog(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id inventory = getObjectInSlot(player, "inventory");
@@ -48,8 +57,8 @@ public class palace_access_doc extends script.base_script
         sui.setSUIProperty(pid, sui.MSGBOX_BTN_CANCEL, sui.PROP_TEXT, SID_SIGN);
         sui.setSUIProperty(pid, sui.MSGBOX_BTN_OK, sui.PROP_TEXT, SID_CLOSE);
         sui.showSUIPage(pid);
-        return;
     }
+
     public int handleDialogInput(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -61,17 +70,19 @@ public class palace_access_doc extends script.base_script
         switch (bp)
         {
             case sui.BP_CANCEL:
-            signForm(self, player);
-            return SCRIPT_CONTINUE;
+                signForm(self, player);
+                return SCRIPT_CONTINUE;
             case sui.BP_OK:
-            return SCRIPT_CONTINUE;
+                return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public void signForm(obj_id self, obj_id player) throws InterruptedException
     {
         sui.inputbox(self, player, "@space/quest:palace_access_sign", sui.OK_CANCEL, "@space/quest:palace_access_sign_title", sui.MSG_NORMAL, null, "handleSignedForm", null);
     }
+
     public int handleSignedForm(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -84,11 +95,11 @@ public class palace_access_doc extends script.base_script
         switch (bp)
         {
             case sui.BP_CANCEL:
-            return SCRIPT_CONTINUE;
+                return SCRIPT_CONTINUE;
             case sui.BP_OK:
-            setObjVar(self, "signature", text);
-            sendSystemMessage(player, SID_SIGNED);
-            return SCRIPT_CONTINUE;
+                setObjVar(self, "signature", text);
+                sendSystemMessage(player, SID_SIGNED);
+                return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
     }

@@ -1,5 +1,11 @@
 package script.city.imperial_crackdown;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,26 +14,27 @@ public class door_check extends script.base_script
     public door_check()
     {
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             if (isIdValid(srcContainer))
             {
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 obj_id top = getTopMostContainer(self);
                 if (hasObjVar(top, "checkingForTrouble"))
                 {
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     setObjVar(top, "checkingForTrouble", 1);
                     dictionary websters = new dictionary();

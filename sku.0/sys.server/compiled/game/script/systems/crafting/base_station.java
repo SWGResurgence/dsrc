@@ -1,5 +1,11 @@
 package script.systems.crafting;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.buff;
 import script.library.craftinglib;
 import script.library.utils;
@@ -44,7 +50,7 @@ public class base_station extends script.base_script
         {
             names[idx] = "stationmod";
             float attrib = getFloatObjVar(self, "crafting.stationMod");
-            attribs[idx] = "" + attrib;
+            attribs[idx] = String.valueOf(attrib);
             idx++;
             if (idx >= names.length)
             {
@@ -147,7 +153,7 @@ public class base_station extends script.base_script
         {
             int craftingType = getIntObjVar(self, craftinglib.OBJVAR_CRAFTING_TYPE);
             String[] buffNames = craftinglib.getAllStationBuffNames(craftingType);
-            if (buffNames == null || buffNames.length <= 0)
+            if (buffNames == null)
             {
                 return SCRIPT_CONTINUE;
             }

@@ -1,5 +1,11 @@
 package script.creature_spawner;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class naboo_medium extends script.creature_spawner.base_newbie_creature_spawner
@@ -10,11 +16,13 @@ public class naboo_medium extends script.creature_spawner.base_newbie_creature_s
     public naboo_medium()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         spawnCreatures(self);
         return SCRIPT_CONTINUE;
     }
+
     public String pickCreature() throws InterruptedException
     {
         switch (rand(1, 3))

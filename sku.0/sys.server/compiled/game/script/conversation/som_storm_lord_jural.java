@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,70 +14,87 @@ import script.*;
 
 public class som_storm_lord_jural extends script.base_script
 {
+    public static String c_stringFile = "conversation/som_storm_lord_jural";
+
     public som_storm_lord_jural()
     {
     }
-    public static String c_stringFile = "conversation/som_storm_lord_jural";
+
     public boolean som_storm_lord_jural_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean som_storm_lord_jural_condition_isOnTaskOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "som_storm_lord", "storm_lord_one");
     }
+
     public boolean som_storm_lord_jural_condition_finishedTaskOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "som_storm_lord", "storm_lord_two");
     }
+
     public boolean som_storm_lord_jural_condition_isOnTaskTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "som_storm_lord", "storm_lord_three");
     }
+
     public boolean som_storm_lord_jural_condition_finishedTaskTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "som_storm_lord", "storm_lord_four");
     }
+
     public boolean som_storm_lord_jural_condition_isOnTaskThree(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "som_storm_lord", "storm_lord_five");
     }
+
     public boolean som_storm_lord_jural_condition_finishedTaskThree(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "som_storm_lord", "storm_lord_six");
     }
+
     public boolean som_storm_lord_jural_condition_isOnTaskFour(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "som_storm_lord", "storm_lord_seven");
     }
+
     public boolean som_storm_lord_jural_condition_finishedTaskFour(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "som_storm_lord", "storm_lord_eight");
     }
+
     public boolean som_storm_lord_jural_condition_hasWonMission(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "som_storm_lord");
     }
+
     public void som_storm_lord_jural_action_startMission(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "som_storm_lord");
     }
+
     public void som_storm_lord_jural_action_sendFirstSignal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "storm_lord_minions_defeated");
     }
+
     public void som_storm_lord_jural_action_sendSecondSignal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "storm_lord_zealots_defeated");
     }
+
     public void som_storm_lord_jural_action_sendThirdSignal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "storm_lord_prophet_defeated");
     }
+
     public void som_storm_lord_jural_action_sendFourthSignal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "storm_lord_defeated");
     }
+
     public int som_storm_lord_jural_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_63"))
@@ -88,6 +111,7 @@ public class som_storm_lord_jural extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_storm_lord_jural_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_56"))
@@ -115,7 +139,7 @@ public class som_storm_lord_jural extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_58");
@@ -128,7 +152,7 @@ public class som_storm_lord_jural extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_storm_lord_jural.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -138,6 +162,7 @@ public class som_storm_lord_jural extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_storm_lord_jural_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_58"))
@@ -165,6 +190,7 @@ public class som_storm_lord_jural extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_storm_lord_jural_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_45"))
@@ -186,7 +212,7 @@ public class som_storm_lord_jural extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -195,7 +221,7 @@ public class som_storm_lord_jural extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_storm_lord_jural.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -205,6 +231,7 @@ public class som_storm_lord_jural extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_storm_lord_jural_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_47"))
@@ -225,7 +252,7 @@ public class som_storm_lord_jural extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_49");
@@ -234,7 +261,7 @@ public class som_storm_lord_jural extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_storm_lord_jural.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -244,6 +271,7 @@ public class som_storm_lord_jural extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_storm_lord_jural_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_49"))
@@ -272,7 +300,7 @@ public class som_storm_lord_jural extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_51");
@@ -285,7 +313,7 @@ public class som_storm_lord_jural extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_storm_lord_jural.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -295,6 +323,7 @@ public class som_storm_lord_jural extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_storm_lord_jural_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_51"))
@@ -322,6 +351,7 @@ public class som_storm_lord_jural extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_storm_lord_jural_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_37"))
@@ -342,7 +372,7 @@ public class som_storm_lord_jural extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_40");
@@ -351,7 +381,7 @@ public class som_storm_lord_jural extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_storm_lord_jural.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -361,6 +391,7 @@ public class som_storm_lord_jural extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_storm_lord_jural_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_40"))
@@ -388,7 +419,7 @@ public class som_storm_lord_jural extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_44");
@@ -401,7 +432,7 @@ public class som_storm_lord_jural extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_storm_lord_jural.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -411,6 +442,7 @@ public class som_storm_lord_jural extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_storm_lord_jural_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_44"))
@@ -437,6 +469,7 @@ public class som_storm_lord_jural extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_storm_lord_jural_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_76"))
@@ -457,7 +490,7 @@ public class som_storm_lord_jural extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_80");
@@ -466,7 +499,7 @@ public class som_storm_lord_jural extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_storm_lord_jural.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -476,6 +509,7 @@ public class som_storm_lord_jural extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_storm_lord_jural_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_80"))
@@ -496,7 +530,7 @@ public class som_storm_lord_jural extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_84");
@@ -505,7 +539,7 @@ public class som_storm_lord_jural extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_storm_lord_jural.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -515,6 +549,7 @@ public class som_storm_lord_jural extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_storm_lord_jural_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_84"))
@@ -535,7 +570,7 @@ public class som_storm_lord_jural extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_88");
@@ -544,7 +579,7 @@ public class som_storm_lord_jural extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_storm_lord_jural.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -554,6 +589,7 @@ public class som_storm_lord_jural extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_storm_lord_jural_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_88"))
@@ -574,7 +610,7 @@ public class som_storm_lord_jural extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_92");
@@ -583,7 +619,7 @@ public class som_storm_lord_jural extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_storm_lord_jural.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -593,6 +629,7 @@ public class som_storm_lord_jural extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_storm_lord_jural_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_92"))
@@ -612,7 +649,7 @@ public class som_storm_lord_jural extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_96");
@@ -621,7 +658,7 @@ public class som_storm_lord_jural extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_storm_lord_jural.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -631,6 +668,7 @@ public class som_storm_lord_jural extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_storm_lord_jural_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_96"))
@@ -651,7 +689,7 @@ public class som_storm_lord_jural extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_100");
@@ -660,7 +698,7 @@ public class som_storm_lord_jural extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_storm_lord_jural.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -670,6 +708,7 @@ public class som_storm_lord_jural extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_storm_lord_jural_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_100"))
@@ -690,7 +729,7 @@ public class som_storm_lord_jural extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_104");
@@ -699,7 +738,7 @@ public class som_storm_lord_jural extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_storm_lord_jural.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -709,6 +748,7 @@ public class som_storm_lord_jural extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_storm_lord_jural_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_104"))
@@ -729,7 +769,7 @@ public class som_storm_lord_jural extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_108");
@@ -738,7 +778,7 @@ public class som_storm_lord_jural extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_storm_lord_jural.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -748,6 +788,7 @@ public class som_storm_lord_jural extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_storm_lord_jural_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_108"))
@@ -769,7 +810,7 @@ public class som_storm_lord_jural extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_112");
@@ -778,7 +819,7 @@ public class som_storm_lord_jural extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_storm_lord_jural.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -788,6 +829,7 @@ public class som_storm_lord_jural extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_storm_lord_jural_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_112"))
@@ -808,7 +850,7 @@ public class som_storm_lord_jural extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_116");
@@ -817,7 +859,7 @@ public class som_storm_lord_jural extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_storm_lord_jural.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -827,6 +869,7 @@ public class som_storm_lord_jural extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_storm_lord_jural_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_116"))
@@ -854,7 +897,7 @@ public class som_storm_lord_jural extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_120");
@@ -867,7 +910,7 @@ public class som_storm_lord_jural extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_storm_lord_jural.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -877,6 +920,7 @@ public class som_storm_lord_jural extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_storm_lord_jural_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_120"))
@@ -905,6 +949,7 @@ public class som_storm_lord_jural extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -917,6 +962,7 @@ public class som_storm_lord_jural extends script.base_script
         setName(self, "Jural");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -925,6 +971,7 @@ public class som_storm_lord_jural extends script.base_script
         setName(self, "Jural");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -933,18 +980,21 @@ public class som_storm_lord_jural extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.som_storm_lord_jural");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -975,7 +1025,7 @@ public class som_storm_lord_jural extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_63");
@@ -983,7 +1033,7 @@ public class som_storm_lord_jural extends script.base_script
                 utils.setScriptVar(player, "conversation.som_storm_lord_jural.branchId", 2);
                 npcStartConversation(player, npc, "som_storm_lord_jural", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1012,7 +1062,7 @@ public class som_storm_lord_jural extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_56");
@@ -1020,7 +1070,7 @@ public class som_storm_lord_jural extends script.base_script
                 utils.setScriptVar(player, "conversation.som_storm_lord_jural.branchId", 5);
                 npcStartConversation(player, npc, "som_storm_lord_jural", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1049,7 +1099,7 @@ public class som_storm_lord_jural extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_45");
@@ -1057,7 +1107,7 @@ public class som_storm_lord_jural extends script.base_script
                 utils.setScriptVar(player, "conversation.som_storm_lord_jural.branchId", 10);
                 npcStartConversation(player, npc, "som_storm_lord_jural", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1086,7 +1136,7 @@ public class som_storm_lord_jural extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_37");
@@ -1094,7 +1144,7 @@ public class som_storm_lord_jural extends script.base_script
                 utils.setScriptVar(player, "conversation.som_storm_lord_jural.branchId", 17);
                 npcStartConversation(player, npc, "som_storm_lord_jural", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1123,7 +1173,7 @@ public class som_storm_lord_jural extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -1131,7 +1181,7 @@ public class som_storm_lord_jural extends script.base_script
                 utils.setScriptVar(player, "conversation.som_storm_lord_jural.branchId", 23);
                 npcStartConversation(player, npc, "som_storm_lord_jural", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1140,6 +1190,7 @@ public class som_storm_lord_jural extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("som_storm_lord_jural"))

@@ -1,39 +1,55 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class event_ls_cpt_dramont extends script.base_script
 {
+    public static String c_stringFile = "conversation/event_ls_cpt_dramont";
+
     public event_ls_cpt_dramont()
     {
     }
-    public static String c_stringFile = "conversation/event_ls_cpt_dramont";
+
     public boolean event_ls_cpt_dramont_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean event_ls_cpt_dramont_condition_hasSixCores(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] playerItems = getInventoryAndEquipment(player);
-        for (obj_id playerItem : playerItems) {
+        for (obj_id playerItem : playerItems)
+        {
             String itemTemplate = getTemplateName(playerItem);
-            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_1.iff")) {
+            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_1.iff"))
+            {
                 utils.setScriptVar(player, "core_1", playerItem);
             }
-            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_2.iff")) {
+            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_2.iff"))
+            {
                 utils.setScriptVar(player, "core_2", playerItem);
             }
-            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_3.iff")) {
+            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_3.iff"))
+            {
                 utils.setScriptVar(player, "core_3", playerItem);
             }
-            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_4.iff")) {
+            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_4.iff"))
+            {
                 utils.setScriptVar(player, "core_4", playerItem);
             }
-            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_5.iff")) {
+            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_5.iff"))
+            {
                 utils.setScriptVar(player, "core_5", playerItem);
             }
-            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_6.iff")) {
+            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_6.iff"))
+            {
                 utils.setScriptVar(player, "core_6", playerItem);
             }
         }
@@ -47,7 +63,7 @@ public class event_ls_cpt_dramont extends script.base_script
             utils.removeScriptVar(player, "core_6");
             return true;
         }
-        else 
+        else
         {
             utils.removeScriptVar(player, "core_1");
             utils.removeScriptVar(player, "core_2");
@@ -58,67 +74,77 @@ public class event_ls_cpt_dramont extends script.base_script
             return false;
         }
     }
+
     public boolean event_ls_cpt_dramont_condition_outOfRewards(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id mom = getObjIdObjVar(npc, "mom");
         int numRewards = getIntObjVar(mom, "event.lost_squadron.num_rewards");
-        if (numRewards >= 6)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return numRewards >= 6;
     }
+
     public boolean event_ls_cpt_dramont_condition_hasMin1core(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] playerItems = getInventoryAndEquipment(player);
-        for (obj_id playerItem : playerItems) {
+        for (obj_id playerItem : playerItems)
+        {
             String itemTemplate = getTemplateName(playerItem);
-            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_1.iff")) {
+            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_1.iff"))
+            {
                 return true;
             }
-            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_2.iff")) {
+            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_2.iff"))
+            {
                 return true;
             }
-            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_3.iff")) {
+            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_3.iff"))
+            {
                 return true;
             }
-            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_4.iff")) {
+            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_4.iff"))
+            {
                 return true;
             }
-            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_5.iff")) {
+            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_5.iff"))
+            {
                 return true;
             }
-            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_6.iff")) {
+            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_6.iff"))
+            {
                 return true;
             }
         }
         return false;
     }
+
     public void event_ls_cpt_dramont_action_giveBoobiePrize(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] playerItems = getInventoryAndEquipment(player);
         obj_id mom = getObjIdObjVar(npc, "mom");
-        for (obj_id playerItem : playerItems) {
+        for (obj_id playerItem : playerItems)
+        {
             String itemTemplate = getTemplateName(playerItem);
-            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_1.iff")) {
+            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_1.iff"))
+            {
                 utils.setScriptVar(player, "core_1", playerItem);
             }
-            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_2.iff")) {
+            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_2.iff"))
+            {
                 utils.setScriptVar(player, "core_2", playerItem);
             }
-            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_3.iff")) {
+            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_3.iff"))
+            {
                 utils.setScriptVar(player, "core_3", playerItem);
             }
-            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_4.iff")) {
+            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_4.iff"))
+            {
                 utils.setScriptVar(player, "core_4", playerItem);
             }
-            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_5.iff")) {
+            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_5.iff"))
+            {
                 utils.setScriptVar(player, "core_5", playerItem);
             }
-            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_6.iff")) {
+            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_6.iff"))
+            {
                 utils.setScriptVar(player, "core_6", playerItem);
             }
         }
@@ -160,7 +186,7 @@ public class event_ls_cpt_dramont extends script.base_script
             params.put("player", player);
             messageTo(mom, "rewardGiven", params, 1, false);
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id("event/lost_squadron", "reward_verify_fail"));
         }
@@ -171,28 +197,36 @@ public class event_ls_cpt_dramont extends script.base_script
         utils.removeScriptVar(player, "core_5");
         utils.removeScriptVar(player, "core_6");
     }
+
     public void event_ls_cpt_dramont_action_giveXWingReward(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] playerItems = getInventoryAndEquipment(player);
         obj_id mom = getObjIdObjVar(npc, "mom");
-        for (obj_id playerItem : playerItems) {
+        for (obj_id playerItem : playerItems)
+        {
             String itemTemplate = getTemplateName(playerItem);
-            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_1.iff")) {
+            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_1.iff"))
+            {
                 utils.setScriptVar(player, "core_1", playerItem);
             }
-            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_2.iff")) {
+            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_2.iff"))
+            {
                 utils.setScriptVar(player, "core_2", playerItem);
             }
-            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_3.iff")) {
+            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_3.iff"))
+            {
                 utils.setScriptVar(player, "core_3", playerItem);
             }
-            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_4.iff")) {
+            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_4.iff"))
+            {
                 utils.setScriptVar(player, "core_4", playerItem);
             }
-            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_5.iff")) {
+            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_5.iff"))
+            {
                 utils.setScriptVar(player, "core_5", playerItem);
             }
-            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_6.iff")) {
+            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_6.iff"))
+            {
                 utils.setScriptVar(player, "core_6", playerItem);
             }
         }
@@ -239,12 +273,12 @@ public class event_ls_cpt_dramont extends script.base_script
                 showFlyText(player, new string_id("event/lost_squadron", "fly_txt_winner"), 1.5f, colors.LIGHTGOLDENRODYELLOW);
                 playMusic(player, "sound/mus_fan_fair_fade.snd");
             }
-            else 
+            else
             {
                 sendSystemMessage(player, new string_id("event/lost_squadron", "sys_msg_full_inv"));
             }
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id("event/lost_squadron", "reward_verify_fail"));
         }
@@ -255,28 +289,36 @@ public class event_ls_cpt_dramont extends script.base_script
         utils.removeScriptVar(player, "core_5");
         utils.removeScriptVar(player, "core_6");
     }
+
     public void event_ls_cpt_dramont_action_giveTBomberReward(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] playerItems = getInventoryAndEquipment(player);
         obj_id mom = getObjIdObjVar(npc, "mom");
-        for (obj_id playerItem : playerItems) {
+        for (obj_id playerItem : playerItems)
+        {
             String itemTemplate = getTemplateName(playerItem);
-            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_1.iff")) {
+            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_1.iff"))
+            {
                 utils.setScriptVar(player, "core_1", playerItem);
             }
-            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_2.iff")) {
+            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_2.iff"))
+            {
                 utils.setScriptVar(player, "core_2", playerItem);
             }
-            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_3.iff")) {
+            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_3.iff"))
+            {
                 utils.setScriptVar(player, "core_3", playerItem);
             }
-            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_4.iff")) {
+            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_4.iff"))
+            {
                 utils.setScriptVar(player, "core_4", playerItem);
             }
-            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_5.iff")) {
+            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_5.iff"))
+            {
                 utils.setScriptVar(player, "core_5", playerItem);
             }
-            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_6.iff")) {
+            if (itemTemplate.equals("object/tangible/loot/quest/lost_squadron_core_6.iff"))
+            {
                 utils.setScriptVar(player, "core_6", playerItem);
             }
         }
@@ -323,12 +365,12 @@ public class event_ls_cpt_dramont extends script.base_script
                 showFlyText(player, new string_id("event/lost_squadron", "fly_txt_winner"), 1.5f, colors.LIGHTGOLDENRODYELLOW);
                 playMusic(player, "sound/mus_fan_fair_fade.snd");
             }
-            else 
+            else
             {
                 sendSystemMessage(player, new string_id("event/lost_squadron", "sys_msg_full_inv"));
             }
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id("event/lost_squadron", "reward_verify_fail"));
         }
@@ -339,6 +381,7 @@ public class event_ls_cpt_dramont extends script.base_script
         utils.removeScriptVar(player, "core_5");
         utils.removeScriptVar(player, "core_6");
     }
+
     public int event_ls_cpt_dramont_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6"))
@@ -359,7 +402,7 @@ public class event_ls_cpt_dramont extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_10");
@@ -368,7 +411,7 @@ public class event_ls_cpt_dramont extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.event_ls_cpt_dramont.branchId");
                     chat.chat(npc, player, message);
@@ -416,7 +459,7 @@ public class event_ls_cpt_dramont extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -425,7 +468,7 @@ public class event_ls_cpt_dramont extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.event_ls_cpt_dramont.branchId");
                     chat.chat(npc, player, message);
@@ -456,7 +499,7 @@ public class event_ls_cpt_dramont extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_34");
@@ -469,7 +512,7 @@ public class event_ls_cpt_dramont extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.event_ls_cpt_dramont.branchId");
                     chat.chat(npc, player, message);
@@ -480,6 +523,7 @@ public class event_ls_cpt_dramont extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int event_ls_cpt_dramont_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_10"))
@@ -499,7 +543,7 @@ public class event_ls_cpt_dramont extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_14");
@@ -508,7 +552,7 @@ public class event_ls_cpt_dramont extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.event_ls_cpt_dramont.branchId");
                     chat.chat(npc, player, message);
@@ -519,6 +563,7 @@ public class event_ls_cpt_dramont extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int event_ls_cpt_dramont_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_14"))
@@ -534,6 +579,7 @@ public class event_ls_cpt_dramont extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int event_ls_cpt_dramont_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_28"))
@@ -551,6 +597,7 @@ public class event_ls_cpt_dramont extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int event_ls_cpt_dramont_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_34"))
@@ -577,7 +624,7 @@ public class event_ls_cpt_dramont extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_38");
@@ -590,7 +637,7 @@ public class event_ls_cpt_dramont extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.event_ls_cpt_dramont.branchId");
                     chat.chat(npc, player, message);
@@ -623,7 +670,7 @@ public class event_ls_cpt_dramont extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_50");
@@ -636,7 +683,7 @@ public class event_ls_cpt_dramont extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.event_ls_cpt_dramont.branchId");
                     chat.chat(npc, player, message);
@@ -647,6 +694,7 @@ public class event_ls_cpt_dramont extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int event_ls_cpt_dramont_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_38"))
@@ -687,7 +735,7 @@ public class event_ls_cpt_dramont extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_34");
@@ -700,7 +748,7 @@ public class event_ls_cpt_dramont extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.event_ls_cpt_dramont.branchId");
                     chat.chat(npc, player, message);
@@ -711,6 +759,7 @@ public class event_ls_cpt_dramont extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int event_ls_cpt_dramont_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_34"))
@@ -737,7 +786,7 @@ public class event_ls_cpt_dramont extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_38");
@@ -750,7 +799,7 @@ public class event_ls_cpt_dramont extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.event_ls_cpt_dramont.branchId");
                     chat.chat(npc, player, message);
@@ -783,7 +832,7 @@ public class event_ls_cpt_dramont extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_50");
@@ -796,7 +845,7 @@ public class event_ls_cpt_dramont extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.event_ls_cpt_dramont.branchId");
                     chat.chat(npc, player, message);
@@ -807,6 +856,7 @@ public class event_ls_cpt_dramont extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int event_ls_cpt_dramont_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_50"))
@@ -847,7 +897,7 @@ public class event_ls_cpt_dramont extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_34");
@@ -860,7 +910,7 @@ public class event_ls_cpt_dramont extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.event_ls_cpt_dramont.branchId");
                     chat.chat(npc, player, message);
@@ -871,6 +921,7 @@ public class event_ls_cpt_dramont extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int event_ls_cpt_dramont_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_34"))
@@ -897,7 +948,7 @@ public class event_ls_cpt_dramont extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_38");
@@ -910,7 +961,7 @@ public class event_ls_cpt_dramont extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.event_ls_cpt_dramont.branchId");
                     chat.chat(npc, player, message);
@@ -943,7 +994,7 @@ public class event_ls_cpt_dramont extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_50");
@@ -956,7 +1007,7 @@ public class event_ls_cpt_dramont extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.event_ls_cpt_dramont.branchId");
                     chat.chat(npc, player, message);
@@ -967,6 +1018,7 @@ public class event_ls_cpt_dramont extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -976,11 +1028,13 @@ public class event_ls_cpt_dramont extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -989,18 +1043,21 @@ public class event_ls_cpt_dramont extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.event_ls_cpt_dramont");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1037,7 +1094,7 @@ public class event_ls_cpt_dramont extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_6");
@@ -1053,7 +1110,7 @@ public class event_ls_cpt_dramont extends script.base_script
                 utils.setScriptVar(player, "conversation.event_ls_cpt_dramont.branchId", 1);
                 npcStartConversation(player, npc, "event_ls_cpt_dramont", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1062,6 +1119,7 @@ public class event_ls_cpt_dramont extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("event_ls_cpt_dramont"))

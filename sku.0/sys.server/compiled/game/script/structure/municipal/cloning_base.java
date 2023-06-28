@@ -1,5 +1,11 @@
 package script.structure.municipal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -8,6 +14,7 @@ public class cloning_base extends script.base_script
     public static final String SCRIPT_CLONING_FACILITY = "structure.municipal.cloning_facility";
     public static final String VAR_NUM_RESPAWN_TUBES = "numRespawnTubes";
     public static final String VAR_CURRENT_RESPAWN_TUBE = "currentTube";
+
     public cloning_base()
     {
     }

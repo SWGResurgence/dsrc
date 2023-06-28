@@ -1,5 +1,11 @@
 package script.creature_spawner;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,13 +14,14 @@ public class tatooine_npc_hard extends base_newbie_npc_spawner
     public static final boolean SPAWNER_DISABLED = false;
     public int maxPop = 3;
     public boolean newbie = true;
-    
+
     public tatooine_npc_hard()
     {
     }
+
     public String pickCreature() throws InterruptedException
     {
-        switch (rand(1,11))
+        switch (rand(1, 11))
         {
             case 1:
                 return "jabba_thief";
@@ -41,6 +48,7 @@ public class tatooine_npc_hard extends base_newbie_npc_spawner
         }
         return "tusken_commoner";
     }
+
     public int creatureDied(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())

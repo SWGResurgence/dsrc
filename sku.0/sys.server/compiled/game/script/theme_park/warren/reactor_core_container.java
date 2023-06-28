@@ -1,16 +1,23 @@
 package script.theme_park.warren;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.colors;
 import script.library.utils;
 
 public class reactor_core_container extends script.base_script
 {
+    public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
+    public static final String COREROD_TEMPLATE = "object/tangible/mission/quest_item/warren_core_control_rod_s01.iff";
     public reactor_core_container()
     {
     }
-    public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
-    public static final String COREROD_TEMPLATE = "object/tangible/mission/quest_item/warren_core_control_rod_s01.iff";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setOwner(self, obj_id.NULL_ID);
@@ -18,6 +25,7 @@ public class reactor_core_container extends script.base_script
         setName(self, new string_id(SYSTEM_MESSAGES, "core_name_on"));
         return SCRIPT_CONTINUE;
     }
+
     public void checkForReactorShutDown(obj_id self) throws InterruptedException
     {
         obj_id bldg = getTopMostContainer(self);
@@ -31,16 +39,20 @@ public class reactor_core_container extends script.base_script
             return;
         }
         int coreCount = 0;
-        for (obj_id content : contents) {
-            if (hasObjVar(content, "warren.reactorControlRod")) {
+        for (obj_id content : contents)
+        {
+            if (hasObjVar(content, "warren.reactorControlRod"))
+            {
                 coreCount++;
             }
-            if (coreCount > 1) {
+            if (coreCount > 1)
+            {
                 shutDownCore(self, bldg);
                 return;
             }
         }
     }
+
     public void checkForReactorShutDown(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id bldg = getTopMostContainer(self);
@@ -50,21 +62,27 @@ public class reactor_core_container extends script.base_script
             return;
         }
         int coreCount = 0;
-        for (obj_id content : contents) {
-            if (hasObjVar(content, "warren.reactorControlRod")) {
+        for (obj_id content : contents)
+        {
+            if (hasObjVar(content, "warren.reactorControlRod"))
+            {
                 moveCoreRodFromPlayerToContainer(content, self);
                 sendSystemMessage(player, new string_id(SYSTEM_MESSAGES, "insert_rod"));
                 doAnimationAction(player, "manipulate_low");
                 coreCount++;
             }
-            if (coreCount > 1) {
+            if (coreCount > 1)
+            {
                 shutDownCore(self, bldg);
                 return;
-            } else if (coreCount > 0) {
+            }
+            else if (coreCount > 0)
+            {
                 checkForReactorShutDown(self);
             }
         }
     }
+
     public void shutDownCore(obj_id self, obj_id bldg) throws InterruptedException
     {
         permissionsMakePublic(getCellId(getTopMostContainer(self), "plusroom84"));
@@ -78,10 +96,12 @@ public class reactor_core_container extends script.base_script
         {
             return;
         }
-        for (obj_id content : contents) {
+        for (obj_id content : contents)
+        {
             destroyObject(content);
         }
     }
+
     public int handleReactivateCore(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id bldg = getTopMostContainer(self);
@@ -95,6 +115,7 @@ public class reactor_core_container extends script.base_script
         setName(self, new string_id(SYSTEM_MESSAGES, "core_name_on"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info item) throws InterruptedException
     {
         location here = getLocation(player);
@@ -108,6 +129,7 @@ public class reactor_core_container extends script.base_script
         checkForReactorShutDown(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnOpenedContainer(obj_id self, obj_id player) throws InterruptedException
     {
         location here = getLocation(player);
@@ -121,6 +143,7 @@ public class reactor_core_container extends script.base_script
         checkForReactorShutDown(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public void moveCoreRodFromPlayerToContainer(obj_id coreRod, obj_id container) throws InterruptedException
     {
         destroyObject(coreRod);

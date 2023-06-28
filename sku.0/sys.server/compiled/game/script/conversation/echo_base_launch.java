@@ -1,50 +1,67 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class echo_base_launch extends script.base_script
 {
+    public static String c_stringFile = "conversation/echo_base_launch";
+
     public echo_base_launch()
     {
     }
-    public static String c_stringFile = "conversation/echo_base_launch";
+
     public boolean echo_base_launch_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean echo_base_launch_condition_bothRebel(obj_id player, obj_id npc) throws InterruptedException
     {
         return (factions.isRebel(npc) && factions.isRebel(player));
     }
+
     public boolean echo_base_launch_condition_bothImperial(obj_id player, obj_id npc) throws InterruptedException
     {
         return (factions.isImperial(npc) && factions.isImperial(player));
     }
+
     public boolean echo_base_launch_condition_npcRebelPlayerImperial(obj_id player, obj_id npc) throws InterruptedException
     {
         return (factions.isRebel(npc) && factions.isImperial(player));
     }
+
     public boolean echo_base_launch_condition_npcImperialPlayerRebel(obj_id player, obj_id npc) throws InterruptedException
     {
         return (factions.isImperial(npc) && factions.isRebel(player));
     }
+
     public boolean echo_base_launch_condition_disableRebel(obj_id player, obj_id npc) throws InterruptedException
     {
         return false;
     }
+
     public boolean echo_base_launch_condition_disableImperial(obj_id player, obj_id npc) throws InterruptedException
     {
         return false;
     }
+
     public boolean echo_base_launch_condition_Rebel_awaitingInstance(obj_id player, obj_id npc) throws InterruptedException
     {
         return buff.hasBuff(player, "instance_launching") && factions.isRebel(npc) && factions.isRebel(player);
     }
+
     public boolean echo_base_launch_condition_Imperial_awaitingInstance(obj_id player, obj_id npc) throws InterruptedException
     {
         return buff.hasBuff(player, "instance_launching") && factions.isImperial(npc) && factions.isImperial(player);
     }
+
     public boolean echo_base_launch_condition_tooSmallGroup(obj_id player, obj_id npc) throws InterruptedException
     {
         if (isGod(player) || hasObjVar(player, "testingHoth"))
@@ -63,25 +80,26 @@ public class echo_base_launch extends script.base_script
                     if (groupies != null && groupies.length > 0)
                     {
                         int playerCount = 0;
-                        for (obj_id groupie : groupies) {
-                            if (isPlayer(groupie)) {
+                        for (obj_id groupie : groupies)
+                        {
+                            if (isPlayer(groupie))
+                            {
                                 playerCount = playerCount + 1;
                             }
                         }
-                        if (playerCount >= 2)
-                        {
-                            return false;
-                        }
+                        return playerCount < 2;
                     }
                 }
             }
         }
         return true;
     }
+
     public boolean echo_base_launch_condition_isNotCorrectLevel(obj_id player, obj_id npc) throws InterruptedException
     {
         return getLevel(player) < township.MIN_LEVEL;
     }
+
     public void echo_base_launch_action_launchRebel(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!instance.isFlaggedForInstance(player, "echo_base"))
@@ -94,6 +112,7 @@ public class echo_base_launch extends script.base_script
             buff.applyBuff(player, "instance_launching");
         }
     }
+
     public void echo_base_launch_action_launchImperial(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!instance.isFlaggedForInstance(player, "echo_base"))
@@ -106,13 +125,14 @@ public class echo_base_launch extends script.base_script
             buff.applyBuff(player, "instance_launching");
         }
     }
+
     public void echo_base_launch_action_showEchoBaseVendorSui(obj_id player, obj_id npc) throws InterruptedException
     {
         dictionary d = new dictionary();
         d.put("player", player);
         messageTo(npc, "showInventorySUI", d, 0, false);
-        return;
     }
+
     public int echo_base_launch_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9"))
@@ -153,7 +173,7 @@ public class echo_base_launch extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_23");
@@ -166,7 +186,7 @@ public class echo_base_launch extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.echo_base_launch.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -187,6 +207,7 @@ public class echo_base_launch extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int echo_base_launch_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_23"))
@@ -214,6 +235,7 @@ public class echo_base_launch extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int echo_base_launch_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_32"))
@@ -254,7 +276,7 @@ public class echo_base_launch extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_38");
@@ -267,7 +289,7 @@ public class echo_base_launch extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.echo_base_launch.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -288,6 +310,7 @@ public class echo_base_launch extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int echo_base_launch_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_38"))
@@ -315,6 +338,7 @@ public class echo_base_launch extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -324,11 +348,13 @@ public class echo_base_launch extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -337,18 +363,21 @@ public class echo_base_launch extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.echo_base_launch");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -397,7 +426,7 @@ public class echo_base_launch extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_9");
@@ -409,7 +438,7 @@ public class echo_base_launch extends script.base_script
                 utils.setScriptVar(player, "conversation.echo_base_launch.branchId", 4);
                 npcStartConversation(player, npc, "echo_base_launch", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -450,7 +479,7 @@ public class echo_base_launch extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_32");
@@ -462,7 +491,7 @@ public class echo_base_launch extends script.base_script
                 utils.setScriptVar(player, "conversation.echo_base_launch.branchId", 13);
                 npcStartConversation(player, npc, "echo_base_launch", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -478,6 +507,7 @@ public class echo_base_launch extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("echo_base_launch"))

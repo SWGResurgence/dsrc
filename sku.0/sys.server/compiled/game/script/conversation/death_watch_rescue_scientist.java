@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.factions;
@@ -8,14 +14,17 @@ import script.*;
 
 public class death_watch_rescue_scientist extends script.base_script
 {
+    public static String c_stringFile = "conversation/death_watch_rescue_scientist";
+
     public death_watch_rescue_scientist()
     {
     }
-    public static String c_stringFile = "conversation/death_watch_rescue_scientist";
+
     public boolean death_watch_rescue_scientist_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean death_watch_rescue_scientist_condition_RebelCheck(obj_id player, obj_id npc) throws InterruptedException
     {
         String playerFaction = factions.getFaction(player);
@@ -23,12 +32,9 @@ public class death_watch_rescue_scientist extends script.base_script
         {
             return false;
         }
-        if (playerFaction.equals("Rebel"))
-        {
-            return true;
-        }
-        return false;
+        return playerFaction.equals("Rebel");
     }
+
     public boolean death_watch_rescue_scientist_condition_ImperialCheck(obj_id player, obj_id npc) throws InterruptedException
     {
         String playerFaction = factions.getFaction(player);
@@ -36,21 +42,15 @@ public class death_watch_rescue_scientist extends script.base_script
         {
             return false;
         }
-        if (playerFaction.equals("Imperial"))
-        {
-            return true;
-        }
-        return false;
+        return playerFaction.equals("Imperial");
     }
+
     public boolean death_watch_rescue_scientist_condition_NeutralCheck(obj_id player, obj_id npc) throws InterruptedException
     {
         String playerFaction = factions.getFaction(player);
-        if (playerFaction == null)
-        {
-            return true;
-        }
-        return false;
+        return playerFaction == null;
     }
+
     public boolean death_watch_rescue_scientist_condition_AlreadyRescuedCheck(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "death_watch_herald.neutralrescue"))
@@ -61,15 +61,13 @@ public class death_watch_rescue_scientist extends script.base_script
         {
             return true;
         }
-        if (hasObjVar(player, "death_watch_herald.rebelrescue"))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(player, "death_watch_herald.rebelrescue");
     }
+
     public void death_watch_rescue_scientist_action__defaultAction(obj_id player, obj_id npc) throws InterruptedException
     {
     }
+
     public void death_watch_rescue_scientist_action_RewardRebel(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "death_watch_herald.rebelfinish"))
@@ -80,8 +78,8 @@ public class death_watch_rescue_scientist extends script.base_script
                 setObjVar(player, "death_watch_herald.rebelrescue", true);
             }
         }
-        return;
     }
+
     public void death_watch_rescue_scientist_action_RewardImperial(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "death_watch_herald.imperialrescue"))
@@ -89,8 +87,8 @@ public class death_watch_rescue_scientist extends script.base_script
             factions.addFactionStanding(player, "Imperial", 30);
             setObjVar(player, "death_watch_herald.imperialrescue", true);
         }
-        return;
     }
+
     public void death_watch_rescue_scientist_action_RewardNeutral(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "death_watch_herald.neutralrescue"))
@@ -103,8 +101,8 @@ public class death_watch_rescue_scientist extends script.base_script
                 setObjVar(player, "death_watch_herald.neutralrescue", true);
             }
         }
-        return;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -114,6 +112,7 @@ public class death_watch_rescue_scientist extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -121,6 +120,7 @@ public class death_watch_rescue_scientist extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -129,12 +129,14 @@ public class death_watch_rescue_scientist extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "npc.conversation.death_watch_rescue_scientist");
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -171,6 +173,7 @@ public class death_watch_rescue_scientist extends script.base_script
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("death_watch_rescue_scientist"))

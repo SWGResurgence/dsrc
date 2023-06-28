@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,86 +14,72 @@ import script.*;
 
 public class newbie_ranged_combat extends script.base_script
 {
+    public static String c_stringFile = "conversation/newbie_ranged_combat";
+
     public newbie_ranged_combat()
     {
     }
-    public static String c_stringFile = "conversation/newbie_ranged_combat";
+
     public boolean newbie_ranged_combat_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean newbie_ranged_combat_condition_completedStepOne(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.hasCompletedTask(player, "quest/newbie_ranged_combat", "newbie_ranged_kill_zealots_1"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.hasCompletedTask(player, "quest/newbie_ranged_combat", "newbie_ranged_kill_zealots_1");
     }
+
     public boolean newbie_ranged_combat_condition_completedStepTwo(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.hasCompletedTask(player, "quest/newbie_ranged_combat", "newbie_ranged_kill_zealots_2"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.hasCompletedTask(player, "quest/newbie_ranged_combat", "newbie_ranged_kill_zealots_2");
     }
+
     public boolean newbie_ranged_combat_condition_completedStepThree(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.hasCompletedTask(player, "quest/newbie_ranged_combat", "newbie_ranged_kill_zealots_3"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.hasCompletedTask(player, "quest/newbie_ranged_combat", "newbie_ranged_kill_zealots_3");
     }
+
     public boolean newbie_ranged_combat_condition_isOnStepOne(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "quest/newbie_ranged_combat", "newbie_ranged_kill_zealots_1"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isTaskActive(player, "quest/newbie_ranged_combat", "newbie_ranged_kill_zealots_1");
     }
+
     public boolean newbie_ranged_combat_condition_isOnStepTwo(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "quest/newbie_ranged_combat", "newbie_ranged_kill_zealots_2"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isTaskActive(player, "quest/newbie_ranged_combat", "newbie_ranged_kill_zealots_2");
     }
+
     public boolean newbie_ranged_combat_condition_isOnStepThree(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "quest/newbie_ranged_combat", "newbie_ranged_kill_zealots_3"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isTaskActive(player, "quest/newbie_ranged_combat", "newbie_ranged_kill_zealots_3");
     }
+
     public boolean newbie_ranged_combat_condition_pickingPurvisPocket(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "quest/steal_speeder", "pickPurvisPocket"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isTaskActive(player, "quest/steal_speeder", "pickPurvisPocket");
     }
+
     public void newbie_ranged_combat_action_grantRangedCombatQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest/newbie_ranged_combat");
     }
+
     public void newbie_ranged_combat_action_startTaskTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "start_task_two");
     }
+
     public void newbie_ranged_combat_action_startTaskThree(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "start_task_three");
     }
+
     public void newbie_ranged_combat_action_sendPocketPickSignal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "purvisPocketPicked");
     }
+
     public int newbie_ranged_combat_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_61"))
@@ -104,6 +96,7 @@ public class newbie_ranged_combat extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_ranged_combat_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_144"))
@@ -130,6 +123,7 @@ public class newbie_ranged_combat extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_ranged_combat_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_155"))
@@ -149,7 +143,7 @@ public class newbie_ranged_combat extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_163");
@@ -158,7 +152,7 @@ public class newbie_ranged_combat extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_ranged_combat.branchId");
                     chat.chat(npc, player, message);
@@ -184,7 +178,7 @@ public class newbie_ranged_combat extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_163");
@@ -193,7 +187,7 @@ public class newbie_ranged_combat extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_ranged_combat.branchId");
                     chat.chat(npc, player, message);
@@ -204,6 +198,7 @@ public class newbie_ranged_combat extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_ranged_combat_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_163"))
@@ -223,7 +218,7 @@ public class newbie_ranged_combat extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_168");
@@ -232,7 +227,7 @@ public class newbie_ranged_combat extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_ranged_combat.branchId");
                     chat.chat(npc, player, message);
@@ -243,6 +238,7 @@ public class newbie_ranged_combat extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_ranged_combat_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_168"))
@@ -262,7 +258,7 @@ public class newbie_ranged_combat extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_173");
@@ -271,7 +267,7 @@ public class newbie_ranged_combat extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_ranged_combat.branchId");
                     chat.chat(npc, player, message);
@@ -282,6 +278,7 @@ public class newbie_ranged_combat extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_ranged_combat_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_173"))
@@ -301,7 +298,7 @@ public class newbie_ranged_combat extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_179");
@@ -310,7 +307,7 @@ public class newbie_ranged_combat extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_ranged_combat.branchId");
                     chat.chat(npc, player, message);
@@ -321,6 +318,7 @@ public class newbie_ranged_combat extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_ranged_combat_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_179"))
@@ -347,7 +345,7 @@ public class newbie_ranged_combat extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_184");
@@ -360,7 +358,7 @@ public class newbie_ranged_combat extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_ranged_combat.branchId");
                     chat.chat(npc, player, message);
@@ -371,6 +369,7 @@ public class newbie_ranged_combat extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_ranged_combat_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_184"))
@@ -401,7 +400,7 @@ public class newbie_ranged_combat extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_192");
@@ -410,7 +409,7 @@ public class newbie_ranged_combat extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_ranged_combat.branchId");
                     chat.chat(npc, player, message);
@@ -421,6 +420,7 @@ public class newbie_ranged_combat extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_ranged_combat_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_192"))
@@ -437,6 +437,7 @@ public class newbie_ranged_combat extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_ranged_combat_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_200"))
@@ -456,7 +457,7 @@ public class newbie_ranged_combat extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_208");
@@ -465,7 +466,7 @@ public class newbie_ranged_combat extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_ranged_combat.branchId");
                     chat.chat(npc, player, message);
@@ -491,7 +492,7 @@ public class newbie_ranged_combat extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_208");
@@ -500,7 +501,7 @@ public class newbie_ranged_combat extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_ranged_combat.branchId");
                     chat.chat(npc, player, message);
@@ -511,6 +512,7 @@ public class newbie_ranged_combat extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_ranged_combat_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_208"))
@@ -530,7 +532,7 @@ public class newbie_ranged_combat extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_213");
@@ -539,7 +541,7 @@ public class newbie_ranged_combat extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_ranged_combat.branchId");
                     chat.chat(npc, player, message);
@@ -550,6 +552,7 @@ public class newbie_ranged_combat extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_ranged_combat_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_213"))
@@ -569,7 +572,7 @@ public class newbie_ranged_combat extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_219");
@@ -578,7 +581,7 @@ public class newbie_ranged_combat extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_ranged_combat.branchId");
                     chat.chat(npc, player, message);
@@ -589,6 +592,7 @@ public class newbie_ranged_combat extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_ranged_combat_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_219"))
@@ -615,7 +619,7 @@ public class newbie_ranged_combat extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_224");
@@ -628,7 +632,7 @@ public class newbie_ranged_combat extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_ranged_combat.branchId");
                     chat.chat(npc, player, message);
@@ -639,6 +643,7 @@ public class newbie_ranged_combat extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_ranged_combat_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_224"))
@@ -665,7 +670,7 @@ public class newbie_ranged_combat extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_229");
@@ -678,7 +683,7 @@ public class newbie_ranged_combat extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_ranged_combat.branchId");
                     chat.chat(npc, player, message);
@@ -704,7 +709,7 @@ public class newbie_ranged_combat extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_213");
@@ -713,7 +718,7 @@ public class newbie_ranged_combat extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_ranged_combat.branchId");
                     chat.chat(npc, player, message);
@@ -724,6 +729,7 @@ public class newbie_ranged_combat extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_ranged_combat_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_229"))
@@ -743,7 +749,7 @@ public class newbie_ranged_combat extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_235");
@@ -752,7 +758,7 @@ public class newbie_ranged_combat extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_ranged_combat.branchId");
                     chat.chat(npc, player, message);
@@ -785,7 +791,7 @@ public class newbie_ranged_combat extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_243");
@@ -798,7 +804,7 @@ public class newbie_ranged_combat extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_ranged_combat.branchId");
                     chat.chat(npc, player, message);
@@ -809,6 +815,7 @@ public class newbie_ranged_combat extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_ranged_combat_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_235"))
@@ -835,7 +842,7 @@ public class newbie_ranged_combat extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_243");
@@ -848,7 +855,7 @@ public class newbie_ranged_combat extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_ranged_combat.branchId");
                     chat.chat(npc, player, message);
@@ -859,6 +866,7 @@ public class newbie_ranged_combat extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_ranged_combat_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_243"))
@@ -886,6 +894,7 @@ public class newbie_ranged_combat extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_ranged_combat_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_254"))
@@ -912,7 +921,7 @@ public class newbie_ranged_combat extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_260");
@@ -925,7 +934,7 @@ public class newbie_ranged_combat extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_ranged_combat.branchId");
                     chat.chat(npc, player, message);
@@ -958,7 +967,7 @@ public class newbie_ranged_combat extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_260");
@@ -971,7 +980,7 @@ public class newbie_ranged_combat extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_ranged_combat.branchId");
                     chat.chat(npc, player, message);
@@ -982,6 +991,7 @@ public class newbie_ranged_combat extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_ranged_combat_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_260"))
@@ -1008,7 +1018,7 @@ public class newbie_ranged_combat extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_264");
@@ -1021,7 +1031,7 @@ public class newbie_ranged_combat extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_ranged_combat.branchId");
                     chat.chat(npc, player, message);
@@ -1047,7 +1057,7 @@ public class newbie_ranged_combat extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_276");
@@ -1056,7 +1066,7 @@ public class newbie_ranged_combat extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_ranged_combat.branchId");
                     chat.chat(npc, player, message);
@@ -1067,6 +1077,7 @@ public class newbie_ranged_combat extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_ranged_combat_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_264"))
@@ -1094,6 +1105,7 @@ public class newbie_ranged_combat extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_ranged_combat_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_276"))
@@ -1120,7 +1132,7 @@ public class newbie_ranged_combat extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_264");
@@ -1133,7 +1145,7 @@ public class newbie_ranged_combat extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_ranged_combat.branchId");
                     chat.chat(npc, player, message);
@@ -1144,6 +1156,7 @@ public class newbie_ranged_combat extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -1156,6 +1169,7 @@ public class newbie_ranged_combat extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -1164,6 +1178,7 @@ public class newbie_ranged_combat extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -1172,18 +1187,21 @@ public class newbie_ranged_combat extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.newbie_ranged_combat");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1206,7 +1224,7 @@ public class newbie_ranged_combat extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -1214,7 +1232,7 @@ public class newbie_ranged_combat extends script.base_script
                 utils.setScriptVar(player, "conversation.newbie_ranged_combat.branchId", 1);
                 npcStartConversation(player, npc, "newbie_ranged_combat", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1260,7 +1278,7 @@ public class newbie_ranged_combat extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_144");
@@ -1272,7 +1290,7 @@ public class newbie_ranged_combat extends script.base_script
                 utils.setScriptVar(player, "conversation.newbie_ranged_combat.branchId", 6);
                 npcStartConversation(player, npc, "newbie_ranged_combat", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1300,7 +1318,7 @@ public class newbie_ranged_combat extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_155");
@@ -1312,7 +1330,7 @@ public class newbie_ranged_combat extends script.base_script
                 utils.setScriptVar(player, "conversation.newbie_ranged_combat.branchId", 8);
                 npcStartConversation(player, npc, "newbie_ranged_combat", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1340,7 +1358,7 @@ public class newbie_ranged_combat extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_200");
@@ -1352,7 +1370,7 @@ public class newbie_ranged_combat extends script.base_script
                 utils.setScriptVar(player, "conversation.newbie_ranged_combat.branchId", 16);
                 npcStartConversation(player, npc, "newbie_ranged_combat", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1380,7 +1398,7 @@ public class newbie_ranged_combat extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_254");
@@ -1392,7 +1410,7 @@ public class newbie_ranged_combat extends script.base_script
                 utils.setScriptVar(player, "conversation.newbie_ranged_combat.branchId", 25);
                 npcStartConversation(player, npc, "newbie_ranged_combat", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1401,6 +1419,7 @@ public class newbie_ranged_combat extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("newbie_ranged_combat"))

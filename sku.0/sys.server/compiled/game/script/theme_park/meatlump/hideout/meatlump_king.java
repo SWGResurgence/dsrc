@@ -1,5 +1,11 @@
 package script.theme_park.meatlump.hideout;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.obj_id;
 import script.prose_package;
@@ -7,9 +13,6 @@ import script.string_id;
 
 public class meatlump_king extends script.base_script
 {
-    public meatlump_king()
-    {
-    }
     public static final String MEATLUMP_KING_DATATABLE = "datatables/theme_park/meatlump/meatlump_king.iff";
     public static final String OFFERING_COLUMN = "offering";
     public static final String REACTION_TYPE_COLUMN = "reactionType";
@@ -18,10 +21,15 @@ public class meatlump_king extends script.base_script
     public static final int CHAT = 1;
     public static final int GIVE = 2;
     public static final int SPECIAL = 3;
+    public meatlump_king()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnSawEmote(obj_id self, obj_id emoteSayer, String emoteSeen) throws InterruptedException
     {
         if (!isPlayer(emoteSayer) || ai_lib.isInCombat(emoteSayer) || isIncapacitated(emoteSayer) || isDead(emoteSayer))
@@ -43,6 +51,7 @@ public class meatlump_king extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGiveItem(obj_id self, obj_id item, obj_id giver) throws InterruptedException
     {
         if (!isPlayer(giver) || ai_lib.isInCombat(giver) || isIncapacitated(giver) || isDead(giver))
@@ -62,6 +71,7 @@ public class meatlump_king extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void determineKingReaction(obj_id self, obj_id player, int row) throws InterruptedException
     {
         int reactionType = dataTableGetInt(MEATLUMP_KING_DATATABLE, row, REACTION_TYPE_COLUMN);
@@ -77,44 +87,43 @@ public class meatlump_king extends script.base_script
             {
                 moreReactions = false;
             }
-            else 
+            else
             {
                 processKingReaction(self, player, nextReactionType, nextReaction);
                 index = index + 1;
             }
         }
-        return;
     }
+
     public void processKingReaction(obj_id self, obj_id player, int reactionType, String reaction) throws InterruptedException
     {
         faceTo(self, player);
         switch (reactionType)
         {
             case EMOTE:
-            doAnimationAction(self, reaction);
-            break;
+                doAnimationAction(self, reaction);
+                break;
             case CHAT:
-            prose_package pp = prose.getPackage(new string_id("theme_park/corellia/quest", reaction), player, player);
-            String pronounTT = getGender(player) == Gender.MALE ? "boy" : "girl";
-            prose.setTT(pp, pronounTT);
-            chat.chat(self, player, chat.CHAT_SAY, null, pp);
-            break;
+                prose_package pp = prose.getPackage(new string_id("theme_park/corellia/quest", reaction), player, player);
+                String pronounTT = getGender(player) == Gender.MALE ? "boy" : "girl";
+                prose.setTT(pp, pronounTT);
+                chat.chat(self, player, chat.CHAT_SAY, null, pp);
+                break;
             case GIVE:
-            String[] items = split(reaction, ':');
-            String itemToGive = items[rand(0, items.length - 1)];
-            if (itemToGive != null && itemToGive.length() > 0)
-            {
-                obj_id inv = getObjectInSlot(player, "inventory");
-                if (isIdValid(inv))
+                String[] items = split(reaction, ':');
+                String itemToGive = items[rand(0, items.length - 1)];
+                if (itemToGive != null && itemToGive.length() > 0)
                 {
-                    obj_id givenItem = static_item.createNewItemFunction(itemToGive, inv);
-                    groundquests.sendPlacedInInventorySystemMessage(player, givenItem, reaction);
+                    obj_id inv = getObjectInSlot(player, "inventory");
+                    if (isIdValid(inv))
+                    {
+                        obj_id givenItem = static_item.createNewItemFunction(itemToGive, inv);
+                        groundquests.sendPlacedInInventorySystemMessage(player, givenItem, reaction);
+                    }
                 }
-            }
-            break;
+                break;
             case SPECIAL:
-            break;
+                break;
         }
-        return;
     }
 }

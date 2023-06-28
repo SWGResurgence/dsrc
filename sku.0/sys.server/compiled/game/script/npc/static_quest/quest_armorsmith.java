@@ -1,5 +1,11 @@
 package script.npc.static_quest;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.chat;
 import script.library.money;
@@ -11,9 +17,6 @@ import java.util.Vector;
 
 public class quest_armorsmith extends script.base_script
 {
-    public quest_armorsmith()
-    {
-    }
     public static final String SCRIPT_QUEST_ARMORSMITH = "npc.static_quest.quest_armorsmith";
     public static final String DATATABLE_ARMORSMITH_ITEMS = "datatables/npc/static_quest/armorsmith.iff";
     public static final int QUEST_COST = 50000;
@@ -55,11 +58,16 @@ public class quest_armorsmith extends script.base_script
     public static final string_id SID_NO_TO_QUEST_6_QUERY = new string_id("quest_armorsmith", "no_to_quest_6_query");
     public static final string_id SID_YES = new string_id("quest_armorsmith", "yes");
     public static final string_id SID_NO = new string_id("quest_armorsmith", "no");
+    public quest_armorsmith()
+    {
+    }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         detachScript(self, SCRIPT_QUEST_ARMORSMITH);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int mnu = mi.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -67,6 +75,7 @@ public class quest_armorsmith extends script.base_script
         mdata.setServerNotify(false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         string_id[] valid_responses = new string_id[0];
@@ -80,7 +89,7 @@ public class quest_armorsmith extends script.base_script
             {
                 fullSchematicConversion(speaker);
             }
-            else 
+            else
             {
                 bootSchematicConversion(speaker);
             }
@@ -91,62 +100,63 @@ public class quest_armorsmith extends script.base_script
         switch (stage)
         {
             case 0:
-            pp = prose.getPackage(SID_QUEST_1_START, QUEST_COST);
-            valid_responses = getConversationResponses(speaker, self, 1);
-            npcStartConversation(speaker, self, CONVERSE_ARMORSMITH_QUEST, null, pp, valid_responses);
-            break;
+                pp = prose.getPackage(SID_QUEST_1_START, QUEST_COST);
+                valid_responses = getConversationResponses(speaker, self, 1);
+                npcStartConversation(speaker, self, CONVERSE_ARMORSMITH_QUEST, null, pp, valid_responses);
+                break;
             case 1:
-            npcStartConversation(speaker, self, CONVERSE_ARMORSMITH_QUEST, SID_QUEST_1_DESCRIPTION, valid_responses);
-            grantSchematic(speaker, "object/draft_schematic/armor/armor_segment_ris.iff");
-            setObjVar(speaker, VAR_QUEST_ROOT_ARMORSMITH, 2);
-            break;
+                npcStartConversation(speaker, self, CONVERSE_ARMORSMITH_QUEST, SID_QUEST_1_DESCRIPTION, valid_responses);
+                grantSchematic(speaker, "object/draft_schematic/armor/armor_segment_ris.iff");
+                setObjVar(speaker, VAR_QUEST_ROOT_ARMORSMITH, 2);
+                break;
             case 2:
-            name = getArmorsmithQuestItemName(stage);
-            if (name != null)
-            {
-                pp = prose.getPackage(SID_QUEST_2_QUERY, name);
-                valid_responses = getConversationResponses(speaker, self, 3);
-                npcStartConversation(speaker, self, CONVERSE_ARMORSMITH_QUEST, null, pp, valid_responses);
-            }
-            break;
+                name = getArmorsmithQuestItemName(stage);
+                if (name != null)
+                {
+                    pp = prose.getPackage(SID_QUEST_2_QUERY, name);
+                    valid_responses = getConversationResponses(speaker, self, 3);
+                    npcStartConversation(speaker, self, CONVERSE_ARMORSMITH_QUEST, null, pp, valid_responses);
+                }
+                break;
             case 3:
-            npcStartConversation(speaker, self, CONVERSE_ARMORSMITH_QUEST, SID_QUEST_3_START, valid_responses);
-            setObjVar(speaker, VAR_QUEST_ROOT_ARMORSMITH, 4);
-            grantSchematic(speaker, "object/draft_schematic/armor/component/armor_layer_ris.iff");
-            break;
+                npcStartConversation(speaker, self, CONVERSE_ARMORSMITH_QUEST, SID_QUEST_3_START, valid_responses);
+                setObjVar(speaker, VAR_QUEST_ROOT_ARMORSMITH, 4);
+                grantSchematic(speaker, "object/draft_schematic/armor/component/armor_layer_ris.iff");
+                break;
             case 4:
-            name = getArmorsmithQuestItemName(stage);
-            if (name != null)
-            {
-                pp = prose.getPackage(SID_QUEST_4_QUERY, name);
-                valid_responses = getConversationResponses(speaker, self, 5);
-                npcStartConversation(speaker, self, CONVERSE_ARMORSMITH_QUEST, null, pp, valid_responses);
-            }
-            break;
+                name = getArmorsmithQuestItemName(stage);
+                if (name != null)
+                {
+                    pp = prose.getPackage(SID_QUEST_4_QUERY, name);
+                    valid_responses = getConversationResponses(speaker, self, 5);
+                    npcStartConversation(speaker, self, CONVERSE_ARMORSMITH_QUEST, null, pp, valid_responses);
+                }
+                break;
             case 5:
-            setObjVar(speaker, VAR_QUEST_ROOT_ARMORSMITH, 6);
-            npcStartConversation(speaker, self, CONVERSE_ARMORSMITH_QUEST, SID_QUEST_5_START, valid_responses);
-            grantSchematic(speaker, "object/draft_schematic/armor/armor_appearance_ris_boots.iff");
-            break;
+                setObjVar(speaker, VAR_QUEST_ROOT_ARMORSMITH, 6);
+                npcStartConversation(speaker, self, CONVERSE_ARMORSMITH_QUEST, SID_QUEST_5_START, valid_responses);
+                grantSchematic(speaker, "object/draft_schematic/armor/armor_appearance_ris_boots.iff");
+                break;
             case 6:
-            name = getArmorsmithQuestItemName(stage);
-            if (name != null)
-            {
-                pp = prose.getPackage(SID_QUEST_6_QUERY, name);
-                valid_responses = getConversationResponses(speaker, self, 7);
-                npcStartConversation(speaker, self, CONVERSE_ARMORSMITH_QUEST, null, pp, valid_responses);
-            }
-            break;
+                name = getArmorsmithQuestItemName(stage);
+                if (name != null)
+                {
+                    pp = prose.getPackage(SID_QUEST_6_QUERY, name);
+                    valid_responses = getConversationResponses(speaker, self, 7);
+                    npcStartConversation(speaker, self, CONVERSE_ARMORSMITH_QUEST, null, pp, valid_responses);
+                }
+                break;
             case 7:
-            npcSpeak(speaker, SID_GREETING_COMPLETE);
-            npcEndConversation(speaker);
+                npcSpeak(speaker, SID_GREETING_COMPLETE);
+                npcEndConversation(speaker);
             default:
-            chat.chat(self, speaker, SID_GREETING);
-            npcEndConversation(speaker);
-            break;
+                chat.chat(self, speaker, SID_GREETING);
+                npcEndConversation(speaker);
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convoName, obj_id speaker, string_id response) throws InterruptedException
     {
         string_id[] valid_responses = new string_id[0];
@@ -175,7 +185,7 @@ public class quest_armorsmith extends script.base_script
                 {
                     npcSpeak(speaker, SID_NOT_ENOUGH_MONEY);
                 }
-                else 
+                else
                 {
                     d.put("player", speaker);
                     money.requestPayment(speaker, self, QUEST_COST, "armorsmithQuestPayment", d, true);
@@ -323,6 +333,7 @@ public class quest_armorsmith extends script.base_script
         npcEndConversation(speaker);
         return SCRIPT_CONTINUE;
     }
+
     public int armorsmithQuestPayment(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -347,6 +358,7 @@ public class quest_armorsmith extends script.base_script
         money.bankTo(self, money.ACCT_SKILL_TRAINING, QUEST_COST);
         return SCRIPT_CONTINUE;
     }
+
     public string_id[] getConversationResponses(obj_id player, obj_id npc, int progress) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "faction_recruiter::getConversationResponses -- " + progress);
@@ -355,41 +367,41 @@ public class quest_armorsmith extends script.base_script
         switch (progress)
         {
             case 1:
-            responses = utils.addElement(responses, SID_YES_TO_QUEST_1_START);
-            responses = utils.addElement(responses, SID_NO_TO_QUEST_1_START);
-            break;
+                responses = utils.addElement(responses, SID_YES_TO_QUEST_1_START);
+                responses = utils.addElement(responses, SID_NO_TO_QUEST_1_START);
+                break;
             case 2:
-            responses = utils.addElement(responses, SID_YES);
-            break;
+                responses = utils.addElement(responses, SID_YES);
+                break;
             case 3:
-            if (verifyQuestItem(player) != null)
-            {
-                responses = utils.addElement(responses, SID_YES_TO_QUEST_2_QUERY);
-            }
-            responses = utils.addElement(responses, SID_NO_TO_QUEST_2_QUERY);
-            break;
+                if (verifyQuestItem(player) != null)
+                {
+                    responses = utils.addElement(responses, SID_YES_TO_QUEST_2_QUERY);
+                }
+                responses = utils.addElement(responses, SID_NO_TO_QUEST_2_QUERY);
+                break;
             case 4:
-            responses = utils.addElement(responses, SID_YES_TO_QUEST_3_START);
-            responses = utils.addElement(responses, SID_NO_TO_QUEST_3_START);
-            break;
+                responses = utils.addElement(responses, SID_YES_TO_QUEST_3_START);
+                responses = utils.addElement(responses, SID_NO_TO_QUEST_3_START);
+                break;
             case 5:
-            if (verifyQuestItem(player) != null)
-            {
-                responses = utils.addElement(responses, SID_YES_TO_QUEST_4_QUERY);
-            }
-            responses = utils.addElement(responses, SID_NO_TO_QUEST_4_QUERY);
-            break;
+                if (verifyQuestItem(player) != null)
+                {
+                    responses = utils.addElement(responses, SID_YES_TO_QUEST_4_QUERY);
+                }
+                responses = utils.addElement(responses, SID_NO_TO_QUEST_4_QUERY);
+                break;
             case 6:
-            responses = utils.addElement(responses, SID_YES_TO_QUEST_5_START);
-            responses = utils.addElement(responses, SID_NO_TO_QUEST_5_START);
-            break;
+                responses = utils.addElement(responses, SID_YES_TO_QUEST_5_START);
+                responses = utils.addElement(responses, SID_NO_TO_QUEST_5_START);
+                break;
             case 7:
-            if (verifyQuestItem(player) != null)
-            {
-                responses = utils.addElement(responses, SID_YES_TO_QUEST_6_QUERY);
-            }
-            responses = utils.addElement(responses, SID_NO_TO_QUEST_6_QUERY);
-            break;
+                if (verifyQuestItem(player) != null)
+                {
+                    responses = utils.addElement(responses, SID_YES_TO_QUEST_6_QUERY);
+                }
+                responses = utils.addElement(responses, SID_NO_TO_QUEST_6_QUERY);
+                break;
             default:
         }
         string_id[] _responses = new string_id[0];
@@ -400,25 +412,25 @@ public class quest_armorsmith extends script.base_script
         }
         return _responses;
     }
+
     public prose_package[] getProseConversationResponses(obj_id player, obj_id npc, String prose_string, int prose_digit, int progress) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "faction_recruiter::getProseConversationResponses -- " + progress);
         prose_package[] responses = new prose_package[0];
         prose_package pp;
         int stage = getArmorsmithQuestStage(player);
-        switch (progress)
+        if (progress == 3)
         {
-            case 3:
             LOG("LOG_CHANNEL", "name ->" + prose_string);
             pp = prose.getPackage(SID_YES_TO_QUEST_2_QUERY, prose_string);
             responses = assemblePackageArray(responses, pp);
             pp = prose.getPackage(SID_NO_TO_QUEST_2_QUERY, prose_string);
             responses = assemblePackageArray(responses, pp);
-            break;
         }
         LOG("LOG_CHANNEL", "responses ->" + responses.length);
         return responses;
     }
+
     public prose_package[] assemblePackageArray(prose_package[] array, prose_package element) throws InterruptedException
     {
         if (element == null)
@@ -435,6 +447,7 @@ public class quest_armorsmith extends script.base_script
         vector.toArray(array);
         return array;
     }
+
     public int getArmorsmithQuestStage(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -449,11 +462,12 @@ public class quest_armorsmith extends script.base_script
         {
             return getIntObjVar(player, VAR_QUEST_ROOT_ARMORSMITH);
         }
-        else 
+        else
         {
             return 0;
         }
     }
+
     public String getArmorsmithQuestItem(int stage) throws InterruptedException
     {
         if (stage < 0)
@@ -465,11 +479,12 @@ public class quest_armorsmith extends script.base_script
         {
             return null;
         }
-        else 
+        else
         {
             return dataTableGetString(DATATABLE_ARMORSMITH_ITEMS, idx, "template");
         }
     }
+
     public String getArmorsmithQuestItemName(int stage) throws InterruptedException
     {
         if (stage < 0)
@@ -481,7 +496,7 @@ public class quest_armorsmith extends script.base_script
         {
             return null;
         }
-        else 
+        else
         {
             String name_str = dataTableGetString(DATATABLE_ARMORSMITH_ITEMS, idx, "name");
             if (name_str != null)
@@ -492,6 +507,7 @@ public class quest_armorsmith extends script.base_script
         }
         return null;
     }
+
     public obj_id verifyQuestItem(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -515,11 +531,15 @@ public class quest_armorsmith extends script.base_script
             return null;
         }
         obj_id[] inv_contents = utils.getContents(inventory, false);
-        for (obj_id inv_content : inv_contents) {
-            if (template.equals(getTemplateName(inv_content))) {
+        for (obj_id inv_content : inv_contents)
+        {
+            if (template.equals(getTemplateName(inv_content)))
+            {
                 obj_id creator = getCrafter(inv_content);
-                if (isIdValid(creator)) {
-                    if (creator == player) {
+                if (isIdValid(creator))
+                {
+                    if (creator == player)
+                    {
                         return inv_content;
                     }
                 }
@@ -527,6 +547,7 @@ public class quest_armorsmith extends script.base_script
         }
         return null;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "Mol Ni'mai");
@@ -534,14 +555,17 @@ public class quest_armorsmith extends script.base_script
         setCondition(self, CONDITION_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public boolean hasOldRisChest(obj_id player) throws InterruptedException
     {
         return (hasSchematic(player, "object/draft_schematic/clothing/clothing_armor_ris_chest_plate.iff"));
     }
+
     public boolean hasOldRisBoot(obj_id player) throws InterruptedException
     {
         return (hasSchematic(player, "object/draft_schematic/clothing/clothing_armor_ris_boots.iff"));
     }
+
     public void fullSchematicConversion(obj_id speaker) throws InterruptedException
     {
         revokeSchematic(speaker, "object/draft_schematic/armor/component/armor_layer_ris.iff");
@@ -562,12 +586,11 @@ public class quest_armorsmith extends script.base_script
         grantSchematic(speaker, "object/draft_schematic/armor/armor_appearance_ris_gloves.iff");
         grantSchematic(speaker, "object/draft_schematic/armor/armor_appearance_ris_helmet.iff");
         grantSchematic(speaker, "object/draft_schematic/armor/armor_appearance_ris_leggings.iff");
-        return;
     }
+
     public void bootSchematicConversion(obj_id speaker) throws InterruptedException
     {
         revokeSchematic(speaker, "object/draft_schematic/clothing/clothing_armor_ris_boots.iff");
         grantSchematic(speaker, "object/draft_schematic/armor/armor_appearance_ris_boots.iff");
-        return;
     }
 }

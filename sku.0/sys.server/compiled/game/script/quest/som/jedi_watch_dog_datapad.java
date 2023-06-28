@@ -1,16 +1,23 @@
 package script.quest.som;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.groundquests;
 import script.*;
 
 public class jedi_watch_dog_datapad extends script.base_script
 {
-    public jedi_watch_dog_datapad()
-    {
-    }
     public static final String STF = "som/som_quest";
     public static final string_id LISTEN = new string_id(STF, "jedi_datapad_listen");
     public static final string_id CLICK = new string_id(STF, "jedi_datapad_click");
+    public jedi_watch_dog_datapad()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int menu = mi.addRootMenu(menu_info_types.ITEM_USE, LISTEN);
@@ -22,6 +29,7 @@ public class jedi_watch_dog_datapad extends script.base_script
         mid.setServerNotify(true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -31,7 +39,7 @@ public class jedi_watch_dog_datapad extends script.base_script
                 groundquests.grantQuest(player, "som_jedi_dog");
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 sendSystemMessage(player, CLICK);
                 return SCRIPT_CONTINUE;

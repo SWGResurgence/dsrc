@@ -1,5 +1,11 @@
 package script.developer.soe.e3demo;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.anims;
 import script.library.factions;
@@ -12,6 +18,7 @@ public class e3_stormtrooper_leader extends script.base_script
     public e3_stormtrooper_leader()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "moveToLocationOne", null, 5, false);
@@ -19,11 +26,13 @@ public class e3_stormtrooper_leader extends script.base_script
         factions.setFaction(self, "Imperial");
         return SCRIPT_CONTINUE;
     }
+
     public int moveToLocationOne(obj_id self, dictionary params) throws InterruptedException
     {
         pathToLocationOne(self);
         return SCRIPT_CONTINUE;
     }
+
     public void pathToLocationOne(obj_id self) throws InterruptedException
     {
         location destLoc = new location(getLocation(self));
@@ -33,6 +42,7 @@ public class e3_stormtrooper_leader extends script.base_script
         setObjVar(self, "intIndex", 1);
         pathTo(self, destLoc);
     }
+
     public void pathToLocationTwo(obj_id self) throws InterruptedException
     {
         location destLoc = new location(getLocation(self));
@@ -42,6 +52,7 @@ public class e3_stormtrooper_leader extends script.base_script
         pathTo(self, destLoc);
         setObjVar(self, "intIndex", 2);
     }
+
     public void pathToLocationThree(obj_id self) throws InterruptedException
     {
         location destLoc = new location(getLocation(self));
@@ -51,11 +62,13 @@ public class e3_stormtrooper_leader extends script.base_script
         pathTo(self, destLoc);
         setObjVar(self, "intIndex", 3);
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         messageTo(self, "doFaceTo", null, 1.5f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int doFaceTo(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] objTestObjects = getAllObjectsWithObjVar(getLocation(self), 2000, "leaderFaceTo");
@@ -63,6 +76,7 @@ public class e3_stormtrooper_leader extends script.base_script
         messageTo(self, "doNextMove", null, 2.5f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int doNextMove(obj_id self, dictionary params) throws InterruptedException
     {
         float fltWait = rand(1, 3);
@@ -97,34 +111,39 @@ public class e3_stormtrooper_leader extends script.base_script
         {
             messageTo(self, "doLocationTwo", null, fltWait, false);
         }
-        else 
+        else
         {
             messageTo(self, "doLocationThree", null, fltWait, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int doLocationOne(obj_id self, dictionary params) throws InterruptedException
     {
         pathToLocationOne(self);
         return SCRIPT_CONTINUE;
     }
+
     public int doLocationTwo(obj_id self, dictionary params) throws InterruptedException
     {
         pathToLocationTwo(self);
         return SCRIPT_CONTINUE;
     }
+
     public int doLocationThree(obj_id self, dictionary params) throws InterruptedException
     {
         pathToLocationThree(self);
         return SCRIPT_CONTINUE;
     }
+
     public int doSalute(obj_id self, dictionary params) throws InterruptedException
     {
         doAnimationAction(self, anims.PLAYER_SALUTE2);
         dictionary dctParams = new dictionary();
         dctParams.put("strEmote", anims.PLAYER_SALUTE2);
         obj_id[] objObjects = getAllObjectsWithScript(getLocation(self), 2000, "e3demo.e3_stormtrooper");
-        for (obj_id objObject : objObjects) {
+        for (obj_id objObject : objObjects)
+        {
             space_utils.notifyObject(objObject, "doEmote", dctParams);
         }
         float fltWait = rand(1, 5);
@@ -133,7 +152,7 @@ public class e3_stormtrooper_leader extends script.base_script
         {
             messageTo(self, "doLocationOne", null, fltWait, false);
         }
-        else 
+        else
         {
             messageTo(self, "doLocationThree", null, fltWait, false);
         }

@@ -1,5 +1,11 @@
 package script.systems.vehicle_system;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -9,6 +15,7 @@ public class vehicle_deed extends script.base_script
     public static final string_id SID_NO_GROUND_VEHICLE_IN_SPACE = new string_id("space/space_interaction", "no_ground_vehicle_in_space");
     public static final string_id SID_NOT_BIO_LINKED = new string_id("spam", "vehicle_not_biolink");
     public static final string_id SID_FAILED_PCD_CREATION = new string_id("spam", "failed_pcd_creation");
+
     public vehicle_deed()
     {
     }

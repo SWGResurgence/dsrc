@@ -1,5 +1,11 @@
 package script.space.content_tools;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ship_ai;
 import script.library.space_utils;
@@ -11,10 +17,12 @@ public class squad_member extends script.base_script
     public squad_member()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "intCleaningUp"))
@@ -30,21 +38,25 @@ public class squad_member extends script.base_script
         int intMembers = 0;
         int intSquadId = ship_ai.unitGetSquadId(self);
         obj_id[] objMembers = ship_ai.squadGetUnitList(intSquadId);
-        for (obj_id objMember : objMembers) {
-            if (isIdValid(objMember)) {
+        for (obj_id objMember : objMembers)
+        {
+            if (isIdValid(objMember))
+            {
                 intMembers = intMembers + 1;
             }
         }
         intMembers = intMembers - 1;
         if (intMembers > 0)
         {
-            fltRemainingPercentage = (float)intMembers / intStartPopulation;
+            fltRemainingPercentage = (float) intMembers / intStartPopulation;
         }
         float fltThresholdPercentage = utils.getFloatScriptVar(self, "fltDestroyPercentage");
         if (fltRemainingPercentage <= fltThresholdPercentage)
         {
-            for (obj_id objMember : objMembers) {
-                if (isIdValid(objMember) && (objMember != self)) {
+            for (obj_id objMember : objMembers)
+            {
+                if (isIdValid(objMember) && (objMember != self))
+                {
                     setObjVar(objMember, "noNotify", 1);
                 }
             }
@@ -52,7 +64,7 @@ public class squad_member extends script.base_script
             {
                 obj_id objParent = getObjIdObjVar(self, "objParent");
                 dictionary dctParams = new dictionary();
-                if(isIdValid(objParent) && exists(objParent))
+                if (isIdValid(objParent) && exists(objParent))
                     space_utils.notifyObject(objParent, "childDestroyed", dctParams);
                 setObjVar(self, "noNotify", 1);
             }

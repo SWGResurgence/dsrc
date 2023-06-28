@@ -1,5 +1,11 @@
 package script.quest.task;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.quests;
 import script.library.utils;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class retrieve_item extends script.base_script
     public retrieve_item()
     {
     }
+
     public int OnContainerChildGainItem(obj_id self, obj_id item, obj_id source, obj_id transferer) throws InterruptedException
     {
         LOG("newquests", "received item(" + item + ", " + getTemplateName(item) + ") source(" + source + ", " + getTemplateName(source) + ") transferer(" + transferer + ", " + getTemplateName(transferer) + ")");
@@ -30,7 +37,7 @@ public class retrieve_item extends script.base_script
                 targetCount = getIntObjVar(self, "quest." + activeTasks[i] + ".parameter");
                 LOG("newquests", "task objvar parameter overriding data table. parameter = " + targetCount);
             }
-            else 
+            else
             {
                 String countString = quests.getDataEntry(activeTasks[i], "PARAMETER");
                 if (countString != null && countString.length() > 0)
@@ -52,7 +59,7 @@ public class retrieve_item extends script.base_script
                     LOG("newquests", "this item (" + getTemplateName(item) + ") is part of this retrieve_item task");
                     count++;
                 }
-                else 
+                else
                 {
                     LOG("newquests", "this item(" + getTemplateName(item) + ") is not part of the retrieve_item task");
                 }
@@ -68,7 +75,7 @@ public class retrieve_item extends script.base_script
                     count++;
                 }
             }
-            else 
+            else
             {
                 String questItem = quests.getDataEntry(activeTasks[i], "TARGET");
                 String wantItem = getTemplateName(item);
@@ -96,7 +103,7 @@ public class retrieve_item extends script.base_script
                 quests.complete(activeTasks[i], self, true);
                 break;
             }
-            else 
+            else
             {
                 LOG("newquests", "This retrieve_item task wanted " + targetCount + " items and the player has retrieved " + count + " items. Continuing the task");
                 setObjVar(self, "quest." + activeTasks[i] + ".current_count", count);

@@ -1,5 +1,11 @@
 package script.systems.crafting.space.capacitor;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.craftinglib;
 import script.resource_weight;
 
@@ -104,6 +110,7 @@ public class crafting_basic_capacitor extends script.systems.crafting.space.capa
                                     new resource_weight.weight(craftinglib.RESOURCE_QUALITY, 1)
                             })
             };
+
     public crafting_basic_capacitor()
     {
     }

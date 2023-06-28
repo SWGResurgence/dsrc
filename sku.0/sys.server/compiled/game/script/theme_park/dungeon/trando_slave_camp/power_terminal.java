@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.trando_slave_camp;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.groundquests;
 import script.menu_info;
 import script.menu_info_types;
@@ -8,12 +14,13 @@ import script.string_id;
 
 public class power_terminal extends script.base_script
 {
-    public power_terminal()
-    {
-    }
     public static final String STF = "terminal_ui";
     public static final string_id POWER_TOGGLE = new string_id(STF, "power_toggle");
     public static final string_id UNLOCKED = new string_id(STF, "power_security_off");
+    public power_terminal()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (groundquests.isTaskActive(player, "ep3_slave_camp_control_room_access", "slaverDisableLocks"))
@@ -22,6 +29,7 @@ public class power_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)

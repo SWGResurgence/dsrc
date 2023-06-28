@@ -1,5 +1,11 @@
 package script.theme_park.outbreak;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.obj_id;
@@ -7,10 +13,12 @@ import script.string_id;
 
 public class griffax_jin_undead extends script.base_script
 {
+    public static final string_id SID_JIN_ESCAPED = new string_id("theme_park/outbreak/outbreak", "dr_jin_escaped");
+
     public griffax_jin_undead()
     {
     }
-    public static final string_id SID_JIN_ESCAPED = new string_id("theme_park/outbreak/outbreak", "dr_jin_escaped");
+
     public int OnIncapacitateTarget(obj_id self, obj_id victim) throws InterruptedException
     {
         CustomerServiceLog("quest", "griffax_jin_undead.OnIncapacitateTarget() Dr. Jin Incapacitated a target.");
@@ -28,6 +36,7 @@ public class griffax_jin_undead extends script.base_script
         messageTo(self, "cleanupDrJin", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         if (ai_lib.isDead(self))
@@ -44,6 +53,7 @@ public class griffax_jin_undead extends script.base_script
         messageTo(self, "cleanupDrJin", null, 12, false);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanupDrJin(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id owner = getObjIdObjVar(self, "owner");
@@ -54,8 +64,10 @@ public class griffax_jin_undead extends script.base_script
                 obj_id[] haters = getHateList(self);
                 if (haters != null || haters.length > 0)
                 {
-                    for (obj_id hater : haters) {
-                        if (owner == hater) {
+                    for (obj_id hater : haters)
+                    {
+                        if (owner == hater)
+                        {
                             return SCRIPT_CONTINUE;
                         }
                     }

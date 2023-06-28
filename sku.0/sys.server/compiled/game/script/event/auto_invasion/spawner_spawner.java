@@ -1,5 +1,11 @@
 package script.event.auto_invasion;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.create;
 import script.library.locations;
 import script.location;
@@ -7,25 +13,28 @@ import script.obj_id;
 
 public class spawner_spawner extends script.base_script
 {
+    public static final int[] LOCS =
+            {
+                    -4915, 6, 4093,
+                    -1376, 12, -3576,
+                    -51, 28, -4734,
+                    -977, 73, 1554,
+                    3668, 96, -6446,
+                    -2197, 20, 2302
+            };
+
     public spawner_spawner()
     {
     }
-    public static final int[] LOCS = 
-    {
-        -4915,6,4093,
-        -1376,12,-3576,
-        -51,28,-4734,
-        -977,73,1554,
-        3668,96,-6446,
-        -2197,20,2302
-    };
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "auto_invasion.spawned"))
         {
             int locStart = 999;
             String myRegion = locations.getGuardSpawnerRegionName(getLocation(self));
-            switch (myRegion) {
+            switch (myRegion)
+            {
                 case "@naboo_region_names:theed":
                     locStart = 0;
                     break;

@@ -1,6 +1,12 @@
 package script.conversation;
 
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.chat;
@@ -10,18 +16,18 @@ import script.library.create;
 
 public class gmf_moenia_gravestone extends script.base_script
 {
+    public static final String c_stringFile = "conversation/gmf_moenia_gravetone";
+    private static final String REQUIRED_SKILL = "social_language_basic_comprehend";
+    private static final String GMF_QUEST = "the_skeleton";
     public gmf_moenia_gravestone()
     {
     }
-    public static final String c_stringFile = "conversation/gmf_moenia_gravetone";
-
-    private static final String REQUIRED_SKILL = "social_language_basic_comprehend";
-    private static final String GMF_QUEST = "the_skeleton";
 
     public boolean grave_defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     //The player has completed the scavenger hunt
     public boolean grave_taskCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -31,6 +37,7 @@ public class gmf_moenia_gravestone extends script.base_script
         }
         return getIntObjVar(player, "the_skeleton.quest_state") == 2;
     }
+
     public boolean grave_haunted(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "the_skeleton.quest_state"))
@@ -39,6 +46,7 @@ public class gmf_moenia_gravestone extends script.base_script
         }
         return getIntObjVar(player, "the_skeleton.quest_state") == 3;
     }
+
     public boolean grave_completeCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "the_skeleton.quest_state"))
@@ -47,11 +55,13 @@ public class gmf_moenia_gravestone extends script.base_script
         }
         return getIntObjVar(player, "the_skeleton.quest_state") == 5;
     }
+
     public boolean grave_onQuestCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         //Are they on the quest at all?
         return hasObjVar(player, "the_skeleton.quest_state");
     }
+
     /*
         This branch is our intro conversation.
         So this is the first dialog shown to the player
@@ -69,6 +79,7 @@ public class gmf_moenia_gravestone extends script.base_script
         }
         return SCRIPT_DEFAULT;
     }
+
     public int grave_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("player_i_need_help_finding_stuff"))
@@ -83,7 +94,7 @@ public class gmf_moenia_gravestone extends script.base_script
             int responseIndex = 0;
 
             //Prepare the responses
-            string_id responses[] = new string_id[numberOfResponses];
+            string_id[] responses = new string_id[numberOfResponses];
 
             //Ensure numberOfResponses equals the amount of responses below
             responses[responseIndex++] = new string_id(c_stringFile, "player_fine_ill_use_my_eyes");
@@ -104,6 +115,7 @@ public class gmf_moenia_gravestone extends script.base_script
         }
         return SCRIPT_DEFAULT;
     }
+
     public int grave_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("player_fine_ill_use_my_eyes"))
@@ -115,6 +127,7 @@ public class gmf_moenia_gravestone extends script.base_script
         }
         return SCRIPT_DEFAULT;
     }
+
     public int grave_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("player_offer_tribute"))
@@ -127,6 +140,7 @@ public class gmf_moenia_gravestone extends script.base_script
         }
         return SCRIPT_DEFAULT;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -134,6 +148,7 @@ public class gmf_moenia_gravestone extends script.base_script
         setName(self, "Dusty Gravestone");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -142,12 +157,14 @@ public class gmf_moenia_gravestone extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id npc, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(npc) || ai_lib.isInCombat(player))
@@ -170,7 +187,7 @@ public class gmf_moenia_gravestone extends script.base_script
             int responseIndex = 0;
 
             //Prepare the responses
-            string_id responses[] = new string_id[numberOfResponses];
+            string_id[] responses = new string_id[numberOfResponses];
 
             //Ensure numberOfResponses equals the amount of responses below
             responses[responseIndex++] = new string_id(c_stringFile, "player_trick_or_treat");
@@ -185,7 +202,7 @@ public class gmf_moenia_gravestone extends script.base_script
             string_id message = new string_id(c_stringFile, "npc_released");
             int numberOfResponses = 1;
             int responseIndex = 0;
-            string_id responses[] = new string_id[numberOfResponses];
+            string_id[] responses = new string_id[numberOfResponses];
             responses[responseIndex++] = new string_id(c_stringFile, "player_offer_tribute");
             utils.setScriptVar(player, "conversation.grave.branchId", 4);
             npcStartConversation(player, npc, "grave", message, responses);
@@ -195,7 +212,7 @@ public class gmf_moenia_gravestone extends script.base_script
             string_id message = new string_id(c_stringFile, "npc_i_told_you_to_get_the_stuff");
             int numberOfResponses = 2;
             int responseIndex = 0;
-            string_id responses[] = new string_id[numberOfResponses];
+            string_id[] responses = new string_id[numberOfResponses];
             responses[responseIndex++] = new string_id(c_stringFile, "player_i_need_help_finding_stuff");
             responses[responseIndex++] = new string_id(c_stringFile, "player_trick_or_treat");
             utils.setScriptVar(player, "conversation.grave.branchId", 2);
@@ -206,7 +223,7 @@ public class gmf_moenia_gravestone extends script.base_script
             string_id message = new string_id(c_stringFile, "npc_the_gravestone");
             int numberOfResponses = 1;
             int responseIndex = 0;
-            string_id responses[] = new string_id[numberOfResponses];
+            string_id[] responses = new string_id[numberOfResponses];
             responses[responseIndex++] = new string_id(c_stringFile, "player_investigate");
             utils.setScriptVar(player, "conversation.grave.branchId", 1);
 
@@ -214,6 +231,7 @@ public class gmf_moenia_gravestone extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id npc, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("grave"))

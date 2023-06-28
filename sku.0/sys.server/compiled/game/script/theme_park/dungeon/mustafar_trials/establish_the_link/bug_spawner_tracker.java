@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.establish_the_link;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.trial;
@@ -11,11 +17,12 @@ import java.util.Vector;
 
 public class bug_spawner_tracker extends script.base_script
 {
+    public static final String PATH_MAX = "pathMax";
+    public static final boolean LOGGING = false;
     public bug_spawner_tracker()
     {
     }
-    public static final String PATH_MAX = "pathMax";
-    public static final boolean LOGGING = false;
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (trial.isUplinkActive(self))
@@ -26,12 +33,14 @@ public class bug_spawner_tracker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         messageTo(self, "destroyRelayObject", null, 5, false);
         playClientEffectObj(self, trial.PRT_KUBAZA_WARNING, self, "");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         findWayPoints(self);
@@ -40,9 +49,10 @@ public class bug_spawner_tracker extends script.base_script
         messageTo(self, "pathToNextPoint", null, 8, false);
         return SCRIPT_CONTINUE;
     }
+
     public void findWayPoints(obj_id self) throws InterruptedException
     {
-        obj_id contents[] = utils.getSharedContainerObjects(self);
+        obj_id[] contents = utils.getSharedContainerObjects(self);
         if (contents == null || contents.length == 0)
         {
             doLogging("findWayPoints", "Contents list was empty, exiting");
@@ -50,8 +60,10 @@ public class bug_spawner_tracker extends script.base_script
         }
         Vector waypoints = new Vector();
         waypoints.setSize(0);
-        for (obj_id content : contents) {
-            if (utils.hasScriptVar(content, trial.WP_NAME)) {
+        for (obj_id content : contents)
+        {
+            if (utils.hasScriptVar(content, trial.WP_NAME))
+            {
                 utils.addElement(waypoints, getLocation(content));
             }
         }
@@ -74,6 +86,7 @@ public class bug_spawner_tracker extends script.base_script
         utils.setScriptVar(self, "patrolPoints", patrolPoints);
         utils.setScriptVar(self, PATH_MAX, patrolPoints.length);
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         checkForRelayPoint(self);
@@ -82,6 +95,7 @@ public class bug_spawner_tracker extends script.base_script
         messageTo(self, "checkForStuck", null, 12, false);
         return SCRIPT_CONTINUE;
     }
+
     public int checkForStuck(obj_id self, dictionary params) throws InterruptedException
     {
         location here = getLocation(self);
@@ -92,6 +106,7 @@ public class bug_spawner_tracker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void checkForRelayPoint(obj_id self) throws InterruptedException
     {
         obj_id[] objects = getObjectsInRange(self, 5.0f);
@@ -100,8 +115,10 @@ public class bug_spawner_tracker extends script.base_script
             messageTo(self, "pathToNextPoint", null, 0, false);
             return;
         }
-        for (obj_id object : objects) {
-            if ((getTemplateName(object)).equals(trial.RELAY_OBJECT)) {
+        for (obj_id object : objects)
+        {
+            if ((getTemplateName(object)).equals(trial.RELAY_OBJECT))
+            {
                 dictionary dict = new dictionary();
                 dict.put("relay", object);
                 messageTo(self, "destroyRelayObject", dict, 5, false);
@@ -110,6 +127,7 @@ public class bug_spawner_tracker extends script.base_script
         }
         messageTo(self, "pathToNextPoint", null, 0, false);
     }
+
     public int destroyRelayObject(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id relay = params.getObjId("relay");
@@ -124,7 +142,8 @@ public class bug_spawner_tracker extends script.base_script
                 doLogging("nukeSelf", "No valid targets in blast radius");
                 return SCRIPT_CONTINUE;
             }
-            for (obj_id target : targets) {
+            for (obj_id target : targets)
+            {
                 damage(target, DAMAGE_ELEMENTAL_HEAT, HIT_LOCATION_BODY, 500);
             }
             return SCRIPT_CONTINUE;
@@ -132,6 +151,7 @@ public class bug_spawner_tracker extends script.base_script
         messageTo(self, "pathToNextPoint", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int pathToNextPoint(obj_id self, dictionary params) throws InterruptedException
     {
         setInvulnerable(self, false);
@@ -152,6 +172,7 @@ public class bug_spawner_tracker extends script.base_script
         setHomeLocation(self, patrolPoints[pathIndex]);
         return SCRIPT_CONTINUE;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING || trial.UPLINK_LOGGING)

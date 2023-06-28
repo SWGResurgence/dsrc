@@ -1,23 +1,31 @@
 package script.theme_park.dungeon.avatar_platform;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 public class terminal_cell_02 extends script.base_script
 {
-    public terminal_cell_02()
-    {
-    }
     public static final String STF = "dungeon/avatar_platform";
     public static final string_id UNLOCK_CELL = new string_id(STF, "unlock_cell");
     public static final string_id DESTROY_WKE = new string_id(STF, "destroy_wke");
     public static final string_id CELL_UNLOCKED = new string_id(STF, "cell_unlocked");
     public static final string_id EXECUTE = new string_id(STF, "execute");
+    public terminal_cell_02()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int menu = mi.addRootMenu(menu_info_types.ITEM_USE, UNLOCK_CELL);
         mi.addRootMenu(menu_info_types.SERVER_MENU1, DESTROY_WKE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)

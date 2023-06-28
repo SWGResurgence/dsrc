@@ -1,5 +1,11 @@
 package script.theme_park.newbie_tutorial;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.chat;
@@ -13,6 +19,7 @@ public class pirate extends script.theme_park.newbie_tutorial.tutorial_base
     public pirate()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_AGGRESSIVE);
@@ -22,6 +29,7 @@ public class pirate extends script.theme_park.newbie_tutorial.tutorial_base
         setLevel(self, 1);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id attacker) throws InterruptedException
     {
         obj_id player = getPlayer(self);
@@ -37,6 +45,7 @@ public class pirate extends script.theme_park.newbie_tutorial.tutorial_base
         messageTo(player, "moveOnToNextRoom", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayerInRoom(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "newbie.didThis"))
@@ -71,6 +80,7 @@ public class pirate extends script.theme_park.newbie_tutorial.tutorial_base
         messageTo(self, "handleTauntTwo", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleTauntTwo(obj_id self, dictionary params) throws InterruptedException
     {
         if (ai_lib.isAiDead(self))
@@ -84,6 +94,7 @@ public class pirate extends script.theme_park.newbie_tutorial.tutorial_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (ai_lib.isAiDead(self))
@@ -116,6 +127,7 @@ public class pirate extends script.theme_park.newbie_tutorial.tutorial_base
         messageTo(self, "handleTauntThree", null, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleTauntThree(obj_id self, dictionary params) throws InterruptedException
     {
         if (ai_lib.isAiDead(self))
@@ -126,7 +138,7 @@ public class pirate extends script.theme_park.newbie_tutorial.tutorial_base
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             setObjVar(self, "newbie.beenHereToo", true);
         }
@@ -136,6 +148,7 @@ public class pirate extends script.theme_park.newbie_tutorial.tutorial_base
         messageTo(self, "handleTauntFour", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleTauntFour(obj_id self, dictionary params) throws InterruptedException
     {
         if (ai_lib.isAiDead(self))
@@ -148,6 +161,7 @@ public class pirate extends script.theme_park.newbie_tutorial.tutorial_base
         messageTo(self, "handleExplosion", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleExplosion(obj_id self, dictionary params) throws InterruptedException
     {
         if (ai_lib.isAiDead(self))
@@ -160,6 +174,7 @@ public class pirate extends script.theme_park.newbie_tutorial.tutorial_base
         ai_lib.incapacitateMob(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         obj_id player = getPlayer(self);

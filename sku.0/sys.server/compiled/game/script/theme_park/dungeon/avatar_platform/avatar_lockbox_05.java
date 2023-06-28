@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.avatar_platform;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.groundquests;
 import script.library.money;
@@ -7,9 +13,6 @@ import script.library.utils;
 
 public class avatar_lockbox_05 extends script.base_script
 {
-    public avatar_lockbox_05()
-    {
-    }
     public static final String STF = "dungeon/avatar_platform";
     public static final string_id ENTER_CODE = new string_id(STF, "lockbox_code");
     public static final string_id UNLOCKED = new string_id(STF, "lockbox_unlocked");
@@ -17,6 +20,10 @@ public class avatar_lockbox_05 extends script.base_script
     public static final string_id INCORRECT_CODE = new string_id(STF, "lockbox_incorrect");
     public static final string_id UNLOCK = new string_id(STF, "lockbox_unlock");
     public static final string_id NOT_NEEDED = new string_id(STF, "not_needed");
+    public avatar_lockbox_05()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int menu = mi.addRootMenu(menu_info_types.ITEM_USE, ENTER_CODE);
@@ -28,6 +35,7 @@ public class avatar_lockbox_05 extends script.base_script
         mid.setServerNotify(true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -44,7 +52,7 @@ public class avatar_lockbox_05 extends script.base_script
             {
                 sendSystemMessage(player, NOT_NEEDED);
             }
-            else 
+            else
             {
                 sendSystemMessage(player, UNKNOWN_CODE);
                 return SCRIPT_CONTINUE;
@@ -52,6 +60,7 @@ public class avatar_lockbox_05 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void keypad(obj_id player) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -62,8 +71,8 @@ public class avatar_lockbox_05 extends script.base_script
         setSUIProperty(pid, "buttonKeyCard", "enabled", "false");
         setSUIProperty(pid, "buttonSlice", "enabled", "false");
         showSUIPage(pid);
-        return;
     }
+
     public int KeypadCallback(obj_id self, dictionary params) throws InterruptedException
     {
         String result = params.getString("result.numberBox" + "." + "localtext");
@@ -98,7 +107,7 @@ public class avatar_lockbox_05 extends script.base_script
                 utils.removeScriptVarTree(player, "lockbox");
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 utils.removeScriptVarTree(player, "lockbox");
                 sendSystemMessage(player, INCORRECT_CODE);
@@ -106,6 +115,7 @@ public class avatar_lockbox_05 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void grantReward(obj_id player) throws InterruptedException
     {
         money.bankTo(money.ACCT_NEW_PLAYER_QUESTS, player, 25000);

@@ -1,5 +1,11 @@
 package script.systems.fs_quest;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.utils;
 import script.obj_id;
@@ -10,6 +16,7 @@ public class phase3_disk_loot extends script.base_script
     public static final String WAYPOINT_DISK = "object/tangible/loot/quest/force_sensitive/camp_waypoint_datapad.iff";
     public static final int PERCENT_CHANCE_OF_LOOT = 20;
     public static final int LIFE_SPAN = 1000;
+
     public phase3_disk_loot()
     {
     }
@@ -55,6 +62,5 @@ public class phase3_disk_loot extends script.base_script
                         WAYPOINT_DISK
                 };
         obj_id item = createObject(loots[rand(0, loots.length - 1)], corpseInventory, "");
-        return;
     }
 }

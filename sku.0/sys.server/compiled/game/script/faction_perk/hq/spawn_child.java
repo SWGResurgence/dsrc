@@ -1,5 +1,11 @@
 package script.faction_perk.hq;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.hq;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class spawn_child extends script.base_script
     public spawn_child()
     {
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         if (hasObjVar(self, hq.VAR_SPAWN_LEADER))
@@ -24,6 +31,7 @@ public class spawn_child extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id parent = getObjIdObjVar(self, hq.VAR_SPAWN_PARENT);

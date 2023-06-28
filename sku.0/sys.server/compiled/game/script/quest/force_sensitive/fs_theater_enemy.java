@@ -1,5 +1,11 @@
 package script.quest.force_sensitive;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.group;
 import script.library.utils;
@@ -12,6 +18,7 @@ public class fs_theater_enemy extends script.base_script
     public fs_theater_enemy()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         final location anchorLocation = getLocation(self);
@@ -22,6 +29,7 @@ public class fs_theater_enemy extends script.base_script
         loiterLocation(self, anchorLocation, minDistance, maxDistance, minDelay, maxDelay);
         return SCRIPT_CONTINUE;
     }
+
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "quest.owner"))
@@ -37,17 +45,20 @@ public class fs_theater_enemy extends script.base_script
                     {
                         permitted = getGroupMemberIds(winner);
                     }
-                    else 
+                    else
                     {
                         permitted = new obj_id[1];
                         permitted[0] = winner;
                     }
                     if (permitted != null)
                     {
-                        for (obj_id obj_id : permitted) {
-                            if (obj_id == player) {
+                        for (obj_id obj_id : permitted)
+                        {
+                            if (obj_id == player)
+                            {
                                 obj_id inv = utils.getInventoryContainer(self);
-                                if (isIdValid(inv)) {
+                                if (isIdValid(inv))
+                                {
                                     obj_id loot = createObject("object/tangible/loot/quest/force_sensitive/theater_datapad.iff", inv, "");
                                     setObjVar(loot, "quest.loot_datapad_2.quest_item_target", player);
                                     setOwner(loot, player);

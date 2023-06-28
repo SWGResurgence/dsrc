@@ -1,5 +1,11 @@
 package script.systems.beast;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.beast_lib;
 import script.library.incubator;
@@ -11,6 +17,7 @@ public class dna extends script.base_script
 {
     public static final string_id SID_GOD_DNA_DATA = new string_id("incubator", "GODMODE_ADD_DATA");
     public static final string_id SID_GOD_FIX = new string_id("incubator", "GODMODE_FIX_DATA");
+
     public dna()
     {
     }
@@ -35,7 +42,7 @@ public class dna extends script.base_script
                 names[idx] = "quality";
                 float attrib = incubator.getDnaQuality(self);
                 attrib = utils.roundFloatByDecimal(attrib);
-                attribs[idx] = "" + attrib + "%";
+                attribs[idx] = attrib + "%";
                 idx++;
                 if (idx >= names.length)
                 {
@@ -69,7 +76,7 @@ public class dna extends script.base_script
             {
                 attrib = localize(templateId);
             }
-            attribs[idx] = "" + attrib;
+            attribs[idx] = attrib;
             idx++;
             if (idx >= names.length)
             {

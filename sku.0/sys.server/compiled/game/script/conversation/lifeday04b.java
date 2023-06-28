@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.utils;
@@ -7,100 +13,67 @@ import script.*;
 
 public class lifeday04b extends script.base_script
 {
+    public static String c_stringFile = "conversation/lifeday04b";
+
     public lifeday04b()
     {
     }
-    public static String c_stringFile = "conversation/lifeday04b";
+
     public boolean lifeday04b_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean lifeday04b_condition_hasNotStarted(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (!hasObjVar(player, "lifeday04.convTracker") && !hasObjVar(player, "lifeday04.rewarded"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return !hasObjVar(player, "lifeday04.convTracker") && !hasObjVar(player, "lifeday04.rewarded");
     }
+
     public boolean lifeday04b_condition_hasBeenRewarded(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (hasObjVar(player, "lifeday04.rewarded"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return hasObjVar(player, "lifeday04.rewarded");
     }
+
     public boolean lifeday04b_condition_hasTalkedToCityGuy(obj_id player, obj_id npc) throws InterruptedException
     {
         int convTracker = getIntObjVar(player, "lifeday04.convTracker");
-        if (convTracker >= 0 && convTracker < 15)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return convTracker >= 0 && convTracker < 15;
     }
+
     public boolean lifeday04b_condition_spokeWithEveryone(obj_id player, obj_id npc) throws InterruptedException
     {
         int convTracker = getIntObjVar(player, "lifeday04.convTracker");
-        if (convTracker == 15)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return convTracker == 15;
     }
+
     public boolean lifeday04b_condition_isOldEnoughNotaWookiee(obj_id player, obj_id npc) throws InterruptedException
     {
         int timeData = getPlayerBirthDate(player);
         int rightNow = getCurrentBirthDate();
         int delta = rightNow - timeData;
         int species = getSpecies(player);
-        if (species != SPECIES_WOOKIEE)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return species != SPECIES_WOOKIEE;
     }
+
     public boolean lifeday04b_condition_isOldEnoughIsaWookiee(obj_id player, obj_id npc) throws InterruptedException
     {
         int timeData = getPlayerBirthDate(player);
         int rightNow = getCurrentBirthDate();
         int delta = rightNow - timeData;
         int species = getSpecies(player);
-        if (species == SPECIES_WOOKIEE)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return species == SPECIES_WOOKIEE;
     }
+
     public void lifeday04b_action_giveRandomGift(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id playerInventory = utils.getInventoryContainer(player);
-        String[] reward = 
-        {
-            "object/tangible/loot/quest/lifeday_orb.iff",
-            "object/tangible/painting/painting_wookiee_m.iff",
-            "object/tangible/painting/painting_wookiee_f.iff",
-            "object/tangible/painting/painting_trees_s01.iff"
-        };
+        String[] reward =
+                {
+                        "object/tangible/loot/quest/lifeday_orb.iff",
+                        "object/tangible/painting/painting_wookiee_m.iff",
+                        "object/tangible/painting/painting_wookiee_f.iff",
+                        "object/tangible/painting/painting_trees_s01.iff"
+                };
         int roll = rand(0, 3);
         obj_id createdObject = createObject(reward[roll], playerInventory, "");
         if (isIdValid(createdObject))
@@ -108,11 +81,12 @@ public class lifeday04b extends script.base_script
             setObjVar(player, "lifeday04.rewarded", 1);
             removeObjVar(player, "lifeday04.convTracker");
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id("quest/lifeday/lifeday", "full_inv"));
         }
     }
+
     public void lifeday04b_action_giveLifeDayRobe(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id playerInventory = utils.getInventoryContainer(player);
@@ -122,11 +96,12 @@ public class lifeday04b extends script.base_script
             setObjVar(player, "lifeday04.rewarded", 1);
             removeObjVar(player, "lifeday04.convTracker");
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id("quest/lifeday/lifeday", "full_inv"));
         }
     }
+
     public void lifeday04b_action_setSpokeWithElder(obj_id player, obj_id npc) throws InterruptedException
     {
         int convTracker = getIntObjVar(player, "lifeday04.convTracker");
@@ -135,11 +110,13 @@ public class lifeday04b extends script.base_script
             setObjVar(player, "lifeday04.convTracker", 1);
         }
     }
+
     public void lifeday04b_action_notOldEnoughBoned(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "lifeday04.rewarded", 1);
         removeObjVar(player, "lifeday04.convTracker");
     }
+
     public int lifeday04b_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_8a712dbc"))
@@ -168,6 +145,7 @@ public class lifeday04b extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lifeday04b_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ebbd31aa"))
@@ -188,7 +166,7 @@ public class lifeday04b extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_afabf3ac");
@@ -197,7 +175,7 @@ public class lifeday04b extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lifeday04b.branchId");
                     chat.chat(npc, player, message);
@@ -228,7 +206,7 @@ public class lifeday04b extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_352585ec");
@@ -241,7 +219,7 @@ public class lifeday04b extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lifeday04b.branchId");
                     chat.chat(npc, player, message);
@@ -262,6 +240,7 @@ public class lifeday04b extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lifeday04b_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_afabf3ac"))
@@ -278,6 +257,7 @@ public class lifeday04b extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lifeday04b_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_352585ec"))
@@ -306,6 +286,7 @@ public class lifeday04b extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -315,11 +296,13 @@ public class lifeday04b extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -328,18 +311,21 @@ public class lifeday04b extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.lifeday04b");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -385,7 +371,7 @@ public class lifeday04b extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_8a712dbc");
@@ -397,7 +383,7 @@ public class lifeday04b extends script.base_script
                 utils.setScriptVar(player, "conversation.lifeday04b.branchId", 3);
                 npcStartConversation(player, npc, "lifeday04b", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -419,7 +405,7 @@ public class lifeday04b extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_ebbd31aa");
@@ -427,7 +413,7 @@ public class lifeday04b extends script.base_script
                 utils.setScriptVar(player, "conversation.lifeday04b.branchId", 6);
                 npcStartConversation(player, npc, "lifeday04b", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -436,6 +422,7 @@ public class lifeday04b extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("lifeday04b"))

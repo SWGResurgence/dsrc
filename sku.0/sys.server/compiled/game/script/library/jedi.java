@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.combat_engine.hit_result;
 import script.combat_engine.weapon_data;
@@ -88,6 +94,7 @@ public class jedi extends script.base_script
             };
     public static final float ENEMY_VISIBILITY_MULTIPLIER = 1.0f;
     public static final float NEUTRAL_VISIBILITY_MULTIPLIER = 0.5f;
+
     public jedi()
     {
     }
@@ -537,7 +544,6 @@ public class jedi extends script.base_script
                     playClientEffectObj(objPlayer, clientEffect, objPlayer, "");
                 }
             }
-            return;
         }
         else
         {
@@ -1933,7 +1939,6 @@ public class jedi extends script.base_script
                 }
                 jediComponentStatSetter(owner, item, itemName);
                 CustomerServiceLog("jedi_saber", "Converting Old Tuned Pearl (" + item + ") - Damage:" + damage + " - to a new Static Item Pearl - " + itemName);
-                return;
             }
             else
             {
@@ -1986,14 +1991,12 @@ public class jedi extends script.base_script
                     }
                     jediComponentStatSetter(null, item, itemName);
                     CustomerServiceLog("jedi_saber", "Converting Old Untuned Pearl (" + item + ") - Level:" + level + " - to a new Static Item Pearl - " + itemName);
-                    return;
                 }
                 else
                 {
                     itemName = "item_krayt_pearl_04_09";
                     jediComponentStatSetter(null, item, itemName);
                     CustomerServiceLog("jedi_saber", "Converting Old Untuned Pearl Missing Level (" + item + ") - Level:" + level + " - to a new Static Item Pearl - " + itemName);
-                    return;
                 }
             }
         }
@@ -2006,13 +2009,11 @@ public class jedi extends script.base_script
                 obj_id owner = getObjIdObjVar(item, VAR_CRYSTAL_OWNER_ID);
                 jediComponentStatSetter(owner, item, colorName);
                 CustomerServiceLog("jedi_saber", "Converting Old Tuned Lance Color Crystal (" + item + ") - OLD COLOR:" + color + " - to a new Static Item Color Crystal - " + colorName);
-                return;
             }
             else
             {
                 jediComponentStatSetter(null, item, colorName);
                 CustomerServiceLog("jedi_saber", "Converting Old Untuned Lance Color Crystal (" + item + ") - OLD COLOR:" + color + " - to a new Static Item Color Crystal - " + colorName);
-                return;
             }
         }
         else if (template.endsWith("lightsaber_module_force_crystal.iff"))
@@ -2026,13 +2027,11 @@ public class jedi extends script.base_script
                     obj_id owner = getObjIdObjVar(item, VAR_CRYSTAL_OWNER_ID);
                     jediComponentStatSetter(owner, item, colorName);
                     CustomerServiceLog("jedi_saber", "Converting Old Tuned Color Crystal (" + item + ") - OLD COLOR:" + color + " - to a new Static Item Color Crystal - " + colorName);
-                    return;
                 }
                 else
                 {
                     jediComponentStatSetter(null, item, colorName);
                     CustomerServiceLog("jedi_saber", "Converting Old Untuned Color Crystal (" + item + ") - OLD COLOR:" + color + " - to a new Static Item Color Crystal - " + colorName);
-                    return;
                 }
             }
             else
@@ -2090,7 +2089,6 @@ public class jedi extends script.base_script
                     }
                     jediComponentStatSetter(owner, item, itemName);
                     CustomerServiceLog("jedi_saber", "Converting Old Tuned Power Crystal (" + item + ") - Damage:" + damage + " - to a new Static Item Power Crystal - " + itemName);
-                    return;
                 }
                 else
                 {
@@ -2100,14 +2098,12 @@ public class jedi extends script.base_script
                         itemName = mapOldPowerCrystalLevelToNew(level);
                         jediComponentStatSetter(null, item, itemName);
                         CustomerServiceLog("jedi_saber", "Converting Old Untuned Power Crystal (" + item + ") - Level:" + level + " - to a new Static Item Crystal - " + itemName);
-                        return;
                     }
                     else
                     {
                         itemName = "item_power_crystal_04_09";
                         jediComponentStatSetter(null, item, itemName);
                         CustomerServiceLog("jedi_saber", "Converting Old Untuned Power Crystal Missing Level (" + item + ") - Level:" + level + " - to a new Static Item Crystal - " + itemName);
-                        return;
                     }
                 }
             }

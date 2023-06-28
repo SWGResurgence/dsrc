@@ -1,13 +1,16 @@
 package script.event.emp_day;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class crash_site_requisition extends script.base_script
 {
-    public crash_site_requisition()
-    {
-    }
     public static final String EMPIREDAY = "event/empire_day";
     public static final String LIFEDAY = "event/life_day";
     public static final string_id SID_WRONG_FACTION = new string_id(EMPIREDAY, "wrong_faction");
@@ -16,6 +19,10 @@ public class crash_site_requisition extends script.base_script
     public static final string_id SID_PICK_PATH = new string_id(EMPIREDAY, "pick_path");
     public static final string_id SID_MOUNTED = new string_id(LIFEDAY, "mounted");
     public static final int COUNTDOWN_TIMER = 3;
+    public crash_site_requisition()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -46,6 +53,7 @@ public class crash_site_requisition extends script.base_script
         mi.addRootMenu(menu_info_types.ITEM_USE, SID_MNU_DRESS);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -82,6 +90,7 @@ public class crash_site_requisition extends script.base_script
         doAnimationAction(player, "manipulate_high");
         return SCRIPT_CONTINUE;
     }
+
     public int handleObjectSwapTimer(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -131,7 +140,7 @@ public class crash_site_requisition extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             String parentBuffName = "";
             if (buff.hasBuff(player, holiday.BUFF_IMP_EMPIREDAY_RECRUITMENT_COMBATANT))
@@ -153,6 +162,7 @@ public class crash_site_requisition extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);

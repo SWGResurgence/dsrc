@@ -1,5 +1,11 @@
 package script.terminal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -7,9 +13,6 @@ import java.util.Vector;
 
 public class terminal_hangar_structure extends script.base_script
 {
-    public terminal_hangar_structure()
-    {
-    }
     public static final String PID_NAME = "hangar";
     public static final String SCRIPT_VAR_SCD_LIST = "hangar.scds";
     public static final String SCRIPT_VAR_RESTORING_SHIP = "hangar.restoring";
@@ -43,6 +46,10 @@ public class terminal_hangar_structure extends script.base_script
     public static final string_id SID_PLACE_SHIP_DECORATION_SUCCESS = new string_id("player_structure", "hangar_place_ship_decoration_success");
     public static final string_id SID_REMOVE_SHIP_DECORATION_SUCCESS = new string_id("player_structure", "hangar_remove_ship_decoration_success");
     public static final String HANGAR_MINI_SHIPS_TABLE = "datatables/tcg/hangar_mini_ships.iff";
+    public terminal_hangar_structure()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id structure = self;
@@ -69,11 +76,14 @@ public class terminal_hangar_structure extends script.base_script
             if (isIdValid(playerHangar) && hasObjVar(player, player_structure.OBJVAR_HANGAR_CREATED))
             {
                 obj_id[] shipControlDevices = space_transition.findShipControlDevicesInHangarSlot(player);
-                if (shipControlDevices != null && shipControlDevices.length > 0)
+                if (shipControlDevices != null)
                 {
-                    for (obj_id storedShip : shipControlDevices) {
-                        if (isIdValid(storedShip)) {
-                            if (!hasObjVar(storedShip, player_structure.OBJVAR_STORED_HANGAR_LITE)) {
+                    for (obj_id storedShip : shipControlDevices)
+                    {
+                        if (isIdValid(storedShip))
+                        {
+                            if (!hasObjVar(storedShip, player_structure.OBJVAR_STORED_HANGAR_LITE))
+                            {
                                 canRecallShips = true;
                                 break;
                             }
@@ -97,6 +107,7 @@ public class terminal_hangar_structure extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         sendDirtyObjectMenuNotification(self);
@@ -147,6 +158,7 @@ public class terminal_hangar_structure extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -176,11 +188,14 @@ public class terminal_hangar_structure extends script.base_script
             attribs[idx] = "none";
             idx++;
         }
-        else 
+        else
         {
-            for (obj_id storedShip : shipsStored) {
-                if (isIdValid(storedShip)) {
-                    if (!hasObjVar(storedShip, player_structure.OBJVAR_STORED_HANGAR_LITE)) {
+            for (obj_id storedShip : shipsStored)
+            {
+                if (isIdValid(storedShip))
+                {
+                    if (!hasObjVar(storedShip, player_structure.OBJVAR_STORED_HANGAR_LITE))
+                    {
                         utils.addElement(storedShipNames, getEncodedName(storedShip));
                     }
                 }
@@ -191,9 +206,10 @@ public class terminal_hangar_structure extends script.base_script
                 attribs[idx] = "none";
                 idx++;
             }
-            else 
+            else
             {
-                for (Object storedShipName : storedShipNames) {
+                for (Object storedShipName : storedShipNames)
+                {
                     names[idx] = "ship_in_hangar";
                     attribs[idx] = ((String) storedShipName);
                     idx++;
@@ -202,6 +218,7 @@ public class terminal_hangar_structure extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void placeShipDecoration(obj_id player, obj_id hangarControls, obj_id playerHangar) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player) || !isIdValid(hangarControls) || !exists(hangarControls) || !isIdValid(playerHangar) || !exists(playerHangar))
@@ -216,9 +233,12 @@ public class terminal_hangar_structure extends script.base_script
             sendSystemMessage(player, SID_NO_SHIPS);
             return;
         }
-        for (obj_id storedShip : shipControlDevices) {
-            if (isIdValid(storedShip)) {
-                if (!hasObjVar(storedShip, player_structure.OBJVAR_STORED_HANGAR_LITE)) {
+        for (obj_id storedShip : shipControlDevices)
+        {
+            if (isIdValid(storedShip))
+            {
+                if (!hasObjVar(storedShip, player_structure.OBJVAR_STORED_HANGAR_LITE))
+                {
                     utils.addElement(hangarStoredShips, storedShip);
                 }
             }
@@ -232,8 +252,8 @@ public class terminal_hangar_structure extends script.base_script
         String[] localizedList = new String[hangarStoredShips.size()];
         for (int i = 0; i < localizedList.length; ++i)
         {
-            localizedList[i] = getEncodedName(((obj_id)hangarStoredShips.get(i)));
-            if (hasObjVar(((obj_id)hangarStoredShips.get(i)), SHIP_OBJVAR_DECORATED_SHIP))
+            localizedList[i] = getEncodedName(((obj_id) hangarStoredShips.get(i)));
+            if (hasObjVar(((obj_id) hangarStoredShips.get(i)), SHIP_OBJVAR_DECORATED_SHIP))
             {
                 localizedList[i] += " (Placed)";
             }
@@ -242,6 +262,7 @@ public class terminal_hangar_structure extends script.base_script
         int pid = sui.listbox(hangarControls, player, "@" + SID_PLACE_SHIP_DECORATION_PROMPT, sui.OK_CANCEL, "@" + SID_LIST_TITLE, localizedList, "onShipDecorationResponse", true, false);
         sui.setPid(player, pid, PID_NAME);
     }
+
     public boolean callSuiOfShipsToStore(obj_id player, obj_id terminal, obj_id hangar) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -261,9 +282,12 @@ public class terminal_hangar_structure extends script.base_script
         hangarStoredShips.setSize(0);
         if (shipsInHangar != null && shipsInHangar.length > 0)
         {
-            for (obj_id storedShip : shipsInHangar) {
-                if (isIdValid(storedShip)) {
-                    if (!hasObjVar(storedShip, player_structure.OBJVAR_STORED_HANGAR_LITE)) {
+            for (obj_id storedShip : shipsInHangar)
+            {
+                if (isIdValid(storedShip))
+                {
+                    if (!hasObjVar(storedShip, player_structure.OBJVAR_STORED_HANGAR_LITE))
+                    {
                         utils.addElement(hangarStoredShips, storedShip);
                     }
                 }
@@ -290,6 +314,7 @@ public class terminal_hangar_structure extends script.base_script
         sui.setPid(player, pid, PID_NAME);
         return true;
     }
+
     public boolean callSuiOfStoredShips(obj_id player, obj_id terminal, obj_id hangar) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -312,9 +337,12 @@ public class terminal_hangar_structure extends script.base_script
             sendSystemMessage(player, SID_NO_SHIPS);
             return false;
         }
-        for (obj_id storedShip : shipControlDevices) {
-            if (isIdValid(storedShip)) {
-                if (!hasObjVar(storedShip, player_structure.OBJVAR_STORED_HANGAR_LITE)) {
+        for (obj_id storedShip : shipControlDevices)
+        {
+            if (isIdValid(storedShip))
+            {
+                if (!hasObjVar(storedShip, player_structure.OBJVAR_STORED_HANGAR_LITE))
+                {
                     utils.addElement(hangarStoredShips, storedShip);
                 }
             }
@@ -328,13 +356,14 @@ public class terminal_hangar_structure extends script.base_script
         String[] localizedList = new String[hangarStoredShips.size()];
         for (int i = 0; i < localizedList.length; ++i)
         {
-            localizedList[i] = getEncodedName(((obj_id)hangarStoredShips.get(i)));
+            localizedList[i] = getEncodedName(((obj_id) hangarStoredShips.get(i)));
         }
         utils.setScriptVar(terminal, SCRIPT_VAR_RESTORING_SHIP, true);
         int pid = sui.listbox(terminal, player, "@" + SID_SHIP_LIST_RESTORE_PROMPT, sui.OK_CANCEL, "@" + SID_LIST_TITLE, localizedList, "onShipListResponse", true, false);
         sui.setPid(player, pid, PID_NAME);
         return true;
     }
+
     public int handleHangarInitialize(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -367,12 +396,13 @@ public class terminal_hangar_structure extends script.base_script
         {
             callSuiOfShipsToStore(player, self, playerHangar);
         }
-        else 
+        else
         {
             callSuiOfStoredShips(player, self, playerHangar);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int onShipDecorationResponse(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -444,7 +474,7 @@ public class terminal_hangar_structure extends script.base_script
             removeObjVar(shipSelected, SHIP_OBJVAR_DECORATED_SHIP);
             sendSystemMessage(player, SID_REMOVE_SHIP_DECORATION_SUCCESS);
         }
-        else 
+        else
         {
             obj_id objShip = space_transition.getShipFromShipControlDevice(shipSelected);
             if (!isIdValid(objShip))
@@ -483,7 +513,7 @@ public class terminal_hangar_structure extends script.base_script
             {
                 persistObject(toyShip);
                 String houseName = getName(house);
-                houseName = localize(new string_id(houseName.substring(0, houseName.indexOf(":")), houseName.substring(houseName.indexOf(":") + 1, houseName.length())));
+                houseName = localize(new string_id(houseName.substring(0, houseName.indexOf(":")), houseName.substring(houseName.indexOf(":") + 1)));
                 setObjVar(shipSelected, SHIP_OBJVAR_DECORATED_SHIP, toyShip);
                 setObjVar(toyShip, "validHouse", "object/building/player/player_house_hangar.iff");
                 setObjVar(toyShip, "validHouseName", houseName);
@@ -513,6 +543,7 @@ public class terminal_hangar_structure extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int onShipListResponse(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -589,6 +620,7 @@ public class terminal_hangar_structure extends script.base_script
         sui.setPid(player, newPid, PID_NAME);
         return SCRIPT_CONTINUE;
     }
+
     public int handlerConfirmShipMove(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -669,13 +701,13 @@ public class terminal_hangar_structure extends script.base_script
                 prose.setTT(pp, getEncodedName(shipSelected));
                 sendSystemMessageProse(player, pp);
             }
-            else 
+            else
             {
                 sendSystemMessage(player, SID_TRANSFER_FAILED_GENERIC);
                 CustomerServiceLog(CUSTOMER_SERVICE_LOG, "SCD " + getEncodedName(shipSelected) + " (" + shipSelected + ") was NOT transferred to Player " + getPlayerName(player) + "(" + player + ")'s hangar (" + playerHangar + "), the putIn command failed.");
             }
         }
-        else 
+        else
         {
             if (putIn(shipSelected, datapad, player))
             {
@@ -684,7 +716,7 @@ public class terminal_hangar_structure extends script.base_script
                 {
                     removeObjVar(shipSelected, SHIP_OBJVAR_DECORATED_SHIP);
                 }
-                else 
+                else
                 {
                     destroyObject(shipDecoration);
                     removeObjVar(shipSelected, SHIP_OBJVAR_DECORATED_SHIP);
@@ -695,7 +727,7 @@ public class terminal_hangar_structure extends script.base_script
                 prose.setTT(pp, getEncodedName(shipSelected));
                 sendSystemMessageProse(player, pp);
             }
-            else 
+            else
             {
                 sendSystemMessage(player, SID_TRANSFER_FAILED_GENERIC);
                 CustomerServiceLog(CUSTOMER_SERVICE_LOG, "SCD " + getEncodedName(shipSelected) + " (" + shipSelected + ") was NOT transferred to Player " + getPlayerName(player) + "(" + player + ")'s datapad (" + datapad + "), the putIn command failed.");

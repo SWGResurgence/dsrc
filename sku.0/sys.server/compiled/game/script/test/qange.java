@@ -1,5 +1,11 @@
 package script.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.qa;
 import script.library.static_item;
@@ -9,12 +15,13 @@ import script.obj_id;
 
 public class qange extends script.base_script
 {
-    public qange()
-    {
-    }
     public static final String SCRIPTVAR = "qange";
     public static final String NGE_TOOL_TITLE = "QA NGE TOOL";
     public static final String RESPEC_TOOL_PROMPT = "This tool allows the tester to attain a Respec item in their inventory.\n\nPlease select a number (between 1 - 90) that will represent the level that the player character will respec to (Example: 61).";
+    public qange()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (isGod(self))
@@ -31,6 +38,7 @@ public class qange extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (isGod(self))
@@ -43,6 +51,7 @@ public class qange extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleGiveRespecItem(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -69,7 +78,7 @@ public class qange extends script.base_script
                 {
                     spawnRespecItem(self, entry);
                 }
-                else 
+                else
                 {
                     broadcast(player, "Invalid entry");
                     qa.createInputBox(player, RESPEC_TOOL_PROMPT, NGE_TOOL_TITLE, "handleGiveRespecItem", SCRIPTVAR + ".pid");
@@ -78,6 +87,7 @@ public class qange extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleDeletionQuestion(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -88,7 +98,7 @@ public class qange extends script.base_script
                 removePlayer(self, "");
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 if (!utils.hasScriptVar(self, SCRIPTVAR + ".deleteInventory"))
                 {
@@ -98,6 +108,7 @@ public class qange extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleDeletionResponse(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -108,13 +119,15 @@ public class qange extends script.base_script
                 removePlayer(self, "");
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 obj_id inventory = utils.getInventoryContainer(self);
                 obj_id respecDevice = utils.getStaticItemInBankOrInventory(self, "item_respec_token_01_01");
                 obj_id[] items = getContents(inventory);
-                for (obj_id item : items) {
-                    if (item != respecDevice) {
+                for (obj_id item : items)
+                {
+                    if (item != respecDevice)
+                    {
                         destroyObject(item);
                     }
                 }
@@ -122,16 +135,19 @@ public class qange extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void toolMainMenu(obj_id player) throws InterruptedException
     {
         qa.createInputBox(player, RESPEC_TOOL_PROMPT, NGE_TOOL_TITLE, "handleGiveRespecItem", SCRIPTVAR + ".pid");
     }
+
     public void removePlayer(obj_id player, String err) throws InterruptedException
     {
         broadcast(player, err);
         qa.removeScriptVars(player, SCRIPTVAR);
         utils.removeScriptVarTree(player, SCRIPTVAR);
     }
+
     public void spawnRespecItem(obj_id self, int combatLevel) throws InterruptedException
     {
         obj_id respecDevice = utils.getStaticItemInBankOrInventory(self, "item_respec_token_01_01");
@@ -155,6 +171,7 @@ public class qange extends script.base_script
         String popupText = "You must use the Respec Token in your inventory to get a new profession and the level you specified.";
         int pid = sui.msgbox(self, self, popupText, sui.OK_ONLY, "Respec Tool Instructions", "handleDeletionQuestion");
     }
+
     public void resetTester(obj_id self) throws InterruptedException
     {
         removeObjVar(self, "clickRespec");

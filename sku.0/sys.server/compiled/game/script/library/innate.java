@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 import script.string_id;
 
@@ -45,6 +51,7 @@ public class innate extends script.base_script
     public static final int AMR_CONTINUE = 0;
     public static final int AMR_OVERRIDE = 1;
     public static final int AMR_AMPLIFY = 2;
+
     public innate()
     {
     }

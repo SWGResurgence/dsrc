@@ -1,5 +1,11 @@
 package script.theme_park.corellia.content;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.utils;
 import script.location;
@@ -10,6 +16,7 @@ public class u13_ponda_gungan_statue_spawner extends script.base_script
     public u13_ponda_gungan_statue_spawner()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (canSpawnByConfigSetting())
@@ -18,6 +25,7 @@ public class u13_ponda_gungan_statue_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (canSpawnByConfigSetting())
@@ -26,6 +34,7 @@ public class u13_ponda_gungan_statue_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int spawnGunganStatueEvent(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "gunganStatueSpawned"))
@@ -41,6 +50,7 @@ public class u13_ponda_gungan_statue_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean canSpawnByConfigSetting() throws InterruptedException
     {
         String disableSpawners = getConfigSetting("GameServer", "disableAreaSpawners");
@@ -48,10 +58,6 @@ public class u13_ponda_gungan_statue_spawner extends script.base_script
         {
             return true;
         }
-        if (disableSpawners.equals("true") || disableSpawners.equals("1"))
-        {
-            return false;
-        }
-        return true;
+        return !disableSpawners.equals("true") && !disableSpawners.equals("1");
     }
 }

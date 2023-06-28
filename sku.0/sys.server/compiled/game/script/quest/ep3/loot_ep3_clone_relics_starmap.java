@@ -1,5 +1,11 @@
 package script.quest.ep3;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.groundquests;
 import script.library.utils;
 import script.menu_info;
@@ -12,6 +18,7 @@ public class loot_ep3_clone_relics_starmap extends script.base_script
     public loot_ep3_clone_relics_starmap()
     {
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -25,6 +32,7 @@ public class loot_ep3_clone_relics_starmap extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -37,6 +45,7 @@ public class loot_ep3_clone_relics_starmap extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void grantQuest(obj_id player, obj_id self) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player) || !isIdValid(self) || !exists(self))
@@ -80,6 +89,5 @@ public class loot_ep3_clone_relics_starmap extends script.base_script
         int nextReset = timeUntilReset + currentTime;
         setObjVar(player, "ep3.starmapTimer", nextReset);
         destroyObject(self);
-        return;
     }
 }

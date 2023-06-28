@@ -1,5 +1,11 @@
 package script.npe;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.create;
 import script.library.utils;
 import script.menu_info;
@@ -9,14 +15,17 @@ import script.string_id;
 
 public class medikit_handler extends script.base_script
 {
+    public static final string_id GET_STIMPACK = new string_id("npe_hangar_1", "get_stimpack");
+
     public medikit_handler()
     {
     }
-    public static final string_id GET_STIMPACK = new string_id("npe_hangar_1", "get_stimpack");
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if ((getStringObjVar(player, "canpickupmedikit")).equals("yes"))
@@ -25,6 +34,7 @@ public class medikit_handler extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)

@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.valley_battleground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.trial;
@@ -9,10 +15,12 @@ import script.obj_id;
 
 public class droid_squad_member extends script.base_script
 {
+    public static final boolean LOGGING = false;
+
     public droid_squad_member()
     {
     }
-    public static final boolean LOGGING = false;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         trial.setInterest(self);
@@ -20,18 +28,21 @@ public class droid_squad_member extends script.base_script
         setHibernationDelay(self, 7200);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         trial.prepareCorpse(self);
         utils.setScriptVar(self, trial.BATTLEFIELD_DROID_CORPSE, true);
         return SCRIPT_CONTINUE;
     }
+
     public int pathToNextPoint(obj_id self, dictionary params) throws InterruptedException
     {
         location[] patrolPoints = utils.getLocationArrayScriptVar(self, "patrolPoints");
         ai_lib.setPatrolOncePath(self, patrolPoints);
         return SCRIPT_CONTINUE;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING || trial.VALLEY_LOGGING)

@@ -1,27 +1,36 @@
 package script.event.lifeday;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.create;
 import script.location;
 import script.obj_id;
 
 public class city_spawner extends script.base_script
 {
+    private static final int[][] startLocations =
+            {
+                    {131, 52, -5384},
+                    {-5545, 23, -6177},
+                    {-5557, -150, 0}
+            };
+
     public city_spawner()
     {
     }
-    private static final int[][] startLocations =
-    {
-        {131,52,-5384},
-        {-5545,23,-6177},
-        {-5557,-150,0}
-    };
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "event.lifeday.spawned"))
         {
             String myPlanet = getCurrentSceneName();
             int locStart;
-            switch(myPlanet){
+            switch (myPlanet)
+            {
                 case "tatooine":
                     locStart = 0;
                     break;

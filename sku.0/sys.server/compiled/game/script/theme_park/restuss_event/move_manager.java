@@ -1,5 +1,11 @@
 package script.theme_park.restuss_event;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.movement;
@@ -9,26 +15,28 @@ import script.obj_id;
 
 public class move_manager extends script.base_script
 {
+    public static final int REST_IMP = 0;
+    public static final int REST_REB = 1;
     public move_manager()
     {
     }
-    public static final int REST_IMP = 0;
-    public static final int REST_REB = 1;
+
     public int marchRun(obj_id self, dictionary params) throws InterruptedException
     {
         int type = getIntObjVar(self, "restriction");
         switch (type)
         {
             case REST_IMP:
-            doImperialMarch(self);
-            break;
+                doImperialMarch(self);
+                break;
             case REST_REB:
-            setMovementRun(self);
-            movement.refresh(self);
-            break;
+                setMovementRun(self);
+                movement.refresh(self);
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int setRun(obj_id self, dictionary params) throws InterruptedException
     {
         int type = getIntObjVar(self, "restriction");
@@ -39,6 +47,7 @@ public class move_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void doImperialMarch(obj_id self) throws InterruptedException
     {
         location moveToLoc = utils.findLocInFrontOfTarget(self, 40.0f);

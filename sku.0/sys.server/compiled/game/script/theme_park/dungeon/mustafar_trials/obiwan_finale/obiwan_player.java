@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.obiwan_finale;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.buff;
 import script.library.instance;
@@ -10,12 +16,13 @@ import script.string_id;
 
 public class obiwan_player extends script.base_script
 {
-    public obiwan_player()
-    {
-    }
     public static final String STF = "dungeon/kash_the_arena";
     public static final string_id SID_DEATH_EJECT = new string_id(STF, "ejected_by_death");
     public static final boolean CONST_FLAG_DO_LOGGING = true;
+    public obiwan_player()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         debugLogging("//***// OnAttach: ", "////>>>> entered.");
@@ -23,6 +30,7 @@ public class obiwan_player extends script.base_script
         playMusic(self, "sound/mus_mustafar_dark_jedi_master_quest.snd");
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         if (buff.hasBuff(self, "crystal_buff"))
@@ -36,10 +44,12 @@ public class obiwan_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         CustomerServiceLog("DUNGEON_ObiWanFinale", "*ObiwanFinale %TU died in theMustafar ObiwanFinale event, ejecting them from dungeon..", self);
@@ -47,6 +57,7 @@ public class obiwan_player extends script.base_script
         messageTo(self, "handleDeathFailure", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public void debugLogging(String section, String message) throws InterruptedException
     {
         if (CONST_FLAG_DO_LOGGING)
@@ -54,6 +65,7 @@ public class obiwan_player extends script.base_script
             LOG("debug/obiwan_player/" + section, message);
         }
     }
+
     public int setUpDungeon(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id instancedDungeon = trial.getTop(self);
@@ -61,13 +73,14 @@ public class obiwan_player extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             messageTo(instancedDungeon, "beginSpawn", null, 1, false);
             attachScript(instancedDungeon, "theme_park.dungeon.mustafar_trials.obiwan_finale.obiwan_instance_spawned");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleDeathFailure(obj_id self, dictionary params) throws InterruptedException
     {
         buff.removeAllBuffs(self);

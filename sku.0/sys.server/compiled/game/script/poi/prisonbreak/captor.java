@@ -1,31 +1,41 @@
 package script.poi.prisonbreak;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.modifiable_float;
 import script.obj_id;
 
 public class captor extends script.base_script
 {
+    public static final String[] captorEmotes =
+            {
+                    "scratch",
+                    "yawn",
+                    "fidget",
+                    "cough"
+            };
+
     public captor()
     {
     }
-    public static final String captorEmotes[] = 
-    {
-        "scratch",
-        "yawn",
-        "fidget",
-        "cough"
-    };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnLoiterWaiting(obj_id self, modifiable_float time) throws InterruptedException
     {
         stop(self);
         messageTo(self, "emoteCaptor", null, 4, false);
         return SCRIPT_CONTINUE;
     }
+
     public int emoteCaptor(obj_id self, dictionary params) throws InterruptedException
     {
         int dosocial = rand(1, 4);

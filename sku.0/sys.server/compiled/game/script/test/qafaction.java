@@ -1,5 +1,11 @@
 package script.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.factions;
 import script.library.qa;
@@ -12,39 +18,40 @@ import java.util.HashSet;
 
 public class qafaction extends script.base_script
 {
-    public qafaction()
-    {
-    }
     public static final String NPC_PROMPT = "Choose a faction option\n" + "NOTE: Some factions are not really available to players, so occasionally if you select one and try to " + "add or remove the faction, it will not work";
     public static final String PROMPT = "Choose a faction option";
     public static final String TITLE = "QA Faction Tool";
     public static final int XP_AMOUNT = 1000000;
-    public static final String[] FACTIONS = 
-    {
-        "Rebel",
-        "Imperial"
-    };
-    public static final String[] MIN_MAX = 
-    {
-        "Max faction",
-        "Min Faction",
-        "Zero Faction"
-    };
-    public static final String[] MAIN_MENU_CONST = 
-    {
-        "Join a faction",
-        "Go Covert (Combatant)",
-        "Go Overt (Special Forces)",
-        "Go On Leave",
-        "Go Neutral",
-        "GCW Faction Points",
-        "Manipulate NPC Factions"
-    };
-    public static final String[] GCW_MENU = 
-    {
-        "Check Lambda Shuttles"
-    };
+    public static final String[] FACTIONS =
+            {
+                    "Rebel",
+                    "Imperial"
+            };
+    public static final String[] MIN_MAX =
+            {
+                    "Max faction",
+                    "Min Faction",
+                    "Zero Faction"
+            };
+    public static final String[] MAIN_MENU_CONST =
+            {
+                    "Join a faction",
+                    "Go Covert (Combatant)",
+                    "Go Overt (Special Forces)",
+                    "Go On Leave",
+                    "Go Neutral",
+                    "GCW Faction Points",
+                    "Manipulate NPC Factions"
+            };
+    public static final String[] GCW_MENU =
+            {
+                    "Check Lambda Shuttles"
+            };
     public static final String SCRIPTVAR = "qafac";
+    public qafaction()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (isGod(self))
@@ -61,6 +68,7 @@ public class qafaction extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mainMenuOptions(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -86,78 +94,79 @@ public class qafaction extends script.base_script
                 switch (idx)
                 {
                     case 0:
-                    qa.refreshMenu(player, PROMPT, TITLE, FACTIONS, "joinFactions", SCRIPTVAR + ".pid", sui.OK_CANCEL_REFRESH);
-                    break;
+                        qa.refreshMenu(player, PROMPT, TITLE, FACTIONS, "joinFactions", SCRIPTVAR + ".pid", sui.OK_CANCEL_REFRESH);
+                        break;
                     case 1:
-                    if (!factions.isRebel(player) && !factions.isImperial(player))
-                    {
-                        broadcast(player, "You have to be part of a faction to go Covert!!!");
-                        qa.refreshMenu(player, PROMPT, TITLE, MAIN_MENU_CONST, "mainMenuOptions", SCRIPTVAR + ".pid", sui.OK_CANCEL_REFRESH);
-                        return SCRIPT_CONTINUE;
-                    }
-                    setObjVar(player, "intChangingFactionStatus", 1);
-                    factions.goCovert(player);
-                    CustomerServiceLog("qaTool", "User: (" + self + ") " + getName(self) + " has set their character to Imperial or Rebel Covert (Combatant) status using the QA Faction Tool.");
-                    qa.refreshMenu(player, PROMPT, TITLE, qa.populateArrayDoNotSort(self, "faction_tool", "datatables/test/qa_tool_menu.iff"), "mainMenuOptions", SCRIPTVAR + ".pid", sui.OK_CANCEL_REFRESH);
-                    break;
+                        if (!factions.isRebel(player) && !factions.isImperial(player))
+                        {
+                            broadcast(player, "You have to be part of a faction to go Covert!!!");
+                            qa.refreshMenu(player, PROMPT, TITLE, MAIN_MENU_CONST, "mainMenuOptions", SCRIPTVAR + ".pid", sui.OK_CANCEL_REFRESH);
+                            return SCRIPT_CONTINUE;
+                        }
+                        setObjVar(player, "intChangingFactionStatus", 1);
+                        factions.goCovert(player);
+                        CustomerServiceLog("qaTool", "User: (" + self + ") " + getName(self) + " has set their character to Imperial or Rebel Covert (Combatant) status using the QA Faction Tool.");
+                        qa.refreshMenu(player, PROMPT, TITLE, qa.populateArrayDoNotSort(self, "faction_tool", "datatables/test/qa_tool_menu.iff"), "mainMenuOptions", SCRIPTVAR + ".pid", sui.OK_CANCEL_REFRESH);
+                        break;
                     case 2:
-                    if (!factions.isRebel(player) && !factions.isImperial(player))
-                    {
-                        broadcast(player, "You have to be part of a faction to go Overt!!!");
+                        if (!factions.isRebel(player) && !factions.isImperial(player))
+                        {
+                            broadcast(player, "You have to be part of a faction to go Overt!!!");
+                            qa.refreshMenu(player, PROMPT, TITLE, MAIN_MENU_CONST, "mainMenuOptions", SCRIPTVAR + ".pid", sui.OK_CANCEL_REFRESH);
+                            return SCRIPT_CONTINUE;
+                        }
+                        setObjVar(player, "intChangingFactionStatus", 1);
+                        factions.goOvert(player);
+                        CustomerServiceLog("qaTool", "User: (" + self + ") " + getName(self) + " has set their character to Imperial or Rebel Overt (Special Forces) status using the QA Faction Tool.");
                         qa.refreshMenu(player, PROMPT, TITLE, MAIN_MENU_CONST, "mainMenuOptions", SCRIPTVAR + ".pid", sui.OK_CANCEL_REFRESH);
-                        return SCRIPT_CONTINUE;
-                    }
-                    setObjVar(player, "intChangingFactionStatus", 1);
-                    factions.goOvert(player);
-                    CustomerServiceLog("qaTool", "User: (" + self + ") " + getName(self) + " has set their character to Imperial or Rebel Overt (Special Forces) status using the QA Faction Tool.");
-                    qa.refreshMenu(player, PROMPT, TITLE, MAIN_MENU_CONST, "mainMenuOptions", SCRIPTVAR + ".pid", sui.OK_CANCEL_REFRESH);
-                    break;
+                        break;
                     case 3:
-                    broadcast(player, faction);
-                    if (!factions.isRebel(player) && !factions.isImperial(player))
-                    {
-                        broadcast(player, "You have to be part of a faction to go on Leave!!!");
+                        broadcast(player, faction);
+                        if (!factions.isRebel(player) && !factions.isImperial(player))
+                        {
+                            broadcast(player, "You have to be part of a faction to go on Leave!!!");
+                            qa.refreshMenu(player, PROMPT, TITLE, MAIN_MENU_CONST, "mainMenuOptions", SCRIPTVAR + ".pid", sui.OK_CANCEL_REFRESH);
+                            return SCRIPT_CONTINUE;
+                        }
+                        setObjVar(player, "intChangingFactionStatus", 1);
+                        factions.goOnLeave(player);
+                        CustomerServiceLog("qaTool", "User: (" + self + ") " + getName(self) + " has set their character to Imperial or Rebel Leave status using the QA Faction Tool.");
                         qa.refreshMenu(player, PROMPT, TITLE, MAIN_MENU_CONST, "mainMenuOptions", SCRIPTVAR + ".pid", sui.OK_CANCEL_REFRESH);
-                        return SCRIPT_CONTINUE;
-                    }
-                    setObjVar(player, "intChangingFactionStatus", 1);
-                    factions.goOnLeave(player);
-                    CustomerServiceLog("qaTool", "User: (" + self + ") " + getName(self) + " has set their character to Imperial or Rebel Leave status using the QA Faction Tool.");
-                    qa.refreshMenu(player, PROMPT, TITLE, MAIN_MENU_CONST, "mainMenuOptions", SCRIPTVAR + ".pid", sui.OK_CANCEL_REFRESH);
-                    break;
+                        break;
                     case 4:
-                    pvpMakeNeutral(player);
-                    pvpSetAlignedFaction(player, 0);
-                    broadcast(player, "You are now Neutral.");
-                    CustomerServiceLog("qaTool", "User: (" + self + ") " + getName(self) + " has set their character to Neutral non-faction status using the QA Faction Tool.");
-                    qa.refreshMenu(player, PROMPT, TITLE, MAIN_MENU_CONST, "mainMenuOptions", SCRIPTVAR + ".pid", sui.OK_CANCEL_REFRESH);
-                    break;
+                        pvpMakeNeutral(player);
+                        pvpSetAlignedFaction(player, 0);
+                        broadcast(player, "You are now Neutral.");
+                        CustomerServiceLog("qaTool", "User: (" + self + ") " + getName(self) + " has set their character to Neutral non-faction status using the QA Faction Tool.");
+                        qa.refreshMenu(player, PROMPT, TITLE, MAIN_MENU_CONST, "mainMenuOptions", SCRIPTVAR + ".pid", sui.OK_CANCEL_REFRESH);
+                        break;
                     case 5:
-                    qa.refreshMenu(player, PROMPT, TITLE, FACTIONS, "getFactionPoints", SCRIPTVAR + ".pid", sui.OK_CANCEL_REFRESH);
-                    break;
+                        qa.refreshMenu(player, PROMPT, TITLE, FACTIONS, "getFactionPoints", SCRIPTVAR + ".pid", sui.OK_CANCEL_REFRESH);
+                        break;
                     case 6:
-                    String[] menuArray = new String[47];
-                    String[] factionArray = qa.populateArray(player, "factionName", "datatables/faction/faction.iff", "Neutral");
-                    int i = 0;
-                    for (i = 0; i <= 45; i++)
-                    {
-                        menuArray[i] = factionArray[i];
-                    }
-                    menuArray[i++] = "*MORE*";
-                    Arrays.sort(menuArray);
-                    utils.setScriptVar(player, SCRIPTVAR + ".menu", menuArray);
-                    utils.setScriptVar(player, SCRIPTVAR + ".factionMenu", factionArray);
-                    utils.setScriptVar(player, SCRIPTVAR + ".index", i);
-                    qa.refreshMenu(player, NPC_PROMPT, TITLE, menuArray, "npcFactions", SCRIPTVAR + ".pid", sui.OK_CANCEL_REFRESH);
-                    break;
+                        String[] menuArray = new String[47];
+                        String[] factionArray = qa.populateArray(player, "factionName", "datatables/faction/faction.iff", "Neutral");
+                        int i = 0;
+                        for (i = 0; i <= 45; i++)
+                        {
+                            menuArray[i] = factionArray[i];
+                        }
+                        menuArray[i++] = "*MORE*";
+                        Arrays.sort(menuArray);
+                        utils.setScriptVar(player, SCRIPTVAR + ".menu", menuArray);
+                        utils.setScriptVar(player, SCRIPTVAR + ".factionMenu", factionArray);
+                        utils.setScriptVar(player, SCRIPTVAR + ".index", i);
+                        qa.refreshMenu(player, NPC_PROMPT, TITLE, menuArray, "npcFactions", SCRIPTVAR + ".pid", sui.OK_CANCEL_REFRESH);
+                        break;
                     default:
-                    qa.removeScriptVars(player, SCRIPTVAR);
-                    return SCRIPT_CONTINUE;
+                        qa.removeScriptVars(player, SCRIPTVAR);
+                        return SCRIPT_CONTINUE;
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int getFactionPoints(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -181,22 +190,23 @@ public class qafaction extends script.base_script
                 switch (idx)
                 {
                     case 0:
-                    broadcast(player, "Option 1.");
-                    utils.setScriptVar(player, SCRIPTVAR + ".factionType", factions.FACTION_REBEL);
-                    sui.transfer(player, player, PROMPT, "Rebel Faction", "Available", XP_AMOUNT, "Amount", 0, "handleFactionAdd");
-                    break;
+                        broadcast(player, "Option 1.");
+                        utils.setScriptVar(player, SCRIPTVAR + ".factionType", factions.FACTION_REBEL);
+                        sui.transfer(player, player, PROMPT, "Rebel Faction", "Available", XP_AMOUNT, "Amount", 0, "handleFactionAdd");
+                        break;
                     case 1:
-                    broadcast(player, "Option 2.");
-                    utils.setScriptVar(player, SCRIPTVAR + ".factionType", factions.FACTION_IMPERIAL);
-                    sui.transfer(player, player, PROMPT, "Imperial Faction", "Available", XP_AMOUNT, "Amount", 0, "handleFactionAdd");
-                    break;
+                        broadcast(player, "Option 2.");
+                        utils.setScriptVar(player, SCRIPTVAR + ".factionType", factions.FACTION_IMPERIAL);
+                        sui.transfer(player, player, PROMPT, "Imperial Faction", "Available", XP_AMOUNT, "Amount", 0, "handleFactionAdd");
+                        break;
                     default:
-                    return SCRIPT_CONTINUE;
+                        return SCRIPT_CONTINUE;
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleFactionAdd(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -212,6 +222,7 @@ public class qafaction extends script.base_script
         qa.refreshMenu(player, PROMPT, TITLE, FACTIONS, "getFactionPoints", SCRIPTVAR + ".pid", sui.OK_CANCEL_REFRESH);
         return SCRIPT_CONTINUE;
     }
+
     public int joinFactions(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -245,6 +256,7 @@ public class qafaction extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npcFactions(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -255,8 +267,8 @@ public class qafaction extends script.base_script
                 obj_id player = sui.getPlayerId(params);
                 int idx = sui.getListboxSelectedRow(params);
                 int btn = sui.getIntButtonPressed(params);
-                String prevMenuArray[] = utils.getStringArrayScriptVar(self, SCRIPTVAR + ".menu");
-                String factionArray[] = utils.getStringArrayScriptVar(self, SCRIPTVAR + ".factionMenu");
+                String[] prevMenuArray = utils.getStringArrayScriptVar(self, SCRIPTVAR + ".menu");
+                String[] factionArray = utils.getStringArrayScriptVar(self, SCRIPTVAR + ".factionMenu");
                 int lastIndex = utils.getIntScriptVar(self, SCRIPTVAR + ".index");
                 if (btn == sui.BP_CANCEL)
                 {
@@ -299,6 +311,7 @@ public class qafaction extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int minMaxFaction(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -310,7 +323,7 @@ public class qafaction extends script.base_script
                 int idx = sui.getListboxSelectedRow(params);
                 int btn = sui.getIntButtonPressed(params);
                 String lastChoice = utils.getStringScriptVar(player, SCRIPTVAR + ".choice");
-                String prevMenuArray[] = utils.getStringArrayScriptVar(player, SCRIPTVAR + ".menu");
+                String[] prevMenuArray = utils.getStringArrayScriptVar(player, SCRIPTVAR + ".menu");
                 if (btn == sui.BP_CANCEL)
                 {
                     qa.removeScriptVars(player, SCRIPTVAR);
@@ -324,23 +337,23 @@ public class qafaction extends script.base_script
                 switch (idx)
                 {
                     case 0:
-                    factions.setFactionStanding(player, lastChoice, factions.FACTION_RATING_MAX);
-                    CustomerServiceLog("qaTool", "User: (" + self + ") " + getName(self) + " has set their character faction for " + lastChoice + " to " + factions.FACTION_RATING_MAX + " using the QA Faction Tool.");
-                    qa.refreshMenu(player, PROMPT, TITLE, qa.populateArrayDoNotSort(self, "faction_tool", "datatables/test/qa_tool_menu.iff"), "mainMenuOptions", SCRIPTVAR + ".pid", sui.OK_CANCEL_REFRESH);
-                    break;
+                        factions.setFactionStanding(player, lastChoice, factions.FACTION_RATING_MAX);
+                        CustomerServiceLog("qaTool", "User: (" + self + ") " + getName(self) + " has set their character faction for " + lastChoice + " to " + factions.FACTION_RATING_MAX + " using the QA Faction Tool.");
+                        qa.refreshMenu(player, PROMPT, TITLE, qa.populateArrayDoNotSort(self, "faction_tool", "datatables/test/qa_tool_menu.iff"), "mainMenuOptions", SCRIPTVAR + ".pid", sui.OK_CANCEL_REFRESH);
+                        break;
                     case 1:
-                    factions.setFactionStanding(player, lastChoice, factions.FACTION_RATING_MIN);
-                    CustomerServiceLog("qaTool", "User: (" + self + ") " + getName(self) + " has set their character faction for " + lastChoice + " to " + factions.FACTION_RATING_MIN + " using the QA Faction Tool.");
-                    qa.refreshMenu(player, PROMPT, TITLE, qa.populateArrayDoNotSort(self, "faction_tool", "datatables/test/qa_tool_menu.iff"), "mainMenuOptions", SCRIPTVAR + ".pid", sui.OK_CANCEL_REFRESH);
-                    break;
+                        factions.setFactionStanding(player, lastChoice, factions.FACTION_RATING_MIN);
+                        CustomerServiceLog("qaTool", "User: (" + self + ") " + getName(self) + " has set their character faction for " + lastChoice + " to " + factions.FACTION_RATING_MIN + " using the QA Faction Tool.");
+                        qa.refreshMenu(player, PROMPT, TITLE, qa.populateArrayDoNotSort(self, "faction_tool", "datatables/test/qa_tool_menu.iff"), "mainMenuOptions", SCRIPTVAR + ".pid", sui.OK_CANCEL_REFRESH);
+                        break;
                     case 2:
-                    factions.setFactionStanding(player, lastChoice, factions.FACTION_RATING_INVALID);
-                    CustomerServiceLog("qaTool", "User: (" + self + ") " + getName(self) + " has set their character faction for " + lastChoice + " to " + factions.FACTION_RATING_INVALID + " using the QA Faction Tool.");
-                    qa.refreshMenu(player, PROMPT, TITLE, qa.populateArrayDoNotSort(self, "faction_tool", "datatables/test/qa_tool_menu.iff"), "mainMenuOptions", SCRIPTVAR + ".pid", sui.OK_CANCEL_REFRESH);
-                    break;
+                        factions.setFactionStanding(player, lastChoice, factions.FACTION_RATING_INVALID);
+                        CustomerServiceLog("qaTool", "User: (" + self + ") " + getName(self) + " has set their character faction for " + lastChoice + " to " + factions.FACTION_RATING_INVALID + " using the QA Faction Tool.");
+                        qa.refreshMenu(player, PROMPT, TITLE, qa.populateArrayDoNotSort(self, "faction_tool", "datatables/test/qa_tool_menu.iff"), "mainMenuOptions", SCRIPTVAR + ".pid", sui.OK_CANCEL_REFRESH);
+                        break;
                     default:
-                    qa.removeScriptVars(player, SCRIPTVAR);
-                    return SCRIPT_CONTINUE;
+                        qa.removeScriptVars(player, SCRIPTVAR);
+                        return SCRIPT_CONTINUE;
                 }
             }
         }

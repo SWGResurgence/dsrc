@@ -1,14 +1,17 @@
 package script.theme_park.meatlump;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.player_structure;
 import script.library.utils;
 
 public class meatlump_camera extends script.base_script
 {
-    public meatlump_camera()
-    {
-    }
     public static final string_id SID_USE_CAMERA = new string_id("collection", "use_camera");
     public static final string_id SID_INVALID_OBJECT = new string_id("collection", "invalid_camera_target");
     public static final string_id SID_PICTURE_TAKEN = new string_id("collection", "picture_taken");
@@ -21,6 +24,10 @@ public class meatlump_camera extends script.base_script
     public static final string_id SID_NO_DESTROY_YOUR_STUFF = new string_id("collection", "nodestroy_your_stuff");
     public static final String PHOTO_COLLECTION = "col_meatlump_photo_01";
     public static final String HOPPER_OBJVAR = "player_structure.deed.maxHopperSize";
+    public meatlump_camera()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id myCamera = self;
@@ -30,6 +37,7 @@ public class meatlump_camera extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -58,12 +66,13 @@ public class meatlump_camera extends script.base_script
         {
             sendSystemMessage(player, SID_INVALID_TARGET);
         }
-        else 
+        else
         {
             checkValidObject(player, intended);
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean checkValidObject(obj_id player, obj_id target) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -75,11 +84,14 @@ public class meatlump_camera extends script.base_script
             return false;
         }
         String[] adminList = getStringArrayObjVar(target, player_structure.VAR_ADMIN_LIST);
-        if(adminList != null && adminList.length > 0) {
-            String str_player_id = "" + player;
+        if (adminList != null && adminList.length > 0)
+        {
+            String str_player_id = String.valueOf(player);
             int adminSize = adminList.length;
-            for (String s : adminList) {
-                if (s.equals(str_player_id)) {
+            for (String s : adminList)
+            {
+                if (s.equals(str_player_id))
+                {
                     sendSystemMessage(player, SID_NO_DESTROY_YOUR_STUFF);
                     return false;
                 }
@@ -110,6 +122,7 @@ public class meatlump_camera extends script.base_script
         tagTheObject(player, target);
         return true;
     }
+
     public void tagTheObject(obj_id player, obj_id photoTarget) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))

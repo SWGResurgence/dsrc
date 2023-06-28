@@ -1,5 +1,11 @@
 package script.systems.crafting.item;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.draft_schematic;
 import script.library.craftinglib;
@@ -20,6 +26,7 @@ public class crafting_gcw_tower extends script.systems.crafting.crafting_base
             {
                     "droid_experimentation"
             };
+
     public crafting_gcw_tower()
     {
     }

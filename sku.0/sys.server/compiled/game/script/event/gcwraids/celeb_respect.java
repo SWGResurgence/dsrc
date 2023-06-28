@@ -1,5 +1,11 @@
 package script.event.gcwraids;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.chat;
@@ -10,11 +16,12 @@ import script.string_id;
 
 public class celeb_respect extends script.base_script
 {
+    public static final String STF_FILE = "event/gcw_raids";
+    private static final String EMOTE_DATATABLE = "datatables/npc/stormtrooper_attitude/emote.iff";
     public celeb_respect()
     {
     }
-    private static final String EMOTE_DATATABLE = "datatables/npc/stormtrooper_attitude/emote.iff";
-    public static final String STF_FILE = "event/gcw_raids";
+
     public int OnSawEmote(obj_id self, obj_id emoteSayer, String emotein) throws InterruptedException
     {
         int type = getIntObjVar(self, "event.gcwraids.type");
@@ -39,6 +46,7 @@ public class celeb_respect extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int forceChokeThisGuy(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id emoteSayer = params.getObjId("emoteSayer");
@@ -51,6 +59,7 @@ public class celeb_respect extends script.base_script
         messageTo(self, "finishHim", params, 6, false);
         return SCRIPT_CONTINUE;
     }
+
     public int finishHim(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id emoteSayer = params.getObjId("emoteSayer");
@@ -59,6 +68,7 @@ public class celeb_respect extends script.base_script
         setAttrib(emoteSayer, HEALTH, (rand(30, 90) * -1));
         return SCRIPT_CONTINUE;
     }
+
     private int getEmoteBeligerence(String emote) throws InterruptedException
     {
         int st_emote_type = dataTableGetInt(EMOTE_DATATABLE, dataTableSearchColumnForString(emote, 0, EMOTE_DATATABLE), 1);
@@ -66,11 +76,12 @@ public class celeb_respect extends script.base_script
         {
             return st_emote_type;
         }
-        else 
+        else
         {
             return -1;
         }
     }
+
     private void playKnockdown(obj_id victim, obj_id attacker) throws InterruptedException
     {
         if (!isIdValid(victim) || !isIdValid(attacker))
@@ -84,7 +95,7 @@ public class celeb_respect extends script.base_script
         {
             strPlaybackScript = "ranged_melee_light";
         }
-        else 
+        else
         {
             strPlaybackScript = "attack_high_center_light_0";
         }

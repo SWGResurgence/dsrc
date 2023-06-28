@@ -1,14 +1,22 @@
 package script.npc.pet_deed;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class droid_deed extends script.base_script
 {
+    public static final String MENU_FILE = "pet/pet_menu";
+
     public droid_deed()
     {
     }
-    public static final String MENU_FILE = "pet/pet_menu";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "module_data.struct_maint"))
@@ -27,7 +35,7 @@ public class droid_deed extends script.base_script
         }
         else if (hasObjVar(self, "combatModule") && hasObjVar(self, "crafting_components.cmbt_module"))
         {
-            if ((getIntObjVar(self, "combatModule")) != ((int)(getFloatObjVar(self, "crafting_components.cmbt_module"))))
+            if ((getIntObjVar(self, "combatModule")) != ((int) (getFloatObjVar(self, "crafting_components.cmbt_module"))))
             {
                 reStatTheDeed = 1;
             }
@@ -42,13 +50,14 @@ public class droid_deed extends script.base_script
             }
             if (hasObjVar(self, "crafting_components.cmbt_module"))
             {
-                int combatValue = (int)(getFloatObjVar(self, "crafting_components.cmbt_module"));
+                int combatValue = (int) (getFloatObjVar(self, "crafting_components.cmbt_module"));
                 droidCombatStats.put("combatModuleValue", combatValue);
             }
             pet_lib.initDroidCombatStats(self, droidCombatStats);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int getStorageSlotsByRating(int rating) throws InterruptedException
     {
         int slots = 0;
@@ -94,6 +103,7 @@ public class droid_deed extends script.base_script
         }
         return slots;
     }
+
     public int getDataSlotsByRating(int rating) throws InterruptedException
     {
         int slots = 0;
@@ -123,6 +133,7 @@ public class droid_deed extends script.base_script
         }
         return slots;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -133,8 +144,8 @@ public class droid_deed extends script.base_script
         if (hasObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + ".mechanism_quality"))
         {
             names[idx] = "mechanism_quality";
-            int value = (int)getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + ".mechanism_quality");
-            attribs[idx] = "" + value;
+            int value = (int) getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + ".mechanism_quality");
+            attribs[idx] = String.valueOf(value);
             idx++;
             if (idx >= names.length)
             {
@@ -145,7 +156,7 @@ public class droid_deed extends script.base_script
         {
             names[idx] = "pet_stats.level";
             int value = getIntObjVar(self, "creature_attribs.level");
-            attribs[idx] = "" + value;
+            attribs[idx] = String.valueOf(value);
             idx++;
             if (idx >= names.length)
             {
@@ -156,7 +167,7 @@ public class droid_deed extends script.base_script
         {
             names[idx] = "pet_stats.creature_health";
             int value = getIntObjVar(self, "creature_attribs." + create.MAXATTRIBNAMES[HEALTH]);
-            attribs[idx] = "" + value;
+            attribs[idx] = String.valueOf(value);
             idx++;
             if (idx >= names.length)
             {
@@ -167,7 +178,7 @@ public class droid_deed extends script.base_script
         {
             names[idx] = "pet_stats.creature_action";
             int value = getIntObjVar(self, "creature_attribs." + create.MAXATTRIBNAMES[ACTION]);
-            attribs[idx] = "" + value;
+            attribs[idx] = String.valueOf(value);
             idx++;
             if (idx >= names.length)
             {
@@ -178,7 +189,7 @@ public class droid_deed extends script.base_script
         {
             names[idx] = "pet_stats.general_protection";
             int value = getIntObjVar(self, "creature_attribs.general_protection");
-            attribs[idx] = "" + value;
+            attribs[idx] = String.valueOf(value);
             idx++;
             if (idx >= names.length)
             {
@@ -189,7 +200,7 @@ public class droid_deed extends script.base_script
         {
             names[idx] = "pet_stats.creature_tohit";
             int value = getIntObjVar(self, "creature_attribs.toHitChance");
-            attribs[idx] = "" + value;
+            attribs[idx] = String.valueOf(value);
             idx++;
             if (idx >= names.length)
             {
@@ -200,7 +211,7 @@ public class droid_deed extends script.base_script
         {
             names[idx] = "pet_stats.creature_defense";
             int value = getIntObjVar(self, "creature_attribs.defenseValue");
-            attribs[idx] = "" + value;
+            attribs[idx] = String.valueOf(value);
             idx++;
             if (idx >= names.length)
             {
@@ -211,7 +222,7 @@ public class droid_deed extends script.base_script
         {
             names[idx] = "pet_stats.creature_state_resist";
             float value = getFloatObjVar(self, "creature_attribs.stateResist");
-            attribs[idx] = "" + value * 100 + "%";
+            attribs[idx] = value * 100 + "%";
             idx++;
             if (idx >= names.length)
             {
@@ -222,7 +233,7 @@ public class droid_deed extends script.base_script
         {
             names[idx] = "pet_stats.creature_crit_chance";
             float value = getFloatObjVar(self, "creature_attribs.critChance");
-            attribs[idx] = "" + value * 100 + "%";
+            attribs[idx] = value * 100 + "%";
             idx++;
             if (idx >= names.length)
             {
@@ -233,7 +244,7 @@ public class droid_deed extends script.base_script
         {
             names[idx] = "pet_stats.creature_crit_save";
             float value = getFloatObjVar(self, "creature_attribs.critSave");
-            attribs[idx] = "" + value * 100 + "%";
+            attribs[idx] = value * 100 + "%";
             idx++;
             if (idx >= names.length)
             {
@@ -244,7 +255,7 @@ public class droid_deed extends script.base_script
         {
             names[idx] = "pet_stats.creature_aggro_bonus";
             float value = getFloatObjVar(self, "creature_attribs.aggroBonus");
-            attribs[idx] = "" + value * 100 + "%";
+            attribs[idx] = value * 100 + "%";
             idx++;
             if (idx >= names.length)
             {
@@ -259,7 +270,7 @@ public class droid_deed extends script.base_script
             int[] dmgBonus = pet_lib.getPetAbilityDamageBonus(self, min, max);
             min += dmgBonus[0];
             max += dmgBonus[1];
-            attribs[idx] = "" + min + " - " + max;
+            attribs[idx] = min + " - " + max;
             idx++;
             if (idx >= names.length)
             {
@@ -384,7 +395,7 @@ public class droid_deed extends script.base_script
         {
             names[idx] = "medpower";
             float med = getFloatObjVar(self, "medpower");
-            attribs[idx] = " " + ((int)(med * 100));
+            attribs[idx] = " " + ((int) (med * 100));
             idx++;
             if (idx >= names.length)
             {
@@ -405,7 +416,7 @@ public class droid_deed extends script.base_script
         {
             names[idx] = "storage_module_rating";
             int rating = getIntObjVar(self, "storageModuleRating");
-            attribs[idx] = "" + rating;
+            attribs[idx] = String.valueOf(rating);
             idx++;
             if (idx >= names.length)
             {
@@ -413,7 +424,7 @@ public class droid_deed extends script.base_script
             }
             names[idx] = "inventory_capacity";
             int storage = getStorageSlotsByRating(rating);
-            attribs[idx] = "" + storage;
+            attribs[idx] = String.valueOf(storage);
             idx++;
             if (idx >= names.length)
             {
@@ -456,7 +467,7 @@ public class droid_deed extends script.base_script
                 return SCRIPT_CONTINUE;
             }
             names[idx] = "data_module_rating";
-            attribs[idx] = "" + datastorage;
+            attribs[idx] = String.valueOf(datastorage);
             idx++;
             if (idx >= names.length)
             {
@@ -464,7 +475,7 @@ public class droid_deed extends script.base_script
             }
             names[idx] = "datapad_slots";
             int storage = getDataSlotsByRating(datastorage);
-            attribs[idx] = "" + storage;
+            attribs[idx] = String.valueOf(storage);
             idx++;
             if (idx >= names.length)
             {
@@ -554,7 +565,7 @@ public class droid_deed extends script.base_script
                 combatStrength = 1.0f;
             }
             names[idx] = "combat_rating";
-            attribs[idx] = " " + (int)combatStrength;
+            attribs[idx] = " " + (int) combatStrength;
             idx++;
             if (idx >= names.length)
             {
@@ -621,11 +632,13 @@ public class droid_deed extends script.base_script
             String[] effects = pet_lib.getLightingEffects(self);
             if (effects != null)
             {
-                for (String effect : effects) {
+                for (String effect : effects)
+                {
                     names[idx] = effect;
                     attribs[idx] = " installed";
                     idx++;
-                    if (idx >= names.length) {
+                    if (idx >= names.length)
+                    {
                         return SCRIPT_CONTINUE;
                     }
                 }
@@ -696,6 +709,7 @@ public class droid_deed extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (canManipulate(player, self, true, true, 15, true))
@@ -704,6 +718,7 @@ public class droid_deed extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.PET_TAME)
@@ -735,6 +750,7 @@ public class droid_deed extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public obj_id createCraftedCreatureDevice(obj_id player, obj_id deed) throws InterruptedException
     {
         if (!canManipulate(player, deed, true, true, 15, true))
@@ -755,7 +771,7 @@ public class droid_deed extends script.base_script
             sendSystemMessage(player, pet_lib.SID_SYS_TOO_MANY_STORED_PETS);
             return null;
         }
-        else 
+        else
         {
             string_id nameId = new string_id(create.CREATURE_NAME_FILE, creatureName);
             setName(petControlDevice, nameId);
@@ -840,9 +856,11 @@ public class droid_deed extends script.base_script
             ranged_int_custom_var[] ri = hue.getPalcolorVars(deed);
             if (ri != null && ri.length > 0)
             {
-                for (ranged_int_custom_var ranged_int_custom_var : ri) {
+                for (ranged_int_custom_var ranged_int_custom_var : ri)
+                {
                     int val = ranged_int_custom_var.getValue();
-                    if (val > -1) {
+                    if (val > -1)
+                    {
                         String varpath = pet_lib.VAR_PALVAR_VARS + "." + ranged_int_custom_var.getVarName();
                         setObjVar(petControlDevice, varpath, val);
                         hue.setColor(pet, ranged_int_custom_var.getVarName(), val);
@@ -872,6 +890,7 @@ public class droid_deed extends script.base_script
         }
         return petControlDevice;
     }
+
     public void initDroidCraftedInventoryPCD(obj_id petControlDevice, obj_id player) throws InterruptedException
     {
         if (hasObjVar(petControlDevice, "ai.pet.hasContainer"))
@@ -929,12 +948,12 @@ public class droid_deed extends script.base_script
             {
                 setOwner(newerInventory, player);
             }
-            else 
+            else
             {
                 LOG("LOG_CHANNEL", "droid_deed::initDroidCraftedInventory -- Unable to create valid datapad and/or unable to set owner on it.");
             }
         }
-        else 
+        else
         {
             obj_id inv = getObjectInSlot(petControlDevice, "inventory");
             if (isIdValid(inv))
@@ -944,6 +963,7 @@ public class droid_deed extends script.base_script
             }
         }
     }
+
     public void initDroidCraftedDatapadPCD(obj_id petControlDevice, obj_id player) throws InterruptedException
     {
         if (hasObjVar(petControlDevice, "dataModuleRating"))
@@ -984,12 +1004,12 @@ public class droid_deed extends script.base_script
             {
                 setOwner(newerDatapad, player);
             }
-            else 
+            else
             {
                 LOG("LOG_CHANNEL", "droid_deed::initDroidCraftedDatapad -- Unable to create valid datapad and/or unable to set owner on it.");
             }
         }
-        else 
+        else
         {
             obj_id dpad = getObjectInSlot(petControlDevice, "datapad");
             if (isIdValid(dpad))
@@ -1000,6 +1020,7 @@ public class droid_deed extends script.base_script
             }
         }
     }
+
     public void initDroidModuleData(obj_id pet, obj_id petControlDevice) throws InterruptedException
     {
         copyObjVar(petControlDevice, pet, "module_data");

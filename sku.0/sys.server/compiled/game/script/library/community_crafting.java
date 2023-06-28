@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 import java.lang.reflect.Method;
@@ -49,6 +55,7 @@ public class community_crafting extends script.base_script
     public static final string_id SID_NOT_MIN_QUALITY = new string_id("crafting", "cc_not_min_quality");
     public static final string_id SID_NOT_VALID_ITEM = new string_id("crafting", "cc_not_valid_item");
     public static final String SCRIPT_COMMUNITY_CRAFTING_PLAYER = "player.player_community_crafting";
+
     public community_crafting()
     {
     }

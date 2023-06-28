@@ -1,15 +1,23 @@
 package script.theme_park.dungeon.mustafar_trials.valley_battleground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.create;
 import script.library.utils;
 import script.obj_id;
 
 public class koseyet_spawner extends script.base_script
 {
+    public static final String SPAWNED = "koseyetSpawned";
+
     public koseyet_spawner()
     {
     }
-    public static final String SPAWNED = "koseyetSpawned";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!isKoseyetSpawned(self))
@@ -23,6 +31,7 @@ public class koseyet_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!isKoseyetSpawned(self))
@@ -36,13 +45,14 @@ public class koseyet_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean isKoseyetSpawned(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, SPAWNED))
         {
             return isIdValid(utils.getObjIdScriptVar(self, SPAWNED));
         }
-        else 
+        else
         {
             return false;
         }

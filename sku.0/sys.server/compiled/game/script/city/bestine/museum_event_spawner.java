@@ -1,5 +1,11 @@
 package script.city.bestine;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.create;
@@ -7,21 +13,24 @@ import script.library.utils;
 
 public class museum_event_spawner extends script.base_script
 {
+    public static final String SCRIPT_NAME = "city.bestine.museum_event_spawner";
+
     public museum_event_spawner()
     {
     }
-    public static final String SCRIPT_NAME = "city.bestine.museum_event_spawner";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
-        LOG("museum","Museum event NPC spawner initializing with objid of " + self + ".");
+        LOG("museum", "Museum event NPC spawner initializing with objid of " + self + ".");
         deltadictionary dctScriptVars = self.getScriptVars();
         dctScriptVars.put("numMuseumChecks", 1);
         messageTo(self, "checkForMuseumBuilding", null, 60, false);
         return SCRIPT_CONTINUE;
     }
+
     public int checkForMuseumBuilding(obj_id self, dictionary params) throws InterruptedException
     {
-        LOG("museum","Starting to look for Bestine's museum.");
+        LOG("museum", "Starting to look for Bestine's museum.");
         deltadictionary dctScriptVars = self.getScriptVars();
         int numMuseumChecks = dctScriptVars.getInt("numMuseumChecks");
 
@@ -32,11 +41,13 @@ public class museum_event_spawner extends script.base_script
             obj_id objMuseumBuilding = null;
             map_location registeredMuseum;
             String museumName;
-            for (map_location allRegisteredMuseum : allRegisteredMuseums) {
+            for (map_location allRegisteredMuseum : allRegisteredMuseums)
+            {
                 LOG("museum", "Found " + allRegisteredMuseums.length + " registered museums.");
                 registeredMuseum = allRegisteredMuseum;
                 museumName = getString(utils.unpackString(registeredMuseum.getLocationName()));
-                if (museumName != null && museumName.equals("Bestine")) {
+                if (museumName != null && museumName.equals("Bestine"))
+                {
                     objMuseumBuilding = registeredMuseum.getLocationId();
                     LOG("museum", "Found Bestine's museum - has objid of " + objMuseumBuilding);
                 }
@@ -50,20 +61,20 @@ public class museum_event_spawner extends script.base_script
                     messageTo(self, "checkForMuseumBuilding", null, 60, false);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     LOG("DESIGNER_FATAL", "** " + SCRIPT_NAME + ": Couldn't find obj_id for a registered museum after " + numMuseumChecks + " museumChecks from here:" + here);
                     return SCRIPT_CONTINUE;
                 }
             }
-            else 
+            else
             {
-                LOG("museum","Adding Bestine's museum obj id to the script vars and getting ready to spawn npc's.");
+                LOG("museum", "Adding Bestine's museum obj id to the script vars and getting ready to spawn npc's.");
                 dctScriptVars.put("objMuseumBuilding", objMuseumBuilding);
                 spawnNpc(self);
             }
         }
-        else 
+        else
         {
             if (numMuseumChecks <= 90)
             {
@@ -72,16 +83,17 @@ public class museum_event_spawner extends script.base_script
                 messageTo(self, "checkForMuseumBuilding", null, 60, false);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 LOG("DESIGNER_FATAL", "** " + SCRIPT_NAME + ": Couldn't find a valid map_location for a registered museum after " + numMuseumChecks + " museumChecks from here: " + here);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public void spawnNpc(obj_id self) throws InterruptedException
     {
-        LOG("museum","Starting to spawn NPC.");
+        LOG("museum", "Starting to spawn NPC.");
         String spawn = getStringObjVar(self, "spawns");
         obj_id npc = create.staticObject(spawn, getLocation(self));
         setInvulnerable(npc, true);

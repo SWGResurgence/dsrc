@@ -1,5 +1,11 @@
 package script.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.craftinglib;
 import script.library.qa;
@@ -9,76 +15,77 @@ import script.obj_id;
 
 public class qa_resources extends script.base_script
 {
-    public qa_resources()
-    {
-    }
     public static final String SCRIPTVAR = "resource";
-    public static final String[] MAIN_MENU = 
-    {
-        "Recycled Resources",
-        "Space Resources"
-    };
-    public static final String[] RECYCLED_MAIN = 
-    {
-        "Chemical",
-        "Creature",
-        "Flora",
-        "Metal",
-        "Ore"
-    };
-    public static final String[] RECYCLED_CHEMICAL = 
-    {
-        "chemical",
-        "fuel_petrochem_solid",
-        "radioactive",
-        "water"
-    };
-    public static final String[] RECYCLED_CREATURE = 
-    {
-        "bone",
-        "bone_horn",
-        "hide",
-        "meat",
-        "milk",
-        "seafood"
-    };
-    public static final String[] RECYCLED_FLORA = 
-    {
-        "cereal",
-        "fruit",
-        "vegetable",
-        "wood"
-    };
-    public static final String[] RECYCLED_METAL = 
-    {
-        "metal_ferrous",
-        "metal_nonferrous"
-    };
-    public static final String[] RECYCLED_ORE = 
-    {
-        "ore_igneous",
-        "ore_sedimentary",
-        "gemstone"
-    };
-    public static final String[] SPACE_RESOURCE_CONST = 
-    {
-        "space_chemical_acid",
-        "space_chemical_cyanomethanic",
-        "space_chemical_petrochem",
-        "space_chemical_sulfuric",
-        "space_gas_methane",
-        "space_gas_organometallic",
-        "space_gem_crystal",
-        "space_gem_diamond",
-        "space_metal_carbonaceous",
-        "space_metal_ice",
-        "space_metal_iron",
-        "space_metal_obsidian",
-        "space_metal_silicaceous"
-    };
+    public static final String[] MAIN_MENU =
+            {
+                    "Recycled Resources",
+                    "Space Resources"
+            };
+    public static final String[] RECYCLED_MAIN =
+            {
+                    "Chemical",
+                    "Creature",
+                    "Flora",
+                    "Metal",
+                    "Ore"
+            };
+    public static final String[] RECYCLED_CHEMICAL =
+            {
+                    "chemical",
+                    "fuel_petrochem_solid",
+                    "radioactive",
+                    "water"
+            };
+    public static final String[] RECYCLED_CREATURE =
+            {
+                    "bone",
+                    "bone_horn",
+                    "hide",
+                    "meat",
+                    "milk",
+                    "seafood"
+            };
+    public static final String[] RECYCLED_FLORA =
+            {
+                    "cereal",
+                    "fruit",
+                    "vegetable",
+                    "wood"
+            };
+    public static final String[] RECYCLED_METAL =
+            {
+                    "metal_ferrous",
+                    "metal_nonferrous"
+            };
+    public static final String[] RECYCLED_ORE =
+            {
+                    "ore_igneous",
+                    "ore_sedimentary",
+                    "gemstone"
+            };
+    public static final String[] SPACE_RESOURCE_CONST =
+            {
+                    "space_chemical_acid",
+                    "space_chemical_cyanomethanic",
+                    "space_chemical_petrochem",
+                    "space_chemical_sulfuric",
+                    "space_gas_methane",
+                    "space_gas_organometallic",
+                    "space_gem_crystal",
+                    "space_gem_diamond",
+                    "space_metal_carbonaceous",
+                    "space_metal_ice",
+                    "space_metal_iron",
+                    "space_metal_obsidian",
+                    "space_metal_silicaceous"
+            };
     public static final String RESOURCE_TOOL_DESCRIPTION = "This Tool will automatically spawn the space resources selected into the tester inventory.";
     public static final String TITLE = "QA Resource Tool";
     public static final int RECYCLED_AMOUNT = 100000;
+    public qa_resources()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (isGod(self))
@@ -95,6 +102,7 @@ public class qa_resources extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (isGod(self))
@@ -107,6 +115,7 @@ public class qa_resources extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int startingMenuOptions(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -128,11 +137,12 @@ public class qa_resources extends script.base_script
                     utils.removeScriptVarTree(player, SCRIPTVAR);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     String[] previousMainMenuArray = utils.getStringArrayScriptVar(self, "resource.mainMenu");
                     String previousSelection = previousMainMenuArray[idx];
-                    switch (previousSelection) {
+                    switch (previousSelection)
+                    {
                         case "Recycled Resources":
                             qa.refreshMenu(self, "Select a Resource Type", TITLE, RECYCLED_MAIN, "recycledMenuOptions", false, "resource.pid", "resource.recycledMain");
                             return SCRIPT_OVERRIDE;
@@ -163,6 +173,7 @@ public class qa_resources extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int recycledMenuOptions(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -178,11 +189,12 @@ public class qa_resources extends script.base_script
                     qa.refreshMenu(self, "Select a Resource Type", TITLE, MAIN_MENU, "startingMenuOptions", true, "resource.pid", "resource.mainMenu");
                     return SCRIPT_OVERRIDE;
                 }
-                else 
+                else
                 {
                     String[] previousMainMenuArray = utils.getStringArrayScriptVar(self, "resource.recycledMain");
                     String previousSelection = previousMainMenuArray[idx];
-                    switch (previousSelection) {
+                    switch (previousSelection)
+                    {
                         case "Chemical":
                             qa.refreshMenu(self, "Select a Resource Type", TITLE, RECYCLED_CHEMICAL, "allRecycledMenuOptions", false, "resource.pid", "resource.allRecycled");
                             return SCRIPT_OVERRIDE;
@@ -208,6 +220,7 @@ public class qa_resources extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int allRecycledMenuOptions(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -223,7 +236,7 @@ public class qa_resources extends script.base_script
                     qa.refreshMenu(self, "Select a Resource Type", TITLE, MAIN_MENU, "startingMenuOptions", true, "resource.pid", "resource.mainMenu");
                     return SCRIPT_OVERRIDE;
                 }
-                else 
+                else
                 {
                     String[] previousMainMenuArray = utils.getStringArrayScriptVar(self, "resource.allRecycled");
                     String previousSelection = previousMainMenuArray[idx];
@@ -236,6 +249,7 @@ public class qa_resources extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int spaceResourceHandler(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -246,12 +260,12 @@ public class qa_resources extends script.base_script
                 obj_id player = sui.getPlayerId(params);
                 int idx = sui.getListboxSelectedRow(params);
                 int btn = sui.getIntButtonPressed(params);
-                String previousMainMenuArray[] = utils.getStringArrayScriptVar(self, "resource.spaceResource");
+                String[] previousMainMenuArray = utils.getStringArrayScriptVar(self, "resource.spaceResource");
                 if (btn == sui.BP_CANCEL)
                 {
                     qa.refreshMenu(self, "Select a Resource Type", TITLE, MAIN_MENU, "startingMenuOptions", true, "resource.pid", "resource.mainMenu");
                 }
-                else 
+                else
                 {
                     String previousSelection = previousMainMenuArray[idx];
                     if (previousSelection.equals(""))
@@ -260,7 +274,7 @@ public class qa_resources extends script.base_script
                         qa.removePlayer(player, SCRIPTVAR, "");
                         return SCRIPT_CONTINUE;
                     }
-                    else 
+                    else
                     {
                         obj_id[] rtypes = getResourceTypes(previousSelection);
                         obj_id rtype = rtypes[0];
@@ -292,6 +306,7 @@ public class qa_resources extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void createResourceInInventory(obj_id player, String resourceTypeName) throws InterruptedException
     {
         obj_id resourceId = pickRandomNonDepeletedResource(resourceTypeName);
@@ -303,7 +318,7 @@ public class qa_resources extends script.base_script
             obj_id generic = createResourceCrate(recycle, RECYCLED_AMOUNT, inv);
             broadcast(player, "Resource placed in inventory.");
         }
-        else 
+        else
         {
             broadcast(player, "The function failed because there were no resources of this type found on the server.");
         }

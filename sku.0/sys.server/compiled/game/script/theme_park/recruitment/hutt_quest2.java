@@ -1,5 +1,11 @@
 package script.theme_park.recruitment;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.locations;
@@ -12,6 +18,7 @@ public class hutt_quest2 extends script.base_script
     public hutt_quest2()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         location center = new location(-5685, 0, -5915, "tatooine", null);
@@ -21,11 +28,13 @@ public class hutt_quest2 extends script.base_script
         addLocationTarget("spawnThugs", thugs, 100.0f);
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String name) throws InterruptedException
     {
         location thugLoc = getLocationObjVar(self, "hutt.thugsLoc");
         obj_id quester = self;
-        switch (name) {
+        switch (name)
+        {
             case "spawnThugs":
                 obj_id thug1 = create.object("thug", thugLoc);
                 thugLoc.x = thugLoc.x + 2;
@@ -46,6 +55,7 @@ public class hutt_quest2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int backToHutt(obj_id self, dictionary params) throws InterruptedException
     {
         location palace = new location(-5860, 90, -6176, "tatooine", null);

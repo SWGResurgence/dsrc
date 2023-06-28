@@ -1,5 +1,11 @@
 package script.guild;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.guild;
 import script.library.objvar_mangle;
@@ -8,11 +14,6 @@ import script.obj_id;
 
 public class master_guild_object extends script.base_script
 {
-    public master_guild_object()
-    {
-    }
-    public static int guildProcessInterval = -1;
-    public static int guildUpdateInterval = -1;
     public static final int DEFAULT_GUILD_PROCESS_INTERVAL = 60 * 60;
     public static final int DEFAULT_GUILD_UPDATE_INTERVAL = 60 * 60 * 24 * 7;
     public static final int MIN_GUILD_MEMBERS = 5;
@@ -22,11 +23,18 @@ public class master_guild_object extends script.base_script
     public static final String VAR_NAMECHANGE_NAMES = VAR_NAMECHANGE + ".names";
     public static final String VAR_NAMECHANGE_ABBREVS = VAR_NAMECHANGE + ".abbrevs";
     public static final String VAR_NAMECHANGE_CHANGERS = VAR_NAMECHANGE + ".changers";
+    public static int guildProcessInterval = -1;
+    public static int guildUpdateInterval = -1;
+    public master_guild_object()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "onGuildUpdatePulse", null, getGuildProcessInterval(), false);
         return SCRIPT_CONTINUE;
     }
+
     public int onGuildUpdatePulse(obj_id self, dictionary params) throws InterruptedException
     {
         updateGuilds(self, false);
@@ -34,16 +42,19 @@ public class master_guild_object extends script.base_script
         messageTo(self, "onGuildUpdatePulse", null, getGuildProcessInterval(), false);
         return SCRIPT_CONTINUE;
     }
+
     public int forceUpdateGuilds(obj_id self, dictionary params) throws InterruptedException
     {
         updateGuilds(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int forceUpdateGuildNameChanges(obj_id self, dictionary params) throws InterruptedException
     {
         updateGuildNameChanges(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int initiateGuildNameChange(obj_id self, dictionary params) throws InterruptedException
     {
         int guildId = params.getInt("guildId");
@@ -82,7 +93,7 @@ public class master_guild_object extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             guildNamechangeIds = null;
             guildNamechangeTimes = null;
@@ -120,6 +131,7 @@ public class master_guild_object extends script.base_script
         objvar_mangle.setMangledObjIdArrayObjVar(self, VAR_NAMECHANGE_CHANGERS, newGuildNamechangeChangers);
         return SCRIPT_CONTINUE;
     }
+
     public void updateGuilds(obj_id self, boolean force) throws InterruptedException
     {
         int[] guildUpdateIds = objvar_mangle.getMangledIntArrayObjVar(self, "guildUpdate.ids");
@@ -137,7 +149,7 @@ public class master_guild_object extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             guildUpdateIds = null;
             guildUpdateTimes = null;
@@ -151,7 +163,7 @@ public class master_guild_object extends script.base_script
             {
                 newGuildUpdateTimes[i] = nextTime;
             }
-            else 
+            else
             {
                 newGuildUpdateTimes[i] = guildUpdateTimes[pos];
             }
@@ -159,6 +171,7 @@ public class master_guild_object extends script.base_script
         objvar_mangle.setMangledIntArrayObjVar(self, "guildUpdate.ids", guildIds);
         objvar_mangle.setMangledIntArrayObjVar(self, "guildUpdate.times", newGuildUpdateTimes);
     }
+
     public void updateGuildNameChanges(obj_id self, boolean force) throws InterruptedException
     {
         int currentTime = getGameTime();
@@ -185,7 +198,7 @@ public class master_guild_object extends script.base_script
                 {
                     guild.handleGuildNameChange(guildNamechangeIds[i], guildNamechangeNames[i], guildNamechangeAbbrevs[i], guildNamechangeChangers[i]);
                 }
-                else 
+                else
                 {
                     ++newCount;
                 }
@@ -221,20 +234,24 @@ public class master_guild_object extends script.base_script
                 objvar_mangle.setMangledObjIdArrayObjVar(self, VAR_NAMECHANGE_CHANGERS, newGuildNamechangeChangers);
             }
         }
-        else 
+        else
         {
             clearNamechanges(self);
         }
     }
+
     public void clearNamechanges(obj_id self) throws InterruptedException
     {
         removeObjVar(self, VAR_NAMECHANGE);
     }
+
     public void handleGuildUpdate(int guildId) throws InterruptedException
     {
         obj_id[] memberIds = guildGetMemberIds(guildId);
-        for (obj_id memberId : memberIds) {
-            if (!playerExists(memberId)) {
+        for (obj_id memberId : memberIds)
+        {
+            if (!playerExists(memberId))
+            {
                 guildRemoveMember(guildId, memberId);
             }
         }
@@ -244,6 +261,7 @@ public class master_guild_object extends script.base_script
             guild.disbandForNotEnoughMembers(guildId);
         }
     }
+
     public int findIntOffsetInTable(int[] from, int find) throws InterruptedException
     {
         if (from != null)
@@ -258,6 +276,7 @@ public class master_guild_object extends script.base_script
         }
         return -1;
     }
+
     public int getGuildProcessInterval() throws InterruptedException
     {
         if (guildProcessInterval == -1)
@@ -275,6 +294,7 @@ public class master_guild_object extends script.base_script
         }
         return guildProcessInterval;
     }
+
     public int getGuildUpdateInterval() throws InterruptedException
     {
         if (guildUpdateInterval == -1)

@@ -1,122 +1,142 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class greeter_coronet_merchant extends script.base_script
 {
+    public static String c_stringFile = "conversation/greeter_coronet_merchant";
+
     public greeter_coronet_merchant()
     {
     }
-    public static String c_stringFile = "conversation/greeter_coronet_merchant";
+
     public boolean greeter_coronet_merchant_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean greeter_coronet_merchant_condition_getInvoiceAndSchedule(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "corellia_coronet_find_missing_shipment", "ralMundi_getSchedule") && (groundquests.isTaskActive(player, "corellia_coronet_find_missing_shipment", "ralMundi_getInvoice") || groundquests.isTaskActive(player, "corellia_coronet_find_missing_shipment", "ralMundi_craftTool") || groundquests.isTaskActive(player, "corellia_coronet_find_missing_shipment", "ralMundi_craftedTool")))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isTaskActive(player, "corellia_coronet_find_missing_shipment", "ralMundi_getSchedule") && (groundquests.isTaskActive(player, "corellia_coronet_find_missing_shipment", "ralMundi_getInvoice") || groundquests.isTaskActive(player, "corellia_coronet_find_missing_shipment", "ralMundi_craftTool") || groundquests.isTaskActive(player, "corellia_coronet_find_missing_shipment", "ralMundi_craftedTool"));
     }
+
     public boolean greeter_coronet_merchant_condition_getSchedule(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "corellia_coronet_find_missing_shipment", "ralMundi_getSchedule") && groundquests.hasCompletedTask(player, "corellia_coronet_find_missing_shipment", "ralMundi_craftedTool"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isTaskActive(player, "corellia_coronet_find_missing_shipment", "ralMundi_getSchedule") && groundquests.hasCompletedTask(player, "corellia_coronet_find_missing_shipment", "ralMundi_craftedTool");
     }
+
     public boolean greeter_coronet_merchant_condition_getInvoice(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.hasCompletedTask(player, "corellia_coronet_find_missing_shipment", "ralMundi_getSchedule") && (groundquests.isTaskActive(player, "corellia_coronet_find_missing_shipment", "ralMundi_getInvoice") || groundquests.isTaskActive(player, "corellia_coronet_find_missing_shipment", "ralMundi_craftTool") || groundquests.isTaskActive(player, "corellia_coronet_find_missing_shipment", "ralMundi_craftedTool")))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.hasCompletedTask(player, "corellia_coronet_find_missing_shipment", "ralMundi_getSchedule") && (groundquests.isTaskActive(player, "corellia_coronet_find_missing_shipment", "ralMundi_getInvoice") || groundquests.isTaskActive(player, "corellia_coronet_find_missing_shipment", "ralMundi_craftTool") || groundquests.isTaskActive(player, "corellia_coronet_find_missing_shipment", "ralMundi_craftedTool"));
     }
+
     public boolean greeter_coronet_merchant_condition_faliedSpaceQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "corellia_coronet_capitol_problems_missing_shipment_intro") && !(groundquests.isQuestActiveOrComplete(player, "corellia_coronet_capitol_problems_missing_shipment")));
     }
+
     public boolean greeter_coronet_merchant_condition_playerHasShip(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_utils.hasShip(player);
     }
+
     public boolean greeter_coronet_merchant_condition_gotBothInvoiceAndSchedule(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "corellia_coronet_find_missing_shipment", "ralMundi_gotScheduleAndInvoice") || groundquests.isTaskActive(player, "corellia_coronet_capitol_problems_missing_shipment_intro", "ralMundi_gotScheduleAndInvoice");
     }
+
     public boolean greeter_coronet_merchant_condition_sawRagtagFighters(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "corellia_coronet_capitol_problems_missing_shipment", "ralMundi_traceTransportRoute");
     }
+
     public boolean greeter_coronet_merchant_condition_failedSpacePatrol(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "corellia_coronet_capitol_problems_missing_shipment", "ralMundi_failed_patrol");
     }
+
     public boolean greeter_coronet_merchant_condition_foundTomiBunker(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "corellia_coronet_find_missing_shipment", "ralMundi_defeatTomi") || groundquests.isTaskActive(player, "corellia_coronet_capitol_problems_missing_shipment", "ralMundi_defeatTomi");
     }
+
     public boolean greeter_coronet_merchant_condition_intimidateRagtags(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "corellia_coronet_find_missing_shipment", "ralMundi_intimidateRagtags") || groundquests.isTaskActive(player, "corellia_coronet_capitol_problems_missing_shipment", "ralMundi_intimidateRagtags");
     }
+
     public boolean greeter_coronet_merchant_condition_goGetShipment(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "corellia_coronet_find_missing_shipment", "ralMundi_shipmentAtCapitol") || groundquests.isTaskActive(player, "corellia_coronet_capitol_problems_missing_shipment", "ralMundi_shipmentAtCapitol");
     }
+
     public boolean greeter_coronet_merchant_condition_foundShipment(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "corellia_coronet_find_missing_shipment", "ralMundi_shipmentFound") || groundquests.isTaskActive(player, "corellia_coronet_capitol_problems_missing_shipment", "ralMundi_shipmentFound");
     }
+
     public boolean greeter_coronet_merchant_condition_questComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "corellia_coronet_find_missing_shipment") || groundquests.isTaskActive(player, "corellia_coronet_capitol_problems_missing_shipment", "ralMundi_reportToJasper") || groundquests.hasCompletedQuest(player, "corellia_coronet_capitol_problems_missing_shipment");
     }
+
     public boolean greeter_coronet_merchant_condition_hasSpacePatrol(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "corellia_coronet_capitol_problems_missing_shipment", "givespacequest");
     }
+
     public boolean greeter_coronet_merchant_condition_hasOtherSpaceMission(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasQuest(player);
     }
+
     public boolean greeter_coronet_merchant_condition_notOnMissingShipment(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestDisabled("corellia_coronet_capitol_problems_missing_shipment") || (!groundquests.isQuestActive(player, "corellia_coronet_capitol_problems_missing_shipment") && !groundquests.hasCompletedQuest(player, "corellia_coronet_capitol_problems_missing_shipment") && !groundquests.isQuestActive(player, "corellia_coronet_capitol_problems_missing_shipment_intro") && !groundquests.hasCompletedQuest(player, "corellia_coronet_capitol_problems_missing_shipment_intro"));
     }
+
     public void greeter_coronet_merchant_action_beginMissingShipment(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "ralMundi_begin");
     }
+
     public void greeter_coronet_merchant_action_givePatrolMission(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "corellia_coronet_capitol_problems_missing_shipment");
     }
+
     public void greeter_coronet_merchant_action_goAfterRagtags(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "ralMundi_traceTransportRoute");
     }
+
     public void greeter_coronet_merchant_action_endQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "ralMundi_shipmentFound");
     }
+
     public void greeter_coronet_merchant_action_signalPatrolMission(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "ralMundi_gotScheduleAndInvoice");
     }
+
     public void greeter_coronet_merchant_action_giveShip(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantNewbieShip(player, "neutral");
     }
+
     public void greeter_coronet_merchant_action_clearFailedPatrol(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "failed_ral");
     }
+
     public int greeter_coronet_merchant_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_125"))
@@ -132,6 +152,7 @@ public class greeter_coronet_merchant extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int greeter_coronet_merchant_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_114"))
@@ -151,7 +172,7 @@ public class greeter_coronet_merchant extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_116");
@@ -160,7 +181,7 @@ public class greeter_coronet_merchant extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.greeter_coronet_merchant.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -170,6 +191,7 @@ public class greeter_coronet_merchant extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int greeter_coronet_merchant_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_116"))
@@ -196,7 +218,7 @@ public class greeter_coronet_merchant extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_118");
@@ -209,7 +231,7 @@ public class greeter_coronet_merchant extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.greeter_coronet_merchant.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -219,6 +241,7 @@ public class greeter_coronet_merchant extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int greeter_coronet_merchant_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_118"))
@@ -244,6 +267,7 @@ public class greeter_coronet_merchant extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int greeter_coronet_merchant_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_110"))
@@ -269,6 +293,7 @@ public class greeter_coronet_merchant extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int greeter_coronet_merchant_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_48"))
@@ -292,6 +317,7 @@ public class greeter_coronet_merchant extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int greeter_coronet_merchant_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_104"))
@@ -319,7 +345,7 @@ public class greeter_coronet_merchant extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_54");
@@ -328,7 +354,7 @@ public class greeter_coronet_merchant extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.greeter_coronet_merchant.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -356,6 +382,7 @@ public class greeter_coronet_merchant extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int greeter_coronet_merchant_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_54"))
@@ -383,7 +410,7 @@ public class greeter_coronet_merchant extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_54");
@@ -392,7 +419,7 @@ public class greeter_coronet_merchant extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.greeter_coronet_merchant.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -410,6 +437,7 @@ public class greeter_coronet_merchant extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int greeter_coronet_merchant_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_80e2ba26"))
@@ -430,7 +458,7 @@ public class greeter_coronet_merchant extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d48167e1");
@@ -439,7 +467,7 @@ public class greeter_coronet_merchant extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.greeter_coronet_merchant.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -449,6 +477,7 @@ public class greeter_coronet_merchant extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int greeter_coronet_merchant_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d48167e1"))
@@ -469,7 +498,7 @@ public class greeter_coronet_merchant extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_89");
@@ -478,7 +507,7 @@ public class greeter_coronet_merchant extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.greeter_coronet_merchant.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -488,6 +517,7 @@ public class greeter_coronet_merchant extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int greeter_coronet_merchant_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_89"))
@@ -507,7 +537,7 @@ public class greeter_coronet_merchant extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_92");
@@ -516,7 +546,7 @@ public class greeter_coronet_merchant extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.greeter_coronet_merchant.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -526,6 +556,7 @@ public class greeter_coronet_merchant extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int greeter_coronet_merchant_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_92"))
@@ -552,7 +583,7 @@ public class greeter_coronet_merchant extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_96");
@@ -565,7 +596,7 @@ public class greeter_coronet_merchant extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.greeter_coronet_merchant.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -575,6 +606,7 @@ public class greeter_coronet_merchant extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int greeter_coronet_merchant_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_96"))
@@ -600,6 +632,7 @@ public class greeter_coronet_merchant extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -611,6 +644,7 @@ public class greeter_coronet_merchant extends script.base_script
         setCondition(self, CONDITION_SPACE_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -618,6 +652,7 @@ public class greeter_coronet_merchant extends script.base_script
         setCondition(self, CONDITION_SPACE_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -626,6 +661,7 @@ public class greeter_coronet_merchant extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
@@ -633,12 +669,14 @@ public class greeter_coronet_merchant extends script.base_script
         detachScript(self, "conversation.greeter_coronet_merchant");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -675,7 +713,7 @@ public class greeter_coronet_merchant extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_125");
@@ -683,7 +721,7 @@ public class greeter_coronet_merchant extends script.base_script
                 utils.setScriptVar(player, "conversation.greeter_coronet_merchant.branchId", 3);
                 npcStartConversation(player, npc, "greeter_coronet_merchant", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -722,7 +760,7 @@ public class greeter_coronet_merchant extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_114");
@@ -730,7 +768,7 @@ public class greeter_coronet_merchant extends script.base_script
                 utils.setScriptVar(player, "conversation.greeter_coronet_merchant.branchId", 8);
                 npcStartConversation(player, npc, "greeter_coronet_merchant", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -759,7 +797,7 @@ public class greeter_coronet_merchant extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_110");
@@ -771,7 +809,7 @@ public class greeter_coronet_merchant extends script.base_script
                 utils.setScriptVar(player, "conversation.greeter_coronet_merchant.branchId", 13);
                 npcStartConversation(player, npc, "greeter_coronet_merchant", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -798,7 +836,7 @@ public class greeter_coronet_merchant extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_48");
@@ -806,7 +844,7 @@ public class greeter_coronet_merchant extends script.base_script
                 utils.setScriptVar(player, "conversation.greeter_coronet_merchant.branchId", 17);
                 npcStartConversation(player, npc, "greeter_coronet_merchant", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -835,7 +873,7 @@ public class greeter_coronet_merchant extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_104");
@@ -847,7 +885,7 @@ public class greeter_coronet_merchant extends script.base_script
                 utils.setScriptVar(player, "conversation.greeter_coronet_merchant.branchId", 20);
                 npcStartConversation(player, npc, "greeter_coronet_merchant", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -887,7 +925,7 @@ public class greeter_coronet_merchant extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_80e2ba26");
@@ -895,7 +933,7 @@ public class greeter_coronet_merchant extends script.base_script
                 utils.setScriptVar(player, "conversation.greeter_coronet_merchant.branchId", 28);
                 npcStartConversation(player, npc, "greeter_coronet_merchant", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -904,6 +942,7 @@ public class greeter_coronet_merchant extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("greeter_coronet_merchant"))

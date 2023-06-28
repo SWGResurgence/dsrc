@@ -1,5 +1,11 @@
 package script.theme_park.tatooine.mos_taike;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.chat;
@@ -11,6 +17,7 @@ public class cantina_deliver extends script.base_script
     public cantina_deliver()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         attachScript(self, "npc.converse.npc_converse_menu");
@@ -18,6 +25,7 @@ public class cantina_deliver extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         String CONVO = "theme_park_mos_taike/cantina_owner";
@@ -57,21 +65,21 @@ public class cantina_deliver extends script.base_script
                 chat.chat(self, work);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 string_id cant = new string_id(CONVO, "cantwork");
                 chat.chat(self, cant);
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             String npcGreet = "npc_1_" + questNum;
             String response1 = "player_1_" + questNum;
             String response2 = "player_2_" + questNum;
             String response3 = "player_3_" + questNum;
             string_id greeting = new string_id(CONVO, npcGreet);
-            string_id response[] = new string_id[3];
+            string_id[] response = new string_id[3];
             response[0] = new string_id(CONVO, response1);
             response[1] = new string_id(CONVO, response2);
             response[2] = new string_id(CONVO, response3);
@@ -79,6 +87,7 @@ public class cantina_deliver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convo, obj_id player, string_id response) throws InterruptedException
     {
         String CONVO = "theme_park_mos_taike/cantina_owner";
@@ -98,7 +107,7 @@ public class cantina_deliver extends script.base_script
                 npcEndConversation(player);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 String npcAnswer1 = "npc_2_" + questNum;
                 string_id message = new string_id(CONVO, npcAnswer1);
@@ -134,6 +143,7 @@ public class cantina_deliver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public location getTargetLocation(obj_id self) throws InterruptedException
     {
         location target = new location();
@@ -151,6 +161,7 @@ public class cantina_deliver extends script.base_script
         }
         return target;
     }
+
     public int giveReward(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");

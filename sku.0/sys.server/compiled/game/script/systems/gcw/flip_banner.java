@@ -1,5 +1,11 @@
 package script.systems.gcw;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.gcw;
 import script.library.locations;
@@ -112,6 +118,5 @@ public class flip_banner extends script.base_script
         }
         setObjVar(banner, "spawner", self);
         utils.setScriptVar(self, "banner", banner);
-        return;
     }
 }

@@ -1,5 +1,11 @@
 package script.theme_park.poi.general.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.chat;
 import script.library.utils;
 import script.obj_id;
@@ -7,21 +13,24 @@ import script.string_id;
 
 public class animal_cage_convo extends script.base_script
 {
+    public static final String CONVO = "npc_reaction/animal_cage";
+    public static final String STF_FILE = "npc_reaction/animal_cage";
     public animal_cage_convo()
     {
     }
-    public static final String CONVO = "npc_reaction/animal_cage";
-    public static final String STF_FILE = "npc_reaction/animal_cage";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         attachScript(self, "npc.converse.npc_converse_menu");
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         attachScript(self, "npc.converse.npc_converse_menu");
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         if (hasObjVar(speaker, "squillKilled"))
@@ -36,21 +45,22 @@ public class animal_cage_convo extends script.base_script
         if (hasObjVar(self, "scientist"))
         {
             string_id greeting = new string_id(CONVO, "scientist_1");
-            string_id response[] = new string_id[2];
+            string_id[] response = new string_id[2];
             response[0] = new string_id(CONVO, "player_1");
             response[1] = new string_id(CONVO, "player_2");
             npcStartConversation(speaker, self, CONVO, greeting, response);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             string_id greeting = new string_id(CONVO, "npc_1");
-            string_id response[] = new string_id[1];
+            string_id[] response = new string_id[1];
             response[0] = new string_id(CONVO, "player_3");
             npcStartConversation(speaker, self, CONVO, greeting, response);
             return SCRIPT_CONTINUE;
         }
     }
+
     public int OnNpcConversationResponse(obj_id self, String convoName, obj_id player, string_id response) throws InterruptedException
     {
         if (!convoName.equals(CONVO))
@@ -61,7 +71,7 @@ public class animal_cage_convo extends script.base_script
         {
             string_id message = new string_id(CONVO, "squill");
             npcSpeak(player, message);
-            string_id responses[] = new string_id[2];
+            string_id[] responses = new string_id[2];
             responses[0] = new string_id(CONVO, "player_3");
             responses[1] = new string_id(CONVO, "player_4");
             npcSetConversationResponses(player, responses);
@@ -78,7 +88,7 @@ public class animal_cage_convo extends script.base_script
         {
             string_id message = new string_id(CONVO, "scientist_3");
             npcSpeak(player, message);
-            string_id responses[] = new string_id[2];
+            string_id[] responses = new string_id[2];
             responses[0] = new string_id(CONVO, "player_2");
             responses[1] = new string_id(CONVO, "player_4");
             npcSetConversationResponses(player, responses);
@@ -88,7 +98,7 @@ public class animal_cage_convo extends script.base_script
         {
             string_id message = new string_id(CONVO, "scientist_4");
             npcSpeak(player, message);
-            string_id responses[] = new string_id[2];
+            string_id[] responses = new string_id[2];
             responses[0] = new string_id(CONVO, "player_2");
             responses[1] = new string_id(CONVO, "player_5");
             npcSetConversationResponses(player, responses);

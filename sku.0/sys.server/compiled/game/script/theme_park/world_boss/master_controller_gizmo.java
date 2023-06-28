@@ -1,5 +1,11 @@
 package script.theme_park.world_boss;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.obj_id;
 
@@ -32,13 +38,9 @@ public class master_controller_gizmo extends script.base_script
 
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
-        if (pet_lib.isPet(killer))
+        if (isGod(killer))
         {
-            sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: Gizmo, the Wretched and Accursed Ewok has been reported to have been killed and the Czerka Corporation has paid out the out the bounty to " + getPlayerFullName(pet_lib.getMaster(killer)));
-        }
-        else
-        {
-            sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: Gizmo, the Wretched and Accursed Ewok has been reported to have been killed and the Czerka Corporation has paid out the out the bounty to " + getPlayerFullName(killer));
+            return SCRIPT_CONTINUE;
         }
         obj_id tatooine = getPlanetByName("tatooine");
         if (hasObjVar(tatooine, "dungeon_finder.world_boss.gizmo"))

@@ -1,5 +1,11 @@
 package script.theme_park.kashyyyk;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.space_dungeon;
 import script.library.utils;
@@ -10,11 +16,12 @@ import java.util.Vector;
 
 public class hracca_controller extends script.base_script
 {
+    public static final int CHISS_FOG_ON = 0;
+    public static final int CHISS_FOG_OFF = 1;
     public hracca_controller()
     {
     }
-    public static final int CHISS_FOG_ON = 0;
-    public static final int CHISS_FOG_OFF = 1;
+
     public int beginSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, space_dungeon.VAR_QUEST_TYPE))
@@ -27,9 +34,10 @@ public class hracca_controller extends script.base_script
             return SCRIPT_CONTINUE;
         }
         obj_id[] spawners = space_dungeon.getRegisteredObjects(self);
-        if (spawners != null && spawners.length > 0)
+        if (spawners != null)
         {
-            for (obj_id spawner : spawners) {
+            for (obj_id spawner : spawners)
+            {
                 dictionary webster = new dictionary();
                 webster.put("controllerObject", self);
                 webster.put("spawnChissOnly", true);
@@ -38,6 +46,7 @@ public class hracca_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int registerChissPoacher(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id chissPoacher = params.getObjId("chissPoacher");
@@ -53,7 +62,7 @@ public class hracca_controller extends script.base_script
                     setObjVar(self, "chissPoacherList", chissPoachers);
                 }
             }
-            else 
+            else
             {
                 Vector chissPoacherList = getResizeableObjIdArrayObjVar(self, "chissPoacherList");
                 chissPoacherList.add(chissPoacher);
@@ -65,6 +74,7 @@ public class hracca_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleChissPoacherDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id deadChissPoacher = params.getObjId("deadChissPoacher");
@@ -86,40 +96,41 @@ public class hracca_controller extends script.base_script
                             switch (chissPoacherList.size())
                             {
                                 case 38:
-                                message = new string_id("theme_park/kashyyyk/hracca", "chiss_report_38");
-                                sendChissCountUpdateMessage(self, message);
-                                break;
+                                    message = new string_id("theme_park/kashyyyk/hracca", "chiss_report_38");
+                                    sendChissCountUpdateMessage(self, message);
+                                    break;
                                 case 20:
-                                message = new string_id("theme_park/kashyyyk/hracca", "chiss_report_20");
-                                sendChissCountUpdateMessage(self, message);
-                                break;
+                                    message = new string_id("theme_park/kashyyyk/hracca", "chiss_report_20");
+                                    sendChissCountUpdateMessage(self, message);
+                                    break;
                                 case 10:
-                                message = new string_id("theme_park/kashyyyk/hracca", "chiss_report_10");
-                                sendChissCountUpdateMessage(self, message);
-                                break;
+                                    message = new string_id("theme_park/kashyyyk/hracca", "chiss_report_10");
+                                    sendChissCountUpdateMessage(self, message);
+                                    break;
                                 case 5:
-                                message = new string_id("theme_park/kashyyyk/hracca", "chiss_report_5");
-                                sendChissCountUpdateMessage(self, message);
-                                break;
+                                    message = new string_id("theme_park/kashyyyk/hracca", "chiss_report_5");
+                                    sendChissCountUpdateMessage(self, message);
+                                    break;
                                 case 2:
-                                message = new string_id("theme_park/kashyyyk/hracca", "chiss_report_2");
-                                sendChissCountUpdateMessage(self, message);
-                                break;
+                                    message = new string_id("theme_park/kashyyyk/hracca", "chiss_report_2");
+                                    sendChissCountUpdateMessage(self, message);
+                                    break;
                                 case 1:
-                                message = new string_id("theme_park/kashyyyk/hracca", "chiss_report_1");
-                                sendChissCountUpdateMessage(self, message);
-                                break;
+                                    message = new string_id("theme_park/kashyyyk/hracca", "chiss_report_1");
+                                    sendChissCountUpdateMessage(self, message);
+                                    break;
                                 default:
-                                break;
+                                    break;
                             }
                         }
-                        else 
+                        else
                         {
                             removeObjVar(self, "chissPoacherList");
                             obj_id[] spawners = space_dungeon.getRegisteredObjects(self);
-                            if (spawners != null && spawners.length > 0)
+                            if (spawners != null)
                             {
-                                for (obj_id spawner : spawners) {
+                                for (obj_id spawner : spawners)
+                                {
                                     dictionary webster = new dictionary();
                                     webster.put("controllerObject", self);
                                     webster.put("spawnKkorrwrot", true);
@@ -127,9 +138,10 @@ public class hracca_controller extends script.base_script
                                 }
                             }
                             obj_id[] playersInInstance = space_dungeon.getPlayersInInstance(self);
-                            if (playersInInstance != null && playersInInstance.length > 0)
+                            if (playersInInstance != null)
                             {
-                                for (obj_id player : playersInInstance) {
+                                for (obj_id player : playersInInstance)
+                                {
                                     play2dNonLoopingSound(player, "sound/quest_hracca_kkorrwrot_roar.snd");
                                 }
                             }
@@ -140,23 +152,26 @@ public class hracca_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void sendChissCountUpdateMessage(obj_id controller, string_id message) throws InterruptedException
     {
         obj_id[] playersInInstance = space_dungeon.getPlayersInInstance(controller);
-        if (playersInInstance != null && playersInInstance.length > 0)
+        if (playersInInstance != null)
         {
-            for (obj_id player : playersInInstance) {
+            for (obj_id player : playersInInstance)
+            {
                 sendSystemMessage(player, message);
             }
         }
-        return;
     }
+
     public int msgSpaceDungeonCleanup(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] spawners = space_dungeon.getRegisteredObjects(self);
-        if (spawners != null && spawners.length > 0)
+        if (spawners != null)
         {
-            for (obj_id spawner : spawners) {
+            for (obj_id spawner : spawners)
+            {
                 messageTo(spawner, "doCleanupEvent", null, 1, false);
             }
         }
@@ -166,10 +181,12 @@ public class hracca_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int testWeatherStateChange(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

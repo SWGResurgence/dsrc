@@ -1,5 +1,11 @@
 package script.systems.crafting.structure.specific_item;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.craftinglib;
 import script.resource_weight;
 
@@ -46,6 +52,7 @@ public class crafting_structure_harvester_installation_artisan extends script.sy
                                     new resource_weight.weight(craftinglib.RESOURCE_TOUGHNESS, 2)
                             })
             };
+
     public crafting_structure_harvester_installation_artisan()
     {
     }

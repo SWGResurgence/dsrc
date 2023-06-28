@@ -1,5 +1,11 @@
 package script.theme_park;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.utils;
 import script.library.weapons;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class trooper extends script.base_script
     public trooper()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         createObject("object/tangible/wearables/armor/stormtrooper/armor_stormtrooper_boots_combo.iff", self, "shoes");

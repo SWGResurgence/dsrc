@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,22 +14,27 @@ import script.*;
 
 public class tat_icon_missingdroid_lyrissa extends script.base_script
 {
+    public static String c_stringFile = "conversation/tat_icon_missingdroid_lyrissa";
+
     public tat_icon_missingdroid_lyrissa()
     {
     }
-    public static String c_stringFile = "conversation/tat_icon_missingdroid_lyrissa";
+
     public boolean tat_icon_missingdroid_lyrissa_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean tat_icon_missingdroid_lyrissa_condition_stage9(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean tat_icon_missingdroid_lyrissa_condition_stage8(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean tat_icon_missingdroid_lyrissa_condition_fixingJawa_e5ore6(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/tat_icon_fixingjawa_1");
@@ -31,13 +42,10 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
         int tat_icon_tosche_to_lyrissa_e6 = groundquests.getTaskId(questId1, "tat_icon_tosche_to_lyrissa_e6");
         boolean onTask1 = questIsTaskActive(questId1, tat_icon_lyrissa_to_tosche_e5, player);
         boolean onTask2 = questIsTaskActive(questId1, tat_icon_tosche_to_lyrissa_e6, player);
-        boolean onTask = false;
-        if (onTask1 || onTask2)
-        {
-            onTask = true;
-        }
+        boolean onTask = onTask1 || onTask2;
         return onTask;
     }
+
     public boolean tat_icon_missingdroid_lyrissa_condition_fixingJawa_e8_droid2Dren(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/tat_icon_fixingjawa_1");
@@ -45,6 +53,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
         boolean onTask = questIsTaskActive(questId1, tat_icon_droid_to_dren_e8, player);
         return onTask;
     }
+
     public boolean tat_icon_missingdroid_lyrissa_condition_fixingJawa_e7_lyrissa2Droid(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/tat_icon_fixingjawa_1");
@@ -52,6 +61,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
         boolean onTask = questIsTaskActive(questId1, tat_icon_lyrissa_to_droid_e7, player);
         return onTask;
     }
+
     public boolean tat_icon_missingdroid_lyrissa_condition_fixingJawa_e6_tosche2Lyrissa(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/tat_icon_fixingjawa_1");
@@ -59,6 +69,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
         boolean onTask = questIsTaskActive(questId1, tat_icon_tosche_to_lyrissa_e6, player);
         return onTask;
     }
+
     public boolean tat_icon_missingdroid_lyrissa_condition_fixingJawa_e5_lyrissa2Tosche(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/tat_icon_fixingjawa_1");
@@ -66,6 +77,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
         boolean onTask = questIsTaskActive(questId1, tat_icon_lyrissa_to_tosche_e5, player);
         return onTask;
     }
+
     public boolean tat_icon_missingdroid_lyrissa_condition_fixingJawa_e4_dren2Lyrissa(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/tat_icon_fixingjawa_1");
@@ -73,6 +85,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
         boolean onTask = questIsTaskActive(questId1, tat_icon_dren_to_lyrissa_e4, player);
         return onTask;
     }
+
     public boolean tat_icon_missingdroid_lyrissa_condition_fixingjJawa_e3_droid2Dren(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/tat_icon_fixingjawa_1");
@@ -80,27 +93,33 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
         boolean onTask = questIsTaskActive(questId1, tat_icon_droid_to_dren_e3, player);
         return onTask;
     }
+
     public void tat_icon_missingdroid_lyrissa_action_facePlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
     }
+
     public void tat_icon_missingdroid_lyrissa_action_giveQuest_missingHarvest(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/tatooine_fixingjawa_missingharvest1");
         groundquests.grantQuest(questId, player, npc, true);
     }
+
     public void tat_icon_missingdroid_lyrissa_action_signal_gotoTosche_e4(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "tat_icon_fixingjawa_dren_to_lyrissa_e4");
     }
+
     public void tat_icon_missingdroid_lyrissa_action_signal_gotoLyrissa_e5(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "tat_icon_fixingjawa_lyrissa_to_tosche_e5");
     }
+
     public void tat_icon_missingdroid_lyrissa_action_signal_gotoDroid_e6(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "tat_icon_fixingjawa_tosche_to_lyrissa_e6");
     }
+
     public int tat_icon_missingdroid_lyrissa_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_54"))
@@ -120,7 +139,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_57");
@@ -129,7 +148,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tat_icon_missingdroid_lyrissa.branchId");
                     chat.chat(npc, player, message);
@@ -162,7 +181,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_60");
@@ -175,7 +194,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tat_icon_missingdroid_lyrissa.branchId");
                     chat.chat(npc, player, message);
@@ -186,6 +205,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tat_icon_missingdroid_lyrissa_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_57"))
@@ -201,6 +221,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tat_icon_missingdroid_lyrissa_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_60"))
@@ -232,7 +253,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_65");
@@ -241,7 +262,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tat_icon_missingdroid_lyrissa.branchId");
                     chat.chat(npc, player, message);
@@ -252,6 +273,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tat_icon_missingdroid_lyrissa_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_65"))
@@ -268,6 +290,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tat_icon_missingdroid_lyrissa_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_47"))
@@ -287,7 +310,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_51");
@@ -296,7 +319,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tat_icon_missingdroid_lyrissa.branchId");
                     chat.chat(npc, player, message);
@@ -322,7 +345,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82");
@@ -331,7 +354,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tat_icon_missingdroid_lyrissa.branchId");
                     chat.chat(npc, player, message);
@@ -342,6 +365,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tat_icon_missingdroid_lyrissa_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_51"))
@@ -361,7 +385,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_64");
@@ -370,7 +394,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tat_icon_missingdroid_lyrissa.branchId");
                     chat.chat(npc, player, message);
@@ -389,6 +413,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tat_icon_missingdroid_lyrissa_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_64"))
@@ -404,6 +429,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tat_icon_missingdroid_lyrissa_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_82"))
@@ -419,6 +445,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tat_icon_missingdroid_lyrissa_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_86"))
@@ -456,7 +483,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_94");
@@ -469,7 +496,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tat_icon_missingdroid_lyrissa.branchId");
                     chat.chat(npc, player, message);
@@ -480,6 +507,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tat_icon_missingdroid_lyrissa_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_94"))
@@ -507,6 +535,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tat_icon_missingdroid_lyrissa_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_104"))
@@ -526,7 +555,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_108");
@@ -535,7 +564,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tat_icon_missingdroid_lyrissa.branchId");
                     chat.chat(npc, player, message);
@@ -546,6 +575,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tat_icon_missingdroid_lyrissa_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_108"))
@@ -565,7 +595,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_112");
@@ -574,7 +604,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tat_icon_missingdroid_lyrissa.branchId");
                     chat.chat(npc, player, message);
@@ -585,6 +615,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tat_icon_missingdroid_lyrissa_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_112"))
@@ -605,7 +636,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_116");
@@ -614,7 +645,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tat_icon_missingdroid_lyrissa.branchId");
                     chat.chat(npc, player, message);
@@ -625,6 +656,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tat_icon_missingdroid_lyrissa_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_116"))
@@ -644,7 +676,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_120");
@@ -653,7 +685,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tat_icon_missingdroid_lyrissa.branchId");
                     chat.chat(npc, player, message);
@@ -664,6 +696,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tat_icon_missingdroid_lyrissa_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_120"))
@@ -680,6 +713,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -693,6 +727,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -702,6 +737,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -710,18 +746,21 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.tat_icon_missingdroid_lyrissa");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -752,7 +791,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_54");
@@ -764,7 +803,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
                 utils.setScriptVar(player, "conversation.tat_icon_missingdroid_lyrissa.branchId", 1);
                 npcStartConversation(player, npc, "tat_icon_missingdroid_lyrissa", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -793,7 +832,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -805,7 +844,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
                 utils.setScriptVar(player, "conversation.tat_icon_missingdroid_lyrissa.branchId", 8);
                 npcStartConversation(player, npc, "tat_icon_missingdroid_lyrissa", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -834,7 +873,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_86");
@@ -846,7 +885,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
                 utils.setScriptVar(player, "conversation.tat_icon_missingdroid_lyrissa.branchId", 14);
                 npcStartConversation(player, npc, "tat_icon_missingdroid_lyrissa", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -868,7 +907,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_104");
@@ -876,7 +915,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
                 utils.setScriptVar(player, "conversation.tat_icon_missingdroid_lyrissa.branchId", 19);
                 npcStartConversation(player, npc, "tat_icon_missingdroid_lyrissa", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -891,6 +930,7 @@ public class tat_icon_missingdroid_lyrissa extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("tat_icon_missingdroid_lyrissa"))

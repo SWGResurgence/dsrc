@@ -1,5 +1,11 @@
 package script.poi.twoliars;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.poi;
@@ -9,36 +15,37 @@ import script.obj_id;
 
 public class master extends script.theme_park.poi.base
 {
-    public master()
-    {
-    }
     public static final String SCENARIO_NAME = "twoliars";
     public static final String LOG_NAME = "poiTwoLiars Master";
     public static final String SCENARIO_THEATER = "object/building/poi/tatooine_fugitive_camp_medium.iff";
     public static final String BASE_PATH = "poi." + SCENARIO_NAME;
-    public static final String MEDIATOR_TYPE = "MEDIATOR_TYPE";
-    public static final String ANTAGONIST_TYPE = "ANTAGONIST_TYPE";
     public static final String SCRIPT_ANTAGONIST = BASE_PATH + ".antagonist";
     public static final String SCRIPT_MEDIATOR = BASE_PATH + ".mediator";
+    public static final String MEDIATOR_TYPE = "MEDIATOR_TYPE";
+    public static final String ANTAGONIST_TYPE = "ANTAGONIST_TYPE";
     public static final String TBL = "datatables/poi/" + SCENARIO_NAME + "/setup.iff";
-    public static final int mediatorCoordsX[] = 
+    public static final int[] mediatorCoordsX =
+            {
+                    8,
+                    -5,
+                    -2,
+                    0,
+                    -6,
+                    -3
+            };
+    public static final int[] mediatorCoordsZ =
+            {
+                    7,
+                    -6,
+                    6,
+                    4,
+                    6,
+                    -6
+            };
+    public master()
     {
-        8,
-        -5,
-        -2,
-        0,
-        -6,
-        -3
-    };
-    public static final int mediatorCoordsZ[] = 
-    {
-        7,
-        -6,
-        6,
-        4,
-        6,
-        -6
-    };
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!scenario.initScenario(self, TBL))
@@ -47,26 +54,31 @@ public class master extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         scenario.cleanup(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnUnloadedFromMemory(obj_id self) throws InterruptedException
     {
         scenario.cleanup(self);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanupScenario(obj_id self, dictionary params) throws InterruptedException
     {
         scenario.cleanup(self);
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int initScenario(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -79,7 +91,7 @@ public class master extends script.theme_park.poi.base
         String atype = params.getString("ANTAGONIST_TEMPLATE");
         setObjVar(self, ANTAGONIST_TYPE, atype);
         scenario.createTeam(self, "mediator", self.toString() + "_mediator");
-        scenario.createTeam(self, "antagonist", self.toString() + "_antagonist");
+        scenario.createTeam(self, "antagonist", self + "_antagonist");
         if (!createTheaters(self))
         {
             scenario.cleanup(self);
@@ -87,12 +99,14 @@ public class master extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean createTheaters(obj_id self) throws InterruptedException
     {
         obj_id theater = poi.createObject(SCENARIO_THEATER, 0, 0);
         setObjVar(self, "theater", theater);
         return true;
     }
+
     public int handleTheaterComplete(obj_id self, dictionary params) throws InterruptedException
     {
         if (!createAntagonist(self))
@@ -108,6 +122,7 @@ public class master extends script.theme_park.poi.base
         messageTo(self, "setTitles", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public boolean createAntagonist(obj_id self) throws InterruptedException
     {
         String type = getStringObjVar(self, ANTAGONIST_TYPE);
@@ -122,18 +137,19 @@ public class master extends script.theme_park.poi.base
         ai_lib.setDefaultCalmBehavior(antagonist, ai_lib.BEHAVIOR_SENTINEL);
         return true;
     }
+
     public boolean createMediators(obj_id self) throws InterruptedException
     {
         location baseloc = getLocation(self);
         String type = getStringObjVar(self, MEDIATOR_TYPE);
         if (!type.equals(""))
         {
-            int coord_idx[] = new int[6];
+            int[] coord_idx = new int[6];
             for (int i = 0; i < 6; i++)
             {
                 coord_idx[i] = i;
             }
-            int statement_idx[] = new int[6];
+            int[] statement_idx = new int[6];
             for (int i = 0; i < 6; i++)
             {
                 statement_idx[i] = i;
@@ -157,7 +173,7 @@ public class master extends script.theme_park.poi.base
                 {
                     LOG(LOG_NAME, "Couldn't create mediator minion.");
                 }
-                else 
+                else
                 {
                     setYaw(mediator, rand(0, 359));
                     attachScript(mediator, SCRIPT_MEDIATOR);
@@ -170,6 +186,7 @@ public class master extends script.theme_park.poi.base
         }
         return true;
     }
+
     public int setTitles(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id m = poi.findObject("mediator_0");

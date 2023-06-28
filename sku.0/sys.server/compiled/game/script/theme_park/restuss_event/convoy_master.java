@@ -1,5 +1,11 @@
 package script.theme_park.restuss_event;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.trial;
@@ -11,12 +17,14 @@ public class convoy_master extends script.base_script
     public convoy_master()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "destroySelf", null, 180, false);
         messageTo(self, "findWayPoints", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int findWayPoints(obj_id self, dictionary params) throws InterruptedException
     {
         String faction = getStringObjVar(self, "alignment");
@@ -29,9 +37,11 @@ public class convoy_master extends script.base_script
             {
                 debugSpeakMsg(self, "Points was null or zero");
             }
-            for (obj_id point : points) {
+            for (obj_id point : points)
+            {
                 int value = getIntObjVar(point, "restuss_imperial_ambush");
-                switch (value) {
+                switch (value)
+                {
                     case 1:
                         patrolPoints[0] = getLocation(point);
                         break;
@@ -49,9 +59,11 @@ public class convoy_master extends script.base_script
         if (faction.equals("rebel"))
         {
             obj_id[] points = getAllObjectsWithObjVar(getLocation(self), 600.0f, "restuss_rebel_ambush");
-            for (obj_id point : points) {
+            for (obj_id point : points)
+            {
                 int value = getIntObjVar(point, "restuss_rebel_ambush");
-                switch (value) {
+                switch (value)
+                {
                     case 1:
                         patrolPoints[0] = getLocation(point);
                         break;
@@ -69,6 +81,7 @@ public class convoy_master extends script.base_script
         ai_lib.setPatrolOncePath(self, patrolPoints);
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         if (ai_lib.isInCombat(self))

@@ -1,5 +1,11 @@
 package script.space.quest_logic;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,11 +14,13 @@ public class piracy_ship extends script.base_script
     public piracy_ship()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "statusCheck", null, 5.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpaceUnitMoveToComplete(obj_id self) throws InterruptedException
     {
         obj_id beacon = getObjIdObjVar(self, "beacon");
@@ -23,6 +31,7 @@ public class piracy_ship extends script.base_script
         messageTo(beacon, "startMovement", null, 1.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int statusCheck(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id beacon = getObjIdObjVar(self, "beacon");
@@ -38,6 +47,7 @@ public class piracy_ship extends script.base_script
         messageTo(self, "statusCheck", null, 30.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int hyperLeave(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObjectHyperspace(self);

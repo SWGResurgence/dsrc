@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.death_watch_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.location;
@@ -7,10 +13,12 @@ import script.obj_id;
 
 public class herald_boss extends script.base_script
 {
+    public static final String TBL_BACKUP = "datatables/dungeon/death_watch/boss_backup.iff";
+
     public herald_boss()
     {
     }
-    public static final String TBL_BACKUP = "datatables/dungeon/death_watch/boss_backup.iff";
+
     public int OnAboutToReceiveItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))
@@ -31,7 +39,7 @@ public class herald_boss extends script.base_script
                 {
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     removeObjVar(self, "death_watch_herald.boss.died");
                 }
@@ -41,6 +49,7 @@ public class herald_boss extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int SpawnBoss(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id building = getTopMostContainer(self);

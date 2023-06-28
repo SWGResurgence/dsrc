@@ -1,5 +1,11 @@
 package script.poi.template.scene.hq;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.create;
 import script.library.theater;
@@ -11,45 +17,46 @@ import java.util.Vector;
 
 public class imperial_lrg extends script.base_script
 {
+    public static final boolean IS_PERSISTED = true;
+    public static final String SENTINEL_GUARD = "stormtrooper";
+    public static final String[] SENTINEL =
+            {
+                    "world:3.0,0,24.5,0",
+                    "world:-3.0,0,24.5,0",
+                    "foyer1:12.3,1,22.5,-135",
+                    "foyer1:-12.3,1,22.5,135",
+                    "mainhall:17,1,10.25,180",
+                    "mainhall:-17,1,10.25,180",
+                    "mainhall:2,1,-15.5,0",
+                    "mainhall:-2,1,-15.5,0",
+                    "jailcell1:11,1,-16.75,180",
+                    "jailcell1:18,1,-16.75,180",
+                    "jailcell2:-11,1,-16.75,180",
+                    "jailcell2:-18,1,-16.75,180",
+                    "foyer2:7,7,13,180",
+                    "foyer2:13,7,13,180",
+                    "foyer2:7,7,6.6,0",
+                    "foyer2:13,7,6.6,0",
+                    "world:16,0,-27.5,90",
+                    "world:16,0,-32,90"
+            };
+    public static final String PATROL_GUARD = "stormtrooper";
+    public static final String[] PATROL =
+            {
+                    "world:21,7,21,45",
+                    "world:-21,7,21,-45",
+                    "world:21,7,-21,135",
+                    "world:-21,7,-21,-135",
+                    "world:0,0,-26,180"
+            };
+    public static final String[] REINFORCEMENTS =
+            {
+                    "imperial_drop_squad"
+            };
     public imperial_lrg()
     {
     }
-    public static final boolean IS_PERSISTED = true;
-    public static final String SENTINEL_GUARD = "stormtrooper";
-    public static final String[] SENTINEL = 
-    {
-        "world:3.0,0,24.5,0",
-        "world:-3.0,0,24.5,0",
-        "foyer1:12.3,1,22.5,-135",
-        "foyer1:-12.3,1,22.5,135",
-        "mainhall:17,1,10.25,180",
-        "mainhall:-17,1,10.25,180",
-        "mainhall:2,1,-15.5,0",
-        "mainhall:-2,1,-15.5,0",
-        "jailcell1:11,1,-16.75,180",
-        "jailcell1:18,1,-16.75,180",
-        "jailcell2:-11,1,-16.75,180",
-        "jailcell2:-18,1,-16.75,180",
-        "foyer2:7,7,13,180",
-        "foyer2:13,7,13,180",
-        "foyer2:7,7,6.6,0",
-        "foyer2:13,7,6.6,0",
-        "world:16,0,-27.5,90",
-        "world:16,0,-32,90"
-    };
-    public static final String PATROL_GUARD = "stormtrooper";
-    public static final String[] PATROL = 
-    {
-        "world:21,7,21,45",
-        "world:-21,7,21,-45",
-        "world:21,7,-21,135",
-        "world:-21,7,-21,-135",
-        "world:0,0,-26,180"
-    };
-    public static final String[] REINFORCEMENTS = 
-    {
-        "imperial_drop_squad"
-    };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (IS_PERSISTED)
@@ -58,28 +65,32 @@ public class imperial_lrg extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         cleanupTheater(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (IS_PERSISTED)
         {
             setupTheater(self);
         }
-        else 
+        else
         {
             destroyObject(self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnUnloadedFromMemory(obj_id self) throws InterruptedException
     {
         cleanupTheater(self);
         return SCRIPT_CONTINUE;
     }
+
     public boolean setupTheater(obj_id self) throws InterruptedException
     {
         LOG("imperial_lrg", "**************** SETUP: " + getGameTime() + " **************");
@@ -90,31 +101,40 @@ public class imperial_lrg extends script.base_script
         Vector children = new Vector();
         children.setSize(0);
         location myLoc = getLocation(self);
-        for (String s1 : SENTINEL) {
+        for (String s1 : SENTINEL)
+        {
             obj_id child = spawn(self, SENTINEL_GUARD, s1, ai_lib.BEHAVIOR_SENTINEL);
-            if ((child == null) || (child == obj_id.NULL_ID)) {
-            } else {
+            if ((child == null) || (child == obj_id.NULL_ID))
+            {
+            }
+            else
+            {
                 children = utils.addElement(children, child);
                 ai_lib.setDefaultCalmBehavior(child, ai_lib.BEHAVIOR_SENTINEL);
             }
         }
-        for (String s : PATROL) {
+        for (String s : PATROL)
+        {
             obj_id child = spawn(self, PATROL_GUARD, s, ai_lib.BEHAVIOR_SENTINEL);
-            if ((child == null) || (child == obj_id.NULL_ID)) {
-            } else {
+            if ((child == null) || (child == obj_id.NULL_ID))
+            {
+            }
+            else
+            {
                 children = utils.addElement(children, child);
             }
         }
         if ((children == null) || (children.size() == 0))
         {
         }
-        else 
+        else
         {
             setObjVar(self, theater.VAR_CHILDREN, children);
             return true;
         }
         return false;
     }
+
     public boolean cleanupTheater(obj_id self) throws InterruptedException
     {
         if ((self == null) || (self == obj_id.NULL_ID))
@@ -126,17 +146,22 @@ public class imperial_lrg extends script.base_script
         {
             return false;
         }
-        else 
+        else
         {
-            for (obj_id child : children) {
-                if ((child == null) || (child == obj_id.NULL_ID)) {
-                } else {
+            for (obj_id child : children)
+            {
+                if ((child == null) || (child == obj_id.NULL_ID))
+                {
+                }
+                else
+                {
                     destroyObject(child);
                 }
             }
         }
         return true;
     }
+
     public obj_id spawn(obj_id self, String type, String sLoc, int default_behavior) throws InterruptedException
     {
         LOG("imperial_lrg", "******");
@@ -179,24 +204,24 @@ public class imperial_lrg extends script.base_script
             spawnLoc = new location(myLoc.x + x, 0, myLoc.z + z, myLoc.area, obj_id.NULL_ID);
             LOG("imperial_lrg", "world spawn: type = " + type);
             LOG("imperial_lrg", "world spawn: offset = " + sLoc);
-            LOG("imperial_lrg", "world spawn: pre-spin spawnLoc = " + spawnLoc.toString());
+            LOG("imperial_lrg", "world spawn: pre-spin spawnLoc = " + spawnLoc);
             if (myYaw != 0.0f)
             {
                 float dist = utils.getDistance2D(myLoc, spawnLoc);
                 LOG("imperial_lrg", "world spawn: distance = " + dist);
                 spawnLoc = utils.rotatePointXZ(myLoc, spawnLoc, myYaw);
                 spawnLoc.y = myLoc.y + y;
-                LOG("imperial_lrg", "world spawn: post-spin spawnLoc = " + spawnLoc.toString());
+                LOG("imperial_lrg", "world spawn: post-spin spawnLoc = " + spawnLoc);
             }
         }
-        else 
+        else
         {
             obj_id cellId = getCellId(self, cellName);
             if ((cellId == null) || (cellId == obj_id.NULL_ID))
             {
                 return null;
             }
-            else 
+            else
             {
                 spawnLoc = new location(x, y, z, myLoc.area, cellId);
             }
@@ -204,10 +229,10 @@ public class imperial_lrg extends script.base_script
         obj_id npcId = create.object(type, spawnLoc);
         if ((npcId == null) || (npcId == obj_id.NULL_ID))
         {
-            LOG("imperial_lrg", "unable to spawn " + type + " @ " + spawnLoc.toString());
+            LOG("imperial_lrg", "unable to spawn " + type + " @ " + spawnLoc);
             return null;
         }
-        else 
+        else
         {
             setYaw(npcId, yaw);
             ai_lib.setDefaultCalmBehavior(npcId, default_behavior);

@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.location;
 import script.obj_id;
 
@@ -26,6 +32,7 @@ public class npc extends script.base_script
     public static final String DATATABLE_NPC_CREATE = "datatables/npc/create_npc.iff";
     public static final String COL_KEY = "KEY";
     public static final String COL_TEMPLATE = "TEMPLATE";
+
     public npc()
     {
     }

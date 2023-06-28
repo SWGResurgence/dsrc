@@ -1,5 +1,11 @@
 package script.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.cybernetic;
 import script.library.qa;
@@ -11,9 +17,6 @@ import java.util.Vector;
 
 public class qa_cybernetic extends script.base_script
 {
-    public qa_cybernetic()
-    {
-    }
     public static final String SCRIPTVAR = "qacybernetic";
     public static final int INSTALL_OPTION = 0;
     public static final int UNINSTALL_OPTION = 1;
@@ -34,23 +37,27 @@ public class qa_cybernetic extends script.base_script
     public static final String ARM_SURESHOT = "object/tangible/wearables/cybernetic/s05/cybernetic_s05_arm_l.iff";
     public static final String ARM_SNIPE = "object/tangible/wearables/cybernetic/s05/cybernetic_s05_arm_r.iff";
     public static final String LEGS_KICK = "object/tangible/wearables/cybernetic/s05/cybernetic_s05_legs.iff";
-    public static final String[] CYBER_MENU_LIST = 
+    public static final String[] CYBER_MENU_LIST =
+            {
+                    "Install",
+                    "Uninstall",
+                    "Repair"
+            };
+    public static final String[] CYBERNETIC_LIST_OPTIONS =
+            {
+                    "Cyborg Strength Arm",
+                    "Cyborg Lightning Arm",
+                    "Cyborg Burst Run Legs",
+                    "Cyborg Revive Arm",
+                    "Cyborg Armor Arm",
+                    "Cyborg Sure Shot Arm",
+                    "Cyborg Critical Snipe Arm",
+                    "Cyborg Kick Down Legs"
+            };
+    public qa_cybernetic()
     {
-        "Install",
-        "Uninstall",
-        "Repair"
-    };
-    public static final String[] CYBERNETIC_LIST_OPTIONS = 
-    {
-        "Cyborg Strength Arm",
-        "Cyborg Lightning Arm",
-        "Cyborg Burst Run Legs",
-        "Cyborg Revive Arm",
-        "Cyborg Armor Arm",
-        "Cyborg Sure Shot Arm",
-        "Cyborg Critical Snipe Arm",
-        "Cyborg Kick Down Legs"
-    };
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (isGod(self))
@@ -67,6 +74,7 @@ public class qa_cybernetic extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (isGod(self))
@@ -79,6 +87,7 @@ public class qa_cybernetic extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleChoice(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -105,31 +114,32 @@ public class qa_cybernetic extends script.base_script
             switch (idx)
             {
                 case INSTALL_OPTION:
-                boolean boolCheck = cybernetic.hasMaxInstalled(player);
-                if (boolCheck == false)
-                {
-                    installChoiceMenu(player);
-                }
-                else 
-                {
-                    broadcast(player, "This character already has the maximum number of Cybernetics installed!");
-                }
-                break;
+                    boolean boolCheck = cybernetic.hasMaxInstalled(player);
+                    if (!boolCheck)
+                    {
+                        installChoiceMenu(player);
+                    }
+                    else
+                    {
+                        broadcast(player, "This character already has the maximum number of Cybernetics installed!");
+                    }
+                    break;
                 case UNINSTALL_OPTION:
-                utils.setScriptVar(player, SCRIPTVAR + ".uninstall", "uninstall");
-                getAttachedCybers(player);
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".uninstall", "uninstall");
+                    getAttachedCybers(player);
+                    break;
                 case REPAIR_OPTION:
-                utils.setScriptVar(player, SCRIPTVAR + ".repair", "repair");
-                getAttachedCybers(player);
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".repair", "repair");
+                    getAttachedCybers(player);
+                    break;
                 default:
-                qa.refreshMenu(player, " - Cybernetic Main Menu - \nSelect Install, Uninstall or Repair", "Cybernetic Tool", CYBERNETIC_LIST_OPTIONS, "handleChoice", SCRIPTVAR + ".pid", SCRIPTVAR + ".CyberMainMenu", sui.OK_CANCEL_REFRESH);
-                return SCRIPT_CONTINUE;
+                    qa.refreshMenu(player, " - Cybernetic Main Menu - \nSelect Install, Uninstall or Repair", "Cybernetic Tool", CYBERNETIC_LIST_OPTIONS, "handleChoice", SCRIPTVAR + ".pid", SCRIPTVAR + ".CyberMainMenu", sui.OK_CANCEL_REFRESH);
+                    return SCRIPT_CONTINUE;
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleInstallOptions(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -155,44 +165,45 @@ public class qa_cybernetic extends script.base_script
             switch (idx)
             {
                 case STRENGTH_ARM:
-                utils.setScriptVar(player, SCRIPTVAR + ".cyberChoice", ARM_STRENGTH);
-                installCyber(player);
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".cyberChoice", ARM_STRENGTH);
+                    installCyber(player);
+                    break;
                 case LIGHTNING:
-                utils.setScriptVar(player, SCRIPTVAR + ".cyberChoice", ARM_LIGHTNING);
-                installCyber(player);
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".cyberChoice", ARM_LIGHTNING);
+                    installCyber(player);
+                    break;
                 case BURST_RUN:
-                utils.setScriptVar(player, SCRIPTVAR + ".cyberChoice", LEGS_BURST);
-                installCyber(player);
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".cyberChoice", LEGS_BURST);
+                    installCyber(player);
+                    break;
                 case REVIVE:
-                utils.setScriptVar(player, SCRIPTVAR + ".cyberChoice", ARM_REVIVE);
-                installCyber(player);
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".cyberChoice", ARM_REVIVE);
+                    installCyber(player);
+                    break;
                 case ARMOR:
-                utils.setScriptVar(player, SCRIPTVAR + ".cyberChoice", ARM_ARMOR);
-                installCyber(player);
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".cyberChoice", ARM_ARMOR);
+                    installCyber(player);
+                    break;
                 case SURE_SHOT:
-                utils.setScriptVar(player, SCRIPTVAR + ".cyberChoice", ARM_SURESHOT);
-                installCyber(player);
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".cyberChoice", ARM_SURESHOT);
+                    installCyber(player);
+                    break;
                 case CRIT_SNIPE:
-                utils.setScriptVar(player, SCRIPTVAR + ".cyberChoice", ARM_SNIPE);
-                installCyber(player);
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".cyberChoice", ARM_SNIPE);
+                    installCyber(player);
+                    break;
                 case KICK_DOWN:
-                utils.setScriptVar(player, SCRIPTVAR + ".cyberChoice", LEGS_KICK);
-                installCyber(player);
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".cyberChoice", LEGS_KICK);
+                    installCyber(player);
+                    break;
                 default:
-                qa.refreshMenu(player, " - Cybernetic Main Menu - \nSelect Install, Uninstall or Repair", "Cybernetic Tool", CYBERNETIC_LIST_OPTIONS, "handleChoice", SCRIPTVAR + ".pid", SCRIPTVAR + ".CyberMainMenu", sui.OK_CANCEL_REFRESH);
-                return SCRIPT_CONTINUE;
+                    qa.refreshMenu(player, " - Cybernetic Main Menu - \nSelect Install, Uninstall or Repair", "Cybernetic Tool", CYBERNETIC_LIST_OPTIONS, "handleChoice", SCRIPTVAR + ".pid", SCRIPTVAR + ".CyberMainMenu", sui.OK_CANCEL_REFRESH);
+                    return SCRIPT_CONTINUE;
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleUninstallRepairChoice(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -226,7 +237,7 @@ public class qa_cybernetic extends script.base_script
             {
                 repairCyber(player, idxObj_id);
             }
-            else 
+            else
             {
                 broadcast(player, "An error has occurred, please try again.");
                 toolCyberMainMenu(player);
@@ -234,22 +245,27 @@ public class qa_cybernetic extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void toolCyberMainMenu(obj_id player) throws InterruptedException
     {
         qa.refreshMenu(player, "- Cybernetic Install Menu -\nSelect Install, Uninstall or Repair.", "Cybernetic Tool", CYBER_MENU_LIST, "handleChoice", SCRIPTVAR + ".pid", SCRIPTVAR + ".CyberMainMenu", sui.OK_CANCEL_REFRESH);
     }
+
     public void installChoiceMenu(obj_id player) throws InterruptedException
     {
         qa.refreshMenu(player, "- Cybernetic List Menu -\nSelect a Cybernetic to install.", "Cybernetic Tool", CYBERNETIC_LIST_OPTIONS, "handleInstallOptions", SCRIPTVAR + ".pid", SCRIPTVAR + ".CyberInstallMenu", sui.OK_CANCEL_REFRESH);
     }
+
     public void uninstallChoices(obj_id player, String[] list) throws InterruptedException
     {
         qa.refreshMenu(player, "- Cybernetic Uninstall Menu -\nChoose a Cybernetic to Uninstall.", "Cybernetic Tool", list, "handleUninstallRepairChoice", SCRIPTVAR + ".pid", SCRIPTVAR + ".uninstallMenu", sui.OK_CANCEL_REFRESH);
     }
+
     public void repairChoices(obj_id player, String[] list) throws InterruptedException
     {
         qa.refreshMenu(player, "- Cybernetic Repair Menu -\nChoose a Cybernetic to Repair.", "Cybernetic Tool", list, "handleUninstallRepairChoice", SCRIPTVAR + ".pid", SCRIPTVAR + ".uninstallMenu", sui.OK_CANCEL_REFRESH);
     }
+
     public void installCyber(obj_id player) throws InterruptedException
     {
         if (utils.hasScriptVar(player, SCRIPTVAR + ".cyberChoice"))
@@ -259,20 +275,22 @@ public class qa_cybernetic extends script.base_script
             obj_id cyberItemID = createObject(myLimb, inventory, "");
             cybernetic.installCyberneticItem(player, player, cyberItemID);
         }
-        else 
+        else
         {
             broadcast(player, "An error has occurred, please try again.");
             toolCyberMainMenu(player);
         }
         qa.removePlayer(player, SCRIPTVAR, "");
     }
+
     public void getAttachedCybers(obj_id player) throws InterruptedException
     {
         Vector installList = new Vector();
         obj_id[] installed = cybernetic.getInstalledCybernetics(player);
         if (installed != null)
         {
-            for (obj_id obj_id : installed) {
+            for (obj_id obj_id : installed)
+            {
                 String itemName = getTemplateName(obj_id);
                 installList.add(itemName);
             }
@@ -288,23 +306,25 @@ public class qa_cybernetic extends script.base_script
             {
                 repairChoices(player, list);
             }
-            else 
+            else
             {
                 broadcast(player, "An error has occurred, please try again.");
                 toolCyberMainMenu(player);
             }
         }
-        else 
+        else
         {
             broadcast(player, "There are not cybernetics installed on this character.");
             toolCyberMainMenu(player);
         }
     }
+
     public void removeCyber(obj_id player, obj_id idxObj_id) throws InterruptedException
     {
         cybernetic.unInstallCyberneticItem(player, player, idxObj_id);
         qa.removePlayer(player, SCRIPTVAR, "");
     }
+
     public void repairCyber(obj_id player, obj_id idxObj_id) throws InterruptedException
     {
         cybernetic.repairCyberneticItem(player, player, idxObj_id);

@@ -1,16 +1,23 @@
 package script.developer.soe.beta;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class mount_vendor extends script.base_script
 {
-    public mount_vendor()
-    {
-    }
     public static final String MOUNT_VENDOR_CONVO = "beta/mount_vendor";
     public static final int EXPIRATION_TIME = 60 * 60 * 24 * 4;
     public static final int MOUNT_EXPIRATION_TIME = 60 * 60 * 24 * 7;
+    public mount_vendor()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);
@@ -23,6 +30,7 @@ public class mount_vendor extends script.base_script
         messageTo(self, "expireAndCleanup", null, EXPIRATION_TIME, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         int expirationTime = getIntObjVar(self, "mount_vendor.create");
@@ -32,11 +40,13 @@ public class mount_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int expireAndCleanup(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int mnu = mi.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -44,17 +54,19 @@ public class mount_vendor extends script.base_script
         mdata.setServerNotify(false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         chat.setGoodMood(self);
         faceToBehavior(self, speaker);
         string_id greeting = new string_id(MOUNT_VENDOR_CONVO, "start");
-        string_id response[] = new string_id[2];
+        string_id[] response = new string_id[2];
         response[0] = new string_id(MOUNT_VENDOR_CONVO, "yes");
         response[1] = new string_id(MOUNT_VENDOR_CONVO, "no");
         npcStartConversation(speaker, self, MOUNT_VENDOR_CONVO, greeting, response);
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convo, obj_id player, string_id response) throws InterruptedException
     {
         if (!convo.equals(MOUNT_VENDOR_CONVO))
@@ -87,7 +99,8 @@ public class mount_vendor extends script.base_script
         }
         String mountType = response.getAsciiId();
         String diction = "";
-        switch (mountType) {
+        switch (mountType)
+        {
             case "carrion_spat":
                 mountType = "carrion_spat";
                 break;
@@ -123,7 +136,7 @@ public class mount_vendor extends script.base_script
             {
                 destroyObject(mount);
             }
-            else 
+            else
             {
                 if (getMountsEnabled())
                 {
@@ -135,7 +148,7 @@ public class mount_vendor extends script.base_script
                             setObjVar(petControlDevice, "ai.pet.trainedMount", 1);
                         }
                     }
-                    else 
+                    else
                     {
                         broadcast(player, "For some reason, the creature spawned can NOT be turned into a mount. Might be out of SCALE, could be several other things.");
                         broadcast(player, "Anyhow, try making a mount using the REAL way instead of using a fake-out shortcut method. If you've got GOD access, it shouldn't take *much* longer.");
@@ -149,6 +162,7 @@ public class mount_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean createNewMount(obj_id master, obj_id pet) throws InterruptedException
     {
         String creatureName = ai_lib.getCreatureName(pet);
@@ -196,7 +210,7 @@ public class mount_vendor extends script.base_script
                 messageTo(petControlDevice, "expireAndCleanup", null, MOUNT_EXPIRATION_TIME, true);
                 attachScript(petControlDevice, "beta.free_mount");
             }
-            else 
+            else
             {
                 callable.setCallableLinks(master, callable.getCallableCD(pet), pet);
             }

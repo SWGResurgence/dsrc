@@ -1,14 +1,10 @@
-// ======================================================================
-//
-// isd_bypass_smuggler.java
-// Copyright 2004-2020, Sony Online Entertainment
-// All Rights Reserved.
-//
-// Created with SwgConversationEditor 1.37 - DO NOT EDIT THIS AUTO-GENERATED FILE!
-//Roachie says herro UwU
-// ======================================================================
-
 package script.conversation;
+
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
 
 // ======================================================================
 // Library Includes
@@ -24,24 +20,6 @@ public class isd_bypass_smuggler extends script.base_script
 // ======================================================================
 // Script Constants
 // ======================================================================
-
-    public isd_bypass_smuggler()
-
-    {
-
-    }
-
-// ======================================================================
-// Script Conditions
-// ======================================================================
-
-    public boolean isd_bypass_smuggler_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
-    {
-        return true;
-    }
-
-// ----------------------------------------------------------------------
-
     public String[] GEN_RESPONSE = {
             "Uh-huh. What do you want?",
             "I'm busy.",
@@ -51,6 +29,24 @@ public class isd_bypass_smuggler extends script.base_script
             "Sorry to be blunt, but I'm not really interested.",
             "I have better things to do."
     };
+
+// ======================================================================
+// Script Conditions
+// ======================================================================
+
+    public isd_bypass_smuggler()
+
+    {
+
+    }
+
+// ----------------------------------------------------------------------
+
+    public boolean isd_bypass_smuggler_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
+    {
+        return true;
+    }
+
     public boolean isd_bypass_smuggler_condition_canTalk(obj_id player, obj_id npc) throws InterruptedException
     {
         if (instance.isFlaggedForInstance(player, "heroic_star_destroyer"))
@@ -153,7 +149,7 @@ public class isd_bypass_smuggler extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
 
                     if (hasResponse0)
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4");
@@ -279,7 +275,7 @@ public class isd_bypass_smuggler extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
 
                 if (hasResponse0)
                     responses[responseIndex++] = new string_id(c_stringFile, "s_4");

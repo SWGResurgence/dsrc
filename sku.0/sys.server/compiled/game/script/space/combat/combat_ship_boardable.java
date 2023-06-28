@@ -1,5 +1,11 @@
 package script.space.combat;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.space_utils;
@@ -13,6 +19,7 @@ public class combat_ship_boardable extends script.base_script
     public combat_ship_boardable()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String strBoardingType = getStringObjVar(self, "strBoardingType");
@@ -25,7 +32,8 @@ public class combat_ship_boardable extends script.base_script
         LOG("space", "Type is " + strFileName);
         String[] strMobs = dataTableGetStringColumn(strFileName, "strMobsToSpawn");
         String[] strBossesToSpawn = dataTableGetStringColumn(strFileName, "strBossesToSpawn");
-        for (String s : strBossesToSpawn) {
+        for (String s : strBossesToSpawn)
+        {
             location locSpawnLocation = getLocationFromLocationListRandom(self, "locBossSpawners", 1.5f);
             obj_id objMob = create.object(s, locSpawnLocation);
         }
@@ -33,6 +41,7 @@ public class combat_ship_boardable extends script.base_script
         messageTo(self, "delayedSpawn", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public location getLocationFromLocationList(obj_id objObject, String strLocationList) throws InterruptedException
     {
         transform[] trTransforms = utils.getTransformArrayScriptVar(objObject, strLocationList);
@@ -48,6 +57,7 @@ public class combat_ship_boardable extends script.base_script
         locTest.cell = objCells[intRoll];
         return locTest;
     }
+
     public location getLocationFromLocationListRandom(obj_id objObject, String strLocationList, float fltRandomValue) throws InterruptedException
     {
         location locTest = getLocationFromLocationList(objObject, strLocationList);
@@ -55,6 +65,7 @@ public class combat_ship_boardable extends script.base_script
         locTest.y = locTest.y + rand(-1 * fltRandomValue, fltRandomValue);
         return locTest;
     }
+
     public int delayedSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         int intIndex = utils.getIntLocalVar(self, "intIndex");
@@ -67,7 +78,7 @@ public class combat_ship_boardable extends script.base_script
             utils.setLocalVar(self, "intIndex", intIndex);
             messageTo(self, "delayedSpawn", null, 1, false);
         }
-        else 
+        else
         {
             utils.removeLocalVar(self, "intIndex");
             utils.removeLocalVar(self, "strMobs");

@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.location;
 import script.obj_id;
 import script.region;
@@ -99,6 +105,7 @@ public class regions extends script.base_script
     public static final int BIT_MUNICIPAL = 2;
     public static final int BIT_SPAWNABLE = 3;
     public static final int BIT_MISSION = 4;
+
     public regions()
     {
     }

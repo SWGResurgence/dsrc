@@ -1,15 +1,23 @@
 package script.faction_perk.hq;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.hq;
 import script.obj_id;
 
 public class objective_manager extends script.base_script
 {
+    private static final int VULN_DELAY = 14400;
+
     public objective_manager()
     {
     }
-    private static final int VULN_DELAY = 14400;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "isPvpBase"))
@@ -20,6 +28,7 @@ public class objective_manager extends script.base_script
         messageTo(self, "handleLoadVulnerability", null, (float) VULN_DELAY, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "isPvpBase"))
@@ -30,26 +39,31 @@ public class objective_manager extends script.base_script
         messageTo(self, "handleLoadVulnerability", null, VULN_DELAY, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         hq.unloadVulnerability(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePveVulnerability(obj_id self, dictionary params) throws InterruptedException
     {
         hq.loadFullTimeVulnerability(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleLoadVulnerability(obj_id self, dictionary params) throws InterruptedException
     {
         hq.loadVulnerability(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleUnloadVulnerability(obj_id self, dictionary params) throws InterruptedException
     {
         hq.unloadVulnerability(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleFlagVulnerabilityChange(obj_id self, dictionary params) throws InterruptedException
     {
         int status = params.getInt("status");

@@ -1,5 +1,11 @@
 package script.space.terminal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.space_quest;
 import script.library.space_utils;
@@ -14,6 +20,7 @@ public class offer_a_ship extends script.base_script
     public offer_a_ship()
     {
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -49,6 +56,7 @@ public class offer_a_ship extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSpaceTerminalOfferAShip(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -64,10 +72,10 @@ public class offer_a_ship extends script.base_script
         switch (bp)
         {
             case sui.BP_OK:
-            space_quest.grantNewbieShip(player, "neutral");
-            break;
+                space_quest.grantNewbieShip(player, "neutral");
+                break;
             case sui.BP_CANCEL:
-            break;
+                break;
         }
         return SCRIPT_CONTINUE;
     }

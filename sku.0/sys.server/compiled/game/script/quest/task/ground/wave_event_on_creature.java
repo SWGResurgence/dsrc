@@ -1,5 +1,11 @@
 package script.quest.task.ground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -7,10 +13,12 @@ import script.prose_package;
 
 public class wave_event_on_creature extends script.base_script
 {
+    public static final boolean LOGGING = false;
+
     public wave_event_on_creature()
     {
     }
-    public static final boolean LOGGING = false;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
@@ -18,6 +26,7 @@ public class wave_event_on_creature extends script.base_script
         messageTo(self, "waveEventCheckForUtterance", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int waveEventCheckForUtterance(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "waveEventUtterance"))
@@ -38,6 +47,7 @@ public class wave_event_on_creature extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         obj_id parent = trial.getParent(self);
@@ -46,6 +56,7 @@ public class wave_event_on_creature extends script.base_script
         messageTo(parent, "waveEventChildDestroyed", webster, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (isInvulnerable(self))
@@ -57,10 +68,12 @@ public class wave_event_on_creature extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING)

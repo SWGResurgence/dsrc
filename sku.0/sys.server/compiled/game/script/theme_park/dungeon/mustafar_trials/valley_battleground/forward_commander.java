@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.valley_battleground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -12,11 +18,12 @@ import java.util.Vector;
 
 public class forward_commander extends script.base_script
 {
+    public static final String SQUAD_MEMBER = "som_battlefield_elite_guard";
+    public static final boolean LOGGING = false;
     public forward_commander()
     {
     }
-    public static final String SQUAD_MEMBER = "som_battlefield_elite_guard";
-    public static final boolean LOGGING = false;
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         trial.bumpSession(self);
@@ -24,6 +31,7 @@ public class forward_commander extends script.base_script
         messageTo(top, "commanderDied", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         trial.bumpSession(self);
@@ -36,6 +44,7 @@ public class forward_commander extends script.base_script
         setHibernationDelay(self, 7200);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnEliteGuard(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] squad = new obj_id[6];
@@ -56,9 +65,10 @@ public class forward_commander extends script.base_script
         ai_lib.establishAgroLink(self, squad);
         return SCRIPT_CONTINUE;
     }
+
     public void findWayPoints(obj_id self) throws InterruptedException
     {
-        obj_id objects[] = getObjectsInRange(self, 400);
+        obj_id[] objects = getObjectsInRange(self, 400);
         if (objects == null || objects.length == 0)
         {
             doLogging("findWayPoints", "Contents list was empty, exiting");
@@ -69,7 +79,7 @@ public class forward_commander extends script.base_script
         {
             pathNum = utils.getIntScriptVar(self, "path");
         }
-        else 
+        else
         {
             String[] paths = dataTableGetStringColumn(trial.VALLEY_DATA, "path");
             pathNum = rand(0, paths.length - 1);
@@ -83,10 +93,14 @@ public class forward_commander extends script.base_script
         }
         Vector waypoints = new Vector();
         waypoints.setSize(0);
-        for (String s : pathList) {
-            for (obj_id object : objects) {
-                if (hasObjVar(object, "wp_name")) {
-                    if (s.equals(getStringObjVar(object, "wp_name"))) {
+        for (String s : pathList)
+        {
+            for (obj_id object : objects)
+            {
+                if (hasObjVar(object, "wp_name"))
+                {
+                    if (s.equals(getStringObjVar(object, "wp_name")))
+                    {
                         utils.addElement(waypoints, getLocation(object));
                     }
                 }
@@ -110,12 +124,14 @@ public class forward_commander extends script.base_script
         }
         utils.setScriptVar(self, "patrolPoints", patrolPoints);
     }
+
     public int pathToNextPoint(obj_id self, dictionary params) throws InterruptedException
     {
         location[] patrolPoints = utils.getLocationArrayScriptVar(self, "patrolPoints");
         ai_lib.setPatrolOncePath(self, patrolPoints);
         return SCRIPT_CONTINUE;
     }
+
     public int performRez(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params))
@@ -136,6 +152,7 @@ public class forward_commander extends script.base_script
         messageTo(self, "performRez", trial.getSessionDict(self), trial.BATTLEFIELD_COMM_REZ_DELAY, false);
         return SCRIPT_CONTINUE;
     }
+
     public void rezCorpse(obj_id corpse, location corpseLoc) throws InterruptedException
     {
         String template = getTemplateName(corpse);
@@ -152,34 +169,34 @@ public class forward_commander extends script.base_script
         switch (type)
         {
             case 0:
-            obj_id hk = create.object("som_battlefield_droid_soldier", corpseLoc);
-            playClientEffectLoc(hk, trial.PRT_DROID_REVIVE, corpseLoc, 4.0f);
-            attachScript(hk, "theme_park.dungeon.mustafar_trials.valley_battleground.droid_squad_member");
-            messageTo(hk, "pathToNextPoint", null, 3, false);
-            utils.setScriptVar(hk, "patrolPoints", patrolPoints);
-            destroyObject(corpse);
-            trial.markAsDroidArmy(hk);
-            return;
+                obj_id hk = create.object("som_battlefield_droid_soldier", corpseLoc);
+                playClientEffectLoc(hk, trial.PRT_DROID_REVIVE, corpseLoc, 4.0f);
+                attachScript(hk, "theme_park.dungeon.mustafar_trials.valley_battleground.droid_squad_member");
+                messageTo(hk, "pathToNextPoint", null, 3, false);
+                utils.setScriptVar(hk, "patrolPoints", patrolPoints);
+                destroyObject(corpse);
+                trial.markAsDroidArmy(hk);
+                return;
             case 1:
-            obj_id cww = create.object("som_battlefield_ak_3", corpseLoc);
-            playClientEffectLoc(cww, trial.PRT_DROID_REVIVE, corpseLoc, 4.0f);
-            attachScript(cww, "theme_park.dungeon.mustafar_trials.valley_battleground.assault_killer_bot");
-            messageTo(cww, "pathToNextPoint", null, 3, false);
-            utils.setScriptVar(cww, "patrolPoints", patrolPoints);
-            destroyObject(corpse);
-            trial.markAsDroidArmy(cww);
-            return;
+                obj_id cww = create.object("som_battlefield_ak_3", corpseLoc);
+                playClientEffectLoc(cww, trial.PRT_DROID_REVIVE, corpseLoc, 4.0f);
+                attachScript(cww, "theme_park.dungeon.mustafar_trials.valley_battleground.assault_killer_bot");
+                messageTo(cww, "pathToNextPoint", null, 3, false);
+                utils.setScriptVar(cww, "patrolPoints", patrolPoints);
+                destroyObject(corpse);
+                trial.markAsDroidArmy(cww);
+                return;
             case 2:
-            obj_id union = create.object("som_battlefield_gk_5", corpseLoc);
-            playClientEffectLoc(union, trial.PRT_DROID_REVIVE, corpseLoc, 4.0f);
-            attachScript(union, "theme_park.dungeon.mustafar_trials.valley_battleground.assault_killer_bot");
-            messageTo(union, "pathToNextPoint", null, 3, false);
-            utils.setScriptVar(union, "patrolPoints", patrolPoints);
-            destroyObject(corpse);
-            trial.markAsDroidArmy(union);
-            return;
+                obj_id union = create.object("som_battlefield_gk_5", corpseLoc);
+                playClientEffectLoc(union, trial.PRT_DROID_REVIVE, corpseLoc, 4.0f);
+                attachScript(union, "theme_park.dungeon.mustafar_trials.valley_battleground.assault_killer_bot");
+                messageTo(union, "pathToNextPoint", null, 3, false);
+                utils.setScriptVar(union, "patrolPoints", patrolPoints);
+                destroyObject(corpse);
+                trial.markAsDroidArmy(union);
         }
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING || trial.VALLEY_LOGGING)

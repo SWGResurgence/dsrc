@@ -1,5 +1,11 @@
 package script.faction_perk.hq;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.hq;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class terminal_manager extends script.base_script
     public terminal_manager()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         hq.loadHqTerminals(self);
@@ -16,11 +23,13 @@ public class terminal_manager extends script.base_script
         hq.loadAlarmUnits(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         hq.cleanupBaseAlarmUnits(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnMaintenanceLoop(obj_id self, dictionary params) throws InterruptedException
     {
         int hp = getHitpoints(self);
@@ -35,6 +44,7 @@ public class terminal_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int terminalOff(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "hq.objective.tracking"))
@@ -44,6 +54,7 @@ public class terminal_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int terminalOn(obj_id self, dictionary params) throws InterruptedException
     {
         removeObjVar(self, "donateTerminalOff");

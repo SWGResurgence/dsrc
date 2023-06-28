@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.death_watch_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.sui;
 import script.*;
 
@@ -8,6 +14,7 @@ public class datapad_text extends script.base_script
     public datapad_text()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "Data Storage Unit");
@@ -18,6 +25,7 @@ public class datapad_text extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);
@@ -28,6 +36,7 @@ public class datapad_text extends script.base_script
         mid.setServerNotify(true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -36,6 +45,7 @@ public class datapad_text extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int testSui(obj_id self, obj_id player) throws InterruptedException
     {
         int pid = sui.createSUIPage(sui.SUI_MSGBOX, self, player, "readableText");

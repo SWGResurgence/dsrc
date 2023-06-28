@@ -1,5 +1,11 @@
 package script.theme_park.stp;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.factions;
 import script.obj_id;
@@ -17,6 +23,7 @@ public class factional_npc extends script.base_script
             "(a Rebel officer)",
             "(a Rebel dispatcher)"
     };
+
     public factional_npc()
     {
     }

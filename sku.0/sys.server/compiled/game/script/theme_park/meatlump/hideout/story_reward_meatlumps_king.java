@@ -1,5 +1,11 @@
 package script.theme_park.meatlump.hideout;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.sui;
 import script.library.utils;
@@ -9,11 +15,13 @@ public class story_reward_meatlumps_king extends script.base_script
     public story_reward_meatlumps_king()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "getQuestPlayerName", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int getQuestPlayerName(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id questPlayer = utils.getContainingPlayer(self);
@@ -24,6 +32,7 @@ public class story_reward_meatlumps_king extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!hasObjVar(self, "questPlayerName"))
@@ -34,7 +43,7 @@ public class story_reward_meatlumps_king extends script.base_script
                 String questPlayerName = getPlayerFullName(questPlayer);
                 setObjVar(self, "questPlayerName", questPlayerName);
             }
-            else 
+            else
             {
                 return SCRIPT_CONTINUE;
             }
@@ -43,6 +52,7 @@ public class story_reward_meatlumps_king extends script.base_script
         int menuExtras = mi.addRootMenu(menu_info_types.SERVER_MENU1, menu_read);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU1)

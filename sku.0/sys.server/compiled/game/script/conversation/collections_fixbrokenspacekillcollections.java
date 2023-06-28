@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.collection;
@@ -8,282 +14,352 @@ import script.*;
 
 public class collections_fixbrokenspacekillcollections extends script.base_script
 {
+    public static String c_stringFile = "conversation/collections_fixbrokenspacekillcollections";
+
     public collections_fixbrokenspacekillcollections()
     {
     }
-    public static String c_stringFile = "conversation/collections_fixbrokenspacekillcollections";
+
     public boolean collections_fixbrokenspacekillcollections_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean collections_fixbrokenspacekillcollections_condition_isRebelKillCollectionTier1Broken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasCompletedCollection(player, "kill_space_rebel_tier_01") && getCollectionSlotValue(player, "kill_space_rebel_icon_tier1") == 0);
     }
+
     public boolean collections_fixbrokenspacekillcollections_condition_isImperialKillCollectionTier1Broken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasCompletedCollection(player, "kill_space_imperial_tier_01") && getCollectionSlotValue(player, "kill_space_imperial_icon_tier1") == 0);
     }
+
     public boolean collections_fixbrokenspacekillcollections_condition_isBlackSunKillCollectionTier1Broken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasCompletedCollection(player, "kill_space_blacksun_tier_01") && getCollectionSlotValue(player, "kill_space_blacksun_icon_tier1") == 0);
     }
+
     public boolean collections_fixbrokenspacekillcollections_condition_isDroidKillCollectionTier1Broken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasCompletedCollection(player, "kill_space_droid_tier_01") && getCollectionSlotValue(player, "kill_space_droid_icon_tier1") == 0);
     }
+
     public boolean collections_fixbrokenspacekillcollections_condition_isHiddenDaggersKillCollectionTier1Broken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasCompletedCollection(player, "kill_space_pirate_tier_01") && getCollectionSlotValue(player, "kill_space_pirate_icon_tier1") == 0);
     }
+
     public boolean collections_fixbrokenspacekillcollections_condition_isVoidWingKillCollectionTier1Broken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasCompletedCollection(player, "kill_space_void_tier_01") && getCollectionSlotValue(player, "kill_space_void_icon_tier1") == 0);
     }
+
     public boolean collections_fixbrokenspacekillcollections_condition_isBlackSunKillCollectionTier2Broken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasCompletedCollection(player, "kill_space_blacksun_tier_02") && getCollectionSlotValue(player, "kill_space_blacksun_icon_tier2") == 0);
     }
+
     public boolean collections_fixbrokenspacekillcollections_condition_isBlackSunKillCollectionTier3Broken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasCompletedCollection(player, "kill_space_blacksun_tier_03") && getCollectionSlotValue(player, "kill_space_blacksun_icon_tier3") == 0);
     }
+
     public boolean collections_fixbrokenspacekillcollections_condition_isBlackSunKillCollectionTier4Broken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasCompletedCollection(player, "kill_space_blacksun_tier_04") && getCollectionSlotValue(player, "kill_space_blacksun_icon_tier4") == 0);
     }
+
     public boolean collections_fixbrokenspacekillcollections_condition_isBlackSunKillCollectionTier5Broken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasCompletedCollection(player, "kill_space_blacksun_tier_05") && getCollectionSlotValue(player, "kill_space_blacksun_icon_tier5") == 0);
     }
+
     public boolean collections_fixbrokenspacekillcollections_condition_isDroidKillCollectionTier2Broken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasCompletedCollection(player, "kill_space_droid_tier_02") && getCollectionSlotValue(player, "kill_space_droid_icon_tier2") == 0);
     }
+
     public boolean collections_fixbrokenspacekillcollections_condition_isDroidKillCollectionTier3Broken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasCompletedCollection(player, "kill_space_droid_tier_03") && getCollectionSlotValue(player, "kill_space_droid_icon_tier3") == 0);
     }
+
     public boolean collections_fixbrokenspacekillcollections_condition_isDroidKillCollectionTier4Broken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasCompletedCollection(player, "kill_space_droid_tier_04") && getCollectionSlotValue(player, "kill_space_droid_icon_tier4") == 0);
     }
+
     public boolean collections_fixbrokenspacekillcollections_condition_isDroidKillCollectionTier5Broken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasCompletedCollection(player, "kill_space_droid_tier_05") && getCollectionSlotValue(player, "kill_space_droid_icon_tier5") == 0);
     }
+
     public boolean collections_fixbrokenspacekillcollections_condition_isHiddenDaggersKillCollectionTier2Broken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasCompletedCollection(player, "kill_space_pirate_tier_02") && getCollectionSlotValue(player, "kill_space_pirate_icon_tier2") == 0);
     }
+
     public boolean collections_fixbrokenspacekillcollections_condition_isHiddenDaggersKillCollectionTier3Broken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasCompletedCollection(player, "kill_space_pirate_tier_03") && getCollectionSlotValue(player, "kill_space_pirate_icon_tier3") == 0);
     }
+
     public boolean collections_fixbrokenspacekillcollections_condition_isHiddenDaggersKillCollectionTier4Broken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasCompletedCollection(player, "kill_space_pirate_tier_04") && getCollectionSlotValue(player, "kill_space_pirate_icon_tier4") == 0);
     }
+
     public boolean collections_fixbrokenspacekillcollections_condition_isHiddenDaggersKillCollectionTier5Broken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasCompletedCollection(player, "kill_space_pirate_tier_05") && getCollectionSlotValue(player, "kill_space_pirate_icon_tier5") == 0);
     }
+
     public boolean collections_fixbrokenspacekillcollections_condition_isVoidWingKillCollectionTier2Broken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasCompletedCollection(player, "kill_space_void_tier_02") && getCollectionSlotValue(player, "kill_space_void_icon_tier2") == 0);
     }
+
     public boolean collections_fixbrokenspacekillcollections_condition_isVoidWingKillCollectionTier3Broken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasCompletedCollection(player, "kill_space_void_tier_03") && getCollectionSlotValue(player, "kill_space_void_icon_tier3") == 0);
     }
+
     public boolean collections_fixbrokenspacekillcollections_condition_isVoidWingKillCollectionTier4Broken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasCompletedCollection(player, "kill_space_void_tier_04") && getCollectionSlotValue(player, "kill_space_void_icon_tier4") == 0);
     }
+
     public boolean collections_fixbrokenspacekillcollections_condition_isVoidWingKillCollectionTier5Broken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasCompletedCollection(player, "kill_space_void_tier_05") && getCollectionSlotValue(player, "kill_space_void_icon_tier5") == 0);
     }
+
     public boolean collections_fixbrokenspacekillcollections_condition_isRebelKillCollectionTier2Broken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasCompletedCollection(player, "kill_space_rebel_tier_02") && getCollectionSlotValue(player, "kill_space_rebel_icon_tier2") == 0);
     }
+
     public boolean collections_fixbrokenspacekillcollections_condition_isRebelKillCollectionTier3Broken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasCompletedCollection(player, "kill_space_rebel_tier_03") && getCollectionSlotValue(player, "kill_space_rebel_icon_tier3") == 0);
     }
+
     public boolean collections_fixbrokenspacekillcollections_condition_isRebelKillCollectionTier4Broken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasCompletedCollection(player, "kill_space_rebel_tier_04") && getCollectionSlotValue(player, "kill_space_rebel_icon_tier4") == 0);
     }
+
     public boolean collections_fixbrokenspacekillcollections_condition_isRebelKillCollectionTier5Broken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasCompletedCollection(player, "kill_space_rebel_tier_05") && getCollectionSlotValue(player, "kill_space_rebel_icon_tier5") == 0);
     }
+
     public boolean collections_fixbrokenspacekillcollections_condition_isImperialKillCollectionTier2Broken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasCompletedCollection(player, "kill_space_imperial_tier_02") && getCollectionSlotValue(player, "kill_space_imperial_icon_tier2") == 0);
     }
+
     public boolean collections_fixbrokenspacekillcollections_condition_isImperialKillCollectionTier3Broken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasCompletedCollection(player, "kill_space_imperial_tier_03") && getCollectionSlotValue(player, "kill_space_imperial_icon_tier3") == 0);
     }
+
     public boolean collections_fixbrokenspacekillcollections_condition_isImperialKillCollectionTier4Broken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasCompletedCollection(player, "kill_space_imperial_tier_04") && getCollectionSlotValue(player, "kill_space_imperial_icon_tier4") == 0);
     }
+
     public boolean collections_fixbrokenspacekillcollections_condition_isImperialKillCollectionTier5Broken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasCompletedCollection(player, "kill_space_imperial_tier_05") && getCollectionSlotValue(player, "kill_space_imperial_icon_tier5") == 0);
     }
+
     public boolean collections_fixbrokenspacekillcollections_condition_isBlackSunBroken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (collections_fixbrokenspacekillcollections_condition_isBlackSunKillCollectionTier1Broken(player, npc) || collections_fixbrokenspacekillcollections_condition_isBlackSunKillCollectionTier2Broken(player, npc) || collections_fixbrokenspacekillcollections_condition_isBlackSunKillCollectionTier3Broken(player, npc) || collections_fixbrokenspacekillcollections_condition_isBlackSunKillCollectionTier4Broken(player, npc) || collections_fixbrokenspacekillcollections_condition_isBlackSunKillCollectionTier5Broken(player, npc));
     }
+
     public boolean collections_fixbrokenspacekillcollections_condition_isRebelBroken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (collections_fixbrokenspacekillcollections_condition_isRebelKillCollectionTier1Broken(player, npc) || collections_fixbrokenspacekillcollections_condition_isRebelKillCollectionTier2Broken(player, npc) || collections_fixbrokenspacekillcollections_condition_isRebelKillCollectionTier3Broken(player, npc) || collections_fixbrokenspacekillcollections_condition_isRebelKillCollectionTier4Broken(player, npc) || collections_fixbrokenspacekillcollections_condition_isRebelKillCollectionTier5Broken(player, npc));
     }
+
     public boolean collections_fixbrokenspacekillcollections_condition_isImperialBroken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (collections_fixbrokenspacekillcollections_condition_isImperialKillCollectionTier1Broken(player, npc) || collections_fixbrokenspacekillcollections_condition_isImperialKillCollectionTier2Broken(player, npc) || collections_fixbrokenspacekillcollections_condition_isImperialKillCollectionTier3Broken(player, npc) || collections_fixbrokenspacekillcollections_condition_isImperialKillCollectionTier4Broken(player, npc) || collections_fixbrokenspacekillcollections_condition_isImperialKillCollectionTier5Broken(player, npc));
     }
+
     public boolean collections_fixbrokenspacekillcollections_condition_isDroidBroken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (collections_fixbrokenspacekillcollections_condition_isDroidKillCollectionTier1Broken(player, npc) || collections_fixbrokenspacekillcollections_condition_isDroidKillCollectionTier2Broken(player, npc) || collections_fixbrokenspacekillcollections_condition_isDroidKillCollectionTier3Broken(player, npc) || collections_fixbrokenspacekillcollections_condition_isDroidKillCollectionTier4Broken(player, npc) || collections_fixbrokenspacekillcollections_condition_isDroidKillCollectionTier5Broken(player, npc));
     }
+
     public boolean collections_fixbrokenspacekillcollections_condition_isPirateBroken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (collections_fixbrokenspacekillcollections_condition_isHiddenDaggersKillCollectionTier1Broken(player, npc) || collections_fixbrokenspacekillcollections_condition_isHiddenDaggersKillCollectionTier2Broken(player, npc) || collections_fixbrokenspacekillcollections_condition_isHiddenDaggersKillCollectionTier3Broken(player, npc) || collections_fixbrokenspacekillcollections_condition_isHiddenDaggersKillCollectionTier4Broken(player, npc) || collections_fixbrokenspacekillcollections_condition_isHiddenDaggersKillCollectionTier5Broken(player, npc));
     }
+
     public boolean collections_fixbrokenspacekillcollections_condition_isVoidBroken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (collections_fixbrokenspacekillcollections_condition_isVoidWingKillCollectionTier1Broken(player, npc) || collections_fixbrokenspacekillcollections_condition_isVoidWingKillCollectionTier2Broken(player, npc) || collections_fixbrokenspacekillcollections_condition_isVoidWingKillCollectionTier3Broken(player, npc) || collections_fixbrokenspacekillcollections_condition_isVoidWingKillCollectionTier4Broken(player, npc) || collections_fixbrokenspacekillcollections_condition_isVoidWingKillCollectionTier5Broken(player, npc));
     }
+
     public boolean collections_fixbrokenspacekillcollections_condition_nothingIsBroken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (collections_fixbrokenspacekillcollections_condition_isBlackSunBroken(player, npc) || collections_fixbrokenspacekillcollections_condition_isDroidBroken(player, npc) || collections_fixbrokenspacekillcollections_condition_isPirateBroken(player, npc) || collections_fixbrokenspacekillcollections_condition_isVoidBroken(player, npc) || collections_fixbrokenspacekillcollections_condition_isRebelBroken(player, npc) || collections_fixbrokenspacekillcollections_condition_isImperialBroken(player, npc));
     }
+
     public void collections_fixbrokenspacekillcollections_action_fixBlackSunTier1Collection(obj_id player, obj_id npc) throws InterruptedException
     {
         collection.revokeThenGrantCollection(player, "kill_space_blacksun_tier_01");
     }
+
     public void collections_fixbrokenspacekillcollections_action_fixBlackSunTier2Collection(obj_id player, obj_id npc) throws InterruptedException
     {
         collection.revokeThenGrantCollection(player, "kill_space_blacksun_tier_02");
     }
+
     public void collections_fixbrokenspacekillcollections_action_fixBlackSunTier3Collection(obj_id player, obj_id npc) throws InterruptedException
     {
         collection.revokeThenGrantCollection(player, "kill_space_blacksun_tier_03");
     }
+
     public void collections_fixbrokenspacekillcollections_action_fixBlackSunTier4Collection(obj_id player, obj_id npc) throws InterruptedException
     {
         collection.revokeThenGrantCollection(player, "kill_space_blacksun_tier_04");
     }
+
     public void collections_fixbrokenspacekillcollections_action_fixBlackSunTier5Collection(obj_id player, obj_id npc) throws InterruptedException
     {
         collection.revokeThenGrantCollection(player, "kill_space_blacksun_tier_05");
     }
+
     public void collections_fixbrokenspacekillcollections_action_fixDroidTier1Collection(obj_id player, obj_id npc) throws InterruptedException
     {
         collection.revokeThenGrantCollection(player, "kill_space_droid_tier_01");
     }
+
     public void collections_fixbrokenspacekillcollections_action_fixDroidTier2Collection(obj_id player, obj_id npc) throws InterruptedException
     {
         collection.revokeThenGrantCollection(player, "kill_space_droid_tier_02");
     }
+
     public void collections_fixbrokenspacekillcollections_action_fixDroidTier3Collection(obj_id player, obj_id npc) throws InterruptedException
     {
         collection.revokeThenGrantCollection(player, "kill_space_droid_tier_03");
     }
+
     public void collections_fixbrokenspacekillcollections_action_fixDroidTier4Collection(obj_id player, obj_id npc) throws InterruptedException
     {
         collection.revokeThenGrantCollection(player, "kill_space_droid_tier_04");
     }
+
     public void collections_fixbrokenspacekillcollections_action_fixDroidTier5Collection(obj_id player, obj_id npc) throws InterruptedException
     {
         collection.revokeThenGrantCollection(player, "kill_space_droid_tier_05");
     }
+
     public void collections_fixbrokenspacekillcollections_action_fixHiddenDaggersTier1Collection(obj_id player, obj_id npc) throws InterruptedException
     {
         collection.revokeThenGrantCollection(player, "kill_space_pirate_tier_01");
     }
+
     public void collections_fixbrokenspacekillcollections_action_fixHiddenDaggersTier2Collection(obj_id player, obj_id npc) throws InterruptedException
     {
         collection.revokeThenGrantCollection(player, "kill_space_pirate_tier_02");
     }
+
     public void collections_fixbrokenspacekillcollections_action_fixHiddenDaggersTier3Collection(obj_id player, obj_id npc) throws InterruptedException
     {
         collection.revokeThenGrantCollection(player, "kill_space_pirate_tier_03");
     }
+
     public void collections_fixbrokenspacekillcollections_action_fixHiddenDaggersTier4Collection(obj_id player, obj_id npc) throws InterruptedException
     {
         collection.revokeThenGrantCollection(player, "kill_space_pirate_tier_04");
     }
+
     public void collections_fixbrokenspacekillcollections_action_fixHiddenDaggersTier5Collection(obj_id player, obj_id npc) throws InterruptedException
     {
         collection.revokeThenGrantCollection(player, "kill_space_pirate_tier_05");
     }
+
     public void collections_fixbrokenspacekillcollections_action_fixImperialTier1Collection(obj_id player, obj_id npc) throws InterruptedException
     {
         collection.revokeThenGrantCollection(player, "kill_space_imperial_tier_01");
     }
+
     public void collections_fixbrokenspacekillcollections_action_fixImperialTier2Collection(obj_id player, obj_id npc) throws InterruptedException
     {
         collection.revokeThenGrantCollection(player, "kill_space_imperial_tier_02");
     }
+
     public void collections_fixbrokenspacekillcollections_action_fixImperialTier3Collection(obj_id player, obj_id npc) throws InterruptedException
     {
         collection.revokeThenGrantCollection(player, "kill_space_imperial_tier_03");
     }
+
     public void collections_fixbrokenspacekillcollections_action_fixImperialTier4Collection(obj_id player, obj_id npc) throws InterruptedException
     {
         collection.revokeThenGrantCollection(player, "kill_space_imperial_tier_04");
     }
+
     public void collections_fixbrokenspacekillcollections_action_fixImperialTier5Collection(obj_id player, obj_id npc) throws InterruptedException
     {
         collection.revokeThenGrantCollection(player, "kill_space_imperial_tier_05");
     }
+
     public void collections_fixbrokenspacekillcollections_action_fixRebelTier1Collection(obj_id player, obj_id npc) throws InterruptedException
     {
         collection.revokeThenGrantCollection(player, "kill_space_rebel_tier_01");
     }
+
     public void collections_fixbrokenspacekillcollections_action_fixRebelTier2Collection(obj_id player, obj_id npc) throws InterruptedException
     {
         collection.revokeThenGrantCollection(player, "kill_space_rebel_tier_02");
     }
+
     public void collections_fixbrokenspacekillcollections_action_fixRebelTier3Collection(obj_id player, obj_id npc) throws InterruptedException
     {
         collection.revokeThenGrantCollection(player, "kill_space_rebel_tier_03");
     }
+
     public void collections_fixbrokenspacekillcollections_action_fixRebelTier4Collection(obj_id player, obj_id npc) throws InterruptedException
     {
         collection.revokeThenGrantCollection(player, "kill_space_rebel_tier_04");
     }
+
     public void collections_fixbrokenspacekillcollections_action_fixRebelTier5Collection(obj_id player, obj_id npc) throws InterruptedException
     {
         collection.revokeThenGrantCollection(player, "kill_space_rebel_tier_05");
     }
+
     public void collections_fixbrokenspacekillcollections_action_fixVoidWingTier1Collection(obj_id player, obj_id npc) throws InterruptedException
     {
         collection.revokeThenGrantCollection(player, "kill_space_void_tier_01");
     }
+
     public void collections_fixbrokenspacekillcollections_action_fixVoidWingTier2Collection(obj_id player, obj_id npc) throws InterruptedException
     {
         collection.revokeThenGrantCollection(player, "kill_space_void_tier_02");
     }
+
     public void collections_fixbrokenspacekillcollections_action_fixVoidWingTier3Collection(obj_id player, obj_id npc) throws InterruptedException
     {
         collection.revokeThenGrantCollection(player, "kill_space_void_tier_03");
     }
+
     public void collections_fixbrokenspacekillcollections_action_fixVoidWingTier4Collection(obj_id player, obj_id npc) throws InterruptedException
     {
         collection.revokeThenGrantCollection(player, "kill_space_void_tier_04");
     }
+
     public void collections_fixbrokenspacekillcollections_action_fixVoidWingTier5Collection(obj_id player, obj_id npc) throws InterruptedException
     {
         collection.revokeThenGrantCollection(player, "kill_space_void_tier_05");
     }
+
     public int collections_fixbrokenspacekillcollections_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_118"))
@@ -345,7 +421,7 @@ public class collections_fixbrokenspacekillcollections extends script.base_scrip
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_124");
@@ -378,7 +454,7 @@ public class collections_fixbrokenspacekillcollections extends script.base_scrip
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.collections_fixbrokenspacekillcollections.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -398,6 +474,7 @@ public class collections_fixbrokenspacekillcollections extends script.base_scrip
         }
         return SCRIPT_CONTINUE;
     }
+
     public int collections_fixbrokenspacekillcollections_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_124"))
@@ -445,7 +522,7 @@ public class collections_fixbrokenspacekillcollections extends script.base_scrip
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_143");
@@ -470,7 +547,7 @@ public class collections_fixbrokenspacekillcollections extends script.base_scrip
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.collections_fixbrokenspacekillcollections.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -523,7 +600,7 @@ public class collections_fixbrokenspacekillcollections extends script.base_scrip
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_182");
@@ -548,7 +625,7 @@ public class collections_fixbrokenspacekillcollections extends script.base_scrip
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.collections_fixbrokenspacekillcollections.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -601,7 +678,7 @@ public class collections_fixbrokenspacekillcollections extends script.base_scrip
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_206");
@@ -626,7 +703,7 @@ public class collections_fixbrokenspacekillcollections extends script.base_scrip
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.collections_fixbrokenspacekillcollections.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -679,7 +756,7 @@ public class collections_fixbrokenspacekillcollections extends script.base_scrip
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_230");
@@ -704,7 +781,7 @@ public class collections_fixbrokenspacekillcollections extends script.base_scrip
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.collections_fixbrokenspacekillcollections.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -757,7 +834,7 @@ public class collections_fixbrokenspacekillcollections extends script.base_scrip
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_254");
@@ -782,7 +859,7 @@ public class collections_fixbrokenspacekillcollections extends script.base_scrip
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.collections_fixbrokenspacekillcollections.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -835,7 +912,7 @@ public class collections_fixbrokenspacekillcollections extends script.base_scrip
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_278");
@@ -860,7 +937,7 @@ public class collections_fixbrokenspacekillcollections extends script.base_scrip
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.collections_fixbrokenspacekillcollections.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -880,6 +957,7 @@ public class collections_fixbrokenspacekillcollections extends script.base_scrip
         }
         return SCRIPT_CONTINUE;
     }
+
     public int collections_fixbrokenspacekillcollections_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_143"))
@@ -940,6 +1018,7 @@ public class collections_fixbrokenspacekillcollections extends script.base_scrip
         }
         return SCRIPT_CONTINUE;
     }
+
     public int collections_fixbrokenspacekillcollections_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_182"))
@@ -999,6 +1078,7 @@ public class collections_fixbrokenspacekillcollections extends script.base_scrip
         }
         return SCRIPT_CONTINUE;
     }
+
     public int collections_fixbrokenspacekillcollections_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_206"))
@@ -1058,6 +1138,7 @@ public class collections_fixbrokenspacekillcollections extends script.base_scrip
         }
         return SCRIPT_CONTINUE;
     }
+
     public int collections_fixbrokenspacekillcollections_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_230"))
@@ -1117,6 +1198,7 @@ public class collections_fixbrokenspacekillcollections extends script.base_scrip
         }
         return SCRIPT_CONTINUE;
     }
+
     public int collections_fixbrokenspacekillcollections_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_254"))
@@ -1176,6 +1258,7 @@ public class collections_fixbrokenspacekillcollections extends script.base_scrip
         }
         return SCRIPT_CONTINUE;
     }
+
     public int collections_fixbrokenspacekillcollections_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_278"))
@@ -1235,6 +1318,7 @@ public class collections_fixbrokenspacekillcollections extends script.base_scrip
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -1244,11 +1328,13 @@ public class collections_fixbrokenspacekillcollections extends script.base_scrip
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -1257,18 +1343,21 @@ public class collections_fixbrokenspacekillcollections extends script.base_scrip
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.collections_fixbrokenspacekillcollections");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1298,7 +1387,7 @@ public class collections_fixbrokenspacekillcollections extends script.base_scrip
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_118");
@@ -1310,7 +1399,7 @@ public class collections_fixbrokenspacekillcollections extends script.base_scrip
                 utils.setScriptVar(player, "conversation.collections_fixbrokenspacekillcollections.branchId", 1);
                 npcStartConversation(player, npc, "collections_fixbrokenspacekillcollections", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1319,6 +1408,7 @@ public class collections_fixbrokenspacekillcollections extends script.base_scrip
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("collections_fixbrokenspacekillcollections"))

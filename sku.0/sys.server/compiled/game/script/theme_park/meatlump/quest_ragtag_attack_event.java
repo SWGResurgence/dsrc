@@ -1,5 +1,11 @@
 package script.theme_park.meatlump;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.chat;
 import script.library.group;
@@ -8,11 +14,12 @@ import script.string_id;
 
 public class quest_ragtag_attack_event extends script.base_script
 {
+    public static final String OWNER_OBJVAR = "meatlump.owner";
+    public static final String COMLINK_OBJVAR = "meatlump.comlink";
     public quest_ragtag_attack_event()
     {
     }
-    public static final String OWNER_OBJVAR = "meatlump.owner";
-    public static final String COMLINK_OBJVAR = "meatlump.comlink";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "cleanUpGuard", null, 1000, true);
@@ -21,11 +28,13 @@ public class quest_ragtag_attack_event extends script.base_script
         detachScript(self, "npc.converse.npc_converse_menu");
         return SCRIPT_CONTINUE;
     }
+
     public int cleanUpGuard(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int attackPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, OWNER_OBJVAR);
@@ -38,7 +47,7 @@ public class quest_ragtag_attack_event extends script.base_script
             startCombat(self, player);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             obj_id groupObj = getGroupObject(player);
             if (!isValidId(groupObj) || !exists(groupObj))
@@ -60,7 +69,7 @@ public class quest_ragtag_attack_event extends script.base_script
                     CustomerServiceLog("meatlumpEvent", "ERROR: Mob: " + self + " " + getName(self) + " is attacking: " + player + " " + getName(player) + " by default. This means the function failed to have the mob attach a group member" + " [ attackPlayer() ]");
                 }
             }
-            else 
+            else
             {
                 startCombat(self, player);
                 CustomerServiceLog("meatlumpEvent", "Mob: " + self + " " + getName(self) + " is attacking: " + player + " " + getName(player) + ". [ attackPlayer() ]");
@@ -68,6 +77,7 @@ public class quest_ragtag_attack_event extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean getRandomGroupMember(obj_id self, obj_id player, obj_id[] members) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -87,6 +97,7 @@ public class quest_ragtag_attack_event extends script.base_script
         }
         return false;
     }
+
     public int barkAttack(obj_id self, dictionary params) throws InterruptedException
     {
         chat.chat(self, chat.CHAT_SHOUT, chat.MOOD_ANGRY, new string_id("meatlump/meatlump", "bark_ragtag"));

@@ -1,18 +1,25 @@
 package script.ai;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class beast_control_device extends script.base_script
 {
-    public beast_control_device()
-    {
-    }
     public static final string_id SID_CANNOT_TRANSFER_BCD = new string_id("beast", "cannot_transfer_bcd");
     public static final string_id SID_CANNOT_CALL_BEAST_COMBAT = new string_id("beast", "beast_cant_call_combat");
     public static final string_id SID_CANNOT_STORE_BEAST_COMBAT = new string_id("beast", "beast_cant_store");
     public static final string_id SID_STUFF_BEAST = new string_id("beast", "beast_stuff");
     public static final String CALLED_FOR_PET = "player.calledForPet";
+    public beast_control_device()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (ai_lib.aiIsDead(player))
@@ -39,7 +46,7 @@ public class beast_control_device extends script.base_script
             }
             mi.addRootMenu(menu_info_types.SERVER_MENU1, SID_STUFF_BEAST);
         }
-        else 
+        else
         {
             if (calledBeast.isLoaded() && exists(calledBeast) && !ai_lib.isInCombat(player))
             {
@@ -48,6 +55,7 @@ public class beast_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (ai_lib.aiIsDead(player) || getPerformanceType(player) != 0)
@@ -87,7 +95,7 @@ public class beast_control_device extends script.base_script
                 {
                     utils.removeScriptVar(player, CALLED_FOR_PET);
                 }
-                else 
+                else
                 {
                     prose_package pp = prose.getPackage(pet_lib.SID_SYS_CALL_DELAY_FINISH_PET, timeLeft);
                     sendSystemMessageProse(player, pp);
@@ -111,7 +119,7 @@ public class beast_control_device extends script.base_script
                     sendSystemMessage(player, pet_lib.SID_SYS_CANT_CALL);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     beast_lib.setBCDBeastCalled(self, null);
                 }
@@ -189,6 +197,7 @@ public class beast_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleBeastStuffingConfirm(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -204,6 +213,7 @@ public class beast_control_device extends script.base_script
         beast_lib.convertBcdIntoBeastItem(player, self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (hasScript(item, "ai.beast_control_device"))
@@ -216,6 +226,7 @@ public class beast_control_device extends script.base_script
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         beast_lib.storeBeast(self);
@@ -226,6 +237,7 @@ public class beast_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTransferred(obj_id self, obj_id sourceContainer, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (!exists(self))
@@ -235,6 +247,7 @@ public class beast_control_device extends script.base_script
         beast_lib.storeBeast(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id player = utils.getContainingPlayer(self);
@@ -245,6 +258,7 @@ public class beast_control_device extends script.base_script
         sendSystemMessage(player, new string_id("beast", "datapad_beast_added"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         if (!exists(self))
@@ -260,7 +274,7 @@ public class beast_control_device extends script.base_script
         String currentHappiness = utils.packStringId(beast_lib.convertHappinessString(self));
         if (currentHappiness != null)
         {
-            attribs[idx] = String.valueOf(currentHappiness);
+            attribs[idx] = currentHappiness;
             idx++;
             if (idx >= names.length)
             {
@@ -271,7 +285,7 @@ public class beast_control_device extends script.base_script
         String currentLoyalty = utils.packStringId(beast_lib.convertLoyaltyString(self));
         if (currentLoyalty != null)
         {
-            attribs[idx] = String.valueOf(currentLoyalty);
+            attribs[idx] = currentLoyalty;
             idx++;
             if (idx >= names.length)
             {
@@ -325,10 +339,10 @@ public class beast_control_device extends script.base_script
                         if (!name.equals("block_value_bonus"))
                         {
                             names[idx] = beast_lib.DISPLAY_NAMES[i];
-                            attribs[idx] = String.valueOf(utils.roundFloatByDecimal(incubationBonuses[i] * beast_lib.DISPLAY_OBJVAR_CONVERSION_RATES[i])) + "%";
+                            attribs[idx] = utils.roundFloatByDecimal(incubationBonuses[i] * beast_lib.DISPLAY_OBJVAR_CONVERSION_RATES[i]) + "%";
                             idx++;
                         }
-                        else 
+                        else
                         {
                             names[idx] = beast_lib.DISPLAY_NAMES[i];
                             attribs[idx] = String.valueOf(incubationBonuses[i]);
@@ -336,7 +350,7 @@ public class beast_control_device extends script.base_script
                         }
                         continue;
                     }
-                    else 
+                    else
                     {
                         names[idx] = beast_lib.DISPLAY_NAMES[i];
                         attribs[idx] = String.valueOf(incubationBonuses[i]);
@@ -360,6 +374,7 @@ public class beast_control_device extends script.base_script
         setDescriptionStringId(self, new string_id("spam", "bm_train_pet_info"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (tcg.isBarnRanchhand(destContainer) || tcg.isBarnRanchhand(getContainedBy(destContainer)))
@@ -374,10 +389,12 @@ public class beast_control_device extends script.base_script
         sendSystemMessage(transferer, SID_CANNOT_TRANSFER_BCD);
         return SCRIPT_OVERRIDE;
     }
+
     public int handlePetDeathblow(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int beastPing(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id beast = params.getObjId("beastId");
@@ -398,6 +415,7 @@ public class beast_control_device extends script.base_script
         messageTo(beast, "bcdPingResponse", messageData, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int beastHungry(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id beast = params.getObjId("beastId");
@@ -448,12 +466,13 @@ public class beast_control_device extends script.base_script
                 messageTo(self, "removeHungryBlock", null, 600, false);
             }
         }
-        else 
+        else
         {
             LOG("beast_control_device", "Something is wrong. Pet has been fed but their last time fed has not been updated");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ownerGrouped(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, beast_lib.PET_FAVORITES_OBJVAR))
@@ -461,7 +480,7 @@ public class beast_control_device extends script.base_script
             LOG("beast_control_device", "Something is wrong. This BCD does not have the pets favorite activities stored. Setting them up now");
             beast_lib.setupHappinessLoyalty(self);
         }
-        else 
+        else
         {
             obj_id player = beast_lib.getBCDPlayer(self);
             obj_id beast = beast_lib.getBCDBeastCalled(self);
@@ -500,6 +519,7 @@ public class beast_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int checkIfStillGrouped(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = beast_lib.getBCDPlayer(self);
@@ -507,12 +527,13 @@ public class beast_control_device extends script.base_script
         {
             messageTo(self, "checkIfStillGrouped", null, 1800, false);
         }
-        else 
+        else
         {
             beast_lib.performingActivity(self, beast_lib.PET_NORMAL_ACTIVITY);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ownerEntertained(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, beast_lib.PET_FAVORITES_OBJVAR))
@@ -520,7 +541,7 @@ public class beast_control_device extends script.base_script
             LOG("beast_control_device", "Something is wrong. This BCD does not have the pets favorite activities stored. Setting them up now");
             beast_lib.setupHappinessLoyalty(self);
         }
-        else 
+        else
         {
             obj_id player = beast_lib.getBCDPlayer(self);
             obj_id beast = beast_lib.getBCDBeastCalled(self);
@@ -559,6 +580,7 @@ public class beast_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int checkIfStillEntertained(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = beast_lib.getBCDPlayer(self);
@@ -566,12 +588,13 @@ public class beast_control_device extends script.base_script
         {
             messageTo(self, "checkIfStillEntertained", null, 1800, false);
         }
-        else 
+        else
         {
             beast_lib.performingActivity(self, beast_lib.PET_NORMAL_ACTIVITY);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int beastKilledSomething(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, beast_lib.PET_FAVORITES_OBJVAR))
@@ -579,7 +602,7 @@ public class beast_control_device extends script.base_script
             LOG("beast_control_device", "Something is wrong. This BCD does not have the pets favorite activities stored. Setting them up now");
             beast_lib.setupHappinessLoyalty(self);
         }
-        else 
+        else
         {
             obj_id target = params.getObjId("targetId");
             obj_id player = beast_lib.getBCDPlayer(self);
@@ -637,6 +660,7 @@ public class beast_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int removeKillBonus(obj_id self, dictionary params) throws InterruptedException
     {
         beast_lib.performingActivity(self, beast_lib.PET_NORMAL_ACTIVITY);
@@ -646,6 +670,7 @@ public class beast_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int petDoingTrick(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, beast_lib.PET_FAVORITES_OBJVAR))
@@ -653,7 +678,7 @@ public class beast_control_device extends script.base_script
             LOG("beast_control_device", "Something is wrong. This BCD does not have the pets favorite activities stored. Setting them up now");
             beast_lib.setupHappinessLoyalty(self);
         }
-        else 
+        else
         {
             obj_id player = beast_lib.getBCDPlayer(self);
             obj_id beast = beast_lib.getBCDBeastCalled(self);
@@ -692,11 +717,13 @@ public class beast_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int removeTrickBonus(obj_id self, dictionary params) throws InterruptedException
     {
         beast_lib.performingActivity(self, beast_lib.PET_NORMAL_ACTIVITY);
         return SCRIPT_CONTINUE;
     }
+
     public int removeHungryBlock(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, beast_lib.PET_HUNGRY_MESSAGE_SCRIPTVAR))
@@ -705,6 +732,7 @@ public class beast_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int removeActivityBlock(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, beast_lib.PET_ACTIVITY_MESSAGE_SCRIPTVAR))

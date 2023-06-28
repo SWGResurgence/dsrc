@@ -1,22 +1,32 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class ep3_clone_relics_clone_trooper_mort extends script.base_script
 {
+    public static String c_stringFile = "conversation/ep3_clone_relics_clone_trooper_mort";
+
     public ep3_clone_relics_clone_trooper_mort()
     {
     }
-    public static String c_stringFile = "conversation/ep3_clone_relics_clone_trooper_mort";
+
     public boolean ep3_clone_relics_clone_trooper_mort_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean ep3_clone_relics_clone_trooper_mort_condition_retrievedLogs(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "ep3_clone_relics_clone_trooper_mort_1", "logsRecovered"));
     }
+
     public boolean ep3_clone_relics_clone_trooper_mort_condition_isRebel(obj_id player, obj_id npc) throws InterruptedException
     {
         int playerFactionID = pvpGetAlignedFaction(player);
@@ -24,11 +34,12 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         {
             return true;
         }
-        else 
+        else
         {
             return (hasSkill(player, "pilot_rebel_navy_novice"));
         }
     }
+
     public boolean ep3_clone_relics_clone_trooper_mort_condition_isImperial(obj_id player, obj_id npc) throws InterruptedException
     {
         int playerFactionID = pvpGetAlignedFaction(player);
@@ -36,164 +47,187 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         {
             return true;
         }
-        else 
+        else
         {
             return (hasSkill(player, "pilot_imperial_navy_novice"));
         }
     }
+
     public boolean ep3_clone_relics_clone_trooper_mort_condition_finishedImperialQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "ep3_clone_relics_clone_trooper_mort_imperial", "mortGoodNewsImperial"));
     }
+
     public boolean ep3_clone_relics_clone_trooper_mort_condition_completedQuestSeries(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.hasCompletedTask(player, "ep3_clone_relics_clone_trooper_mort_imperial", "mortGoodNewsImperial") || groundquests.hasCompletedTask(player, "ep3_clone_relics_clone_trooper_mort_rebel", "mortGoodNewsRebel") || groundquests.hasCompletedTask(player, "ep3_clone_relics_clone_trooper_mort_neutral", "mortGoodNewsNeutral"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.hasCompletedTask(player, "ep3_clone_relics_clone_trooper_mort_imperial", "mortGoodNewsImperial") || groundquests.hasCompletedTask(player, "ep3_clone_relics_clone_trooper_mort_rebel", "mortGoodNewsRebel") || groundquests.hasCompletedTask(player, "ep3_clone_relics_clone_trooper_mort_neutral", "mortGoodNewsNeutral");
     }
+
     public boolean ep3_clone_relics_clone_trooper_mort_condition_finishedNeutralQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "ep3_clone_relics_clone_trooper_mort_neutral", "mortGoodNewsNeutral"));
     }
+
     public boolean ep3_clone_relics_clone_trooper_mort_condition_onQuest1(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "ep3_clone_relics_clone_trooper_mort_1"));
     }
+
     public boolean ep3_clone_relics_clone_trooper_mort_condition_finishedRebelQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "ep3_clone_relics_clone_trooper_mort_rebel", "mortGoodNewsRebel"));
     }
+
     public boolean ep3_clone_relics_clone_trooper_mort_condition_isGm(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasObjVar(player, "gm"));
     }
+
     public boolean ep3_clone_relics_clone_trooper_mort_condition_finishedQuest1(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "ep3_clone_relics_clone_trooper_mort_1"));
     }
+
     public boolean ep3_clone_relics_clone_trooper_mort_condition_hasEp3(obj_id player, obj_id npc) throws InterruptedException
     {
         return features.hasEpisode3Expansion(player);
     }
+
     public void ep3_clone_relics_clone_trooper_mort_action_giveQuest1(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_clone_relics_clone_trooper_mort_1");
     }
+
     public void ep3_clone_relics_clone_trooper_mort_action_removeQuest1(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "ep3_clone_relics_clone_trooper_mort_1");
     }
+
     public void ep3_clone_relics_clone_trooper_mort_action_showedLogsMort(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "showedMortLog");
     }
+
     public void ep3_clone_relics_clone_trooper_mort_action_giveQuestImperial(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_clone_relics_clone_trooper_mort_imperial");
     }
+
     public void ep3_clone_relics_clone_trooper_mort_action_giveQuestRebel(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_clone_relics_clone_trooper_mort_rebel");
     }
+
     public void ep3_clone_relics_clone_trooper_mort_action_giveQuestJabba(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_clone_relics_clone_trooper_mort_neutral");
     }
+
     public void ep3_clone_relics_clone_trooper_mort_action_issueImperialArmorSet(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "toldMort");
-        final String[] ARMOR_SET_IMPERIAL = 
+        final String[] ARMOR_SET_IMPERIAL =
+                {
+                        "armor_clone_trooper_imperial_s01_leggings.iff",
+                        "armor_clone_trooper_imperial_s01_helmet.iff",
+                        "armor_clone_trooper_imperial_s01_gloves.iff",
+                        "armor_clone_trooper_imperial_s01_chest_plate.iff",
+                        "armor_clone_trooper_imperial_s01_bracer_r.iff",
+                        "armor_clone_trooper_imperial_s01_bracer_l.iff",
+                        "armor_clone_trooper_imperial_s01_boots.iff",
+                        "armor_clone_trooper_imperial_s01_bicep_r.iff",
+                        "armor_clone_trooper_imperial_s01_bicep_l.iff",
+                        "armor_clone_trooper_imperial_s01_belt.iff"
+                };
+        for (String s : ARMOR_SET_IMPERIAL)
         {
-            "armor_clone_trooper_imperial_s01_leggings.iff",
-            "armor_clone_trooper_imperial_s01_helmet.iff",
-            "armor_clone_trooper_imperial_s01_gloves.iff",
-            "armor_clone_trooper_imperial_s01_chest_plate.iff",
-            "armor_clone_trooper_imperial_s01_bracer_r.iff",
-            "armor_clone_trooper_imperial_s01_bracer_l.iff",
-            "armor_clone_trooper_imperial_s01_boots.iff",
-            "armor_clone_trooper_imperial_s01_bicep_r.iff",
-            "armor_clone_trooper_imperial_s01_bicep_l.iff",
-            "armor_clone_trooper_imperial_s01_belt.iff"
-        };
-        for (String s : ARMOR_SET_IMPERIAL) {
             String armorTemplate = "object/tangible/wearables/armor/clone_trooper/" + s;
             obj_id armorItem = createObjectInInventoryAllowOverload(armorTemplate, player);
-            if (isIdValid(armorItem)) {
-                if (!isGameObjectTypeOf(armorItem, GOT_armor_foot) && !isGameObjectTypeOf(armorItem, GOT_armor_hand)) {
+            if (isIdValid(armorItem))
+            {
+                if (!isGameObjectTypeOf(armorItem, GOT_armor_foot) && !isGameObjectTypeOf(armorItem, GOT_armor_hand))
+                {
                     armor.setArmorDataPercent(armorItem, 2, 1, 0.94f, 0.95f);
                 }
             }
         }
     }
+
     public void ep3_clone_relics_clone_trooper_mort_action_removeQuestImperial(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "ep3_clone_relics_clone_trooper_mort_imperial");
     }
+
     public void ep3_clone_relics_clone_trooper_mort_action_removeQuestJabba(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "ep3_clone_relics_clone_trooper_mort_neutral");
     }
+
     public void ep3_clone_relics_clone_trooper_mort_action_removeQuestRebel(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "ep3_clone_relics_clone_trooper_mort_rebel");
     }
+
     public void ep3_clone_relics_clone_trooper_mort_action_issueRebelArmorSet(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "toldMort");
-        final String[] ARMOR_SET_REBEL = 
+        final String[] ARMOR_SET_REBEL =
+                {
+                        "armor_clone_trooper_rebel_s01_leggings.iff",
+                        "armor_clone_trooper_rebel_s01_helmet.iff",
+                        "armor_clone_trooper_rebel_s01_gloves.iff",
+                        "armor_clone_trooper_rebel_s01_chest_plate.iff",
+                        "armor_clone_trooper_rebel_s01_bracer_r.iff",
+                        "armor_clone_trooper_rebel_s01_bracer_l.iff",
+                        "armor_clone_trooper_rebel_s01_boots.iff",
+                        "armor_clone_trooper_rebel_s01_bicep_r.iff",
+                        "armor_clone_trooper_rebel_s01_bicep_l.iff",
+                        "armor_clone_trooper_rebel_s01_belt.iff"
+                };
+        for (String s : ARMOR_SET_REBEL)
         {
-            "armor_clone_trooper_rebel_s01_leggings.iff",
-            "armor_clone_trooper_rebel_s01_helmet.iff",
-            "armor_clone_trooper_rebel_s01_gloves.iff",
-            "armor_clone_trooper_rebel_s01_chest_plate.iff",
-            "armor_clone_trooper_rebel_s01_bracer_r.iff",
-            "armor_clone_trooper_rebel_s01_bracer_l.iff",
-            "armor_clone_trooper_rebel_s01_boots.iff",
-            "armor_clone_trooper_rebel_s01_bicep_r.iff",
-            "armor_clone_trooper_rebel_s01_bicep_l.iff",
-            "armor_clone_trooper_rebel_s01_belt.iff"
-        };
-        for (String s : ARMOR_SET_REBEL) {
             String armorTemplate = "object/tangible/wearables/armor/clone_trooper/" + s;
             obj_id armorItem = createObjectInInventoryAllowOverload(armorTemplate, player);
-            if (isIdValid(armorItem)) {
-                if (!isGameObjectTypeOf(armorItem, GOT_armor_foot) && !isGameObjectTypeOf(armorItem, GOT_armor_hand)) {
+            if (isIdValid(armorItem))
+            {
+                if (!isGameObjectTypeOf(armorItem, GOT_armor_foot) && !isGameObjectTypeOf(armorItem, GOT_armor_hand))
+                {
                     armor.setArmorDataPercent(armorItem, 2, 1, 0.94f, 0.95f);
                 }
             }
         }
     }
+
     public void ep3_clone_relics_clone_trooper_mort_action_issueNeutralArmorSet(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "toldMort");
-        final String[] ARMOR_SET_NEUTRAL = 
+        final String[] ARMOR_SET_NEUTRAL =
+                {
+                        "armor_clone_trooper_neutral_s01_leggings.iff",
+                        "armor_clone_trooper_neutral_s01_helmet.iff",
+                        "armor_clone_trooper_neutral_s01_gloves.iff",
+                        "armor_clone_trooper_neutral_s01_chest_plate.iff",
+                        "armor_clone_trooper_neutral_s01_bracer_r.iff",
+                        "armor_clone_trooper_neutral_s01_bracer_l.iff",
+                        "armor_clone_trooper_neutral_s01_boots.iff",
+                        "armor_clone_trooper_neutral_s01_bicep_r.iff",
+                        "armor_clone_trooper_neutral_s01_bicep_l.iff",
+                        "armor_clone_trooper_neutral_s01_belt.iff"
+                };
+        for (String s : ARMOR_SET_NEUTRAL)
         {
-            "armor_clone_trooper_neutral_s01_leggings.iff",
-            "armor_clone_trooper_neutral_s01_helmet.iff",
-            "armor_clone_trooper_neutral_s01_gloves.iff",
-            "armor_clone_trooper_neutral_s01_chest_plate.iff",
-            "armor_clone_trooper_neutral_s01_bracer_r.iff",
-            "armor_clone_trooper_neutral_s01_bracer_l.iff",
-            "armor_clone_trooper_neutral_s01_boots.iff",
-            "armor_clone_trooper_neutral_s01_bicep_r.iff",
-            "armor_clone_trooper_neutral_s01_bicep_l.iff",
-            "armor_clone_trooper_neutral_s01_belt.iff"
-        };
-        for (String s : ARMOR_SET_NEUTRAL) {
             String armorTemplate = "object/tangible/wearables/armor/clone_trooper/" + s;
             obj_id armorItem = createObjectInInventoryAllowOverload(armorTemplate, player);
-            if (isIdValid(armorItem)) {
-                if (!isGameObjectTypeOf(armorItem, GOT_armor_foot) && !isGameObjectTypeOf(armorItem, GOT_armor_hand)) {
+            if (isIdValid(armorItem))
+            {
+                if (!isGameObjectTypeOf(armorItem, GOT_armor_foot) && !isGameObjectTypeOf(armorItem, GOT_armor_hand))
+                {
                     armor.setArmorDataPercent(armorItem, 2, 1, 0.94f, 0.95f);
                 }
             }
         }
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_676"))
@@ -213,7 +247,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_680");
@@ -222,7 +256,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -289,7 +323,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_315");
@@ -322,7 +356,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -332,6 +366,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_680"))
@@ -352,6 +387,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_686"))
@@ -372,7 +408,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_690");
@@ -381,7 +417,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -448,7 +484,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_315");
@@ -481,7 +517,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -491,6 +527,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_690"))
@@ -511,7 +548,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_694");
@@ -520,7 +557,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -530,6 +567,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_694"))
@@ -549,7 +587,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_698");
@@ -558,7 +596,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -568,6 +606,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_698"))
@@ -589,7 +628,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_702");
@@ -598,7 +637,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -608,6 +647,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_702"))
@@ -628,7 +668,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_706");
@@ -637,7 +677,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -647,6 +687,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_706"))
@@ -667,6 +708,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_865"))
@@ -687,7 +729,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_869");
@@ -696,7 +738,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -763,7 +805,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_315");
@@ -796,7 +838,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -806,6 +848,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_869"))
@@ -826,7 +869,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_873");
@@ -835,7 +878,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -845,6 +888,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_873"))
@@ -864,7 +908,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_877");
@@ -873,7 +917,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -883,6 +927,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_877"))
@@ -904,7 +949,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_881");
@@ -913,7 +958,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -923,6 +968,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_881"))
@@ -943,7 +989,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_885");
@@ -952,7 +998,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -962,6 +1008,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_885"))
@@ -982,6 +1029,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_891"))
@@ -1002,7 +1050,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_895");
@@ -1011,7 +1059,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1078,7 +1126,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_315");
@@ -1111,7 +1159,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1121,6 +1169,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_895"))
@@ -1141,7 +1190,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_899");
@@ -1150,7 +1199,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1160,6 +1209,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_899"))
@@ -1179,7 +1229,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_903");
@@ -1188,7 +1238,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1198,6 +1248,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_903"))
@@ -1219,7 +1270,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_907");
@@ -1228,7 +1279,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1238,6 +1289,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_907"))
@@ -1258,7 +1310,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_911");
@@ -1267,7 +1319,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1277,6 +1329,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_911"))
@@ -1297,6 +1350,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_277"))
@@ -1372,7 +1426,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_315");
@@ -1405,7 +1459,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1415,6 +1469,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_713"))
@@ -1434,7 +1489,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_721");
@@ -1447,7 +1502,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     prose_package pp = new prose_package();
@@ -1473,7 +1528,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_740");
@@ -1486,7 +1541,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     prose_package pp = new prose_package();
@@ -1512,7 +1567,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_755");
@@ -1525,7 +1580,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     prose_package pp = new prose_package();
@@ -1596,7 +1651,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_315");
@@ -1629,7 +1684,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1639,6 +1694,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_721"))
@@ -1659,7 +1715,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_729");
@@ -1668,7 +1724,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1678,6 +1734,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_729"))
@@ -1695,6 +1752,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_740"))
@@ -1714,7 +1772,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_748");
@@ -1723,7 +1781,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1733,6 +1791,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_748"))
@@ -1750,6 +1809,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_755"))
@@ -1769,7 +1829,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -1778,7 +1838,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1788,6 +1848,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_759"))
@@ -1805,6 +1866,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_765"))
@@ -1892,7 +1954,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_315");
@@ -1925,7 +1987,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1935,6 +1997,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_315"))
@@ -2016,6 +2079,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch48(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_775"))
@@ -2048,7 +2112,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_783");
@@ -2057,7 +2121,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2124,7 +2188,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_315");
@@ -2157,7 +2221,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2167,6 +2231,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_783"))
@@ -2187,7 +2252,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_787");
@@ -2196,7 +2261,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2206,6 +2271,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_787"))
@@ -2226,7 +2292,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_791");
@@ -2235,7 +2301,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2245,6 +2311,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch52(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_791"))
@@ -2265,7 +2332,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_795");
@@ -2274,7 +2341,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2284,6 +2351,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch53(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_795"))
@@ -2305,7 +2373,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_799");
@@ -2314,7 +2382,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2324,6 +2392,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_799"))
@@ -2344,7 +2413,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_803");
@@ -2353,7 +2422,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2363,6 +2432,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch55(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_803"))
@@ -2382,7 +2452,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_807");
@@ -2391,7 +2461,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2401,6 +2471,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch56(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_807"))
@@ -2421,7 +2492,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_811");
@@ -2430,7 +2501,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2440,6 +2511,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch57(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_811"))
@@ -2459,7 +2531,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_815");
@@ -2468,7 +2540,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2478,6 +2550,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch58(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_815"))
@@ -2498,7 +2571,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_819");
@@ -2507,7 +2580,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2517,6 +2590,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch59(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_819"))
@@ -2537,7 +2611,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_823");
@@ -2546,7 +2620,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2556,6 +2630,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch60(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_823"))
@@ -2575,7 +2650,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_827");
@@ -2584,7 +2659,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2594,6 +2669,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch61(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_827"))
@@ -2613,7 +2689,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_831");
@@ -2622,7 +2698,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2632,6 +2708,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch62(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_831"))
@@ -2651,7 +2728,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_835");
@@ -2660,7 +2737,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2670,6 +2747,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch63(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_835"))
@@ -2689,7 +2767,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_839");
@@ -2698,7 +2776,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2708,6 +2786,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch64(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_839"))
@@ -2727,7 +2806,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_843");
@@ -2736,7 +2815,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2746,6 +2825,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch65(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_843"))
@@ -2772,7 +2852,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_847");
@@ -2785,7 +2865,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2795,6 +2875,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch66(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_847"))
@@ -2815,7 +2896,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_851");
@@ -2824,7 +2905,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2845,6 +2926,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch67(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_851"))
@@ -2866,7 +2948,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_855");
@@ -2875,7 +2957,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2885,6 +2967,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_clone_trooper_mort_handleBranch68(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_855"))
@@ -2901,6 +2984,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -2914,6 +2998,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         equip(cup1, self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -2923,6 +3008,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         equip(cup1, self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -2932,18 +3018,21 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.ep3_clone_relics_clone_trooper_mort");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -2975,7 +3064,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_676");
@@ -2991,7 +3080,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "ep3_clone_relics_clone_trooper_mort", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -3024,7 +3113,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_686");
@@ -3040,7 +3129,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "ep3_clone_relics_clone_trooper_mort", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -3073,7 +3162,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_865");
@@ -3089,7 +3178,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "ep3_clone_relics_clone_trooper_mort", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -3122,7 +3211,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_891");
@@ -3138,7 +3227,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "ep3_clone_relics_clone_trooper_mort", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -3170,7 +3259,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_277");
@@ -3186,7 +3275,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "ep3_clone_relics_clone_trooper_mort", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -3220,7 +3309,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_713");
@@ -3232,7 +3321,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId", 27);
                 npcStartConversation(player, npc, "ep3_clone_relics_clone_trooper_mort", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3267,7 +3356,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_765");
@@ -3283,7 +3372,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId", 37);
                 npcStartConversation(player, npc, "ep3_clone_relics_clone_trooper_mort", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3318,7 +3407,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_775");
@@ -3334,7 +3423,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_clone_trooper_mort.branchId", 48);
                 npcStartConversation(player, npc, "ep3_clone_relics_clone_trooper_mort", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3343,6 +3432,7 @@ public class ep3_clone_relics_clone_trooper_mort extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("ep3_clone_relics_clone_trooper_mort"))

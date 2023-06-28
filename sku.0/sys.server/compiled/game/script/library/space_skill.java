@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.location;
 import script.obj_id;
 
@@ -37,6 +43,7 @@ public class space_skill extends script.base_script
                     "_droid_01",
                     "_novice"
             };
+
     public space_skill()
     {
     }

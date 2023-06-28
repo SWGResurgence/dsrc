@@ -1,36 +1,45 @@
 package script.event.lifeday;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.create;
 import script.location;
 import script.obj_id;
 
 public class lifeday_spawner extends script.base_script
 {
+    private static final int[][] LOCS =
+            {
+                    {-2580, 77, -5519},
+                    {-2576, 77, -5519},
+                    {-2576, 77, -5508},
+                    {-2580, 77, -5508},
+                    {-1088, 6, -998},
+                    {-1088, 6, -994},
+                    {-1100, 6, -994},
+                    {-1100, 6, -998},
+                    {-12, 163, -3918},
+                    {-12, 163, -3922},
+                    {-3, 163, -3922},
+                    {-3, 163, -3918}
+            };
+
     public lifeday_spawner()
     {
     }
-    private static final int[][] LOCS =
-    {
-            {-2580,77,-5519},
-            {-2576,77,-5519},
-            {-2576,77,-5508},
-            {-2580,77,-5508},
-            {-1088,6,-998},
-            {-1088,6,-994},
-            {-1100,6,-994},
-            {-1100,6,-998},
-            {-12,163,-3918},
-            {-12,163,-3922},
-            {-3,163,-3922},
-            {-3,163,-3918}
-    };
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "event.lifeday.spawned"))
         {
             String myPlanet = getCurrentSceneName();
             int locStart;
-            switch(myPlanet){
+            switch (myPlanet)
+            {
                 case "dathomir":
                     locStart = 0;
                     break;

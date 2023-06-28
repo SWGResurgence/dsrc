@@ -1,11 +1,19 @@
 package script.theme_park.wod;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.base_class.*;
 import script.combat_engine.*;
+
 import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.Vector;
+
 import script.base_script;
 
 import script.library.ai_lib;
@@ -15,17 +23,19 @@ import script.library.utils;
 
 public class entertainer_rancor extends script.base_script
 {
-    public entertainer_rancor()
-    {
-    }
     public static final boolean debug = false;
     public static final String creatureTypesToLookFor = "gnarled_rancor,rancor,rancor_pygmy,rancor_youth";
     public static final String SYSTEM_MESSAGES = "theme_park/wod";
+    public entertainer_rancor()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         utils.removeScriptVar(self, "wod_entertainer_rancor_following");
         return SCRIPT_CONTINUE;
     }
+
     public int OnChangedPosture(obj_id self, int before, int after) throws InterruptedException
     {
         if (after == POSTURE_SKILL_ANIMATING)
@@ -37,6 +47,7 @@ public class entertainer_rancor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int checkForRancors(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] creaturesNearMe = getCreaturesInRange(self, 10.0f);
@@ -87,6 +98,7 @@ public class entertainer_rancor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void controlRancor(obj_id self, obj_id targetRancor) throws InterruptedException
     {
         utils.setScriptVar(targetRancor, "wod_rancor_followingPlayer", self);
@@ -99,6 +111,7 @@ public class entertainer_rancor extends script.base_script
         messageTo(self, "rancorUpdate", null, 60.0f, false);
         messageTo(self, "rancorControlUpdate", null, 150.0f, false);
     }
+
     public int rancorUpdate(obj_id self, dictionary params) throws InterruptedException
     {
         if (debug)
@@ -127,6 +140,7 @@ public class entertainer_rancor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rancorControlUpdate(obj_id self, dictionary params) throws InterruptedException
     {
         if (debug)
@@ -144,6 +158,7 @@ public class entertainer_rancor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int angryRancorAngery(obj_id self, dictionary params) throws InterruptedException
     {
         if (debug)
@@ -158,6 +173,7 @@ public class entertainer_rancor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nsRancorFinished(obj_id self, dictionary params) throws InterruptedException
     {
         if (debug)
@@ -170,6 +186,7 @@ public class entertainer_rancor extends script.base_script
         detachScript(self, "theme_park.wod.entertainer_rancor");
         return SCRIPT_CONTINUE;
     }
+
     public int smRancorFinished(obj_id self, dictionary params) throws InterruptedException
     {
         if (debug)

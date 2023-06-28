@@ -1,5 +1,11 @@
 package script.content_tools;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.sui;
 import script.library.trial;
@@ -10,9 +16,6 @@ import java.util.Vector;
 
 public class spawn_generation_tool extends script.base_script
 {
-    public spawn_generation_tool()
-    {
-    }
     public static final String MASTER_SPAWN_OBJECT = "spawn.master_object";
     public static final String ASSOCIATED_SPAWN_TABLE = "spawn.associated_table";
     public static final String NOT_ASSIGNED = "Not Assigned";
@@ -20,11 +23,16 @@ public class spawn_generation_tool extends script.base_script
     public static final String MASTER_SPAWN_SCRIPT = "systems.spawning.content_spawning_master";
     public static final String LIST_MSO_SELECT = "list.mso_selection_array";
     public static final boolean LOGGING = true;
+    public spawn_generation_tool()
+    {
+    }
+
     public int showSpawnManagerSui(obj_id self, dictionary params) throws InterruptedException
     {
         createSpawnGenerationSui(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleMasterListSelection(obj_id self, dictionary params) throws InterruptedException
     {
         if (sui.getIntButtonPressed(params) == sui.BP_CANCEL)
@@ -45,14 +53,14 @@ public class spawn_generation_tool extends script.base_script
             switch (idx)
             {
                 case 0:
-                setMasterSpawnObject(player);
-                break;
+                    setMasterSpawnObject(player);
+                    break;
                 case 1:
-                loadExistingSpawnData(player);
-                break;
+                    loadExistingSpawnData(player);
+                    break;
             }
         }
-        else 
+        else
         {
             if (idx < 0 || idx > 2)
             {
@@ -62,21 +70,23 @@ public class spawn_generation_tool extends script.base_script
             switch (idx)
             {
                 case 0:
-                showStandardSpawnCreationSUI(player);
-                break;
+                    showStandardSpawnCreationSUI(player);
+                    break;
                 case 1:
-                showCleanSlateSpawnCreationSUI(player);
-                break;
+                    showCleanSlateSpawnCreationSUI(player);
+                    break;
                 case 2:
-                loadExistingSpawnData(player);
+                    loadExistingSpawnData(player);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSpawnGenerationSuiUpdate(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetMso(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -91,32 +101,35 @@ public class spawn_generation_tool extends script.base_script
         switch (bp)
         {
             case sui.BP_OK:
-            if (idx > -1 && idx < objectList.length)
-            {
-                obj_id masterObject = objectList[idx];
-                if (isIdValid(masterObject))
+                if (idx > -1 && idx < objectList.length)
                 {
-                    attachScript(masterObject, MASTER_SPAWN_SCRIPT);
-                    setObjVar(player, MASTER_SPAWN_OBJECT, masterObject);
-                    for (obj_id obj_id : objectList) {
-                        if (obj_id != objectList[idx]) {
-                            trial.cleanupNpc(obj_id);
+                    obj_id masterObject = objectList[idx];
+                    if (isIdValid(masterObject))
+                    {
+                        attachScript(masterObject, MASTER_SPAWN_SCRIPT);
+                        setObjVar(player, MASTER_SPAWN_OBJECT, masterObject);
+                        for (obj_id obj_id : objectList)
+                        {
+                            if (obj_id != objectList[idx])
+                            {
+                                trial.cleanupNpc(obj_id);
+                            }
                         }
                     }
                 }
-            }
-            else 
-            {
-                doLogging("handleSetMso", "Idx was out of bounds");
-                return SCRIPT_CONTINUE;
-            }
-            break;
+                else
+                {
+                    doLogging("handleSetMso", "Idx was out of bounds");
+                    return SCRIPT_CONTINUE;
+                }
+                break;
             case sui.BP_CANCEL:
-            return SCRIPT_CONTINUE;
+                return SCRIPT_CONTINUE;
         }
         setAssociatedSpawnTable(player);
         return SCRIPT_CONTINUE;
     }
+
     public int handleAstChoice(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -134,20 +147,21 @@ public class spawn_generation_tool extends script.base_script
         switch (bp)
         {
             case sui.BP_OK:
-            if (idx == 0)
-            {
-                presentNewAstSUI(player);
-            }
-            else if (idx == 1)
-            {
-                presentExistingTableSui(player);
-            }
-            break;
+                if (idx == 0)
+                {
+                    presentNewAstSUI(player);
+                }
+                else if (idx == 1)
+                {
+                    presentExistingTableSui(player);
+                }
+                break;
             case sui.BP_CANCEL:
-            return SCRIPT_CONTINUE;
+                return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleNameNewTable(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -172,13 +186,14 @@ public class spawn_generation_tool extends script.base_script
         {
             setObjVar(player, ASSOCIATED_SPAWN_TABLE, tableName);
         }
-        else 
+        else
         {
             broadcast(player, "Failed to create table with specified name");
             return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public void createSpawnGenerationSui(obj_id player) throws InterruptedException
     {
         obj_id mso = null;
@@ -191,7 +206,7 @@ public class spawn_generation_tool extends script.base_script
         {
             ast = getStringObjVar(player, ASSOCIATED_SPAWN_TABLE);
         }
-        else 
+        else
         {
             setObjVar(player, ASSOCIATED_SPAWN_TABLE, NOT_ASSIGNED);
         }
@@ -215,7 +230,7 @@ public class spawn_generation_tool extends script.base_script
             showSUIPage(pid);
             flushSUIPage(pid);
         }
-        else 
+        else
         {
             addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, "0");
             setSUIProperty(pid, sui.LISTBOX_DATASOURCE + "." + 0, sui.PROP_TEXT, "Use Existing Data");
@@ -229,6 +244,7 @@ public class spawn_generation_tool extends script.base_script
             flushSUIPage(pid);
         }
     }
+
     public void setMasterSpawnObject(obj_id player) throws InterruptedException
     {
         String prompt = getMsoAndAstDisplayData(player);
@@ -250,7 +266,7 @@ public class spawn_generation_tool extends script.base_script
             addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, "0");
             setSUIProperty(pid, sui.LISTBOX_DATASOURCE + "." + 0, sui.PROP_TEXT, "No Available Objects In Range");
         }
-        else 
+        else
         {
             for (int i = 0; i < sortedList.length; i++)
             {
@@ -266,6 +282,7 @@ public class spawn_generation_tool extends script.base_script
         showSUIPage(pid);
         flushSUIPage(pid);
     }
+
     public void setAssociatedSpawnTable(obj_id player) throws InterruptedException
     {
         String prompt = getMsoAndAstDisplayData(player);
@@ -290,15 +307,19 @@ public class spawn_generation_tool extends script.base_script
         showSUIPage(pid);
         flushSUIPage(pid);
     }
+
     public void loadExistingSpawnData(obj_id player) throws InterruptedException
     {
     }
+
     public void showStandardSpawnCreationSUI(obj_id player) throws InterruptedException
     {
     }
+
     public void showCleanSlateSpawnCreationSUI(obj_id player) throws InterruptedException
     {
     }
+
     public void presentNewAstSUI(obj_id player) throws InterruptedException
     {
         String prompt = getMsoAndAstDisplayData(player);
@@ -318,40 +339,51 @@ public class spawn_generation_tool extends script.base_script
         showSUIPage(pid);
         flushSUIPage(pid);
     }
+
     public void presentExistingTableSui(obj_id player) throws InterruptedException
     {
     }
+
     public boolean createNewAssociatedSpawnTable(obj_id player, String tableName) throws InterruptedException
     {
         return true;
     }
+
     public obj_id[] sortAllObjectsByMasterSpawnScript(obj_id[] allObjects) throws InterruptedException
     {
         Vector objectsWithScript = new Vector();
         objectsWithScript.setSize(0);
         Vector objectsWithoutScript = new Vector();
         objectsWithoutScript.setSize(0);
-        for (obj_id allObject : allObjects) {
-            if (!isPlayer(allObject) && !isMob(allObject)) {
-                if (hasScript(allObject, MASTER_SPAWN_SCRIPT)) {
+        for (obj_id allObject : allObjects)
+        {
+            if (!isPlayer(allObject) && !isMob(allObject))
+            {
+                if (hasScript(allObject, MASTER_SPAWN_SCRIPT))
+                {
                     utils.addElement(objectsWithScript, allObject);
-                } else {
+                }
+                else
+                {
                     utils.addElement(objectsWithoutScript, allObject);
                 }
             }
         }
         obj_id[] completeList = new obj_id[objectsWithScript.size() + objectsWithoutScript.size()];
         int r = 0;
-        for (Object o1 : objectsWithScript) {
+        for (Object o1 : objectsWithScript)
+        {
             completeList[r] = ((obj_id) o1);
             r++;
         }
-        for (Object o : objectsWithoutScript) {
+        for (Object o : objectsWithoutScript)
+        {
             completeList[r] = ((obj_id) o);
             r++;
         }
         return completeList;
     }
+
     public String[] formatMsoSelectionSortedObjectList(obj_id[] allObjects) throws InterruptedException
     {
         String[] sortedList = new String[allObjects.length];
@@ -361,13 +393,14 @@ public class spawn_generation_tool extends script.base_script
             {
                 sortedList[i] = "* " + getTemplateName(allObjects[i]) + " : " + allObjects[i];
             }
-            else 
+            else
             {
                 sortedList[i] = getTemplateName(allObjects[i]) + " : " + allObjects[i];
             }
         }
         return sortedList;
     }
+
     public String getMsoAndAstDisplayData(obj_id player) throws InterruptedException
     {
         obj_id mso = null;
@@ -384,6 +417,7 @@ public class spawn_generation_tool extends script.base_script
         }
         return "Master Spawn Object: " + mso + " - " + template + "\n" + "Associated Spawn Table: " + ast + "\n\n";
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING)

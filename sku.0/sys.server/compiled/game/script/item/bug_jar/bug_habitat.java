@@ -1,5 +1,11 @@
 package script.item.bug_jar;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.player_structure;
 import script.menu_info;
 import script.menu_info_types;
@@ -20,6 +26,7 @@ public class bug_habitat extends script.base_script
                     "clienteffect/item_bugs_glowzees.cef",
                     "clienteffect/item_bugs_moths.cef"
             };
+
     public bug_habitat()
     {
     }

@@ -1,5 +1,11 @@
 package script.systems.collections;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.factions;
 import script.library.sui;
@@ -13,6 +19,7 @@ public class collection_gcw extends script.base_script
     public static final string_id SID_GCW_CONSUME_ITEM = new string_id("collection", "consume_gcw_item");
     public static final string_id WRONG_FACTION = new string_id("collection", "wrong_faction");
     public static final string_id USED_ITEM = new string_id("collection", "gcw_point_item_used");
+
     public collection_gcw()
     {
     }

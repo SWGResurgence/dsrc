@@ -1,5 +1,11 @@
 package script.npc.vendor;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.trial;
 import script.library.utils;
@@ -10,6 +16,7 @@ public class space_duty_vendor extends script.base_script
     public space_duty_vendor()
     {
     }
+
     public int buySpaceDutyItem(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -22,6 +29,7 @@ public class space_duty_vendor extends script.base_script
         processItemPurchase(player, level, component);
         return SCRIPT_CONTINUE;
     }
+
     public void processItemPurchase(obj_id player, int level, String component) throws InterruptedException
     {
         if (level < 1 || level > 10 || !isIdValid(player) || !exists(player) || component == null || component.length() <= 0)
@@ -38,8 +46,10 @@ public class space_duty_vendor extends script.base_script
             return;
         }
         int realLength = 0;
-        for (String s : compList) {
-            if (s != null && s.length() > 0) {
+        for (String s : compList)
+        {
+            if (s != null && s.length() > 0)
+            {
                 realLength++;
             }
         }

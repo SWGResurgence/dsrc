@@ -1,33 +1,42 @@
 package script.theme_park.wod;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.base_class.*;
 import script.combat_engine.*;
+
 import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.Vector;
+
 import script.base_script;
 
 import script.library.static_item;
 
 public class pro_seed_jar_ns extends script.base_script
 {
+    public static final string_id SID_MNU_USE = new string_id("spam", "open");
+    public static final string_id SID_SYS_NOT_IN_INV = new string_id("spam", "cannot_use_not_in_inv");
+    public static final String[] TREES =
+            {
+                    "item_schematic_wod_pro_ns_tree_01",
+                    "item_schematic_wod_pro_ns_tree_02",
+                    "item_schematic_wod_pro_ns_tree_03",
+                    "item_schematic_wod_pro_ns_tree_04",
+                    "item_schematic_wod_pro_ns_tree_05",
+                    "item_schematic_wod_pro_ns_tree_06",
+                    "item_schematic_wod_pro_ns_tree_07",
+                    "item_schematic_wod_pro_ns_tree_08"
+            };
     public pro_seed_jar_ns()
     {
     }
-    public static final string_id SID_MNU_USE = new string_id("spam", "open");
-    public static final string_id SID_SYS_NOT_IN_INV = new string_id("spam", "cannot_use_not_in_inv");
-    public static final String[] TREES = 
-    {
-        "item_schematic_wod_pro_ns_tree_01",
-        "item_schematic_wod_pro_ns_tree_02",
-        "item_schematic_wod_pro_ns_tree_03",
-        "item_schematic_wod_pro_ns_tree_04",
-        "item_schematic_wod_pro_ns_tree_05",
-        "item_schematic_wod_pro_ns_tree_06",
-        "item_schematic_wod_pro_ns_tree_07",
-        "item_schematic_wod_pro_ns_tree_08"
-    };
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -41,6 +50,7 @@ public class pro_seed_jar_ns extends script.base_script
         mi.addRootMenu(menu_info_types.ITEM_USE, SID_MNU_USE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))

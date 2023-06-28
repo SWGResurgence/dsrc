@@ -1,146 +1,184 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class imperial_general extends script.base_script
 {
+    public static String c_stringFile = "conversation/imperial_general";
+
     public imperial_general()
     {
     }
-    public static String c_stringFile = "conversation/imperial_general";
+
     public boolean imperial_general_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean imperial_general_condition_isEntertainerPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return utils.isProfession(player, utils.ENTERTAINER);
     }
+
     public boolean imperial_general_condition_isPlayerImperial(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (factions.isImperial(player) || factions.isPlayerSameGcwFactionAsSchedulerObject(player, npc));
     }
+
     public boolean imperial_general_condition_isPlayerRebel(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (factions.isRebel(player) || factions.isPlayerSameGcwFactionAsSchedulerObject(player, npc));
     }
+
     public boolean imperial_general_condition_isPlayerNeutral(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (!factions.isImperial(player) && !factions.isRebel(player) && pvpNeutralGetMercenaryFaction(player) == 0);
     }
+
     public boolean imperial_general_condition_isTraderPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return utils.isProfession(player, utils.TRADER);
     }
+
     public boolean imperial_general_condition_isForceSensitivePlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return utils.isProfession(player, utils.FORCE_SENSITIVE);
     }
+
     public boolean imperial_general_condition_isSmugglerPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return utils.isProfession(player, utils.SMUGGLER);
     }
+
     public boolean imperial_general_condition_isMedicPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return utils.isProfession(player, utils.MEDIC);
     }
+
     public boolean imperial_general_condition_isOfficerPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return utils.isProfession(player, utils.OFFICER);
     }
+
     public boolean imperial_general_condition_isSpyPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return utils.isProfession(player, utils.SPY);
     }
+
     public boolean imperial_general_condition_isBountyHunterPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return utils.isProfession(player, utils.BOUNTY_HUNTER);
     }
+
     public boolean imperial_general_condition_isCommandoPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return utils.isProfession(player, utils.COMMANDO);
     }
+
     public boolean imperial_general_condition_generalIsOffensive(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasObjVar(npc, "offense") && getIntObjVar(npc, "offense") == 1);
     }
+
     public boolean imperial_general_condition_generalIsImperial(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasObjVar(npc, "factionFlag") && getIntObjVar(npc, "factionFlag") == factions.FACTION_FLAG_IMPERIAL);
     }
+
     public boolean imperial_general_condition_generalIsDefensive(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasObjVar(npc, "offense") && getIntObjVar(npc, "offense") == 0);
     }
+
     public boolean imperial_general_condition_generalIsRebel(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasObjVar(npc, "factionFlag") && getIntObjVar(npc, "factionFlag") == factions.FACTION_FLAG_REBEL);
     }
+
     public boolean imperial_general_condition_isGeneralRebAndOffense(obj_id player, obj_id npc) throws InterruptedException
     {
         return imperial_general_condition_isPlayerRebel(player, npc) && imperial_general_condition_generalIsRebel(player, npc) && imperial_general_condition_generalIsOffensive(player, npc);
     }
+
     public boolean imperial_general_condition_isConstructionPhase(obj_id player, obj_id npc) throws InterruptedException
     {
         return (gcw.getGcwCityInvasionPhase(npc) == gcw.GCW_CITY_PHASE_CONSTRUCTION);
     }
+
     public boolean imperial_general_condition_isCombatPhase(obj_id player, obj_id npc) throws InterruptedException
     {
         return (gcw.getGcwCityInvasionPhase(npc) == gcw.GCW_CITY_PHASE_COMBAT);
     }
+
     public boolean imperial_general_condition_isGeneralRebAndDefense(obj_id player, obj_id npc) throws InterruptedException
     {
         return imperial_general_condition_isPlayerRebel(player, npc) && imperial_general_condition_generalIsRebel(player, npc) && imperial_general_condition_generalIsDefensive(player, npc);
     }
+
     public boolean imperial_general_condition_isGeneralImpAndOffense(obj_id player, obj_id npc) throws InterruptedException
     {
         return imperial_general_condition_isPlayerImperial(player, npc) && imperial_general_condition_generalIsImperial(player, npc) && imperial_general_condition_generalIsOffensive(player, npc);
     }
+
     public boolean imperial_general_condition_isGeneralImpAndDefense(obj_id player, obj_id npc) throws InterruptedException
     {
         return imperial_general_condition_isPlayerImperial(player, npc) && imperial_general_condition_generalIsImperial(player, npc) && imperial_general_condition_generalIsDefensive(player, npc);
     }
+
     public boolean imperial_general_condition_hasImperialQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return imperial_general_condition_isPlayerImperial(player, npc) && (imperial_general_condition_hasSpyScoutPatrolQuest(player, npc) || imperial_general_condition_hasSpyDestroyPatrolQuest(player, npc) || imperial_general_condition_hasSpyDestroyPatrolQuestNeedsExplosives(player, npc) || imperial_general_condition_hasDestroyBarricadeQuest(player, npc) || imperial_general_condition_hasDestroyTurretQuest(player, npc));
     }
+
     public boolean imperial_general_condition_hasSpyScoutPatrolQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return imperial_general_condition_isSpyPlayer(player, npc) && groundquests.isQuestActive(player, gcw.GCW_SPY_PATROL_SCOUT_QUEST);
     }
+
     public boolean imperial_general_condition_hasSpyDestroyPatrolQuestNeedsExplosives(obj_id player, obj_id npc) throws InterruptedException
     {
         return imperial_general_condition_isSpyPlayer(player, npc) && groundquests.isQuestActive(player, gcw.GCW_SPY_PATROL_DESTROY_QUEST) && (buff.getBuffStackCount(player, "gcw_spy_destroy_patrol_explosive_stack") < 5);
     }
+
     public boolean imperial_general_condition_hasSpyDestroyPatrolQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return imperial_general_condition_isSpyPlayer(player, npc) && groundquests.isQuestActive(player, gcw.GCW_SPY_PATROL_DESTROY_QUEST);
     }
+
     public boolean imperial_general_condition_hasDestroyTurretQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, gcw.GCW_DESTROY_TURRET);
     }
+
     public boolean imperial_general_condition_hasDestroyBarricadeQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, gcw.GCW_DESTROY_BARRICADE);
     }
+
     public boolean imperial_general_condition_hasDestroyQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return imperial_general_condition_hasSpyDestroyPatrolQuest(player, npc) || imperial_general_condition_hasDestroyTurretQuest(player, npc) || imperial_general_condition_hasDestroyBarricadeQuest(player, npc);
     }
+
     public boolean imperial_general_condition_enemyPatrolPointsExist(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id parent = trial.getParent(npc);
@@ -168,28 +206,34 @@ public class imperial_general extends script.base_script
         }
         return false;
     }
+
     public boolean imperial_general_condition_enemyPatrolsExistAndIsCombatPhase(obj_id player, obj_id npc) throws InterruptedException
     {
         return (imperial_general_condition_enemyPatrolPointsExist(player, npc) && imperial_general_condition_isCombatPhase(player, npc));
     }
+
     public boolean imperial_general_condition_enemyPatrolPointsDestroyed(obj_id player, obj_id npc) throws InterruptedException
     {
         return (imperial_general_condition_isCombatPhase(player, npc) && !imperial_general_condition_enemyPatrolPointsExist(player, npc));
     }
+
     public boolean imperial_general_condition_canBeMerc(obj_id player, obj_id npc) throws InterruptedException
     {
         int faction_id = pvpGetAlignedFaction(npc);
         String recruiterFaction = factions.getFactionNameByHashCode(faction_id);
         return factions.canChangeNeutralMercenaryStatus(player, recruiterFaction);
     }
+
     public boolean imperial_general_condition_patrolPointsExistNoScoutQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return imperial_general_condition_enemyPatrolPointsExist(player, npc) && !groundquests.isQuestActive(player, gcw.GCW_SPY_PATROL_SCOUT_QUEST);
     }
+
     public boolean imperial_general_condition_patrolPointsExistNoDestroyQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return imperial_general_condition_enemyPatrolPointsExist(player, npc) && !groundquests.isQuestActive(player, gcw.GCW_SPY_PATROL_DESTROY_QUEST);
     }
+
     public void imperial_general_action_spawnGuards(obj_id player, obj_id npc) throws InterruptedException
     {
         for (int i = 0; i < 3; i++)
@@ -201,6 +245,7 @@ public class imperial_general extends script.base_script
             startCombat(guard, player);
         }
     }
+
     public void imperial_general_action_grantSpyScoutPatrol(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isQuestActive(player, gcw.GCW_SPY_PATROL_SCOUT_QUEST))
@@ -213,6 +258,7 @@ public class imperial_general extends script.base_script
         }
         groundquests.grantQuest(player, gcw.GCW_SPY_PATROL_SCOUT_QUEST);
     }
+
     public void imperial_general_action_grantSpyDestroyPatrol(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isQuestActive(player, gcw.GCW_SPY_PATROL_DESTROY_QUEST))
@@ -226,10 +272,12 @@ public class imperial_general extends script.base_script
         buff.applyBuffWithStackCount(player, gcw.BUFF_SPY_EXPLOSIVES, 5);
         groundquests.grantQuest(player, gcw.GCW_SPY_PATROL_DESTROY_QUEST);
     }
+
     public void imperial_general_action_grantMoreSpyDestroyPatrolExplosives(obj_id player, obj_id npc) throws InterruptedException
     {
         buff.applyBuffWithStackCount(player, gcw.BUFF_SPY_EXPLOSIVES, 5);
     }
+
     public void imperial_general_action_grantCombatDestroyBarricade(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isQuestActive(player, gcw.GCW_DESTROY_BARRICADE))
@@ -242,6 +290,7 @@ public class imperial_general extends script.base_script
         }
         groundquests.grantQuest(player, gcw.GCW_DESTROY_BARRICADE);
     }
+
     public void imperial_general_action_grantCombatDestroyTurret(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isQuestActive(player, gcw.GCW_DESTROY_TURRET))
@@ -254,6 +303,7 @@ public class imperial_general extends script.base_script
         }
         groundquests.grantQuest(player, gcw.GCW_DESTROY_TURRET);
     }
+
     public void imperial_general_action_grantEntertainRallyQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isQuestActive(player, gcw.GCW_ENTERTAIN_RALLY))
@@ -266,6 +316,7 @@ public class imperial_general extends script.base_script
         }
         groundquests.grantQuest(player, gcw.GCW_ENTERTAIN_RALLY);
     }
+
     public void imperial_general_action_grantEntertainFatigueQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isQuestActive(player, gcw.GCW_ENTERTAIN_FATIGUE))
@@ -278,6 +329,7 @@ public class imperial_general extends script.base_script
         }
         groundquests.grantQuest(player, gcw.GCW_ENTERTAIN_FATIGUE);
     }
+
     public void imperial_general_action_grantEntertainerQuests(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!groundquests.isQuestActive(player, gcw.GCW_ENTERTAIN_FATIGUE))
@@ -297,6 +349,7 @@ public class imperial_general extends script.base_script
             groundquests.grantQuest(player, gcw.GCW_ENTERTAIN_RALLY);
         }
     }
+
     public void imperial_general_action_grantCombatQuests(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!groundquests.isQuestActive(player, gcw.GCW_DESTROY_BARRICADE))
@@ -324,14 +377,17 @@ public class imperial_general extends script.base_script
             groundquests.grantQuest(player, gcw.GCW_ELIMINATE_REBELS);
         }
     }
+
     public void imperial_general_action_makeImpMercCombatant(obj_id player, obj_id npc) throws InterruptedException
     {
         factions.setNeturalMercenaryCovert(player, factions.FACTION_FLAG_IMPERIAL);
     }
+
     public void imperial_general_action_makeImpMercSF(obj_id player, obj_id npc) throws InterruptedException
     {
         factions.setNeturalMercenaryOvert(player, factions.FACTION_FLAG_IMPERIAL);
     }
+
     public void imperial_general_action_grantCombatSpyQuests(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!groundquests.isQuestActive(player, gcw.GCW_DESTROY_BARRICADE))
@@ -376,6 +432,7 @@ public class imperial_general extends script.base_script
             groundquests.grantQuest(player, gcw.GCW_SPY_PATROL_SCOUT_QUEST);
         }
     }
+
     public void imperial_general_action_grantDefensiveSpyQuests(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!groundquests.isQuestActive(player, gcw.GCW_ELIMINATE_REBELS))
@@ -404,6 +461,7 @@ public class imperial_general extends script.base_script
             groundquests.grantQuest(player, gcw.GCW_SPY_PATROL_SCOUT_QUEST);
         }
     }
+
     public int imperial_general_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_28"))
@@ -423,7 +481,7 @@ public class imperial_general extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_111");
@@ -432,7 +490,7 @@ public class imperial_general extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_general.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -442,6 +500,7 @@ public class imperial_general extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_general_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_111"))
@@ -461,7 +520,7 @@ public class imperial_general extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_113");
@@ -470,7 +529,7 @@ public class imperial_general extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_general.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -487,6 +546,7 @@ public class imperial_general extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_general_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_113"))
@@ -506,7 +566,7 @@ public class imperial_general extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_116");
@@ -515,7 +575,7 @@ public class imperial_general extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_general.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -525,6 +585,7 @@ public class imperial_general extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_general_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_116"))
@@ -551,7 +612,7 @@ public class imperial_general extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_119");
@@ -564,7 +625,7 @@ public class imperial_general extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_general.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -581,6 +642,7 @@ public class imperial_general extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_general_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_119"))
@@ -623,6 +685,7 @@ public class imperial_general extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_general_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_26"))
@@ -856,6 +919,7 @@ public class imperial_general extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_general_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_126"))
@@ -1069,6 +1133,7 @@ public class imperial_general extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -1078,6 +1143,7 @@ public class imperial_general extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -1090,6 +1156,7 @@ public class imperial_general extends script.base_script
         messageTo(self, "playQuestIcon", params, 1.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -1098,12 +1165,14 @@ public class imperial_general extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.imperial_general");
         return SCRIPT_CONTINUE;
     }
+
     public int playQuestIcon(obj_id self, dictionary params) throws InterruptedException
     {
         gcw.playQuestIconHandler(self, params);
@@ -1118,12 +1187,14 @@ public class imperial_general extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1146,7 +1217,7 @@ public class imperial_general extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -1154,7 +1225,7 @@ public class imperial_general extends script.base_script
                 utils.setScriptVar(player, "conversation.imperial_general.branchId", 1);
                 npcStartConversation(player, npc, "imperial_general", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1252,7 +1323,7 @@ public class imperial_general extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_26");
@@ -1304,7 +1375,7 @@ public class imperial_general extends script.base_script
                 utils.setScriptVar(player, "conversation.imperial_general.branchId", 12);
                 npcStartConversation(player, npc, "imperial_general", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1402,7 +1473,7 @@ public class imperial_general extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_126");
@@ -1454,7 +1525,7 @@ public class imperial_general extends script.base_script
                 utils.setScriptVar(player, "conversation.imperial_general.branchId", 39);
                 npcStartConversation(player, npc, "imperial_general", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1469,6 +1540,7 @@ public class imperial_general extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("imperial_general"))

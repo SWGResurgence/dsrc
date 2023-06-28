@@ -1,68 +1,89 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class nova_orion_rank1 extends script.base_script
 {
+    public static String c_stringFile = "conversation/nova_orion_rank1";
+
     public nova_orion_rank1()
     {
     }
-    public static String c_stringFile = "conversation/nova_orion_rank1";
+
     public boolean nova_orion_rank1_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean nova_orion_rank1_condition_onQuest_01(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "nova_orion_rank1_01") && !groundquests.isTaskActive(player, "nova_orion_rank1_01", "wait_01"));
     }
+
     public boolean nova_orion_rank1_condition_returnWin_01(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "nova_orion_rank1_01", "wait_01") || groundquests.hasCompletedQuest(player, "nova_orion_rank1_01"));
     }
+
     public boolean nova_orion_rank1_condition_onQuest_02(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "nova_orion_rank1_02") && !groundquests.isTaskActive(player, "nova_orion_rank1_02", "wait"));
     }
+
     public boolean nova_orion_rank1_condition_returnWin_02(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "nova_orion_rank1_02", "wait") || groundquests.hasCompletedQuest(player, "nova_orion_rank1_02"));
     }
+
     public boolean nova_orion_rank1_condition_onQuest_03(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "nova_orion_rank1_03") && !groundquests.isTaskActive(player, "nova_orion_rank1_02", "wait"));
     }
+
     public boolean nova_orion_rank1_condition_returnWin_03(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "nova_orion_rank1_03", "wait");
     }
+
     public boolean nova_orion_rank1_condition_finishedAll(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "nova_orion_rank1_03");
     }
+
     public boolean nova_orion_rank1_condition_isRank1(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasCompletedCollectionSlot(player, "nova_orion_rank_01");
     }
+
     public void nova_orion_rank1_action_grantQuest_01(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "nova_orion_rank1_01");
     }
+
     public void nova_orion_rank1_action_clearAndRegrant_01(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "nova_orion_rank1_01");
         space_quest.clearQuestFlags(player, "delivery", "nova_orion_rank1_01");
         groundquests.grantQuest(player, "nova_orion_rank1_01");
     }
+
     public void nova_orion_rank1_action_sendFinishSignal_01(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "nova_orion_rank1_01");
     }
+
     public void nova_orion_rank1_action_grantQuest_02(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "nova_orion_rank1_02");
     }
+
     public void nova_orion_rank1_action_clearAndRegrant_02(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "nova_orion_rank1_02");
@@ -72,10 +93,12 @@ public class nova_orion_rank1 extends script.base_script
         space_quest.clearQuestFlags(player, "destroy_surpriseattack", "nova_orion_rank1_01");
         groundquests.grantQuest(player, "nova_orion_rank1_02");
     }
+
     public void nova_orion_rank1_action_grantQuest_03(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "nova_orion_rank1_03");
     }
+
     public void nova_orion_rank1_action_clearAndRegrant_03(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "nova_orion_rank1_03");
@@ -83,14 +106,17 @@ public class nova_orion_rank1 extends script.base_script
         space_quest.clearQuestFlags(player, "assassinate", "nova_orion_rank1_01");
         groundquests.grantQuest(player, "nova_orion_rank1_03");
     }
+
     public void nova_orion_rank1_action_sendFinishSignal_02(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "nova_orion_rank1_02");
     }
+
     public void nova_orion_rank1_action_sendFinishSignal_03(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "nova_orion_rank1_03");
     }
+
     public int nova_orion_rank1_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_33"))
@@ -106,6 +132,7 @@ public class nova_orion_rank1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nova_orion_rank1_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_29"))
@@ -131,6 +158,7 @@ public class nova_orion_rank1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nova_orion_rank1_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_27"))
@@ -151,7 +179,7 @@ public class nova_orion_rank1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_36");
@@ -160,7 +188,7 @@ public class nova_orion_rank1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.nova_orion_rank1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -170,6 +198,7 @@ public class nova_orion_rank1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nova_orion_rank1_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_36"))
@@ -185,6 +214,7 @@ public class nova_orion_rank1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nova_orion_rank1_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_20"))
@@ -210,6 +240,7 @@ public class nova_orion_rank1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nova_orion_rank1_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_44"))
@@ -230,7 +261,7 @@ public class nova_orion_rank1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48");
@@ -239,7 +270,7 @@ public class nova_orion_rank1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.nova_orion_rank1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -249,6 +280,7 @@ public class nova_orion_rank1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nova_orion_rank1_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_48"))
@@ -264,6 +296,7 @@ public class nova_orion_rank1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nova_orion_rank1_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_54"))
@@ -289,6 +322,7 @@ public class nova_orion_rank1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nova_orion_rank1_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_64"))
@@ -308,7 +342,7 @@ public class nova_orion_rank1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_68");
@@ -317,7 +351,7 @@ public class nova_orion_rank1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.nova_orion_rank1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -327,6 +361,7 @@ public class nova_orion_rank1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nova_orion_rank1_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_68"))
@@ -342,6 +377,7 @@ public class nova_orion_rank1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -351,11 +387,13 @@ public class nova_orion_rank1 extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -364,18 +402,21 @@ public class nova_orion_rank1 extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.nova_orion_rank1");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -404,7 +445,7 @@ public class nova_orion_rank1 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_33");
@@ -412,7 +453,7 @@ public class nova_orion_rank1 extends script.base_script
                 utils.setScriptVar(player, "conversation.nova_orion_rank1.branchId", 2);
                 npcStartConversation(player, npc, "nova_orion_rank1", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -440,7 +481,7 @@ public class nova_orion_rank1 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_29");
@@ -452,7 +493,7 @@ public class nova_orion_rank1 extends script.base_script
                 utils.setScriptVar(player, "conversation.nova_orion_rank1.branchId", 4);
                 npcStartConversation(player, npc, "nova_orion_rank1", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -473,7 +514,7 @@ public class nova_orion_rank1 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_27");
@@ -481,7 +522,7 @@ public class nova_orion_rank1 extends script.base_script
                 utils.setScriptVar(player, "conversation.nova_orion_rank1.branchId", 7);
                 npcStartConversation(player, npc, "nova_orion_rank1", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -509,7 +550,7 @@ public class nova_orion_rank1 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_20");
@@ -521,7 +562,7 @@ public class nova_orion_rank1 extends script.base_script
                 utils.setScriptVar(player, "conversation.nova_orion_rank1.branchId", 10);
                 npcStartConversation(player, npc, "nova_orion_rank1", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -542,7 +583,7 @@ public class nova_orion_rank1 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_44");
@@ -550,7 +591,7 @@ public class nova_orion_rank1 extends script.base_script
                 utils.setScriptVar(player, "conversation.nova_orion_rank1.branchId", 13);
                 npcStartConversation(player, npc, "nova_orion_rank1", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -578,7 +619,7 @@ public class nova_orion_rank1 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_54");
@@ -590,7 +631,7 @@ public class nova_orion_rank1 extends script.base_script
                 utils.setScriptVar(player, "conversation.nova_orion_rank1.branchId", 16);
                 npcStartConversation(player, npc, "nova_orion_rank1", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -611,7 +652,7 @@ public class nova_orion_rank1 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_64");
@@ -619,7 +660,7 @@ public class nova_orion_rank1 extends script.base_script
                 utils.setScriptVar(player, "conversation.nova_orion_rank1.branchId", 19);
                 npcStartConversation(player, npc, "nova_orion_rank1", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -634,6 +675,7 @@ public class nova_orion_rank1 extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("nova_orion_rank1"))

@@ -1,13 +1,16 @@
 package script.event.lifeday;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class monkey_pet extends script.base_script
 {
-    public monkey_pet()
-    {
-    }
     private static final String LIFEDAY = "event/life_day";
     private static final String MONKEY_RED = "lifeday_monkey_lizard";
     private static final String MONKEY_GREEN = "lifeday_monkey_lizard_green";
@@ -19,6 +22,9 @@ public class monkey_pet extends script.base_script
     private static final String ANIMATION_5 = "wave1";
     private static final string_id SID_TURN_ON = new string_id(LIFEDAY, "free_monkey");
     private static final string_id SID_TURN_OFF = new string_id(LIFEDAY, "cage_monkey");
+    public monkey_pet()
+    {
+    }
 
     public int OnInitialize(obj_id self) throws InterruptedException
     {
@@ -50,6 +56,7 @@ public class monkey_pet extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (inHouse(self) && hasObjVar(self, "petCalled"))
@@ -80,6 +87,7 @@ public class monkey_pet extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (hasObjVar(self, "petCalled"))
@@ -97,11 +105,14 @@ public class monkey_pet extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
-        if (!buff.hasBuff(breacher, "event_lifeday_no_laugh") && volumeName.equals("laughAura") && hasObjVar(self, "petId")) {
+        if (!buff.hasBuff(breacher, "event_lifeday_no_laugh") && volumeName.equals("laughAura") && hasObjVar(self, "petId"))
+        {
             obj_id monkey = getObjIdObjVar(self, "petId");
-            if (exists(monkey)) {
+            if (exists(monkey))
+            {
                 dictionary params = new dictionary();
                 params.put("breacher", breacher);
                 params.put("monkey", monkey);
@@ -116,6 +127,7 @@ public class monkey_pet extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (inHouse(self))
@@ -125,13 +137,14 @@ public class monkey_pet extends script.base_script
             {
                 mi.addRootMenu(menu_info_types.ITEM_USE, SID_TURN_OFF);
             }
-            else 
+            else
             {
                 mi.addRootMenu(menu_info_types.ITEM_USE, SID_TURN_ON);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (inHouse(self))
@@ -165,6 +178,7 @@ public class monkey_pet extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     private String whichMonkey() throws InterruptedException
     {
         if (rand(1, 2) == 2)
@@ -173,6 +187,7 @@ public class monkey_pet extends script.base_script
         }
         return MONKEY_RED;
     }
+
     private boolean inHouse(obj_id device) throws InterruptedException
     {
         obj_id selfContainer = getContainedBy(device);
@@ -184,6 +199,7 @@ public class monkey_pet extends script.base_script
         }
         return (utils.isInHouseCellSpace(device) || space_utils.isPobType(templateName)) && !utils.isNestedWithinAPlayer(device);
     }
+
     public int animationOne(obj_id self, dictionary params) throws InterruptedException
     {
         int idx = params.getInt("idx");
@@ -211,6 +227,7 @@ public class monkey_pet extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int animationTwo(obj_id self, dictionary params) throws InterruptedException
     {
         int idx = params.getInt("idx");
@@ -236,11 +253,13 @@ public class monkey_pet extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int getMoving(obj_id self, dictionary params) throws InterruptedException
     {
         resumeMovement(params.getObjId("monkey"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "petCalled"))

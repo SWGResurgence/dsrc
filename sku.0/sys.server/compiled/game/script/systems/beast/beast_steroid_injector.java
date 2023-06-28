@@ -1,5 +1,11 @@
 package script.systems.beast;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.beast_lib;
 import script.library.buff;
@@ -11,6 +17,7 @@ public class beast_steroid_injector extends script.base_script
     public static final string_id SID_BEAST_WRONG_FAMILY = new string_id("beast", "beast_buff_wrong_type");
     public static final string_id SID_BEAST_NO_BEAST = new string_id("beast", "beast_buff_no_beast");
     public static final string_id SID_USE_ITEM = new string_id("beast", "beast_buff_use");
+
     public beast_steroid_injector()
     {
     }

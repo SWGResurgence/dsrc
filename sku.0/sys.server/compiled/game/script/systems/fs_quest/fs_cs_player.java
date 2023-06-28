@@ -1,5 +1,11 @@
 package script.systems.fs_quest;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -10,6 +16,7 @@ public class fs_cs_player extends script.base_script
 {
     public static final float HELP_SPAWN_TIME_MIN = 180;
     public static final float HELP_SPAWN_TIME_MAX = 300;
+
     public fs_cs_player()
     {
     }
@@ -33,7 +40,7 @@ public class fs_cs_player extends script.base_script
             {
                 obj_id[] gang = null;
                 gang = getGroupMemberIds(getGroupObject(self));
-                if ((gang != null) && (gang.length > 0))
+                if (gang != null)
                 {
                     for (obj_id thisGuy : gang)
                     {
@@ -332,7 +339,6 @@ public class fs_cs_player extends script.base_script
         setWaypointActive(waypoint, true);
         setWaypointName(waypoint, "Return the Commander");
         setObjVar(player, "fs_cs.returnCommanderWaypoint", waypoint);
-        return;
     }
 
     public void makePlayerEscort(obj_id player, obj_id commander) throws InterruptedException

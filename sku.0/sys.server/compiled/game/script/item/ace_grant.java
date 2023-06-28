@@ -4,6 +4,12 @@ package script.item;/*
 @Purpose: Grants player an ace pilot.
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.skill;
 import script.library.sui;
@@ -11,15 +17,17 @@ import script.library.utils;
 
 public class ace_grant extends script.base_script
 {
+    public static final String[] FACTIONS =
+            {
+                    "Rebel",
+                    "Imperial",
+                    "Neutral"
+            };
+
     public ace_grant()
     {
     }
-    public static final String[] FACTIONS =
-    {
-        "Rebel",
-        "Imperial",
-        "Neutral"
-    };
+
     public int OnInitialize(obj_id self)
     {
         setName(self, "Knowledge of the Wingman");
@@ -125,6 +133,7 @@ public class ace_grant extends script.base_script
         broadcast(player, "You have learned all the skills of a Rebel Navy Pilot.");
         destroyObject(self);
     }
+
     public void grantNeutralPilot(obj_id self, obj_id player)
     {
         skill.grantSkill(player, "pilot_neutral_novice");

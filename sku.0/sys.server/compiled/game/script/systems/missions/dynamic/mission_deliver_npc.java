@@ -1,5 +1,11 @@
 package script.systems.missions.dynamic;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -149,7 +155,7 @@ public class mission_deliver_npc extends script.systems.missions.base.mission_dy
                     missionInfo = thisMission;
                 }
             }
-            if (rightSpot != true)
+            if (!rightSpot)
             {
                 if (boolDebug)
                 {

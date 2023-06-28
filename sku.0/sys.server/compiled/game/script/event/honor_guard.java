@@ -1,5 +1,11 @@
 package script.event;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -10,29 +16,30 @@ import script.obj_id;
 
 public class honor_guard extends script.base_script
 {
+    public static final String[] PROMPT_TEXT =
+            {
+                    "Enter \"setup\" to setup data, \"singleSetup\" to setup single spawn data, \"spawn\" to spawn NPCs using current data, \"data\" to view current data or \"quit\" end.",
+                    "Enter the template name for the NPC to spawn (e.g. stormtrooper).",
+                    "How many NPCs per line (shoulder to shoulder)?",
+                    "How many rows of NPCs?",
+                    "How far apart are the NPCs going to be spaced in meters?",
+                    "Enter an expiration time in seconds.",
+                    "Current data shows that more then 50 NPCs are set to be spawned. If this is intended type \"ok\" to ignore this warning and continue. Otherwise type \"setup\" to make changes."
+            };
+    public static final String[] TITLE =
+            {
+                    "Standby",
+                    "Template Name",
+                    "Number per Line",
+                    "Number per Row",
+                    "Spacing",
+                    "Expiration Time",
+                    "WARNING"
+            };
     public honor_guard()
     {
     }
-    public static final String[] PROMPT_TEXT = 
-    {
-        "Enter \"setup\" to setup data, \"singleSetup\" to setup single spawn data, \"spawn\" to spawn NPCs using current data, \"data\" to view current data or \"quit\" end.",
-        "Enter the template name for the NPC to spawn (e.g. stormtrooper).",
-        "How many NPCs per line (shoulder to shoulder)?",
-        "How many rows of NPCs?",
-        "How far apart are the NPCs going to be spaced in meters?",
-        "Enter an expiration time in seconds.",
-        "Current data shows that more then 50 NPCs are set to be spawned. If this is intended type \"ok\" to ignore this warning and continue. Otherwise type \"setup\" to make changes."
-    };
-    public static final String[] TITLE = 
-    {
-        "Standby",
-        "Template Name",
-        "Number per Line",
-        "Number per Row",
-        "Spacing",
-        "Expiration Time",
-        "WARNING"
-    };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!isGod(self))
@@ -58,6 +65,7 @@ public class honor_guard extends script.base_script
         showUI(self, self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id objSpeaker, String strText) throws InterruptedException
     {
         if (objSpeaker != self)
@@ -74,11 +82,13 @@ public class honor_guard extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     private int showUI(obj_id self, obj_id player) throws InterruptedException
     {
         int current = getIntObjVar(self, "event.honor_guard.setupStep");
         return sui.inputbox(self, self, PROMPT_TEXT[current], TITLE[current], "handleUIdata", 255, false, "");
     }
+
     public int handleUIdata(obj_id self, dictionary params) throws InterruptedException
     {
         int bp = sui.getIntButtonPressed(params);
@@ -93,10 +103,12 @@ public class honor_guard extends script.base_script
         messageTo(self, "storeLastDataObjVar", null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int storeLastDataObjVar(obj_id self, dictionary params) throws InterruptedException
     {
         String lastDataStr = getStringObjVar(self, "event.honor_guard.lastData");
-        switch (lastDataStr) {
+        switch (lastDataStr)
+        {
             case "setup":
                 setObjVar(self, "event.honor_guard.setupStep", 1);
                 setObjVar(self, "event.honor_guard.single", 0);
@@ -129,23 +141,29 @@ public class honor_guard extends script.base_script
                 return SCRIPT_CONTINUE;
         }
         int setupStep = getIntObjVar(self, "event.honor_guard.setupStep");
-        switch (setupStep) {
+        switch (setupStep)
+        {
             case 0:
                 sendSystemMessage(self, "Type \"quit\" to terminate the script, \"setup\" to start over, \"data\" to see current data or \"spawn\" to spawn the NPCs.", null);
                 messageTo(self, "continueCollectingData", null, 1, false);
                 return SCRIPT_CONTINUE;
             case 1:
                 setObjVar(self, "event.honor_guard.template", lastDataStr);
-                if (getIntObjVar(self, "event.honor_guard.single") == 0) {
+                if (getIntObjVar(self, "event.honor_guard.single") == 0)
+                {
                     setObjVar(self, "event.honor_guard.setupStep", 2);
-                } else {
+                }
+                else
+                {
                     setObjVar(self, "event.honor_guard.setupStep", 5);
                 }
                 sendSystemMessage(self, "Template set as: " + lastDataStr, null);
                 break;
-            case 2: {
+            case 2:
+            {
                 int lastDataInt = utils.stringToInt(lastDataStr);
-                if (lastDataInt <= 0) {
+                if (lastDataInt <= 0)
+                {
                     sendSystemMessage(self, "You must enter a whole number greater then 0.", null);
                     messageTo(self, "continueCollectingData", null, 1, false);
                     return SCRIPT_CONTINUE;
@@ -155,9 +173,11 @@ public class honor_guard extends script.base_script
                 sendSystemMessage(self, "Number of spawns per line set to: " + lastDataInt, null);
                 break;
             }
-            case 3: {
+            case 3:
+            {
                 int lastDataInt = utils.stringToInt(lastDataStr);
-                if (lastDataInt <= 0) {
+                if (lastDataInt <= 0)
+                {
                     sendSystemMessage(self, "You must enter a whole number greater then 0.", null);
                     messageTo(self, "continueCollectingData", null, 1, false);
                     return SCRIPT_CONTINUE;
@@ -167,9 +187,11 @@ public class honor_guard extends script.base_script
                 sendSystemMessage(self, "Number of rows set to: " + lastDataInt, null);
                 break;
             }
-            case 4: {
+            case 4:
+            {
                 float lastDataFloat = utils.stringToFloat(lastDataStr);
-                if (lastDataFloat <= 0) {
+                if (lastDataFloat <= 0)
+                {
                     sendSystemMessage(self, "You must enter a value greater then 0.", null);
                     messageTo(self, "continueCollectingData", null, 1, false);
                     return SCRIPT_CONTINUE;
@@ -179,9 +201,11 @@ public class honor_guard extends script.base_script
                 sendSystemMessage(self, "Spacing between NPCs set to: " + lastDataFloat, null);
                 break;
             }
-            case 5: {
+            case 5:
+            {
                 float lastDataFloat = utils.stringToFloat(lastDataStr);
-                if (lastDataFloat <= 0 || lastDataFloat > 864001) {
+                if (lastDataFloat <= 0 || lastDataFloat > 864001)
+                {
                     sendSystemMessage(self, "You must enter a value more then 0 and at most 864000 (10 days).", null);
                     messageTo(self, "continueCollectingData", null, 1, false);
                     return SCRIPT_CONTINUE;
@@ -192,7 +216,8 @@ public class honor_guard extends script.base_script
                 break;
             }
             case 6:
-                if (lastDataStr.equals("ok")) {
+                if (lastDataStr.equals("ok"))
+                {
                     setObjVar(self, "event.honor_guard.overRide", 1);
                     setObjVar(self, "event.honor_guard.setupStep", 4);
                 }
@@ -213,11 +238,13 @@ public class honor_guard extends script.base_script
         messageTo(self, "continueCollectingData", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int continueCollectingData(obj_id self, dictionary params) throws InterruptedException
     {
         showUI(self, self);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnHonorGuard(obj_id self, dictionary params) throws InterruptedException
     {
         String template = getStringObjVar(self, "event.honor_guard.template");
@@ -236,15 +263,15 @@ public class honor_guard extends script.base_script
         for (int i = 0; i < numPerLine; i++)
         {
             double xRowOffsetDbl = StrictMath.sin(Math.toRadians(heading + 90)) * (i * offset);
-            float xRowOffset = (float)xRowOffsetDbl;
+            float xRowOffset = (float) xRowOffsetDbl;
             double zRowOffsetDbl = StrictMath.cos(Math.toRadians(heading + 90)) * (i * offset);
-            float zRowOffset = (float)zRowOffsetDbl;
+            float zRowOffset = (float) zRowOffsetDbl;
             for (int j = 0; j < numRows; j++)
             {
                 double xSpawnDbl = StrictMath.sin(Math.toRadians(heading)) * (j * offset) + xLoc + xRowOffset;
                 double zSpawnDbl = StrictMath.cos(Math.toRadians(heading)) * (j * offset) + zLoc + zRowOffset;
-                float xSpawn = (float)xSpawnDbl;
-                float zSpawn = (float)zSpawnDbl;
+                float xSpawn = (float) xSpawnDbl;
+                float zSpawn = (float) zSpawnDbl;
                 location spawnPoint = new location();
                 spawnPoint.x = xSpawn;
                 spawnPoint.y = yLoc;

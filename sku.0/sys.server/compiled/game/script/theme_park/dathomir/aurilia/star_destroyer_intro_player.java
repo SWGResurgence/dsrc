@@ -1,5 +1,11 @@
 package script.theme_park.dathomir.aurilia;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.groundquests;
 import script.library.money;
@@ -10,14 +16,15 @@ import script.string_id;
 
 public class star_destroyer_intro_player extends script.base_script
 {
-    public star_destroyer_intro_player()
-    {
-    }
     public static final string_id SID_NO_MONEY_MSG = new string_id("quest/force_sensitive/fs_crafting", "tracking_data_no_money");
     public static final string_id SID_PURCHASE_MSG_01 = new string_id("quest/force_sensitive/fs_crafting", "tracking_data_purchase_msg_01");
     public static final string_id SID_PURCHASE_MSG_02 = new string_id("quest/force_sensitive/fs_crafting", "tracking_data_purchase_msg_02");
     public static final string_id SID_PURCHASE_MSG_03 = new string_id("quest/force_sensitive/fs_crafting", "tracking_data_purchase_msg_03");
     public static final int TRACKING_DATA_COST = 1100;
+    public star_destroyer_intro_player()
+    {
+    }
+
     public int handlePurchaseTrackingData(obj_id self, dictionary params) throws InterruptedException
     {
         if (groundquests.isTaskActive(self, "star_destroyer_intro_rebel", "star_destroyer_intro_01") || groundquests.isTaskActive(self, "star_destroyer_intro_neutral", "star_destroyer_intro_01"))
@@ -27,7 +34,7 @@ public class star_destroyer_intro_player extends script.base_script
                 String str_no_money = utils.packStringId(SID_NO_MONEY_MSG);
                 sui.msgbox(self, str_no_money);
             }
-            else 
+            else
             {
                 obj_id starportDroid = utils.getObjIdScriptVar(self, "crafting4.starportDroid");
                 utils.moneyOutMetric(self, "FS_QUESTS", TRACKING_DATA_COST);
@@ -39,12 +46,14 @@ public class star_destroyer_intro_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleTrackingDataPurchaseMsg02(obj_id self, dictionary params) throws InterruptedException
     {
         sendSystemMessage(self, SID_PURCHASE_MSG_02);
         messageTo(self, "handleTrackingDataPurchaseMsg03", null, rand(1, 2), false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleTrackingDataPurchaseMsg03(obj_id self, dictionary params) throws InterruptedException
     {
         sendSystemMessage(self, SID_PURCHASE_MSG_03);
@@ -52,6 +61,7 @@ public class star_destroyer_intro_player extends script.base_script
         messageTo(self, "handleTrackingDataScriptCleanup", null, rand(1, 2), false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleTrackingDataScriptCleanup(obj_id self, dictionary params) throws InterruptedException
     {
         detachScript(self, "theme_park.dathomir.aurilia.star_destroyer_intro_player");

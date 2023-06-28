@@ -1,5 +1,11 @@
 package script.item.event;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.static_item;
 import script.library.sui;
@@ -83,6 +89,7 @@ public class esb_anniv_holocron extends script.base_script
             "yavin4",
             "dxun"
     };
+
     public esb_anniv_holocron()
     {
     }

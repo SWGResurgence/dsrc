@@ -1,5 +1,11 @@
 package script.theme_park.meatlump;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.create;
 import script.library.groundquests;
 import script.library.stealth;
@@ -8,9 +14,6 @@ import script.obj_id;
 
 public class meatlump_spy_trigger_volume extends script.base_script
 {
-    public meatlump_spy_trigger_volume()
-    {
-    }
     public static final boolean LOGGING_ON = false;
     public static final String TRIGGER_NAME_PREFIX = "meatlump_spy_trigger_";
     public static final String TRIGGER = "meatlump_spy_trigger";
@@ -24,11 +27,16 @@ public class meatlump_spy_trigger_volume extends script.base_script
     public static final String QUEST_TASK_NAME = "findInfiltrator";
     public static final String QUEST_SIGNAL = "findTheInfiltrator";
     public static final float TRIGGER_RADIUS = 2.0f;
+    public meatlump_spy_trigger_volume()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         createTriggerVolume(TRIGGER_NAME_PREFIX + self, TRIGGER_RADIUS, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id whoTriggeredMe) throws InterruptedException
     {
         blog("OnTriggerVolumeEntered INIT: " + whoTriggeredMe);
@@ -78,11 +86,13 @@ public class meatlump_spy_trigger_volume extends script.base_script
         attachScript(mob, MEATLUMP_ENEMY_SCRIPT);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volumeName, obj_id whoTriggeredMe) throws InterruptedException
     {
         blog("Exited trigger volume: " + whoTriggeredMe);
         return SCRIPT_CONTINUE;
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON)

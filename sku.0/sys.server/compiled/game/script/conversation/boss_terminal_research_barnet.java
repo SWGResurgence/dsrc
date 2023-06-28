@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.chat;
@@ -8,31 +14,33 @@ import script.library.utils;
 
 public class boss_terminal_research_barnet extends script.base_script
 {
+    public static String c_stringFile = "conversation/boss_terminal_research_barnet";
+
     public boss_terminal_research_barnet()
     {
     }
-    public static String c_stringFile = "conversation/boss_terminal_research_barnet";
+
     public boolean boss_terminal_research_barnet_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean boss_terminal_research_barnet_condition_hasQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "outbreak_undead_rancor_boss_fight");
     }
+
     public boolean boss_terminal_research_barnet_condition_hasGroup(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id groupid = getGroupObject(player);
-        if (!isValidId(groupid))
-        {
-            return false;
-        }
-        return true;
+        return isValidId(groupid);
     }
+
     public boolean boss_terminal_research_barnet_condition_hasBossTask(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "u16_nym_themepark_lab_boss", "findUdoBarnet") || groundquests.isTaskActive(player, "u16_nym_themepark_lab_boss", "killUdoBarnet")) && hasCompletedCollectionSlot(player, "kill_nyms_themepark_boss_lab_activate");
     }
+
     public boolean boss_terminal_research_barnet_condition_hasQuestAndGroup(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!boss_terminal_research_barnet_condition_hasGroup(player, npc))
@@ -45,11 +53,13 @@ public class boss_terminal_research_barnet extends script.base_script
         }
         return groundquests.isTaskActive(player, "outbreak_undead_rancor_boss_fight", "defeatUndeadRancor");
     }
+
     public boolean boss_terminal_research_barnet_condition_wave_event_active(obj_id player, obj_id npc) throws InterruptedException
     {
         int wave = utils.getIntScriptVar(npc, "waveEventCurrentWave");
         return wave > 0;
     }
+
     public void boss_terminal_research_barnet_action_startEvent(obj_id player, obj_id npc) throws InterruptedException
     {
         boss_terminal_research_barnet_action_foundTerminal(player, npc);
@@ -57,6 +67,7 @@ public class boss_terminal_research_barnet extends script.base_script
         dict.put("player", player);
         messageTo(npc, "waveEventControllerNPCStart", dict, 4, false);
     }
+
     public void boss_terminal_research_barnet_action_foundTerminal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "hasFoundUdoBarnet");
@@ -64,29 +75,36 @@ public class boss_terminal_research_barnet extends script.base_script
         if (isValidId(myGroup))
         {
             obj_id[] members = getGroupMemberIds(myGroup);
-            for (obj_id member : members) {
-                if (!isIdValid(member) || !exists(member)) {
+            for (obj_id member : members)
+            {
+                if (!isIdValid(member) || !exists(member))
+                {
                     continue;
                 }
-                if (getDistance(member, npc) > 200) {
+                if (getDistance(member, npc) > 200)
+                {
                     continue;
                 }
-                if (boss_terminal_research_barnet_condition_hasBossTask(member, npc)) {
+                if (boss_terminal_research_barnet_condition_hasBossTask(member, npc))
+                {
                     groundquests.sendSignal(member, "hasFoundUdoBarnet");
                 }
             }
         }
     }
+
     public void boss_terminal_research_barnet_action_unauthorizedUse(obj_id player, obj_id npc) throws InterruptedException
     {
         string_id barkString = new string_id("theme_park_nym/messages", "terminal_unauthorized");
         chat.chat(npc, barkString);
     }
+
     public void boss_terminal_research_barnet_action_busyWithOtherPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         string_id barkString = new string_id("theme_park_nym/messages", "terminal_busy");
         chat.chat(npc, barkString);
     }
+
     public int boss_terminal_research_barnet_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_11"))
@@ -101,6 +119,7 @@ public class boss_terminal_research_barnet extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int boss_terminal_research_barnet_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_36"))
@@ -116,6 +135,7 @@ public class boss_terminal_research_barnet extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int boss_terminal_research_barnet_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_14"))
@@ -130,16 +150,19 @@ public class boss_terminal_research_barnet extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -148,6 +171,7 @@ public class boss_terminal_research_barnet extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnEnemies(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -157,13 +181,14 @@ public class boss_terminal_research_barnet extends script.base_script
         messageTo(self, "waveEventControllerNPCStart", params, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleQuestFlavorObjectCleanup(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "handleQuestFlavorObjectCleanup"))
         {
             return SCRIPT_CONTINUE;
         }
-        obj_id objList[] = utils.getObjIdArrayScriptVar(self, "handleQuestFlavorObjectCleanup");
+        obj_id[] objList = utils.getObjIdArrayScriptVar(self, "handleQuestFlavorObjectCleanup");
         if (objList == null || objList.length <= 0)
         {
             return SCRIPT_CONTINUE;
@@ -178,12 +203,14 @@ public class boss_terminal_research_barnet extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -206,7 +233,7 @@ public class boss_terminal_research_barnet extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_11");
@@ -214,7 +241,7 @@ public class boss_terminal_research_barnet extends script.base_script
                 utils.setScriptVar(player, "conversation.boss_terminal_research_barnet.branchId", 1);
                 npcStartConversation(player, npc, "boss_terminal_research_barnet", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -235,7 +262,7 @@ public class boss_terminal_research_barnet extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_36");
@@ -243,7 +270,7 @@ public class boss_terminal_research_barnet extends script.base_script
                 utils.setScriptVar(player, "conversation.boss_terminal_research_barnet.branchId", 3);
                 npcStartConversation(player, npc, "boss_terminal_research_barnet", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -265,7 +292,7 @@ public class boss_terminal_research_barnet extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_14");
@@ -273,7 +300,7 @@ public class boss_terminal_research_barnet extends script.base_script
                 utils.setScriptVar(player, "conversation.boss_terminal_research_barnet.branchId", 5);
                 npcStartConversation(player, npc, "boss_terminal_research_barnet", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -282,6 +309,7 @@ public class boss_terminal_research_barnet extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("boss_terminal_research_barnet"))

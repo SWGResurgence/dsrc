@@ -1,5 +1,11 @@
 package script.theme_park.meatlump;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.buff;
@@ -12,11 +18,13 @@ public class mtp_quest_strilath_farles_combat extends script.base_script
     public mtp_quest_strilath_farles_combat()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleFarlesFaceTo", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleFarlesFaceTo(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, "waveEventPlayer");
@@ -26,6 +34,7 @@ public class mtp_quest_strilath_farles_combat extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id wpn, int[] damage) throws InterruptedException
     {
         float damageThreshold = 0.1f;
@@ -41,6 +50,7 @@ public class mtp_quest_strilath_farles_combat extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int makeNpcStopCombat(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "ai.combat.isInCombat");
@@ -51,6 +61,7 @@ public class mtp_quest_strilath_farles_combat extends script.base_script
         buff.removeAllBuffs(self);
         return SCRIPT_CONTINUE;
     }
+
     public int makeNpcDisappear(obj_id self, dictionary params) throws InterruptedException
     {
         location here = getLocation(self);
@@ -58,14 +69,16 @@ public class mtp_quest_strilath_farles_combat extends script.base_script
         messageTo(self, "handleDestroySelf", null, 0.25f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleDestroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         stopCombat(self);
         clearHateList(self);
         obj_id[] players = getPlayerCreaturesInRange(getLocation(self), 20.0f);
-        if (players != null && players.length > 0)
+        if (players != null)
         {
-            for (obj_id player : players) {
+            for (obj_id player : players)
+            {
                 npcEndConversation(player);
             }
         }

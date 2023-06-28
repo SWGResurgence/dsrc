@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,94 +14,117 @@ import script.*;
 
 public class corellia_murmurs_questgiver extends script.base_script
 {
+    public static String c_stringFile = "conversation/corellia_murmurs_questgiver";
+
     public corellia_murmurs_questgiver()
     {
     }
-    public static String c_stringFile = "conversation/corellia_murmurs_questgiver";
+
     public boolean corellia_murmurs_questgiver_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean corellia_murmurs_questgiver_condition_playerCompletedInitialStep(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActiveOrComplete(player, "coronet_murmurs_1_smuggler");
     }
+
     public boolean corellia_murmurs_questgiver_condition_hasPointer(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "corellia_cb_1_pointer") || groundquests.isQuestActiveOrComplete(player, "corellia_cb_1");
     }
+
     public boolean corellia_murmurs_questgiver_condition_playerDeletedQ2(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "coronet_murmurs_1_smuggler") && !groundquests.isQuestActiveOrComplete(player, "coronet_murmurs_2_gatherinfo"));
     }
+
     public boolean corellia_murmurs_questgiver_condition_playerDeletedQ3(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "coronet_murmurs_2_gatherinfo") && !groundquests.isQuestActiveOrComplete(player, "coronet_murmurs_3_miniboss"));
     }
+
     public boolean corellia_murmurs_questgiver_condition_finishedAll(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "coronet_murmurs_7_reward");
     }
+
     public boolean corellia_murmurs_questgiver_condition_playerDeletedQ4(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "coronet_murmurs_3_miniboss") && !groundquests.isQuestActiveOrComplete(player, "coronet_murmurs_4_lab"));
     }
+
     public boolean corellia_murmurs_questgiver_condition_playerDeletedQ5(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "coronet_murmurs_4_lab") && !groundquests.isQuestActiveOrComplete(player, "coronet_murmurs_5_gas"));
     }
+
     public boolean corellia_murmurs_questgiver_condition_playerDeletedQ6(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "coronet_murmurs_5_gas") && !groundquests.isQuestActiveOrComplete(player, "coronet_murmurs_6_zoo"));
     }
+
     public boolean corellia_murmurs_questgiver_condition_playerOnFinalStep(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "coronet_murmurs_7_reward", "returntojoth");
     }
+
     public boolean corellia_murmurs_questgiver_condition_playerDeletedQ7(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "coronet_murmurs_6_zoo") && !groundquests.isQuestActiveOrComplete(player, "coronet_murmurs_7_reward"));
     }
+
     public void corellia_murmurs_questgiver_action_giveFirstQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "coronet_murmurs_1_smuggler");
     }
+
     public void corellia_murmurs_questgiver_action_giveSecondQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "coronet_murmurs_2_gatherinfo");
     }
+
     public void corellia_murmurs_questgiver_action_giveThirdQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "coronet_murmurs_3_miniboss");
     }
+
     public void corellia_murmurs_questgiver_action_giveFourthQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "coronet_murmurs_4_lab");
     }
+
     public void corellia_murmurs_questgiver_action_giveNextSeriesPointer(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "corellia_cb_1_pointer");
     }
+
     public void corellia_murmurs_questgiver_action_giveFifthQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "coronet_murmurs_5_gas");
     }
+
     public void corellia_murmurs_questgiver_action_giveSixthQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "coronet_murmurs_6_zoo");
     }
+
     public void corellia_murmurs_questgiver_action_signalRewardQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "coronet_murmurs_7_reward_signal");
     }
+
     public void corellia_murmurs_questgiver_action_giveSeventhQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "coronet_murmurs_7_reward");
     }
+
     public void corellia_murmurs_questgiver_action_signalGotoQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "goto_talktojoth");
     }
+
     public int corellia_murmurs_questgiver_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_28"))
@@ -111,6 +140,7 @@ public class corellia_murmurs_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corellia_murmurs_questgiver_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_41"))
@@ -132,7 +162,7 @@ public class corellia_murmurs_questgiver extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -141,7 +171,7 @@ public class corellia_murmurs_questgiver extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corellia_murmurs_questgiver.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -151,6 +181,7 @@ public class corellia_murmurs_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corellia_murmurs_questgiver_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_28"))
@@ -166,6 +197,7 @@ public class corellia_murmurs_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corellia_murmurs_questgiver_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_23"))
@@ -228,6 +260,7 @@ public class corellia_murmurs_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corellia_murmurs_questgiver_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_36"))
@@ -254,7 +287,7 @@ public class corellia_murmurs_questgiver extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -267,7 +300,7 @@ public class corellia_murmurs_questgiver extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corellia_murmurs_questgiver.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -277,6 +310,7 @@ public class corellia_murmurs_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corellia_murmurs_questgiver_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_46"))
@@ -304,6 +338,7 @@ public class corellia_murmurs_questgiver extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -316,6 +351,7 @@ public class corellia_murmurs_questgiver extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -324,6 +360,7 @@ public class corellia_murmurs_questgiver extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -332,18 +369,21 @@ public class corellia_murmurs_questgiver extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.corellia_murmurs_questgiver");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -368,7 +408,7 @@ public class corellia_murmurs_questgiver extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -376,7 +416,7 @@ public class corellia_murmurs_questgiver extends script.base_script
                 utils.setScriptVar(player, "conversation.corellia_murmurs_questgiver.branchId", 1);
                 npcStartConversation(player, npc, "corellia_murmurs_questgiver", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -398,7 +438,7 @@ public class corellia_murmurs_questgiver extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_41");
@@ -406,7 +446,7 @@ public class corellia_murmurs_questgiver extends script.base_script
                 utils.setScriptVar(player, "conversation.corellia_murmurs_questgiver.branchId", 3);
                 npcStartConversation(player, npc, "corellia_murmurs_questgiver", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -429,7 +469,7 @@ public class corellia_murmurs_questgiver extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_23");
@@ -437,7 +477,7 @@ public class corellia_murmurs_questgiver extends script.base_script
                 utils.setScriptVar(player, "conversation.corellia_murmurs_questgiver.branchId", 5);
                 npcStartConversation(player, npc, "corellia_murmurs_questgiver", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -459,7 +499,7 @@ public class corellia_murmurs_questgiver extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_36");
@@ -467,7 +507,7 @@ public class corellia_murmurs_questgiver extends script.base_script
                 utils.setScriptVar(player, "conversation.corellia_murmurs_questgiver.branchId", 13);
                 npcStartConversation(player, npc, "corellia_murmurs_questgiver", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -476,6 +516,7 @@ public class corellia_murmurs_questgiver extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("corellia_murmurs_questgiver"))

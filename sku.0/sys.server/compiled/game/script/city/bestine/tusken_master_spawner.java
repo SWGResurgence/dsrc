@@ -1,5 +1,11 @@
 package script.city.bestine;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.deltadictionary;
 import script.dictionary;
 import script.library.create;
@@ -12,14 +18,16 @@ public class tusken_master_spawner extends script.base_script
     public tusken_master_spawner()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         deltadictionary tuskenSpawn = self.getScriptVars();
         tuskenSpawn.put("count", 0);
-        tuskenSpawn.put("wave",0);
+        tuskenSpawn.put("wave", 0);
         messageTo(self, "checkSpawnStatus", null, 60, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         deltadictionary tuskenSpawn = self.getScriptVars();
@@ -27,19 +35,21 @@ public class tusken_master_spawner extends script.base_script
         messageTo(self, "checkSpawnStatus", null, 60, false);
         return SCRIPT_CONTINUE;
     }
+
     public int checkSpawnStatus(obj_id self, dictionary params) throws InterruptedException
     {
         int count = utils.getIntScriptVar(self, "count");
         if (count == 0)
         {
             int delay = 3600 + rand(300, 900);
-            if(utils.getIntScriptVar(self, "wave") == 0) delay = 1;
+            if (utils.getIntScriptVar(self, "wave") == 0) delay = 1;
             utils.setScriptVar(self, "delay", delay);
             utils.setScriptVar(self, "nextSpawn", delay + getGameTime());
             messageTo(self, "spawnTuskenNpcs", null, delay, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int spawnTuskenNpcs(obj_id self, dictionary params) throws InterruptedException
     {
         deltadictionary tuskenSpawn = self.getScriptVars();
@@ -47,7 +57,8 @@ public class tusken_master_spawner extends script.base_script
         tuskenSpawn.put("wave", tuskenSpawn.getInt("wave") + 1);
         obj_id building = getTopMostContainer(self);
 
-        try {
+        try
+        {
             createSpawn(self, new location(6.54f, 8.01f, -34.17f, "tatooine", getCellId(building, "r5")), "tusken_executioner");
             count++;
 
@@ -62,8 +73,8 @@ public class tusken_master_spawner extends script.base_script
 
             createSpawn(self, new location(2.17f, 8.36f, -32.02f, "tatooine", getCellId(building, "r5")), "tusken_witch_doctor");
             count++;
-        }
-        catch(Exception e){
+        } catch (Exception e)
+        {
             // do nothing.
         }
         tuskenSpawn.put("lastSpawned", getGameTime());
@@ -71,6 +82,7 @@ public class tusken_master_spawner extends script.base_script
 
         return SCRIPT_CONTINUE;
     }
+
     public int doDeathRespawn(obj_id self, dictionary params) throws InterruptedException
     {
         deltadictionary tuskenSpawn = self.getScriptVars();
@@ -79,7 +91,9 @@ public class tusken_master_spawner extends script.base_script
         messageTo(self, "checkSpawnStatus", null, 1, false);
         return SCRIPT_CONTINUE;
     }
-    private obj_id createSpawn(obj_id self, location spawnLoc, String template) throws InterruptedException{
+
+    private obj_id createSpawn(obj_id self, location spawnLoc, String template) throws InterruptedException
+    {
         obj_id tusken = create.object(template, spawnLoc);
         attachScript(tusken, "city.bestine.tusken_spawner");
         setObjVar(tusken, "spawner", self);

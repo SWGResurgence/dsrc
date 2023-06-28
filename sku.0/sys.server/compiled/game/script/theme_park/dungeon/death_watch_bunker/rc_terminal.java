@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.death_watch_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.create;
 import script.library.sui;
@@ -7,10 +13,12 @@ import script.library.utils;
 
 public class rc_terminal extends script.base_script
 {
+    public static final String MSGS = "dungeon/death_watch";
+
     public rc_terminal()
     {
     }
-    public static final String MSGS = "dungeon/death_watch";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "Droid Terminal");
@@ -18,6 +26,7 @@ public class rc_terminal extends script.base_script
         createMouseDroid(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         location here = getLocation(self);
@@ -63,7 +72,7 @@ public class rc_terminal extends script.base_script
         int leftCheck = text.indexOf("left");
         if (forwardCheck > -1)
         {
-            String distUp = text.substring(text.indexOf(" ") + 1, text.length());
+            String distUp = text.substring(text.indexOf(" ") + 1);
             int distanceUp = utils.stringToInt(distUp);
             dictionary up = new dictionary();
             up.put("distance", distanceUp);
@@ -72,7 +81,7 @@ public class rc_terminal extends script.base_script
         }
         if (backwardCheck > -1)
         {
-            String distDown = text.substring(text.indexOf(" ") + 1, text.length());
+            String distDown = text.substring(text.indexOf(" ") + 1);
             int distanceDown = utils.stringToInt(distDown);
             dictionary down = new dictionary();
             down.put("distance", distanceDown);
@@ -81,7 +90,7 @@ public class rc_terminal extends script.base_script
         }
         if (rightCheck > -1)
         {
-            String distRight = text.substring(text.indexOf(" ") + 1, text.length());
+            String distRight = text.substring(text.indexOf(" ") + 1);
             int distanceRight = utils.stringToInt(distRight);
             dictionary right = new dictionary();
             right.put("distance", distanceRight);
@@ -90,7 +99,7 @@ public class rc_terminal extends script.base_script
         }
         if (leftCheck > -1)
         {
-            String dist = text.substring(text.indexOf(" ") + 1, text.length());
+            String dist = text.substring(text.indexOf(" ") + 1);
             int distance = utils.stringToInt(dist);
             dictionary left = new dictionary();
             left.put("distance", distance);
@@ -115,7 +124,7 @@ public class rc_terminal extends script.base_script
                 createMouseDroid(self);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 obj_id droid = getObjIdObjVar(self, "mouse");
                 destroyObject(droid);
@@ -124,6 +133,7 @@ public class rc_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void createMouseDroid(obj_id self) throws InterruptedException
     {
         location here = getLocation(self);
@@ -134,8 +144,8 @@ public class rc_terminal extends script.base_script
         obj_id mouse = create.object("r2", mouseLoc);
         setObjVar(self, "mouse", mouse);
         attachScript(mouse, "theme_park.dungeon.death_watch_bunker.rc_mouse");
-        return;
     }
+
     public int removePrevious(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "previous"))
@@ -144,6 +154,7 @@ public class rc_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int timesUp(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id speaker = params.getObjId("player");
@@ -153,6 +164,7 @@ public class rc_terminal extends script.base_script
         messageTo(self, "removePrevious", null, 120, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);
@@ -163,6 +175,7 @@ public class rc_terminal extends script.base_script
         mid.setServerNotify(true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -171,6 +184,7 @@ public class rc_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int testSui(obj_id self, obj_id player) throws InterruptedException
     {
         int pid = sui.createSUIPage(sui.SUI_MSGBOX, self, player, "readableText");

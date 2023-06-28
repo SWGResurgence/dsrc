@@ -1,38 +1,48 @@
 package script.theme_park.poi;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
 public class launch extends script.theme_park.poi.base
 {
+    public static final String POI_SCRIPT = "poi.script";
+
     public launch()
     {
     }
-    public static final String POI_SCRIPT = "poi.script";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, POI_BASE_OBJECT))
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             messageTo(self, "handle_Spawn_Setup_Complete", null, 20, isObjectPersisted(self));
             return SCRIPT_CONTINUE;
         }
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, POI_BASE_OBJECT))
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             messageTo(self, "handle_Spawn_Setup_Complete", null, 20, isObjectPersisted(self));
             return SCRIPT_CONTINUE;
         }
     }
+
     public int handle_Spawn_Setup_Complete(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "npc_lair.delayedLaunch"))
@@ -54,12 +64,13 @@ public class launch extends script.theme_park.poi.base
             setObjVar(self, "npc_lair.delayedLaunch", true);
             messageTo(self, "handleLairInRangeCheck", null, 2, false);
         }
-        else 
+        else
         {
             launchPoi(self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public void launchPoi(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self) || !hasObjVar(self, POI_SCRIPT))
@@ -82,13 +93,14 @@ public class launch extends script.theme_park.poi.base
             LOG("spawning", self + " hasScirpt " + POI_OBJECT_SCRIPT);
             debugServerConsoleMsg(self, "WARNING:  " + getName(self) + " already has the POI OBJECT script attached.  Don't.");
         }
-        else 
+        else
         {
             LOG("spawning", self + " attaching Script " + POI_OBJECT_SCRIPT);
             attachScript(self, POI_OBJECT_SCRIPT);
         }
         LOG("spawning", self + " returning");
     }
+
     public int handleLairInRangeCheck(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] otherObjects = getAllObjectsWithTemplate(getLocation(self), 80.0f, "object/tangible/lair/npc_lair.iff");
@@ -96,13 +108,19 @@ public class launch extends script.theme_park.poi.base
         {
             launchPoi(self);
         }
-        for (obj_id otherObject : otherObjects) {
-            if (otherObject != self) {
-                if (hasScript(self, "systems.spawning.spawn_template")) {
+        for (obj_id otherObject : otherObjects)
+        {
+            if (otherObject != self)
+            {
+                if (hasScript(self, "systems.spawning.spawn_template"))
+                {
                     destroyObject(self);
                     return SCRIPT_CONTINUE;
-                } else {
-                    if (hasScript(otherObject, "systems.spawning.spawn_template")) {
+                }
+                else
+                {
+                    if (hasScript(otherObject, "systems.spawning.spawn_template"))
+                    {
                         destroyObject(otherObject);
                     }
                 }
@@ -111,6 +129,7 @@ public class launch extends script.theme_park.poi.base
         launchPoi(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "objLocationReservation"))

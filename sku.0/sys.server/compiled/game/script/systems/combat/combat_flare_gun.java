@@ -1,5 +1,11 @@
 package script.systems.combat;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 public class combat_flare_gun extends script.systems.combat.combat_base

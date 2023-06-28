@@ -1,5 +1,11 @@
 package script.systems.crafting.item.specific_item;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.craftinglib;
 import script.resource_weight;
 
@@ -42,6 +48,7 @@ public class crafting_item_complex_component extends script.systems.crafting.ite
                                     new resource_weight.weight(craftinglib.RESOURCE_QUALITY, 2)
                             })
             };
+
     public crafting_item_complex_component()
     {
     }

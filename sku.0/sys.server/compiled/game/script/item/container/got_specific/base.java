@@ -1,5 +1,11 @@
 package script.item.container.got_specific;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.prose;
 import script.obj_id;
 import script.prose_package;
@@ -9,6 +15,7 @@ public class base extends script.base_script
 {
     public static final String VAR_GOT = "container.got";
     public static final string_id PROSE_WRONG_ITEM_TYPE = new string_id("error_message", "wrong_item_type");
+
     public base()
     {
     }

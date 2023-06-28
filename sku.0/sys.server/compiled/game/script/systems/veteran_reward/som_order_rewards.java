@@ -1,5 +1,11 @@
 package script.systems.veteran_reward;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.static_item;
 import script.library.utils;
@@ -12,6 +18,7 @@ public class som_order_rewards extends script.base_script
     public static final string_id EXAMINE_MOUNT = new string_id(STF, "generate_lava_flea");
     public static final string_id EXAMINE_VEHICLE = new string_id(STF, "generate_skiff");
     public static final string_id ALREADY = new string_id(STF, "");
+
     public som_order_rewards()
     {
     }

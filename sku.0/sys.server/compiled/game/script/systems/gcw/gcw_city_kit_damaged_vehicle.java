@@ -1,5 +1,11 @@
 package script.systems.gcw;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -19,6 +25,7 @@ public class gcw_city_kit_damaged_vehicle extends script.systems.gcw.gcw_city_ki
                     "gcw_city_at_xt_2",
                     "gcw_city_at_xt_3"
             };
+
     public gcw_city_kit_damaged_vehicle()
     {
     }

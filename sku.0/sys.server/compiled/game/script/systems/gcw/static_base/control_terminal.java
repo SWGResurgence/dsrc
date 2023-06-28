@@ -1,5 +1,11 @@
 package script.systems.gcw.static_base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -29,6 +35,7 @@ public class control_terminal extends script.base_script
     public static final String VAR_ACCESS_DELAY = "gcw.static_base.access_delay";
     public static final String VAR_ICON_OBJECT = "gcw.static_base.icon_object";
     public static final String SCRIPT_VAR_CAPTURING = "gcw.static_base.control_terminal.capturing";
+
     public control_terminal()
     {
     }

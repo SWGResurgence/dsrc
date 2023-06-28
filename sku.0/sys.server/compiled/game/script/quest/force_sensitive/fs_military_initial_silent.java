@@ -1,5 +1,11 @@
 package script.quest.force_sensitive;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.utils;
@@ -10,12 +16,14 @@ public class fs_military_initial_silent extends script.base_script
     public fs_military_initial_silent()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         createTriggerVolume("fs_two_military_range", 26, true);
         messageTo(self, "approach", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int approach(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id owner = null;
@@ -27,6 +35,7 @@ public class fs_military_initial_silent extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id target) throws InterruptedException
     {
         if (volumeName.equals("fs_two_military_range"))
@@ -45,6 +54,7 @@ public class fs_military_initial_silent extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdObjVar(self, "quest.owner", obj_id.NULL_ID);

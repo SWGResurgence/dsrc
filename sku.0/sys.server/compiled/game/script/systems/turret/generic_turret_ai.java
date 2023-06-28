@@ -1,5 +1,11 @@
 package script.systems.turret;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.combat_engine.attacker_data;
 import script.combat_engine.defender_data;
 import script.combat_engine.hit_result;
@@ -282,7 +288,7 @@ public class generic_turret_ai extends script.systems.combat.combat_base_old
                     ovs[i] = new obj_var((attackerList.elementAt(i)).toString(), utils.getIntScriptVar(self, scriptVarPath));
                 }
                 ovs = list.quickSort(0, ovs.length - 1, ovs);
-                if ((ovs != null) && (ovs.length > 0))
+                if (ovs != null)
                 {
                     for (obj_var ov : ovs)
                     {

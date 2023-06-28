@@ -1,5 +1,11 @@
 package script.theme_park.alderaan.act2;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.utils;
@@ -9,11 +15,12 @@ import script.string_id;
 
 public class imperial_mission extends script.base_script
 {
+    public static final String IMPERIAL_STF = "theme_park/alderaan/act2/imperial_missions";
+    public static final String IMPERIAL_SHARED_STF = "theme_park/alderaan/act2/shared_imperial_missions";
     public imperial_mission()
     {
     }
-    public static final String IMPERIAL_STF = "theme_park/alderaan/act2/imperial_missions";
-    public static final String IMPERIAL_SHARED_STF = "theme_park/alderaan/act2/shared_imperial_missions";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (hasScript(self, "theme_park.alderaan.act2.rebel_mission"))
@@ -23,6 +30,7 @@ public class imperial_mission extends script.base_script
         startImperialMission(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "coa2.imperial"))
@@ -32,6 +40,7 @@ public class imperial_mission extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String name) throws InterruptedException
     {
         int missionNum = getIntObjVar(self, "coa2.imperial.missionNum");
@@ -45,7 +54,7 @@ public class imperial_mission extends script.base_script
                 setObjVar(self, "coa2.imperial.missionNpcId", npc);
                 setObjVar(npc, "coa2.imperial.playerId", self);
             }
-            else 
+            else
             {
                 removeObjVar(self, "coa2.imperial.missionNpcId");
             }
@@ -62,12 +71,12 @@ public class imperial_mission extends script.base_script
                     sendSystemMessage(self, error);
                     abortImperialMission(self, missionNum, true);
                 }
-                else 
+                else
                 {
                     removeMissionWaypoint(self);
                 }
             }
-            else 
+            else
             {
                 removeMissionWaypoint(self);
             }
@@ -80,6 +89,7 @@ public class imperial_mission extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleRestartMission(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, "coa2.imperial.success", 1);
@@ -87,6 +97,7 @@ public class imperial_mission extends script.base_script
         startImperialMission(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleAbortMission(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -94,6 +105,7 @@ public class imperial_mission extends script.base_script
         abortImperialMission(player, missionNum, false);
         return SCRIPT_CONTINUE;
     }
+
     public int createReturnMission(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "coa2.imperial.waypoint"))
@@ -111,6 +123,7 @@ public class imperial_mission extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void startImperialMission(obj_id player) throws InterruptedException
     {
         int missionNum = getIntObjVar(player, "coa2.imperial.missionNum");
@@ -123,12 +136,13 @@ public class imperial_mission extends script.base_script
             setObjVar(player, "coa2.imperial.waypointDesc", waypointDesc);
             addLocationTarget("missionSpawner", missionLoc, 300);
         }
-        else 
+        else
         {
             string_id error = new string_id(IMPERIAL_SHARED_STF, "waypoint_failure");
             sendSystemMessage(player, error);
         }
     }
+
     public void abortImperialMission(obj_id player, int mission, boolean returnHome) throws InterruptedException
     {
         removeMissionWaypoint(player);
@@ -136,34 +150,36 @@ public class imperial_mission extends script.base_script
         {
             messageTo(player, "createReturnMission", null, 1, false);
         }
-        else 
+        else
         {
             revertMissionProgress(player, mission);
             removeObjVar(player, "coa2.imperial");
             detachScript(player, "theme_park.alderaan.act2.imperial_mission");
         }
     }
+
     public void revertMissionProgress(obj_id player, int mission) throws InterruptedException
     {
         switch (mission)
         {
             case 1:
-            setObjVar(player, "coa2.progress", 0);
-            break;
+                setObjVar(player, "coa2.progress", 0);
+                break;
             case 2:
-            setObjVar(player, "coa2.progress", -3);
-            break;
+                setObjVar(player, "coa2.progress", -3);
+                break;
             case 3:
-            setObjVar(player, "coa2.progress", -3);
-            break;
+                setObjVar(player, "coa2.progress", -3);
+                break;
             case 4:
-            setObjVar(player, "coa2.progress", -6);
-            break;
+                setObjVar(player, "coa2.progress", -6);
+                break;
             case 5:
-            setObjVar(player, "coa2.progress", -8);
-            break;
+                setObjVar(player, "coa2.progress", -8);
+                break;
         }
     }
+
     public obj_id createMissionWaypoint(obj_id player, location loc, float radius, String waypointName, String volumeName) throws InterruptedException
     {
         addLocationTarget(volumeName, loc, radius);
@@ -177,6 +193,7 @@ public class imperial_mission extends script.base_script
         }
         return waypoint;
     }
+
     public void removeMissionWaypoint(obj_id player) throws InterruptedException
     {
         obj_id waypoint = getObjIdObjVar(player, "coa2.imperial.waypoint");
@@ -195,6 +212,7 @@ public class imperial_mission extends script.base_script
         destroyWaypointInDatapad(waypoint, player);
         removeObjVar(player, "coa2.imperial.waypoint");
     }
+
     public int OnWaypointGetAttributes(obj_id self, obj_id waypoint, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         obj_id wp = getObjIdObjVar(player, "coa2.imperial.waypoint");
@@ -212,6 +230,7 @@ public class imperial_mission extends script.base_script
         attribs[idx] = "@" + waypointDesc.toString();
         return SCRIPT_CONTINUE;
     }
+
     public int OnWaypointDestroyed(obj_id self, obj_id waypoint) throws InterruptedException
     {
         obj_id wp = getObjIdObjVar(self, "coa2.imperial.waypoint");
@@ -223,7 +242,7 @@ public class imperial_mission extends script.base_script
         {
             removeObjVar(self, "coa2.imperial.success");
         }
-        else 
+        else
         {
             int missionNum = getIntObjVar(self, "coa2.imperial.missionNum");
             revertMissionProgress(self, missionNum);

@@ -1,14 +1,17 @@
 package script.npc.jawa_traders;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.obj_id;
 import script.string_id;
 
 public class jawa_trader_01 extends script.base_script
 {
-    public jawa_trader_01()
-    {
-    }
     public static final String FACETO_VOLUME_NAME = "faceToTriggerVolume";
     public static final String CONVO = "jawa_trader";
     public static final String TBL = "datatables/npc/junk_dealer/junk_dealer.iff";
@@ -29,6 +32,10 @@ public class jawa_trader_01 extends script.base_script
     public static final String NO_ITEMS_PROMPT = "@" + STF + ":no_items";
     public static final String BTN_SELL = "@" + STF + ":btn_sell";
     public static final String BTN_SELL_ALL = "@" + STF + ":btn_sell_all";
+    public jawa_trader_01()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
@@ -37,6 +44,7 @@ public class jawa_trader_01 extends script.base_script
         setName(self, "Ribbo Qua`lu (a Jawa Trader)");
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (!isPlayer(breacher))

@@ -1,11 +1,19 @@
 package script.theme_park.wod;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.base_class.*;
 import script.combat_engine.*;
+
 import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.Vector;
+
 import script.base_script;
 
 import script.library.create;
@@ -18,11 +26,12 @@ import script.library.static_item;
 
 public class wod_spider_queen_death extends script.base_script
 {
+    public static final String NS_BACKPACK_SCHEMATIC = "item_wod_bossloot_ns_backpack";
+    public static final String SMC_BACKPACK_SCHEMATIC = "item_wod_bossloot_smc_backpack";
     public wod_spider_queen_death()
     {
     }
-    public static final String NS_BACKPACK_SCHEMATIC = "item_wod_bossloot_ns_backpack";
-    public static final String SMC_BACKPACK_SCHEMATIC = "item_wod_bossloot_smc_backpack";
+
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id inv = utils.getInventoryContainer(self);

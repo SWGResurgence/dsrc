@@ -1,5 +1,11 @@
 package script.event.ewok_festival;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -11,11 +17,13 @@ public class mister_hate extends script.base_script
     public mister_hate()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleFarlesFaceTo", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleFarlesFaceTo(obj_id self, dictionary params) throws InterruptedException
     {
         ai_lib.setMood(self, chat.MOOD_ANGRY);
@@ -28,16 +36,19 @@ public class mister_hate extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSawEmote(obj_id self, obj_id emoteSayer, String emoteSeen) throws InterruptedException
     {
         checkForTheLove(self, emoteSayer, emoteSeen);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         checkForTheLove(self, speaker, text);
         return SCRIPT_CONTINUE;
     }
+
     public void checkForTheLove(obj_id self, obj_id player, String text) throws InterruptedException
     {
         if (!isPlayer(player) || isIncapacitated(player) || isDead(player))
@@ -86,6 +97,7 @@ public class mister_hate extends script.base_script
             }
         }
     }
+
     public int makeNpcStopCombat(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "ai.combat.isInCombat");
@@ -96,19 +108,22 @@ public class mister_hate extends script.base_script
         buff.removeAllBuffs(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id wpn, int[] damage) throws InterruptedException
     {
         setAttrib(self, HEALTH, getUnmodifiedMaxAttrib(self, HEALTH));
         return SCRIPT_CONTINUE;
     }
+
     public int handleDestroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         stopCombat(self);
         clearHateList(self);
         obj_id[] players = getPlayerCreaturesInRange(getLocation(self), 20.0f);
-        if (players != null && players.length > 0)
+        if (players != null)
         {
-            for (obj_id player : players) {
+            for (obj_id player : players)
+            {
                 npcEndConversation(player);
             }
         }

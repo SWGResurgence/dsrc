@@ -1,5 +1,11 @@
 package script.theme_park.warren;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.advanced_turret;
 import script.library.create;
@@ -10,9 +16,6 @@ import script.string_id;
 
 public class warren_base extends script.base_script
 {
-    public warren_base()
-    {
-    }
     public static final String ESCAPEE = "warren.escapee";
     public static final String ESCAPEE_CREATURENAME = "commoner";
     public static final String ESCAPEE_SCRIPT = "theme_park.warren.escapee";
@@ -31,16 +34,22 @@ public class warren_base extends script.base_script
     public static final int WARREN_VERSION = 3;
     public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
     public static final String ELEVATOR_OBJID = "8575772";
+    public warren_base()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleDelayedSetup", null, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleDelayedSetup(obj_id self, dictionary params) throws InterruptedException
     {
         intializeWarren(self, null);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (isGod(speaker) && text.equals("reset"))
@@ -50,6 +59,7 @@ public class warren_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void spawnTurret(obj_id bldg) throws InterruptedException
     {
         if (hasObjVar(bldg, "warren.turret"))
@@ -67,6 +77,7 @@ public class warren_base extends script.base_script
         setObjVar(bldg, "warren.turret", turret);
         attachScript(turret, "theme_park.warren.warren_turret");
     }
+
     public void intializeWarren(obj_id bldg, obj_id god) throws InterruptedException
     {
         if (hasObjVar(bldg, ESCAPEE))
@@ -92,6 +103,7 @@ public class warren_base extends script.base_script
         spawnMirla(bldg);
         attachCommandWarning(bldg);
     }
+
     public void resetTurretCodeSequence(obj_id bldg) throws InterruptedException
     {
         String turretCodeSequence = toUpper(generateRandomName("object/creature/player/rodian_male.iff"));
@@ -99,6 +111,7 @@ public class warren_base extends script.base_script
         String cellPassword = toUpper(generateRandomName("object/creature/player/rodian_male.iff"));
         setObjVar(bldg, "warren.cellPassword", cellPassword);
     }
+
     public void spawnEscapee(obj_id bldg) throws InterruptedException
     {
         location outLoc = getBuildingEjectLocation(bldg);
@@ -113,6 +126,7 @@ public class warren_base extends script.base_script
         setObjVar(escapee, "warren.bldg", bldg);
         attachScript(escapee, ESCAPEE_SCRIPT);
     }
+
     public void spawnCellGuard(obj_id bldg) throws InterruptedException
     {
         location spawnLoc = getLocation(bldg);
@@ -129,11 +143,13 @@ public class warren_base extends script.base_script
         setObjVar(escapee, "warren.bldg", bldg);
         attachScript(escapee, CELL_GUARD_SCRIPT);
     }
+
     public int handleCellGuardDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnCellGuard(self);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnKnag(obj_id bldg) throws InterruptedException
     {
         location spawnLoc = getLocation(bldg);
@@ -149,11 +165,13 @@ public class warren_base extends script.base_script
         setObjVar(escapee, "warren.bldg", bldg);
         attachScript(escapee, KNAG_SCRIPT);
     }
+
     public int handleKnagDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnKnag(self);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnMirla(obj_id bldg) throws InterruptedException
     {
         location spawnLoc = getLocation(bldg);
@@ -169,11 +187,13 @@ public class warren_base extends script.base_script
         setObjVar(escapee, "warren.bldg", bldg);
         attachScript(escapee, MIRLA_SCRIPT);
     }
+
     public int handleMirlaDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnMirla(self);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnEscapedWorker(obj_id bldg) throws InterruptedException
     {
         location spawnLoc = getLocation(bldg);
@@ -189,6 +209,7 @@ public class warren_base extends script.base_script
         setObjVar(escapee, "warren.bldg", bldg);
         attachScript(escapee, ESCAPED_WORKER_SCRIPT);
     }
+
     public void spawnCloneRelicsBox(obj_id self) throws InterruptedException
     {
         obj_id terminalRoom = getCellId(self, "entryhall");
@@ -196,15 +217,15 @@ public class warren_base extends script.base_script
         int yaw = 90;
         obj_id computer = create.object("object/tangible/quest/clone_relics_computer_terminal.iff", computerloc);
         setYaw(computer, yaw);
-        return;
     }
+
     public void spawnElevator(obj_id bldg) throws InterruptedException
     {
         obj_id elevator = utils.stringToObjId(ELEVATOR_OBJID);
         detachScript(elevator, "systems.elevator.elevator");
         attachScript(elevator, "theme_park.warren.elevator_one");
-        return;
     }
+
     public void spawnDyingLoyalist(obj_id bldg) throws InterruptedException
     {
         location spawnLoc = getLocation(bldg);
@@ -220,6 +241,7 @@ public class warren_base extends script.base_script
         setObjVar(loyalist, "warren.bldg", bldg);
         attachScript(loyalist, DYING_LOYALIST_SCRIPT);
     }
+
     public void spawnPanickedResearcher(obj_id bldg) throws InterruptedException
     {
         location spawnLoc = getLocation(bldg);
@@ -235,26 +257,31 @@ public class warren_base extends script.base_script
         setObjVar(loyalist, "warren.bldg", bldg);
         attachScript(loyalist, PANICKED_RESEARCHER_SCRIPT);
     }
+
     public int handleLoyalistDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnDyingLoyalist(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleEscapeeDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnEscapee(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleEscapedWorkerDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnEscapedWorker(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleResearcherDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnPanickedResearcher(self);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnDebris(obj_id bldg) throws InterruptedException
     {
         if (hasObjVar(bldg, "warren.debrisObject"))
@@ -274,11 +301,13 @@ public class warren_base extends script.base_script
         spawnLoc.y = -68.0f;
         spawnLoc.z = 0.63f;
         spawnLoc.cell = getCellId(bldg, "smallroom52");
-        obj_id oldDebrises[] = getContents(spawnLoc.cell);
+        obj_id[] oldDebrises = getContents(spawnLoc.cell);
         if (oldDebrises != null)
         {
-            for (obj_id oldDebris : oldDebrises) {
-                if (hasScript(oldDebris, "object.destroy_message")) {
+            for (obj_id oldDebris : oldDebrises)
+            {
+                if (hasScript(oldDebris, "object.destroy_message"))
+                {
                     detachScript(oldDebris, "object.destroy_message");
                 }
                 destroyObject(oldDebris);
@@ -288,12 +317,14 @@ public class warren_base extends script.base_script
         create.addDestroyMessage(debris, "handleRespawnDebris", 1800, bldg);
         setObjVar(bldg, "warren.debrisObject", debris);
     }
+
     public int handleRespawnDebris(obj_id self, dictionary params) throws InterruptedException
     {
         removeObjVar(self, "warren.debrisObject");
         spawnDebris(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLostItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))
@@ -310,6 +341,7 @@ public class warren_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))
@@ -330,8 +362,10 @@ public class warren_base extends script.base_script
         {
             return SCRIPT_OVERRIDE;
         }
-        for (obj_id content : contents) {
-            if (hasObjVar(content, "warren.keycode")) {
+        for (obj_id content : contents)
+        {
+            if (hasObjVar(content, "warren.keycode"))
+            {
                 destroyObject(content);
                 addAllowed(self, item);
                 return SCRIPT_CONTINUE;
@@ -340,19 +374,23 @@ public class warren_base extends script.base_script
         sendSystemMessage(item, new string_id(SYSTEM_MESSAGES, "access_denied"));
         return SCRIPT_OVERRIDE;
     }
+
     public boolean containsPlayer(obj_id bldg) throws InterruptedException
     {
         obj_id[] contents = getContents(bldg);
         if (contents != null)
         {
-            for (obj_id content : contents) {
-                if (isPlayer(content) || containsPlayer(content)) {
+            for (obj_id content : contents)
+            {
+                if (isPlayer(content) || containsPlayer(content))
+                {
                     return true;
                 }
             }
         }
         return false;
     }
+
     public void addAllowed(obj_id bldg, obj_id player) throws InterruptedException
     {
         if (player.isLoaded() && isPlayer(player))
@@ -379,7 +417,6 @@ public class warren_base extends script.base_script
                     }
                 }
             }
-            return;
         }
         else if (isIdValid(group))
         {
@@ -388,18 +425,16 @@ public class warren_base extends script.base_script
             setObjVar(bldg, listName, allowedList);
         }
     }
+
     public void removeAllAllowed(obj_id bldg) throws InterruptedException
     {
         removeObjVar(bldg, "allowedList");
         resetTurretCodeSequence(bldg);
     }
+
     public boolean isAllowed(obj_id bldg, obj_id player) throws InterruptedException
     {
-        boolean playerIsAllowed = false;
-        if (utils.hasScriptVar(player, "warren.isAllowed"))
-        {
-            playerIsAllowed = true;
-        }
+        boolean playerIsAllowed = utils.hasScriptVar(player, "warren.isAllowed");
         String listName = "allowedList";
         if (!hasObjVar(bldg, listName))
         {
@@ -419,7 +454,7 @@ public class warren_base extends script.base_script
             }
             return true;
         }
-        else 
+        else
         {
             if (playerIsAllowed)
             {
@@ -429,6 +464,7 @@ public class warren_base extends script.base_script
         }
         return false;
     }
+
     public void lockReactorCoreRoom(obj_id bldg) throws InterruptedException
     {
         obj_id cell = getCellId(bldg, "smallroom44");
@@ -440,8 +476,8 @@ public class warren_base extends script.base_script
         {
             attachScript(cell, "theme_park.warren.reactor_core");
         }
-        return;
     }
+
     public void lockCell(obj_id bldg) throws InterruptedException
     {
         obj_id cell = getCellId(bldg, "smallroom47");
@@ -453,8 +489,8 @@ public class warren_base extends script.base_script
         {
             attachScript(cell, "theme_park.warren.inquisitor_cell");
         }
-        return;
     }
+
     public void attachCommandWarning(obj_id bldg) throws InterruptedException
     {
         obj_id cell = getCellId(bldg, "smallroom78");
@@ -466,8 +502,8 @@ public class warren_base extends script.base_script
         {
             attachScript(cell, "theme_park.warren.command_warning");
         }
-        return;
     }
+
     public int handlePlayerLogin(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");

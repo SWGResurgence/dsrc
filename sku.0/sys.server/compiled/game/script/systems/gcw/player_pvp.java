@@ -1,5 +1,11 @@
 package script.systems.gcw;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -361,8 +367,8 @@ public class player_pvp extends script.base_script
             rebelGroups = utils.stringToInt(bfStatArray[8]);
             imperialPlayers = utils.stringToInt(bfStatArray[9]);
             imperialGroups = utils.stringToInt(bfStatArray[10]);
-            statusData[i][3] = "" + (rebelPlayers + rebelGroups);
-            statusData[i][4] = "" + (imperialPlayers + imperialGroups);
+            statusData[i][3] = String.valueOf(rebelPlayers + rebelGroups);
+            statusData[i][4] = String.valueOf(imperialPlayers + imperialGroups);
             statusData[i][5] = bfStatArray[11];
             statusData[i][6] = bfStatArray[12];
             playerInfo = bfStatArray[13];
@@ -379,7 +385,7 @@ public class player_pvp extends script.base_script
                 {
                     time = 0;
                 }
-                statusData[i][2] = "" + time + " seconds";
+                statusData[i][2] = time + " seconds";
             }
             else if (battlefieldState == pvp.PVP_STATE_BATTLE_SETUP)
             {
@@ -388,7 +394,7 @@ public class player_pvp extends script.base_script
                 {
                     time = 0;
                 }
-                statusData[i][2] = "" + time + " seconds";
+                statusData[i][2] = time + " seconds";
             }
             else if (battlefieldState == pvp.PVP_STATE_INVITE_QUEUE)
             {
@@ -397,7 +403,7 @@ public class player_pvp extends script.base_script
                 {
                     time = 0;
                 }
-                statusData[i][2] = "" + time + " seconds";
+                statusData[i][2] = time + " seconds";
             }
             else
             {
@@ -623,13 +629,13 @@ public class player_pvp extends script.base_script
         {
             minutes = 0;
         }
-        String minutesInfo = "" + minutes;
+        String minutesInfo = String.valueOf(minutes);
         seconds = seconds % 60;
         if (seconds < 0)
         {
             seconds = 0;
         }
-        String secondsInfo = "" + seconds;
+        String secondsInfo = String.valueOf(seconds);
         if (minutes == 1)
         {
             minutesInfo += " minute ";

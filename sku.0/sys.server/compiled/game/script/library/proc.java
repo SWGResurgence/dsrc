@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.combat_engine.combat_data;
 import script.combat_engine.weapon_data;
@@ -11,6 +17,7 @@ public class proc extends script.base_script
     public static final String CYBERNETICS_TABLE = "datatables/cybernetic/cybernetic.iff";
     public static final String PROC_TABLE = "datatables/proc/proc.iff";
     public static final String REAC_BASE = "reactive_proc.";
+
     public proc()
     {
     }

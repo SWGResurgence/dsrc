@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.avatar_platform;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class avatar_boss_clean_up extends script.base_script
     public avatar_boss_clean_up()
     {
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         if (!ai_lib.isAiDead(self))
@@ -17,6 +24,7 @@ public class avatar_boss_clean_up extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int checkForReset(obj_id self, dictionary params) throws InterruptedException
     {
         if (ai_lib.isInCombat(self))
@@ -32,8 +40,10 @@ public class avatar_boss_clean_up extends script.base_script
         int numItems = items.length;
         if (numItems > 0)
         {
-            for (obj_id item : items) {
-                if (isPlayer(item)) {
+            for (obj_id item : items)
+            {
+                if (isPlayer(item))
+                {
                     messageTo(self, "checkForReset", null, 60.0f, false);
                     return SCRIPT_CONTINUE;
                 }
@@ -42,6 +52,7 @@ public class avatar_boss_clean_up extends script.base_script
         resetBossFight(self);
         return SCRIPT_CONTINUE;
     }
+
     public void resetBossFight(obj_id self) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);
@@ -52,6 +63,5 @@ public class avatar_boss_clean_up extends script.base_script
         removeObjVar(structure, "avatar_platform.boss_fight");
         removeObjVar(structure, "avatar_platform.boss_fight_door_locked");
         destroyObject(self);
-        return;
     }
 }

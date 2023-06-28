@@ -1,86 +1,93 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class som_kenobi_pwwoz_pwwa extends script.base_script
 {
+    public static String c_stringFile = "conversation/som_kenobi_pwwoz_pwwa";
+
     public som_kenobi_pwwoz_pwwa()
     {
     }
-    public static String c_stringFile = "conversation/som_kenobi_pwwoz_pwwa";
+
     public boolean som_kenobi_pwwoz_pwwa_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean som_kenobi_pwwoz_pwwa_condition_playerJedi(obj_id player, obj_id npc) throws InterruptedException
     {
         return jedi.isForceSensitive(player);
     }
+
     public boolean som_kenobi_pwwoz_pwwa_condition_foundCrystal(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "som_kenobi_samaritan_1", "returnPwwoz");
     }
+
     public boolean som_kenobi_pwwoz_pwwa_condition_onQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "som_kenobi_samaritan_1");
     }
+
     public boolean som_kenobi_pwwoz_pwwa_condition_keptCrystal(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isQuestActive(player, "som_kenobi_samaritan_2") || groundquests.hasCompletedQuest(player, "som_kenobi_samaritan_2"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.isQuestActive(player, "som_kenobi_samaritan_2") || groundquests.hasCompletedQuest(player, "som_kenobi_samaritan_2");
     }
+
     public boolean som_kenobi_pwwoz_pwwa_condition_gaveCrystal(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.hasCompletedQuest(player, "som_kenobi_samaritan_1") && !groundquests.hasCompletedQuest(player, "som_kenobi_samaritan_2"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.hasCompletedQuest(player, "som_kenobi_samaritan_1") && !groundquests.hasCompletedQuest(player, "som_kenobi_samaritan_2");
     }
+
     public boolean som_kenobi_pwwoz_pwwa_condition_killPwwoz(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "som_kenobi_samaritan_1", "killIthorian");
     }
+
     public void som_kenobi_pwwoz_pwwa_action_giveQuest1(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "som_kenobi_samaritan_1");
     }
+
     public void som_kenobi_pwwoz_pwwa_action_removeInvuln(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "giveCrystal");
         setInvulnerable(npc, false);
         clearCondition(npc, CONDITION_INTERESTING);
     }
+
     public void som_kenobi_pwwoz_pwwa_action_attack(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "giveCrystal");
         startCombat(npc, player);
         clearCondition(npc, CONDITION_CONVERSABLE);
     }
+
     public void som_kenobi_pwwoz_pwwa_action_signalKeep(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "keepCrystal");
     }
+
     public void som_kenobi_pwwoz_pwwa_action_secondAttack(obj_id player, obj_id npc) throws InterruptedException
     {
         clearCondition(npc, CONDITION_CONVERSABLE);
         startCombat(npc, player);
     }
+
     public void som_kenobi_pwwoz_pwwa_action_removeInvuln2(obj_id player, obj_id npc) throws InterruptedException
     {
         setInvulnerable(npc, false);
         clearCondition(npc, CONDITION_INTERESTING);
     }
+
     public int som_kenobi_pwwoz_pwwa_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_84"))
@@ -97,6 +104,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_pwwoz_pwwa_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_227"))
@@ -125,7 +133,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_230");
@@ -138,7 +146,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_pwwoz_pwwa.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -172,7 +180,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_238");
@@ -185,7 +193,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_pwwoz_pwwa.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -195,6 +203,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_pwwoz_pwwa_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_230"))
@@ -229,7 +238,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_233");
@@ -238,7 +247,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_pwwoz_pwwa.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -248,6 +257,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_pwwoz_pwwa_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_233"))
@@ -265,6 +275,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_pwwoz_pwwa_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_238"))
@@ -297,7 +308,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_244");
@@ -306,7 +317,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_pwwoz_pwwa.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -316,6 +327,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_pwwoz_pwwa_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_244"))
@@ -333,6 +345,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_pwwoz_pwwa_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_174"))
@@ -368,7 +381,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_179");
@@ -385,7 +398,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_pwwoz_pwwa.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -426,7 +439,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_189");
@@ -443,7 +456,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_pwwoz_pwwa.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -484,7 +497,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_206");
@@ -501,7 +514,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_pwwoz_pwwa.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -541,7 +554,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_214");
@@ -558,7 +571,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_pwwoz_pwwa.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -568,6 +581,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_pwwoz_pwwa_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_179"))
@@ -623,7 +637,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_183");
@@ -636,7 +650,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_pwwoz_pwwa.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -646,6 +660,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_pwwoz_pwwa_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_183"))
@@ -677,6 +692,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_pwwoz_pwwa_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_189"))
@@ -721,6 +737,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_pwwoz_pwwa_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_206"))
@@ -776,7 +793,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_210");
@@ -789,7 +806,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_pwwoz_pwwa.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -799,6 +816,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_pwwoz_pwwa_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_210"))
@@ -830,6 +848,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_pwwoz_pwwa_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_214"))
@@ -885,7 +904,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_222");
@@ -898,7 +917,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_pwwoz_pwwa.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -908,6 +927,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_pwwoz_pwwa_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_222"))
@@ -939,6 +959,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_pwwoz_pwwa_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_111"))
@@ -959,7 +980,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_116");
@@ -968,7 +989,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_pwwoz_pwwa.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -993,7 +1014,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_153");
@@ -1002,7 +1023,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_pwwoz_pwwa.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1024,6 +1045,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_pwwoz_pwwa_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_116"))
@@ -1044,7 +1066,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_118");
@@ -1053,7 +1075,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_pwwoz_pwwa.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1063,6 +1085,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_pwwoz_pwwa_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_118"))
@@ -1083,7 +1106,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_120");
@@ -1092,7 +1115,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_pwwoz_pwwa.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1102,6 +1125,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_pwwoz_pwwa_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_120"))
@@ -1129,7 +1153,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_122");
@@ -1142,7 +1166,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_pwwoz_pwwa.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1152,6 +1176,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_pwwoz_pwwa_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_122"))
@@ -1182,6 +1207,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_pwwoz_pwwa_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_153"))
@@ -1203,7 +1229,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_157");
@@ -1212,7 +1238,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_pwwoz_pwwa.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1222,6 +1248,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_pwwoz_pwwa_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_157"))
@@ -1243,7 +1270,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_161");
@@ -1252,7 +1279,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_pwwoz_pwwa.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1262,6 +1289,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_pwwoz_pwwa_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_161"))
@@ -1290,7 +1318,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_165");
@@ -1303,7 +1331,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_kenobi_pwwoz_pwwa.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1313,6 +1341,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_kenobi_pwwoz_pwwa_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_165"))
@@ -1344,6 +1373,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -1353,6 +1383,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
         ai_lib.setMood(self, "nervous");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setMood(self, "nervous");
@@ -1361,6 +1392,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -1368,18 +1400,21 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
         menuInfoData.setServerNotify(false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.som_kenobi_pwwoz_pwwa");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1402,7 +1437,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_84");
@@ -1414,7 +1449,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "som_kenobi_pwwoz_pwwa", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1455,7 +1490,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_227");
@@ -1467,7 +1502,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                 utils.setScriptVar(player, "conversation.som_kenobi_pwwoz_pwwa.branchId", 4);
                 npcStartConversation(player, npc, "som_kenobi_pwwoz_pwwa", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1511,7 +1546,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_174");
@@ -1531,7 +1566,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                 utils.setScriptVar(player, "conversation.som_kenobi_pwwoz_pwwa.branchId", 13);
                 npcStartConversation(player, npc, "som_kenobi_pwwoz_pwwa", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1575,7 +1610,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_111");
@@ -1591,7 +1626,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
                 utils.setScriptVar(player, "conversation.som_kenobi_pwwoz_pwwa.branchId", 25);
                 npcStartConversation(player, npc, "som_kenobi_pwwoz_pwwa", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1600,6 +1635,7 @@ public class som_kenobi_pwwoz_pwwa extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("som_kenobi_pwwoz_pwwa"))

@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.death_watch_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -12,15 +18,16 @@ import java.util.Vector;
 
 public class repair_droid extends script.base_script
 {
-    public repair_droid()
-    {
-    }
     public static final String TBL_ATTACK_WAVE1 = "datatables/dungeon/death_watch/attack_wave_01.iff";
     public static final String TBL_ATTACK_WAVE2 = "datatables/dungeon/death_watch/attack_wave_02.iff";
     public static final string_id VENTILATION_REPAIR = new string_id("dungeon/death_watch", "ventilation_repair");
     public static final string_id REPAIR_FAILED = new string_id("dungeon/death_watch", "repair_failed");
     public static final string_id PROTECT_TOOLS = new string_id("dungeon/death_watch", "protect_tools");
     public static final string_id PROTECT_FIX = new string_id("dungeon/death_watch", "protect_fix");
+    public repair_droid()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         detachScript(self, "ai.ai_combat");
@@ -28,6 +35,7 @@ public class repair_droid extends script.base_script
         messageTo(self, "handleGetTools", null, 10.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String name) throws InterruptedException
     {
         if (name.equals("tools") && !hasObjVar(self, "toolsReached"))
@@ -44,6 +52,7 @@ public class repair_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id attacker) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);
@@ -77,7 +86,8 @@ public class repair_droid extends script.base_script
                     {
                         return SCRIPT_CONTINUE;
                     }
-                    for (Object member : members) {
+                    for (Object member : members)
+                    {
                         obj_id thisMember = ((obj_id) member);
                         sendSystemMessage(thisMember, REPAIR_FAILED);
                     }
@@ -86,6 +96,7 @@ public class repair_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void spawnAttackWaveOne(obj_id droid) throws InterruptedException
     {
         int defenderCreatures = dataTableGetNumRows(TBL_ATTACK_WAVE1);
@@ -109,8 +120,8 @@ public class repair_droid extends script.base_script
             messageTo(droid, "handleAttackDroid", params, 5, false);
             x = x + 1;
         }
-        return;
     }
+
     public void spawnAttackWaveTwo(obj_id droid) throws InterruptedException
     {
         int defenderCreatures = dataTableGetNumRows(TBL_ATTACK_WAVE2);
@@ -134,8 +145,8 @@ public class repair_droid extends script.base_script
             messageTo(droid, "handleAttackDroid", params, 5, false);
             x = x + 1;
         }
-        return;
     }
+
     public int handleGetTools(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);
@@ -166,7 +177,8 @@ public class repair_droid extends script.base_script
                 {
                     return SCRIPT_CONTINUE;
                 }
-                for (Object member : members) {
+                for (Object member : members)
+                {
                     obj_id thisMember = ((obj_id) member);
                     sendSystemMessage(thisMember, PROTECT_TOOLS);
                 }
@@ -174,6 +186,7 @@ public class repair_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleGoVentilation(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);
@@ -207,7 +220,8 @@ public class repair_droid extends script.base_script
                     {
                         return SCRIPT_CONTINUE;
                     }
-                    for (Object member : members) {
+                    for (Object member : members)
+                    {
                         obj_id thisMember = ((obj_id) member);
                         sendSystemMessage(thisMember, PROTECT_FIX);
                         CustomerServiceLog("DUNGEON_DeathWatchBunker", "*Death Watch Air Vent: %TU has turned the air vent back on.", thisMember);
@@ -217,6 +231,7 @@ public class repair_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleFix(obj_id self, dictionary params) throws InterruptedException
     {
         if (isIncapacitated(self))
@@ -250,7 +265,8 @@ public class repair_droid extends script.base_script
                 {
                     return SCRIPT_CONTINUE;
                 }
-                for (Object member : members) {
+                for (Object member : members)
+                {
                     obj_id thisMember = ((obj_id) member);
                     sendSystemMessage(thisMember, VENTILATION_REPAIR);
                 }
@@ -258,11 +274,13 @@ public class repair_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleCleanUp(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleAttackDroid(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id droid = params.getObjId("droid");

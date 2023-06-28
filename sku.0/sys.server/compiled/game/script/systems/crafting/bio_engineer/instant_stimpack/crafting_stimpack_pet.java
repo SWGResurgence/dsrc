@@ -1,5 +1,11 @@
 package script.systems.crafting.bio_engineer.instant_stimpack;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.craftinglib;
 import script.resource_weight;
 
@@ -45,6 +51,7 @@ public class crafting_stimpack_pet extends script.systems.crafting.bio_engineer.
                                     new resource_weight.weight(craftinglib.RESOURCE_QUALITY, 4)
                             })
             };
+
     public crafting_stimpack_pet()
     {
     }

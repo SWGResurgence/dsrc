@@ -1,5 +1,11 @@
 package script.systems.fs_quest;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.chat;
 import script.library.prose;
@@ -13,6 +19,7 @@ public class fs_village_wounded extends script.base_script
     public static final String PP_FILE_LOC = "quest/force_sensitive/fs_lamentations";
     public static final String RESPONSE_TEXT = "datatables/fs_quests/fs_lamentations.iff";
     public static int INITIAL_DELAY = 10;
+
     public fs_village_wounded()
     {
     }

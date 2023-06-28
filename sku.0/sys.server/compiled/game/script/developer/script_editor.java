@@ -1,5 +1,11 @@
 package script.developer;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.sui;
 import script.library.utils;
@@ -58,8 +64,8 @@ public class script_editor extends script.base_script
         String scriptContents = file_access.readTextFile(scriptFileName);
         if (scriptContents == null)
         {
-           broadcast(self,"Unable to read script file " + scriptFileName);
-           return SCRIPT_OVERRIDE;
+            broadcast(self, "Unable to read script file " + scriptFileName);
+            return SCRIPT_OVERRIDE;
         }
         int page = createSUIPage("/Script.editScript", self, self);
         setSUIProperty(page, "pageText.text", "Font", "starwarslogo_optimized_56");
@@ -172,7 +178,7 @@ public class script_editor extends script.base_script
                 String addOutput = system_process.runAndGetOutput("git add .", new File("../../data"));
                 String commitOutput = system_process.runAndGetOutput("git commit -m \"Script Editor: " + scriptFileName + new Date() + "\"", new File("../../data"));
                 String pushOutput = system_process.runAndGetOutput("git push origin apotheosis", new File("../../data"));
-                sui.msgbox(self, self, "Git Status: \n" + addOutput + "\n" +  commitOutput + pushOutput, sui.OK_ONLY, "Git Status", "noHandler");
+                sui.msgbox(self, self, "Git Status: \n" + addOutput + "\n" + commitOutput + pushOutput, sui.OK_ONLY, "Git Status", "noHandler");
             }
         }
         return SCRIPT_CONTINUE;

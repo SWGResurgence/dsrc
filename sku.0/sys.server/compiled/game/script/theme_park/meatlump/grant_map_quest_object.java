@@ -1,14 +1,17 @@
 package script.theme_park.meatlump;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.groundquests;
 import script.library.sui;
 
 public class grant_map_quest_object extends script.base_script
 {
-    public grant_map_quest_object()
-    {
-    }
     public static final string_id RADIAL_INSPECT = new string_id("quest/ground/util/quest_giver_object", "radial_inspect");
     public static final string_id OFFER_QUEST_MSG = new string_id("quest/ground/util/quest_giver_object", "offer_quest");
     public static final string_id SUI_TITLE = new string_id("quest/ground/util/quest_giver_object", "sui_title");
@@ -18,11 +21,16 @@ public class grant_map_quest_object extends script.base_script
     public static final string_id SID_NOT_WHILE_IN_COMBAT = new string_id("base_player", "not_while_in_combat");
     public static final String PID_NAME = "map_quest_pid";
     public static final String OBJECT_OBJVAR = "quest_string";
+    public grant_map_quest_object()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int menuOption = mi.addRootMenu(menu_info_types.ITEM_USE, RADIAL_INSPECT);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -65,6 +73,7 @@ public class grant_map_quest_object extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlerGetQuest(obj_id self, dictionary params) throws InterruptedException
     {
         int btn = sui.getIntButtonPressed(params);

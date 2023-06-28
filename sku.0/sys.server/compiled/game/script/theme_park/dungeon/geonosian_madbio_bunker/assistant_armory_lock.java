@@ -1,14 +1,22 @@
 package script.theme_park.dungeon.geonosian_madbio_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 import script.string_id;
 
 public class assistant_armory_lock extends script.base_script
 {
+    public static final String MSGS = "dungeon/geonosian_madbio";
+
     public assistant_armory_lock()
     {
     }
-    public static final String MSGS = "dungeon/geonosian_madbio";
+
     public int OnAboutToReceiveItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))
@@ -26,7 +34,7 @@ public class assistant_armory_lock extends script.base_script
             sendSystemMessage(item, locked);
             return SCRIPT_OVERRIDE;
         }
-        else 
+        else
         {
             return SCRIPT_CONTINUE;
         }

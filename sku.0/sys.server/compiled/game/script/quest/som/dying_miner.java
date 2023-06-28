@@ -1,5 +1,11 @@
 package script.quest.som;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.groundquests;
 import script.menu_info;
 import script.menu_info_types;
@@ -8,14 +14,17 @@ import script.string_id;
 
 public class dying_miner extends script.base_script
 {
+    public static final string_id MNU_INSPECT_MINER = new string_id("som/som_quest", "examine_miner");
+
     public dying_miner()
     {
     }
-    public static final string_id MNU_INSPECT_MINER = new string_id("som/som_quest", "examine_miner");
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (groundquests.isQuestActive(player, "som_obi_wan_signal_1"))
@@ -24,6 +33,7 @@ public class dying_miner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU1)

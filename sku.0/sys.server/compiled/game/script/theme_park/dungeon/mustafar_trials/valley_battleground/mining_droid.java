@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.valley_battleground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -7,17 +13,19 @@ import java.util.Vector;
 
 public class mining_droid extends script.base_script
 {
-    public mining_droid()
-    {
-    }
     public static final String STF = "mustafar/valley_battlefield";
     public static final string_id ACTIVATE_DROID = new string_id(STF, "activate_droid");
     public static final boolean LOGGING = false;
+    public mining_droid()
+    {
+    }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         messageTo(self, "destroySelf", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isDroidEngineer(player) && isDeactivated(self))
@@ -26,6 +34,7 @@ public class mining_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -34,18 +43,21 @@ public class mining_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id weapon, int[] damage) throws InterruptedException
     {
         if (isPlayer(attacker) || pet_lib.isPet(attacker))
         {
             int total = 0;
-            for (int i : damage) {
+            for (int i : damage)
+            {
                 total += i;
             }
             addToHealth(self, total);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnHateTargetAdded(obj_id self, obj_id target) throws InterruptedException
     {
         if (isPlayer(target) || pet_lib.isPet(target))
@@ -54,6 +66,7 @@ public class mining_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         findWayPoints(self);
@@ -64,6 +77,7 @@ public class mining_droid extends script.base_script
         setHibernationDelay(self, 7200);
         return SCRIPT_CONTINUE;
     }
+
     public int startPathing(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "deactivated"))
@@ -73,14 +87,17 @@ public class mining_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean isDeactivated(obj_id droid) throws InterruptedException
     {
         return utils.hasScriptVar(droid, "deactivated");
     }
+
     public boolean isDroidEngineer(obj_id player) throws InterruptedException
     {
         return hasSkill(player, "class_engineering_phase2_novice");
     }
+
     public void activateDroid(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "deactivated"))
@@ -92,6 +109,7 @@ public class mining_droid extends script.base_script
         playClientEffectLoc(self, effect, playLoc, 0.4f);
         messageTo(self, "startPathing", null, 3, false);
     }
+
     public void findWayPoints(obj_id self) throws InterruptedException
     {
         location baseLoc = getLocation(self);
@@ -103,9 +121,12 @@ public class mining_droid extends script.base_script
         }
         Vector waypoints = new Vector();
         waypoints.setSize(0);
-        for (obj_id object : objects) {
-            if (hasObjVar(object, "wp_name")) {
-                if ((getStringObjVar(object, "wp_name")).startsWith("droid")) {
+        for (obj_id object : objects)
+        {
+            if (hasObjVar(object, "wp_name"))
+            {
+                if ((getStringObjVar(object, "wp_name")).startsWith("droid"))
+                {
                     utils.addElement(waypoints, getLocation(object));
                 }
             }
@@ -128,11 +149,13 @@ public class mining_droid extends script.base_script
         }
         utils.setScriptVar(self, "patrolPoints", patrolPoints);
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int pathToNextPoint(obj_id self, dictionary params) throws InterruptedException
     {
         location[] patrolPoints = utils.getLocationArrayScriptVar(self, "patrolPoints");
@@ -140,6 +163,7 @@ public class mining_droid extends script.base_script
         setInvulnerable(self, false);
         return SCRIPT_CONTINUE;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING || trial.VALLEY_LOGGING)

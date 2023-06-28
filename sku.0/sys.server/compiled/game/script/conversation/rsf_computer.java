@@ -1,82 +1,107 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class rsf_computer extends script.base_script
 {
+    public static String c_stringFile = "conversation/rsf_computer";
+
     public rsf_computer()
     {
     }
-    public static String c_stringFile = "conversation/rsf_computer";
+
     public boolean rsf_computer_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean rsf_computer_condition_isOnDecoderQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean rsf_computer_condition_hasProperSecurityClearance(obj_id player, obj_id npc) throws InterruptedException
     {
         return badge.hasBadge(player, "bdg_content_rsf_clearance_7");
     }
+
     public boolean rsf_computer_condition_module1_alreadyHasQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "legacy_naboo_droid_module_2") || groundquests.isQuestActive(player, "legacy_naboo_droid_module_3") || (groundquests.hasCompletedQuest(player, "legacy_naboo_droid_module_3") && !groundquests.hasCompletedQuest(player, "legacy_naboo_droid_module_3_pt2")) || groundquests.isQuestActive(player, "legacy_naboo_droid_module_4");
     }
+
     public boolean rsf_computer_condition_module4_alreadyHasQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "legacy_naboo_droid_module_1") || groundquests.isQuestActive(player, "legacy_naboo_droid_module_2") || groundquests.isQuestActive(player, "legacy_naboo_droid_module_3") || (groundquests.hasCompletedQuest(player, "legacy_naboo_droid_module_3") && !groundquests.hasCompletedQuest(player, "legacy_naboo_droid_module_3_pt2"));
     }
+
     public boolean rsf_computer_condition_module3_alreadyHasQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "legacy_naboo_droid_module_1") || groundquests.isQuestActive(player, "legacy_naboo_droid_module_2") || groundquests.isQuestActive(player, "legacy_naboo_droid_module_4");
     }
+
     public boolean rsf_computer_condition_module2_alreadyHasQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "legacy_naboo_droid_module_1") || groundquests.isQuestActive(player, "legacy_naboo_droid_module_3") || (groundquests.hasCompletedQuest(player, "legacy_naboo_droid_module_3") && !groundquests.hasCompletedQuest(player, "legacy_naboo_droid_module_3_pt2")) || groundquests.isQuestActive(player, "legacy_naboo_droid_module_4");
     }
+
     public boolean rsf_computer_condition_hasDroidModule4Quest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "legacy_naboo_droid_module_4") || groundquests.hasCompletedQuest(player, "legacy_naboo_droid_module_4");
     }
+
     public boolean rsf_computer_condition_hasDroidModule3Quest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "legacy_naboo_droid_module_3") || groundquests.hasCompletedQuest(player, "legacy_naboo_droid_module_3");
     }
+
     public boolean rsf_computer_condition_hasDroidModule2Quest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "legacy_naboo_droid_module_2") || groundquests.hasCompletedQuest(player, "legacy_naboo_droid_module_2");
     }
+
     public boolean rsf_computer_condition_hasDroidModule1Quest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "legacy_naboo_droid_module_1") || groundquests.hasCompletedQuest(player, "legacy_naboo_droid_module_1");
     }
+
     public boolean rsf_computer_condition_hasAllDroidParts(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "legacy_naboo_droid_module_1") && groundquests.hasCompletedQuest(player, "legacy_naboo_droid_module_2") && groundquests.hasCompletedQuest(player, "legacy_naboo_droid_module_3_pt2") && groundquests.hasCompletedQuest(player, "legacy_naboo_droid_module_4") && !groundquests.isQuestActiveOrComplete(player, "legacy_naboo_back_to_rebel") && !groundquests.isQuestActiveOrComplete(player, "legacy_naboo_back_to_imperial");
     }
+
     public boolean rsf_computer_condition_needsDroidModuleUpdate(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "legacy_naboo_droid_module_1", "findDroidPart1_03") || groundquests.isTaskActive(player, "legacy_naboo_droid_module_2", "findDroidPart2_03") || groundquests.isTaskActive(player, "legacy_naboo_droid_module_3_pt2", "findDroidPart3_08") || groundquests.isTaskActive(player, "legacy_naboo_droid_module_4", "findDroidPart4_06");
     }
+
     public boolean rsf_computer_condition_hasModule1(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActiveOrComplete(player, "legacy_naboo_droid_module_1");
     }
+
     public boolean rsf_computer_condition_hasModule2(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActiveOrComplete(player, "legacy_naboo_droid_module_2");
     }
+
     public boolean rsf_computer_condition_hasModule3(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActiveOrComplete(player, "legacy_naboo_droid_module_3_pt2") || groundquests.isQuestActiveOrComplete(player, "legacy_naboo_droid_module_3"));
     }
+
     public boolean rsf_computer_condition_hasModule4(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActiveOrComplete(player, "legacy_naboo_droid_module_4");
     }
+
     public void rsf_computer_action_grantDroidModule1Quest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isQuestActive(player, "naboo_theed_goto_mainframe_imp") || groundquests.isQuestActive(player, "naboo_theed_goto_mainframe_reb"))
@@ -84,8 +109,8 @@ public class rsf_computer extends script.base_script
             groundquests.sendSignal(player, "usedSecurityClearanceToAccessRsfComputer");
         }
         groundquests.requestGrantQuest(player, "legacy_naboo_droid_module_1");
-        return;
     }
+
     public void rsf_computer_action_sendBackToContact(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, content.REBEL_PATH_OBJVAR_NAME))
@@ -96,8 +121,8 @@ public class rsf_computer extends script.base_script
         {
             groundquests.requestGrantQuest(player, "legacy_naboo_back_to_imperial");
         }
-        return;
     }
+
     public void rsf_computer_action_grantDroidModule4Quest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isQuestActive(player, "naboo_theed_goto_mainframe_imp") || groundquests.isQuestActive(player, "naboo_theed_goto_mainframe_reb"))
@@ -106,6 +131,7 @@ public class rsf_computer extends script.base_script
         }
         groundquests.requestGrantQuest(player, "legacy_naboo_droid_module_4");
     }
+
     public void rsf_computer_action_grantDroidModule3Quest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isQuestActive(player, "naboo_theed_goto_mainframe_imp") || groundquests.isQuestActive(player, "naboo_theed_goto_mainframe_reb"))
@@ -114,6 +140,7 @@ public class rsf_computer extends script.base_script
         }
         groundquests.requestGrantQuest(player, "legacy_naboo_droid_module_3");
     }
+
     public void rsf_computer_action_grantDroidModule2Quest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isQuestActive(player, "naboo_theed_goto_mainframe_imp") || groundquests.isQuestActive(player, "naboo_theed_goto_mainframe_reb"))
@@ -122,6 +149,7 @@ public class rsf_computer extends script.base_script
         }
         groundquests.requestGrantQuest(player, "legacy_naboo_droid_module_2");
     }
+
     public void rsf_computer_action_updateDroidModuleInfo(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isTaskActive(player, "legacy_naboo_droid_module_1", "findDroidPart1_03"))
@@ -140,12 +168,13 @@ public class rsf_computer extends script.base_script
         {
             groundquests.sendSignal(player, "findDroidPart4_06");
         }
-        return;
     }
+
     public void rsf_computer_action_sendMaulerDecode(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "decodedMaulerMessages");
     }
+
     public int rsf_computer_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_116"))
@@ -193,7 +222,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_120");
@@ -218,7 +247,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -292,7 +321,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_296");
@@ -325,7 +354,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -372,7 +401,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_252");
@@ -389,7 +418,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -409,6 +438,7 @@ public class rsf_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rsf_computer_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_120"))
@@ -449,7 +479,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_124");
@@ -470,7 +500,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -516,7 +546,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -537,7 +567,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -583,7 +613,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_196");
@@ -604,7 +634,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -650,7 +680,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_232");
@@ -671,7 +701,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -691,6 +721,7 @@ public class rsf_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rsf_computer_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_124"))
@@ -724,7 +755,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_128");
@@ -741,7 +772,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -780,7 +811,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_138");
@@ -797,7 +828,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -836,7 +867,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_148");
@@ -853,7 +884,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -873,6 +904,7 @@ public class rsf_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rsf_computer_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_128"))
@@ -913,7 +945,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_124");
@@ -934,7 +966,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -987,7 +1019,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_120");
@@ -1012,7 +1044,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1032,6 +1064,7 @@ public class rsf_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rsf_computer_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_138"))
@@ -1072,7 +1105,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_124");
@@ -1093,7 +1126,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1146,7 +1179,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_120");
@@ -1171,7 +1204,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1191,6 +1224,7 @@ public class rsf_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rsf_computer_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_148"))
@@ -1231,7 +1265,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_124");
@@ -1252,7 +1286,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1305,7 +1339,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_120");
@@ -1330,7 +1364,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1350,6 +1384,7 @@ public class rsf_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rsf_computer_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_160"))
@@ -1383,7 +1418,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -1400,7 +1435,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1439,7 +1474,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_174");
@@ -1456,7 +1491,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1495,7 +1530,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_184");
@@ -1512,7 +1547,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1532,6 +1567,7 @@ public class rsf_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rsf_computer_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_164"))
@@ -1572,7 +1608,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -1593,7 +1629,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1646,7 +1682,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_120");
@@ -1671,7 +1707,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1691,6 +1727,7 @@ public class rsf_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rsf_computer_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_174"))
@@ -1731,7 +1768,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -1752,7 +1789,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1805,7 +1842,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_120");
@@ -1830,7 +1867,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1850,6 +1887,7 @@ public class rsf_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rsf_computer_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_184"))
@@ -1890,7 +1928,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -1911,7 +1949,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1964,7 +2002,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_120");
@@ -1989,7 +2027,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2009,6 +2047,7 @@ public class rsf_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rsf_computer_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_196"))
@@ -2042,7 +2081,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_200");
@@ -2059,7 +2098,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2098,7 +2137,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_210");
@@ -2115,7 +2154,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2154,7 +2193,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_220");
@@ -2171,7 +2210,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2191,6 +2230,7 @@ public class rsf_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rsf_computer_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_200"))
@@ -2231,7 +2271,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_196");
@@ -2252,7 +2292,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2305,7 +2345,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_120");
@@ -2330,7 +2370,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2350,6 +2390,7 @@ public class rsf_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rsf_computer_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_210"))
@@ -2390,7 +2431,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_196");
@@ -2411,7 +2452,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2464,7 +2505,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_120");
@@ -2489,7 +2530,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2509,6 +2550,7 @@ public class rsf_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rsf_computer_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_220"))
@@ -2549,7 +2591,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_196");
@@ -2570,7 +2612,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2623,7 +2665,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_120");
@@ -2648,7 +2690,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2668,6 +2710,7 @@ public class rsf_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rsf_computer_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_232"))
@@ -2701,7 +2744,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_236");
@@ -2718,7 +2761,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2757,7 +2800,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_272");
@@ -2774,7 +2817,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2813,7 +2856,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_282");
@@ -2830,7 +2873,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2850,6 +2893,7 @@ public class rsf_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rsf_computer_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_236"))
@@ -2890,7 +2934,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_232");
@@ -2911,7 +2955,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2964,7 +3008,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_120");
@@ -2989,7 +3033,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3009,6 +3053,7 @@ public class rsf_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rsf_computer_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_272"))
@@ -3049,7 +3094,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_232");
@@ -3070,7 +3115,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3123,7 +3168,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_120");
@@ -3148,7 +3193,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3168,6 +3213,7 @@ public class rsf_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rsf_computer_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_282"))
@@ -3208,7 +3254,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_232");
@@ -3229,7 +3275,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3282,7 +3328,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_120");
@@ -3307,7 +3353,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3327,6 +3373,7 @@ public class rsf_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rsf_computer_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_296"))
@@ -3361,7 +3408,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_300");
@@ -3378,7 +3425,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3417,7 +3464,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_99");
@@ -3434,7 +3481,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3473,7 +3520,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -3490,7 +3537,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3529,7 +3576,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159");
@@ -3546,7 +3593,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3585,7 +3632,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_197");
@@ -3602,7 +3649,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3628,7 +3675,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_261");
@@ -3637,7 +3684,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3657,6 +3704,7 @@ public class rsf_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rsf_computer_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_300"))
@@ -3677,7 +3725,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_261");
@@ -3686,7 +3734,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3760,7 +3808,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_296");
@@ -3793,7 +3841,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3813,6 +3861,7 @@ public class rsf_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rsf_computer_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_261"))
@@ -3827,6 +3876,7 @@ public class rsf_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rsf_computer_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_99"))
@@ -3853,7 +3903,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_103");
@@ -3866,7 +3916,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3940,7 +3990,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_296");
@@ -3973,7 +4023,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3993,6 +4043,7 @@ public class rsf_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rsf_computer_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_103"))
@@ -4020,7 +4071,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_253");
@@ -4029,7 +4080,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4049,6 +4100,7 @@ public class rsf_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rsf_computer_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_253"))
@@ -4063,6 +4115,7 @@ public class rsf_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rsf_computer_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_121"))
@@ -4089,7 +4142,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_129");
@@ -4102,7 +4155,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4176,7 +4229,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_296");
@@ -4209,7 +4262,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4229,6 +4282,7 @@ public class rsf_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rsf_computer_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_129"))
@@ -4256,7 +4310,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_255");
@@ -4265,7 +4319,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4285,6 +4339,7 @@ public class rsf_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rsf_computer_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_255"))
@@ -4299,6 +4354,7 @@ public class rsf_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rsf_computer_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_159"))
@@ -4325,7 +4381,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_167");
@@ -4338,7 +4394,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4412,7 +4468,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_296");
@@ -4445,7 +4501,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4465,6 +4521,7 @@ public class rsf_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rsf_computer_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_167"))
@@ -4492,7 +4549,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_257");
@@ -4501,7 +4558,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4521,6 +4578,7 @@ public class rsf_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rsf_computer_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_257"))
@@ -4535,6 +4593,7 @@ public class rsf_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rsf_computer_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_197"))
@@ -4561,7 +4620,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_205");
@@ -4574,7 +4633,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4648,7 +4707,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_296");
@@ -4681,7 +4740,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4701,6 +4760,7 @@ public class rsf_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rsf_computer_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_205"))
@@ -4728,7 +4788,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_259");
@@ -4737,7 +4797,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4757,6 +4817,7 @@ public class rsf_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rsf_computer_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_259"))
@@ -4771,6 +4832,7 @@ public class rsf_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rsf_computer_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_252"))
@@ -4811,7 +4873,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_116");
@@ -4832,7 +4894,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4879,7 +4941,7 @@ public class rsf_computer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_252");
@@ -4896,7 +4958,7 @@ public class rsf_computer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rsf_computer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4916,6 +4978,7 @@ public class rsf_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((isPlayer(self)))
@@ -4925,11 +4988,13 @@ public class rsf_computer extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         string_id funk = new string_id("terminal_ui", "access_rsf_computer");
@@ -4939,18 +5004,21 @@ public class rsf_computer extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.rsf_computer");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -4994,7 +5062,7 @@ public class rsf_computer extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_116");
@@ -5014,7 +5082,7 @@ public class rsf_computer extends script.base_script
                 utils.setScriptVar(player, "conversation.rsf_computer.branchId", 1);
                 npcStartConversation(player, npc, "rsf_computer", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -5023,6 +5091,7 @@ public class rsf_computer extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("rsf_computer"))

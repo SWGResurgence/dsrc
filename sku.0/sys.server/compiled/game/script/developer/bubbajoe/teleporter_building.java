@@ -4,6 +4,12 @@ package script.developer.bubbajoe;/*
 @Purpose: This script is used to teleport players to a location saved on the terminal. You must be in god-mode and have the terminal in your inventory to setup, then get the OID and place in the world.
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.colors_hex;
 import script.library.sui;

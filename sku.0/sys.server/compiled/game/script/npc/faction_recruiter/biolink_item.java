@@ -1,5 +1,11 @@
 package script.npc.faction_recruiter;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.combat;
 import script.library.factions;
@@ -8,9 +14,6 @@ import script.library.utils;
 
 public class biolink_item extends script.base_script
 {
-    public biolink_item()
-    {
-    }
     public static final String VAR_TEMP_BASE = "biotemp";
     public static final String VAR_TEMP_EQUIP_FLAG = "biotemp.equip";
     public static final string_id SID_POINTS_NEEDED_FOR_BIO_LINK = new string_id("base_player", "faction_points_needed_for_bio_link");
@@ -24,11 +27,16 @@ public class biolink_item extends script.base_script
     public static final string_id SID_SPEND_FACTION_POINTS_PROMPT = new string_id("sui", "spend_faction_points");
     public static final string_id SID_BIO_LINK_MSG_TITLE = new string_id("sui", "bio_link_item_title");
     public static final string_id SID_SPECIES_CANNOT_EQUIP = new string_id("base_player", "species_cannot_equip");
+    public biolink_item()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setBioLink(self, null);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id biolink = getBioLink(self);
@@ -38,6 +46,7 @@ public class biolink_item extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         obj_id biolink = getBioLink(self);
@@ -60,7 +69,7 @@ public class biolink_item extends script.base_script
             {
                 player = containerPlayer;
             }
-            else 
+            else
             {
                 player = getContainedBy(destContainer);
             }
@@ -74,6 +83,7 @@ public class biolink_item extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info item) throws InterruptedException
     {
         obj_id biolink = getBioLink(self);
@@ -89,6 +99,7 @@ public class biolink_item extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.BIO_LINK)
@@ -100,6 +111,7 @@ public class biolink_item extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleEquipBioLinkSui(obj_id self, dictionary params) throws InterruptedException
     {
         int bp = sui.getIntButtonPressed(params);
@@ -111,6 +123,7 @@ public class biolink_item extends script.base_script
         _bioLinkItem(self, player, true, true);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSpendFactionPointsSui(obj_id self, dictionary params) throws InterruptedException
     {
         int bp = sui.getIntButtonPressed(params);
@@ -122,6 +135,7 @@ public class biolink_item extends script.base_script
         utils.removeScriptVar(self, VAR_TEMP_BASE);
         return SCRIPT_CONTINUE;
     }
+
     public boolean _bioLinkItem(obj_id self, obj_id player, boolean equipAfterLink, boolean queryPlayer) throws InterruptedException
     {
         if (!isIdValid(self) || !isIdValid(player))

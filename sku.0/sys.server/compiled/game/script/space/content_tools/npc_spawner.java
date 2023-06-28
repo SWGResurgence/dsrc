@@ -1,5 +1,11 @@
 package script.space.content_tools;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.planetary_map;
 import script.library.utils;
@@ -12,10 +18,11 @@ public class npc_spawner extends script.base_script
     public npc_spawner()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         LOG("space", "ONINTIAILIZE");
-        String strTest = "" + self;
+        String strTest = String.valueOf(self);
         dictionary dctSpawnInfo = dataTableGetRow("datatables/space_content/npc_spawners.iff", strTest);
         if (dctSpawnInfo == null)
         {
@@ -34,8 +41,7 @@ public class npc_spawner extends script.base_script
         try
         {
             objNPC = createObject(strTemplate, getTransform_o2p(self), locTest.cell);
-        }
-        catch(Throwable err)
+        } catch (Throwable err)
         {
             LOG("space", "BAD TEMPLATE FOR " + self);
             locTest.x = locTest.x + 1;
@@ -86,7 +92,7 @@ public class npc_spawner extends script.base_script
             {
                 locTest = getLocation(objContainer);
             }
-            addPlanetaryMapLocation(self, utils.packStringId(strMapNameId), (int)locTest.x, (int)locTest.z, strPrimaryCategory, strSecondaryCategory, MLT_STATIC, planetary_map.NO_FLAG);
+            addPlanetaryMapLocation(self, utils.packStringId(strMapNameId), (int) locTest.x, (int) locTest.z, strPrimaryCategory, strSecondaryCategory, MLT_STATIC, planetary_map.NO_FLAG);
         }
         return SCRIPT_CONTINUE;
     }

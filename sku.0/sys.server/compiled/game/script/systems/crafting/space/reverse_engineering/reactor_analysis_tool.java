@@ -1,5 +1,11 @@
 package script.systems.crafting.space.reverse_engineering;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.create;
 import script.library.space_crafting;
 import script.library.utils;
@@ -23,6 +29,7 @@ public class reactor_analysis_tool extends script.base_script
     public static final String ANALYZE_PROMPT = "@" + STF + ":analyze_prompt";
     public static final String NO_ITEMS_PROMPT = "@" + STF + ":no_items";
     public static final String BTN_ANALYZE = "@" + STF + ":analyze";
+
     public reactor_analysis_tool()
     {
     }
@@ -49,7 +56,7 @@ public class reactor_analysis_tool extends script.base_script
             sendSystemMessage(transferer, errormessage2);
             return SCRIPT_OVERRIDE;
         }
-        if (getBooleanObjVar(item, "cannotReverseEngineer") == true)
+        if (getBooleanObjVar(item, "cannotReverseEngineer"))
         {
             string_id errormessage = new string_id(TOOL, "already_engineered");
             sendSystemMessage(transferer, errormessage);
@@ -118,7 +125,7 @@ public class reactor_analysis_tool extends script.base_script
                 {
                     countX++;
                 }
-                if (getBooleanObjVar(x2, "cannotReverseEngineer") == true)
+                if (getBooleanObjVar(x2, "cannotReverseEngineer"))
                 {
                     string_id errormessage = new string_id(TOOL, "already_engineered");
                     sendSystemMessage(player, errormessage);

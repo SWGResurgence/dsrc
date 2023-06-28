@@ -1,5 +1,11 @@
 package script.player.skill;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.obj_id;
 import script.prose_package;
@@ -9,6 +15,7 @@ public class teraskasi extends script.systems.combat.combat_base
     public teraskasi()
     {
     }
+
     public int cmdForceOfWill(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         int modval = meditation.getMeditationSkillMod(self);
@@ -39,17 +46,19 @@ public class teraskasi extends script.systems.combat.combat_base
             setObjVar(self, meditation.VAR_FORCE_OF_WILL_ACTIVE, -1);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             meditation.forceOfWill(self, modval - roll);
             setObjVar(self, meditation.VAR_FORCE_OF_WILL_ACTIVE, now);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdForceOfWillFail(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int cmdPowerBoost(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -80,6 +89,7 @@ public class teraskasi extends script.systems.combat.combat_base
         combat.sendCombatSpamMessage(self, meditation.SID_POWERBOOST_BEGIN);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdPowerBoostFail(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         combat.sendCombatSpamMessage(self, meditation.SID_POWERBOOST_FAIL);

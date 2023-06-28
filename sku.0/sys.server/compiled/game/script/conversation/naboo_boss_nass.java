@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,150 +14,185 @@ import script.*;
 
 public class naboo_boss_nass extends script.base_script
 {
+    public static String c_stringFile = "conversation/naboo_boss_nass";
+
     public naboo_boss_nass()
     {
     }
-    public static String c_stringFile = "conversation/naboo_boss_nass";
+
     public boolean naboo_boss_nass_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean naboo_boss_nass_condition_onArtifactMauler(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "naboo_boss_nass_artifacts_mauler");
     }
+
     public boolean naboo_boss_nass_condition_sentToBossNass(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "legacy_naboo_droid_module_4") || groundquests.hasCompletedQuest(player, "legacy_naboo_droid_module_4");
     }
+
     public boolean naboo_boss_nass_condition_finishedArtifactMauler(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "naboo_boss_nass_artifacts_mauler", "boss_nass_mauler_06") || groundquests.hasCompletedQuest(player, "naboo_boss_nass_artifacts_mauler");
     }
+
     public boolean naboo_boss_nass_condition_onArtifactSkaak(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "naboo_boss_nass_artifacts_skaak");
     }
+
     public boolean naboo_boss_nass_condition_finishedArtifactSkaak(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "naboo_boss_nass_artifacts_skaak", "boss_nass_artifacts_skaak_07") || groundquests.hasCompletedQuest(player, "naboo_boss_nass_artifacts_skaak");
     }
+
     public boolean naboo_boss_nass_condition_onArtifactMuskeg(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "naboo_boss_nass_artifacts_muskeg");
     }
+
     public boolean naboo_boss_nass_condition_finishedArtifactMuskeg(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "naboo_boss_nass_artifacts_muskeg", "boss_nass_artifacts_muskeg_05") || groundquests.hasCompletedQuest(player, "naboo_boss_nass_artifacts_muskeg");
     }
+
     public boolean naboo_boss_nass_condition_onArtifactDarkwalker(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "naboo_boss_nass_artifacts_darkwalker");
     }
+
     public boolean naboo_boss_nass_condition_finishedArtifactDarkwalker(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "naboo_boss_nass_artifacts_darkwalker", "boss_nass_artifacts_darkwalker_04") || groundquests.hasCompletedQuest(player, "naboo_boss_nass_artifacts_darkwalker");
     }
+
     public boolean naboo_boss_nass_condition_onArtifactScattered(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "naboo_boss_nass_artifacts_scattered");
     }
+
     public boolean naboo_boss_nass_condition_finishedArtifactScattered(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "naboo_boss_nass_artifacts_scattered", "boss_nass_artifacts_scattered_02") || groundquests.hasCompletedQuest(player, "naboo_boss_nass_artifacts_scattered");
     }
+
     public boolean naboo_boss_nass_condition_onPasscodeRecon(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "naboo_boss_nass_password_recon");
     }
+
     public boolean naboo_boss_nass_condition_finishedPasscodeRecon(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "naboo_boss_nass_password_recon", "boss_nass_password_recon_04") || groundquests.hasCompletedQuest(player, "naboo_boss_nass_password_recon");
     }
+
     public boolean naboo_boss_nass_condition_finishedPasscodeCode(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "naboo_boss_nass_password_code", "boss_nass_password_code_06") || groundquests.hasCompletedQuest(player, "naboo_boss_nass_password_code");
     }
+
     public boolean naboo_boss_nass_condition_onPasscodeCode(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "naboo_boss_nass_password_code");
     }
+
     public boolean naboo_boss_nass_condition_gettingDroidPart(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "legacy_naboo_droid_module_4", "findDroidPart4_03");
     }
+
     public boolean naboo_boss_nass_condition_hasDroidPart(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "legacy_naboo_droid_module_4", "findDroidPart4_04") || groundquests.isTaskActive(player, "legacy_naboo_droid_module_4", "findDroidPart4_05") || groundquests.isTaskActive(player, "legacy_naboo_droid_module_4", "findDroidPart4_06") || groundquests.hasCompletedQuest(player, "legacy_naboo_droid_module_4");
     }
+
     public void naboo_boss_nass_action_grantArtifactMauler(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "findDroidPart4_01");
         groundquests.requestGrantQuest(player, "naboo_boss_nass_artifacts_mauler");
     }
+
     public void naboo_boss_nass_action_grantArtifactSkaak(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "naboo_boss_nass_artifacts_skaak");
     }
+
     public void naboo_boss_nass_action_grantArtifactMuskeg(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "naboo_boss_nass_artifacts_muskeg");
     }
+
     public void naboo_boss_nass_action_grantArtifactDarkwalker(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "naboo_boss_nass_artifacts_darkwalker");
     }
+
     public void naboo_boss_nass_action_grantArtifactScattered(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "naboo_boss_nass_artifacts_scattered");
     }
+
     public void naboo_boss_nass_action_signal_scattered_02(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "boss_nass_artifacts_scattered_02");
         groundquests.sendSignal(player, "findDroidPart4_01");
     }
+
     public void naboo_boss_nass_action_endArtifactDarkwalker(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "boss_nass_artifacts_darkwalker_04");
         groundquests.sendSignal(player, "findDroidPart4_01");
     }
+
     public void naboo_boss_nass_action_endArtifactMuskeg(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "boss_nass_artifacts_muskeg_05");
         groundquests.sendSignal(player, "findDroidPart4_01");
     }
+
     public void naboo_boss_nass_action_endArtifactSkaak(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "boss_nass_artifacts_skaak_07");
         groundquests.sendSignal(player, "findDroidPart4_01");
     }
+
     public void naboo_boss_nass_action_endArtifactMauler(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "boss_nass_mauler_06");
         groundquests.sendSignal(player, "findDroidPart4_01");
     }
+
     public void naboo_boss_nass_action_grantPasscodeRecon(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "naboo_boss_nass_password_recon");
     }
+
     public void naboo_boss_nass_action_endPasscodeRecon(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "boss_nass_password_recon_04");
         groundquests.sendSignal(player, "findDroidPart4_01");
     }
+
     public void naboo_boss_nass_action_grantPasscodeCode(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "naboo_boss_nass_password_code");
     }
+
     public void naboo_boss_nass_action_endPasscodeCode(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "boss_nass_password_code_06");
         groundquests.sendSignal(player, "findDroidPart4_01");
     }
+
     public void naboo_boss_nass_action_codeForDroidPart(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "findDroidPart4_02");
     }
+
     public int naboo_boss_nass_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_70"))
@@ -167,6 +208,7 @@ public class naboo_boss_nass extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_boss_nass_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_32"))
@@ -182,6 +224,7 @@ public class naboo_boss_nass extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_boss_nass_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_58"))
@@ -201,7 +244,7 @@ public class naboo_boss_nass extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_33");
@@ -210,7 +253,7 @@ public class naboo_boss_nass extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_boss_nass.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -220,6 +263,7 @@ public class naboo_boss_nass extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_boss_nass_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_33"))
@@ -239,7 +283,7 @@ public class naboo_boss_nass extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_64");
@@ -248,7 +292,7 @@ public class naboo_boss_nass extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_boss_nass.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -258,6 +302,7 @@ public class naboo_boss_nass extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_boss_nass_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_64"))
@@ -273,6 +318,7 @@ public class naboo_boss_nass extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_boss_nass_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_55"))
@@ -288,6 +334,7 @@ public class naboo_boss_nass extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_boss_nass_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_53"))
@@ -303,6 +350,7 @@ public class naboo_boss_nass extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_boss_nass_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_51"))
@@ -318,6 +366,7 @@ public class naboo_boss_nass extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_boss_nass_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_39"))
@@ -333,6 +382,7 @@ public class naboo_boss_nass extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_boss_nass_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_74"))
@@ -352,7 +402,7 @@ public class naboo_boss_nass extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_78");
@@ -361,7 +411,7 @@ public class naboo_boss_nass extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_boss_nass.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -381,6 +431,7 @@ public class naboo_boss_nass extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_boss_nass_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_78"))
@@ -396,6 +447,7 @@ public class naboo_boss_nass extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -405,11 +457,13 @@ public class naboo_boss_nass extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -418,18 +472,21 @@ public class naboo_boss_nass extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.naboo_boss_nass");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -465,7 +522,7 @@ public class naboo_boss_nass extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_70");
@@ -473,7 +530,7 @@ public class naboo_boss_nass extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_boss_nass.branchId", 3);
                 npcStartConversation(player, npc, "naboo_boss_nass", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -501,7 +558,7 @@ public class naboo_boss_nass extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_32");
@@ -509,7 +566,7 @@ public class naboo_boss_nass extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_boss_nass.branchId", 6);
                 npcStartConversation(player, npc, "naboo_boss_nass", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -537,7 +594,7 @@ public class naboo_boss_nass extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_58");
@@ -545,7 +602,7 @@ public class naboo_boss_nass extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_boss_nass.branchId", 9);
                 npcStartConversation(player, npc, "naboo_boss_nass", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -573,7 +630,7 @@ public class naboo_boss_nass extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_55");
@@ -581,7 +638,7 @@ public class naboo_boss_nass extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_boss_nass.branchId", 14);
                 npcStartConversation(player, npc, "naboo_boss_nass", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -609,7 +666,7 @@ public class naboo_boss_nass extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_53");
@@ -617,7 +674,7 @@ public class naboo_boss_nass extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_boss_nass.branchId", 17);
                 npcStartConversation(player, npc, "naboo_boss_nass", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -645,7 +702,7 @@ public class naboo_boss_nass extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_51");
@@ -653,7 +710,7 @@ public class naboo_boss_nass extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_boss_nass.branchId", 20);
                 npcStartConversation(player, npc, "naboo_boss_nass", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -681,7 +738,7 @@ public class naboo_boss_nass extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_39");
@@ -689,7 +746,7 @@ public class naboo_boss_nass extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_boss_nass.branchId", 23);
                 npcStartConversation(player, npc, "naboo_boss_nass", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -723,7 +780,7 @@ public class naboo_boss_nass extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_74");
@@ -735,7 +792,7 @@ public class naboo_boss_nass extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_boss_nass.branchId", 26);
                 npcStartConversation(player, npc, "naboo_boss_nass", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -750,6 +807,7 @@ public class naboo_boss_nass extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("naboo_boss_nass"))

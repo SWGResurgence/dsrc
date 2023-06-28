@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,98 +14,122 @@ import script.*;
 
 public class naboo_deeja_peak_vance_groten extends script.base_script
 {
+    public static String c_stringFile = "conversation/naboo_deeja_peak_vance_groten";
+
     public naboo_deeja_peak_vance_groten()
     {
     }
-    public static String c_stringFile = "conversation/naboo_deeja_peak_vance_groten";
+
     public boolean naboo_deeja_peak_vance_groten_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean naboo_deeja_peak_vance_groten_condition_startBeaconQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "naboo_deeja_peak_goto_vance") || groundquests.hasCompletedQuest(player, "naboo_deeja_peak_goto_prof_hudmasse");
     }
+
     public boolean naboo_deeja_peak_vance_groten_condition_onSafetyQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "naboo_deeja_peak_beacon_safety");
     }
+
     public boolean naboo_deeja_peak_vance_groten_condition_finishedSafetyQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "naboo_deeja_peak_beacon_safety", "deeja_peak_beacon_safety_05") || groundquests.hasCompletedQuest(player, "naboo_deeja_peak_beacon_safety");
     }
+
     public boolean naboo_deeja_peak_vance_groten_condition_onDarknessQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "naboo_deeja_peak_beacon_darkness");
     }
+
     public boolean naboo_deeja_peak_vance_groten_condition_finishedDarknessQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "naboo_deeja_peak_beacon_darkness", "deeja_peak_beacon_darkness_10") || groundquests.hasCompletedQuest(player, "naboo_deeja_peak_beacon_darkness");
     }
+
     public boolean naboo_deeja_peak_vance_groten_condition_onFavorQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "naboo_deeja_peak_beacon_favor");
     }
+
     public boolean naboo_deeja_peak_vance_groten_condition_finishedFavorQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "naboo_deeja_peak_beacon_favor", "deeja_peak_beacon_favor_05") || groundquests.hasCompletedQuest(player, "naboo_deeja_peak_beacon_favor");
     }
+
     public boolean naboo_deeja_peak_vance_groten_condition_completedBeaconQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "naboo_deeja_peak_beacon_mercs", "deeja_peak_beacon_mercs_06") || groundquests.hasCompletedQuest(player, "naboo_deeja_peak_beacon_mercs");
     }
+
     public boolean naboo_deeja_peak_vance_groten_condition_onMercsQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "naboo_deeja_peak_beacon_mercs");
     }
+
     public boolean naboo_deeja_peak_vance_groten_condition_finishedMercQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "naboo_deeja_peak_beacon_mercs", "deeja_peak_beacon_mercs_05");
     }
+
     public boolean naboo_deeja_peak_vance_groten_condition_noLuckWithKippy(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "naboo_deeja_peak_beacon_darkness", "deeja_peak_beacon_darkness_04");
     }
+
     public void naboo_deeja_peak_vance_groten_action_grantSafetyQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "naboo_deeja_peak_beacon_safety");
     }
+
     public void naboo_deeja_peak_vance_groten_action_grantDarknessQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "naboo_deeja_peak_beacon_darkness");
     }
+
     public void naboo_deeja_peak_vance_groten_action_grantFavorQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "naboo_deeja_peak_beacon_favor");
     }
+
     public void naboo_deeja_peak_vance_groten_action_grantMercsQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "naboo_deeja_peak_beacon_mercs");
     }
+
     public void naboo_deeja_peak_vance_groten_action_signel_mercs_05(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "deeja_peak_beacon_mercs_05");
     }
+
     public void naboo_deeja_peak_vance_groten_action_signal_darkness_04(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "deeja_peak_beacon_darkness_04");
     }
+
     public void naboo_deeja_peak_vance_groten_action_endFavorQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "deeja_peak_beacon_favor_05");
     }
+
     public void naboo_deeja_peak_vance_groten_action_endDarknessQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "deeja_peak_beacon_darkness_10");
     }
+
     public void naboo_deeja_peak_vance_groten_action_endSafetyQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "deeja_peak_beacon_safety_05");
     }
+
     public void naboo_deeja_peak_vance_groten_action_endGotoVance(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "deeja_peak_goto_vance");
     }
+
     public int naboo_deeja_peak_vance_groten_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_87"))
@@ -115,6 +145,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_deeja_peak_vance_groten_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_58"))
@@ -134,7 +165,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_83");
@@ -143,7 +174,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_deeja_peak_vance_groten.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -153,6 +184,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_deeja_peak_vance_groten_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_83"))
@@ -168,6 +200,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_deeja_peak_vance_groten_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_53"))
@@ -187,7 +220,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_81");
@@ -196,7 +229,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_deeja_peak_vance_groten.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -206,6 +239,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_deeja_peak_vance_groten_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_81"))
@@ -225,7 +259,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_98");
@@ -234,7 +268,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_deeja_peak_vance_groten.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -244,6 +278,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_deeja_peak_vance_groten_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_98"))
@@ -259,6 +294,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_deeja_peak_vance_groten_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_94"))
@@ -278,7 +314,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_96");
@@ -287,7 +323,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_deeja_peak_vance_groten.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -297,6 +333,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_deeja_peak_vance_groten_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_96"))
@@ -312,6 +349,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_deeja_peak_vance_groten_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_73"))
@@ -331,7 +369,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_75");
@@ -340,7 +378,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_deeja_peak_vance_groten.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -350,6 +388,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_deeja_peak_vance_groten_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_75"))
@@ -365,6 +404,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_deeja_peak_vance_groten_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_37"))
@@ -384,7 +424,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_41");
@@ -393,7 +433,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_deeja_peak_vance_groten.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -403,6 +443,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_deeja_peak_vance_groten_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_41"))
@@ -422,7 +463,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -431,7 +472,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_deeja_peak_vance_groten.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -441,6 +482,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_deeja_peak_vance_groten_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_61"))
@@ -467,7 +509,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_63");
@@ -480,7 +522,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_deeja_peak_vance_groten.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -490,6 +532,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_deeja_peak_vance_groten_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_63"))
@@ -516,6 +559,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -525,11 +569,13 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -538,18 +584,21 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.naboo_deeja_peak_vance_groten");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -578,7 +627,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_87");
@@ -586,7 +635,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_deeja_peak_vance_groten.branchId", 2);
                 npcStartConversation(player, npc, "naboo_deeja_peak_vance_groten", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -614,7 +663,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_58");
@@ -622,7 +671,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_deeja_peak_vance_groten.branchId", 5);
                 npcStartConversation(player, npc, "naboo_deeja_peak_vance_groten", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -650,7 +699,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_53");
@@ -658,7 +707,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_deeja_peak_vance_groten.branchId", 9);
                 npcStartConversation(player, npc, "naboo_deeja_peak_vance_groten", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -679,7 +728,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_94");
@@ -687,7 +736,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_deeja_peak_vance_groten.branchId", 13);
                 npcStartConversation(player, npc, "naboo_deeja_peak_vance_groten", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -715,7 +764,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_73");
@@ -723,7 +772,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_deeja_peak_vance_groten.branchId", 17);
                 npcStartConversation(player, npc, "naboo_deeja_peak_vance_groten", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -751,7 +800,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_37");
@@ -759,7 +808,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_deeja_peak_vance_groten.branchId", 21);
                 npcStartConversation(player, npc, "naboo_deeja_peak_vance_groten", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -768,6 +817,7 @@ public class naboo_deeja_peak_vance_groten extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("naboo_deeja_peak_vance_groten"))

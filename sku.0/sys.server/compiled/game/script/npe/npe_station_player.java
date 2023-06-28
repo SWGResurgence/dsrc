@@ -1,5 +1,11 @@
 package script.npe;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.groundquests;
 import script.obj_id;
 
@@ -8,6 +14,7 @@ public class npe_station_player extends script.base_script
     public npe_station_player()
     {
     }
+
     public int OnNewbieTutorialResponse(obj_id self, String strAction) throws InterruptedException
     {
         if (strAction.equals("clientReady"))

@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.utils;
@@ -7,14 +13,17 @@ import script.*;
 
 public class seans_historian extends script.base_script
 {
+    public static String c_stringFile = "conversation/seans_historian";
+
     public seans_historian()
     {
     }
-    public static String c_stringFile = "conversation/seans_historian";
+
     public boolean seans_historian_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean seans_historian_condition_historyQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "bestine.hquest"))
@@ -22,14 +31,12 @@ public class seans_historian extends script.base_script
             if (hasObjVar(npc, "bestine.electionWinner"))
             {
                 String winner = getStringObjVar(npc, "bestine.electionWinner");
-                if ((winner.equals("sean")) || (winner.equals("Sean")))
-                {
-                    return true;
-                }
+                return (winner.equals("sean")) || (winner.equals("Sean"));
             }
         }
         return false;
     }
+
     public boolean seans_historian_condition_hasFind(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "bestine.find"))
@@ -37,37 +44,31 @@ public class seans_historian extends script.base_script
             if (hasObjVar(npc, "bestine.electionWinner"))
             {
                 String winner = getStringObjVar(npc, "bestine.electionWinner");
-                if ((winner.equals("sean")) || (winner.equals("Sean")))
-                {
-                    return true;
-                }
+                return (winner.equals("sean")) || (winner.equals("Sean"));
             }
         }
         return false;
     }
+
     public boolean seans_historian_condition_hasItem(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (utils.playerHasItemByTemplate(player, "object/tangible/loot/quest/sean_history_disk.iff"))
-        {
-            return true;
-        }
-        return false;
+        return utils.playerHasItemByTemplate(player, "object/tangible/loot/quest/sean_history_disk.iff");
     }
+
     public boolean seans_historian_condition_inoffice(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.electionWinner"))
         {
             String winner = getStringObjVar(npc, "bestine.electionWinner");
-            if ((winner.equals("sean")) || (winner.equals("Sean")))
-            {
-                return true;
-            }
+            return (winner.equals("sean")) || (winner.equals("Sean"));
         }
         return false;
     }
+
     public void seans_historian_action__defaultAction(obj_id player, obj_id npc) throws InterruptedException
     {
     }
+
     public void seans_historian_action_setFind(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "bestine.find", true);
@@ -81,6 +82,7 @@ public class seans_historian extends script.base_script
             removeObjVar(player, "bestine.already_searched");
         }
     }
+
     public void seans_historian_action_ItemfoundObj(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "bestine.itemfound", true);
@@ -96,6 +98,7 @@ public class seans_historian extends script.base_script
         }
         removeObjVar(player, "bestine.historianWaypoint");
     }
+
     public void seans_historian_action_cleanUpOldVars(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!utils.playerHasItemByTemplate(player, "object/tangible/loot/quest/sean_history_disk.iff"))
@@ -110,6 +113,7 @@ public class seans_historian extends script.base_script
             }
         }
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -119,11 +123,13 @@ public class seans_historian extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -132,12 +138,14 @@ public class seans_historian extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "npc.conversation.seans_historian");
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -160,7 +168,7 @@ public class seans_historian extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_647601e7");
@@ -168,7 +176,7 @@ public class seans_historian extends script.base_script
                 setObjVar(player, "conversation.seans_historian.branchId", 1);
                 npcStartConversation(player, self, "seans_historian", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -196,7 +204,7 @@ public class seans_historian extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_b30bd73c");
@@ -208,7 +216,7 @@ public class seans_historian extends script.base_script
                 setObjVar(player, "conversation.seans_historian.branchId", 6);
                 npcStartConversation(player, self, "seans_historian", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -231,6 +239,7 @@ public class seans_historian extends script.base_script
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("seans_historian"))
@@ -255,7 +264,7 @@ public class seans_historian extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e547fd1e");
@@ -264,7 +273,7 @@ public class seans_historian extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.seans_historian.branchId");
                     npcSpeak(player, message);
@@ -299,7 +308,7 @@ public class seans_historian extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_67e6df55");
@@ -312,7 +321,7 @@ public class seans_historian extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.seans_historian.branchId");
                     npcSpeak(player, message);

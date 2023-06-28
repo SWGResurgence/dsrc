@@ -1,5 +1,11 @@
 package script.systems.crafting.space.reverse_engineering;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.draft_schematic;
 import script.library.craftinglib;

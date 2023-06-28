@@ -1,5 +1,11 @@
 package script.systems.skills;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -80,6 +86,5 @@ public class skill_test extends script.base_script
             skillname = skillnames[i];
             LOG("skills", "skill.skills: " + skillname);
         }
-        return;
     }
 }

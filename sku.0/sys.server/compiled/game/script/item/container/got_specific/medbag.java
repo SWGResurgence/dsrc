@@ -1,5 +1,11 @@
 package script.item.container.got_specific;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class medbag extends script.item.container.got_specific.base

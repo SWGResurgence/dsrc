@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,65 +14,72 @@ import script.*;
 
 public class story_arc_prelude_chivos extends script.base_script
 {
+    public static String c_stringFile = "conversation/story_arc_prelude_chivos";
+
     public story_arc_prelude_chivos()
     {
     }
-    public static String c_stringFile = "conversation/story_arc_prelude_chivos";
+
     public boolean story_arc_prelude_chivos_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean story_arc_prelude_chivos_condition_isOnMissionOne(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isQuestActive(player, "som_story_arc_prelude_01") || groundquests.isQuestActive(player, "som_story_arc_prelude_02"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.isQuestActive(player, "som_story_arc_prelude_01") || groundquests.isQuestActive(player, "som_story_arc_prelude_02");
     }
+
     public boolean story_arc_prelude_chivos_condition_hasCleanedVents(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "som_story_arc_prelude_02", "mustafar_air_filter_five");
     }
+
     public boolean story_arc_prelude_chivos_condition_hasWonVentMission(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "som_story_arc_prelude_02");
     }
+
     public boolean story_arc_prelude_chivos_condition_isOnMissionTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "som_story_arc_prelude_03");
     }
+
     public boolean story_arc_prelude_chivos_condition_hasCollectedRods(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "som_story_arc_prelude_03", "mustafar_rod_four");
     }
+
     public boolean story_arc_prelude_chivos_condition_hasWonAllMissions(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "som_story_arc_prelude_03");
     }
+
     public boolean story_arc_prelude_chivos_condition_hasCompletedSupply(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "som_story_arc_prelude_01");
     }
+
     public void story_arc_prelude_chivos_action_grantMissionOne(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "som_story_arc_prelude_01");
     }
+
     public void story_arc_prelude_chivos_action_grantVentReward(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "mustafar_air_filter_reward");
     }
+
     public void story_arc_prelude_chivos_action_grantMissionTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "som_story_arc_prelude_03");
     }
+
     public void story_arc_prelude_chivos_action_grantRodReward(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "mustafar_rod_reward");
     }
+
     public void story_arc_prelude_chivos_action_grantVentQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!groundquests.isQuestActive(player, "som_story_arc_prelude_02"))
@@ -74,6 +87,7 @@ public class story_arc_prelude_chivos extends script.base_script
             groundquests.grantQuest(player, "som_story_arc_prelude_02");
         }
     }
+
     public int story_arc_prelude_chivos_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_28"))
@@ -96,7 +110,7 @@ public class story_arc_prelude_chivos extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_84");
@@ -105,7 +119,7 @@ public class story_arc_prelude_chivos extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.story_arc_prelude_chivos.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -115,6 +129,7 @@ public class story_arc_prelude_chivos extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int story_arc_prelude_chivos_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_84"))
@@ -130,6 +145,7 @@ public class story_arc_prelude_chivos extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int story_arc_prelude_chivos_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_25"))
@@ -145,6 +161,7 @@ public class story_arc_prelude_chivos extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int story_arc_prelude_chivos_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_21"))
@@ -165,7 +182,7 @@ public class story_arc_prelude_chivos extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_69");
@@ -174,7 +191,7 @@ public class story_arc_prelude_chivos extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.story_arc_prelude_chivos.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -194,6 +211,7 @@ public class story_arc_prelude_chivos extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int story_arc_prelude_chivos_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_30"))
@@ -222,7 +240,7 @@ public class story_arc_prelude_chivos extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_34");
@@ -235,7 +253,7 @@ public class story_arc_prelude_chivos extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.story_arc_prelude_chivos.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -245,6 +263,7 @@ public class story_arc_prelude_chivos extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int story_arc_prelude_chivos_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_34"))
@@ -266,7 +285,7 @@ public class story_arc_prelude_chivos extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_69");
@@ -275,7 +294,7 @@ public class story_arc_prelude_chivos extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.story_arc_prelude_chivos.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -295,6 +314,7 @@ public class story_arc_prelude_chivos extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int story_arc_prelude_chivos_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_69"))
@@ -315,7 +335,7 @@ public class story_arc_prelude_chivos extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_71");
@@ -324,7 +344,7 @@ public class story_arc_prelude_chivos extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.story_arc_prelude_chivos.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -334,6 +354,7 @@ public class story_arc_prelude_chivos extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int story_arc_prelude_chivos_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_71"))
@@ -353,7 +374,7 @@ public class story_arc_prelude_chivos extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_73");
@@ -362,7 +383,7 @@ public class story_arc_prelude_chivos extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.story_arc_prelude_chivos.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -372,6 +393,7 @@ public class story_arc_prelude_chivos extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int story_arc_prelude_chivos_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_73"))
@@ -392,7 +414,7 @@ public class story_arc_prelude_chivos extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_75");
@@ -401,7 +423,7 @@ public class story_arc_prelude_chivos extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.story_arc_prelude_chivos.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -411,6 +433,7 @@ public class story_arc_prelude_chivos extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int story_arc_prelude_chivos_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_75"))
@@ -431,7 +454,7 @@ public class story_arc_prelude_chivos extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_77");
@@ -440,7 +463,7 @@ public class story_arc_prelude_chivos extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.story_arc_prelude_chivos.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -450,6 +473,7 @@ public class story_arc_prelude_chivos extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int story_arc_prelude_chivos_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_77"))
@@ -470,7 +494,7 @@ public class story_arc_prelude_chivos extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_115");
@@ -479,7 +503,7 @@ public class story_arc_prelude_chivos extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.story_arc_prelude_chivos.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -489,6 +513,7 @@ public class story_arc_prelude_chivos extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int story_arc_prelude_chivos_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_115"))
@@ -516,7 +541,7 @@ public class story_arc_prelude_chivos extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_118");
@@ -529,7 +554,7 @@ public class story_arc_prelude_chivos extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.story_arc_prelude_chivos.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -539,6 +564,7 @@ public class story_arc_prelude_chivos extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int story_arc_prelude_chivos_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_118"))
@@ -565,6 +591,7 @@ public class story_arc_prelude_chivos extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int story_arc_prelude_chivos_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_57"))
@@ -580,6 +607,7 @@ public class story_arc_prelude_chivos extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int story_arc_prelude_chivos_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_102"))
@@ -607,7 +635,7 @@ public class story_arc_prelude_chivos extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_104");
@@ -620,7 +648,7 @@ public class story_arc_prelude_chivos extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.story_arc_prelude_chivos.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -630,6 +658,7 @@ public class story_arc_prelude_chivos extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int story_arc_prelude_chivos_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_104"))
@@ -656,6 +685,7 @@ public class story_arc_prelude_chivos extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int story_arc_prelude_chivos_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_80"))
@@ -676,7 +706,7 @@ public class story_arc_prelude_chivos extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_89");
@@ -685,7 +715,7 @@ public class story_arc_prelude_chivos extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.story_arc_prelude_chivos.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -695,6 +725,7 @@ public class story_arc_prelude_chivos extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int story_arc_prelude_chivos_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_89"))
@@ -715,7 +746,7 @@ public class story_arc_prelude_chivos extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_93");
@@ -724,7 +755,7 @@ public class story_arc_prelude_chivos extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.story_arc_prelude_chivos.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -734,6 +765,7 @@ public class story_arc_prelude_chivos extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int story_arc_prelude_chivos_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_93"))
@@ -755,7 +787,7 @@ public class story_arc_prelude_chivos extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_97");
@@ -764,7 +796,7 @@ public class story_arc_prelude_chivos extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.story_arc_prelude_chivos.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -774,6 +806,7 @@ public class story_arc_prelude_chivos extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int story_arc_prelude_chivos_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_97"))
@@ -801,7 +834,7 @@ public class story_arc_prelude_chivos extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_108");
@@ -814,7 +847,7 @@ public class story_arc_prelude_chivos extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.story_arc_prelude_chivos.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -824,6 +857,7 @@ public class story_arc_prelude_chivos extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int story_arc_prelude_chivos_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_108"))
@@ -851,6 +885,7 @@ public class story_arc_prelude_chivos extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -863,6 +898,7 @@ public class story_arc_prelude_chivos extends script.base_script
         setName(self, "Foreman Chivos");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -871,6 +907,7 @@ public class story_arc_prelude_chivos extends script.base_script
         setName(self, "Foreman Chivos");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -880,18 +917,21 @@ public class story_arc_prelude_chivos extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.story_arc_prelude_chivos");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -920,7 +960,7 @@ public class story_arc_prelude_chivos extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -928,7 +968,7 @@ public class story_arc_prelude_chivos extends script.base_script
                 utils.setScriptVar(player, "conversation.story_arc_prelude_chivos.branchId", 2);
                 npcStartConversation(player, npc, "story_arc_prelude_chivos", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -949,7 +989,7 @@ public class story_arc_prelude_chivos extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_25");
@@ -957,7 +997,7 @@ public class story_arc_prelude_chivos extends script.base_script
                 utils.setScriptVar(player, "conversation.story_arc_prelude_chivos.branchId", 5);
                 npcStartConversation(player, npc, "story_arc_prelude_chivos", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -985,7 +1025,7 @@ public class story_arc_prelude_chivos extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_21");
@@ -997,7 +1037,7 @@ public class story_arc_prelude_chivos extends script.base_script
                 utils.setScriptVar(player, "conversation.story_arc_prelude_chivos.branchId", 7);
                 npcStartConversation(player, npc, "story_arc_prelude_chivos", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1019,7 +1059,7 @@ public class story_arc_prelude_chivos extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_30");
@@ -1027,7 +1067,7 @@ public class story_arc_prelude_chivos extends script.base_script
                 utils.setScriptVar(player, "conversation.story_arc_prelude_chivos.branchId", 9);
                 npcStartConversation(player, npc, "story_arc_prelude_chivos", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1048,7 +1088,7 @@ public class story_arc_prelude_chivos extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_57");
@@ -1056,7 +1096,7 @@ public class story_arc_prelude_chivos extends script.base_script
                 utils.setScriptVar(player, "conversation.story_arc_prelude_chivos.branchId", 20);
                 npcStartConversation(player, npc, "story_arc_prelude_chivos", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1078,7 +1118,7 @@ public class story_arc_prelude_chivos extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_102");
@@ -1086,7 +1126,7 @@ public class story_arc_prelude_chivos extends script.base_script
                 utils.setScriptVar(player, "conversation.story_arc_prelude_chivos.branchId", 22);
                 npcStartConversation(player, npc, "story_arc_prelude_chivos", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1108,7 +1148,7 @@ public class story_arc_prelude_chivos extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_80");
@@ -1116,7 +1156,7 @@ public class story_arc_prelude_chivos extends script.base_script
                 utils.setScriptVar(player, "conversation.story_arc_prelude_chivos.branchId", 26);
                 npcStartConversation(player, npc, "story_arc_prelude_chivos", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1125,6 +1165,7 @@ public class story_arc_prelude_chivos extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("story_arc_prelude_chivos"))

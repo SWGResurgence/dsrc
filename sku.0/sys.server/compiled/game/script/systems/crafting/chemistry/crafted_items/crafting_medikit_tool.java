@@ -1,5 +1,11 @@
 package script.systems.crafting.chemistry.crafted_items;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.craftinglib;
 import script.resource_weight;
 
@@ -40,6 +46,7 @@ public class crafting_medikit_tool extends script.systems.crafting.chemistry.cra
                                     new resource_weight.weight(craftinglib.RESOURCE_CONDUCTIVITY, 1)
                             })
             };
+
     public crafting_medikit_tool()
     {
     }

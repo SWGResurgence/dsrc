@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.utils;
@@ -7,30 +13,37 @@ import script.*;
 
 public class som_battlefield_miner_leader extends script.base_script
 {
+    public static String c_stringFile = "conversation/som_battlefield_miner_leader";
+
     public som_battlefield_miner_leader()
     {
     }
-    public static String c_stringFile = "conversation/som_battlefield_miner_leader";
+
     public boolean som_battlefield_miner_leader_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean som_battlefield_miner_leader_condition_isMinerFollowing(obj_id player, obj_id npc) throws InterruptedException
     {
         return (ai_lib.isFollowing(npc) && !utils.hasScriptVar(npc, "deployed"));
     }
+
     public boolean som_battlefield_miner_leader_condition_isNotFollowing(obj_id player, obj_id npc) throws InterruptedException
     {
         return (!ai_lib.isFollowing(npc) && !utils.hasScriptVar(npc, "deployed"));
     }
+
     public boolean som_battlefield_miner_leader_condition_isDeployed(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.hasScriptVar(npc, "deployed");
     }
+
     public boolean som_battlefield_miner_leader_condition_isNotDeployed(obj_id player, obj_id npc) throws InterruptedException
     {
         return (!utils.hasScriptVar(npc, "deployed"));
     }
+
     public void som_battlefield_miner_leader_action_deployForces(obj_id player, obj_id npc) throws InterruptedException
     {
         ai_lib.aiStopFollowing(npc);
@@ -39,11 +52,13 @@ public class som_battlefield_miner_leader extends script.base_script
         utils.setScriptVar(npc, "player", player);
         messageTo(npc, "deployForces", null, 0, false);
     }
+
     public void som_battlefield_miner_leader_action_startFollowing(obj_id player, obj_id npc) throws InterruptedException
     {
         ai_lib.aiFollow(npc, player);
         setMovementRun(npc);
     }
+
     public void som_battlefield_miner_leader_action_stopFollowing(obj_id player, obj_id npc) throws InterruptedException
     {
         ai_lib.aiStopFollowing(npc);
@@ -51,11 +66,13 @@ public class som_battlefield_miner_leader extends script.base_script
         aiSetHomeLocation(npc, here);
         ai_lib.setDefaultCalmBehavior(npc, ai_lib.BEHAVIOR_SENTINEL);
     }
+
     public void som_battlefield_miner_leader_action_undeployAndFollow(obj_id player, obj_id npc) throws InterruptedException
     {
         messageTo(npc, "unDeployForces", null, 0, false);
         ai_lib.aiFollow(npc, player);
     }
+
     public int som_battlefield_miner_leader_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6"))
@@ -104,6 +121,7 @@ public class som_battlefield_miner_leader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -115,6 +133,7 @@ public class som_battlefield_miner_leader extends script.base_script
         setCondition(self, CONDITION_INVULNERABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -122,6 +141,7 @@ public class som_battlefield_miner_leader extends script.base_script
         setCondition(self, CONDITION_INVULNERABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -130,18 +150,21 @@ public class som_battlefield_miner_leader extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.som_battlefield_miner_leader");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -185,7 +208,7 @@ public class som_battlefield_miner_leader extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_6");
@@ -205,7 +228,7 @@ public class som_battlefield_miner_leader extends script.base_script
                 utils.setScriptVar(player, "conversation.som_battlefield_miner_leader.branchId", 1);
                 npcStartConversation(player, npc, "som_battlefield_miner_leader", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -214,6 +237,7 @@ public class som_battlefield_miner_leader extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("som_battlefield_miner_leader"))

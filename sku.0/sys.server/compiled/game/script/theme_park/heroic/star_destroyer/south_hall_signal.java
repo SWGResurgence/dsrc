@@ -1,5 +1,11 @@
 package script.theme_park.heroic.star_destroyer;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.trial;
 import script.library.utils;
@@ -10,6 +16,7 @@ public class south_hall_signal extends script.base_script
     public south_hall_signal()
     {
     }
+
     public int startSpawnLoop(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self) || !exists(self))
@@ -21,35 +28,36 @@ public class south_hall_signal extends script.base_script
             setObjVar(self, "first", 1);
             messageTo(self, "doNextSpawn", null, 10.0f, false);
         }
-        else 
+        else
         {
             messageTo(self, "doNextSpawn", null, 50.0f, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int doNextSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self) || !exists(self))
         {
             return SCRIPT_OVERRIDE;
         }
-        String[] cell_list = 
-        {
-            "elevator00",
-            "elevator01",
-            "secondaryhangar",
-            "room05",
-            "hallway09",
-            "hallway08",
-            "hallway07",
-            "hallway06",
-            "hallway03",
-            "room04",
-            "room03",
-            "room02",
-            "room01",
-            "navcomputer"
-        };
+        String[] cell_list =
+                {
+                        "elevator00",
+                        "elevator01",
+                        "secondaryhangar",
+                        "room05",
+                        "hallway09",
+                        "hallway08",
+                        "hallway07",
+                        "hallway06",
+                        "hallway03",
+                        "room04",
+                        "room03",
+                        "room02",
+                        "room01",
+                        "navcomputer"
+                };
         obj_id[] players = trial.getPlayersInCellList(trial.getTop(self), cell_list);
         if (players == null || players.length == 0)
         {
@@ -71,7 +79,7 @@ public class south_hall_signal extends script.base_script
             dict.put("triggerName", "spawn_squad_leader");
             step = 0;
         }
-        else 
+        else
         {
             dict.put("triggerName", "next_south_spawn");
             step++;

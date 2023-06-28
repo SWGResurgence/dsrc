@@ -1,5 +1,11 @@
 package script.npc.junk_dealer;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.smuggler;
 import script.library.utils;
 import script.obj_id;
@@ -10,6 +16,7 @@ public class buy_back_device extends script.base_script
     public buy_back_device()
     {
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         String myTemplate = getTemplateName(self);

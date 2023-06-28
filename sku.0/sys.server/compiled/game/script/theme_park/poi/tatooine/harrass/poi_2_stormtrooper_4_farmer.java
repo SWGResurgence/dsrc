@@ -1,5 +1,11 @@
 package script.theme_park.poi.tatooine.harrass;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.location;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class poi_2_stormtrooper_4_farmer extends script.theme_park.poi.base
     public poi_2_stormtrooper_4_farmer()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         location here = new location(getLocation(self));

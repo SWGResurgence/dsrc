@@ -1,5 +1,11 @@
 package script.item.loot_kits;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.utils;
 import script.obj_id;
 import script.string_id;
@@ -12,6 +18,7 @@ public class loot_kit_base extends script.base_script
     public static final string_id NEW_ITEM_CREATED = new string_id(STF, "new_item_created");
     public static final string_id ITEM_USED = new string_id(STF, "item_used");
     public static final string_id AUTOSTACK_ATTACHED_EJECTED = new string_id(STF, "austostack_attached_ejected");
+
     public loot_kit_base()
     {
     }
@@ -491,6 +498,5 @@ public class loot_kit_base extends script.base_script
                 destroyObject(self);
             }
         }
-        return;
     }
 }

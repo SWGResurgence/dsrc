@@ -1,5 +1,11 @@
 package script.npc.epic_quest;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -11,6 +17,7 @@ public class quest_convo extends script.base_script
     public quest_convo()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         attachScript(self, "npc.converse.npc_converse_menu");
@@ -18,6 +25,7 @@ public class quest_convo extends script.base_script
         messageTo(self, "scriptCheck", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         String datatable = getStringObjVar(self, "quest_table");
@@ -44,7 +52,7 @@ public class quest_convo extends script.base_script
         if ((!gatingObject.equals("none")) && (!gatingObject.equals("")))
         {
             obj_id playerInv = utils.getInventoryContainer(speaker);
-            if (checkForGatingItem(playerInv, speaker, questNum, datatable) != true)
+            if (!checkForGatingItem(playerInv, speaker, questNum, datatable))
             {
                 string_id rewardMessage = new string_id(CONVO, "notyet");
                 chat.chat(self, speaker, rewardMessage);
@@ -89,20 +97,20 @@ public class quest_convo extends script.base_script
             String response1 = "player_reset_" + questNum;
             String response2 = "player_sorry_" + questNum;
             string_id greeting = new string_id(CONVO, npcGreet);
-            string_id response[] = new string_id[2];
+            string_id[] response = new string_id[2];
             response[0] = new string_id(CONVO, response1);
             response[1] = new string_id(CONVO, response2);
             npcStartConversation(speaker, self, "questConvo", greeting, response);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             String npcGreet = "npc_1_" + questNum;
             String response1 = "player_1_" + questNum;
             String response2 = "player_2_" + questNum;
             String response3 = "player_3_" + questNum;
             string_id greeting = new string_id(CONVO, npcGreet);
-            string_id response[] = new string_id[3];
+            string_id[] response = new string_id[3];
             response[0] = new string_id(CONVO, response1);
             response[1] = new string_id(CONVO, response2);
             response[2] = new string_id(CONVO, response3);
@@ -110,6 +118,7 @@ public class quest_convo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convo, obj_id player, string_id response) throws InterruptedException
     {
         String datatable = getStringObjVar(self, "quest_table");
@@ -126,7 +135,7 @@ public class quest_convo extends script.base_script
         {
             home = getLocation(self);
         }
-        else 
+        else
         {
             home = getLocation(npcOrBldg);
         }
@@ -147,7 +156,7 @@ public class quest_convo extends script.base_script
                 npcEndConversation(player);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 String npcAnswer1 = "npc_2_" + questNum;
                 string_id message = new string_id(CONVO, npcAnswer1);
@@ -204,6 +213,7 @@ public class quest_convo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void giveReward(obj_id self, obj_id player, int questNum) throws InterruptedException
     {
         if (questNum == 0)
@@ -231,7 +241,7 @@ public class quest_convo extends script.base_script
             money.bankTo(money.ACCT_JABBA, player, 25);
             sendSystemMessage(player, "25 credits have been deposited in your bank account.", null);
         }
-        else 
+        else
         {
             createObject(reward, playerInv, "");
             sendSystemMessage(player, "A gift has been placed in your inventory for completing this task.", null);
@@ -243,8 +253,8 @@ public class quest_convo extends script.base_script
         {
             detachScript(player, playerScript);
         }
-        return;
     }
+
     public void resetPlayer(obj_id self, obj_id player, int questNum) throws InterruptedException
     {
         String datatable = getStringObjVar(self, "quest_table");
@@ -265,8 +275,8 @@ public class quest_convo extends script.base_script
         {
             detachScript(player, playerScript);
         }
-        return;
     }
+
     public int OnGiveItem(obj_id self, obj_id item, obj_id player) throws InterruptedException
     {
         String name = getTemplateName(item);
@@ -293,26 +303,30 @@ public class quest_convo extends script.base_script
             chat.chat(self, player, notyet);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             string_id notyet = new string_id(CONVO, "notit");
             chat.chat(self, player, notyet);
             return SCRIPT_CONTINUE;
         }
     }
+
     public boolean checkForGatingItem(obj_id inv, obj_id player, int questNum, String datatable) throws InterruptedException
     {
         String giveMe = dataTableGetString(datatable, 12, questNum);
         boolean hadIt = false;
         obj_id[] contents = getContents(inv);
-        for (obj_id content : contents) {
+        for (obj_id content : contents)
+        {
             String itemInInventory = getTemplateName(content);
-            if (itemInInventory.equals(giveMe)) {
+            if (itemInInventory.equals(giveMe))
+            {
                 hadIt = true;
             }
         }
         return hadIt;
     }
+
     public int scriptCheck(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasScript(self, "npc.static_quest.quest_convo"))

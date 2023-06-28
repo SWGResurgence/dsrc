@@ -1,5 +1,11 @@
 package script.event.ewok_festival;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.groundquests;
 import script.library.prose;
@@ -14,10 +20,12 @@ public class love_note extends script.base_script
     public love_note()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int msgLoveNoteSuggestionStart(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -47,16 +55,19 @@ public class love_note extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void areaDebugMessaging(obj_id self, String message) throws InterruptedException
     {
         obj_id[] players = getAllPlayers(getLocation(getTopMostContainer(self)), 35.0f);
-        if (players != null && players.length > 0)
+        if (players != null)
         {
-            for (obj_id player : players) {
+            for (obj_id player : players)
+            {
                 sendSystemMessage(player, message, "");
             }
         }
     }
+
     public int msgLoveNoteSuggestionResponse(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -81,7 +92,7 @@ public class love_note extends script.base_script
                 groundquests.sendSignal(player, "loveday_disillusion_love_note_03");
                 utils.removeScriptVarTree(player, "love_note");
             }
-            else 
+            else
             {
                 int nextPhrase = phraseNum + 1;
                 int pid = sui.inputbox(
@@ -102,7 +113,7 @@ public class love_note extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             prose_package pp = prose.getPackage(new string_id("event/love_day", "love_note_incorrect_0" + rand(1, 9)), player, player);
             prose.setTO(pp, getName(player));

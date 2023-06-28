@@ -1,5 +1,11 @@
 package script.theme_park.newbie_tutorial;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.chat;
@@ -10,6 +16,7 @@ public class trooper4 extends script.theme_park.newbie_tutorial.tutorial_base
     public trooper4()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, "ai.rangedOnly", true);
@@ -17,12 +24,14 @@ public class trooper4 extends script.theme_park.newbie_tutorial.tutorial_base
         ai_lib.setMood(self, "npc_imperial");
         return SCRIPT_CONTINUE;
     }
+
     public int setMeUp(obj_id self, dictionary params) throws InterruptedException
     {
         aiEquipPrimaryWeapon(self);
         makeRefugees(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         stop(self);
@@ -30,6 +39,7 @@ public class trooper4 extends script.theme_park.newbie_tutorial.tutorial_base
         messageTo(self, "handleWaveOn", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleWaveOn(obj_id self, dictionary params) throws InterruptedException
     {
         chat.chat(self, new string_id(NEWBIE_CONVO, "trooper_move_along"));
@@ -37,12 +47,14 @@ public class trooper4 extends script.theme_park.newbie_tutorial.tutorial_base
         messageTo(self, "handleResumeGuarding", null, 4, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleResumeGuarding(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] refugees = getObjIdArrayObjVar(self, "newbie.refugees");
         faceToBehavior(self, refugees[0]);
         return SCRIPT_CONTINUE;
     }
+
     public void makeRefugees(obj_id trooper) throws InterruptedException
     {
         location spawnLoc = new location(getLocation(trooper));
@@ -69,6 +81,7 @@ public class trooper4 extends script.theme_park.newbie_tutorial.tutorial_base
         setObjVar(trooper, "newbie.refugees", refugees);
         messageTo(trooper, "makeWithTheTalking", null, rand(20, 30), false);
     }
+
     public int makeWithTheTalking(obj_id self, dictionary params) throws InterruptedException
     {
         int attempts = getIntObjVar(self, "newbie.numTries");

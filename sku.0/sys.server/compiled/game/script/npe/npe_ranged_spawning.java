@@ -1,5 +1,11 @@
 package script.npe;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.create;
 import script.library.utils;
 import script.location;
@@ -10,37 +16,38 @@ public class npe_ranged_spawning extends script.base_script
     public npe_ranged_spawning()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         location myLoc = new location();
         myLoc.cell = self;
-        float[] locations = 
-        {
-            -31.0f,
-            -35.0f,
-            -33.0f,
-            -37.0f,
-            -36.0f,
-            -38.0f,
-            -39.0f,
-            -39.0f,
-            -41.0f,
-            -39.0f,
-            -44.0f,
-            -38.0f,
-            -47.0f,
-            -36.0f,
-            -50.0f,
-            -31.0f,
-            -50.0f,
-            -26.0f,
-            -47.0f,
-            -22.0f,
-            -43.0f,
-            -19.0f
-        };
+        float[] locations =
+                {
+                        -31.0f,
+                        -35.0f,
+                        -33.0f,
+                        -37.0f,
+                        -36.0f,
+                        -38.0f,
+                        -39.0f,
+                        -39.0f,
+                        -41.0f,
+                        -39.0f,
+                        -44.0f,
+                        -38.0f,
+                        -47.0f,
+                        -36.0f,
+                        -50.0f,
+                        -31.0f,
+                        -50.0f,
+                        -26.0f,
+                        -47.0f,
+                        -22.0f,
+                        -43.0f,
+                        -19.0f
+                };
         boolean setting = utils.checkConfigFlag("ScriptFlags", "npeSequencersActive");
-        if (setting == true)
+        if (setting)
         {
             for (int i = 0; i <= 21; i = i + 2)
             {

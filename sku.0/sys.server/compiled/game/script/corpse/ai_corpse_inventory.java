@@ -1,5 +1,11 @@
 package script.corpse;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -11,6 +17,7 @@ public class ai_corpse_inventory extends script.base_script
     public ai_corpse_inventory()
     {
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (isPlayer(transferer))
@@ -20,6 +27,7 @@ public class ai_corpse_inventory extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToLoseItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         obj_id lootingPlayer = transferer;
@@ -81,14 +89,14 @@ public class ai_corpse_inventory extends script.base_script
                             return SCRIPT_OVERRIDE;
                         }
                     }
-                    else 
+                    else
                     {
                         return SCRIPT_OVERRIDE;
                     }
                 }
                 CustomerServiceLog("Loot", "(" + lootingPlayer + ") " + getName(lootingPlayer) + " is attempting to remove (" + item + ") " + getName(item) + " from (" + self + ")" + getName(self) + " to " + destContainer);
             }
-            else 
+            else
             {
                 sendSystemMessage(lootingPlayer, permissions.SID_INSUFFICIENT_PERMISSIONS);
                 return SCRIPT_OVERRIDE;
@@ -96,6 +104,7 @@ public class ai_corpse_inventory extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnLostItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (!isIdValid(transferer))
@@ -128,6 +137,7 @@ public class ai_corpse_inventory extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnOpenedContainer(obj_id self, obj_id whoOpenedMe) throws InterruptedException
     {
         obj_id corpseId = getContainedBy(self);
@@ -146,6 +156,7 @@ public class ai_corpse_inventory extends script.base_script
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int OnClosedContainer(obj_id self, obj_id whoClosedMe) throws InterruptedException
     {
         int cnt = utils.getIntScriptVar(self, "openCount");

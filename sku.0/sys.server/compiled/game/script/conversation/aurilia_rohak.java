@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.obj_id;
 import script.prose_package;
@@ -9,41 +15,49 @@ public class aurilia_rohak extends script.conversation.base.conversation_base
 {
     public String conversation = "conversation.aurilia_rohak";
     public String c_stringFile = "conversation/aurilia_rohak";
-    
+
     public aurilia_rohak()
     {
         super.scriptName = "aurilia_rohak";
         super.conversation = conversation;
         super.c_stringFile = c_stringFile;
     }
+
     private boolean aurilia_rohak_condition_axkva_min_intro_01(obj_id player) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "axkva_min_intro", "axkva_min_intro_01");
     }
+
     private boolean aurilia_rohak_condition_axkva_min_intro_02(obj_id player) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "axkva_min_intro", "axkva_min_intro_02");
     }
+
     private boolean aurilia_rohak_condition_axkva_min_intro_04(obj_id player) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "axkva_min_intro", "axkva_min_intro_04");
     }
+
     private boolean aurilia_rohak_condition_axkva_min_intro_06(obj_id player) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "axkva_min_intro", "axkva_min_intro_06");
     }
+
     private boolean aurilia_rohak_condition_notCompletedTokenBox(obj_id player) throws InterruptedException
     {
         return !groundquests.isQuestActiveOrComplete(player, "rohak_token_box");
     }
+
     private void aurilia_rohak_action_axkva_min_intro_02_signal(obj_id player) throws InterruptedException
     {
         groundquests.sendSignal(player, "axkva_min_intro_02");
     }
+
     private void aurilia_rohak_action_axkva_min_intro_04_signal(obj_id player) throws InterruptedException
     {
         groundquests.sendSignal(player, "axkva_min_intro_04");
     }
+
     private void aurilia_rohak_action_axkva_min_intro_06_signal(obj_id player) throws InterruptedException
     {
         String axkvaMinShardsString = "item_axkva_min_shards_04_01";
@@ -57,10 +71,12 @@ public class aurilia_rohak extends script.conversation.base.conversation_base
             groundquests.sendSignal(player, "axkva_min_intro_06");
         }
     }
+
     private void aurilia_rohak_action_giveTokenBoxQuest(obj_id player) throws InterruptedException
     {
         groundquests.grantQuest(player, "rohak_token_box");
     }
+
     private int aurilia_rohak_handleBranch1(obj_id player, string_id response) throws InterruptedException
     {
         if (response.equals("s_25"))
@@ -71,22 +87,25 @@ public class aurilia_rohak extends script.conversation.base.conversation_base
         }
         return SCRIPT_CONTINUE;
     }
+
     private int aurilia_rohak_handleBranch3(obj_id player, string_id response) throws InterruptedException
     {
         if (response.equals("s_32"))
         {
-            return craft_response(new String[] {"s_34", "s_36"}, 4, player);
+            return craft_response(new String[]{"s_34", "s_36"}, 4, player);
         }
         return SCRIPT_CONTINUE;
     }
+
     private int aurilia_rohak_handleBranch4(obj_id player, string_id response) throws InterruptedException
     {
         if (response.equals("s_36"))
         {
-            return craft_response(new String[] {"s_38", "s_40"}, 5, player);
+            return craft_response(new String[]{"s_38", "s_40"}, 5, player);
         }
         return SCRIPT_CONTINUE;
     }
+
     private int aurilia_rohak_handleBranch5(obj_id player, string_id response) throws InterruptedException
     {
         if (response.equals("s_40"))
@@ -98,6 +117,7 @@ public class aurilia_rohak extends script.conversation.base.conversation_base
         }
         return SCRIPT_CONTINUE;
     }
+
     private int aurilia_rohak_handleBranch7(obj_id player, string_id response) throws InterruptedException
     {
         if (response.equals("s_26"))
@@ -115,7 +135,7 @@ public class aurilia_rohak extends script.conversation.base.conversation_base
         }
         else if (response.equals("s_35"))
         {
-            return craft_response(new String[] {"s_29", "s_31"}, 11, player);
+            return craft_response(new String[]{"s_29", "s_31"}, 11, player);
         }
         else if (response.equals("s_37"))
         {
@@ -125,11 +145,12 @@ public class aurilia_rohak extends script.conversation.base.conversation_base
         }
         return SCRIPT_CONTINUE;
     }
+
     private int aurilia_rohak_handleBranch10(obj_id player, string_id response) throws InterruptedException
     {
         if (response.equals("s_28"))
         {
-            return craft_response(new String[] {"s_29", "s_31"}, 11, player);
+            return craft_response(new String[]{"s_29", "s_31"}, 11, player);
         }
         else if (response.equals("s_24"))
         {
@@ -139,6 +160,7 @@ public class aurilia_rohak extends script.conversation.base.conversation_base
         }
         return SCRIPT_CONTINUE;
     }
+
     private int aurilia_rohak_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_31"))
@@ -151,6 +173,7 @@ public class aurilia_rohak extends script.conversation.base.conversation_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -161,35 +184,42 @@ public class aurilia_rohak extends script.conversation.base.conversation_base
         if (aurilia_rohak_condition_axkva_min_intro_06(player))
         {
             aurilia_rohak_action_axkva_min_intro_06_signal(player);
-            return craft_repeater(new String[] {"s_9", "s_25"}, 1, player, self);
+            return craft_repeater(new String[]{"s_9", "s_25"}, 1, player, self);
         }
         else if (aurilia_rohak_condition_axkva_min_intro_04(player))
         {
             doAnimationAction(self, "explain");
-            return craft_repeater(new String[] {"s_10", "s_32"}, 3, player, self);
+            return craft_repeater(new String[]{"s_10", "s_32"}, 3, player, self);
         }
         else if (aurilia_rohak_condition_notCompletedTokenBox(player))
         {
-            if (aurilia_rohak_condition_axkva_min_intro_01(player)){
-                return craft_repeater(new String[] {"s_23", "s_26", "s_41", "s_37"}, 7, player, self);
+            if (aurilia_rohak_condition_axkva_min_intro_01(player))
+            {
+                return craft_repeater(new String[]{"s_23", "s_26", "s_41", "s_37"}, 7, player, self);
             }
-            else if (aurilia_rohak_condition_axkva_min_intro_02(player)){
-                return craft_repeater(new String[] {"s_23", "s_26", "s_41", "s_35"}, 7, player, self);
+            else if (aurilia_rohak_condition_axkva_min_intro_02(player))
+            {
+                return craft_repeater(new String[]{"s_23", "s_26", "s_41", "s_35"}, 7, player, self);
             }
-            else {
+            else
+            {
                 return craft_repeater(new String[]{"s_23", "s_26", "s_41"}, 7, player, self);
             }
         }
-        else{
-            if (aurilia_rohak_condition_axkva_min_intro_01(player)){
-                return craft_repeater(new String[] {"s_18", "s_24"}, 10, player, self);
+        else
+        {
+            if (aurilia_rohak_condition_axkva_min_intro_01(player))
+            {
+                return craft_repeater(new String[]{"s_18", "s_24"}, 10, player, self);
             }
-            else if (aurilia_rohak_condition_axkva_min_intro_02(player)){
-                return craft_repeater(new String[] {"s_18", "s_28"}, 10, player, self);
+            else if (aurilia_rohak_condition_axkva_min_intro_02(player))
+            {
+                return craft_repeater(new String[]{"s_18", "s_28"}, 10, player, self);
             }
         }
-        return craft_repeater(new String[] {"s_18"}, 10, player, self);
+        return craft_repeater(new String[]{"s_18"}, 10, player, self);
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("aurilia_rohak"))

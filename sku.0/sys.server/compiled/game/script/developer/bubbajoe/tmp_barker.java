@@ -4,6 +4,12 @@ package script.developer.bubbajoe;/*
 @Purpose: Barks a string on a loop.
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.obj_id;
@@ -32,6 +38,7 @@ public class tmp_barker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (volumeName.equals("barker"))
@@ -48,6 +55,7 @@ public class tmp_barker extends script.base_script
     {
         return SCRIPT_CONTINUE;
     }
+
     public void chirp(obj_id self) throws InterruptedException
     {
         String bark = "Halt! This building is off limits until further notice. Please take all questions, comments or concerns up with your local Imperial Garrison.";

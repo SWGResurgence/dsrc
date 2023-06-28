@@ -1,5 +1,11 @@
 package script.theme_park.nym;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -7,17 +13,19 @@ import script.obj_id;
 
 public class kusak_nyms_themepark extends script.base_script
 {
-    public kusak_nyms_themepark()
-    {
-    }
     public static final int RADIUS = 100;
     public static final int MIN_DIST = 25;
     public static final String DISTANCE_CHECK = "distance_check";
+    public kusak_nyms_themepark()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "moveCreatureToWaypoint", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         CustomerServiceLog("nyms_themepark", "boss_nyms_themepark.OnAboutToBeIncapacitated() Boss Mob " + self + " incapacitated by: " + killer);
@@ -45,37 +53,50 @@ public class kusak_nyms_themepark extends script.base_script
         if (attackerList != null && attackerList.length > 0)
         {
             CustomerServiceLog("nyms_themepark", "boss_nyms_themepark.OnAboutToBeIncapacitated() Boss Mob attackerList = " + attackerList.length);
-            for (obj_id obj_id : attackerList) {
-                if (!isIdValid(obj_id)) {
+            for (obj_id obj_id : attackerList)
+            {
+                if (!isIdValid(obj_id))
+                {
                     continue;
                 }
-                if (group.isGroupObject(obj_id)) {
+                if (group.isGroupObject(obj_id))
+                {
                     obj_id[] members = getGroupMemberIds(obj_id);
-                    for (obj_id member : members) {
-                        if (isIdValid(member)) {
-                            if (!groundquests.isQuestActive(obj_id, bossQuest)) {
+                    for (obj_id member : members)
+                    {
+                        if (isIdValid(member))
+                        {
+                            if (!groundquests.isQuestActive(obj_id, bossQuest))
+                            {
                                 CustomerServiceLog("nyms_themepark", "boss_nyms_themepark.OnAboutToBeIncapacitated() Boss Mob attacker: " + obj_id + " did not have boss quest: " + bossQuest);
                                 continue;
                             }
-                            if (hasCompletedCollectionSlot(obj_id, bossQuestSlot)) {
+                            if (hasCompletedCollectionSlot(obj_id, bossQuestSlot))
+                            {
                                 CustomerServiceLog("nyms_themepark", "boss_nyms_themepark.OnAboutToBeIncapacitated() Boss Mob attacker: " + obj_id + " has already attained: " + bossQuestSlot);
                                 continue;
                             }
-                            if (!hasCompletedCollectionSlotPrereq(obj_id, bossQuestSlot)) {
+                            if (!hasCompletedCollectionSlotPrereq(obj_id, bossQuestSlot))
+                            {
                                 CustomerServiceLog("nyms_themepark", "boss_nyms_themepark.OnAboutToBeIncapacitated() Boss Mob attacker: " + obj_id + " hasn't fulfilled the prerequisite for boss slot/: " + bossQuestSlot);
                                 continue;
                             }
                             modifyCollectionSlotValue(obj_id, bossQuestSlot, 1);
                         }
                     }
-                } else {
-                    if (!groundquests.isQuestActive(obj_id, bossQuest)) {
+                }
+                else
+                {
+                    if (!groundquests.isQuestActive(obj_id, bossQuest))
+                    {
                         continue;
                     }
-                    if (hasCompletedCollectionSlot(obj_id, bossQuestSlot)) {
+                    if (hasCompletedCollectionSlot(obj_id, bossQuestSlot))
+                    {
                         continue;
                     }
-                    if (!hasCompletedCollectionSlotPrereq(obj_id, bossQuestSlot)) {
+                    if (!hasCompletedCollectionSlotPrereq(obj_id, bossQuestSlot))
+                    {
                         continue;
                     }
                     modifyCollectionSlotValue(obj_id, bossQuestSlot, 1);
@@ -84,6 +105,7 @@ public class kusak_nyms_themepark extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -107,10 +129,12 @@ public class kusak_nyms_themepark extends script.base_script
             return SCRIPT_CONTINUE;
         }
         obj_id[] players = getPlayerCreaturesInRange(self, maxDist);
-        if (players != null && players.length > 0)
+        if (players != null)
         {
-            for (obj_id player : players) {
-                if (!isIdValid(player) && !exists(player) || isIncapacitated(player) || !isDead(player)) {
+            for (obj_id player : players)
+            {
+                if (!isIdValid(player) && !exists(player) || isIncapacitated(player) || !isDead(player))
+                {
                     continue;
                 }
                 addHate(self, player, 1000.0f);
@@ -120,6 +144,7 @@ public class kusak_nyms_themepark extends script.base_script
         messageTo(self, "handleBossDistanceCheck", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitateTarget(obj_id self, obj_id victim) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -150,6 +175,7 @@ public class kusak_nyms_themepark extends script.base_script
         messageTo(parent, "defaultEventReset", webster, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -179,6 +205,7 @@ public class kusak_nyms_themepark extends script.base_script
         messageTo(parent, "defaultEventReset", webster, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleBossDistanceCheck(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -217,12 +244,13 @@ public class kusak_nyms_themepark extends script.base_script
             dictionary webster = trial.getSessionDict(parent);
             messageTo(parent, "defaultEventReset", webster, 2, false);
         }
-        else 
+        else
         {
             messageTo(self, "handleBossDistanceCheck", null, 3, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean getRandomCombatTarget(obj_id self, obj_id parent) throws InterruptedException
     {
         if (!isIdValid(self) || !exists(self))
@@ -250,8 +278,10 @@ public class kusak_nyms_themepark extends script.base_script
             messageTo(parent, "defaultEventReset", webster, 2, false);
             return false;
         }
-        for (obj_id target : targets) {
-            if (!isIdValid(target)) {
+        for (obj_id target : targets)
+        {
+            if (!isIdValid(target))
+            {
                 continue;
             }
             startCombat(self, target);
@@ -263,6 +293,7 @@ public class kusak_nyms_themepark extends script.base_script
         messageTo(parent, "defaultEventReset", webster, 2, false);
         return false;
     }
+
     public int moveCreatureToWaypoint(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))

@@ -1,146 +1,160 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class mos_eisley_mayor extends script.base_script
 {
+    public static String c_stringFile = "conversation/mos_eisley_mayor";
+
     public mos_eisley_mayor()
     {
     }
-    public static String c_stringFile = "conversation/mos_eisley_mayor";
+
     public boolean mos_eisley_mayor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean mos_eisley_mayor_condition_needsTuskenReward(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "purvis_kill_warriors", "newbie_ranged_e7");
     }
+
     public boolean mos_eisley_mayor_condition_needsVerminReward(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "newbie_scout_pt6", "newbie_scout_e63");
     }
+
     public boolean mos_eisley_mayor_condition_completedAllMayorQuests(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "newbie_scout_pt6") && groundquests.hasCompletedQuest(player, "purvis_kill_warriors") && groundquests.hasCompletedQuest(player, "newbie_mayor_vaigon_shinn");
     }
+
     public boolean mos_eisley_mayor_condition_sentByVourk(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "tatooine_eisley_gotomayor", "tat_eisley_gotomayor_e3") || groundquests.hasCompletedQuest(player, "tatooine_eisley_gotomayor");
     }
+
     public boolean mos_eisley_mayor_condition_hasAMayorQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActiveOrComplete(player, "c_melee_combat_trainer") || groundquests.isQuestActiveOrComplete(player, "c_ranged_combat_trainer") || groundquests.isQuestActiveOrComplete(player, "c_scout_trainer"));
     }
+
     public boolean mos_eisley_mayor_condition_needsHooligansReward(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "newbie_mayor_vaigon_shinn", "mayor_vaigon_shinn_04");
     }
+
     public boolean mos_eisley_mayor_condition_needsTusken(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isTaskActive(player, "newbie_scout_pt6", "newbie_scout_e63") || groundquests.isTaskActive(player, "purvis_kill_warriors", "newbie_ranged_e7") || groundquests.isTaskActive(player, "newbie_mayor_vaigon_shinn", "mayor_vaigon_shinn_04"))
         {
             return false;
         }
-        if (!groundquests.isQuestActive(player, "c_ranged_combat_trainer") && !groundquests.hasCompletedQuest(player, "c_ranged_combat_trainer") && !groundquests.isQuestActive(player, "purvis_recon_one") && !groundquests.hasCompletedQuest(player, "purvis_recon_one"))
-        {
-            return true;
-        }
-        return false;
+        return !groundquests.isQuestActive(player, "c_ranged_combat_trainer") && !groundquests.hasCompletedQuest(player, "c_ranged_combat_trainer") && !groundquests.isQuestActive(player, "purvis_recon_one") && !groundquests.hasCompletedQuest(player, "purvis_recon_one");
     }
+
     public boolean mos_eisley_mayor_condition_needsVermin(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isTaskActive(player, "newbie_scout_pt6", "newbie_scout_e63") || groundquests.isTaskActive(player, "purvis_kill_warriors", "newbie_ranged_e7") || groundquests.isTaskActive(player, "newbie_mayor_vaigon_shinn", "mayor_vaigon_shinn_04"))
         {
             return false;
         }
-        if (!groundquests.isQuestActive(player, "c_scout_trainer") && !groundquests.hasCompletedQuest(player, "c_scout_trainer") && !groundquests.isQuestActive(player, "newbie_scout_v2") && !groundquests.hasCompletedQuest(player, "newbie_scout_v2"))
-        {
-            return true;
-        }
-        return false;
+        return !groundquests.isQuestActive(player, "c_scout_trainer") && !groundquests.hasCompletedQuest(player, "c_scout_trainer") && !groundquests.isQuestActive(player, "newbie_scout_v2") && !groundquests.hasCompletedQuest(player, "newbie_scout_v2");
     }
+
     public boolean mos_eisley_mayor_condition_needsHooligans(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isTaskActive(player, "newbie_scout_pt6", "newbie_scout_e63") || groundquests.isTaskActive(player, "purvis_kill_warriors", "newbie_ranged_e7") || groundquests.isTaskActive(player, "newbie_mayor_vaigon_shinn", "mayor_vaigon_shinn_04"))
         {
             return false;
         }
-        if (!groundquests.isQuestActive(player, "c_melee_combat_trainer") && !groundquests.hasCompletedQuest(player, "c_melee_combat_trainer") && !groundquests.isQuestActive(player, "newbie_mayor_hooligans") && !groundquests.hasCompletedQuest(player, "newbie_mayor_hooligans"))
-        {
-            return true;
-        }
-        return false;
+        return !groundquests.isQuestActive(player, "c_melee_combat_trainer") && !groundquests.hasCompletedQuest(player, "c_melee_combat_trainer") && !groundquests.isQuestActive(player, "newbie_mayor_hooligans") && !groundquests.hasCompletedQuest(player, "newbie_mayor_hooligans");
     }
+
     public boolean mos_eisley_mayor_condition_completedVerminAndHooligans(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "newbie_scout_pt6") && groundquests.hasCompletedQuest(player, "newbie_mayor_vaigon_shinn");
     }
+
     public boolean mos_eisley_mayor_condition_completedTuskenAndHooligans(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "purvis_kill_warriors") && groundquests.hasCompletedQuest(player, "newbie_mayor_vaigon_shinn");
     }
+
     public boolean mos_eisley_mayor_condition_completedTuskenAndVermin(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "newbie_scout_pt6") && groundquests.hasCompletedQuest(player, "purvis_kill_warriors");
     }
+
     public boolean mos_eisley_mayor_condition_needsToGoToVourk(obj_id player, obj_id npc) throws InterruptedException
     {
         return !groundquests.isQuestActive(player, "newbie_goto_vourk") && !groundquests.hasCompletedQuest(player, "newbie_goto_vourk");
     }
+
     public boolean mos_eisley_mayor_condition_mayorPickPocket(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "steal_speeder", "pickMayorsPocket");
     }
+
     public boolean mos_eisley_mayor_condition_isCompletingAQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return !groundquests.isTaskActive(player, "newbie_scout_pt6", "newbie_scout_e63") && !groundquests.isTaskActive(player, "purvis_kill_warriors", "newbie_ranged_e7") && !groundquests.isTaskActive(player, "newbie_mayor_vaigon_shinn", "mayor_vaigon_shinn_04");
     }
+
     public boolean mos_eisley_mayor_condition_needsHooliganOrTusken(obj_id player, obj_id npc) throws InterruptedException
     {
         return mos_eisley_mayor_condition_needsHooligans(player, npc) || mos_eisley_mayor_condition_needsTusken(player, npc);
     }
+
     public boolean mos_eisley_mayor_condition_needsHooliganOrVermin(obj_id player, obj_id npc) throws InterruptedException
     {
         return mos_eisley_mayor_condition_needsHooligans(player, npc) || mos_eisley_mayor_condition_needsVermin(player, npc);
     }
+
     public boolean mos_eisley_mayor_condition_needsTuskenOrVermin(obj_id player, obj_id npc) throws InterruptedException
     {
         return mos_eisley_mayor_condition_needsTusken(player, npc) || mos_eisley_mayor_condition_needsVermin(player, npc);
     }
+
     public boolean mos_eisley_mayor_condition_isDoingPeawp(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "c_melee_combat_trainer");
     }
+
     public boolean mos_eisley_mayor_condition_isDoingPurvis(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "c_ranged_combat_trainer");
     }
+
     public boolean mos_eisley_mayor_condition_isDoingEntha(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "c_scout_trainer");
     }
+
     public boolean mos_eisley_mayor_condition_isLevelTenOrCompletedAllQuests(obj_id player, obj_id npc) throws InterruptedException
     {
         return (mos_eisley_mayor_condition_completedAllMayorQuests(player, npc) || mos_eisley_mayor_condition_isLevel10(player, npc));
     }
+
     public boolean mos_eisley_mayor_condition_isLevel10(obj_id player, obj_id npc) throws InterruptedException
     {
         int level = getLevel(player);
-        if (level >= 10)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return level >= 10;
     }
+
     public void mos_eisley_mayor_action_giveTuskenReward(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "newbie_ranged_launch_e8");
     }
+
     public void mos_eisley_mayor_action_giveSingleBadge(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!badge.hasBadge(player, "bdg_mos_eisley_newbie_few_quests"))
@@ -148,6 +162,7 @@ public class mos_eisley_mayor extends script.base_script
             badge.grantBadge(player, "bdg_mos_eisley_newbie_few_quests");
         }
     }
+
     public void mos_eisley_mayor_action_giveMultiBadge(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!badge.hasBadge(player, "bdg_mos_eisley_newbie_few_quests"))
@@ -159,6 +174,7 @@ public class mos_eisley_mayor extends script.base_script
             badge.grantBadge(player, "bdg_mos_eisley_newbie_most_quests");
         }
     }
+
     public void mos_eisley_mayor_action_giveFullBadge(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!badge.hasBadge(player, "bdg_mos_eisley_newbie_few_quests"))
@@ -178,50 +194,62 @@ public class mos_eisley_mayor extends script.base_script
             badge.grantBadge(player, "bdg_mos_eisley_key_to_city");
         }
     }
+
     public void mos_eisley_mayor_action_sendToVerminQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "c_scout_trainer");
     }
+
     public void mos_eisley_mayor_action_sendToTuskenQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "c_ranged_combat_trainer");
     }
+
     public void mos_eisley_mayor_action_sendToHooliganQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "c_melee_combat_trainer");
     }
+
     public void mos_eisley_mayor_action_giveVerminReward(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "newbie_scout_mayor");
     }
+
     public void mos_eisley_mayor_action_giveHooliganReward(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "mayor_vaigon_shinn_04");
     }
+
     public void mos_eisley_mayor_action_sendToVourk(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "newbie_goto_vourk");
     }
+
     public void mos_eisley_mayor_action_signal_pickingPocket(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "mayorsPocketPicked");
     }
+
     public void mos_eisley_mayor_action_endGotoMayorQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "tat_eisley_gotomayor_e3");
     }
+
     public void mos_eisley_mayor_action_giveRebPilot(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "tatooine_eisley_gotoreb");
     }
+
     public void mos_eisley_mayor_action_giveImpPilot(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "tatooine_eisley_gotoimp");
     }
+
     public void mos_eisley_mayor_action_giveSmugPilot(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "tatooine_eisley_gotosmug");
     }
+
     public int mos_eisley_mayor_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_176"))
@@ -252,7 +280,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_197");
@@ -261,7 +289,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -271,6 +299,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_188"))
@@ -298,7 +327,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159");
@@ -311,7 +340,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -344,7 +373,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_180");
@@ -357,7 +386,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -421,7 +450,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_188");
@@ -454,7 +483,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -487,7 +516,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_185");
@@ -500,7 +529,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -532,7 +561,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -545,7 +574,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -584,7 +613,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_167");
@@ -601,7 +630,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -626,7 +655,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_144");
@@ -635,7 +664,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -660,7 +689,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_197");
@@ -669,7 +698,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -679,6 +708,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_159"))
@@ -705,7 +735,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_236");
@@ -718,7 +748,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -793,7 +823,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_188");
@@ -826,7 +856,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -836,6 +866,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_236"))
@@ -909,7 +940,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_188");
@@ -942,7 +973,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -952,6 +983,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_188"))
@@ -979,7 +1011,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159");
@@ -992,7 +1024,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1025,7 +1057,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_180");
@@ -1038,7 +1070,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1102,7 +1134,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_188");
@@ -1135,7 +1167,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1168,7 +1200,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_185");
@@ -1181,7 +1213,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1213,7 +1245,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -1226,7 +1258,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1265,7 +1297,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_167");
@@ -1282,7 +1314,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1307,7 +1339,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_144");
@@ -1316,7 +1348,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1341,7 +1373,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_197");
@@ -1350,7 +1382,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1360,6 +1392,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_188"))
@@ -1387,7 +1420,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159");
@@ -1400,7 +1433,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1433,7 +1466,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_180");
@@ -1446,7 +1479,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1510,7 +1543,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_188");
@@ -1543,7 +1576,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1576,7 +1609,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_185");
@@ -1589,7 +1622,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1621,7 +1654,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -1634,7 +1667,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1673,7 +1706,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_167");
@@ -1690,7 +1723,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1715,7 +1748,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_144");
@@ -1724,7 +1757,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1749,7 +1782,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_197");
@@ -1758,7 +1791,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1768,6 +1801,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_180"))
@@ -1794,7 +1828,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_236");
@@ -1807,7 +1841,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1882,7 +1916,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_188");
@@ -1915,7 +1949,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1925,6 +1959,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_236"))
@@ -1998,7 +2033,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_188");
@@ -2031,7 +2066,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2041,6 +2076,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_188"))
@@ -2068,7 +2104,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159");
@@ -2081,7 +2117,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2114,7 +2150,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_180");
@@ -2127,7 +2163,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2191,7 +2227,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_188");
@@ -2224,7 +2260,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2257,7 +2293,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_185");
@@ -2270,7 +2306,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2302,7 +2338,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -2315,7 +2351,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2354,7 +2390,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_167");
@@ -2371,7 +2407,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2396,7 +2432,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_144");
@@ -2405,7 +2441,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2430,7 +2466,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_197");
@@ -2439,7 +2475,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2449,6 +2485,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_188"))
@@ -2476,7 +2513,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159");
@@ -2489,7 +2526,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2522,7 +2559,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_180");
@@ -2535,7 +2572,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2599,7 +2636,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_188");
@@ -2632,7 +2669,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2665,7 +2702,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_185");
@@ -2678,7 +2715,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2710,7 +2747,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -2723,7 +2760,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2762,7 +2799,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_167");
@@ -2779,7 +2816,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2804,7 +2841,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_144");
@@ -2813,7 +2850,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2838,7 +2875,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_197");
@@ -2847,7 +2884,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2857,6 +2894,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_185"))
@@ -2883,7 +2921,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_236");
@@ -2896,7 +2934,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2971,7 +3009,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_188");
@@ -3004,7 +3042,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3014,6 +3052,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_236"))
@@ -3087,7 +3126,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_188");
@@ -3120,7 +3159,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3130,6 +3169,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_188"))
@@ -3157,7 +3197,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159");
@@ -3170,7 +3210,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3203,7 +3243,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_180");
@@ -3216,7 +3256,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3280,7 +3320,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_188");
@@ -3313,7 +3353,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3346,7 +3386,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_185");
@@ -3359,7 +3399,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3391,7 +3431,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -3404,7 +3444,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3443,7 +3483,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_167");
@@ -3460,7 +3500,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3485,7 +3525,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_144");
@@ -3494,7 +3534,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3519,7 +3559,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_197");
@@ -3528,7 +3568,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3538,6 +3578,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_76"))
@@ -3559,7 +3600,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_130");
@@ -3568,7 +3609,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3611,7 +3652,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_95");
@@ -3624,7 +3665,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3649,7 +3690,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_197");
@@ -3658,7 +3699,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3697,7 +3738,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_258");
@@ -3714,7 +3755,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3724,6 +3765,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_130"))
@@ -3757,7 +3799,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_155");
@@ -3774,7 +3816,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3784,6 +3826,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_155"))
@@ -3810,7 +3853,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -3823,7 +3866,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3862,7 +3905,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_167");
@@ -3879,7 +3922,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3904,7 +3947,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_144");
@@ -3913,7 +3956,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3923,6 +3966,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_164"))
@@ -3968,7 +4012,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_155");
@@ -3985,7 +4029,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3995,6 +4039,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_155"))
@@ -4021,7 +4066,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -4034,7 +4079,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4073,7 +4118,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_167");
@@ -4090,7 +4135,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4115,7 +4160,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_144");
@@ -4124,7 +4169,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4134,6 +4179,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_167"))
@@ -4171,7 +4217,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_172");
@@ -4184,7 +4230,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4223,7 +4269,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_155");
@@ -4240,7 +4286,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4250,6 +4296,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_172"))
@@ -4294,7 +4341,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_155");
@@ -4311,7 +4358,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4321,6 +4368,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_155"))
@@ -4347,7 +4395,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -4360,7 +4408,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4399,7 +4447,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_167");
@@ -4416,7 +4464,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4441,7 +4489,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_144");
@@ -4450,7 +4498,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4460,6 +4508,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_155"))
@@ -4486,7 +4535,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -4499,7 +4548,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4538,7 +4587,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_167");
@@ -4555,7 +4604,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4580,7 +4629,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_144");
@@ -4589,7 +4638,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4599,6 +4648,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_144"))
@@ -4625,7 +4675,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_149");
@@ -4638,7 +4688,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4648,6 +4698,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_149"))
@@ -4692,7 +4743,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_155");
@@ -4709,7 +4760,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4719,6 +4770,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_155"))
@@ -4745,7 +4797,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -4758,7 +4810,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4797,7 +4849,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_167");
@@ -4814,7 +4866,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4839,7 +4891,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_144");
@@ -4848,7 +4900,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4858,6 +4910,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_95"))
@@ -4877,7 +4930,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_99");
@@ -4886,7 +4939,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4918,7 +4971,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_105");
@@ -4931,7 +4984,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4941,6 +4994,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_99"))
@@ -4967,7 +5021,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -4980,7 +5034,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4990,6 +5044,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_105"))
@@ -5016,7 +5071,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_109");
@@ -5029,7 +5084,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5061,7 +5116,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_143");
@@ -5074,7 +5129,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5084,6 +5139,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_109"))
@@ -5110,7 +5166,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_113");
@@ -5123,7 +5179,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5155,7 +5211,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_129");
@@ -5168,7 +5224,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5178,6 +5234,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_113"))
@@ -5197,7 +5254,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_117");
@@ -5206,7 +5263,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5231,7 +5288,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_123");
@@ -5240,7 +5297,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5250,6 +5307,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_117"))
@@ -5276,7 +5334,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -5289,7 +5347,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5299,6 +5357,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch45(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_123"))
@@ -5325,7 +5384,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -5338,7 +5397,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5348,6 +5407,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_129"))
@@ -5367,7 +5427,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_199");
@@ -5376,7 +5436,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5401,7 +5461,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_137");
@@ -5410,7 +5470,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5420,6 +5480,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_199"))
@@ -5446,7 +5507,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -5459,7 +5520,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5469,6 +5530,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch48(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_137"))
@@ -5495,7 +5557,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -5508,7 +5570,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5518,6 +5580,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_143"))
@@ -5537,7 +5600,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_153");
@@ -5546,7 +5609,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5571,7 +5634,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_184");
@@ -5580,7 +5643,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5590,6 +5653,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_153"))
@@ -5616,7 +5680,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -5629,7 +5693,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5639,6 +5703,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_162"))
@@ -5665,7 +5730,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_109");
@@ -5678,7 +5743,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5710,7 +5775,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_143");
@@ -5723,7 +5788,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5733,6 +5798,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch52(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_184"))
@@ -5759,7 +5825,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -5772,7 +5838,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5782,6 +5848,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch53(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_197"))
@@ -5808,7 +5875,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_206");
@@ -5821,7 +5888,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5831,6 +5898,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_206"))
@@ -5867,7 +5935,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_222");
@@ -5880,7 +5948,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5890,6 +5958,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch56(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_222"))
@@ -5923,7 +5992,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_226");
@@ -5940,7 +6009,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5979,7 +6048,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_248");
@@ -5996,7 +6065,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6006,6 +6075,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch57(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_226"))
@@ -6039,7 +6109,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_248");
@@ -6056,7 +6126,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6098,7 +6168,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -6111,7 +6181,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6121,6 +6191,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch58(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_248"))
@@ -6154,7 +6225,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_226");
@@ -6171,7 +6242,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6213,7 +6284,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -6226,7 +6297,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6236,6 +6307,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch59(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_258"))
@@ -6264,7 +6336,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_262");
@@ -6277,7 +6349,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6310,7 +6382,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_297");
@@ -6323,7 +6395,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6357,7 +6429,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_292");
@@ -6370,7 +6442,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6380,6 +6452,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch60(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_262"))
@@ -6428,7 +6501,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_258");
@@ -6445,7 +6518,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6455,6 +6528,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch62(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_258"))
@@ -6483,7 +6557,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_262");
@@ -6496,7 +6570,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6529,7 +6603,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_297");
@@ -6542,7 +6616,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6576,7 +6650,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_292");
@@ -6589,7 +6663,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6599,6 +6673,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch63(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_297"))
@@ -6647,7 +6722,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_258");
@@ -6664,7 +6739,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6674,6 +6749,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch65(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_258"))
@@ -6702,7 +6778,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_262");
@@ -6715,7 +6791,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6748,7 +6824,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_297");
@@ -6761,7 +6837,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6795,7 +6871,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_292");
@@ -6808,7 +6884,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6818,6 +6894,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch66(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_292"))
@@ -6866,7 +6943,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_258");
@@ -6883,7 +6960,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6893,6 +6970,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mos_eisley_mayor_handleBranch68(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_258"))
@@ -6921,7 +6999,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_262");
@@ -6934,7 +7012,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6967,7 +7045,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_297");
@@ -6980,7 +7058,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7014,7 +7092,7 @@ public class mos_eisley_mayor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_292");
@@ -7027,7 +7105,7 @@ public class mos_eisley_mayor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mos_eisley_mayor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7037,6 +7115,7 @@ public class mos_eisley_mayor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -7049,6 +7128,7 @@ public class mos_eisley_mayor extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -7057,6 +7137,7 @@ public class mos_eisley_mayor extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -7065,18 +7146,21 @@ public class mos_eisley_mayor extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.mos_eisley_mayor");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -7106,7 +7190,7 @@ public class mos_eisley_mayor extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_176");
@@ -7118,7 +7202,7 @@ public class mos_eisley_mayor extends script.base_script
                 utils.setScriptVar(player, "conversation.mos_eisley_mayor.branchId", 1);
                 npcStartConversation(player, npc, "mos_eisley_mayor", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -7199,7 +7283,7 @@ public class mos_eisley_mayor extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_188");
@@ -7231,7 +7315,7 @@ public class mos_eisley_mayor extends script.base_script
                 utils.setScriptVar(player, "conversation.mos_eisley_mayor.branchId", 6);
                 npcStartConversation(player, npc, "mos_eisley_mayor", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -7280,7 +7364,7 @@ public class mos_eisley_mayor extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -7304,7 +7388,7 @@ public class mos_eisley_mayor extends script.base_script
                 utils.setScriptVar(player, "conversation.mos_eisley_mayor.branchId", 22);
                 npcStartConversation(player, npc, "mos_eisley_mayor", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -7313,6 +7397,7 @@ public class mos_eisley_mayor extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("mos_eisley_mayor"))

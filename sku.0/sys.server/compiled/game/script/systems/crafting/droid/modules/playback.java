@@ -1,5 +1,11 @@
 package script.systems.crafting.droid.modules;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -34,6 +40,7 @@ public class playback extends script.base_script
     public static final int MENU_TYPE = menu_info_types.SERVER_MENU10;
     public static final int RECORD_TIMEOUT = 30;
     public static final int RECORD_TIME = 30;
+
     public playback()
     {
     }

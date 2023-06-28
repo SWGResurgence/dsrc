@@ -1,13 +1,16 @@
 package script.terminal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 import script.string_id;
 
 public class terminal_skill extends script.terminal.base.terminal_add_use
 {
-    public terminal_skill()
-    {
-    }
     public static final String SKILL_TBL = "datatables/skill/skills.iff";
     public static final String SKILL_TERMINAL_TBL = "datatables/skill/skill_terminal.iff";
     public static final string_id SID_TERMINAL_PROMPT = new string_id("skill_teacher", "skill_terminal_prompt");
@@ -16,10 +19,15 @@ public class terminal_skill extends script.terminal.base.terminal_add_use
     public static final string_id SID_TERMINAL_DENIED = new string_id("skill_teacher", "skill_terminal_denied");
     public static final string_id SID_TERMINAL_MAX_SKILLS = new string_id("skill_teacher", "skill_terminal_max_skills");
     public static final string_id PROSE_GRANT_SKILL = new string_id("skill_teacher", "skill_terminal_grant");
+    public terminal_skill()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setName(self, "Correspondent Terminal");

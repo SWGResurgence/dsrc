@@ -1,5 +1,11 @@
 package script.theme_park.heroic.star_destroyer;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.trial;
@@ -10,11 +16,13 @@ public class south_squad_leader extends script.base_script
     public south_squad_leader()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleClanup", null, 30.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleClanup(obj_id self, dictionary params) throws InterruptedException
     {
         if (ai_lib.isInCombat(self))

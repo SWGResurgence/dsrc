@@ -1,13 +1,16 @@
 package script.quest.task.ground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class escort extends script.quest.task.ground.base_task
 {
-    public escort()
-    {
-    }
     public static final String dataTableColumnServerTemplate = "SERVER_TEMPLATE";
     public static final String dataTableColumnDestinationNodeName = "DESTINATION_NODE_NAME";
     public static final String dataTableColumnMovementType = "MOVEMENT_TYPE";
@@ -19,6 +22,10 @@ public class escort extends script.quest.task.ground.base_task
     public static final float escortDistanceTimeCheck = 10;
     public static final float maximumAllowedDistance = 25;
     public static final float cleanupTime = 120;
+    public escort()
+    {
+    }
+
     public int OnTaskActivated(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskActivated", taskType + " task activated.");
@@ -41,6 +48,7 @@ public class escort extends script.quest.task.ground.base_task
         messageTo(self, "messageEscortCheckDistance", distanceCheckParams, escortDistanceTimeCheck, false);
         return super.OnTaskActivated(self, questCrc, taskId);
     }
+
     public int destroyNotification(obj_id self, dictionary params) throws InterruptedException
     {
         if (params != null)
@@ -88,6 +96,7 @@ public class escort extends script.quest.task.ground.base_task
         }
         return SCRIPT_CONTINUE;
     }
+
     public int messageEscortCheckDistance(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -104,7 +113,7 @@ public class escort extends script.quest.task.ground.base_task
                     removeObjVar(player, baseObjVar + objvarBeenWarnedDistance);
                 }
             }
-            else 
+            else
             {
                 failEscortDistanceCheck(player, questCrc, taskId, escortTarget);
             }
@@ -113,6 +122,7 @@ public class escort extends script.quest.task.ground.base_task
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean isEscortNearby(int questCrc, int taskId, obj_id player, obj_id escortTarget) throws InterruptedException
     {
         boolean result = false;
@@ -122,6 +132,7 @@ public class escort extends script.quest.task.ground.base_task
         }
         return result;
     }
+
     public void failEscortDistanceCheck(obj_id player, int questCrc, int taskId, obj_id escortTarget) throws InterruptedException
     {
         String baseObjVar = groundquests.getBaseObjVar(player, taskType, questGetQuestName(questCrc), taskId);
@@ -133,7 +144,7 @@ public class escort extends script.quest.task.ground.base_task
             prose.setDF(pp, escortDistanceTimeCheck);
             sendSystemMessageProse(player, pp);
         }
-        else 
+        else
         {
             string_id message = new string_id("quest/groundquests", "static_escort_failed_due_to_distance");
             prose_package pp = prose.getPackage(message, player, player, 0);
@@ -141,6 +152,7 @@ public class escort extends script.quest.task.ground.base_task
             questFailTask(questCrc, taskId, player);
         }
     }
+
     public int OnTaskCompleted(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskCompleted", taskType + " task completed.");
@@ -150,6 +162,7 @@ public class escort extends script.quest.task.ground.base_task
         cleanup(self, questCrc, taskId);
         return super.OnTaskCompleted(self, questCrc, taskId);
     }
+
     public int OnTaskFailed(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskFailed", taskType + " task failed.");
@@ -159,6 +172,7 @@ public class escort extends script.quest.task.ground.base_task
         cleanup(self, questCrc, taskId);
         return super.OnTaskFailed(self, questCrc, taskId);
     }
+
     public int OnTaskCleared(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskCleared", taskType + " task cleared.");
@@ -168,6 +182,7 @@ public class escort extends script.quest.task.ground.base_task
         cleanup(self, questCrc, taskId);
         return super.OnTaskCleared(self, questCrc, taskId);
     }
+
     public void cleanup(obj_id player, int questCrc, int taskId) throws InterruptedException
     {
         String baseObjVar = groundquests.getBaseObjVar(player, taskType, questGetQuestName(questCrc), taskId);
@@ -185,16 +200,19 @@ public class escort extends script.quest.task.ground.base_task
         }
         groundquests.clearBaseObjVar(player, taskType, questGetQuestName(questCrc), taskId);
     }
+
     public int OnLogout(obj_id self) throws InterruptedException
     {
         groundquests.failAllActiveTasksOfType(self, taskType);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         groundquests.failAllActiveTasksOfType(self, taskType);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         removeObjVar(self, groundquests.getTaskTypeObjVar(self, taskType));

@@ -1,5 +1,11 @@
 package script.systems.gcw;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.force_rank;
 import script.library.sui;
@@ -12,6 +18,7 @@ public class terminal_frs_chal_vote extends script.base_script
     public static final String SCRIPT_VAR_SUI_PID = "force_rank.vote_sui";
     public static final String SCRIPT_VAR_CHAL_TERMINAL = "force_rank.challenge_vote_terminal";
     public static final String SCRIPT_VAR_NAMES = "force_rank.challenge_vote_name";
+
     public terminal_frs_chal_vote()
     {
     }

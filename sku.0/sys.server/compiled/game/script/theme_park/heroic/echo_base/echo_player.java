@@ -1,5 +1,11 @@
 package script.theme_park.heroic.echo_base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -7,20 +13,21 @@ import script.obj_id;
 
 public class echo_player extends script.base_script
 {
+    public static final String BADGE_PLANET_HOTH = "bdg_hoth_planet";
+    public static String[] QUEST_TO_CLEAR =
+            {
+                    "imperial_phase_1",
+                    "rebel_phase_1",
+                    "heroic_echo_imperial_phase_2",
+                    "heroic_echo_rebel_phase_2",
+                    "heroic_echo_rebel_phase_2_v2",
+                    "heroic_echo_rebel_evac",
+                    "heroic_echo_imperial_evac"
+            };
     public echo_player()
     {
     }
-    public static final String BADGE_PLANET_HOTH = "bdg_hoth_planet";
-    public static String[] QUEST_TO_CLEAR = 
-    {
-        "imperial_phase_1",
-        "rebel_phase_1",
-        "heroic_echo_imperial_phase_2",
-        "heroic_echo_rebel_phase_2",
-        "heroic_echo_rebel_phase_2_v2",
-        "heroic_echo_rebel_evac",
-        "heroic_echo_imperial_evac"
-    };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         npcEndConversation(self);
@@ -31,6 +38,7 @@ public class echo_player extends script.base_script
         messageTo(self, "handleEchoPlayerInitialSetup", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "echo_player_setup"))
@@ -40,6 +48,7 @@ public class echo_player extends script.base_script
         messageTo(self, "handleEchoPlayerInitialSetup", null, 9, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleEchoPlayerInitialSetup(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "echoBaseDeath"))
@@ -53,6 +62,7 @@ public class echo_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         String area = locations.getBuildoutAreaName(self);
@@ -74,18 +84,20 @@ public class echo_player extends script.base_script
             clearCurrentEchoQuest(self);
             messageTo(self, "update_quest", null, 10.0f, false);
         }
-        else 
+        else
         {
             utils.removeScriptVar(self, "echoBaseDeath");
         }
         obj_id[] waypoints = getWaypointsInDatapad(self);
         utils.setScriptVar(self, factions.IN_ADHOC_PVP_AREA, true);
         pvpMakeDeclared(self);
-        if (waypoints != null && waypoints.length > 0)
+        if (waypoints != null)
         {
-            for (obj_id waypoint : waypoints) {
+            for (obj_id waypoint : waypoints)
+            {
                 location wpLoc = getWaypointLocation(waypoint);
-                if (wpLoc.area.equals("adventure2")) {
+                if (wpLoc.area.equals("adventure2"))
+                {
                     destroyWaypointInDatapad(waypoint, self);
                 }
             }
@@ -94,6 +106,7 @@ public class echo_player extends script.base_script
         messageTo(self, "checkForHothMusic", null, 4, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnNewbieTutorialResponse(obj_id self, String action) throws InterruptedException
     {
         if (action.equals("clientReady"))
@@ -105,11 +118,13 @@ public class echo_player extends script.base_script
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int OnRecapacitated(obj_id self) throws InterruptedException
     {
         pvpMakeDeclared(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "echoBaseDeath"))
@@ -119,11 +134,13 @@ public class echo_player extends script.base_script
         checkForBattlefieldVehicleAllowedZones(self);
         clearCurrentEchoQuest(self);
         obj_id[] waypoints = getWaypointsInDatapad(self);
-        if (waypoints != null && waypoints.length > 0)
+        if (waypoints != null)
         {
-            for (obj_id waypoint : waypoints) {
+            for (obj_id waypoint : waypoints)
+            {
                 location wpLoc = getWaypointLocation(waypoint);
-                if (wpLoc.area.equals("adventure2")) {
+                if (wpLoc.area.equals("adventure2"))
+                {
                     destroyWaypointInDatapad(waypoint, self);
                 }
             }
@@ -132,6 +149,7 @@ public class echo_player extends script.base_script
         pvpMakeCovert(self);
         return SCRIPT_CONTINUE;
     }
+
     public void checkForBattlefieldVehicleAllowedZones(obj_id self) throws InterruptedException
     {
         obj_id playerCurrentMount = getMountId(self);
@@ -141,22 +159,25 @@ public class echo_player extends script.base_script
             {
                 messageTo(playerCurrentMount, "handleCheckForAllowedZones", null, 0, false);
             }
-            return;
         }
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         utils.setScriptVar(self, "echoBaseDeath", true);
         return SCRIPT_CONTINUE;
     }
+
     public int checkForActiveHothTrackerQuest(obj_id self, dictionary params) throws InterruptedException
     {
         location here = getLocation(self);
         if (here.area.equals("adventure2"))
         {
             boolean questFound = false;
-            for (String s : QUEST_TO_CLEAR) {
-                if (groundquests.isQuestActive(self, s)) {
+            for (String s : QUEST_TO_CLEAR)
+            {
+                if (groundquests.isQuestActive(self, s))
+                {
                     questFound = true;
                 }
             }
@@ -169,6 +190,7 @@ public class echo_player extends script.base_script
         messageTo(self, "checkForActiveHothTrackerQuest", null, 19, false);
         return SCRIPT_CONTINUE;
     }
+
     public int checkForHothMusic(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id instanceController = instance.getAreaInstanceController(self);
@@ -185,6 +207,7 @@ public class echo_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int update_quest(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "echoBaseDeath"))
@@ -199,8 +222,10 @@ public class echo_player extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        for (obj_id obj_id : allObj) {
-            if (hasScript(obj_id, "theme_park.heroic.echo_base.echo_quest_tracker")) {
+        for (obj_id obj_id : allObj)
+        {
+            if (hasScript(obj_id, "theme_park.heroic.echo_base.echo_quest_tracker"))
+            {
                 quest_manager = obj_id;
                 break;
             }
@@ -212,14 +237,18 @@ public class echo_player extends script.base_script
         messageTo(quest_manager, "requestUpdatePlayer", dict, 0.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public void clearCurrentEchoQuest(obj_id self) throws InterruptedException
     {
-        for (String s : QUEST_TO_CLEAR) {
-            if (groundquests.isQuestActive(self, s)) {
+        for (String s : QUEST_TO_CLEAR)
+        {
+            if (groundquests.isQuestActive(self, s))
+            {
                 groundquests.clearQuest(self, s);
             }
         }
     }
+
     public void grantPlanetHothBadge(obj_id player) throws InterruptedException
     {
         if (isIdValid(player) && exists(player) && !badge.hasBadge(player, BADGE_PLANET_HOTH))
@@ -229,6 +258,7 @@ public class echo_player extends script.base_script
             messageTo(player, "delayGrantPlanetHothBadge", dict, 20.0f, false);
         }
     }
+
     public int delayGrantPlanetHothBadge(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -238,6 +268,7 @@ public class echo_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dismountHothPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         boolean isRidingMount = (getState(self, STATE_RIDING_MOUNT) > 0);
@@ -250,7 +281,7 @@ public class echo_player extends script.base_script
                 queueCommand(self, (1988230683), self, creature_name, COMMAND_PRIORITY_FRONT);
                 setYaw(mountId, getYaw(mountId) + 180.0f);
             }
-            else 
+            else
             {
                 queueCommand(self, (117012717), self, creature_name, COMMAND_PRIORITY_FRONT);
             }

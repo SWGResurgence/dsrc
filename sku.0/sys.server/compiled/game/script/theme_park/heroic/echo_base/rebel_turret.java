@@ -1,5 +1,11 @@
 package script.theme_park.heroic.echo_base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.buff;
 import script.library.trial;
@@ -8,11 +14,12 @@ import script.obj_id;
 
 public class rebel_turret extends script.base_script
 {
+    public static final String HOTH_TURRET_DAMAGE_BUFF = "hoth_turret_damage_bonus";
+    public static final String PHASE_3_TURRET = "p3_turret";
     public rebel_turret()
     {
     }
-    public static final String HOTH_TURRET_DAMAGE_BUFF = "hoth_turret_damage_bonus";
-    public static final String PHASE_3_TURRET = "p3_turret";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, PHASE_3_TURRET))
@@ -25,10 +32,12 @@ public class rebel_turret extends script.base_script
         trial.setHp(self, rand(100000, 150000));
         return SCRIPT_CONTINUE;
     }
+
     public int InstanceFaction(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int boredHothTurrets(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, PHASE_3_TURRET))
@@ -55,14 +64,14 @@ public class rebel_turret extends script.base_script
                         messageTo(self, "boredHothTurrets", null, 1.0f, false);
                         return SCRIPT_CONTINUE;
                     }
-                    else 
+                    else
                     {
                         if (getDistance(self, atats[attackChoice]) > 700.0f)
                         {
                             messageTo(self, "boredHothTurrets", null, 10.0f, false);
                             return SCRIPT_CONTINUE;
                         }
-                        else 
+                        else
                         {
                             faceTo(self, atats[attackChoice]);
                             dictionary turretParams = new dictionary();
@@ -74,7 +83,7 @@ public class rebel_turret extends script.base_script
                     }
                 }
             }
-            else 
+            else
             {
                 messageTo(self, "boredHothTurrets", null, getRandomTriggerTime(minMessageTime, maxMessageTime), false);
                 return SCRIPT_CONTINUE;
@@ -82,6 +91,7 @@ public class rebel_turret extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int delayedHothTurretShot(obj_id self, dictionary params) throws InterruptedException
     {
         location loc = getLocation(self);
@@ -96,6 +106,7 @@ public class rebel_turret extends script.base_script
         hothTurretShotApplyDamage(self, target, player);
         return SCRIPT_CONTINUE;
     }
+
     public void hothTurretShotApplyDamage(obj_id turret, obj_id target, obj_id player) throws InterruptedException
     {
         if (!isIdValid(turret))
@@ -119,7 +130,7 @@ public class rebel_turret extends script.base_script
         {
             boltDamage = rand(1500, 3000);
         }
-        else 
+        else
         {
             boltDamage = rand(15000, 20000);
         }
@@ -131,6 +142,7 @@ public class rebel_turret extends script.base_script
         }
         damage(target, DAMAGE_ENERGY, HIT_LOCATION_BODY, boltDamage);
     }
+
     public float getRandomTriggerTime(float minTime, float maxTime) throws InterruptedException
     {
         float triggerTime = rand(minTime, maxTime);

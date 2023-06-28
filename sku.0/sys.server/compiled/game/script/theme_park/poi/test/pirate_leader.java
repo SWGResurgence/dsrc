@@ -1,5 +1,11 @@
 package script.theme_park.poi.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,6 +14,7 @@ public class pirate_leader extends script.theme_park.poi.base
     public pirate_leader()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String objective = poiGetObjective(self);
@@ -20,6 +27,7 @@ public class pirate_leader extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imDead(obj_id self, dictionary params) throws InterruptedException
     {
         poiComplete(POI_SUCCESS);

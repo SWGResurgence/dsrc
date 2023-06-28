@@ -1,11 +1,19 @@
 package script.theme_park.wod;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.base_class.*;
 import script.combat_engine.*;
+
 import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.Vector;
+
 import script.base_script;
 
 import script.library.static_item;
@@ -16,21 +24,25 @@ public class random_wod_token extends script.base_script
     public random_wod_token()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "createRandomObject", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         messageTo(self, "createRandomObject", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTransferred(obj_id self, obj_id sourceContainer, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         messageTo(self, "createRandomObject", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int createRandomObject(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getContainedBy(self);

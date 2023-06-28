@@ -1,5 +1,11 @@
 package script.theme_park.outbreak;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.groundquests;
 import script.menu_info;
 import script.menu_info_types;
@@ -8,10 +14,12 @@ import script.string_id;
 
 public class epsilon_shuttle extends script.base_script
 {
+    public static final String STF_FILE = "theme_park/outbreak/outbreak";
+
     public epsilon_shuttle()
     {
     }
-    public static final String STF_FILE = "theme_park/outbreak/outbreak";
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!groundquests.isTaskActive(player, "outbreak_quest_facility_05_imperial", "seeHX138") && !groundquests.isTaskActive(player, "outbreak_quest_facility_05_rebel", "seeHX138") && !groundquests.isTaskActive(player, "outbreak_quest_facility_05_neutral", "seeHX138"))
@@ -21,6 +29,7 @@ public class epsilon_shuttle extends script.base_script
         int mnu = mi.addRootMenu(menu_info_types.ITEM_USE, new string_id(STF_FILE, "board_shuttle"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!groundquests.isTaskActive(player, "outbreak_quest_facility_05_imperial", "seeHX138") && !groundquests.isTaskActive(player, "outbreak_quest_facility_05_rebel", "seeHX138") && !groundquests.isTaskActive(player, "outbreak_quest_facility_05_neutral", "seeHX138"))

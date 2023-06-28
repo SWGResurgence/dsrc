@@ -1,30 +1,42 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class naboo_rebel_trainer_1 extends script.base_script
 {
+    public static String c_stringFile = "conversation/naboo_rebel_trainer_1";
+
     public naboo_rebel_trainer_1()
     {
     }
-    public static String c_stringFile = "conversation/naboo_rebel_trainer_1";
+
     public boolean naboo_rebel_trainer_1_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean naboo_rebel_trainer_1_condition_isNotRebel(obj_id player, obj_id npc) throws InterruptedException
     {
         return !factions.isRebel(player);
     }
+
     public boolean naboo_rebel_trainer_1_condition_hasNoviceSkillBox(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasSkill(player, "pilot_rebel_navy_novice"));
     }
+
     public boolean naboo_rebel_trainer_1_condition_hasRebelQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasQuest(player) && naboo_rebel_trainer_1_condition_hasNoviceSkillBox(player, npc));
     }
+
     public boolean naboo_rebel_trainer_1_condition_isImperialPilot(obj_id player, obj_id npc) throws InterruptedException
     {
         int playerFactionID = pvpGetAlignedFaction(player);
@@ -32,132 +44,144 @@ public class naboo_rebel_trainer_1 extends script.base_script
         {
             return true;
         }
-        else 
+        else
         {
             return (hasSkill(player, "pilot_imperial_navy_novice"));
         }
     }
+
     public boolean naboo_rebel_trainer_1_condition_isGenderMale(obj_id player, obj_id npc) throws InterruptedException
     {
         return (getGender(player) == Gender.MALE);
     }
+
     public boolean naboo_rebel_trainer_1_condition_hasCompletedQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasCompletedQuest(player, "destroy_surpriseattack", "naboo_rebel_1"));
     }
+
     public boolean naboo_rebel_trainer_1_condition_hasCompletedQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasCompletedQuest(player, "destroy", "naboo_rebel_2"));
     }
+
     public boolean naboo_rebel_trainer_1_condition_hasCompletedQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasCompletedQuest(player, "escort", "naboo_rebel_3"));
     }
+
     public boolean naboo_rebel_trainer_1_condition_hasCompletedQuestFour(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasCompletedQuest(player, "assassinate", "naboo_rebel_4"));
     }
+
     public boolean naboo_rebel_trainer_1_condition_hasFailedQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasFailedQuest(player, "destroy_surpriseattack", "naboo_rebel_1_surprise") || space_quest.hasAbortedQuest(player, "destroy_surpriseattack", "naboo_rebel_1_surprise") || space_quest.hasFailedQuest(player, "patrol", "naboo_rebel_1") || space_quest.hasAbortedQuest(player, "patrol", "naboo_rebel_1"));
     }
+
     public boolean naboo_rebel_trainer_1_condition_isReadyForFirstTraining(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (hasSkill(player, "pilot_rebel_navy_starships_01") || hasSkill(player, "pilot_rebel_navy_procedures_01") || hasSkill(player, "pilot_rebel_navy_weapons_01") || hasSkill(player, "pilot_rebel_navy_droid_01"))
-        {
-            return false;
-        }
-        else 
-        {
-            return true;
-        }
+        return !hasSkill(player, "pilot_rebel_navy_starships_01") && !hasSkill(player, "pilot_rebel_navy_procedures_01") && !hasSkill(player, "pilot_rebel_navy_weapons_01") && !hasSkill(player, "pilot_rebel_navy_droid_01");
     }
+
     public boolean naboo_rebel_trainer_1_condition_isReadyForMoreTraining(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.isPlayerQualifiedForSkill(player, "pilot_rebel_navy_starships_01"));
     }
+
     public boolean naboo_rebel_trainer_1_condition_hasAllTierOneSkills(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_flags.hasCompletedTierOne(player);
     }
+
     public boolean naboo_rebel_trainer_1_condition_hasFailedQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasFailedQuest(player, "destroy", "naboo_rebel_2") || space_quest.hasAbortedQuest(player, "destroy", "naboo_rebel_2"));
     }
+
     public boolean naboo_rebel_trainer_1_condition_beenRewardedForQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasCompletedQuest(player, "destroy_surpriseattack", "naboo_rebel_1") && space_quest.hasReceivedReward(player, "destroy_surpriseattack", "naboo_rebel_1");
     }
+
     public boolean naboo_rebel_trainer_1_condition_beenRewardedForQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasCompletedQuest(player, "destroy", "naboo_rebel_2") && space_quest.hasReceivedReward(player, "destroy", "naboo_rebel_2");
     }
+
     public boolean naboo_rebel_trainer_1_condition_beenRewardedForQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasCompletedQuest(player, "escort", "naboo_rebel_3") && space_quest.hasReceivedReward(player, "escort", "naboo_rebel_3");
     }
+
     public boolean naboo_rebel_trainer_1_condition_beenRewardedForQuestFour(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasCompletedQuest(player, "assassinate", "naboo_rebel_4") && space_quest.hasReceivedReward(player, "assassinate", "naboo_rebel_4");
     }
+
     public boolean naboo_rebel_trainer_1_condition_hasFailedQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasFailedQuest(player, "escort", "naboo_rebel_3") || space_quest.hasAbortedQuest(player, "escort", "naboo_rebel_3") || space_quest.hasFailedQuest(player, "patrol", "naboo_rebel_3") || space_quest.hasAbortedQuest(player, "patrol", "naboo_rebel_3"));
     }
+
     public boolean naboo_rebel_trainer_1_condition_hasFailedQuestFour(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasFailedQuest(player, "assassinate", "naboo_rebel_4") || space_quest.hasAbortedQuest(player, "assassinate", "naboo_rebel_4"));
     }
+
     public boolean naboo_rebel_trainer_1_condition_isPrivateerPilot(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasSkill(player, "pilot_neutral_novice");
     }
+
     public boolean naboo_rebel_trainer_1_condition_readyForSecondSkill(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasCompletedQuest(player, "assassinate", "naboo_rebel_4") && !hasSkill(player, "pilot_rebel_navy_starships_01") && !hasSkill(player, "pilot_rebel_navy_weapons_01") && !hasSkill(player, "pilot_rebel_navy_procedures_01") && !hasSkill(player, "pilot_rebel_navy_droid_01"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasCompletedQuest(player, "assassinate", "naboo_rebel_4") && !hasSkill(player, "pilot_rebel_navy_starships_01") && !hasSkill(player, "pilot_rebel_navy_weapons_01") && !hasSkill(player, "pilot_rebel_navy_procedures_01") && !hasSkill(player, "pilot_rebel_navy_droid_01");
     }
+
     public boolean naboo_rebel_trainer_1_condition_hasSTARSHIPS1(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasSkill(player, "pilot_rebel_navy_starships_01"));
     }
+
     public boolean naboo_rebel_trainer_1_condition_hasWEAPONS1(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasSkill(player, "pilot_rebel_navy_weapons_01"));
     }
+
     public boolean naboo_rebel_trainer_1_condition_hasPROCEDURES1(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasSkill(player, "pilot_rebel_navy_procedures_01"));
     }
+
     public boolean naboo_rebel_trainer_1_condition_hasSpaceExpansion(obj_id player, obj_id npc) throws InterruptedException
     {
         return (features.isSpaceEdition(player));
     }
+
     public boolean naboo_rebel_trainer_1_condition_hasSpaceShip(obj_id player, obj_id npc) throws InterruptedException
     {
         return (!space_quest.canGrantNewbieShip(player));
     }
+
     public boolean naboo_rebel_trainer_1_condition_has_GRADUATED_goto_DANTOOINE(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_flags.hasSpaceFlag(player, "vortexPilot"));
     }
+
     public boolean naboo_rebel_trainer_1_condition_hasVeryFirstQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_quest.hasCertifiedShip(player))
         {
             return false;
         }
-        else 
+        else
         {
             return (space_quest.hasQuest(player, "patrol", "naboo_rebel_1") || space_quest.hasQuest(player, "destroy_surpriseattack", "naboo_rebel_1"));
         }
     }
+
     public boolean naboo_rebel_trainer_1_condition_onMyTrack(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasSkill(player, "pilot_rebel_navy_novice"))
@@ -170,49 +194,55 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return space_flags.isSpaceTrack(player, space_flags.REBEL_NABOO);
     }
+
     public boolean naboo_rebel_trainer_1_condition_canFlyNonTrackDuty(obj_id player, obj_id npc) throws InterruptedException
     {
-        if ((hasSkill(player, "pilot_rebel_navy_starships_01") || hasSkill(player, "pilot_rebel_navy_procedures_01") || hasSkill(player, "pilot_rebel_navy_weapons_01") || hasSkill(player, "pilot_rebel_navy_droid_01")) && !space_quest.hasQuest(player))
-        {
-            return true;
-        }
-        return false;
+        return (hasSkill(player, "pilot_rebel_navy_starships_01") || hasSkill(player, "pilot_rebel_navy_procedures_01") || hasSkill(player, "pilot_rebel_navy_weapons_01") || hasSkill(player, "pilot_rebel_navy_droid_01")) && !space_quest.hasQuest(player);
     }
+
     public boolean naboo_rebel_trainer_1_condition_isWookieeOrIthorian(obj_id player, obj_id npc) throws InterruptedException
     {
         int plrSpecies = getSpecies(player);
         return (plrSpecies == SPECIES_WOOKIEE || plrSpecies == SPECIES_ITHORIAN);
     }
+
     public void naboo_rebel_trainer_1_action_grantNoviceSkillBox(obj_id player, obj_id npc) throws InterruptedException
     {
         space_flags.setSpaceTrack(player, space_flags.REBEL_NABOO);
         skill.noisyGrantSkill(player, "pilot_rebel_navy_novice");
     }
+
     public void naboo_rebel_trainer_1_action_grantQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "patrol", "naboo_rebel_1");
         space_flags.restoreClientPath(player);
     }
+
     public void naboo_rebel_trainer_1_action_grantQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy", "naboo_rebel_2");
     }
+
     public void naboo_rebel_trainer_1_action_grantQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "patrol", "naboo_rebel_3");
     }
+
     public void naboo_rebel_trainer_1_action_grantQuestFour(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "assassinate", "naboo_rebel_4");
     }
+
     public void naboo_rebel_trainer_1_action_anim_greet(obj_id player, obj_id npc) throws InterruptedException
     {
         doAnimationAction(npc, "greet");
     }
+
     public void naboo_rebel_trainer_1_action_anim_explode(obj_id player, obj_id npc) throws InterruptedException
     {
         playClientEffectLoc(player, "clienteffect/lair_damage_light.cef", getLocation(npc), 1.52f);
     }
+
     public void naboo_rebel_trainer_1_action_grantSkill1(obj_id player, obj_id npc) throws InterruptedException
     {
         doAnimationAction(npc, "salute1");
@@ -220,11 +250,12 @@ public class naboo_rebel_trainer_1 extends script.base_script
         {
             skill.noisyGrantSkill(player, "pilot_rebel_navy_starships_01");
         }
-        else 
+        else
         {
             skill.purchaseSkill(player, "pilot_rebel_navy_starships_01");
         }
     }
+
     public void naboo_rebel_trainer_1_action_grantSkill2(obj_id player, obj_id npc) throws InterruptedException
     {
         doAnimationAction(npc, "salute1");
@@ -232,11 +263,12 @@ public class naboo_rebel_trainer_1 extends script.base_script
         {
             skill.noisyGrantSkill(player, "pilot_rebel_navy_weapons_01");
         }
-        else 
+        else
         {
             skill.purchaseSkill(player, "pilot_rebel_navy_weapons_01");
         }
     }
+
     public void naboo_rebel_trainer_1_action_grantSkill3(obj_id player, obj_id npc) throws InterruptedException
     {
         doAnimationAction(npc, "salute1");
@@ -244,11 +276,12 @@ public class naboo_rebel_trainer_1 extends script.base_script
         {
             skill.noisyGrantSkill(player, "pilot_rebel_navy_procedures_01");
         }
-        else 
+        else
         {
             skill.purchaseSkill(player, "pilot_rebel_navy_procedures_01");
         }
     }
+
     public void naboo_rebel_trainer_1_action_grantSkill4(obj_id player, obj_id npc) throws InterruptedException
     {
         doAnimationAction(npc, "salute1");
@@ -256,19 +289,22 @@ public class naboo_rebel_trainer_1 extends script.base_script
         {
             skill.noisyGrantSkill(player, "pilot_rebel_navy_droid_01");
         }
-        else 
+        else
         {
             skill.purchaseSkill(player, "pilot_rebel_navy_droid_01");
         }
     }
+
     public void naboo_rebel_trainer_1_action_grantDUTY_Destroy1(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "naboo_rebel_6");
     }
+
     public void naboo_rebel_trainer_1_action_grantDUTY_Escort1(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "escort_duty", "naboo_rebel_7");
     }
+
     public void naboo_rebel_trainer_1_action_reward_quest_1(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_quest.hasReceivedReward(player, "destroy_surpriseattack", "naboo_rebel_1"))
@@ -277,6 +313,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
             space_quest.giveReward(player, "destroy_surpriseattack", "naboo_rebel_1", 100);
         }
     }
+
     public void naboo_rebel_trainer_1_action_reward_quest_2(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_quest.hasReceivedReward(player, "destroy", "naboo_rebel_2"))
@@ -285,6 +322,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
             space_quest.giveReward(player, "destroy", "naboo_rebel_2", 200);
         }
     }
+
     public void naboo_rebel_trainer_1_action_reward_quest_3(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_quest.hasReceivedReward(player, "escort", "naboo_rebel_3"))
@@ -298,12 +336,13 @@ public class naboo_rebel_trainer_1 extends script.base_script
             {
                 space_quest.giveReward(player, "escort", "naboo_rebel_3", 500, "object/tangible/wearables/bandolier/multipocket_bandolier.iff");
             }
-            else 
+            else
             {
                 space_quest.giveReward(player, "escort", "naboo_rebel_3", 500, "object/tangible/wearables/bandolier/ith_multipocket_bandolier.iff");
             }
         }
     }
+
     public void naboo_rebel_trainer_1_action_reward_quest_4(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_quest.hasReceivedReward(player, "assassinate", "naboo_rebel_4"))
@@ -312,18 +351,22 @@ public class naboo_rebel_trainer_1 extends script.base_script
             space_quest.giveReward(player, "assassinate", "naboo_rebel_4", 1000, "object/tangible/ship/components/armor/arm_mission_reward_rebel_incom_ultralight.iff");
         }
     }
+
     public void naboo_rebel_trainer_1_action_grantSpaceShip(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantNewbieShip(player, "rebel");
     }
+
     public void naboo_rebel_trainer_1_action_set_GRADUATED_goto_DANTOOINE(obj_id player, obj_id npc) throws InterruptedException
     {
         space_flags.setSpaceFlag(player, "vortexPilot", true);
     }
+
     public void naboo_rebel_trainer_1_action_clearNewClientPaths(obj_id player, obj_id npc) throws InterruptedException
     {
         space_flags.clearClientPath(player);
     }
+
     public int naboo_rebel_trainer_1_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_60c4f974"))
@@ -358,7 +401,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_60c4f974");
@@ -375,7 +418,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -415,7 +458,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_60c4f974");
@@ -432,7 +475,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -472,7 +515,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_60c4f974");
@@ -489,7 +532,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -499,6 +542,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_60c4f974"))
@@ -533,7 +577,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_60c4f974");
@@ -550,7 +594,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -590,7 +634,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_60c4f974");
@@ -607,7 +651,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -647,7 +691,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_60c4f974");
@@ -664,7 +708,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -674,6 +718,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_60c4f974"))
@@ -708,7 +753,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_60c4f974");
@@ -725,7 +770,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -765,7 +810,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_60c4f974");
@@ -782,7 +827,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -822,7 +867,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_60c4f974");
@@ -839,7 +884,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -849,6 +894,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_60c4f974"))
@@ -883,7 +929,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_60c4f974");
@@ -900,7 +946,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -940,7 +986,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_60c4f974");
@@ -957,7 +1003,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -997,7 +1043,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_60c4f974");
@@ -1014,7 +1060,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1024,6 +1070,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b26194cb"))
@@ -1074,7 +1121,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f60c8a5");
@@ -1087,7 +1134,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1097,6 +1144,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f60c8a5"))
@@ -1123,6 +1171,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a425f33d"))
@@ -1161,6 +1210,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_78679b31"))
@@ -1189,7 +1239,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_99dfe276");
@@ -1202,7 +1252,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1236,7 +1286,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_546aa4f5");
@@ -1249,7 +1299,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1276,7 +1326,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_31d45080");
@@ -1285,7 +1335,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1295,6 +1345,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_99dfe276"))
@@ -1322,7 +1373,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2bf47615");
@@ -1335,7 +1386,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1368,7 +1419,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e096316d");
@@ -1381,7 +1432,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1391,6 +1442,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2bf47615"))
@@ -1419,7 +1471,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a42932d7");
@@ -1432,7 +1484,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1459,7 +1511,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_104b565a");
@@ -1468,7 +1520,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1478,6 +1530,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a42932d7"))
@@ -1499,7 +1552,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_fc27931b");
@@ -1508,7 +1561,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1555,7 +1608,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d731f764");
@@ -1576,7 +1629,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1586,6 +1639,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_fc27931b"))
@@ -1627,7 +1681,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d731f764");
@@ -1648,7 +1702,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1658,6 +1712,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d731f764"))
@@ -1679,7 +1734,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3a8fb4dd");
@@ -1688,7 +1743,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1737,7 +1792,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c7939f2f");
@@ -1758,7 +1813,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1800,7 +1855,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_92e1301f");
@@ -1817,7 +1872,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1864,7 +1919,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d731f764");
@@ -1885,7 +1940,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1895,6 +1950,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d731f764"))
@@ -1916,7 +1972,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3a8fb4dd");
@@ -1925,7 +1981,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1974,7 +2030,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c7939f2f");
@@ -1995,7 +2051,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2037,7 +2093,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_92e1301f");
@@ -2054,7 +2110,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2101,7 +2157,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d731f764");
@@ -2122,7 +2178,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2132,6 +2188,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_104b565a"))
@@ -2160,7 +2217,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_49");
@@ -2173,7 +2230,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2183,6 +2240,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_49"))
@@ -2204,7 +2262,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_53");
@@ -2213,7 +2271,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2260,7 +2318,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d731f764");
@@ -2281,7 +2339,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2291,6 +2349,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_53"))
@@ -2332,7 +2391,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d731f764");
@@ -2353,7 +2412,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2363,6 +2422,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d731f764"))
@@ -2384,7 +2444,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3a8fb4dd");
@@ -2393,7 +2453,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2442,7 +2502,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c7939f2f");
@@ -2463,7 +2523,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2505,7 +2565,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_92e1301f");
@@ -2522,7 +2582,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2569,7 +2629,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d731f764");
@@ -2590,7 +2650,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2600,6 +2660,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d731f764"))
@@ -2621,7 +2682,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3a8fb4dd");
@@ -2630,7 +2691,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2679,7 +2740,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c7939f2f");
@@ -2700,7 +2761,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2742,7 +2803,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_92e1301f");
@@ -2759,7 +2820,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2806,7 +2867,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d731f764");
@@ -2827,7 +2888,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2837,6 +2898,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_e096316d"))
@@ -2865,7 +2927,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_65");
@@ -2878,7 +2940,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2912,7 +2974,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_79");
@@ -2925,7 +2987,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2935,6 +2997,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_65"))
@@ -2956,7 +3019,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_69");
@@ -2965,7 +3028,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3012,7 +3075,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d731f764");
@@ -3033,7 +3096,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3043,6 +3106,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_69"))
@@ -3084,7 +3148,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d731f764");
@@ -3105,7 +3169,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3115,6 +3179,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d731f764"))
@@ -3136,7 +3201,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3a8fb4dd");
@@ -3145,7 +3210,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3194,7 +3259,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c7939f2f");
@@ -3215,7 +3280,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3257,7 +3322,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_92e1301f");
@@ -3274,7 +3339,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3321,7 +3386,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d731f764");
@@ -3342,7 +3407,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3352,6 +3417,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d731f764"))
@@ -3373,7 +3439,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3a8fb4dd");
@@ -3382,7 +3448,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3431,7 +3497,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c7939f2f");
@@ -3452,7 +3518,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3494,7 +3560,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_92e1301f");
@@ -3511,7 +3577,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3558,7 +3624,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d731f764");
@@ -3579,7 +3645,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3589,6 +3655,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_79"))
@@ -3610,7 +3677,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_83");
@@ -3619,7 +3686,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3666,7 +3733,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d731f764");
@@ -3687,7 +3754,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3697,6 +3764,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_83"))
@@ -3738,7 +3806,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d731f764");
@@ -3759,7 +3827,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3769,6 +3837,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d731f764"))
@@ -3790,7 +3859,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3a8fb4dd");
@@ -3799,7 +3868,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3848,7 +3917,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c7939f2f");
@@ -3869,7 +3938,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3911,7 +3980,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_92e1301f");
@@ -3928,7 +3997,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3975,7 +4044,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d731f764");
@@ -3996,7 +4065,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4006,6 +4075,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d731f764"))
@@ -4027,7 +4097,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3a8fb4dd");
@@ -4036,7 +4106,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4085,7 +4155,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c7939f2f");
@@ -4106,7 +4176,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4148,7 +4218,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_92e1301f");
@@ -4165,7 +4235,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4212,7 +4282,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d731f764");
@@ -4233,7 +4303,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4243,6 +4313,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_546aa4f5"))
@@ -4271,7 +4342,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_95");
@@ -4284,7 +4355,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4311,7 +4382,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d002385f");
@@ -4320,7 +4391,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4330,6 +4401,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_95"))
@@ -4351,7 +4423,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_99");
@@ -4360,7 +4432,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4407,7 +4479,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d731f764");
@@ -4428,7 +4500,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4438,6 +4510,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_99"))
@@ -4479,7 +4552,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d731f764");
@@ -4500,7 +4573,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4510,6 +4583,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d731f764"))
@@ -4531,7 +4605,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3a8fb4dd");
@@ -4540,7 +4614,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4589,7 +4663,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c7939f2f");
@@ -4610,7 +4684,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4652,7 +4726,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_92e1301f");
@@ -4669,7 +4743,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4716,7 +4790,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d731f764");
@@ -4737,7 +4811,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4747,6 +4821,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d731f764"))
@@ -4768,7 +4843,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3a8fb4dd");
@@ -4777,7 +4852,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4826,7 +4901,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c7939f2f");
@@ -4847,7 +4922,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4889,7 +4964,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_92e1301f");
@@ -4906,7 +4981,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4953,7 +5028,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d731f764");
@@ -4974,7 +5049,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4984,6 +5059,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d002385f"))
@@ -5012,7 +5088,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_111");
@@ -5025,7 +5101,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5035,6 +5111,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_111"))
@@ -5056,7 +5133,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_115");
@@ -5065,7 +5142,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5112,7 +5189,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d731f764");
@@ -5133,7 +5210,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5143,6 +5220,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch45(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_115"))
@@ -5184,7 +5262,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d731f764");
@@ -5205,7 +5283,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5215,6 +5293,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d731f764"))
@@ -5236,7 +5315,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3a8fb4dd");
@@ -5245,7 +5324,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5294,7 +5373,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c7939f2f");
@@ -5315,7 +5394,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5357,7 +5436,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_92e1301f");
@@ -5374,7 +5453,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5421,7 +5500,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d731f764");
@@ -5442,7 +5521,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5452,6 +5531,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d731f764"))
@@ -5473,7 +5553,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3a8fb4dd");
@@ -5482,7 +5562,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5531,7 +5611,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c7939f2f");
@@ -5552,7 +5632,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5594,7 +5674,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_92e1301f");
@@ -5611,7 +5691,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5658,7 +5738,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d731f764");
@@ -5679,7 +5759,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5689,6 +5769,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch48(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_31d45080"))
@@ -5717,7 +5798,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_127");
@@ -5730,7 +5811,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5740,6 +5821,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_127"))
@@ -5761,7 +5843,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_131");
@@ -5770,7 +5852,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5817,7 +5899,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d731f764");
@@ -5838,7 +5920,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5848,6 +5930,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_131"))
@@ -5889,7 +5972,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d731f764");
@@ -5910,7 +5993,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5920,6 +6003,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d731f764"))
@@ -5941,7 +6025,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3a8fb4dd");
@@ -5950,7 +6034,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5999,7 +6083,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c7939f2f");
@@ -6020,7 +6104,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6062,7 +6146,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_92e1301f");
@@ -6079,7 +6163,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6126,7 +6210,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d731f764");
@@ -6147,7 +6231,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6157,6 +6241,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch52(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d731f764"))
@@ -6178,7 +6263,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3a8fb4dd");
@@ -6187,7 +6272,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6236,7 +6321,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c7939f2f");
@@ -6257,7 +6342,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6299,7 +6384,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_92e1301f");
@@ -6316,7 +6401,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6363,7 +6448,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d731f764");
@@ -6384,7 +6469,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6394,6 +6479,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch53(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ac05bfba"))
@@ -6427,7 +6513,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6106187c");
@@ -6444,7 +6530,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6461,6 +6547,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6106187c"))
@@ -6494,7 +6581,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6106187c");
@@ -6511,7 +6598,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6543,7 +6630,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cf63ee80");
@@ -6556,7 +6643,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6582,7 +6669,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e5f13c4");
@@ -6591,7 +6678,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6601,6 +6688,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch58(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_741df7ed"))
@@ -6640,6 +6728,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch62(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f75b511f"))
@@ -6699,7 +6788,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f75b511f");
@@ -6724,7 +6813,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6778,7 +6867,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f75b511f");
@@ -6803,7 +6892,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6875,7 +6964,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f75b511f");
@@ -6900,7 +6989,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6910,6 +6999,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch64(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f75b511f"))
@@ -6969,7 +7059,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f75b511f");
@@ -6994,7 +7084,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7048,7 +7138,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f75b511f");
@@ -7073,7 +7163,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7145,7 +7235,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f75b511f");
@@ -7170,7 +7260,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7180,6 +7270,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch65(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f75b511f"))
@@ -7239,7 +7330,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f75b511f");
@@ -7264,7 +7355,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7318,7 +7409,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f75b511f");
@@ -7343,7 +7434,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7415,7 +7506,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f75b511f");
@@ -7440,7 +7531,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7450,6 +7541,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch68(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f75b511f"))
@@ -7509,7 +7601,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f75b511f");
@@ -7534,7 +7626,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7588,7 +7680,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f75b511f");
@@ -7613,7 +7705,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7685,7 +7777,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f75b511f");
@@ -7710,7 +7802,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7720,6 +7812,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch69(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d731f764"))
@@ -7741,7 +7834,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3a8fb4dd");
@@ -7750,7 +7843,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7799,7 +7892,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c7939f2f");
@@ -7820,7 +7913,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7862,7 +7955,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_92e1301f");
@@ -7879,7 +7972,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7926,7 +8019,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d731f764");
@@ -7947,7 +8040,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7957,6 +8050,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch70(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c92d07b4"))
@@ -7992,7 +8086,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1728f71a");
@@ -8009,7 +8103,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8051,7 +8145,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cbe69427");
@@ -8068,7 +8162,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8109,7 +8203,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1809c6fc");
@@ -8126,7 +8220,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8173,7 +8267,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c92d07b4");
@@ -8198,7 +8292,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     prose_package pp = new prose_package();
@@ -8212,6 +8306,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch71(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3f1a842c"))
@@ -8260,7 +8355,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d0233b4b");
@@ -8269,7 +8364,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8316,7 +8411,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3f1a842c");
@@ -8337,7 +8432,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8347,6 +8442,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch72(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ebc0661b"))
@@ -8376,7 +8472,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_bf1a0f3e");
@@ -8389,7 +8485,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8424,7 +8520,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a30c1a53");
@@ -8437,7 +8533,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8479,7 +8575,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cf04e474");
@@ -8496,7 +8592,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8543,7 +8639,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ebc0661b");
@@ -8564,7 +8660,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8574,6 +8670,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch73(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d731f764"))
@@ -8595,7 +8692,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3a8fb4dd");
@@ -8604,7 +8701,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8653,7 +8750,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c7939f2f");
@@ -8674,7 +8771,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8716,7 +8813,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_92e1301f");
@@ -8733,7 +8830,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8780,7 +8877,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d731f764");
@@ -8801,7 +8898,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8811,6 +8908,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch74(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3a8fb4dd"))
@@ -8846,7 +8944,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_116bd775");
@@ -8863,7 +8961,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8873,6 +8971,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch75(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_116bd775"))
@@ -8918,7 +9017,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_116bd775");
@@ -8935,7 +9034,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8975,7 +9074,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_116bd775");
@@ -8992,7 +9091,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9002,6 +9101,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch77(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_116bd775"))
@@ -9047,7 +9147,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_116bd775");
@@ -9064,7 +9164,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9104,7 +9204,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_116bd775");
@@ -9121,7 +9221,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9131,6 +9231,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch78(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_116bd775"))
@@ -9176,7 +9277,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_116bd775");
@@ -9193,7 +9294,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9233,7 +9334,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_116bd775");
@@ -9250,7 +9351,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9260,6 +9361,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch79(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c7939f2f"))
@@ -9301,7 +9403,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c7939f2f");
@@ -9322,7 +9424,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9369,7 +9471,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c7939f2f");
@@ -9390,7 +9492,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9437,7 +9539,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c7939f2f");
@@ -9458,7 +9560,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9479,6 +9581,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch80(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c7939f2f"))
@@ -9520,7 +9623,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c7939f2f");
@@ -9541,7 +9644,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9588,7 +9691,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c7939f2f");
@@ -9609,7 +9712,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9656,7 +9759,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c7939f2f");
@@ -9677,7 +9780,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9698,6 +9801,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch81(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c7939f2f"))
@@ -9739,7 +9843,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c7939f2f");
@@ -9760,7 +9864,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9807,7 +9911,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c7939f2f");
@@ -9828,7 +9932,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9875,7 +9979,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c7939f2f");
@@ -9896,7 +10000,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9917,6 +10021,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch82(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c7939f2f"))
@@ -9958,7 +10063,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c7939f2f");
@@ -9979,7 +10084,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10026,7 +10131,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c7939f2f");
@@ -10047,7 +10152,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10094,7 +10199,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c7939f2f");
@@ -10115,7 +10220,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10136,6 +10241,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch84(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_92e1301f"))
@@ -10181,7 +10287,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_92e1301f");
@@ -10198,7 +10304,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10238,7 +10344,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_92e1301f");
@@ -10255,7 +10361,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10265,6 +10371,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch86(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_92e1301f"))
@@ -10310,7 +10417,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_92e1301f");
@@ -10327,7 +10434,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10367,7 +10474,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_92e1301f");
@@ -10384,7 +10491,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10394,6 +10501,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch87(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_92e1301f"))
@@ -10439,7 +10547,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_92e1301f");
@@ -10456,7 +10564,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10496,7 +10604,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_92e1301f");
@@ -10513,7 +10621,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10523,6 +10631,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch88(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d731f764"))
@@ -10544,7 +10653,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3a8fb4dd");
@@ -10553,7 +10662,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10602,7 +10711,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c7939f2f");
@@ -10623,7 +10732,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10665,7 +10774,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_92e1301f");
@@ -10682,7 +10791,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10729,7 +10838,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d731f764");
@@ -10750,7 +10859,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10760,6 +10869,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch89(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1f6a762c"))
@@ -10798,7 +10908,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7d4a858e");
@@ -10811,7 +10921,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10821,6 +10931,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch91(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_7d4a858e"))
@@ -10847,6 +10958,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch94(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c92d07b4"))
@@ -10882,7 +10994,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1728f71a");
@@ -10899,7 +11011,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10941,7 +11053,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cbe69427");
@@ -10958,7 +11070,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10999,7 +11111,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1809c6fc");
@@ -11016,7 +11128,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11063,7 +11175,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c92d07b4");
@@ -11088,7 +11200,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     prose_package pp = new prose_package();
@@ -11102,6 +11214,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch95(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1728f71a"))
@@ -11136,7 +11249,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1728f71a");
@@ -11153,7 +11266,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11193,7 +11306,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1728f71a");
@@ -11210,7 +11323,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11231,6 +11344,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch96(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1728f71a"))
@@ -11265,7 +11379,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1728f71a");
@@ -11282,7 +11396,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11322,7 +11436,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1728f71a");
@@ -11339,7 +11453,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11360,6 +11474,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch97(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1728f71a"))
@@ -11394,7 +11509,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1728f71a");
@@ -11411,7 +11526,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11451,7 +11566,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1728f71a");
@@ -11468,7 +11583,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11489,6 +11604,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch99(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_cbe69427"))
@@ -11523,7 +11639,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cbe69427");
@@ -11540,7 +11656,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11580,7 +11696,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cbe69427");
@@ -11597,7 +11713,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11618,6 +11734,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch100(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_cbe69427"))
@@ -11652,7 +11769,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cbe69427");
@@ -11669,7 +11786,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11709,7 +11826,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cbe69427");
@@ -11726,7 +11843,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11747,6 +11864,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch101(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_cbe69427"))
@@ -11781,7 +11899,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cbe69427");
@@ -11798,7 +11916,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11838,7 +11956,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cbe69427");
@@ -11855,7 +11973,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11876,6 +11994,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch103(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1809c6fc"))
@@ -11910,7 +12029,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1809c6fc");
@@ -11927,7 +12046,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11967,7 +12086,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1809c6fc");
@@ -11984,7 +12103,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12005,6 +12124,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch104(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1809c6fc"))
@@ -12039,7 +12159,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1809c6fc");
@@ -12056,7 +12176,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12096,7 +12216,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1809c6fc");
@@ -12113,7 +12233,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12134,6 +12254,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch105(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1809c6fc"))
@@ -12168,7 +12289,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1809c6fc");
@@ -12185,7 +12306,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12225,7 +12346,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1809c6fc");
@@ -12242,7 +12363,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12263,6 +12384,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch107(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c92d07b4"))
@@ -12298,7 +12420,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1728f71a");
@@ -12315,7 +12437,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12357,7 +12479,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cbe69427");
@@ -12374,7 +12496,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12415,7 +12537,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1809c6fc");
@@ -12432,7 +12554,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12479,7 +12601,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c92d07b4");
@@ -12504,7 +12626,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     prose_package pp = new prose_package();
@@ -12518,6 +12640,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch108(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c1013aa7"))
@@ -12558,6 +12681,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch112(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3f1a842c"))
@@ -12606,7 +12730,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d0233b4b");
@@ -12615,7 +12739,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12662,7 +12786,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3f1a842c");
@@ -12683,7 +12807,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12693,6 +12817,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch115(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d0233b4b"))
@@ -12708,6 +12833,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch117(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3f1a842c"))
@@ -12756,7 +12882,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d0233b4b");
@@ -12765,7 +12891,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12812,7 +12938,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3f1a842c");
@@ -12833,7 +12959,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12843,6 +12969,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch118(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9561a5a9"))
@@ -12885,6 +13012,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch123(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ebc0661b"))
@@ -12914,7 +13042,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_bf1a0f3e");
@@ -12927,7 +13055,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12962,7 +13090,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a30c1a53");
@@ -12975,7 +13103,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13017,7 +13145,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cf04e474");
@@ -13034,7 +13162,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13081,7 +13209,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ebc0661b");
@@ -13102,7 +13230,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13112,6 +13240,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch124(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_bf1a0f3e"))
@@ -13138,6 +13267,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch127(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a30c1a53"))
@@ -13176,7 +13306,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a30c1a53");
@@ -13189,7 +13319,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13199,6 +13329,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch129(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a30c1a53"))
@@ -13237,7 +13368,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a30c1a53");
@@ -13250,7 +13381,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13260,6 +13391,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch130(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_cf04e474"))
@@ -13294,7 +13426,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cf04e474");
@@ -13311,7 +13443,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13351,7 +13483,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cf04e474");
@@ -13368,7 +13500,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13389,6 +13521,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch131(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_cf04e474"))
@@ -13423,7 +13556,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cf04e474");
@@ -13440,7 +13573,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13480,7 +13613,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cf04e474");
@@ -13497,7 +13630,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13518,6 +13651,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch132(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_cf04e474"))
@@ -13552,7 +13686,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cf04e474");
@@ -13569,7 +13703,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13609,7 +13743,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cf04e474");
@@ -13626,7 +13760,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13647,6 +13781,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch134(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ebc0661b"))
@@ -13676,7 +13811,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_bf1a0f3e");
@@ -13689,7 +13824,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13724,7 +13859,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a30c1a53");
@@ -13737,7 +13872,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13779,7 +13914,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cf04e474");
@@ -13796,7 +13931,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13843,7 +13978,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ebc0661b");
@@ -13864,7 +13999,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13874,6 +14009,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch136(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_342"))
@@ -13893,7 +14029,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_344");
@@ -13902,7 +14038,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13912,6 +14048,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch137(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_344"))
@@ -13937,6 +14074,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch140(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_349"))
@@ -13956,7 +14094,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_354");
@@ -13965,7 +14103,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13987,7 +14125,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_356");
@@ -13996,7 +14134,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -14018,7 +14156,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_358");
@@ -14027,7 +14165,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -14049,7 +14187,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_360");
@@ -14058,7 +14196,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -14068,6 +14206,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch141(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_354"))
@@ -14093,6 +14232,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch144(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_356"))
@@ -14109,6 +14249,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch146(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_358"))
@@ -14125,6 +14266,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch148(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_360"))
@@ -14150,6 +14292,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch151(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6106187c"))
@@ -14183,7 +14326,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6106187c");
@@ -14200,7 +14343,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -14232,7 +14375,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cf63ee80");
@@ -14245,7 +14388,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -14271,7 +14414,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e5f13c4");
@@ -14280,7 +14423,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -14290,6 +14433,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch152(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6106187c"))
@@ -14323,7 +14467,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6106187c");
@@ -14340,7 +14484,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -14372,7 +14516,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cf63ee80");
@@ -14385,7 +14529,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -14411,7 +14555,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e5f13c4");
@@ -14420,7 +14564,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -14430,6 +14574,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch153(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_cf63ee80"))
@@ -14467,6 +14612,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_rebel_trainer_1_handleBranch157(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_e5f13c4"))
@@ -14482,6 +14628,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -14494,6 +14641,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         factions.setFaction(self, factions.FACTION_REBEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -14502,6 +14650,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         factions.setFaction(self, factions.FACTION_REBEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -14510,18 +14659,21 @@ public class naboo_rebel_trainer_1 extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.naboo_rebel_trainer_1");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -14559,7 +14711,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_60c4f974");
@@ -14575,7 +14727,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId", 1);
                 npcStartConversation(player, npc, "naboo_rebel_trainer_1", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -14619,7 +14771,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_b26194cb");
@@ -14635,7 +14787,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId", 6);
                 npcStartConversation(player, npc, "naboo_rebel_trainer_1", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -14671,7 +14823,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_a425f33d");
@@ -14687,7 +14839,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId", 12);
                 npcStartConversation(player, npc, "naboo_rebel_trainer_1", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -14730,7 +14882,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_78679b31");
@@ -14746,7 +14898,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId", 17);
                 npcStartConversation(player, npc, "naboo_rebel_trainer_1", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -14767,7 +14919,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_ac05bfba");
@@ -14775,7 +14927,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId", 53);
                 npcStartConversation(player, npc, "naboo_rebel_trainer_1", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -14826,7 +14978,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_741df7ed");
@@ -14842,7 +14994,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId", 58);
                 npcStartConversation(player, npc, "naboo_rebel_trainer_1", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -14893,7 +15045,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_f75b511f");
@@ -14917,7 +15069,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId", 62);
                 npcStartConversation(player, npc, "naboo_rebel_trainer_1", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -14961,7 +15113,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_d731f764");
@@ -14981,7 +15133,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId", 73);
                 npcStartConversation(player, npc, "naboo_rebel_trainer_1", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -15025,7 +15177,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_c92d07b4");
@@ -15045,7 +15197,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId", 94);
                 npcStartConversation(player, npc, "naboo_rebel_trainer_1", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -15089,7 +15241,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_3f1a842c");
@@ -15109,7 +15261,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId", 112);
                 npcStartConversation(player, npc, "naboo_rebel_trainer_1", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -15153,7 +15305,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_ebc0661b");
@@ -15173,7 +15325,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId", 123);
                 npcStartConversation(player, npc, "naboo_rebel_trainer_1", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -15216,7 +15368,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_d731f764");
@@ -15236,7 +15388,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId", 73);
                 npcStartConversation(player, npc, "naboo_rebel_trainer_1", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -15266,7 +15418,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1f6a762c");
@@ -15278,7 +15430,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId", 89);
                 npcStartConversation(player, npc, "naboo_rebel_trainer_1", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -15320,7 +15472,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_c92d07b4");
@@ -15340,7 +15492,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId", 94);
                 npcStartConversation(player, npc, "naboo_rebel_trainer_1", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -15377,7 +15529,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_c1013aa7");
@@ -15393,7 +15545,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId", 108);
                 npcStartConversation(player, npc, "naboo_rebel_trainer_1", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -15436,7 +15588,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_3f1a842c");
@@ -15456,7 +15608,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId", 112);
                 npcStartConversation(player, npc, "naboo_rebel_trainer_1", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -15486,7 +15638,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_9561a5a9");
@@ -15498,7 +15650,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId", 118);
                 npcStartConversation(player, npc, "naboo_rebel_trainer_1", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -15541,7 +15693,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_ebc0661b");
@@ -15561,7 +15713,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId", 123);
                 npcStartConversation(player, npc, "naboo_rebel_trainer_1", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -15591,7 +15743,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_342");
@@ -15599,7 +15751,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId", 136);
                 npcStartConversation(player, npc, "naboo_rebel_trainer_1", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -15621,7 +15773,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_349");
@@ -15629,7 +15781,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId", 140);
                 npcStartConversation(player, npc, "naboo_rebel_trainer_1", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -15665,7 +15817,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_6106187c");
@@ -15681,7 +15833,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_rebel_trainer_1.branchId", 151);
                 npcStartConversation(player, npc, "naboo_rebel_trainer_1", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -15690,6 +15842,7 @@ public class naboo_rebel_trainer_1 extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("naboo_rebel_trainer_1"))

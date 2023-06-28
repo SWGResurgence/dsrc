@@ -1,5 +1,11 @@
 package script.item.ring;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.sui;
 import script.library.utils;
@@ -13,6 +19,7 @@ public class aurebesh_decoder extends script.base_script
     public static final String SID_A_TO_E_TITLE = "@collection:a_to_e_title";
     public static final String SID_E_TO_A_TITLE = "@collection:e_to_a_title";
     public static final String SID_TRANSLATED_TEXT = "@collection:translated_text";
+
     public aurebesh_decoder()
     {
     }

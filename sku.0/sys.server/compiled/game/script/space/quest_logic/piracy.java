@@ -1,5 +1,11 @@
 package script.space.quest_logic;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -8,6 +14,7 @@ public class piracy extends script.base_script
     public piracy()
     {
     }
+
     public int startBeacon(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isSpaceScene())
@@ -32,6 +39,7 @@ public class piracy extends script.base_script
         messageTo(self, "startPiracyEvent", null, 2.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int startPiracyEvent(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, "player");
@@ -44,6 +52,7 @@ public class piracy extends script.base_script
         generateShipList(self);
         return SCRIPT_CONTINUE;
     }
+
     public void generateShipList(obj_id self) throws InterruptedException
     {
         int difficulty = getIntObjVar(self, "difficulty");
@@ -104,6 +113,7 @@ public class piracy extends script.base_script
         warpInTargetShip(self, targetShipType);
         warpInEscortShips(self, escortsArray);
     }
+
     public void warpInTargetShip(obj_id self, String targetShipType) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, "player");
@@ -156,8 +166,8 @@ public class piracy extends script.base_script
         messageTo(self, "updateTargetWaypoint", null, 1.0f, false);
         messageTo(self, "startMovement", null, 3.0f, false);
         messageTo(self, "eventTimer", null, 1.0f, false);
-        return;
     }
+
     public void warpInEscortShips(obj_id self, String[] escortShips) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, "player");
@@ -216,8 +226,8 @@ public class piracy extends script.base_script
         ship_ai.squadSetGuardTarget(escortSquad, targetSquad);
         ship_ai.squadSetAttackOrders(escortSquad, ship_ai.ATTACK_ORDERS_RETURN_FIRE);
         ship_ai.squadSetFormation(escortSquad, 5);
-        return;
     }
+
     public int startMovement(obj_id self, dictionary params) throws InterruptedException
     {
         location o = new location(0.0f, 0.0f, 0.0f);
@@ -239,6 +249,7 @@ public class piracy extends script.base_script
         ship_ai.unitMoveTo(targetShip, randomTransform);
         return SCRIPT_CONTINUE;
     }
+
     public int updateTargetWaypoint(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, "player");
@@ -275,6 +286,7 @@ public class piracy extends script.base_script
         messageTo(self, "updateTargetWaypoint", null, 30.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanupPiracyEvent(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id targetShip = getObjIdObjVar(self, "targetShip");
@@ -288,8 +300,10 @@ public class piracy extends script.base_script
         obj_id[] escortIdArray = utils.getObjIdArrayObjVar(self, "escortIdArray");
         if (escortIdArray != null)
         {
-            for (obj_id obj_id : escortIdArray) {
-                if (isIdValid(obj_id) && exists(obj_id)) {
+            for (obj_id obj_id : escortIdArray)
+            {
+                if (isIdValid(obj_id) && exists(obj_id))
+                {
                     messageTo(obj_id, "hyperLeave", null, 0.0f, false);
                 }
             }
@@ -309,6 +323,7 @@ public class piracy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int eventTimer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id targetShip = getObjIdObjVar(self, "targetShip");

@@ -1,5 +1,11 @@
 package script.space.qa;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.space_battlefield;
 import script.library.space_crafting;
 import script.library.space_create;
@@ -12,6 +18,7 @@ public class tester extends script.base_script
     public tester()
     {
     }
+
     public int OnSpeaking(obj_id self, String strText) throws InterruptedException
     {
         String[] strCommands = split(strText, ' ');
@@ -40,7 +47,7 @@ public class tester extends script.base_script
                 {
                     objShip = space_create.createShip(strCommands[1], getTransform_o2p(getPilotedShip(self)));
                 }
-                else 
+                else
                 {
                     objShip = space_create.createShip(strCommands[1], getTransform_o2p(self));
                 }
@@ -49,13 +56,13 @@ public class tester extends script.base_script
                     broadcast(self, "You passed in a bad shipType. Type is " + strCommands[1]);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     broadcast(self, "Made ship of type " + strCommands[1] + " object id is: " + objShip);
                     debugConsoleMsg(self, "Made ship of type " + strCommands[1] + " object id is: " + objShip);
                 }
             }
-            else 
+            else
             {
                 broadcast(self, "You need to pass in a ship type for me to spawn.");
                 return SCRIPT_CONTINUE;
@@ -73,13 +80,13 @@ public class tester extends script.base_script
                     broadcast(self, "You passed in a bad shipType. Type is " + strCommands[1]);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     broadcast(self, "Made ship of type " + strCommands[1] + " object id is: " + objShip);
                     debugConsoleMsg(self, "Made ship of type " + strCommands[1] + " object id is: " + objShip);
                 }
             }
-            else 
+            else
             {
                 broadcast(self, "You need to pass in a ship type for me to spawn.");
                 return SCRIPT_CONTINUE;

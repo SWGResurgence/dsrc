@@ -1,5 +1,11 @@
 package script.item.firework;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.firework;
 import script.library.sui;
@@ -16,6 +22,7 @@ public class show extends script.base_script
     public static final string_id MNU_REMOVE_EVENT = new string_id(firework.STF, "mnu_remove_event");
     public static final string_id MNU_REORDER_SHOW = new string_id(firework.STF, "mnu_reorder_show");
     public static final string_id SID_NO_FIREWORKS_IN_SPACE = new string_id("space/space_interaction", "no_fireworks_in_space");
+
     public show()
     {
     }

@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 import script.string_id;
 
@@ -20,6 +26,7 @@ public class player_stomach extends script.base_script
     public static final String VAR_STOMACH_BASE = "stomach";
     public static final string_id SID_STOMACH_UNKNOWN = new string_id("error_message", "stomach_unknown");
     public static final String SCRIPT_TOXIC_BLOOD = "item.comestible.toxic_blood";
+
     public player_stomach()
     {
     }

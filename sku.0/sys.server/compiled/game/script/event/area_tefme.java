@@ -1,26 +1,34 @@
 package script.event;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.utils;
 import script.obj_id;
 
 public class area_tefme extends script.base_script
 {
+    private static final String[] HELP_TEXT =
+            {
+                    "=========================================",
+                    "KEY WORDS (These are case sensitive): setStartPhrase, setEndPhrase, setAreaRange, setSingleMode, setAreaMode, showStats, detach.",
+                    "setStartPhrase: Set the phrase that you will speak to cause yourself to become TEF'd. Default is \"Come get me\"",
+                    "setEndPhrase: Set the phrase that you will speak to attempt to end your TEFs. Default is \"Not in the face!\"",
+                    "setAreaRange: Set the range for area wide TEF mode.",
+                    "setSingleMode: Puts you in single target mode, meaning only your look-at target will get a TEF against you.",
+                    "setAreaMode: Puts you in area wide mode.",
+                    "showStats: Check what mode you are in and current variables.",
+                    "detach: Detaches this script and clears objvars.",
+                    "========================================="
+            };
+
     public area_tefme()
     {
     }
-    private static final String[] HELP_TEXT =
-    {
-        "=========================================",
-        "KEY WORDS (These are case sensitive): setStartPhrase, setEndPhrase, setAreaRange, setSingleMode, setAreaMode, showStats, detach.",
-        "setStartPhrase: Set the phrase that you will speak to cause yourself to become TEF'd. Default is \"Come get me\"",
-        "setEndPhrase: Set the phrase that you will speak to attempt to end your TEFs. Default is \"Not in the face!\"",
-        "setAreaRange: Set the range for area wide TEF mode.",
-        "setSingleMode: Puts you in single target mode, meaning only your look-at target will get a TEF against you.",
-        "setAreaMode: Puts you in area wide mode.",
-        "showStats: Check what mode you are in and current variables.",
-        "detach: Detaches this script and clears objvars.",
-        "========================================="
-    };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!isPlayer(self))
@@ -55,6 +63,7 @@ public class area_tefme extends script.base_script
         setObjVar(self, "event.tefme.mode", 0);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id objSpeaker, String strText) throws InterruptedException
     {
         if (objSpeaker != self)
@@ -88,10 +97,12 @@ public class area_tefme extends script.base_script
             if (strText.equalsIgnoreCase(startPhrase))
             {
                 obj_id[] objPlayers = getPlayerCreaturesInRange(self, range);
-                if (objPlayers != null && objPlayers.length > 0)
+                if (objPlayers != null)
                 {
-                    for (obj_id objPlayer : objPlayers) {
-                        if (objPlayer != self) {
+                    for (obj_id objPlayer : objPlayers)
+                    {
+                        if (objPlayer != self)
+                        {
                             pvpSetPersonalEnemyFlag(self, objPlayer);
                             sendSystemMessage(self, getName(objPlayer) + " can now attack you!", null);
                         }
@@ -218,7 +229,8 @@ public class area_tefme extends script.base_script
         }
         else if ((toLower(strText)).equals("help"))
         {
-            for (String helpText : HELP_TEXT) {
+            for (String helpText : HELP_TEXT)
+            {
                 sendSystemMessage(self, helpText, null);
             }
         }

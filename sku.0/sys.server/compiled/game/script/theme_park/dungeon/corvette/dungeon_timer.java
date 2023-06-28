@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.corvette;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.player_structure;
 import script.library.space_dungeon;
@@ -7,10 +13,12 @@ import script.obj_id;
 
 public class dungeon_timer extends script.base_script
 {
+    public static final String MSGS = "dungeon/corvette";
+
     public dungeon_timer()
     {
     }
-    public static final String MSGS = "dungeon/corvette";
+
     public int beginSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         int time = getGameTime();
@@ -18,6 +26,7 @@ public class dungeon_timer extends script.base_script
         messageTo(self, "everyFiveMinutes", null, 300, false);
         return SCRIPT_CONTINUE;
     }
+
     public int everyFiveMinutes(obj_id self, dictionary params) throws InterruptedException
     {
         int currentTime = getGameTime();
@@ -34,12 +43,13 @@ public class dungeon_timer extends script.base_script
         {
             messageTo(self, "everyFiveMinutes", null, 300, false);
         }
-        else 
+        else
         {
             messageTo(self, "everyMinute", null, 60, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int everyMinute(obj_id self, dictionary params) throws InterruptedException
     {
         int currentTime = getGameTime();
@@ -61,6 +71,7 @@ public class dungeon_timer extends script.base_script
         messageTo(self, "everyMinute", null, 60, false);
         return SCRIPT_CONTINUE;
     }
+
     public int dungeonEnds(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "fuel"))
@@ -105,7 +116,7 @@ public class dungeon_timer extends script.base_script
         {
             space_dungeon.endDungeonSession(self);
         }
-        CustomerServiceLog("DUNGEON_CorellianCorvette", "*Corvette ended because time ran out.  Dungeon ID was " + self + "");
+        CustomerServiceLog("DUNGEON_CorellianCorvette", "*Corvette ended because time ran out.  Dungeon ID was " + self);
         return SCRIPT_CONTINUE;
     }
 }

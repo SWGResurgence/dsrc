@@ -1,5 +1,11 @@
 package script.corpse;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -8,6 +14,7 @@ public class player_corpse extends script.base_script
     public player_corpse()
     {
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.LOOT);
@@ -22,6 +29,7 @@ public class player_corpse extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.LOOT)
@@ -31,7 +39,7 @@ public class player_corpse extends script.base_script
                 utils.requestContainerOpen(player, self);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 sendSystemMessage(player, permissions.SID_NO_CORPSE_PERMISSION);
             }
@@ -43,13 +51,14 @@ public class player_corpse extends script.base_script
                 utils.requestContainerOpen(player, self);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 sendSystemMessage(player, permissions.SID_NO_CORPSE_PERMISSION);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         corpse.cleanUpPlayerCorpse(self, false);
@@ -59,6 +68,7 @@ public class player_corpse extends script.base_script
         CustomerServiceLog("Death", "PCorpse(" + self + " - " + corpseName + ") owner = " + getOwner(self));
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (isPlayer(transferer))
@@ -68,6 +78,7 @@ public class player_corpse extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToLoseItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (isPlayer(transferer))
@@ -77,13 +88,14 @@ public class player_corpse extends script.base_script
                 sendSystemMessage(transferer, permissions.SID_INSUFFICIENT_PERMISSIONS);
                 return SCRIPT_OVERRIDE;
             }
-            else 
+            else
             {
                 CustomerServiceLog("Death", "(" + transferer + ") " + getName(transferer) + " is removing (" + item + ") " + getName(item) + " from (" + self + ")" + getName(self));
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnLostItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (!isIdValid(transferer))
@@ -98,6 +110,7 @@ public class player_corpse extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnOpenedContainer(obj_id self, obj_id whoOpenedMe) throws InterruptedException
     {
         if (utils.isOwner(self, whoOpenedMe))
@@ -109,6 +122,7 @@ public class player_corpse extends script.base_script
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int OnClosedContainer(obj_id self, obj_id whoClosedMe) throws InterruptedException
     {
         obj_id[] itemsLeft = getContents(self);
@@ -118,13 +132,14 @@ public class player_corpse extends script.base_script
             {
                 corpse.lootCorpseCoins(whoClosedMe, self);
             }
-            else 
+            else
             {
                 corpse.cleanUpPlayerCorpse(self);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id[] itemsLeft = getContents(self);
@@ -138,6 +153,7 @@ public class player_corpse extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleCorpseExpire(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, corpse.VAR_TIME_CREATED))
@@ -161,6 +177,7 @@ public class player_corpse extends script.base_script
         corpse.cleanUpPlayerCorpse(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleAddConsentedUser(obj_id self, dictionary params) throws InterruptedException
     {
         if (params != null)
@@ -172,13 +189,14 @@ public class player_corpse extends script.base_script
                 {
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                 }
             }
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int handleRemoveConsentedUser(obj_id self, dictionary params) throws InterruptedException
     {
         if (params != null)
@@ -194,6 +212,7 @@ public class player_corpse extends script.base_script
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int handleCorpseDepositSuccess(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -205,11 +224,13 @@ public class player_corpse extends script.base_script
         utils.moneyOutMetric(self, money.ACCT_CORPSE_EXPIRATION, cash);
         return SCRIPT_CONTINUE;
     }
+
     public int handleCorpseDepositFail(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleAttemptCorpseCleanup(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] stuff = getContents(self);
@@ -217,7 +238,7 @@ public class player_corpse extends script.base_script
         {
             corpse.cleanUpPlayerCorpse(self);
         }
-        else 
+        else
         {
             int stamp = 0;
             if (hasObjVar(self, "cleanupStamp"))
@@ -233,11 +254,13 @@ public class player_corpse extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleDestroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleRequestCorpseMove(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id sender = params.getObjId("sender");
@@ -266,6 +289,7 @@ public class player_corpse extends script.base_script
         corpse.updateCorpseOwnerWaypoint(getOwner(self), self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleRequestLocation(obj_id self, dictionary params) throws InterruptedException
     {
         corpse.updateCorpseOwnerWaypoint(getOwner(self), self);

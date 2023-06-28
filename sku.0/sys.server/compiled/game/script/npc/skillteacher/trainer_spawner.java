@@ -1,5 +1,11 @@
 package script.npc.skillteacher;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.city;
@@ -10,10 +16,12 @@ import script.string_id;
 
 public class trainer_spawner extends script.base_script
 {
+    public static final boolean TRAINERS_OFF = true;
+
     public trainer_spawner()
     {
     }
-    public static final boolean TRAINERS_OFF = true;
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (TRAINERS_OFF)
@@ -32,6 +40,7 @@ public class trainer_spawner extends script.base_script
         messageTo(self, "spawnTrainer", null, 1.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (getIntObjVar(self, "city_id") > 0)
@@ -42,6 +51,7 @@ public class trainer_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnUnloadedFromMemory(obj_id self) throws InterruptedException
     {
         if (getIntObjVar(self, "city_id") > 0)
@@ -52,6 +62,7 @@ public class trainer_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int spawnTrainer(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "trainer"))
@@ -84,10 +95,11 @@ public class trainer_spawner extends script.base_script
             setObjVar(trainer, "spawner", self);
             utils.setScriptVar(self, "trainer", trainer);
             attachScript(trainer, "npc.skillteacher.civic_skillteacher");
-            String spawn_r = "st" + spawn.substring(spawn.indexOf('_'), spawn.length());
+            String spawn_r = "st" + spawn.substring(spawn.indexOf('_'));
         }
         return SCRIPT_CONTINUE;
     }
+
     public int requestDestroy(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id trainer = utils.getObjIdScriptVar(self, "trainer");
@@ -95,21 +107,24 @@ public class trainer_spawner extends script.base_script
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public boolean isTrainerAllowed(String strTrainer) throws InterruptedException
     {
         if (utils.checkConfigFlag("ScriptFlags", "noEliteTrainers"))
         {
-            String[] strAllowedTrainers = 
+            String[] strAllowedTrainers =
+                    {
+                            "trainer_artisan",
+                            "trainer_brawler",
+                            "trainer_entertainer",
+                            "trainer_marksman",
+                            "trainer_medic",
+                            "trainer_scout"
+                    };
+            for (String strTest : strAllowedTrainers)
             {
-                "trainer_artisan",
-                "trainer_brawler",
-                "trainer_entertainer",
-                "trainer_marksman",
-                "trainer_medic",
-                "trainer_scout"
-            };
-            for (String strTest : strAllowedTrainers) {
-                if (strTrainer.equals(strTest)) {
+                if (strTrainer.equals(strTest))
+                {
                     return true;
                 }
             }

@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,91 +14,110 @@ import script.*;
 
 public class stuvany_inglen extends script.base_script
 {
+    public static String c_stringFile = "conversation/stuvany_inglen";
+
     public stuvany_inglen()
     {
     }
-    public static String c_stringFile = "conversation/stuvany_inglen";
+
     public boolean stuvany_inglen_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean stuvany_inglen_condition_canDoPrisoner(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return !groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_pirate_prisoner_rescue_collection") && !groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_pirate_prisoner_rescue_retry_01") && !groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_pirate_prisoner_rescue_retry_02") && groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_pirate_hideout");
     }
+
     public boolean stuvany_inglen_condition_hasReturnedPrisoner(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isTaskActive(player, "u16_nym_themepark_pirate_prisoner_rescue_collection", "returnPrisonerRescueComplete") || groundquests.isTaskActive(player, "u16_nym_themepark_pirate_prisoner_rescue_retry_01", "returnPrisonerRescueComplete") || groundquests.isTaskActive(player, "u16_nym_themepark_pirate_prisoner_rescue_retry_02", "returnPrisonerRescueComplete");
     }
+
     public boolean stuvany_inglen_condition_hasPrisonerQuestNotComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isQuestActive(player, "u16_nym_themepark_pirate_prisoner_rescue_collection") || groundquests.isQuestActive(player, "u16_nym_themepark_pirate_prisoner_rescue_retry_01") || groundquests.isQuestActive(player, "u16_nym_themepark_pirate_prisoner_rescue_retry_02");
     }
+
     public boolean stuvany_inglen_condition_canDoStealOre(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return !groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_pirate_steal_mined_ore_collection") && (groundquests.hasCompletedQuest(player, "u16_nym_themepark_pirate_prisoner_rescue_collection") || groundquests.hasCompletedQuest(player, "u16_nym_themepark_pirate_prisoner_rescue_retry_01") || groundquests.hasCompletedQuest(player, "u16_nym_themepark_pirate_prisoner_rescue_retry_02")) && groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_mine");
     }
+
     public boolean stuvany_inglen_condition_hasStealOreQuestNotComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isQuestActive(player, "u16_nym_themepark_pirate_steal_mined_ore_collection");
     }
+
     public boolean stuvany_inglen_condition_hasReturnedStealOre(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isTaskActive(player, "u16_nym_themepark_pirate_steal_mined_ore_collection", "returnStealMinedOreComplete");
     }
+
     public boolean stuvany_inglen_condition_canDoStealData(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return !groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_pirate_steal_lab_data_collection") && groundquests.hasCompletedQuest(player, "u16_nym_themepark_pirate_steal_mined_ore_collection") && groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_research_facility");
     }
+
     public boolean stuvany_inglen_condition_hasStealDataQuestNotComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isQuestActive(player, "u16_nym_themepark_pirate_steal_lab_data_collection");
     }
+
     public boolean stuvany_inglen_condition_hasReturnedStealData(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isTaskActive(player, "u16_nym_themepark_pirate_steal_lab_data_collection", "returnStealLabDataComplete");
     }
+
     public boolean stuvany_inglen_condition_hasntDonePrisoner(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return !groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_pirate_hideout");
     }
+
     public boolean stuvany_inglen_condition_hasntDoneOre(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return !groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_mine") && groundquests.hasCompletedQuest(player, "u16_nym_themepark_pirate_hideout") && groundquests.hasCompletedQuest(player, "u16_nym_themepark_pirate_prisoner_rescue_collection");
     }
+
     public boolean stuvany_inglen_condition_hasntDoneData(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return !groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_research_facility") && groundquests.hasCompletedQuest(player, "u16_nym_themepark_mine") && groundquests.hasCompletedQuest(player, "u16_nym_themepark_pirate_steal_mined_ore_collection");
     }
+
     public boolean stuvany_inglen_condition_hasCompletedAll(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.hasCompletedQuest(player, "u16_nym_themepark_pirate_steal_lab_data_collection");
     }
+
     public boolean stuvany_inglen_condition_hasCompletedPrisonerRescueCollection(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasCompletedCollection(player, "nyms_rescue_prisoner") && (groundquests.isQuestActive(player, "u16_nym_themepark_pirate_prisoner_rescue_collection") || groundquests.isQuestActive(player, "u16_nym_themepark_pirate_prisoner_rescue_retry_01") || groundquests.isQuestActive(player, "u16_nym_themepark_pirate_prisoner_rescue_retry_02"));
     }
+
     public boolean stuvany_inglen_condition_hasCompletedMinedOreCollection(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasCompletedCollection(player, "nyms_steal_mined_ore") && groundquests.isQuestActive(player, "u16_nym_themepark_pirate_steal_mined_ore_collection");
     }
+
     public boolean stuvany_inglen_condition_hasCompletedLabDataCollection(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasCompletedCollection(player, "nyms_steal_lab_data") && groundquests.isQuestActive(player, "u16_nym_themepark_pirate_steal_lab_data_collection");
     }
+
     public void stuvany_inglen_action_grantPrisonerQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "u16_nym_themepark_pirate_prisoner_rescue_collection");
@@ -101,6 +126,7 @@ public class stuvany_inglen extends script.base_script
             modifyCollectionSlotValue(player, "nym_prisoner_rescue_activation", 1);
         }
     }
+
     public void stuvany_inglen_action_completePrisonerQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isTaskActive(player, "u16_nym_themepark_pirate_prisoner_rescue_collection", "returnPrisonerRescueComplete") || groundquests.isTaskActive(player, "u16_nym_themepark_pirate_prisoner_rescue_retry_01", "returnPrisonerRescueComplete") || groundquests.isTaskActive(player, "u16_nym_themepark_pirate_prisoner_rescue_retry_02", "returnPrisonerRescueComplete"))
@@ -112,6 +138,7 @@ public class stuvany_inglen extends script.base_script
             modifyCollectionSlotValue(player, "icon_nyms_master_collection_2_rescue_prisoner", 1);
         }
     }
+
     public void stuvany_inglen_action_completeStealOreQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isTaskActive(player, "u16_nym_themepark_pirate_steal_mined_ore_collection", "returnStealMinedOreComplete"))
@@ -123,6 +150,7 @@ public class stuvany_inglen extends script.base_script
             modifyCollectionSlotValue(player, "icon_nyms_master_collection_2_steal_ore", 1);
         }
     }
+
     public void stuvany_inglen_action_grantStealOreQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "u16_nym_themepark_pirate_steal_mined_ore_collection");
@@ -131,6 +159,7 @@ public class stuvany_inglen extends script.base_script
             modifyCollectionSlotValue(player, "nym_mined_ore_activation", 1);
         }
     }
+
     public void stuvany_inglen_action_grantStealDataQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "u16_nym_themepark_pirate_steal_lab_data_collection");
@@ -139,6 +168,7 @@ public class stuvany_inglen extends script.base_script
             modifyCollectionSlotValue(player, "nym_lab_data_activation", 1);
         }
     }
+
     public void stuvany_inglen_action_completeStealDataQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isTaskActive(player, "u16_nym_themepark_pirate_steal_lab_data_collection", "returnStealLabDataComplete"))
@@ -150,6 +180,7 @@ public class stuvany_inglen extends script.base_script
             modifyCollectionSlotValue(player, "icon_nyms_master_collection_2_lab_data", 1);
         }
     }
+
     public void stuvany_inglen_action_BruteForceCompletePrisoner(obj_id player, obj_id npc) throws InterruptedException
     {
         if (stuvany_inglen_condition_hasCompletedPrisonerRescueCollection(player, npc))
@@ -188,6 +219,7 @@ public class stuvany_inglen extends script.base_script
             }
         }
     }
+
     public void stuvany_inglen_action_BruteForceCompleteLabData(obj_id player, obj_id npc) throws InterruptedException
     {
         if (stuvany_inglen_condition_hasCompletedLabDataCollection(player, npc))
@@ -204,6 +236,7 @@ public class stuvany_inglen extends script.base_script
             }
         }
     }
+
     public void stuvany_inglen_action_BruteForceCompleteMinedOre(obj_id player, obj_id npc) throws InterruptedException
     {
         if (stuvany_inglen_condition_hasCompletedMinedOreCollection(player, npc))
@@ -220,12 +253,14 @@ public class stuvany_inglen extends script.base_script
             }
         }
     }
+
     public void stuvany_inglen_action_correctAllCollectionErrors(obj_id player, obj_id npc) throws InterruptedException
     {
         stuvany_inglen_action_completePrisonerQuest(player, npc);
         stuvany_inglen_action_completeStealOreQuest(player, npc);
         stuvany_inglen_action_completeStealDataQuest(player, npc);
     }
+
     public int stuvany_inglen_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_28"))
@@ -245,7 +280,7 @@ public class stuvany_inglen extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_90");
@@ -254,7 +289,7 @@ public class stuvany_inglen extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.stuvany_inglen.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -264,6 +299,7 @@ public class stuvany_inglen extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int stuvany_inglen_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_90"))
@@ -283,7 +319,7 @@ public class stuvany_inglen extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_92");
@@ -292,7 +328,7 @@ public class stuvany_inglen extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.stuvany_inglen.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -302,6 +338,7 @@ public class stuvany_inglen extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int stuvany_inglen_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_92"))
@@ -321,7 +358,7 @@ public class stuvany_inglen extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_94");
@@ -330,7 +367,7 @@ public class stuvany_inglen extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.stuvany_inglen.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -340,6 +377,7 @@ public class stuvany_inglen extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int stuvany_inglen_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_94"))
@@ -359,7 +397,7 @@ public class stuvany_inglen extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_96");
@@ -368,7 +406,7 @@ public class stuvany_inglen extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.stuvany_inglen.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -378,6 +416,7 @@ public class stuvany_inglen extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int stuvany_inglen_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_96"))
@@ -397,6 +436,7 @@ public class stuvany_inglen extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int stuvany_inglen_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_30"))
@@ -411,6 +451,7 @@ public class stuvany_inglen extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int stuvany_inglen_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_32"))
@@ -430,7 +471,7 @@ public class stuvany_inglen extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_84");
@@ -439,7 +480,7 @@ public class stuvany_inglen extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.stuvany_inglen.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -449,6 +490,7 @@ public class stuvany_inglen extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int stuvany_inglen_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_84"))
@@ -468,7 +510,7 @@ public class stuvany_inglen extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_86");
@@ -477,7 +519,7 @@ public class stuvany_inglen extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.stuvany_inglen.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -487,6 +529,7 @@ public class stuvany_inglen extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int stuvany_inglen_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_86"))
@@ -502,6 +545,7 @@ public class stuvany_inglen extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int stuvany_inglen_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_39"))
@@ -522,7 +566,7 @@ public class stuvany_inglen extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82");
@@ -531,7 +575,7 @@ public class stuvany_inglen extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.stuvany_inglen.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -541,6 +585,7 @@ public class stuvany_inglen extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int stuvany_inglen_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_82"))
@@ -560,6 +605,7 @@ public class stuvany_inglen extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int stuvany_inglen_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_48"))
@@ -574,6 +620,7 @@ public class stuvany_inglen extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int stuvany_inglen_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_72"))
@@ -593,7 +640,7 @@ public class stuvany_inglen extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_74");
@@ -602,7 +649,7 @@ public class stuvany_inglen extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.stuvany_inglen.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -612,6 +659,7 @@ public class stuvany_inglen extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int stuvany_inglen_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_74"))
@@ -631,7 +679,7 @@ public class stuvany_inglen extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -640,7 +688,7 @@ public class stuvany_inglen extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.stuvany_inglen.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -650,6 +698,7 @@ public class stuvany_inglen extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int stuvany_inglen_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_76"))
@@ -669,7 +718,7 @@ public class stuvany_inglen extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_78");
@@ -678,7 +727,7 @@ public class stuvany_inglen extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.stuvany_inglen.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -688,6 +737,7 @@ public class stuvany_inglen extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int stuvany_inglen_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_78"))
@@ -707,7 +757,7 @@ public class stuvany_inglen extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_80");
@@ -716,7 +766,7 @@ public class stuvany_inglen extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.stuvany_inglen.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -726,6 +776,7 @@ public class stuvany_inglen extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int stuvany_inglen_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_80"))
@@ -741,6 +792,7 @@ public class stuvany_inglen extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int stuvany_inglen_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_67"))
@@ -760,7 +812,7 @@ public class stuvany_inglen extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_71");
@@ -769,7 +821,7 @@ public class stuvany_inglen extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.stuvany_inglen.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -779,6 +831,7 @@ public class stuvany_inglen extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int stuvany_inglen_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_71"))
@@ -794,6 +847,7 @@ public class stuvany_inglen extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int stuvany_inglen_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_102"))
@@ -808,6 +862,7 @@ public class stuvany_inglen extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int stuvany_inglen_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_108"))
@@ -827,7 +882,7 @@ public class stuvany_inglen extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_112");
@@ -836,7 +891,7 @@ public class stuvany_inglen extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.stuvany_inglen.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -846,6 +901,7 @@ public class stuvany_inglen extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int stuvany_inglen_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_112"))
@@ -865,7 +921,7 @@ public class stuvany_inglen extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_116");
@@ -874,7 +930,7 @@ public class stuvany_inglen extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.stuvany_inglen.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -884,6 +940,7 @@ public class stuvany_inglen extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int stuvany_inglen_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_116"))
@@ -903,7 +960,7 @@ public class stuvany_inglen extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_120");
@@ -912,7 +969,7 @@ public class stuvany_inglen extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.stuvany_inglen.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -922,6 +979,7 @@ public class stuvany_inglen extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int stuvany_inglen_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_120"))
@@ -941,7 +999,7 @@ public class stuvany_inglen extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_126");
@@ -950,7 +1008,7 @@ public class stuvany_inglen extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.stuvany_inglen.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -960,6 +1018,7 @@ public class stuvany_inglen extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int stuvany_inglen_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_126"))
@@ -975,6 +1034,7 @@ public class stuvany_inglen extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -985,12 +1045,14 @@ public class stuvany_inglen extends script.base_script
         setCondition(self, CONDITION_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setCondition(self, CONDITION_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -999,18 +1061,21 @@ public class stuvany_inglen extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.stuvany_inglen");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1044,7 +1109,7 @@ public class stuvany_inglen extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -1052,7 +1117,7 @@ public class stuvany_inglen extends script.base_script
                 utils.setScriptVar(player, "conversation.stuvany_inglen.branchId", 2);
                 npcStartConversation(player, npc, "stuvany_inglen", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1080,7 +1145,7 @@ public class stuvany_inglen extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_30");
@@ -1088,7 +1153,7 @@ public class stuvany_inglen extends script.base_script
                 utils.setScriptVar(player, "conversation.stuvany_inglen.branchId", 9);
                 npcStartConversation(player, npc, "stuvany_inglen", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1109,7 +1174,7 @@ public class stuvany_inglen extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_32");
@@ -1117,7 +1182,7 @@ public class stuvany_inglen extends script.base_script
                 utils.setScriptVar(player, "conversation.stuvany_inglen.branchId", 11);
                 npcStartConversation(player, npc, "stuvany_inglen", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1144,7 +1209,7 @@ public class stuvany_inglen extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_39");
@@ -1156,7 +1221,7 @@ public class stuvany_inglen extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "stuvany_inglen", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1188,7 +1253,7 @@ public class stuvany_inglen extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_48");
@@ -1196,7 +1261,7 @@ public class stuvany_inglen extends script.base_script
                 utils.setScriptVar(player, "conversation.stuvany_inglen.branchId", 20);
                 npcStartConversation(player, npc, "stuvany_inglen", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1217,7 +1282,7 @@ public class stuvany_inglen extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_72");
@@ -1225,7 +1290,7 @@ public class stuvany_inglen extends script.base_script
                 utils.setScriptVar(player, "conversation.stuvany_inglen.branchId", 22);
                 npcStartConversation(player, npc, "stuvany_inglen", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1252,7 +1317,7 @@ public class stuvany_inglen extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_67");
@@ -1264,7 +1329,7 @@ public class stuvany_inglen extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "stuvany_inglen", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1296,7 +1361,7 @@ public class stuvany_inglen extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_102");
@@ -1308,7 +1373,7 @@ public class stuvany_inglen extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "stuvany_inglen", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1333,7 +1398,7 @@ public class stuvany_inglen extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_108");
@@ -1345,7 +1410,7 @@ public class stuvany_inglen extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "stuvany_inglen", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1370,6 +1435,7 @@ public class stuvany_inglen extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("stuvany_inglen"))

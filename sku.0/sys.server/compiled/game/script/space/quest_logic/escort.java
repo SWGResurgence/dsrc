@@ -1,5 +1,11 @@
 package script.space.quest_logic;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.prose;
 import script.library.space_quest;
@@ -10,11 +16,12 @@ import script.string_id;
 
 public class escort extends script.space.quest_logic.escort_duty
 {
+    public static final string_id SID_ABANDONED_ESCORT = new string_id("space/quest", "escort_abandoned");
+    public static final int TRIGGER_OVERRIDE = -99;
     public escort()
     {
     }
-    public static final string_id SID_ABANDONED_ESCORT = new string_id("space/quest", "escort_abandoned");
-    public static final int TRIGGER_OVERRIDE = -99;
+
     public int initializedQuestPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -72,6 +79,7 @@ public class escort extends script.space.quest_logic.escort_duty
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int escortComplete(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -96,8 +104,10 @@ public class escort extends script.space.quest_logic.escort_duty
         obj_id[] targets = getObjIdArrayObjVar(self, "targets");
         if (targets != null)
         {
-            for (obj_id target : targets) {
-                if (isIdValid(target)) {
+            for (obj_id target : targets)
+            {
+                if (isIdValid(target))
+                {
                     destroyObjectHyperspace(target);
                 }
             }
@@ -116,12 +126,13 @@ public class escort extends script.space.quest_logic.escort_duty
         {
             questFailed(self, true);
         }
-        else 
+        else
         {
             questCompleted(self);
         }
         return SCRIPT_OVERRIDE;
     }
+
     public void dutyUpdate(obj_id self, string_id update_id) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -131,10 +142,12 @@ public class escort extends script.space.quest_logic.escort_duty
         prose_package pp = prose.getPackage(update_prefix, update_id);
         space_quest.sendQuestMessage(player, pp);
     }
+
     public boolean checkSpecialEvent(obj_id self, obj_id player, int attackCount) throws InterruptedException
     {
         return checkSpecialEvent(self, player, attackCount, true);
     }
+
     public boolean checkSpecialEvent(obj_id self, obj_id player, int attackCount, boolean useDelay) throws InterruptedException
     {
         String BOOL_SPECIAL_TRIGGERED = "eventAlreadyTriggered";
@@ -142,7 +155,7 @@ public class escort extends script.space.quest_logic.escort_duty
         {
             return false;
         }
-        if (getBooleanObjVar(self, BOOL_SPECIAL_TRIGGERED) == true)
+        if (getBooleanObjVar(self, BOOL_SPECIAL_TRIGGERED))
         {
             return false;
         }
@@ -172,12 +185,14 @@ public class escort extends script.space.quest_logic.escort_duty
         setObjVar(self, BOOL_SPECIAL_TRIGGERED, true);
         return false;
     }
+
     public void questAborted(obj_id self) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
         clearMissionWaypoint(self);
         space_quest.setQuestAborted(player, self);
     }
+
     public int abortMission(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "noAbort"))

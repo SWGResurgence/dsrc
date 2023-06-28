@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 public class bio_engineer extends script.base_script
@@ -388,6 +394,7 @@ public class bio_engineer extends script.base_script
     public static final string_id SID_PET_SUI_STATS_FIXED = new string_id("bio_engineer", "pet_sui_stats_fixed");
     public static final string_id SID_PET_SUI_FIX_ERROR = new string_id("bio_engineer", "pet_sui_fix_error");
     public static final String COMPONENT_RESOURCE_ATTRIB_OBJVAR_NAME = "crafting_component_resource_attribs";
+
     public bio_engineer()
     {
     }

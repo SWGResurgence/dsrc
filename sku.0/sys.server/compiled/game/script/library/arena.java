@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.location;
 import script.obj_id;
 import script.prose_package;
@@ -48,6 +54,7 @@ public class arena extends script.base_script
     public static final float ARENA_Z_MIN = -86.0f;
     public static final float ARENA_Z_MAX = -60.0f;
     public static final float ARENA_Y = -47.42435f;
+
     public arena()
     {
     }

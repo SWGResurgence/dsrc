@@ -1,84 +1,81 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class fs_gadget_specialist extends script.base_script
 {
+    public static String c_stringFile = "conversation/fs_gadget_specialist";
+
     public fs_gadget_specialist()
     {
     }
-    public static String c_stringFile = "conversation/fs_gadget_specialist";
+
     public boolean fs_gadget_specialist_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean fs_gadget_specialist_condition_onQuestStep01(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasScript(player, "quest.force_sensitive.fs_crafting4_player"))
         {
-            if (quests.isActive("fs_crafting4_quest_01", player))
-            {
-                return true;
-            }
+            return quests.isActive("fs_crafting4_quest_01", player);
         }
         return false;
     }
+
     public boolean fs_gadget_specialist_condition_onQuestStep02(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasScript(player, "quest.force_sensitive.fs_crafting4_player"))
         {
-            if (quests.isActive("fs_crafting4_quest_02", player))
-            {
-                return true;
-            }
+            return quests.isActive("fs_crafting4_quest_02", player);
         }
         return false;
     }
+
     public boolean fs_gadget_specialist_condition_onQuestStep03(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasScript(player, "quest.force_sensitive.fs_crafting4_player"))
         {
-            if (quests.isActive("fs_crafting4_quest_03", player))
-            {
-                return true;
-            }
+            return quests.isActive("fs_crafting4_quest_03", player);
         }
         return false;
     }
+
     public boolean fs_gadget_specialist_condition_onQuestStep04(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasScript(player, "quest.force_sensitive.fs_crafting4_player"))
         {
-            if (quests.isActive("fs_crafting4_quest_04", player))
-            {
-                return true;
-            }
+            return quests.isActive("fs_crafting4_quest_04", player);
         }
         return false;
     }
+
     public boolean fs_gadget_specialist_condition_onQuestStep05(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasScript(player, "quest.force_sensitive.fs_crafting4_player"))
         {
-            if (quests.isActive("fs_crafting4_quest_05", player))
-            {
-                return true;
-            }
+            return quests.isActive("fs_crafting4_quest_05", player);
         }
         return false;
     }
+
     public boolean fs_gadget_specialist_condition_onQuestStep06(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasScript(player, "quest.force_sensitive.fs_crafting4_player"))
         {
-            if (quests.isActive("fs_crafting4_quest_06", player))
-            {
-                return true;
-            }
+            return quests.isActive("fs_crafting4_quest_06", player);
         }
         return false;
     }
+
     public boolean fs_gadget_specialist_condition_noInventorySpace(obj_id player, obj_id npc) throws InterruptedException
     {
         boolean hasNoInvRoom = false;
@@ -93,22 +90,27 @@ public class fs_gadget_specialist extends script.base_script
         }
         return hasNoInvRoom;
     }
+
     public boolean fs_gadget_specialist_condition_notEnoughCredits(obj_id player, obj_id npc) throws InterruptedException
     {
         return (!money.hasFunds(player, money.MT_TOTAL, 530));
     }
+
     public boolean fs_gadget_specialist_condition_returningForKit(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasObjVar(player, "fs_crafting4.gadget.returnForKit");
     }
+
     public boolean fs_gadget_specialist_condition_onGoGoGadgetQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "corellia_coronet_capitol_problems_go_go_gadget", "go_go_gadget_1");
     }
+
     public boolean fs_gadget_specialist_condition_goGoGadgetFavorDone(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "corellia_coronet_capitol_problems_go_go_gadget", "go_go_gadget_5");
     }
+
     public void fs_gadget_specialist_action_giveTrackingDeviceKit(obj_id player, obj_id npc) throws InterruptedException
     {
         String kitTemplate = "object/tangible/loot/collectible/kits/fs_tracking_device_kit.iff";
@@ -130,21 +132,23 @@ public class fs_gadget_specialist extends script.base_script
                 CustomerServiceLog("FS_Phase4_Crafting", custLogMsg, player);
             }
         }
-        return;
     }
+
     public void fs_gadget_specialist_action_setReturningForKit(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "fs_crafting4.gadget.returnForKit", 1);
-        return;
     }
+
     public void fs_gadget_specialist_action_goGoGadgetFavor(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "go_go_gadget_1");
     }
+
     public void fs_gadget_specialist_action_goGoGadgetEnd(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "go_go_gadget_5");
     }
+
     public int fs_gadget_specialist_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a8749106"))
@@ -190,6 +194,7 @@ public class fs_gadget_specialist extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int fs_gadget_specialist_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_50"))
@@ -220,7 +225,7 @@ public class fs_gadget_specialist extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_42");
@@ -229,7 +234,7 @@ public class fs_gadget_specialist extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fs_gadget_specialist.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -262,7 +267,7 @@ public class fs_gadget_specialist extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_85bd3ae2");
@@ -275,7 +280,7 @@ public class fs_gadget_specialist extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fs_gadget_specialist.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -345,6 +350,7 @@ public class fs_gadget_specialist extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int fs_gadget_specialist_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_42"))
@@ -364,7 +370,7 @@ public class fs_gadget_specialist extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_44");
@@ -373,7 +379,7 @@ public class fs_gadget_specialist extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fs_gadget_specialist.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -383,6 +389,7 @@ public class fs_gadget_specialist extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int fs_gadget_specialist_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_44"))
@@ -409,7 +416,7 @@ public class fs_gadget_specialist extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -422,7 +429,7 @@ public class fs_gadget_specialist extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fs_gadget_specialist.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -432,6 +439,7 @@ public class fs_gadget_specialist extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int fs_gadget_specialist_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_46"))
@@ -457,6 +465,7 @@ public class fs_gadget_specialist extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int fs_gadget_specialist_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_85bd3ae2"))
@@ -477,7 +486,7 @@ public class fs_gadget_specialist extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a1dd9b9e");
@@ -486,7 +495,7 @@ public class fs_gadget_specialist extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fs_gadget_specialist.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -506,6 +515,7 @@ public class fs_gadget_specialist extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int fs_gadget_specialist_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a1dd9b9e"))
@@ -533,7 +543,7 @@ public class fs_gadget_specialist extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_be1b8c5a");
@@ -546,7 +556,7 @@ public class fs_gadget_specialist extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fs_gadget_specialist.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -556,6 +566,7 @@ public class fs_gadget_specialist extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int fs_gadget_specialist_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_be1b8c5a"))
@@ -583,7 +594,7 @@ public class fs_gadget_specialist extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_fff0f4f2");
@@ -596,7 +607,7 @@ public class fs_gadget_specialist extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fs_gadget_specialist.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -617,6 +628,7 @@ public class fs_gadget_specialist extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int fs_gadget_specialist_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_fff0f4f2"))
@@ -637,7 +649,7 @@ public class fs_gadget_specialist extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b9f237f");
@@ -646,7 +658,7 @@ public class fs_gadget_specialist extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fs_gadget_specialist.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -667,6 +679,7 @@ public class fs_gadget_specialist extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int fs_gadget_specialist_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b9f237f"))
@@ -694,7 +707,7 @@ public class fs_gadget_specialist extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a8749106");
@@ -707,7 +720,7 @@ public class fs_gadget_specialist extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.fs_gadget_specialist.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -717,6 +730,7 @@ public class fs_gadget_specialist extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int fs_gadget_specialist_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a8749106"))
@@ -762,6 +776,7 @@ public class fs_gadget_specialist extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -771,11 +786,13 @@ public class fs_gadget_specialist extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -784,18 +801,21 @@ public class fs_gadget_specialist extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.fs_gadget_specialist");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -825,7 +845,7 @@ public class fs_gadget_specialist extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_a8749106");
@@ -837,7 +857,7 @@ public class fs_gadget_specialist extends script.base_script
                 utils.setScriptVar(player, "conversation.fs_gadget_specialist.branchId", 14);
                 npcStartConversation(player, npc, "fs_gadget_specialist", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -915,7 +935,7 @@ public class fs_gadget_specialist extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_50");
@@ -955,7 +975,7 @@ public class fs_gadget_specialist extends script.base_script
                 utils.setScriptVar(player, "conversation.fs_gadget_specialist.branchId", 2);
                 npcStartConversation(player, npc, "fs_gadget_specialist", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -964,6 +984,7 @@ public class fs_gadget_specialist extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("fs_gadget_specialist"))

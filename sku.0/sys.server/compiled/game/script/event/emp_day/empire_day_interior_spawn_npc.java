@@ -1,5 +1,11 @@
 package script.event.emp_day;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.performance;
 import script.obj_id;
@@ -9,16 +15,19 @@ public class empire_day_interior_spawn_npc extends script.base_script
     public empire_day_interior_spawn_npc()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "removeConversationScripts", null, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "removeConversationScripts", null, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int removeConversationScripts(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasScript(self, "conversation.faction_recruiter_rebel"))

@@ -1,5 +1,11 @@
 package script.item.special;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.utils;
 import script.obj_id;
 
@@ -38,6 +44,5 @@ public class fannypack extends script.base_script
                 putInOverloaded(backpack, inv);
             }
         }
-        return;
     }
 }

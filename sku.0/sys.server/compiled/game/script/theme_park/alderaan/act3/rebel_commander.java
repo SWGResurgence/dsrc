@@ -1,5 +1,11 @@
 package script.theme_park.alderaan.act3;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.locations;
@@ -10,10 +16,12 @@ import script.region;
 
 public class rebel_commander extends script.base_script
 {
+    public static final String COMMANDER_TABLE = "datatables/convo/alderaan/act2/commander_locs.iff";
+
     public rebel_commander()
     {
     }
-    public static final String COMMANDER_TABLE = "datatables/convo/alderaan/act2/commander_locs.iff";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
@@ -22,6 +30,7 @@ public class rebel_commander extends script.base_script
         messageTo(self, "handleLeiaCleanup", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleLeiaCleanup(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasScript(self, "npc.celebrity.leia"))
@@ -37,6 +46,7 @@ public class rebel_commander extends script.base_script
         removeObjVar(self, "maxGating");
         return SCRIPT_CONTINUE;
     }
+
     public int messageStartMission(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -44,13 +54,13 @@ public class rebel_commander extends script.base_script
         int missionNum = params.getInt("value");
         location deliveryLoc;
         String npcName;
-        switch (missionNum)
+        if (missionNum == 5)
         {
-            case 5:
             deliveryLoc = getDeliveryLoc(player, 1500, 2500);
             npcName = "object/building/theme_park/alderaan/act3/rebel_research_defend.iff";
-            break;
-            default:
+        }
+        else
+        {
             LOG("CoA3_Rebel", "WARNING!!!  Rebel_Commander - Recieved messageStartMission for unknown mission number. (" + missionNum + ")");
             return SCRIPT_OVERRIDE;
         }
@@ -60,7 +70,7 @@ public class rebel_commander extends script.base_script
         {
             returnLoc = getLocation(npc);
         }
-        else 
+        else
         {
             returnLoc = getLocation(building);
         }
@@ -72,27 +82,29 @@ public class rebel_commander extends script.base_script
         {
             messageTo(player, "handleRestartMission", params, 0, false);
         }
-        else 
+        else
         {
             attachScript(player, "theme_park.alderaan.act3.rebel_mission");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int messageAbortMission(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
         obj_id npc = params.getObjId("npc");
         int missionNum = params.getInt("value");
-        switch (missionNum)
+        if (missionNum == 5)
         {
-            case 5:
             messageTo(player, "handleAbortMission", params, 0, false);
-            break;
-            default:
+        }
+        else
+        {
             LOG("CoA3_Rebel", "WARNING!!!  Rebel_Commander - Recieved messageAbortMission for unknown mission number. (" + missionNum + ")");
         }
         return SCRIPT_CONTINUE;
     }
+
     public location getDeliveryLoc(obj_id player, int minDistance, int maxDistance) throws InterruptedException
     {
         region city = null;
@@ -123,6 +135,7 @@ public class rebel_commander extends script.base_script
         deliveryLoc.y = getHeightAtLocation(deliveryLoc.x, deliveryLoc.z);
         return deliveryLoc;
     }
+
     public location getVaccaLoc(obj_id self) throws InterruptedException
     {
         location vaccaLoc = getLocation(self);

@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 import script.string_id;
@@ -44,6 +50,7 @@ public class meditation extends script.base_script
                     "fs_meditate_2",
                     "fs_meditate_3"
             };
+
     public meditation()
     {
     }

@@ -6,6 +6,12 @@ package script.developer.bubbajoe;/*
 @WIP: This script is a work in progress and is not yet functional.
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class target_to_clientdata extends script.base_script

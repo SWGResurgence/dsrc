@@ -1,5 +1,11 @@
 package script.quest.force_sensitive;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.player_structure;
 import script.library.static_item;
 import script.library.utils;
@@ -10,31 +16,32 @@ import script.string_id;
 
 public class fs_buff_item extends script.base_script
 {
-    public fs_buff_item()
-    {
-    }
     public static final String STRING_TABLE_NAME = "quest/force_sensitive/utils";
     public static final String VAR_TIMESTAMP = "item.time.timestamp";
     public static final String VAR_REUSE_TIME = "item.time.reuse_time";
     public static final String VAR_BUFF_TYPE = "item.buff.type";
     public static final String VAR_BUFF_VALUE = "item.buff.value";
     public static final String VAR_BUFF_DURATION = "item.buff.duration";
-    public static final String[] BUFF_STRING_NAMES = 
-    {
-        "health",
-        "strength",
-        "constitution",
-        "action",
-        "quickness",
-        "stamina",
-        "mind",
-        "focus",
-        "willpower"
-    };
+    public static final String[] BUFF_STRING_NAMES =
+            {
+                    "health",
+                    "strength",
+                    "constitution",
+                    "action",
+                    "quickness",
+                    "stamina",
+                    "mind",
+                    "focus",
+                    "willpower"
+            };
     public static final int DEFAULT_REUSE_TIME = 60 * 60 * 24 * 3;
     public static final int BUFF_TYPE = 0;
     public static final int BUFF_VALUE = 1000;
     public static final int BUFF_DURATION = 60 * 60;
+    public fs_buff_item()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "item.buff.type"))
@@ -77,6 +84,7 @@ public class fs_buff_item extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (hasObjVar(self, "item.buff.type"))
@@ -120,6 +128,7 @@ public class fs_buff_item extends script.base_script
         mi.addRootMenu(menu_info_types.SERVER_MENU1, new string_id(STRING_TABLE_NAME, "use_special_effect"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         int buffType = getIntObjVar(self, "item.buff.type");
@@ -131,7 +140,7 @@ public class fs_buff_item extends script.base_script
         {
             setObjVar(self, VAR_TIMESTAMP, getGameTime());
         }
-        else 
+        else
         {
             int timestamp = getIntObjVar(self, VAR_TIMESTAMP);
             int current_time = getGameTime();
@@ -154,6 +163,7 @@ public class fs_buff_item extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -179,7 +189,7 @@ public class fs_buff_item extends script.base_script
         {
             attribs[idx] = "0";
         }
-        else 
+        else
         {
             attribs[idx] = player_structure.assembleTimeRemaining(player_structure.convertSecondsTime(time_remaining));
         }
@@ -220,6 +230,7 @@ public class fs_buff_item extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void applyBuff(obj_id player, obj_id item) throws InterruptedException
     {
         int buff_type = BUFF_TYPE;
@@ -264,7 +275,7 @@ public class fs_buff_item extends script.base_script
         {
             sendSystemMessage(player, new string_id(STRING_TABLE_NAME, "buff_applied"));
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id(STRING_TABLE_NAME, "have_buff"));
             removeObjVar(item, VAR_TIMESTAMP);

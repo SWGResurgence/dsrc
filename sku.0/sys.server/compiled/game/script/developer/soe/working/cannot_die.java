@@ -1,5 +1,11 @@
 package script.developer.soe.working;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class cannot_die extends script.base_script

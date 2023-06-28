@@ -1,5 +1,11 @@
 package script.theme_park.alderaan.act2;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.locations;
@@ -13,12 +19,14 @@ public class rebel_commander extends script.base_script
     public rebel_commander()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int messageStartMission(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -26,13 +34,13 @@ public class rebel_commander extends script.base_script
         int missionNum = params.getInt("value");
         location deliveryLoc;
         String npcName;
-        switch (missionNum)
+        if (missionNum == 5)
         {
-            case 5:
             deliveryLoc = getDeliveryLoc(player, 1500, 2500);
             npcName = "object/building/theme_park/alderaan/act2/imperial_relay_station.iff";
-            break;
-            default:
+        }
+        else
+        {
             LOG("CoA2_Rebel", "WARNING!!!  Rebel_Commander - Recieved messageStartMission for unknown mission number. (" + missionNum + ")");
             return SCRIPT_OVERRIDE;
         }
@@ -42,7 +50,7 @@ public class rebel_commander extends script.base_script
         {
             returnLoc = getLocation(npc);
         }
-        else 
+        else
         {
             returnLoc = getLocation(building);
         }
@@ -54,27 +62,29 @@ public class rebel_commander extends script.base_script
         {
             messageTo(player, "handleRestartMission", params, 0, false);
         }
-        else 
+        else
         {
             attachScript(player, "theme_park.alderaan.act2.rebel_mission");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int messageAbortMission(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
         obj_id npc = params.getObjId("npc");
         int missionNum = params.getInt("value");
-        switch (missionNum)
+        if (missionNum == 5)
         {
-            case 5:
             messageTo(player, "handleAbortMission", params, 0, false);
-            break;
-            default:
+        }
+        else
+        {
             LOG("CoA2_Rebel", "WARNING!!!  Rebel_Commander - Recieved messageAbortMission for unknown mission number. (" + missionNum + ")");
         }
         return SCRIPT_CONTINUE;
     }
+
     public location getDeliveryLoc(obj_id player, int minDistance, int maxDistance) throws InterruptedException
     {
         region city = null;

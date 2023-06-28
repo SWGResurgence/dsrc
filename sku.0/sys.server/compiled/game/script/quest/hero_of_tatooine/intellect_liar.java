@@ -1,5 +1,11 @@
 package script.quest.hero_of_tatooine;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.chat;
 import script.library.prose;
@@ -7,9 +13,6 @@ import script.library.utils;
 
 public class intellect_liar extends script.base_script
 {
-    public intellect_liar()
-    {
-    }
     public static final String CONVO = "quest/hero_of_tatooine/intellect_liar";
     public static final String HERO_OF_TATOOINE_COMPLETE = "quest.hero_of_tatooine.complete";
     public static final String SPAWNER_OBJVAR = "quest.hero_of_tatooine.intellect.spawner";
@@ -21,11 +24,16 @@ public class intellect_liar extends script.base_script
     public static final String INTELLECT_COMPLETE = INTELLECT_OBJVAR + ".complete";
     public static final String INTELLECT_IN_PROGRESS = INTELLECT_OBJVAR + ".in_progress";
     public static final String INTELLECT_FAILED = INTELLECT_OBJVAR + ".failed";
+    public intellect_liar()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         attachScript(self, "npc.converse.npc_converse_menu");
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasScript(self, "npc.converse.npc_converse_menu"))
@@ -34,6 +42,7 @@ public class intellect_liar extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         int m = rand(0, 11);
@@ -51,10 +60,13 @@ public class intellect_liar extends script.base_script
         npcStartConversation(speaker, self, CONVO, msg, responses);
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversation, obj_id speaker, string_id response) throws InterruptedException
     {
-        switch ((response.getAsciiId())) {
-            case "response_0": {
+        switch ((response.getAsciiId()))
+        {
+            case "response_0":
+            {
                 int m = rand(0, 11);
                 string_id msg = new string_id(CONVO, "equipment_" + m);
                 npcSpeak(speaker, msg);
@@ -64,12 +76,14 @@ public class intellect_liar extends script.base_script
                 npcSetConversationResponses(speaker, responses);
                 return SCRIPT_CONTINUE;
             }
-            case "response_1": {
+            case "response_1":
+            {
                 int m = rand(0, 2);
                 int n = getIntObjVar(self, SPAWNER_NPC);
                 string_id msg = new string_id(CONVO, "others_" + n + "_" + m);
                 prose_package pp = null;
-                switch (n) {
+                switch (n)
+                {
                     case 0:
                         npcSpeak(speaker, msg);
                         break;
@@ -100,7 +114,8 @@ public class intellect_liar extends script.base_script
                 npcSetConversationResponses(speaker, responses);
                 return SCRIPT_CONTINUE;
             }
-            case "response_2": {
+            case "response_2":
+            {
                 int m = rand(0, 11);
                 string_id msg = new string_id(CONVO, "bye_" + m);
                 npcSpeak(speaker, msg);
@@ -110,11 +125,13 @@ public class intellect_liar extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnEndNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         messageTo(self, "handleResetYaw", null, 4.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetYaw(obj_id self, dictionary params) throws InterruptedException
     {
         location loc = params.getLocation("loc");
@@ -122,6 +139,7 @@ public class intellect_liar extends script.base_script
         setObjVar(self, "ai.yaw", getYaw(self));
         return SCRIPT_CONTINUE;
     }
+
     public int handleResetYaw(obj_id self, dictionary params) throws InterruptedException
     {
         if (isInNpcConversation(self))
@@ -136,6 +154,7 @@ public class intellect_liar extends script.base_script
         setYaw(self, yaw);
         return SCRIPT_CONTINUE;
     }
+
     public String getLiarName(obj_id self, int number) throws InterruptedException
     {
         obj_id control = getObjIdObjVar(self, SPAWNER_CONTROLLER);

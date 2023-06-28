@@ -1,15 +1,22 @@
 package script.space.quest_logic;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class convoy extends script.space.quest_logic.escort
 {
+    public static final string_id SID_CONVOY_SURVIVED = new string_id("space/quest", "convoy_survived");
+    public static final string_id SID_CONVOY_PERFECT = new string_id("space/quest", "convoy_perfect");
     public convoy()
     {
     }
-    public static final string_id SID_CONVOY_SURVIVED = new string_id("space/quest", "convoy_survived");
-    public static final string_id SID_CONVOY_PERFECT = new string_id("space/quest", "convoy_perfect");
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String questName = getStringObjVar(self, space_quest.QUEST_NAME);
@@ -93,6 +100,7 @@ public class convoy extends script.space.quest_logic.escort
         }
         return SCRIPT_CONTINUE;
     }
+
     public int initializedQuestPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("convoy_quest", "Reached initialized quest player stage");
@@ -154,6 +162,7 @@ public class convoy extends script.space.quest_logic.escort
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int warpShipDelay(obj_id self, dictionary params) throws InterruptedException
     {
         String questName = getStringObjVar(self, space_quest.QUEST_NAME);
@@ -183,7 +192,7 @@ public class convoy extends script.space.quest_logic.escort
             spawnLoc = space_quest.getRandomPositionInSphere(trans, 100, 200);
             clearMissionWaypoint(self);
         }
-        else 
+        else
         {
             transform leadTrans = getTransform_o2w(convoy[numShips - 1]);
             spawnLoc = leadTrans.move_l(new vector(0, 0, -200));
@@ -218,13 +227,10 @@ public class convoy extends script.space.quest_logic.escort
             newConvoy = new obj_id[1];
             newConvoy[0] = ship;
         }
-        else 
+        else
         {
             newConvoy = new obj_id[convoy.length + 1];
-            for (int i = 0; i < convoy.length; i++)
-            {
-                newConvoy[i] = convoy[i];
-            }
+            System.arraycopy(convoy, 0, newConvoy, 0, convoy.length);
             newConvoy[convoy.length] = ship;
         }
         setObjVar(self, "convoy", newConvoy);
@@ -232,6 +238,7 @@ public class convoy extends script.space.quest_logic.escort
         messageTo(self, "warpShipDelay", null, 5, false);
         return SCRIPT_OVERRIDE;
     }
+
     public int startConvoyPathing(obj_id self, dictionary params) throws InterruptedException
     {
         String questName = getStringObjVar(self, space_quest.QUEST_NAME);
@@ -244,8 +251,10 @@ public class convoy extends script.space.quest_logic.escort
         int squad = ship_ai.squadCreateSquadId();
         transform[] translist = getEscortTransforms(self);
         obj_id[] convoy = getObjIdArrayObjVar(self, "convoy");
-        for (obj_id obj_id : convoy) {
-            if (!isIdValid(obj_id) || !exists(obj_id)) {
+        for (obj_id obj_id : convoy)
+        {
+            if (!isIdValid(obj_id) || !exists(obj_id))
+            {
                 continue;
             }
             ship_ai.unitSetSquadId(obj_id, squad);
@@ -270,18 +279,22 @@ public class convoy extends script.space.quest_logic.escort
         }
         return SCRIPT_CONTINUE;
     }
+
     public void cleanupShips(obj_id self) throws InterruptedException
     {
         obj_id[] convoy = getObjIdArrayObjVar(self, "convoy");
         if (convoy != null)
         {
-            for (obj_id obj_id : convoy) {
-                if (isIdValid(obj_id) && exists(obj_id)) {
+            for (obj_id obj_id : convoy)
+            {
+                if (isIdValid(obj_id) && exists(obj_id))
+                {
                     destroyObjectHyperspace(obj_id);
                 }
             }
         }
     }
+
     public int abortMission(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "noAbort"))
@@ -292,6 +305,7 @@ public class convoy extends script.space.quest_logic.escort
         questAborted(self);
         return SCRIPT_OVERRIDE;
     }
+
     public int shipArrived(obj_id self, dictionary params) throws InterruptedException
     {
         String questName = getStringObjVar(self, space_quest.QUEST_NAME);
@@ -311,7 +325,7 @@ public class convoy extends script.space.quest_logic.escort
         {
             int originalConvoySize = getIntObjVar(self, "originalConvoySize");
             int numKilled = originalConvoySize - numArrived;
-            float percentSurvived = (int)((numArrived / (float)originalConvoySize) * 100.0f);
+            float percentSurvived = (int) ((numArrived / (float) originalConvoySize) * 100.0f);
             int arrivalReward = getIntObjVar(self, "arrivalReward");
             int reward = arrivalReward * numArrived;
             prose_package pp = prose.getPackage(SID_CONVOY_SURVIVED, reward, percentSurvived);
@@ -329,8 +343,10 @@ public class convoy extends script.space.quest_logic.escort
                 obj_id[] members = space_utils.getSpaceGroupMemberIds(gid);
                 if (members != null && members.length >= 0)
                 {
-                    for (obj_id member : members) {
-                        if (space_quest.isOnGroupQuest(member, questType, questName)) {
+                    for (obj_id member : members)
+                    {
+                        if (space_quest.isOnGroupQuest(member, questType, questName))
+                        {
                             money.bankTo(money.ACCT_SPACE_QUEST_REWARD, member, reward);
                         }
                     }
@@ -340,6 +356,7 @@ public class convoy extends script.space.quest_logic.escort
         }
         return SCRIPT_CONTINUE;
     }
+
     public int convoyShipDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         String questName = getStringObjVar(self, space_quest.QUEST_NAME);
@@ -359,8 +376,10 @@ public class convoy extends script.space.quest_logic.escort
         string_id lostShip = new string_id("spacequest/" + questType + "/" + questName, "convoy_ship_lost");
         dutyUpdate(self, lostShip);
         obj_id[] convoy = getObjIdArrayObjVar(self, "convoy");
-        for (obj_id obj_id1 : convoy) {
-            if (!isIdValid(obj_id1) || !exists(obj_id1)) {
+        for (obj_id obj_id1 : convoy)
+        {
+            if (!isIdValid(obj_id1) || !exists(obj_id1))
+            {
                 continue;
             }
             string_id panic = new string_id("spacequest/" + questType + "/" + questName, "panic_destroyed_" + rand(1, 5));
@@ -370,8 +389,10 @@ public class convoy extends script.space.quest_logic.escort
         }
         obj_id[] newConvoy = new obj_id[convoy.length - 1];
         int j = 0;
-        for (obj_id obj_id : convoy) {
-            if (obj_id != ship) {
+        for (obj_id obj_id : convoy)
+        {
+            if (obj_id != ship)
+            {
                 newConvoy[j] = obj_id;
                 j++;
             }
@@ -379,6 +400,7 @@ public class convoy extends script.space.quest_logic.escort
         setObjVar(self, "convoy", newConvoy);
         return SCRIPT_CONTINUE;
     }
+
     public int launchAttack(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -435,22 +457,15 @@ public class convoy extends script.space.quest_logic.escort
         {
             targets = new obj_id[count];
         }
-        else 
+        else
         {
             targets = new obj_id[count + oldtargets.length];
             k = oldtargets.length;
-            for (int i = 0; i < oldtargets.length; i++)
-            {
-                targets[i] = oldtargets[i];
-            }
+            System.arraycopy(oldtargets, 0, targets, 0, oldtargets.length);
         }
         obj_id ship = convoy[rand(0, convoy.length - 1)];
         int squad = ship_ai.squadCreateSquadId();
-        boolean behind = false;
-        if (rand() < 0.25)
-        {
-            behind = true;
-        }
+        boolean behind = rand() < 0.25;
         int j = 0;
         for (int i = k; i < count + k; i++)
         {
@@ -466,7 +481,7 @@ public class convoy extends script.space.quest_logic.escort
                 vector vd = vi.add(vj);
                 gloc = gloc.move_p(vd);
             }
-            else 
+            else
             {
                 float dist = rand(500.0f, 750.0f) * -1.0f;
                 vector n = ((gloc.getLocalFrameK_p()).normalize()).multiply(dist);
@@ -495,11 +510,14 @@ public class convoy extends script.space.quest_logic.escort
             attachScript(newship, "space.quest_logic.dynamic_ship");
             attachScript(newship, "space.quest_logic.destroyduty_ship");
             targets[i] = newship;
-            for (obj_id obj_id : convoy) {
-                if (!isIdValid(obj_id) || !exists(obj_id)) {
+            for (obj_id obj_id : convoy)
+            {
+                if (!isIdValid(obj_id) || !exists(obj_id))
+                {
                     continue;
                 }
-                if (obj_id != ship) {
+                if (obj_id != ship)
+                {
                     ship_ai.unitIncreaseHate(newship, obj_id, 100.0f, 10.0f, 20);
                 }
             }
