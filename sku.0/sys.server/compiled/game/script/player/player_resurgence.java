@@ -47,7 +47,7 @@ public class player_resurgence extends script.base_script
         incrementPlayerCount(self);
         if (resurgence.isEthereal(self))
         {
-            resurgence.logEtherealAction(self, "Logging in at " + getCalendarTimeStringLocal_YYYYMMDDHHMMSS(getGameTime()) + " near location " + getLocation(self));
+            resurgence.logEtherealAction(self, "Player (" + getFirstName(self) + ") is zoning/logging in. Current time: " + getCalendarTimeStringLocal_YYYYMMDDHHMMSS(getGameTime()) + " Near location: " + getLocation(self).toReadableFormat(true));
         }
         nukeFrog(self);
         return SCRIPT_CONTINUE;
@@ -62,7 +62,7 @@ public class player_resurgence extends script.base_script
             if (getTemplateName(frog).contains("terminal_character_builder"))
             {
                 destroyObject(frog);
-                resurgence.logEtherealAction(self, "Player (" + getFirstName(self) + ") has illegal item inside their inventory. Nuking item with prejudice. | Location: " + getLocation(self) + ", Time: " + getCalendarTimeStringLocal_YYYYMMDDHHMMSS(getGameTime()));
+                resurgence.logEtherealAction(self, "Player (" + getFirstName(self) + ") has illegal item inside their inventory. Nuking item with prejudice. | Location: " + getLocation(self).toReadableFormat(true) + ", Time: " + getCalendarTimeStringLocal_YYYYMMDDHHMMSS(getGameTime()));
                 setObjVar(getPlanetByName("tatooine"), "skynet.nuked_frog." + self, true);
                 broadcast(self, "You had an illegal item in your inventory. The item has been removed and this incident has been logged.");
             }
