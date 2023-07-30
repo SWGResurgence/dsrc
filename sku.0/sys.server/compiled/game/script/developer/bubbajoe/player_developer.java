@@ -17,16 +17,19 @@ import script.library.*;
 
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.StringTokenizer;
-import java.util.Vector;
 
 import static script.library.utils.getDistance2D;
 import static script.library.utils.setScriptVar;
 
 public class player_developer extends base_script
 {
+    public static final String API = "https://discord.com/api/webhooks/1099397946887389245/aTbLp6LtIsyges8UYhkd27guDpMHVWShrf2ZbIBSPzV8sXUIIoxHqTj72eMGf5bLckN_";
+    public static final String PFP = "https://i.imgur.com/xQmt86N.png";
+
     public player_developer()
     {
     }
@@ -89,7 +92,7 @@ public class player_developer extends base_script
             String flag = tok.nextToken();
             String category = tok.nextToken();
             String subcategory = tok.nextToken();
-            String name ="";
+            String name = "";
             while (tok.hasMoreTokens())
             {
                 name = name + " " + tok.nextToken();
@@ -108,6 +111,16 @@ public class player_developer extends base_script
                 broadcast(self, "Usage: /developer mapLocations remove [name]");
                 broadcast(self, "You may only have one active map location active at any given time.");
             }
+        }
+        if (cmd.equalsIgnoreCase("webhook"))
+        {
+            String name = tok.nextToken();
+            String message = "";
+            while (tok.hasMoreTokens())
+            {
+                message = message + " " + tok.nextToken();
+            }
+            sendDiscordMessage(API, message, PFP, "System | Debug");
         }
         if (cmd.equalsIgnoreCase("sendMailWaypoint"))
         {
@@ -420,7 +433,7 @@ public class player_developer extends base_script
                 bagLimit++;
             }
             broadcast(self, "Seeding " + items.length + " items with 100% quality.");
-            resurgence.logEtherealAction(self,"Seeding " + items.length + " items with 100% quality.");
+            resurgence.logEtherealAction(self, "Seeding " + items.length + " items with 100% quality.");
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("seedAllSchematicsByType"))
@@ -458,7 +471,7 @@ public class player_developer extends base_script
                 }
             }
             broadcast(self, "Seeding " + bagLimit + " items with 100% quality.");
-            resurgence.logEtherealAction(self,"Seeding " + bagLimit + " items with 100% quality.");
+            resurgence.logEtherealAction(self, "Seeding " + bagLimit + " items with 100% quality.");
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("ballgame"))
@@ -476,6 +489,10 @@ public class player_developer extends base_script
         }
         if (cmd.equalsIgnoreCase("shell"))
         {
+            if (tok.countTokens() <= 2)
+            {
+                broadcast(self, "/developer shell [/drive/location/] [command w/params]");
+            }
             String where = tok.nextToken();
             String command = tok.nextToken();
             StringBuilder args = new StringBuilder();
@@ -489,8 +506,8 @@ public class player_developer extends base_script
             int page = createSUIPage("/Script.messageBox", self, self);
             setSUIProperty(page, "Prompt.lblPrompt", "LocalText", outputString);
             setSUIProperty(page, "Prompt.lblPrompt", "Font", "starwarslogo_optimized_56");
-            setSUIProperty(page, "bg.caption.lblTitle", "Text", "Shell Commander");
-            setSUIProperty(page, "Prompt.lblPrompt", "Editable", "false");
+            setSUIProperty(page, "bg.caption.lblTitle", "Text", "Development Shell" + getClusterName());
+            setSUIProperty(page, "Prompt.lblPrompt", "Editable", "true");
             setSUIProperty(page, "Prompt.lblPrompt", "GetsInput", "true");
             subscribeToSUIEvent(page, sui_event_type.SET_onButton, "%btnOk%", "handleShellOutput");
             subscribeToSUIEvent(page, sui_event_type.SET_onButton, "%btnOK%", "handleShellOutput");
@@ -499,7 +516,7 @@ public class player_developer extends base_script
             showSUIPage(page);
             flushSUIPage(page);
             broadcast(self, "Ran command.");
-            resurgence.logEtherealAction(self,"Ran shell command: " + fullCommand);
+            resurgence.logEtherealAction(self, "Ran shell command: " + fullCommand);
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("markObjects"))
@@ -521,7 +538,7 @@ public class player_developer extends base_script
             attachScript(augment, "systems.crafting.weapon.component.crafting_weapon_component_attribute");
             setObjVar(augment, "attribute.bonus.0", 300);
             setObjVar(augment, "attribute.bonus.2", 300);
-            resurgence.logEtherealAction(self,"Created capped augments.");
+            resurgence.logEtherealAction(self, "Created capped augments.");
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("scale"))
@@ -870,7 +887,10 @@ public class player_developer extends base_script
             for (obj_id content : contents)
             {
                 String itemName = getStaticItemName(content);
-                prompt.append(itemName).append("\n");
+                if (!itemName.equals("null"))
+                {
+                    prompt.append(itemName).append("\n");
+                }
             }
             int page = createSUIPage("/Script.messageBox", self, self);
             setSUIProperty(page, "Prompt.lblPrompt", "LocalText", prompt.toString());
@@ -1374,7 +1394,6 @@ public class player_developer extends base_script
                     words.append(" ").append(tok.nextToken());
                 }
             }
-            //liteLog(words);
             System.out.println(words);
         }
         if (cmd.equalsIgnoreCase("sws"))
@@ -1554,7 +1573,7 @@ public class player_developer extends base_script
                 String corpseTemplate = "object/tangible/container/loot/large_container.iff";
                 location treasureLoc = getLocation(self);
                 obj_id treasureChest = createObject(corpseTemplate, treasureLoc);
-                attachScript (treasureChest, "item.container.loot_crate_opened");
+                attachScript(treasureChest, "item.container.loot_crate_opened");
                 setName(treasureChest, "\\#FFC0CBa cargo container\\#.");
                 loot.makeLootInContainer(treasureChest, table, amt, 300);
                 broadcast(self, "A cargo container was made with " + amt + " items from the loot table: " + table);
@@ -1905,10 +1924,22 @@ public class player_developer extends base_script
             float distance = getDistance2D(objectOne, objectTwo);
             broadcast(self, "The distance between these two targets is " + distance + " or " + Math.round(distance) + " rounded.");
         }
+        if (cmd.equalsIgnoreCase("getCollision"))
+        {
+            obj_id who = getIntendedTarget(self);
+            broadcast(self, "NetworkID: [" + who + "] | Collision radius is " + getObjectCollisionRadius(who) + "or " + Math.round(Float.parseFloat(getObjectCollisionRadius(who) + " rounded.")));
+        }
+        if (cmd.equalsIgnoreCase("killSpace"))
+        {
+            Runtime rt = Runtime.getRuntime();
+            Process pr = rt.exec("java -jar map.jar time.rel test.txt debug");
+            LOG("SpaceKiller", pr.getOutputStream().toString());
+        }
         if (cmd.equalsIgnoreCase("gonkie"))
         {
             broadcast(self, "This is experimental, do not use near players or invulnerable NPCs.");
             obj_id gonkieControlDevice = create.object("object/tangible/loot/generic_usable/frequency_jammer_wire_generic.iff", getLocation(self));
+            putIn(gonkieControlDevice, utils.getInventoryContainer(self));
             if (hasScript(gonkieControlDevice, "item.buff_click_item"))
             {
                 detachScript(gonkieControlDevice, "item.buff_click_item");
@@ -1926,6 +1957,7 @@ public class player_developer extends base_script
             {
                 persistObject(content);
                 echo(self, "Persisted " + content + " (" + getName(content) + ")");
+                echo(self, "Use [/developer saveBuildingCell OID] to save each cell individually.");
             }
         }
         if (cmd.equals("saveBuildingCell"))
@@ -2156,12 +2188,14 @@ public class player_developer extends base_script
         location there = getLocation(target);
         createClientPathAdvanced(target, there, here, "default");
     }
+
     public void pathToWho(obj_id self, obj_id target)
     {
         location here = getLocation(self);
         location there = getLocation(target);
         createClientPathAdvanced(self, here, there, "default");
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "live_qa")) // not valid for non-optimized clients.
@@ -2176,6 +2210,8 @@ public class player_developer extends base_script
             sendConsoleCommand("/echo You are visible and interactable due to having the 'live_qa' objvar.", self);
             sendConsoleCommand("/setGodMode 0", self);
         }
+        LOG("DiscordX", "Attempting to trigger discord message for " + getPlayerFullName(self));
+        sendDiscordMessage(API, getPlayerFullName(self) + " has logged in at " + getLocation(self).toClipboardFormat("Orange"), PFP, "System");
         return SCRIPT_CONTINUE;
     }
 
@@ -2258,7 +2294,47 @@ public class player_developer extends base_script
         broadcast(self, "Removed " + name + " from your planetary map");
         return SCRIPT_CONTINUE;
     }
+    public void sendDiscordMessage(String webhookURL, String message, String avatarPic, String avatarName)
+    {
+        LOG("DiscordX", "Attempting to send a discord webhook to to | " + webhookURL + " | with the message of " + message);
+        try
+        {
+            URL url = new URL(webhookURL);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setDoOutput(true);
+            String contents = "{\"username\": \"" + avatarName + "\", \"avatar_url\": \"" + avatarPic + "\",\"content\": \"" + message + "\"}";
+            try (OutputStream outputStream = connection.getOutputStream())
+            {
+                outputStream.write(contents.getBytes());
+            }
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_NO_CONTENT)
+            {
+                LOG("DiscordX", "Webhook executed successfully!");
+            }
+            else
+            {
+                LOG("DiscordX", "Failed to execute webhook. Response code: " + responseCode);
+                try (BufferedReader errorReader = new BufferedReader(
+                        new InputStreamReader(connection.getErrorStream())))
+                {
+                    String errorResponse;
+                    while ((errorResponse = errorReader.readLine()) != null)
+                    {
+                        System.out.println(errorResponse);
+                    }
+                }
+            }
 
+            connection.disconnect();
+
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
 }
 
 
