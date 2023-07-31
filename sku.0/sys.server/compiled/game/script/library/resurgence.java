@@ -65,6 +65,7 @@ public class resurgence extends script.base_script
                 return true;
             }
         }
+        LOG("developer", "isEthereal: " + name + " is not ethereal, attempting to access something restricted.");
         return false;
     }
 
@@ -77,6 +78,7 @@ public class resurgence extends script.base_script
         }
         else
         {
+            LOG("developer", "isDevelopment: " + name + " is not development, attempting to access something restricted.");
             return false;
         }
     }
@@ -126,12 +128,12 @@ public class resurgence extends script.base_script
         obj_id[] allPumpkins = getAllObjectsWithTemplate(getLocation(player), 1000, "object/tangible/holiday/halloween/pumpkin_object.iff");
         if (allPumpkins == null || allPumpkins.length == 0)
         {
-            sendSystemMessage(player, "No pumpkins found.", null);
+            broadcast(player, "No pumpkins found.");
             return;
         }
         for (obj_id allPumpkin : allPumpkins)
         {
-            sendSystemMessage(player, "Pumpkin: " + allPumpkin, null);
+            broadcast(player, "Pumpkin: " + allPumpkin);
         }
     }
 
@@ -151,6 +153,7 @@ public class resurgence extends script.base_script
         {
             warpPlayer(player, planet, x, y, z, null, 0, 0, 0);
         }
+        LOG("resurgence", "moveAllPlayers() - " + players.length + " players moved to " + planet + " " + x + " " + y + " " + z);
         return SCRIPT_CONTINUE;
     }
 

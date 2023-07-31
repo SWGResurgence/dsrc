@@ -79,6 +79,7 @@ public class toy extends script.base_script
             else
             {
                 buff.applyBuff(player, "nova_orion_rank6_lucky_salvage", 3600, 50);
+                LOG("developer", "Player " + getName(player) + " has used " + getName(self) + " at " + getLocation(player) + " at " + getCalendarTimeStringLocal_YYYYMMDDHHMMSS(currentGameTime));
                 setObjVar(self, "used.timestamp", currentGameTime);
             }
         }

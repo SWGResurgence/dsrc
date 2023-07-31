@@ -24,6 +24,7 @@ public class player_resurgence extends script.base_script
 {
     public boolean requireEntBuffRecycle = false;
     public boolean restoredContent = false;
+    public boolean LOGGING = true;
 
     public int OnAttach(obj_id self)
     {
@@ -47,7 +48,7 @@ public class player_resurgence extends script.base_script
         incrementPlayerCount(self);
         if (resurgence.isEthereal(self))
         {
-            resurgence.logEtherealAction(self, "Logging in at " + getCalendarTimeStringLocal_YYYYMMDDHHMMSS(getGameTime()) + " near location " + getLocation(self));
+            resurgence.logEtherealAction(self, "Player (" + getFirstName(self) + ") is zoning/logging in. Current time: " + getCalendarTimeStringLocal_YYYYMMDDHHMMSS(getGameTime()) + " Near location: " + getLocation(self).toReadableFormat(true));
         }
         nukeFrog(self);
         return SCRIPT_CONTINUE;
@@ -62,7 +63,7 @@ public class player_resurgence extends script.base_script
             if (getTemplateName(frog).contains("terminal_character_builder"))
             {
                 destroyObject(frog);
-                resurgence.logEtherealAction(self, "Player (" + getFirstName(self) + ") has illegal item inside their inventory. Nuking item with prejudice. | Location: " + getLocation(self) + ", Time: " + getCalendarTimeStringLocal_YYYYMMDDHHMMSS(getGameTime()));
+                resurgence.logEtherealAction(self, "Player (" + getFirstName(self) + ") has illegal item inside their inventory. Nuking item with prejudice. | Location: " + getLocation(self).toReadableFormat(true) + ", Time: " + getCalendarTimeStringLocal_YYYYMMDDHHMMSS(getGameTime()));
                 setObjVar(getPlanetByName("tatooine"), "skynet.nuked_frog." + self, true);
                 broadcast(self, "You had an illegal item in your inventory. The item has been removed and this incident has been logged.");
             }
@@ -75,7 +76,7 @@ public class player_resurgence extends script.base_script
         decrementPlayerCount(self);
         if (resurgence.isEthereal(self))
         {
-            resurgence.logEtherealAction(self, "Logging out (or switching zones) at " + getCalendarTimeStringLocal_YYYYMMDDHHMMSS(getGameTime()) + " near location " + getLocation(self));
+            resurgence.logEtherealAction(self, "Logging out (or switching zones) at " + getCalendarTimeStringLocal_YYYYMMDDHHMMSS(getGameTime()) + " near location " + getLocation(self).toReadableFormat(true));
         }
         return SCRIPT_CONTINUE;
     }
@@ -390,6 +391,32 @@ public class player_resurgence extends script.base_script
         else
         {
             broadcast(self, "You must have two targets selected (mouse-over and target) to use this command.");
+        }
+        return SCRIPT_CONTINUE;
+    }
+
+    public int cmdTell(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
+    {
+        if (LOGGING)
+        {
+            //String s_outputfile = "/home/swg/swg-main/exe/linux/logs/im.log";
+            StringTokenizer parser = new StringTokenizer(params);
+            String who = parser.nextToken();
+            String message = "";
+            while (parser.hasMoreTokens())
+            {
+                message = parser.nextToken() + " ";
+            }
+            String finalizedMessage = message;
+            LOG("InstantMessage", "[" + getFirstName(self) + "] to [" + toUpper(who, 0) + "]: " + finalizedMessage);
+        }
+        return SCRIPT_CONTINUE;
+    }
+    public int OnSpeaking(obj_id self, String text)
+    {
+        if (LOGGING)
+        {
+            LOG("Spatial", "[" + getFirstName(self) + "] said: " + text);
         }
         return SCRIPT_CONTINUE;
     }

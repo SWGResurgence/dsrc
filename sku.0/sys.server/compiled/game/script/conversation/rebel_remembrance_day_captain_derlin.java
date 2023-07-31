@@ -289,20 +289,20 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         obj_id tatooine = getPlanetByName("tatooine");
         if (!isIdValid(tatooine) || !exists(tatooine))
         {
-            //CustomerServiceLog("holidayEvent", "derlin_conversation.getLeaderBoardSui: Could not find Tatooine OID.");
+            CustomerServiceLog("holidayEvent", "derlin_conversation.getLeaderBoardSui: Could not find Tatooine OID.");
             return;
         }
         String data = holiday.getEventHighScores(tatooine, holiday.PLANET_VAR_EVENT_PREFIX + holiday.PLANET_VAR_EMPIRE_DAY + holiday.PLANET_VAR_SCORE, true);
         if (data == null || data.length() <= 0)
         {
-            //CustomerServiceLog("holidayEvent", "derlin_conversation.getLeaderBoardSui: High Score Data Invalid.");
+            CustomerServiceLog("holidayEvent", "derlin_conversation.getLeaderBoardSui: High Score Data Invalid.");
             return;
         }
         if (!holiday.createEventLeaderBoardUI(player, holiday.LEADER_BOARD_TITLE, data))
         {
-            //CustomerServiceLog("holidayEvent", "derlin_conversation.getLeaderBoardSui: createEventLeaderBoardUI failed.");
+            CustomerServiceLog("holidayEvent", "derlin_conversation.getLeaderBoardSui: createEventLeaderBoardUI failed.");
         }
-        //CustomerServiceLog("holidayEvent", "derlin_conversation.getLeaderBoardSui: High Score Data received by player: " + player + ".");
+        CustomerServiceLog("holidayEvent", "derlin_conversation.getLeaderBoardSui: High Score Data received by player: " + player + ".");
     }
 
     public void rebel_remembrance_day_captain_derlin_action_setSFVandalEventOnPlayer(obj_id player, obj_id npc) throws InterruptedException
