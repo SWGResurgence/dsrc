@@ -207,6 +207,7 @@ public class menu extends script.base_script
                 sendSystemMessage(owner, new string_id("error_message", "destroy_goggle"));
             }
             destroyObject(self);
+            LOG("developer", "Goggles destroyed: " + self);
             return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;

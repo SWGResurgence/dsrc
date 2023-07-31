@@ -20,7 +20,7 @@ public class planet_base extends script.base_script
 {
     public int OnUniverseComplete(obj_id self) throws InterruptedException
     {
-        //CustomerServiceLog("holidayEvent", "planet_base.OnUniverseComplete: trigger initialized.");
+        CustomerServiceLog("holidayEvent", "planet_base.OnUniverseComplete: trigger initialized.");
         dictionary dctParams = new dictionary();
         messageTo(self, "doSpawnSetup", dctParams, 60, true);
         return SCRIPT_CONTINUE;
@@ -28,34 +28,34 @@ public class planet_base extends script.base_script
 
     public int doSpawnSetup(obj_id self, dictionary params) throws InterruptedException
     {
-        //CustomerServiceLog("holidayEvent", "planet_base.doSpawnSetup: messageHandler initialized.");
+        CustomerServiceLog("holidayEvent", "planet_base.doSpawnSetup: messageHandler initialized.");
         String strPlanet = getNameForPlanetObject(self);
         if (strPlanet == null)
         {
-            //CustomerServiceLog("holidayEvent", "planet_base.doSpawnSetup: Planet name for this object is NULL. Notify SWG Development.");
+            CustomerServiceLog("holidayEvent", "planet_base.doSpawnSetup: Planet name for this object is NULL. Notify SWG Development.");
             debugServerConsoleMsg(self, "Not Good. Your scenename is null. Go get development!");
             return SCRIPT_CONTINUE;
         }
-        //CustomerServiceLog("holidayEvent", "planet_base.doSpawnSetup: Planet name for this object is: " + strPlanet);
+        CustomerServiceLog("holidayEvent", "planet_base.doSpawnSetup: Planet name for this object is: " + strPlanet);
         debugServerConsoleMsg(self, "************************************BASE PLANET INITIALIZATION***************************************");
         debugServerConsoleMsg(self, "onInitialize, my current scene is " + strPlanet);
         debugServerConsoleMsg(self, "************************************BASE PLANET INITIALIZATION***************************************");
         if (!strPlanet.equals("tutorial") && !hasScript(self, "systems.spawning.spawn_master"))
         {
-            //CustomerServiceLog("holidayEvent", "planet_base.doSpawnSetup: Non-tutorial Planet detected. Attaching systems.spawning.spawn_master");
+            CustomerServiceLog("holidayEvent", "planet_base.doSpawnSetup: Non-tutorial Planet detected. Attaching systems.spawning.spawn_master");
             debugServerConsoleMsg(self, "************************************SPAWN ERROR****************************************************");
             debugServerConsoleMsg(self, "No spawnmaster script found!  Attaching one!");
             debugServerConsoleMsg(self, "************************************SPAWN ERROR****************************************************");
             attachScript(self, "systems.spawning.spawn_master");
         }
-        //CustomerServiceLog("holidayEvent", "planet_base.doSpawnSetup: doSpawnSetup complete.");
+        CustomerServiceLog("holidayEvent", "planet_base.doSpawnSetup: doSpawnSetup complete.");
         obj_id tatooinePlanet = getPlanetByName("tatooine");
         if (isIdValid(tatooinePlanet) && exists(tatooinePlanet))
         {
-            //CustomerServiceLog("holidayEvent", "planet_base.doSpawnSetup: Tatooine Planet detected obj_id: " + tatooinePlanet);
+            CustomerServiceLog("holidayEvent", "planet_base.doSpawnSetup: Tatooine Planet detected obj_id: " + tatooinePlanet);
             if (!hasScript(tatooinePlanet, "event.planet_event_handler"))
             {
-                //CustomerServiceLog("holidayEvent", "planet_base.doSpawnSetup: Tatooine Planet detected. Script Not Attached. Attaching event.planet_event_handler");
+                CustomerServiceLog("holidayEvent", "planet_base.doSpawnSetup: Tatooine Planet detected. Script Not Attached. Attaching event.planet_event_handler");
                 attachScript(tatooinePlanet, "event.planet_event_handler");
             }
             if (scheduled_drop.isSystemEnabled())
@@ -65,7 +65,7 @@ public class planet_base extends script.base_script
         }
         else
         {
-            //CustomerServiceLog("holidayEvent", "planet_base.doSpawnSetup: Tatooine Planet not found!! Notify development.");
+            CustomerServiceLog("holidayEvent", "planet_base.doSpawnSetup: Tatooine Planet not found!! Notify development.");
         }
         return SCRIPT_CONTINUE;
     }
